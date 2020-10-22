@@ -28,7 +28,7 @@ public class RootAppConfig {
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
-        ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=JSPDB");
+        ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=NEWSDB");
         ds.setInitialPoolSize(4);
         ds.setMaxPoolSize(8);
         return ds;
@@ -44,6 +44,7 @@ public class RootAppConfig {
         factory.setHibernateProperties(additionalProperties());
         return factory;
     }
+    
     @Bean(name="transactionManager")
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {

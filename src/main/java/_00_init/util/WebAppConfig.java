@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("iiiNews")
+@ComponentScan({"iiiNews","franktest"})
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Bean

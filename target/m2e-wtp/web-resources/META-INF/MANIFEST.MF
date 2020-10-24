@@ -1,5 +1,8 @@
 Manifest-Version: 1.0
-Built-By: luis
+
+=======
+Built-By: Egbert Wang
+>>>>>>> 4bdb4f0754012859098abb62de861b27ce15c65b
 Build-Jdk: 1.8.0_241
 Created-By: Maven Integration for Eclipse
 

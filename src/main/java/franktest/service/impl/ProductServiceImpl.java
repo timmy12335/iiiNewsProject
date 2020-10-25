@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<MemberBean> getRecord() {
 		return dao.getRecord();
 	}
-
-
-
+	
+	
+	
 }

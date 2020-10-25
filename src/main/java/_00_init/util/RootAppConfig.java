@@ -39,7 +39,7 @@ public class RootAppConfig {
         LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
         factory.setDataSource(dataSource());
         factory.setPackagesToScan(new String[] {
-                    "franktest","iiiNews"
+        		"franktest","iiiNews"
                 });
         factory.setHibernateProperties(additionalProperties());
         return factory;

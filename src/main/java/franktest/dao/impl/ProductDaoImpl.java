@@ -16,8 +16,8 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Autowired
 	SessionFactory factory;
-
-
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MemberBean> getRecord() {
@@ -29,7 +29,5 @@ public class ProductDaoImpl implements ProductDao {
 	}
 	
 	
-
 	
-
 }

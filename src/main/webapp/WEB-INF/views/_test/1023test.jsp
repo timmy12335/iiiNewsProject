@@ -11,8 +11,8 @@
 <h2>hello</h2>
 <div>
 	<c:forEach var="product" items="${member }">
-		ID:<p>${member.memberId}</p><br>
-	    NAME:<p>${member.name}</p><br>
+		ID:<p>${product.memberId}</p><br>
+	    NAME:<p>${product.name}</p><br>
 	     <hr>
 	</c:forEach>
 

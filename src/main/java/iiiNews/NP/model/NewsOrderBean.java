@@ -29,6 +29,27 @@ public class NewsOrderBean implements Serializable {
 	
 	public NewsOrderBean() {
 	}
+	
+	@Override
+	public String toString() {
+		return "NewsOrderBean [newsProduct_pk=" + newsProduct_pk + ", order_pk=" + order_pk + ", orderId=" + orderId
+				+ ", memberId=" + memberId + ", companyId=" + companyId + ", newsId=" + newsId + ", orderPrice="
+				+ orderPrice + ", soldTime=" + soldTime + "]";
+	}
+
+	public NewsOrderBean(Integer newsProduct_pk, Integer order_pk, String orderId, String memberId, String companyId,
+			String newsId, Integer orderPrice, Timestamp soldTime) {
+		super();
+		this.newsProduct_pk = newsProduct_pk;
+		this.order_pk = order_pk;
+		this.orderId = orderId;
+		this.memberId = memberId;
+		this.companyId = companyId;
+		this.newsId = newsId;
+		this.orderPrice = orderPrice;
+		this.soldTime = soldTime;
+	}
+
 	public Integer getOrder_pk() {
 		return order_pk;
 	}

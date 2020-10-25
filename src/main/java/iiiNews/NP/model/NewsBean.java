@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 @Entity
 @Table(name="NewsProducts")
 public class NewsBean implements Serializable{
@@ -28,7 +29,8 @@ public class NewsBean implements Serializable{
 	private Timestamp uploadTime;
 	private String location;
 	private Timestamp happenTime;
-//	private String imageNum;
+	@Transient
+	private String imageNum;
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
 	private String outline;
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
@@ -41,13 +43,40 @@ public class NewsBean implements Serializable{
 	@JoinColumn(name = "fk_images_id")
 	private ImageBean imagebean;
 	
-	
-	
-	
-	
 	public NewsBean() {
 		
 	}
+	
+	@Override
+	public String toString() {
+		return "NewsBean [newsProduct_pk=" + newsProduct_pk + ", newsId=" + newsId + ", memberId=" + memberId
+				+ ", companyId=" + companyId + ", newsType=" + newsType + ", title=" + title + ", uploadTime="
+				+ uploadTime + ", location=" + location + ", happenTime=" + happenTime + ", outline=" + outline
+				+ ", article=" + article + ", price=" + price + ", limitTime=" + limitTime + ", status=" + status
+				+ ", imagebean=" + imagebean + "]";
+	}
+
+	public NewsBean(Integer newsProduct_pk, String newsId, String memberId, String companyId, String newsType,
+			String title, Timestamp uploadTime, String location, Timestamp happenTime, String outline, String article,
+			String price, Time limitTime, Integer status, ImageBean imagebean) {
+		super();
+		this.newsProduct_pk = newsProduct_pk;
+		this.newsId = newsId;
+		this.memberId = memberId;
+		this.companyId = companyId;
+		this.newsType = newsType;
+		this.title = title;
+		this.uploadTime = uploadTime;
+		this.location = location;
+		this.happenTime = happenTime;
+		this.outline = outline;
+		this.article = article;
+		this.price = price;
+		this.limitTime = limitTime;
+		this.status = status;
+		this.imagebean = imagebean;
+	}
+
 	public Integer getNewsProduct_pk() {
 		return newsProduct_pk;
 	}

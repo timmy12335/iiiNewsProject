@@ -2,13 +2,10 @@ package iiiNews.NP.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,7 +16,6 @@ public class ImageBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer newsProduct_pk;
-//	private String picId;
 	private String pic_One;
 	private String pic_Two;
 	private String pic_Three;
@@ -27,20 +23,34 @@ public class ImageBean implements Serializable {
 	private Blob img_II;
 	private Blob img_III;
 	
-	@OneToOne(cascade = CascadeType.PERSIST) 
-	@JoinColumn(name = "fk_news")
+	@OneToOne(mappedBy = "imagebean") 
 	private NewsBean newsBean;
 	
 	
 	public ImageBean() {
 		}
 	
-	//	public Integer getPicId() {
-//		return picId;
-//	}
-//	public void setPicId(Integer picId) {
-//		this.picId = picId;
-//	}
+	@Override
+	public String toString() {
+		return "ImageBean [newsProduct_pk=" + newsProduct_pk + ", pic_One=" + pic_One + ", pic_Two=" + pic_Two
+				+ ", pic_Three=" + pic_Three + ", img_I=" + img_I + ", img_II=" + img_II + ", img_III=" + img_III
+				+ ", newsBean=" + newsBean + "]";
+	}
+
+	public ImageBean(Integer newsProduct_pk, String pic_One, String pic_Two, String pic_Three, Blob img_I, Blob img_II,
+			Blob img_III, NewsBean newsBean) {
+		super();
+		this.newsProduct_pk = newsProduct_pk;
+		this.pic_One = pic_One;
+		this.pic_Two = pic_Two;
+		this.pic_Three = pic_Three;
+		this.img_I = img_I;
+		this.img_II = img_II;
+		this.img_III = img_III;
+		this.newsBean = newsBean;
+	}
+
+	
 	public String getPic_One() {
 		return pic_One;
 	}

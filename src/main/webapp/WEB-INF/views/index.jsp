@@ -97,7 +97,6 @@
 
     <div id='cssmenu'>
         <ul>
-            <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
             <li><a href='#'>網站名字可放LOGO</a></li>
             <li><a href='#'>About</a></li>
             <li><a href='#'>會員中心</a>
@@ -149,9 +148,7 @@
             <li><a href="#" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
         </ul>
     </div>
-
-
-
+    
     <div style="margin-top:100px;margin-bottom:100px">
         <h2 align='center'>獨家爆料新聞清單</h2>
         <table class="table table-hover" style="text-align:center">
@@ -174,36 +171,6 @@
                     <td align='center'>宜蘭</td>
                     <td align='center'>2020-10-01</td>
                     <td align='center'>100.0</td>
-                </tr>
-
-                <tr>
-                    <td align='center'><a href="/practice/RetrieveByNewsNo?newsNo=EN2020100300003">EN2020100300003</a>
-                    </td>
-                    <td align='center'>白晝之夜今晚登場！周邊交通管制一次看</td>
-                    <td align='center'>200</td>
-                    <td align='center'>白晝之夜</td>
-                    <td align='center'>2020-10-02</td>
-                    <td align='center'>300.0</td>
-                </tr>
-
-                <tr>
-                    <td align='center'><a href="/practice/RetrieveByNewsNo?newsNo=EN2020100300004">EN2020100300004</a>
-                    </td>
-                    <td align='center'>川普病情及對大選影響</td>
-                    <td align='center'>100</td>
-                    <td align='center'>美國</td>
-                    <td align='center'>2020-09-28</td>
-                    <td align='center'>1000.0</td>
-                </tr>
-
-                <tr>
-                    <td align='center'><a href="/practice/RetrieveByNewsNo?newsNo=EN2020100400001">EN2020100400001</a>
-                    </td>
-                    <td align='center'>全聯買「稀有水果」！驚見6折價秒入手　主婦大讚：超甜</td>
-                    <td align='center'>200</td>
-                    <td align='center'>屏東</td>
-                    <td align='center'>2020-10-04</td>
-                    <td align='center'>500.0</td>
                 </tr>
             </tbody>
         </table>

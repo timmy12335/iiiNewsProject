@@ -9,4 +9,6 @@ public interface AdMainService {
 	public int saveAds(AdBean ab);
 	
 	public List<AdBean> getAllAds();
+	
+	public AdBean getLastRecord() ;
 }

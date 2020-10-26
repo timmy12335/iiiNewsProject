@@ -35,4 +35,10 @@ public class AdMainServiceImpl implements AdMainService {
 		return dao.getAllAds();
 	}
 
+	@Override
+	@Transactional
+	public AdBean getLastRecord() {
+		return dao.getLastRecord();
+	}
+
 }

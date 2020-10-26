@@ -10,6 +10,10 @@
 <title>申請客服表單</title>
 </head>
 <body>
+<nav>
+<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+</nav>
+<section style="margin-top:100px">
 <div align="center">
        <h3 class="title" >客服表單申請</h3>
        </div>
@@ -52,6 +56,6 @@
  </table>
        </form:form> 
 </div>
-
+</section>
 </body>
 </html>

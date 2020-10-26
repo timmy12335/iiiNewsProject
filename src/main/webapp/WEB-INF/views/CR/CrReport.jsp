@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +9,10 @@
 
 </head>
 <body>
-
- 
+<nav>
+<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+</nav>
+<section style="margin-top:100px">
 <h2 class="title">顯示所有客服表單</h2>
 <hr>
 <div align='center'>
@@ -46,7 +48,6 @@
 	</c:choose>
 </table>
 </div>
-</div>
-</div>
+</section>
 </body>
 </html>

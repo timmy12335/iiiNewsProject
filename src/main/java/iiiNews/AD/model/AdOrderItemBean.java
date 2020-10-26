@@ -21,12 +21,15 @@ public class AdOrderItemBean {
 	private Integer adId;				//商品的編號 (廣告的編號)
 	private Double unitPrice;			//商品的價格 (廣告的價格)
 	private Integer quantity;			//訂購的數量
-	private String sellerMemberId;		//賣家會員帳號
+	private String sellerMemberId;		//^^^^賣家會員帳號
 	
 	private Blob adImage;				//客戶上傳的照片
 	private String adImageName;			//客戶上傳照片的檔名
 	
 	private String buyerMemberId;		//賣家會員帳號
+	
+//	@Transient
+//	private MultipartFile productImage;		//$$$$image 處理上傳圖片的問題
 	
 	@ManyToOne
 	@JoinColumn(name = "FK_AdOrderBean_orderNo")

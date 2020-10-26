@@ -22,11 +22,11 @@ public class AdOrderBean {
 	
 	private String adOrderNo;		//我們去撰寫的訂單編號
 	
-	private String buyerMemberId;	//訂購者帳號
+	private String buyerMemberId;	//^^^^ 訂購者帳號
 	private Double totalAmount;		//訂單總額
 	private Date orderDate;			//訂單成立時間
 	
-	private String PayingDetail; 	//其他資訊 先備用
+	private String PayingDetail; 	//$$$$ 其他資訊 先備用
 
 	@OneToMany(mappedBy="adOrderBean", cascade=CascadeType.ALL)
 	Set<AdOrderItemBean> items = new LinkedHashSet<>();

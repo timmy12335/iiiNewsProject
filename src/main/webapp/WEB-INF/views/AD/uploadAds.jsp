@@ -9,7 +9,9 @@
 <title>上架廣告欄位</title>
 </head>
 <body>
-
+<nav>
+<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+</nav>
 <div id="page" class="container" align="center">
     <h2 class="BoxTitle">廣告欄位置上傳</h2>
     <div>

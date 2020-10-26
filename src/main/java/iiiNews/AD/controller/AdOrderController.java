@@ -12,8 +12,8 @@ import iiiNews.AD.service.AdOrderService;
 @Controller
 public class AdOrderController {
 	
-	@Autowired
-	AdOrderService service;
+//	@Autowired
+//	AdOrderService service;
 	
 	public AdOrderController() {
 	}
@@ -27,9 +27,9 @@ public class AdOrderController {
 		//$$$$ 未來要寫得到memberId 目前沒寫!!!
 		int memberId = 0;
 		
-		List<AdOrderBean> orderlist = service.getMemberOrderList(memberId);
+//		List<AdOrderBean> orderlist = service.getMemberOrderList(memberId);
 		//.......
-		model.addAttribute("memberOrderList", orderlist);
+//		model.addAttribute("memberOrderList", orderlist);
 		return "";
 	}
 	

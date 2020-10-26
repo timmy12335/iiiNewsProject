@@ -11,12 +11,12 @@
         <ul>
             <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
             <li><a href='#'>網站名字可放LOGO</a></li>
-            <li><a href='#'>About</a></li>
+            <li><a href="<c:url value='/test1023' />">測試功能1023</a></li>
             <li><a href='#'>會員中心</a>
                 <ul>
                     <li><a href='#'>會員功能1</a>
                         <ul>
-                            <li><a href="<c:url value='/test1023' />">測試功能1023</a></li>
+                            <li><a href="#"></a></li>
                             <li><a href='#'>子功能</a></li>
                         </ul>
                     </li>
@@ -44,7 +44,7 @@
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
                 </ul>
             </li>
-            <li><a href='#'>新聞追蹤</a></li>
+            <li><a href="<c:url value='/trkNews' />">新聞追蹤</a></li>
             <li><a href='#'>影音專區</a></li>
             <li><a href='#'>廣告專區</a>
             	<ul>

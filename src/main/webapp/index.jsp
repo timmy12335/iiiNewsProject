@@ -132,7 +132,7 @@
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
                 </ul>
             </li>
-            <li><a href='#'>新聞追蹤</a></li>
+            <li><a href="<c:url value='/trkNews' />">新聞追蹤</a></li>
             <li><a href='#'>影音專區</a></li>
             <li><a href='#'>廣告專區</a></li>
             <li>

@@ -3,6 +3,7 @@ package CR.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,13 +28,13 @@ public class CRBean implements Serializable {
 	private String crContent;
 	private Timestamp crApplyDate;
 	@Transient
-	private String memberId;
+	private Integer memberId;
 	private String crReContent;
 	private Timestamp crReDate;
 	private String crReplier;
 	private String crReScore;
-	@ManyToOne
-	@JoinColumn(name="memberId")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="memberBean_pkey")
 	private MemberBean memberBean;
 
 	public CRBean() {
@@ -47,7 +48,7 @@ public class CRBean implements Serializable {
 				+ memberBean + "]";
 	}
 
-	public CRBean(Integer pk, String crClass, String crTitle, String crContent, Timestamp crApplyDate, String memberId,
+	public CRBean(Integer pk, String crClass, String crTitle, String crContent, Timestamp crApplyDate, Integer memberId,
 			String crReContent, Timestamp crReDate, String crReplier, String crReScore) {
 		super();
 		this.pk = pk;
@@ -102,11 +103,11 @@ public class CRBean implements Serializable {
 		this.crApplyDate = crApplyDate;
 	}
 
-	public String getMemberId() {
+	public Integer getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(String memberId) {
+	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
 	}
 

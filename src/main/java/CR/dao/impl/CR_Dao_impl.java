@@ -45,4 +45,12 @@ public class CR_Dao_impl implements CR_Dao {
 		return session.get(MemberBean.class, memberId);
 	}
 
+	@Override
+	public void deleteReportByPk(int pk) {
+		Session session = factory.getCurrentSession();
+		CRBean cb = new CRBean(); 
+		cb.setPk(pk);
+		session.delete(cb);
+	}
+	
 }

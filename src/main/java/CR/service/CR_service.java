@@ -11,4 +11,6 @@ public interface CR_service {
 	public MemberBean getMemberById(int memberId);
 
 	void addReport(CRBean report);
+	
+	void deleteReprotByPk(Integer pk);
 }

@@ -1,19 +1,20 @@
 package CR.controller;
 
-import java.io.File;
-import java.sql.Blob;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRBean;
 import CR.service.CR_service;
@@ -46,5 +47,17 @@ public class CR_Controller {
 	    return "redirect:/customerReports";
 	}
 	
+	@DeleteMapping("/customerReports/{pk}")
+	public @ResponseBody Map<String, String> deleteReportByPk(@PathVariable Integer pk){
+		Map<String, String> map = new HashMap<>();
+		try {
+			service.deleteReprotByPk(pk);
+			map.put("success","刪除成功");
+		}catch(Exception e) {
+			map.put("fail","刪除失敗");
+		}
+		return map;
+		
+	}
 	
 }

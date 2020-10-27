@@ -10,8 +10,8 @@
  <div id='cssmenu'>
         <ul>
             <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
-            <li><a href='#'>網站名字可放LOGO</a></li>
-            <li><a href="<c:url value='/test1023' />">測試功能1023</a></li>
+            <li><a href='/iiiNews'>網站名字可放LOGO</a></li>
+<%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
             <li><a href='#'>會員中心</a>
                 <ul>
                     <li><a href='#'>會員功能1</a>
@@ -45,7 +45,13 @@
                 </ul>
             </li>
             <li><a href="<c:url value='/trkNews' />">新聞追蹤</a></li>
-            <li><a href='#'>影音專區</a></li>
+            <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
+<!--             	<ul> -->
+<%--                     <li><a href="<c:url value='/MtCreate' />">上傳頁面</a></li> --%>
+<%--                     <li><a href="<c:url value='/000' />">看所有廣告列表</a></li> --%>
+<%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
+<!--                 </ul> -->
+            </li>
             <li><a href='#'>廣告專區</a>
             	<ul>
                     <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>

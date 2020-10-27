@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< Updated upstream
-Built-By: Egbert Wang
+Built-By: USER
 Build-Jdk: 1.8.0_241
-=======
-Built-By: student
-Build-Jdk: 11.0.8
->>>>>>> Stashed changes
 Created-By: Maven Integration for Eclipse
 

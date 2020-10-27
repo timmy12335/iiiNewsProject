@@ -59,7 +59,7 @@ public class AdMainDaoImpl implements AdMainDao {
 		return adbean;
 	}
 
-	//更新廣告上架資料 還沒測試沒寫完
+	//$$$$ 更新廣告上架資料 還沒測試沒寫完!!!!
 	@Override
 	public int updateAds(String adNo, AdBean ab) {
 		int n = 0;
@@ -75,8 +75,22 @@ public class AdMainDaoImpl implements AdMainDao {
 								.setParameter("price", ab.getPrice())
 								.setParameter("stock", ab.getStock())
 								.executeUpdate();
+		//$$$$ ..............
 		n++;
 		return n;
+	}
+
+	
+	//以會員id來查詢該會員的上傳廣告清單
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AdBean> getMemberAdList(String memberId) {
+		String hql = "FROM AdBean WHERE memberId = :mid";
+		Session session = factory.getCurrentSession();
+		List<AdBean> list = session.createQuery(hql)
+							.setParameter("mid", memberId)	//^^^^注意此處memberId是String還是int 未來會用到!!!
+							.getResultList();
+		return list;
 	}
 	
 	

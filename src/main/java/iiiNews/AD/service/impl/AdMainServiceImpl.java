@@ -14,7 +14,7 @@ import iiiNews.AD.service.AdMainService;
 public class AdMainServiceImpl implements AdMainService {
 	
 	@Autowired
-	AdMainDao dao;
+	AdMainDao adMaindao;
 	
 	
 	public AdMainServiceImpl() {
@@ -24,7 +24,7 @@ public class AdMainServiceImpl implements AdMainService {
 	@Transactional
 	public int saveAds(AdBean ab) {
 		int n = 0;
-		dao.saveAds(ab);
+		adMaindao.saveAds(ab);
 		n++;
 		return n;
 	}
@@ -32,13 +32,21 @@ public class AdMainServiceImpl implements AdMainService {
 	@Override
 	@Transactional
 	public List<AdBean> getAllAds() {
-		return dao.getAllAds();
+		return adMaindao.getAllAds();
 	}
 
 	@Override
 	@Transactional
 	public AdBean getLastRecord() {
-		return dao.getLastRecord();
+		return adMaindao.getLastRecord();
+	}
+	
+	
+	//^^^^注意此處memberId是String還是int 未來會用到!!!
+	@Override
+	@Transactional
+	public List<AdBean> getMemberAdList(String memberId) {
+		return adMaindao.getMemberAdList(memberId);
 	}
 
 }

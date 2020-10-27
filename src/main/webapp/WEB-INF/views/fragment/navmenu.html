@@ -38,10 +38,15 @@
             </li>
             <li><a href='#'>新聞追蹤</a></li>
             <li><a href='#'>影音專區</a></li>
-            <li><a href='#'>廣告專區</a></li>
+            <li><a href='#'>廣告專區</a>
+            	<ul>
+                    <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
+                    <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
+                </ul>
+            </li>
             <li>
                 <div id="nowDateTimeSpan">
-                    <script>startTime()</script>
+                    <script type="text/javascript">startTime()</script>
                 </div>
             </li>
             <li><a href="#" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>

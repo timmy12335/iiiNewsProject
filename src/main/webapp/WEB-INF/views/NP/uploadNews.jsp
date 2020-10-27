@@ -9,7 +9,10 @@
 <title>上傳新聞欄位</title>
 </head>
 <body>
-<div align='center'>
+	<nav>
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	</nav>
+<div align='center' style="margin-top:100px;">
 <form:form method="POST"  id="form1" modelAttribute="newsBean" enctype="multipart/form-data">
 <fieldset>
 <div>
@@ -72,8 +75,8 @@ file3:<input type="file" id="productImage" name="productImage"><br>
 <!-- <div> -->
 <!-- <label>上傳照片：</label> -->
 <!-- file1:<input type="file" id="productImage" name="productImage" multiple ><br> -->
-<!-- <!-- file2:<input type="file" id="productImage" name="productImage"><br> --> -->
-<!-- <!-- file3:<input type="file" id="productImage" name="productImage"><br> --> -->
+<!-- <!-- file2:<input type="file" id="productImage" name="productImage"><br> --> 
+<!-- <!-- file3:<input type="file" id="productImage" name="productImage"><br> --> 
 <!-- </div> -->
 <!-- <div > -->
 <!--  <input type="button" name="submit" value="送出" onclick="submitForms()"> -->

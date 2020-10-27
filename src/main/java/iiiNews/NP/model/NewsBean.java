@@ -1,8 +1,11 @@
 package iiiNews.NP.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name="NewsProducts")
 public class NewsBean implements Serializable{
@@ -28,9 +33,9 @@ public class NewsBean implements Serializable{
 	private String title;
 	private Timestamp uploadTime;
 	private String location;
-	private Timestamp happenTime;
-	@Transient
-	private String imageNum;
+//	private Timestamp happenTime;
+	private Date happenTime;
+	
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
 	private String outline;
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
@@ -38,10 +43,19 @@ public class NewsBean implements Serializable{
 	private String price;
 	private Time limitTime;
 	private Integer status;
+	private String pic_One;
+	private String pic_Two;
+	private String pic_Three;
+	private Blob img_I;
+	private Blob img_II;
+	private Blob img_III;
 	
-	@OneToOne(cascade = CascadeType.PERSIST) 
-	@JoinColumn(name = "fk_images_id")
-	private ImageBean imagebean;
+	@Transient
+	private MultipartFile[] productImage;
+	
+//	@OneToOne(cascade = CascadeType.PERSIST) 
+//	@JoinColumn(name = "fk_images_id")
+//	private ImageBean imagebean;
 	
 	public NewsBean() {
 		
@@ -53,12 +67,12 @@ public class NewsBean implements Serializable{
 				+ ", companyId=" + companyId + ", newsType=" + newsType + ", title=" + title + ", uploadTime="
 				+ uploadTime + ", location=" + location + ", happenTime=" + happenTime + ", outline=" + outline
 				+ ", article=" + article + ", price=" + price + ", limitTime=" + limitTime + ", status=" + status
-				+ ", imagebean=" + imagebean + "]";
+				+ ", imagebean=" +  "]";
 	}
 
 	public NewsBean(Integer newsProduct_pk, String newsId, String memberId, String companyId, String newsType,
-			String title, Timestamp uploadTime, String location, Timestamp happenTime, String outline, String article,
-			String price, Time limitTime, Integer status, ImageBean imagebean) {
+			String title, Timestamp uploadTime, String location, Date happenTime, String outline, String article,
+			String price, Time limitTime, Integer status) {
 		super();
 		this.newsProduct_pk = newsProduct_pk;
 		this.newsId = newsId;
@@ -74,7 +88,7 @@ public class NewsBean implements Serializable{
 		this.price = price;
 		this.limitTime = limitTime;
 		this.status = status;
-		this.imagebean = imagebean;
+		
 	}
 
 	public Integer getNewsProduct_pk() {
@@ -125,10 +139,10 @@ public class NewsBean implements Serializable{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Timestamp getHappenTime() {
+	public Date getHappenTime() {
 		return happenTime;
 	}
-	public void setHappenTime(Timestamp happenTime) {
+	public void setHappenTime(Date happenTime) {
 		this.happenTime = happenTime;
 	}
 //	public String getImageNum() {
@@ -167,8 +181,60 @@ public class NewsBean implements Serializable{
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
+	public String getPic_One() {
+		return pic_One;
+	}
+
+	public void setPic_One(String pic_One) {
+		this.pic_One = pic_One;
+	}
+
+	public String getPic_Two() {
+		return pic_Two;
+	}
+
+	public void setPic_Two(String pic_Two) {
+		this.pic_Two = pic_Two;
+	}
+
+	public String getPic_Three() {
+		return pic_Three;
+	}
+
+	public void setPic_Three(String pic_Three) {
+		this.pic_Three = pic_Three;
+	}
+
+	public Blob getImg_I() {
+		return img_I;
+	}
+
+	public void setImg_I(Blob img_I) {
+		this.img_I = img_I;
+	}
+
+	public Blob getImg_II() {
+		return img_II;
+	}
+
+	public void setImg_II(Blob img_II) {
+		this.img_II = img_II;
+	}
+
+	public Blob getImg_III() {
+		return img_III;
+	}
+
+	public void setImg_III(Blob img_III) {
+		this.img_III = img_III;
+	}
+	public MultipartFile[] getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(MultipartFile[] productImage) {
+		this.productImage = productImage;
+	}
 	
 	
 	

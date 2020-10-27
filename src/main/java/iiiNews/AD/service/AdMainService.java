@@ -11,4 +11,7 @@ public interface AdMainService {
 	public List<AdBean> getAllAds();
 	
 	public AdBean getLastRecord() ;
+	
+	//^^^^注意此處memberId是String還是int 未來會用到!!!
+	public List<AdBean> getMemberAdList(String memberId);
 }

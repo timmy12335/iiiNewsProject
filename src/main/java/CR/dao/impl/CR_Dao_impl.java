@@ -1,5 +1,6 @@
 package CR.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -30,6 +31,8 @@ public class CR_Dao_impl implements CR_Dao {
 	public void addReport(CRBean report) {
 		Session session=factory.getCurrentSession();
 		MemberBean mb = getMemberById(report.getMemberId());
+		Timestamp date=new Timestamp(System.currentTimeMillis());
+		report.setCrApplyDate(date);
 		report.setMemberBean(mb);
 		session.save(report);
 		

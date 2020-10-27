@@ -3,13 +3,16 @@ package iiiNews.AD.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import iiiNews.AD.model.AdBean;
@@ -21,7 +24,7 @@ public class AdMainController {
 	@Autowired
 	AdMainService service;
 	
-	
+	//取得上傳表格
 	@GetMapping("/uploadAds")
 	public String goUploadForm(Model model) {
 		/*是Get方法時進來這裡 為的是傳表格給使用者
@@ -43,6 +46,7 @@ public class AdMainController {
 		return "AD/uploadAds";
 	}
 	
+	//送出使用者填好的上傳表格
 	@PostMapping("/uploadAds")
 	public String uploadAdsForm(
 			@ModelAttribute("adBean") AdBean bean, Model model) {
@@ -51,7 +55,9 @@ public class AdMainController {
 		 * 就會傳完整的資料放在bean裡面傳進來給我們用
 		 * 再填一些不是使用者輸入的資料 然後進行驗證資料 */
 		
-		//取得會員編號>>會員編號先寫死 未來再改
+		Map<String, String> msg = new HashMap<>();
+		
+		//$$$$ 取得會員編號>>會員編號先寫死 未來再改
 		bean.setMemberId("frank");
 		
 		//取得上傳時間
@@ -96,10 +102,15 @@ public class AdMainController {
 		
 		int n = service.saveAds(bean);
 		System.out.println("成功筆數："+n);
-		return "index";
+		
+		//$$$$success 這裡要處理好傳送到前端的資訊的問題 要再想一下
+		msg.put("addStatus", "新增成功筆數："+n);
+		model.mergeAttributes(msg);
+		System.out.println(msg);
+		return "redirect:/getAllAds";
 	}
 	
-	
+	//取得所有廣告列表
 	@GetMapping("/getAllAds")
 	public String getAllAdsList(Model model){
 		List<AdBean> list = service.getAllAds();
@@ -108,8 +119,13 @@ public class AdMainController {
 	}
 	
 	
-	
-
+	//$$$$ 根據會員資料(編號)取得該會員所有廣告列表
+	@GetMapping("/getAllAds/{id}")
+	public String getMemberAllAdsList(@PathVariable String id,Model model){
+//		List<AdBean> list = service.getAllAds();
+//		model.addAttribute("adLists",list);
+		return "";
+	}
 	
 	
 }

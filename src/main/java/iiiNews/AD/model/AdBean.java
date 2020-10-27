@@ -21,7 +21,7 @@ public class AdBean implements Serializable {
 	
 	private String adNo;			//我們去撰寫的產品編號
 	private Timestamp uploadDate;	//上傳的日期戳記
-	private String memberId;		//上傳的會員編號
+	private String memberId;		//^^^^ 上傳的會員編號
 	
 	private String categoryNo;		//廣告欄位的位置分類
 	private Double width;			//紀錄欄位的寬
@@ -31,7 +31,7 @@ public class AdBean implements Serializable {
 	private Integer stock;			//庫存量
 	
 	
-	//要留一個外鍵欄位>>定義一個儲存一方的實例變數
+	//$$$$ 要留一個外鍵欄位>>定義一個儲存一方的實例變數
 	//商品項目是多方
 	
 	

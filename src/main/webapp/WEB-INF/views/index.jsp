@@ -119,7 +119,7 @@
                 <ul>
                     <li><a href='#'>Product 1</a>
                         <ul>
-                            <li><a href='#'>Sub Product</a></li>
+                             <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
                             <li><a href='#'>Sub Product</a></li>
                         </ul>
                     </li>

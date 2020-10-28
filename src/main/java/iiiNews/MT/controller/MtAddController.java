@@ -29,6 +29,8 @@ public class MtAddController {
 		bean.setArticle("HELLO,HELLO,小名");
 		
 		model.addAttribute("mtBean", bean);
+
+		System.out.println("*******************************************");
 		return "MT/Create";
 	}
 	
@@ -39,16 +41,20 @@ public class MtAddController {
 		bean.setArticleId("100-20-1025-144830-001");
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
 		bean.setUpdateDate(uploadDate);
+		bean.setMemberId(987);
+		bean.setArticleStatus("已上架");
 		
 		int n = service.saveMtAddService(bean);
 		System.out.println("成功筆數："+n);
-		return "index";
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		return "redirect:/getAllMts";
 	}
 	
 	@GetMapping("/getAllMts")
 	public String getAllMtsList(Model model) {
 		List<MtAddBean> list = service.getAllMtService();
-		model.addAttribute("mtAllLists", list);
+		model.addAttribute("mtAllList", list);
+		System.out.println("--------------------------------------------");
 		return "MT/showCreate";
 	}
 	

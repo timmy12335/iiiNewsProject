@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>申請客服表單</title>
+<script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+
 </head>
 <body>
 <nav>
@@ -40,22 +42,24 @@
                 <tr>
                     <td>客服主題:</td>
                     <td>
-                    <form:input type="text" path="crTitle"></form:input>
+                    <form:input type="text" placeholder="請輸入客服主題" path="crTitle"></form:input>
                     </td>
                 </tr>
                 	<tr>
                     <td>客服內容:</td>
                     <td>
-                    <form:input type="text" cols="30" rows="5" path="crContent"></form:input>
+                    <form:input type="textarea" cols="30" rows="5" path="crContent"></form:input>
                 	</tr>
                        
            <tr><td colspan="2" align="center">
-            <input type="submit" value="送出表單" /> <input type="button" value="重設"  onclick="confirmreset()"/>
+            <input type="submit" value="送出表單" /> 
+            <input type="button" value="重設"  onclick="confirmreset()"/>
             <input type="button" value="取消申請"  onclick="confirmreturn()"/></td></tr>
        
  </table>
        </form:form> 
 </div>
 </section>
+
 </body>
 </html>

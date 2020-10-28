@@ -12,4 +12,9 @@ public interface CR_Dao {
 	public MemberBean getMemberById(int memberId);
 
 	void addReport(CRBean report);
+	
+	CRBean getReportById(int pk);
+	
+	void deleteReportByPk(int pk);
+	
 }

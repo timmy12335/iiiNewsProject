@@ -31,7 +31,7 @@ public class MtAddDaoImpl implements MtAddDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MtAddBean> getAllAddDao() {
-		String hql = "FROM MtArticleAdd";
+		String hql = "FROM MtAddBean";
 		Session session = factory.getCurrentSession();
 		List<MtAddBean> list = session.createQuery(hql).getResultList();
 		return list;

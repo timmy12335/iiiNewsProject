@@ -35,4 +35,16 @@ public class CR_service_impl implements CR_service {
 		
 	}
 
+	@Override
+	public void deleteReprotByPk(Integer pk) {
+		dao.deleteReportByPk(pk);
+		
+	}
+
+	@Override
+	public CRBean getReportById(int pk) {
+		
+		return dao.getReportById(pk);
+	}
+
 }

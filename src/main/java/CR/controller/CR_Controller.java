@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRBean;
@@ -32,6 +33,16 @@ public class CR_Controller {
 		model.addAttribute("CrReport",beans);
 		return "CR/CrReport";
 	}
+	
+	@GetMapping("/crReport/{pk}")
+	public String getReportByPk(@PathVariable Integer pk, Model model) {
+		CRBean cb = service.getReportById(pk);
+		model.addAttribute("report", cb);
+		return "CR/Report";
+	}
+	
+	
+	
 	
 	@GetMapping("/addReport")
 	public String getAddNewReportForm(Model model) {

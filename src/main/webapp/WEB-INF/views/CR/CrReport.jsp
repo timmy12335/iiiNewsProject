@@ -26,16 +26,22 @@
 			  			divResult.innerHTML = "<font color='green' >"
 							+ result.success + "</font>";
 							window.location.href="<c:url value='/customerReports'/>"
-			  			
-		      		}
+		      		
 			}
 		}
 		
 	}
 	
 	}
+	}
 	
-	
+	function updateCrReport(pk){
+		
+		var result=confirm("回覆/修改此筆客服表單(單號:"+pk+")?");
+		if(result){
+					window.location.href="<c:url value='/crReport/'/>"+pk;
+					}
+	}
 	
 	
 
@@ -76,7 +82,7 @@
 					<td align='center'>${ser.crContent}</td>
 					<td align='center'>${ser.crApplyDate}</td>
 					
-					<td><input type="button" value="修改"  onclick=""/></td>
+					<td><input type="button" id="btn_update" value="修改"  onclick="updateCrReport(${ser.pk})"/></td>
 					<td><input type="button" id="btn_delete" value="刪除" onclick="deleteCrReport(${ser.pk})" /></td>
 				</tr> 
 			</c:forEach>

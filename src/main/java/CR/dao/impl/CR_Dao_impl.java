@@ -3,6 +3,8 @@ package CR.dao.impl;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.NonUniqueResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,21 @@ public class CR_Dao_impl implements CR_Dao {
 		CRBean cb = new CRBean(); 
 		cb.setPk(pk);
 		session.delete(cb);
+	}
+
+	@Override
+	public CRBean getReportById(int pk) {
+		Session session = factory.getCurrentSession();
+		String hql ="FROM CRBean WHERE pk = :pk";
+		CRBean cb = null;
+		try {
+			cb =(CRBean) session.createQuery(hql)
+					.setParameter("pk", pk)
+					.getSingleResult();
+		}catch(NonUniqueResultException e) {
+			e.printStackTrace();
+		}
+		return cb;
 	}
 	
 }

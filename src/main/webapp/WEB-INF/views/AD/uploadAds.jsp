@@ -67,6 +67,7 @@
             </div>
 	</form:form>
 
+	<a href="<c:url value='/' />">回首頁喔</a>
 
     </div>
     <br>

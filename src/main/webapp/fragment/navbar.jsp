@@ -52,7 +52,7 @@
                     <li><a href="#">看所有廣告列表</a>
                     	<ul>
                             <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
-                            <li><a href='#'>依日期查詢</a></li>
+                            <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
                         </ul>
                     </li>
                     <li><a href="<c:url value='/getAllAds' />">還未新增的第三個功能</a></li>

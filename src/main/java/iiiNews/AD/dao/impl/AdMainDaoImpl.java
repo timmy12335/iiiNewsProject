@@ -92,6 +92,25 @@ public class AdMainDaoImpl implements AdMainDao {
 							.getResultList();
 		return list;
 	}
+
+
+	@Override
+	public int deleteAdByMemberPkid(int pkId) {
+		int n = 0;
+		Session session = factory.getCurrentSession();
+		AdBean ab = session.get(AdBean.class, pkId);
+		session.delete(ab);
+		n++;
+		return n;
+	}
+
+
+	@Override
+	public AdBean getOneAdByadPk(int adPk) {
+		Session session = factory.getCurrentSession();
+		AdBean ab = session.get(AdBean.class, adPk);
+		return ab;
+	}
 	
 	
 }

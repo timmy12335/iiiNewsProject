@@ -36,11 +36,10 @@ public class AdMainController {
 		
 		//純粹是為了給初始值 可以不寫
 //		bean.setAdNo("AD20201024");
-//		bean.setWidth(600.0);
-//		bean.setHeight(200.0);
-//		bean.setAdDate(Date.valueOf("2020-10-24"));
-//		bean.setPrice(1000);
-//		bean.setStock(10);
+		bean.setWidth(600.0);
+		bean.setHeight(200.0);
+		bean.setPrice(1000);
+		bean.setStock(10);
 		
 		model.addAttribute("adBean",bean);
 		return "AD/uploadAds";
@@ -78,7 +77,6 @@ public class AdMainController {
 		String lastRecordNoDate = null;
 		//設定時間格式	取得現在時間	將時間轉成想要的格式並設為Date型態以供比對
 		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
-//		SimpleDateFormat ft2 = new SimpleDateFormat ("yyyy-MM-dd");
 		
 		if(lastRecord == null) {
 			noStr = "AD"+ft.format(dnow)+"00001";
@@ -103,7 +101,7 @@ public class AdMainController {
 		int n = service.saveAds(bean);
 		System.out.println("成功筆數："+n);
 		
-		//$$$$success 這裡要處理好傳送到前端的資訊的問題 要再想一下
+		//####優化 這裡要處理好傳送到前端的資訊的問題 要再想一下
 		msg.put("addStatus", "新增成功筆數："+n);
 		model.mergeAttributes(msg);
 		System.out.println(msg);
@@ -126,6 +124,27 @@ public class AdMainController {
 //		model.addAttribute("adLists",list);
 		return "";
 	}
+	
+	
+	//根據該新聞的pk鍵 刪除該則廣告(單則)
+	//####優化：要跳轉回去時告訴使用者刪掉幾筆
+	@GetMapping("/deleteAdProduct/{adPk}")
+	public String deleteAdProductById(@PathVariable Integer adPk,Model model) {
+		int n = service.deleteAdByMemberPkid(adPk);
+		System.out.println("成功更動 "+n+" 筆");
+		return "redirect:/memberAllAdsList";
+	}
+	
+	
+	
+	@GetMapping("/memberAllAdsList")
+	public String memberAllAdsList(Model model){
+		List<AdBean> list = service.getAllAds();
+		model.addAttribute("adLists",list);
+		return "AD/memberAllAdsList";
+	}
+
+	
 	
 	
 }

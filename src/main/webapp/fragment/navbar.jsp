@@ -30,12 +30,21 @@
             </li>
             <li><a href='#'>新聞專區</a>
                 <ul>
-                    <li><a href='#'>Product 1</a>
+                    <li><a href='#'>一般會員</a>
                         <ul>
                             <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-                            <li><a href='#'>Sub Product</a></li>
+                            <li><a href="<c:url value=''/>">個人新聞列表</a></li>
+                            
                         </ul>
                     </li>
+                    <li><a href='#'>企業專區</a>
+                        <ul>
+                        
+                            <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
+                            
+                        </ul>
+                    </li>
+                    
                 </ul>
             </li>
             <li><a href='#'>客服中心</a>

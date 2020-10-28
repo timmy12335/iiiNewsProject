@@ -1,5 +1,7 @@
 package iiiNews.NP.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,11 @@ public class NewsProductServiceImpl implements NewsProductService {
 		newsProductDao.uploadNewsForm(nb);
 		n++;
 		return n;
+	}
+
+	@Override
+	public List<NewsBean> getAllNews() {		
+		return newsProductDao.getAllNews();
 	}
 
 }

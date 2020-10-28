@@ -21,24 +21,24 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"iiiNews","franktest","_00_init","CR","TRN.web.news"})
+@ComponentScan({ "iiiNews", "franktest", "_00_init", "CR", "TRN.web.news" })
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Bean
 	public ViewResolver internalResourceViewResolver() {
-		InternalResourceViewResolver resolver = 
-				new InternalResourceViewResolver();
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+
 	@Bean
 	public MessageSource messageSource() {
-		ResourceBundleMessageSource resource =new ResourceBundleMessageSource();
+		ResourceBundleMessageSource resource = new ResourceBundleMessageSource();
 		resource.setBasename("messages");
 		return resource;
 	}
-	
+
 //	@Override 
 //	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //	 registry.addResourceHandler("/css/**").
@@ -47,33 +47,34 @@ public class WebAppConfig implements WebMvcConfigurer {
 //	 .addResourceLocations("/WEB-INF/views/images/"); }
 
 	@Bean
-	public CommonsMultipartResolver multipartResolver() { 
+	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		resolver.setDefaultEncoding("UTF-8");
 		resolver.setMaxUploadSize(81920000);
 		return resolver;
-	}	
-	@Bean 
+	}
+
+	@Bean
 	public MappingJackson2JsonView jsonView() {
-	    MappingJackson2JsonView view = new MappingJackson2JsonView();
-	    view.setPrettyPrint(true);
-	    return view;
+		MappingJackson2JsonView view = new MappingJackson2JsonView();
+		view.setPrettyPrint(true);
+		return view;
 	}
 
 	@Bean
 	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
-	    ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-	    resolver.setContentNegotiationManager(manager);
-	    ArrayList<View> views = new ArrayList<>();
-	    views.add(jsonView());
-	    resolver.setDefaultViews(views);
-	    return resolver;
+		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+		resolver.setContentNegotiationManager(manager);
+		ArrayList<View> views = new ArrayList<>();
+		views.add(jsonView());
+		resolver.setDefaultViews(views);
+		return resolver;
 	}
 
-	  @Override 
-	  public void
-	 configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-	 configurer.enable(); }
-}	
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
+}
 //	 
 //}

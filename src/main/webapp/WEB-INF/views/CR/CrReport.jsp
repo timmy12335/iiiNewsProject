@@ -6,7 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title>所有客服表單</title>
+<script type="text/javascript">
 
+	function deleteCrReport(pk){
+		var xhr2 = new XMLHttpRequest();
+		var divResult = document.getElementById('resultMsg');
+		var result=confirm("確定刪除此筆客服表單(單號:"+pk+")?");
+		if(result){
+			xhr2.open("DELETE","<c:url value='/customerReports/'/>"+pk,true);
+			xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+			xhr2.send();
+			xhr2.onreadystatechange=function(){
+			if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
+		      result = JSON.parse(xhr2.responseText);
+		      if (result.fail) {		    	  
+				 		divResult.innerHTML = "<font color='red' >"
+							+ result.fail + "</font>";
+			  		} else if (result.success) {
+			  			divResult.innerHTML = "<font color='green' >"
+							+ result.success + "</font>";
+							window.location.href="<c:url value='/customerReports'/>"
+		      		
+			}
+		}
+		
+	}
+	
+	}
+	}
+	
+	function updateCrReport(pk){
+		
+		var result=confirm("回覆/修改此筆客服表單(單號:"+pk+")?");
+		if(result){
+					window.location.href="<c:url value='/crReport/'/>"+pk;
+					}
+	}
+	
+	
+
+
+</script>
 </head>
 <body>
 <nav>
@@ -16,6 +56,7 @@
 <h2 class="title">顯示所有客服表單</h2>
 <hr>
 <div align='center'>
+<div id='resultMsg'></div>
 <table border='1'>
 <thead>
 	<tr>
@@ -40,8 +81,9 @@
 					<td align='left'>&nbsp;${ser.crTitle}</td>
 					<td align='center'>${ser.crContent}</td>
 					<td align='center'>${ser.crApplyDate}</td>
-					<td><a href="/MidProject/ShowoneReport?pk=${ser.pk}"><input type="button" value="修改" /></a></td>
-					<td> <a href="/MidProject/DeleteReport?pk=${ser.pk}"><input type="button" value="刪除"  onclick=""/></a></td>
+					
+					<td><input type="button" id="btn_update" value="修改"  onclick="updateCrReport(${ser.pk})"/></td>
+					<td><input type="button" id="btn_delete" value="刪除" onclick="deleteCrReport(${ser.pk})" /></td>
 				</tr> 
 			</c:forEach>
 		</c:otherwise>

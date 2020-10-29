@@ -19,12 +19,12 @@
 	<label for="newsType">新聞類型：</label>
 	<form:select path="newsType">
 		<form:option value="none">分類項目</form:option>
-		<form:option value="traffic">交通</form:option>
-		<form:option value="argument">糾紛</form:option>
-		<form:option value="relationship">感情</form:option>
-		<form:option value="fraud">詐騙</form:option>
-		<form:option value="disaster">災情</form:option>
-		<form:option value="reveal">爆料</form:option>
+		<form:option value="交通">交通</form:option>
+		<form:option value="糾紛">糾紛</form:option>
+		<form:option value="感情">感情</form:option>
+		<form:option value="詐騙">詐騙</form:option>
+		<form:option value="災情">災情</form:option>
+		<form:option value="爆料">爆料</form:option>
 	</form:select>
 <%-- 	<font color="red" size="-1">${errorMsg.errorCategoryNoEmpty}</font> --%>
 </div>
@@ -37,8 +37,12 @@
 	<form:input type="text" id="location" name="location" size="50" path="location" placeholder="請輸入發生地點"  />
 </div>
 <div>
+	<label for="happenDate">發生日期：</label>
+	<form:input type="Date" id="happenDate" name="happenDate" size="50" path="happenDate" placeholder="請輸入發生時間"  />
+</div>
+<div>
 	<label for="happenTime">發生時間：</label>
-	<form:input type="text" id="happenTime" name="happenTime" size="50" path="happenTime" placeholder="請輸入發生時間"  />
+	<form:input type="time" id="happenTime" name="happenTime" size="50" path="happenTime" placeholder="請輸入發生時間"  />
 </div>
 <div>
 	<label for="outline">新聞大綱：</label>
@@ -70,24 +74,6 @@ file3:<input type="file" id="productImage" name="productImage"><br>
   
 </form:form>
 </div>
-<%-- <form:form method="POST" modelAttribute="imageBean" id="form2" enctype="multipart/form-data"> --%>
-<!-- <fieldset> -->
-<!-- <div> -->
-<!-- <label>上傳照片：</label> -->
-<!-- file1:<input type="file" id="productImage" name="productImage" multiple ><br> -->
-<!-- <!-- file2:<input type="file" id="productImage" name="productImage"><br> --> 
-<!-- <!-- file3:<input type="file" id="productImage" name="productImage"><br> --> 
-<!-- </div> -->
-<!-- <div > -->
-<!--  <input type="button" name="submit" value="送出" onclick="submitForms()"> -->
-<!--  <input type="reset" value="清除"> -->
-<!--   </div> -->
-<!--   </fieldset> -->
-<%-- </form:form> --%>
-<!-- <script type="text/javascript"> -->
 
-<!-- </script> -->
-
-<!-- </div> -->
 </body>
 </html>

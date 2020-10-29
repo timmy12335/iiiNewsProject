@@ -9,4 +9,8 @@ public interface MtAddService {
 	public int saveMtAddService(MtAddBean mtAddBean);
 	
 	public List<MtAddBean> getAllMtService();
+	
+	public MtAddBean getLastRecord() ;
+	
+	public List<String> getAllAddDao1();	//抓pkey
 }

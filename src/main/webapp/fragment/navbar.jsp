@@ -10,7 +10,8 @@
  <div id='cssmenu'>
         <ul>
             <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
-            <li><a href='/iiiNews'>網站名字可放LOGO</a></li>
+            <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
+            
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
             <li><a href='#'>會員中心</a>
                 <ul>
@@ -30,12 +31,21 @@
             </li>
             <li><a href='#'>新聞專區</a>
                 <ul>
-                    <li><a href='#'>Product 1</a>
+                    <li><a href='#'>一般會員</a>
                         <ul>
                             <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-                            <li><a href='#'>Sub Product</a></li>
+                            <li><a href="<c:url value=''/>">個人新聞列表</a></li>
+                            
                         </ul>
                     </li>
+                    <li><a href='#'>企業專區</a>
+                        <ul>
+                        
+                            <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
+                            
+                        </ul>
+                    </li>
+                    
                 </ul>
             </li>
             <li><a href='#'>客服中心</a>
@@ -63,7 +73,7 @@
                     <li><a href="#">看所有廣告列表</a>
                     	<ul>
                             <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
-                            <li><a href='#'>依日期查詢</a></li>
+                            <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
                         </ul>
                     </li>
                     <li><a href="<c:url value='/getAllAds' />">還未新增的第三個功能</a></li>

@@ -19,7 +19,7 @@ public class AdOrderItemBean {
 	private Integer itemPk;			//資料庫自增編號
 	
 	private Integer adId;				//商品的編號 (廣告的編號)
-	private Double unitPrice;			//商品的價格 (廣告的價格)
+	private Integer unitPrice;			//商品的價格 (廣告的價格)
 	private Integer quantity;			//訂購的數量
 	private String sellerMemberId;		//^^^^賣家會員帳號
 	
@@ -41,11 +41,23 @@ public class AdOrderItemBean {
 	public AdOrderItemBean() {
 	}
 
-
+	//有傳參數的建構子
+	public AdOrderItemBean(Integer itemPk, Integer adId, Integer unitPrice, Integer quantity, String sellerMemberId,
+			String buyerMemberId) {
+		super();
+		this.itemPk = itemPk;
+		this.adId = adId;
+		this.unitPrice = unitPrice;
+		this.quantity = quantity;
+		this.sellerMemberId = sellerMemberId;
+		this.buyerMemberId = buyerMemberId;
+	}
+	
+	
+	
 	public Integer getItemPk() {
 		return itemPk;
 	}
-
 
 	public void setItemPk(Integer itemPk) {
 		this.itemPk = itemPk;
@@ -62,12 +74,12 @@ public class AdOrderItemBean {
 	}
 
 
-	public Double getUnitPrice() {
+	public Integer getUnitPrice() {
 		return unitPrice;
 	}
 
 
-	public void setUnitPrice(Double unitPrice) {
+	public void setUnitPrice(Integer unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 

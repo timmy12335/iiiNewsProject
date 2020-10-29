@@ -41,4 +41,10 @@ public class CR_service_impl implements CR_service {
 		
 	}
 
+	@Override
+	public CRBean getReportById(int pk) {
+		
+		return dao.getReportById(pk);
+	}
+
 }

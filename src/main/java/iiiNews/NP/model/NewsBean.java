@@ -33,8 +33,8 @@ public class NewsBean implements Serializable{
 	private String title;
 	private Timestamp uploadTime;
 	private String location;
-//	private Timestamp happenTime;
-	private Date happenTime;
+	private String happenTime;
+	private Date happenDate;
 	
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
 	private String outline;
@@ -61,17 +61,10 @@ public class NewsBean implements Serializable{
 		
 	}
 	
-	@Override
-	public String toString() {
-		return "NewsBean [newsProduct_pk=" + newsProduct_pk + ", newsId=" + newsId + ", memberId=" + memberId
-				+ ", companyId=" + companyId + ", newsType=" + newsType + ", title=" + title + ", uploadTime="
-				+ uploadTime + ", location=" + location + ", happenTime=" + happenTime + ", outline=" + outline
-				+ ", article=" + article + ", price=" + price + ", limitTime=" + limitTime + ", status=" + status
-				+ ", imagebean=" +  "]";
-	}
+	
 
 	public NewsBean(Integer newsProduct_pk, String newsId, String memberId, String companyId, String newsType,
-			String title, Timestamp uploadTime, String location, Date happenTime, String outline, String article,
+			String title, Timestamp uploadTime, String location, String happenTime, String outline, String article,
 			String price, Time limitTime, Integer status) {
 		super();
 		this.newsProduct_pk = newsProduct_pk;
@@ -139,10 +132,10 @@ public class NewsBean implements Serializable{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Date getHappenTime() {
+	public String getHappenTime() {
 		return happenTime;
 	}
-	public void setHappenTime(Date happenTime) {
+	public void setHappenTime(String happenTime) {
 		this.happenTime = happenTime;
 	}
 //	public String getImageNum() {
@@ -234,6 +227,14 @@ public class NewsBean implements Serializable{
 
 	public void setProductImage(MultipartFile[] productImage) {
 		this.productImage = productImage;
+	}
+
+	public Date getHappenDate() {
+		return happenDate;
+	}
+
+	public void setHappenDate(Date happenDate) {
+		this.happenDate = happenDate;
 	}
 	
 	

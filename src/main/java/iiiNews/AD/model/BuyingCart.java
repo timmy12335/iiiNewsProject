@@ -2,6 +2,7 @@ package iiiNews.AD.model;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class BuyingCart {
 
@@ -24,6 +25,17 @@ public class BuyingCart {
 	}
 	
 	
+	//為了得到總額而寫的方法 利用map的keySet方法與get(Key值)跑迴圈
+	public int getTotal() {
+		int total = 0;
+		Set<Integer> item = cart.keySet();
+		for(int n : item) {
+			AdOrderItemBean bean = cart.get(n);
+			int price = bean.getUnitPrice();
+			total += price;
+		}
+		return total;
+	}
 	
 	//把商品（傳進來的pk）加入到購物車裡
 	public void addToCart(int adPk, AdOrderItemBean aoib) {
@@ -33,7 +45,7 @@ public class BuyingCart {
 			//.......
 			return;
 		}
-		
+		System.out.println("把商品（傳進來的pk）加入到購物車裡");
 		cart.put(adPk, aoib);
 		
 //		可能不用下面兩行 因為單一商品不以複數項顯示
@@ -41,6 +53,14 @@ public class BuyingCart {
 //		adItemBean.setQuantity(aoib.getQuantity()+adItemBean.getQuantity());
 	}
 	
+	
+	//從購物車刪除該項商品 用map的remove方法
+	public void removeFromCart(int adPk) {
+		if(cart.get(adPk) != null) {
+			cart.remove(adPk);
+		}
+	}
+
 	
 	
 

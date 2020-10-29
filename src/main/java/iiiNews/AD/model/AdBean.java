@@ -20,6 +20,7 @@ public class AdBean implements Serializable {
 	private Integer adPk;			//資料庫自增編號
 	
 	private String adNo;			//我們去撰寫的產品編號
+//	private String adTitle;			//自訂標題
 	private Timestamp uploadDate;	//上傳的日期戳記
 	private String memberId;		//^^^^ 上傳的會員編號
 	

@@ -12,5 +12,5 @@ public interface MtAddService {
 	
 	public MtAddBean getLastRecord() ;
 	
-	public List<String> getAllAddDao1();	//抓pkey
+//	public List<String> getAllAddDao1();	//抓pkey
 }

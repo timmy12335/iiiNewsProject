@@ -15,13 +15,14 @@
 	<div id="page" class="container" align="center">
 		<h2 class="BoxTitle">廣告欄位置上傳</h2>
 		<div>
-			<form:form method="POST" modelAttribute="mtBean" enctype="multipart/form-data">
+			<form:form method="POST" modelAttribute="mtBean"
+				enctype="multipart/form-data">
 				<fieldset>
 					<div align="center">
 						<h2>新增影片</h2>
 						<hr>
 						<div class="st1">
-							<label for="" class="t1">類別:</label>
+							<label for="Category">類別:</label>
 							<form:select path="Category">
 								<form:option value="生活">生活</form:option>
 								<form:option value="趣味">趣味</form:option>
@@ -31,36 +32,34 @@
 							</form:select>
 						</div>
 						<div class="st1">
-							<label class="t1" for="title1">標題:</label>
-							<form:input type="text" id="title1" name="title1" path="title"
+							<label for="title">標題:</label>
+							<form:input type="text" id="title" name="title" path="title"
 								size="30" placeholder="今晚我想來點..." autocomplete="on" />
 							<font color="red" size="1">${errorMsg.title}</font>
 						</div>
+<!-- 						<div class="st1"> -->
+<!-- 							<label for="videoLink">影片連結:</label> -->
+<%-- 							<form:input type="text" id="videoLink" name="videoLink" path="videoLink" --%>
+<%-- 								size="30" placeholder="https://www.youtube.com/..." --%>
+<%-- 								autocomplete="off" /> --%>
+<%-- 							<font color="red" size="1">${errorMsg.link}</font> --%>
+<!-- 						</div> -->
 						<div class="st1">
-							<label class="t1" for="link1">影片連結:</label>
-							<form:input type="text" id="link1" name="link1" path="videoLink"
-								size="30" placeholder="https://www.youtube.com/..."
-								autocomplete="off" />
-							<font color="red" size="1">${errorMsg.link}</font>
+							<label for="Image">照片:</label>
+							<form:input type="file" id="Image" name="Image" path="Image" />
 						</div>
-						<!-- 					<div class="st1"> -->
-						<!-- 						<label class="t1" for="">照片:</label> -->
-						<%-- 						<form:input type="file" id="img1" name="img1" path="imgLink" /> --%>
-						<!-- 					</div> -->
 						<div class="st1">
-							<label class="t1" for="text1">內容:</label>
-							<form:textarea name="text1" id="cols1" cols="30" rows="10"
+							<label for="article">內容:</label>
+							<form:textarea name="article" id="article" cols="30" rows="10"
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
 						</div>
 					</div>
 				</fieldset>
 				<div id="btn" align="center">
-					<input class="sub" type="submit" name="submit" id="submit" value="送出" /> 
+					<input class="sub" type="submit" name="submit" id="submit" value="送出" />
 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
 				</div>
 			</form:form>
-
-
 		</div>
 		<br> <input type="button" value="one" onclick="onebuttontodata()">
 	</div>

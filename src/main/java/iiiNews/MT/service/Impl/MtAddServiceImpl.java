@@ -40,10 +40,10 @@ public class MtAddServiceImpl implements MtAddService{
 		return dao.getLastRecord();
 	}
 
-	@Override		//抓pkey
-	@Transactional
-	public List<String> getAllAddDao1() {
-		return dao.getAllAddDao1();
-	}
+//	@Override		//抓pkey
+//	@Transactional
+//	public List<String> getAllAddDao1() {
+//		return dao.getAllAddDao1();
+//	}
 
 }

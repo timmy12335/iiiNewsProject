@@ -54,14 +54,14 @@ public class MtAddDaoImpl implements MtAddDao{
 		return mtAddBean;
 	}
 
-	@Override	//抓pkey
-	public List<String> getAllAddDao1() {
-		String hql = "SELECT m.pkey From MtAddBean m";
-		List<String> list = new ArrayList<String>();
-		Session session = factory.getCurrentSession();
-		list = session.createQuery(hql)
-						.getResultList();
-		return list;
-	}
+//	@Override	//抓pkey
+//	public List<String> getAllAddDao1() {
+//		String hql = "SELECT m.pkey From MtAddBean m";
+//		List<String> list = new ArrayList<String>();
+//		Session session = factory.getCurrentSession();
+//		list = session.createQuery(hql)
+//						.getResultList();
+//		return list;
+//	}
 
 }

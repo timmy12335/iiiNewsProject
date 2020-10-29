@@ -1,7 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +14,7 @@
 	<div align="center" style="margin-top: 80px"> <br> 
 		<h1>資料新增成功</h1>
 	</div>
-	<form action="/showCreate" method="post" enctype="multipart/form-data" id="form" />
-	<div>
-	<label for="Image">
-		<spring:message code="spring.addProduct.form.image.label" />
-	</label>
-	<div>
-		<form:input id="Image" path="Image" type="file" />
-	</div>
-	</div>
+	<form action="/showCreate" method="post" enctype="multipart/form-data" id="form">
 		<div align='center'>
 			<table border="1">
 <!-- 				<tr> -->

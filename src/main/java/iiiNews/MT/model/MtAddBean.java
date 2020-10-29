@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,7 +32,8 @@ public class MtAddBean implements Serializable{
 	private String category;		//標籤分類
 	private String title;			//標題
 //	@JsonIgnore
-//	private Blob imgLink;			//圖片連結
+	private Blob imgLink;			//圖片連結
+	private String imgName;			//圖片名字
 	@Column(columnDefinition = "varchar(MAX)")
 	private String videoLink;		//影片連結
 	private String article;			//內文
@@ -37,6 +41,9 @@ public class MtAddBean implements Serializable{
 	private String add1;
 	private String add2;
 	private String add3;
+	
+	@Transient
+	private MultipartFile Image;
 
 	public MtAddBean(Integer pkey, String articleId, Timestamp updateDate, Integer memberId, String articleStatus,
 			String category, String title, Blob imgLink, String videoLink, String article, String comment) {
@@ -52,26 +59,6 @@ public class MtAddBean implements Serializable{
 		this.videoLink = videoLink;
 		this.article = article;
 		this.comment = comment;
-	}
-
-	public MtAddBean(Integer pkey, String articleId, Timestamp updateDate, Integer memberId, String articleStatus,
-			String category, String title, Blob imgLink, String videoLink, String article, String comment, String add1,
-			String add2, String add3) {
-		super();
-		this.pkey = pkey;
-		this.articleId = articleId;
-		this.updateDate = updateDate;
-		this.memberId = memberId;
-		this.articleStatus = articleStatus;
-		this.category = category;
-		this.title = title;
-//		this.imgLink = imgLink;
-		this.videoLink = videoLink;
-		this.article = article;
-		this.comment = comment;
-		this.add1 = add1;
-		this.add2 = add2;
-		this.add3 = add3;
 	}
 
 	public MtAddBean() {
@@ -133,13 +120,13 @@ public class MtAddBean implements Serializable{
 		this.title = title;
 	}
 
-//	public Blob getImgLink() {
-//		return imgLink;
-//	}
-//
-//	public void setImgLink(Blob imgLink) {
-//		this.imgLink = imgLink;
-//	}
+	public Blob getImgLink() {
+		return imgLink;
+	}
+
+	public void setImgLink(Blob imgLink) {
+		this.imgLink = imgLink;
+	}
 
 	public String getVideoLink() {
 		return videoLink;
@@ -187,6 +174,22 @@ public class MtAddBean implements Serializable{
 
 	public void setAdd3(String add3) {
 		this.add3 = add3;
+	}
+
+	public MultipartFile getImage() {
+		return Image;
+	}
+
+	public void setImage(MultipartFile image) {
+		Image = image;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
 	
 }

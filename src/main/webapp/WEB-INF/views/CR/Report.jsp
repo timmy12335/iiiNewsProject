@@ -8,6 +8,36 @@
 <head>
 <meta charset="UTF-8">
 <title>客服表單</title>
+<script>
+
+
+function updateCrReport(report){
+	var xhr2 = new XMLHttpRequest();
+	var divResult = document.getElementById('resultMsg');
+	var result=confirm("確定修改此筆客服表單?");
+	if(result){
+		xhr2.open("PATCH","<c:url value='/crReport'/>",true);
+		xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+		xhr2.send();
+		xhr2.onreadystatechange=function(){
+		if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
+	      result = JSON.parse(xhr2.responseText);
+	      if (result.fail) {		    	  
+			 		divResult.innerHTML = "<font color='red' >"
+						+ result.fail + "</font>";
+		  		} else if (result.success) {
+						window.location.href="<c:url value='/customerReports'/>"
+		}
+	}
+	
+}
+
+}
+}
+
+</script>
+
+
 </head>
 <body>
 
@@ -26,11 +56,12 @@
 
 	<tr>
 		<td width='60' align='center' colspan="2">單號:No.${report.pk}
+		<form:hidden path="pk" value="${report.pk}"/>
 		</td>
 		</tr>
 		<tr>
 		<td width='120' align='center' colspan="2">
-		申請人姓名:${report.memberBean.name}
+		申請人姓名:${report.mbBean.name}
 		</td>
 		</tr>
 		<tr>
@@ -57,7 +88,7 @@
 		</tr>
 		<tr>
 		<td align='center' colspan='2'>
-		<input type="submit" value="確認修改"/>
+		<input type="button" id="btn_update" value="確認修改" onclick="updateCrReport()"/>
 		<input type="button" id="btn_delete" value="取消修改" onclick="deleteCrReport()" />
 		</td>
 		</tr>

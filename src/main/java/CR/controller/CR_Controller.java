@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -69,10 +70,17 @@ public class CR_Controller {
 		
 	}
 	
-	@PatchMapping("/crReport/{pk}")
-	public String updateReportByPk(@ModelAttribute("report") CRBean cb){
-			service.updateReport(cb);
-			return "redirect:/customerReports";
+	@PatchMapping("/crReport")
+	public @ResponseBody Map<String, String> updateReportByPk(@RequestBody CRBean report){
+		Map<String, String> map = new HashMap<>();	
+		try{
+			service.updateReport(report);
+			map.put("success","修改完成");
+		}catch(Exception e) {
+			map.put("fail","修改失敗");
+		}
+		
+		return map;
 		}
 	
 

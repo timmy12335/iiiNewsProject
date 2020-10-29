@@ -77,7 +77,7 @@
 						<c:forEach var='ser' items='${CrReport}'>
 							<tr>
 								<td align='right'>${ser.pk}</td>
-								<td align='left'>&nbsp;${ser.memberBean.name}</td>
+								<td align='left'>&nbsp;${ser.mbBean.name}</td>
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
 								<td align='center'>${ser.crContent}</td>

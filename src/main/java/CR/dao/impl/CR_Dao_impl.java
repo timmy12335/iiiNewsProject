@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import CR.dao.CR_Dao;
 import CR.model.CRBean;
 import franktest.model.MemberBean;
+import iiiNews.MB.model.MBBean;
 
 @Repository
 public class CR_Dao_impl implements CR_Dao {
@@ -32,19 +33,19 @@ public class CR_Dao_impl implements CR_Dao {
 	@Override
 	public void addReport(CRBean report) {
 		Session session=factory.getCurrentSession();
-		MemberBean mb = getMemberById(report.getMemberId());
+		MBBean mb = getMemberById(report.getMemberId());
 		Timestamp date=new Timestamp(System.currentTimeMillis());
 		report.setCrApplyDate(date);
-		report.setMemberBean(mb);
+		report.setMbBean(mb);
 		session.save(report);
 		
 	}
 
 
 	@Override
-	public MemberBean getMemberById(int memberId) {
+	public MBBean getMemberById(int memberId) {
 		Session session=factory.getCurrentSession();
-		return session.get(MemberBean.class, memberId);
+		return session.get(MBBean.class, memberId);
 	}
 
 	@Override

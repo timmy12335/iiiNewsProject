@@ -69,5 +69,12 @@ public class CR_Dao_impl implements CR_Dao {
 		}
 		return cb;
 	}
+
+	@Override
+	public void updateReport(CRBean report) {
+		Session session=factory.getCurrentSession();
+		session.update(report);		
+		
+	}
 	
 }

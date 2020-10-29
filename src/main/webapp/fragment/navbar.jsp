@@ -10,7 +10,8 @@
  <div id='cssmenu'>
         <ul>
             <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
-            <li><a href='/iiiNews'>網站名字可放LOGO</a></li>
+            <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
+            
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
             <li><a href='#'>會員中心</a>
                 <ul>
@@ -33,7 +34,7 @@
                     <li><a href='#'>一般會員</a>
                         <ul>
                             <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-                            <li><a href="<c:url value=''/>">個人新聞列表</a></li>
+                            <li><a href="<c:url value='/getMemNewsList'/>">個人新聞列表</a></li>
                             
                         </ul>
                     </li>
@@ -53,7 +54,12 @@
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
                 </ul>
             </li>
-            <li><a href="<c:url value='/trkNews' />">新聞追蹤</a></li>
+            <li><a href="<c:url value='#' />">新聞追蹤</a>
+                <ul>
+                 	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
+                    <li><a href="<c:url value='/queryByType' />">分類追蹤</a></li>
+               </ul>
+            </li>
             <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
 <!--             	<ul> -->
 <%--                     <li><a href="<c:url value='/MtCreate' />">上傳頁面</a></li> --%>

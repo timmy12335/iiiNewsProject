@@ -17,4 +17,5 @@ public interface CR_Dao {
 	
 	void deleteReportByPk(int pk);
 	
+	void updateReport(CRBean cb);
 }

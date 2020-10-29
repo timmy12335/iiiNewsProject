@@ -2,17 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>trackNews</title>
+<link rel="stylesheet"
+    href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<title>Products</title>
 </head>
 <body>
-<nav>
-<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
-</nav>
     <section>
         <div>
             <div class="container" style="text-align: center" >
@@ -33,7 +30,12 @@
                         <p>標題:${trkNew.title}</p>
                         <p>建立者${trkNew.founder}</p>
                         <p>追蹤人數: ${trkNew.trcnum}</p>
-                        <p></p>
+                        <p>
+                        <a href="<spring:url value='trkNew?id=${trkNew.trackId}' />" 
+									class="btn btn-primary"> <span
+									class="glyphicon-info-sigh glyphicon"></span>詳細資料 //查詢多筆/單筆詳細資料
+								</a>
+                        </p>
                     </div>
                 </div>
             </div>

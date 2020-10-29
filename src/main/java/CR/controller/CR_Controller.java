@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,9 +42,6 @@ public class CR_Controller {
 		return "CR/Report";
 	}
 	
-	
-	
-	
 	@GetMapping("/addReport")
 	public String getAddNewReportForm(Model model) {
 		CRBean cb = new CRBean();
@@ -70,5 +68,15 @@ public class CR_Controller {
 		return map;
 		
 	}
+	
+	@PatchMapping("/crReport/{pk}")
+	public String updateReportByPk(@ModelAttribute("report") CRBean cb){
+			service.updateReport(cb);
+			return "redirect:/customerReports";
+		}
+	
+
+
+	
 	
 }

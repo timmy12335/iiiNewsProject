@@ -9,5 +9,9 @@ public interface MtAddDao {
 	public int saveMtAddDao(MtAddBean mtAddBean);
 
 	public List<MtAddBean> getAllAddDao();
+
+	public MtAddBean getLastRecord();
+	
+	public List<String> getAllAddDao1();	//抓pkey
 	
 }

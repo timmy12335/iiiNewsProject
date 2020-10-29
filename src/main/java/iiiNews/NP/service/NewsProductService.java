@@ -11,4 +11,5 @@ public interface NewsProductService {
 	public List<NewsBean> getAllNews();
 	public NewsBean getSingleNews(String newsId);
 	public List<NewsBean> getMemNews(String memberId);
+	void delSingleNews(String newsId);
 }

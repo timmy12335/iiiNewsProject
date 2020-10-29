@@ -49,7 +49,7 @@
 		<td align='center'>${news.price}</td>
 		<td align='center'>${news.limitTime}</td>
 		<td align='center'><a href="<c:url value='' />">修改</a></td>
-		<td align='center'><a href="<c:url value='' />">刪除</a></td>
+		<td align='center'><a href="<c:url value='/delSingleNews/${news.newsId}' />">刪除</a></td>
 		
 	</tr>		
 	</table>

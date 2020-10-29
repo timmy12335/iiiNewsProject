@@ -66,6 +66,14 @@ public class NewsProductServiceImpl implements NewsProductService {
 	public List<NewsBean> getMemNews(String memberId) {		
 		return newsProductDao.getMemNews(memberId);
 	}
+	@Override
+	public void delSingleNews(String newsId) {
+		NewsBean newsbean = newsProductDao.getSingleNews(newsId);
+		if(newsbean.getStatus() != null && newsbean.getStatus() > 0 ) {
+			newsProductDao.updateStatus(newsId, newsbean.getStatus() - 1);
+		}
+		
+	}
 
 	
 }

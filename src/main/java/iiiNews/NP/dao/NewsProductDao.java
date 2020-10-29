@@ -17,6 +17,6 @@ public interface NewsProductDao {
 	//查詢單一會員的新聞列表
 	public List<NewsBean> getMemNews(String memberId);
 	//刪除單一新聞紀錄
-	public NewsBean delSingleNews(String newsId);
+	void updateStatus(String newsId, int status);
 	
 }

@@ -17,7 +17,7 @@
 <c:forEach var='news' items='${newsLists}'>
 <table>
 	<tr style="background-color:lightblue;"  height='36'>
-		<th width='300' align='center'>新聞標題</th>
+		<th width='500' align='center'>新聞標題</th>
 		<th width='60' align='center'>新聞編號:</th>
 		<th width='60' align='center'>上傳時間</th>		
 		<th width='100' align='center'>新聞類型</th>

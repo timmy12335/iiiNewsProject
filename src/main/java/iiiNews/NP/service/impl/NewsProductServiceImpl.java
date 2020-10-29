@@ -1,5 +1,6 @@
 package iiiNews.NP.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -24,10 +25,39 @@ public class NewsProductServiceImpl implements NewsProductService {
 		n++;
 		return n;
 	}
+    @Override
+	public String getLastRecord() {
+		NewsBean lastRecord = newsProductDao.getLastRecord();
+		String noStr = null;
+		java.util.Date dnow = new java.util.Date();
+		String lastRecordNo = null;
+		String lastRecordNoDate = null;
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
+		if(lastRecord == null) {
+			noStr = "NP"+ft.format(dnow)+"00001";
+		}else {
+			lastRecordNo = lastRecord.getNewsId();
+			lastRecordNoDate = lastRecordNo.substring(2,10);
+			
+			noStr = "NP"+ft.format(dnow);
+			
+			//用字串的方式進行比較
+			if(ft.format(dnow).equals(lastRecordNoDate)) {
+				noStr += String.format("%05d",(Integer.parseInt(lastRecordNo.substring(10))+1));
+			}else {
+				noStr = "NP"+ft.format(dnow)+"00001";
+			}
+			System.out.println(noStr);
+		}
+		return noStr;
+	}
+
+
 
 	@Override
 	public List<NewsBean> getAllNews() {		
 		return newsProductDao.getAllNews();
 	}
 
+	
 }

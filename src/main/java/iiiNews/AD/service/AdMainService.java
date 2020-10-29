@@ -14,4 +14,8 @@ public interface AdMainService {
 	
 	//^^^^注意此處memberId是String還是int 未來會用到!!!
 	public List<AdBean> getMemberAdList(String memberId);
+	
+	public int deleteAdByMemberPkid(int pkId);
+	
+	public AdBean getOneAdByadPk(int adPk);
 }

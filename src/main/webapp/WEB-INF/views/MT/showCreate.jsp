@@ -11,15 +11,16 @@
 	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-
 	<div align="center" style="margin-top: 100px;">
-		<h2>所有廣告列表</h2>
-
+		<h1>資料新增成功</h1>
 	</div>
-	<div align='center'><c:forEach var="mtbean" items="${mtAllList}">
-		<table border="1">
-			<h1>資料新增成功</h1>
-			
+	<div align='center'>
+<%-- 		<c:forEach var="mtbean" items="${mtAllList}"> --%>
+			<table border="1">
+				<tr>
+					<td><div class="A1">PKKKKKK: ${mtbean.pkey}</div></td>
+				</tr>
+
 				<tr>
 					<td><div class="A1">文章編號: ${mtbean.articleId}</div></td>
 				</tr>
@@ -47,14 +48,19 @@
 				<tr>
 					<td><div class="A1">
 							預覽連結: <a href="${videoBean.link}">${videoBean.link}</a>
-<!-- 							<iframe align="center" width="500" height="300" -->
-<%-- 								src="https://www.youtube.com/embed/${videoBean.link}" frameborder="0"> </iframe> --%>
-						</div>
-					<br><br><br><br><br></td>
+							<!-- 							<iframe align="center" width="500" height="300" -->
+							<%-- 								src="https://www.youtube.com/embed/${videoBean.link}" frameborder="0"> </iframe> --%>
+						</div> <br>
+					<br>
+					<br>
+					<br>
+					<br></td>
 				</tr>
-		</table>
-		</c:forEach>
-		<br> <a href="<c:url value='/' />">回首頁</a> <br>
+			</table>
+			<%-- 		</c:forEach> --%>
+			<br>
+			<a href="<c:url value='/' />">回首頁</a>
+			<br>
 	</div>
 </body>
 </html>

@@ -49,4 +49,19 @@ public class AdMainServiceImpl implements AdMainService {
 		return adMaindao.getMemberAdList(memberId);
 	}
 
+	@Override
+	@Transactional
+	public int deleteAdByMemberPkid(int pkId) {
+		int n = 0;
+		adMaindao.deleteAdByMemberPkid(pkId);
+		n++;
+		return n;
+	}
+
+	@Override
+	@Transactional
+	public AdBean getOneAdByadPk(int adPk) {
+		return adMaindao.getOneAdByadPk(adPk);
+	}
+
 }

@@ -2,6 +2,8 @@ package iiiNews.NP.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +26,31 @@ public class NewsProductDaoImpl implements NewsProductDao {
 		n++;
 		return n;
 	}
+	//抓最後一筆資料
+	
+	@Override
+	public NewsBean getLastRecord() {
+		String hql = "FROM NewsBean ORDER BY uploadTime DESC";		
+		Session session = factory.getCurrentSession();
+		NewsBean newsbean = null;
+		try {
+		newsbean = (NewsBean)session.createQuery(hql).setMaxResults(1).getSingleResult();
+		}catch(NoResultException e) {
+			;
+		}
+		return newsbean;
+	}
 	
 	//查詢所有的新聞
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getAllNews() {
-		String hql = "FROM NewsBean";
+		String hql = "FROM NewsBean ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		List<NewsBean> list = session.createQuery(hql).getResultList();	
 		return list;
 	}
+
+	
 
 }

@@ -68,13 +68,17 @@ public class NewsProductController {
 			}
 		}
 		
+		String md = service.getLastRecord();
 		nb.setMemberId("A0001");
-		nb.setNewsId("1001");
+		nb.setNewsId(md);
 		
 		nb.setStatus(1);
 		service.uploadNewsForm(nb);
 		return "redirect:/";
 	}
+	
+	
+	
 	
 	@GetMapping("/getAllNews")
 	public String getAllNewsList(Model model) {

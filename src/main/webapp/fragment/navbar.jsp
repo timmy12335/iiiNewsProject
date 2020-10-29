@@ -10,7 +10,8 @@
  <div id='cssmenu'>
         <ul>
             <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
-            <li><a href='/iiiNews'>網站名字可放LOGO</a></li>
+            <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
+            
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
             <li><a href='#'>會員中心</a>
                 <ul>

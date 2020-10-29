@@ -53,9 +53,6 @@ public class NewsBean implements Serializable{
 	@Transient
 	private MultipartFile[] productImage;
 	
-//	@OneToOne(cascade = CascadeType.PERSIST) 
-//	@JoinColumn(name = "fk_images_id")
-//	private ImageBean imagebean;
 	
 	public NewsBean() {
 		
@@ -138,12 +135,7 @@ public class NewsBean implements Serializable{
 	public void setHappenTime(String happenTime) {
 		this.happenTime = happenTime;
 	}
-//	public String getImageNum() {
-//		return imageNum;
-//	}
-//	public void setImageNum(String imageNum) {
-//		this.imageNum = imageNum;
-//	}
+
 	public String getOutline() {
 		return outline;
 	}
@@ -236,13 +228,6 @@ public class NewsBean implements Serializable{
 	public void setHappenDate(Date happenDate) {
 		this.happenDate = happenDate;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 }

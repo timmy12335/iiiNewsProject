@@ -58,6 +58,14 @@ public class NewsProductServiceImpl implements NewsProductService {
 	public List<NewsBean> getAllNews() {		
 		return newsProductDao.getAllNews();
 	}
+	@Override
+	public NewsBean getSingleNews(String newsId) {		
+		return newsProductDao.getSingleNews(newsId);
+	}
+	@Override
+	public List<NewsBean> getMemNews(String memberId) {		
+		return newsProductDao.getMemNews(memberId);
+	}
 
 	
 }

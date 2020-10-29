@@ -34,7 +34,7 @@
                     <li><a href='#'>一般會員</a>
                         <ul>
                             <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-                            <li><a href="<c:url value=''/>">個人新聞列表</a></li>
+                            <li><a href="<c:url value='/getMemNewsList'/>">個人新聞列表</a></li>
                             
                         </ul>
                     </li>

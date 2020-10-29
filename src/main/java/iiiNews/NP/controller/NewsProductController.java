@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,25 +70,37 @@ public class NewsProductController {
 		}
 		
 		String md = service.getLastRecord();
-		nb.setMemberId("A0001");
+		nb.setMemberId("A0002");
 		nb.setNewsId(md);
 		
 		nb.setStatus(1);
 		service.uploadNewsForm(nb);
-		return "redirect:/";
+		return "redirect:/getMemNewsList/A0002";
 	}
 	
 	
 	
-	
+	//查詢所有的新聞
 	@GetMapping("/getAllNews")
 	public String getAllNewsList(Model model) {
 		List<NewsBean> list = service.getAllNews();
 		model.addAttribute("newsLists", list);
 		return "NP/allNewsList";
 	}
-	
-	
+	//查詢單一筆新聞
+	@GetMapping("/getSingleNews/{newsId}")
+	public String getSingleNews(@PathVariable String newsId ,Model model) {
+		NewsBean newsBean = service.getSingleNews(newsId);
+		model.addAttribute("newsSingle", newsBean);
+		return "NP/singleNews";
+	}
+	//查詢單一會員的新聞列表
+	@GetMapping("/getMemNewsList/{memberId}")
+	public String  getMemNewaList(@PathVariable String memberId ,Model model) {
+		List<NewsBean> list = service.getMemNews(memberId);
+		model.addAttribute("memNewsList", list);
+		return "NP/memNewsList";
+	}
 	
 }
 

@@ -12,7 +12,11 @@ public interface NewsProductDao {
 	public NewsBean getLastRecord();
 	//查詢所有的新聞
 	public List<NewsBean> getAllNews();
-	
-	
+	//抓單一筆新聞
+	public NewsBean getSingleNews(String newsId);
+	//查詢單一會員的新聞列表
+	public List<NewsBean> getMemNews(String memberId);
+	//刪除單一新聞紀錄
+	public NewsBean delSingleNews(String newsId);
 	
 }

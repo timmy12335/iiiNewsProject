@@ -27,9 +27,9 @@ public class MBBean implements Serializable {
 	String okpassword; // 確認密碼
 	String email;
 	String phone;
-	String identityId;
+	String identityId;   //身分證
 	Date birthday;
-	Integer mbpoints;
+	Integer mbpoints;   //會員點數
 
 	public void setPkey(Integer pkey) {
 		this.pkey = pkey;
@@ -67,8 +67,8 @@ public class MBBean implements Serializable {
 		return email;
 	}
 
-	public void setEmail(String mail) {
-		email = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {

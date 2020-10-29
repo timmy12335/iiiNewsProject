@@ -45,7 +45,7 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getAllNews() {
-		String hql = "FROM NewsBean ORDER BY uploadTime DESC";
+		String hql = "FROM NewsBean WHERE status = 1 ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		List<NewsBean> list = session.createQuery(hql).getResultList();	
 		return list;
@@ -63,7 +63,8 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getMemNews(String memberId) {
-		String hql = "FROM NewsBean WHERE memberId = :memId AND status = 1 ORDER BY uploadTime DESC";
+		String hql = "FROM NewsBean WHERE memberId = :memId "
+				+ "AND status = 1 ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		 List<NewsBean> list = session.createQuery(hql)
 				.setParameter("memId", memberId)
@@ -72,9 +73,12 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	}
 	//刪除單一新聞紀錄
 	@Override
-	public NewsBean delSingleNews(String newsId) {
-		String hql = "FROM NewsBean WHERE memberId = :memId ORDER BY uploadTime DESC";
-		return null;
+	public void updateStatus(String newsId, int status) {
+		String hql = "UPDATE NewsBean nb SET nb.status= :status "
+				+ "WHERE nb.newsId = :id";
+		Session session = factory.getCurrentSession();
+		session.createQuery(hql).setParameter("status", status)
+				.setParameter("id", newsId).executeUpdate();
 	}
 
 	

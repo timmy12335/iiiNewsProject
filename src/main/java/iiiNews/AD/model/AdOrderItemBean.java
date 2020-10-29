@@ -1,6 +1,7 @@
 package iiiNews.AD.model;
 
 import java.sql.Blob;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,15 +19,26 @@ public class AdOrderItemBean {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer itemPk;			//資料庫自增編號
 	
-	private Integer adId;				//商品的編號 (廣告的編號)
+	
+	private Integer adPk;			//商品(廣告的)的編號資料庫自增編號
+	private String adNo;				//商品的編號 (廣告的編號)
+	
+	
 	private Integer unitPrice;			//商品的價格 (廣告的價格)
 	private Integer quantity;			//訂購的數量
+	
 	private String sellerMemberId;		//^^^^賣家會員帳號
+	private String buyerMemberId;		//賣家會員帳號
 	
 	private Blob adImage;				//客戶上傳的照片
 	private String adImageName;			//客戶上傳照片的檔名
 	
-	private String buyerMemberId;		//賣家會員帳號
+	
+	
+	private String categoryNo;		//廣告欄位的位置分類
+	private Double width;			//紀錄欄位的寬
+	private Double height;			//紀錄欄位的高
+	private Date adDate;			//欄位要販賣的日期
 	
 //	@Transient
 //	private MultipartFile productImage;		//$$$$image 處理上傳圖片的問題
@@ -42,19 +54,22 @@ public class AdOrderItemBean {
 	}
 
 	//有傳參數的建構子
-	public AdOrderItemBean(Integer itemPk, Integer adId, Integer unitPrice, Integer quantity, String sellerMemberId,
-			String buyerMemberId) {
+	public AdOrderItemBean(Integer itemPk,Integer adPk, String adNo, Integer unitPrice, Integer quantity, String sellerMemberId,
+			String buyerMemberId, String categoryNo, Double width, Double height, Date adDate) {
 		super();
 		this.itemPk = itemPk;
-		this.adId = adId;
+		this.adPk = adPk;
+		this.adNo = adNo;
 		this.unitPrice = unitPrice;
 		this.quantity = quantity;
 		this.sellerMemberId = sellerMemberId;
 		this.buyerMemberId = buyerMemberId;
+		this.categoryNo = categoryNo;
+		this.width = width;
+		this.height = height;
+		this.adDate = adDate;
 	}
-	
-	
-	
+
 	public Integer getItemPk() {
 		return itemPk;
 	}
@@ -62,15 +77,22 @@ public class AdOrderItemBean {
 	public void setItemPk(Integer itemPk) {
 		this.itemPk = itemPk;
 	}
+	
+	public Integer getAdPk() {
+		return adPk;
+	}
 
+	public void setAdPk(Integer adPk) {
+		this.adPk = adPk;
+	}
 
-	public Integer getAdId() {
-		return adId;
+	public String getAdNo() {
+		return adNo;
 	}
 
 
-	public void setAdId(Integer adId) {
-		this.adId = adId;
+	public void setAdNo(String adNo) {
+		this.adNo = adNo;
 	}
 
 
@@ -141,6 +163,47 @@ public class AdOrderItemBean {
 
 	public void setAdOrderBean(AdOrderBean adOrderBean) {
 		this.adOrderBean = adOrderBean;
+	}
+	
+
+	
+	public String getCategoryNo() {
+		return categoryNo;
+	}
+
+	public void setCategoryNo(String categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+
+	public Double getWidth() {
+		return width;
+	}
+
+	public void setWidth(Double width) {
+		this.width = width;
+	}
+
+	public Double getHeight() {
+		return height;
+	}
+
+	public void setHeight(Double height) {
+		this.height = height;
+	}
+
+	public Date getAdDate() {
+		return adDate;
+	}
+
+	public void setAdDate(Date adDate) {
+		this.adDate = adDate;
+	}
+
+	@Override
+	public String toString() {
+		return "AdOrderItemBean [itemPk=" + itemPk + ", adPk=" + adPk + ", adNo=" + adNo + ", unitPrice=" + unitPrice + ", quantity="
+				+ quantity + ", sellerMemberId=" + sellerMemberId + ", adImage=" + adImage + ", adImageName="
+				+ adImageName + ", buyerMemberId=" + buyerMemberId + ", adOrderBean=" + adOrderBean + "]";
 	}
 	
 	

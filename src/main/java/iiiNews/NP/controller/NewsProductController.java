@@ -101,6 +101,13 @@ public class NewsProductController {
 		model.addAttribute("memNewsList", list);
 		return "NP/memNewsList";
 	}
+	//下架一則新聞
+	@GetMapping("/delSingleNews/{newsId}")
+	public String delSingleNews(@PathVariable String newsId ,Model model) {
+		
+		service.delSingleNews(newsId);
+		return "redirect:/getMemNewsList/A0001";
+	}
 	
 }
 

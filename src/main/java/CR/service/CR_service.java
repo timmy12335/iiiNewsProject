@@ -14,4 +14,5 @@ public interface CR_service {
 	
 	void deleteReprotByPk(Integer pk);
 	public CRBean getReportById(int pk);
+	void updateReport(CRBean cb);
 }

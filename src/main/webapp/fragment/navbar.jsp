@@ -54,7 +54,12 @@
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
                 </ul>
             </li>
-            <li><a href="<c:url value='/trkNews' />">新聞追蹤</a></li>
+            <li><a href="<c:url value='#' />">新聞追蹤</a>
+                <ul>
+                 	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
+                    <li><a href="<c:url value='/queryByType' />">分類追蹤</a></li>
+               </ul>
+            </li>
             <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
 <!--             	<ul> -->
 <%--                     <li><a href="<c:url value='/MtCreate' />">上傳頁面</a></li> --%>

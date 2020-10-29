@@ -44,6 +44,15 @@ public class MtAddBean implements Serializable{
 	
 	@Transient
 	private MultipartFile Image;
+	
+	@JsonIgnore
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
 
 	public MtAddBean(Integer pkey, String articleId, Timestamp updateDate, Integer memberId, String articleStatus,
 			String category, String title, Blob imgLink, String videoLink, String article, String comment) {
@@ -183,13 +192,6 @@ public class MtAddBean implements Serializable{
 	public void setImage(MultipartFile image) {
 		Image = image;
 	}
-
-	public String getImgName() {
-		return imgName;
-	}
-
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
-	}
+	
 	
 }

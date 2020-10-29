@@ -21,7 +21,7 @@
 		<spring:message code="spring.addProduct.form.image.label" />
 	</label>
 	<div>
-		<form:input id="Image" path="Image" type="file" />
+		<form:input id="imgLink" path="imgLink" type="file" />
 	</div>
 	</div>
 		<div align='center'>

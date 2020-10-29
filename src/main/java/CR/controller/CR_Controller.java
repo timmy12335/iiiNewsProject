@@ -69,7 +69,7 @@ public class CR_Controller {
 		
 	}
 	
-	@PostMapping("/crReport/{pk}")
+	@PatchMapping("/crReport/{pk}")
 	public String updateReportByPk(@ModelAttribute("report") CRBean cb){
 			service.updateReport(cb);
 			return "redirect:/customerReports";

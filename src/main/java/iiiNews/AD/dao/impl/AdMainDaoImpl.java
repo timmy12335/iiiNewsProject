@@ -34,6 +34,7 @@ public class AdMainDaoImpl implements AdMainDao {
 		return n;
 	}
 
+	
 	// 查詢全部廣告列表 一次查全部
 	@SuppressWarnings("unchecked")
 	@Override
@@ -44,6 +45,7 @@ public class AdMainDaoImpl implements AdMainDao {
 		return list;
 	}
 
+	
 	//抓最後一筆資料 為了新增時能查出最後一筆資料的廣告編號(AD2020102500001)
 	//先設初值為null 若查無資料就回傳null 不處理例外
 	@Override
@@ -59,6 +61,7 @@ public class AdMainDaoImpl implements AdMainDao {
 		return adbean;
 	}
 
+	
 	//$$$$ 更新廣告上架資料 還沒測試沒寫完!!!!
 	@Override
 	public int updateAds(String adNo, AdBean ab) {

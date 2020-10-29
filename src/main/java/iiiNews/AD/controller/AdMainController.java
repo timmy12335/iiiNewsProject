@@ -24,6 +24,14 @@ public class AdMainController {
 	@Autowired
 	AdMainService service;
 	
+	/*在此controller內的功能有
+	 * 取得上傳表格、送出使用者填好的上傳表格
+	 * 取得所有廣告列表
+	 * 根據該新聞的pk鍵 刪除該則廣告(單則)*/
+	
+	
+	
+	
 	//取得上傳表格
 	@GetMapping("/uploadAds")
 	public String goUploadForm(Model model) {
@@ -108,6 +116,7 @@ public class AdMainController {
 		return "redirect:/getAllAds";
 	}
 	
+	
 	//取得所有廣告列表
 	@GetMapping("/getAllAds")
 	public String getAllAdsList(Model model){
@@ -116,14 +125,14 @@ public class AdMainController {
 		return "AD/allAdsList";
 	}
 	
-	
 	//$$$$ 根據會員資料(編號)取得該會員所有廣告列表
-	@GetMapping("/getAllAds/{id}")
-	public String getMemberAllAdsList(@PathVariable String id,Model model){
+	@GetMapping("/memberAllAdsList")
+	public String getMemberAdList(@PathVariable String id,Model model){
 //		List<AdBean> list = service.getAllAds();
 //		model.addAttribute("adLists",list);
-		return "";
+		return "AD/memberAllAdsList";
 	}
+
 	
 	
 	//根據該新聞的pk鍵 刪除該則廣告(單則)
@@ -136,13 +145,6 @@ public class AdMainController {
 	}
 	
 	
-	
-	@GetMapping("/memberAllAdsList")
-	public String memberAllAdsList(Model model){
-		List<AdBean> list = service.getAllAds();
-		model.addAttribute("adLists",list);
-		return "AD/memberAllAdsList";
-	}
 
 	
 	

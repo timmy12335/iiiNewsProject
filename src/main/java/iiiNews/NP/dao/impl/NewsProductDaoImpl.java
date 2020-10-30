@@ -80,6 +80,8 @@ public class NewsProductDaoImpl implements NewsProductDao {
 		session.createQuery(hql).setParameter("status", status)
 				.setParameter("id", newsId).executeUpdate();
 	}
+	//修改單則新聞
+	
 
 	
 

@@ -63,11 +63,11 @@
                </ul>
             </li>
             <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
-<!--             	<ul> -->
-<%--                     <li><a href="<c:url value='/MtCreate' />">上傳頁面</a></li> --%>
+            	<ul>
+                    <li><a href="<c:url value='/getAllMtAdd' />">檢視使用者所有資料</a></li>
 <%--                     <li><a href="<c:url value='/000' />">看所有廣告列表</a></li> --%>
 <%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
-<!--                 </ul> -->
+                </ul>
             </li>
             <li><a href='#'>廣告專區</a>
             	<ul>

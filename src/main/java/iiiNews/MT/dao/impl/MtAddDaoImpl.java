@@ -1,6 +1,5 @@
 package iiiNews.MT.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -10,9 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import iiiNews.AD.model.AdBean;
 import iiiNews.MT.dao.MtAddDao;
-import iiiNews.MT.exception.ProductNotFoundException;
 import iiiNews.MT.model.MtAddBean;
 
 @Repository
@@ -35,7 +32,7 @@ public class MtAddDaoImpl implements MtAddDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MtAddBean> getAllAddDao() {
+	public List<MtAddBean> getAllMtAdd() {
 		String hql = "FROM MtAddBean";
 		Session session = factory.getCurrentSession();
 		List<MtAddBean> list = session.createQuery(hql).getResultList();

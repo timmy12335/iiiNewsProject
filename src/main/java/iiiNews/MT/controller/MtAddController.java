@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import iiiNews.AD.model.AdBean;
 import iiiNews.MT.dao.MtAddDao;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
@@ -40,26 +41,16 @@ public class MtAddController {
 	MtAddService service;
 	@Autowired
 	ServletContext servletContext;
-
+	
 	@GetMapping("/MtCreate")
-	public String toCreateForm(Model model, HttpSession session) {
+	public String toCreateForm(Model model) {		//載入新增欄位頁面getBean
 		MtAddBean bean = new MtAddBean();
-//		List<String> list1 = service.getAllAddDao1();
-//		Integer a = Integer.valueOf(list1.size());
-//		bean.setPkey(a+1);
-//		MtAddBean bean = (MtAddBean) session.getAttribute("MtAddBean");
-//		bean.setCategory("惡搞");
-//		bean.setTitle("今晚吃啥");
-//		bean.setImgLink(null);
-//		bean.setVideoLink("https://www.youtube.com/watch?v=n-hy9MswmcA");
-//		bean.setArticle("HELLO,HELLO,小名");
-
 		model.addAttribute("mtBean", bean);
 		System.out.println("*******************************************");
 		return "MT/Create";
 	}
 
-	@PostMapping("/MtCreate")
+	@PostMapping("/MtCreate")		//新增欄位頁面
 	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model) {
 
 //		Map<String, String> map = new HashMap<>();
@@ -74,7 +65,7 @@ public class MtAddController {
 		 * 則是今天日期然後編號是00001 如果有今天日期 則後面數字加一
 		 */
 
-		String str = null;
+		String str = null;					//文章序號規則
 		java.util.Date now = new java.util.Date();
 		// 取得最後一筆的編號資料
 		MtAddBean lastRecord = service.getLastRecord();
@@ -99,8 +90,7 @@ public class MtAddController {
 		bean.setArticleId(str);
 
 		// ---------------------------------------------------
-
-		MultipartFile Image = bean.getImage();
+		MultipartFile Image = bean.getImage();				//把圖片塞進資料庫
 		System.out.println(Image);
 
 		if (Image.isEmpty()) {
@@ -109,7 +99,7 @@ public class MtAddController {
 			bean.setImgName(Image.getOriginalFilename());
 		}
 		// ******************************************
-		if (Image != null && !Image.isEmpty()) { // 兩種寫法
+		if (Image != null && !Image.isEmpty()) { 		//兩種寫法
 			try {
 				byte[] b1 = Image.getBytes();
 				Blob blob1 = new SerialBlob(b1);
@@ -145,7 +135,7 @@ public class MtAddController {
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++
-	@GetMapping("/getMtCreate/{articleId}")
+	@GetMapping("/getMtCreate/{articleId}")						//取圖片至新增成功頁面
 	public ResponseEntity<byte[]> getPicture(@PathVariable String articleId) throws Exception {
 		System.out.println("articleId=" + articleId);
 		ResponseEntity<byte[]> re = null;
@@ -201,5 +191,11 @@ public class MtAddController {
 //		System.out.println("--------------------------------------------");
 //		return "MT/showCreate";
 //	}
+	@GetMapping("/getAllMtAdd")
+	public String getAllMtAddList(Model model){
+		List<MtAddBean> list = service.getAllMtAdd();
+		model.addAttribute("getAllMtAddList",list);
+		return "MT/getAllMtAdd";
+	}
 
 }

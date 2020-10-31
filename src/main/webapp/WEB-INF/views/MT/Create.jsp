@@ -18,8 +18,8 @@
 			<form:form method="POST" modelAttribute="mtBean"
 				enctype="multipart/form-data">
 				<fieldset>
-					<div align="center">
-						<h2>新增影片</h2>
+					<div align="center" style="margin-top: 50px;">
+						<h1>新增影片</h1>
 						<hr>
 						<div class="st1">
 							<label for="Category">類別:</label>
@@ -35,7 +35,6 @@
 							<label for="title">標題:</label>
 							<form:input type="text" id="title" name="title" path="title"
 								size="30" placeholder="今晚我想來點..." autocomplete="on" />
-							<font color="red" size="1">${errorMsg.title}</font>
 						</div>
 <!-- 						<div class="st1"> -->
 <!-- 							<label for="videoLink">影片連結:</label> -->

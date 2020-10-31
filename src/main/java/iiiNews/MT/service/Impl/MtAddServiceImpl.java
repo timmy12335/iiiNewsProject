@@ -30,8 +30,8 @@ public class MtAddServiceImpl implements MtAddService{
 
 	@Override
 	@Transactional
-	public List<MtAddBean> getAllMtService() {
-		return dao.getAllAddDao();
+	public List<MtAddBean> getAllMtAdd() {
+		return dao.getAllMtAdd();
 	}
 
 	@Override

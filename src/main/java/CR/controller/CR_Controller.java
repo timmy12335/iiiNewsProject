@@ -73,13 +73,17 @@ public class CR_Controller {
 	public @ResponseBody Map<String, String> updateReportByPk(@RequestBody CRBean report,@PathVariable Integer pk){
 		Map<String, String> map = new HashMap<>();	
 		CRBean cb0 = null;
+		if(pk != null) {
+			cb0 = service.getReportById(pk);
+			service.evictReport(cb0);
+		}
+		
 		try{
 			service.updateReport(report);
 			map.put("success","修改完成");
 		}catch(Exception e) {
 			map.put("fail","修改失敗");
 		}
-		
 		return map;
 		}
 	

@@ -77,5 +77,11 @@ public class CR_Dao_impl implements CR_Dao {
 		session.update(report);		
 		
 	}
+
+	@Override
+	public void evictReport(CRBean cb) {
+		Session session = factory.getCurrentSession();
+		session.evict(cb);		
+	}
 	
 }

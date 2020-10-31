@@ -1,5 +1,8 @@
 package iiiNews.MT.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -8,17 +11,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import iiiNews.MT.dao.MtAddDao;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
 
@@ -27,6 +38,8 @@ public class MtAddController {
 
 	@Autowired
 	MtAddService service;
+	@Autowired
+	ServletContext servletContext;
 
 	@GetMapping("/MtCreate")
 	public String toCreateForm(Model model, HttpSession session) {
@@ -81,7 +94,7 @@ public class MtAddController {
 			} else {
 				str = "MT" + ft.format(now) + "00001";
 			}
-			System.out.println("articleId--------"+str);
+			System.out.println("articleId--------" + str);
 		}
 		bean.setArticleId(str);
 
@@ -95,17 +108,17 @@ public class MtAddController {
 		} else {
 			bean.setImgName(Image.getOriginalFilename());
 		}
-		//******************************************
-		if(Image != null && !Image.isEmpty()) {			//兩種寫法
+		// ******************************************
+		if (Image != null && !Image.isEmpty()) { // 兩種寫法
 			try {
 				byte[] b1 = Image.getBytes();
 				Blob blob1 = new SerialBlob(b1);
 				bean.setImgLink(blob1);
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-		}
-		//******************************************
+			}
+			// ******************************************
 //			MultipartFile file = bean.getImage();		//兩種寫法
 //			if(Image != null && !Image.isEmpty()) {	
 //			try {
@@ -117,40 +130,76 @@ public class MtAddController {
 //			}catch (Exception e) {
 //				e.printStackTrace();
 //			}
-		//******************************************
+			// ******************************************
+		}
+
+		// ---------------------------------------------------
+
+		int n = service.saveMtAddService(bean);
+		System.out.println("成功筆數----" + n);
+		System.out.println(bean.getArticleId());
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+//		model.addAttribute("mtBean", bean);
+		return "/MT/showCreate";
+
 	}
 
-	// ---------------------------------------------------
-
-	int n = service.saveMtAddService(bean);
-	System.out.println("成功筆數----"+n);
-	System.out.println(bean.getArticleId());
-	System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-	return"redirect:/getMtCreate";
-	
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++
+	@GetMapping("/getMtCreate/{articleId}")
+	public ResponseEntity<byte[]> getPicture(@PathVariable String articleId) throws Exception {
+		System.out.println("articleId=" + articleId);
+		ResponseEntity<byte[]> re = null;
+		InputStream is = null;
+		String mimeType = null;
+		MtAddBean bean = service.getArticleById(articleId);
+		if (bean != null) {
+			Blob blob = bean.getImgLink();
+			if (blob != null) {
+				is = blob.getBinaryStream();
+				mimeType = servletContext.getMimeType(bean.getImgName());
+			}
+		}
+		if (is == null) {
+			is = servletContext.getResourceAsStream("/img/NoImage.jpg");
+			mimeType = servletContext.getMimeType("NoImage.jpg");
+		}
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(mediaType);
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] b = new byte[81920];
+		int len = 0;
+		while ((len = is.read(b)) != -1) {
+			baos.write(b, 0, len);
+		}
+		byte[] content = baos.toByteArray();
+//re = new ResponseEntity<byte[]>(content, HttpStatus.OK);
+		re = new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
+		return re;
 	}
-
-	@GetMapping("/getMtCreate")
-	public String getMtCreate(Model model) {
-		
-//		try {
-//            InputStream in = null;
-//            in = new FileInputStream(path);
-//            byte[] b = new byte[in.available()];
-//            in.read(b);
-//            in.close();
-//            gp.setPicture(b);
-//
-//            myDao.save(gp);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-		
-//		List<MtAddBean> list = service.getLastRecord();
-		MtAddBean mtAddBean = service.getLastRecord();
-		model.addAttribute("mtbean", mtAddBean);
-		System.out.println("--------------------------------------------");
-		return "MT/showCreate";
-	}
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++
+//	@GetMapping("/getMtCreate")
+//	public String getMtCreate(Model model) {
+//		
+////		try {
+////            InputStream in = null;
+////            in = new FileInputStream(path);
+////            byte[] b = new byte[in.available()];
+////            in.read(b);
+////            in.close();
+////            gp.setPicture(b);
+////
+////            myDao.save(gp);
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////        }
+//		
+////		List<MtAddBean> list = service.getLastRecord();
+//		MtAddBean mtAddBean = service.getLastRecord();
+//		model.addAttribute("mtbean", mtAddBean);
+//		System.out.println("--------------------------------------------");
+//		return "MT/showCreate";
+//	}
 
 }

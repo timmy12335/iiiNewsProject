@@ -20,9 +20,9 @@
 		<th width='600' align='center'>新聞標題</th>
 		<th width='100' align='center'>新聞編號:</th>
 		<th width='60' align='center'>上傳時間</th>		
-		<th width='100' align='center'>新聞類型</th>
-		
+		<th width='100' align='center'>新聞類型</th>		
 		<th width='100' align='center'>發生地點</th>
+		<th width='200' align='center'>影像</th>
 	</tr>
 	<tr>
 		<td align='center' > 
@@ -34,6 +34,8 @@
 		<td align='center'>${ news.newsType}</td>
 		
 		<td align='center'>${news.location}</td>
+		<td><img width='200' height='150' 
+	                    	src="<c:url value='/getNewsPicture/${ news.newsId }'/>" ></td>
 		</tr>
     <tr style="background-color:lightblue;"  height='36'>
 		<th width='600' align='center'>新聞大綱</th>

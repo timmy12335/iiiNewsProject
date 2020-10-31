@@ -24,6 +24,8 @@
 			<p>發生日期: ${ newsSingle.happenDate }</p>
 			<p>發生時間: ${ newsSingle.happenTime }</p>
 			<p>發生地點: ${ newsSingle.location }</p>
+			<img width='300' height='200' 
+	                    	src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>" >
 			<p>新聞內文:</p><p>${ newsSingle.article }</p>
 			<p>價格: ${ newsSingle.price }</p>
 			<p>販賣計時: ${ newsSingle.limitTime }</p>

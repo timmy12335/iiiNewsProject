@@ -45,7 +45,7 @@ public class MtAddBean implements Serializable{
 	@Transient
 	private MultipartFile Image;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	public String getImgName() {
 		return imgName;
 	}

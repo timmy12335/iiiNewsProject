@@ -15,14 +15,8 @@
 	<div align="center" style="margin-top: 80px"> <br> 
 		<h1>資料新增成功</h1>
 	</div>
-	<form action="/showCreate" method="post" enctype="multipart/form-data" id="form" />
+	<form action="/showCreate" method="post" modelAttribute="mtBean" enctype="multipart/form-data" >
 	<div>
-	<label for="Image">
-		<spring:message code="spring.addProduct.form.image.label" />
-	</label>
-	<div>
-		<form:input id="imgLink" path="imgLink" type="file" />
-	</div>
 	</div>
 		<div align='center'>
 			<table border="1">
@@ -30,19 +24,19 @@
 <%-- 					<td><div>PKKKKKK: ${mtbean.pkey}</div></td> --%>
 <!-- 				</tr> -->
 				<tr>
-					<td><div>文章編號: ${mtbean.articleId}</div></td>
+					<td><div>文章編號: ${mtBean.articleId}</div></td>
 				</tr>
 				<tr>
-					<td><div>會員編號: ${mtbean.memberId}</div></td>
+					<td><div>會員編號: ${mtBean.memberId}</div></td>
 				</tr>
 				<tr>
-					<td><div>上傳時間: ${mtbean.updateDate}</div></td>
+					<td><div>上傳時間: ${mtBean.updateDate}</div></td>
 				</tr>
 				<tr>
-					<td><div>文章狀態: ${mtbean.articleStatus}</div></td>
+					<td><div>文章狀態: ${mtBean.articleStatus}</div></td>
 				</tr>
 				<tr>
-					<td><div>${mtbean.category} -- ${mtbean.title}</div></td>
+					<td><div>${mtBean.category} -- ${mtBean.title}</div></td>
 				</tr>
 <!-- 				<tr> -->
 <%-- 					<td><div>標籤: ${mtbean.category}</div></td> --%>
@@ -54,7 +48,10 @@
 <%-- 					<td><div>影片連結: ${mtbean.videoLink}</div></td> --%>
 <!-- 				</tr> -->
 				<tr>
-					<td><div style="width:500px;height:300px">內文: ${mtbean.imgLink} ******** ${mtbean.article}</div></td>
+					<td><div><img src="<c:url value='/getMtCreate/${mtBean.articleId}' />" /></div></td>
+				</tr>
+				<tr>
+					<td><div style="width:500px;height:300px">內文: ***${mtBean.imgLink} ******** ${mtBean.article}***</div></td>
 				</tr>
 <!-- 				<tr> -->
 <%-- 					<td><div>預覽連結: <a href="${videoBean.link}">${videoBean.link}</a> --%>

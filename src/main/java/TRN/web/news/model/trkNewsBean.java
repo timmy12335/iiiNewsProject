@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "trkNews")
@@ -35,10 +38,13 @@ public class trkNewsBean implements Serializable {
 	private String filename;
 	private String type;
 	private Integer status;
+	@Transient
+	private Integer reportId;
+	
+	private rptNewsBean rptNewsBean;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "reportsBean")
-//	private ReportsBean reportsBean;
+	@OneToMany(mappedBy="trkNewsBean")
+	private Set<rptNewsBean> rpts = new LinkedHashSet<>();
 		
 	public trkNewsBean() {
 		
@@ -56,7 +62,8 @@ public class trkNewsBean implements Serializable {
 			           Blob coverimage, 
 			           String filename,
 			           String type, 
-			           int status) {
+			           int status,
+			           rptNewsBean rptNewsBean) {
 		super();
 		this.trackId = trackId;
 		this.title = title;
@@ -71,6 +78,7 @@ public class trkNewsBean implements Serializable {
 		this.filename = filename;
 		this.type = type;
 		this.status = 1;
+		this.rptNewsBean = rptNewsBean;
 	}
 	public trkNewsBean(Integer trackId, 
 			           String title, 
@@ -101,7 +109,13 @@ public class trkNewsBean implements Serializable {
 		this.status = 1;
 	}
 	
-	
+	public Integer getReportId() {
+		return reportId;
+	}
+
+	public void setReportId(Integer reportId) {
+		this.reportId = reportId;
+	}
 	
 	public Integer getTrackId() {
 		return trackId;
@@ -207,12 +221,24 @@ public class trkNewsBean implements Serializable {
 		this.status = status;
 	}
 
-//	public ReportsBean getReportsBean() {
-//		return reportsBean;
-//	}
-//
-//	public void setReportsBean(ReportsBean reportsBean) {
-//		this.reportsBean = reportsBean;
-//	}
+	public Set<rptNewsBean> getRpts() {
+		return rpts;
+	}
+
+	public void setRpts(Set<rptNewsBean> rpts) {
+		this.rpts = rpts;
+	}
+
+	public rptNewsBean getRptNewsBean() {
+		return rptNewsBean;
+	}
+
+	public void setRptNewsBean(rptNewsBean rptNewsBean) {
+		this.rptNewsBean = rptNewsBean;
+	}
+
+	
+
+
 
 }

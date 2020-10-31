@@ -12,7 +12,7 @@
 	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-	<div align="center" style="margin-top: 80px"> <br> 
+	<div align="center" style="margin-top: 100px"> <br> 
 		<h1>資料新增成功</h1>
 	</div>
 	<form action="/showCreate" method="post" modelAttribute="mtBean" enctype="multipart/form-data" >
@@ -20,9 +20,9 @@
 	</div>
 		<div align='center'>
 			<table border="1">
-<!-- 				<tr> -->
-<%-- 					<td><div>PKKKKKK: ${mtbean.pkey}</div></td> --%>
-<!-- 				</tr> -->
+				<tr>
+					<td><div>PKKKKKK: ${mtBean.pkey}</div></td>
+				</tr>
 				<tr>
 					<td><div>文章編號: ${mtBean.articleId}</div></td>
 				</tr>
@@ -48,10 +48,10 @@
 <%-- 					<td><div>影片連結: ${mtbean.videoLink}</div></td> --%>
 <!-- 				</tr> -->
 				<tr>
-					<td><div><img src="<c:url value='/getMtCreate/${mtBean.articleId}' />" /></div></td>
+					<td><div><img style="width:500px;height:300px" src="<c:url value='/getMtCreate/${mtBean.articleId}' />" /></div></td>
 				</tr>
 				<tr>
-					<td><div style="width:500px;height:300px">內文: ***${mtBean.imgLink} ******** ${mtBean.article}***</div></td>
+					<td><div style="width:500px;height:300px">內文: ${mtBean.article}***</div></td>
 				</tr>
 <!-- 				<tr> -->
 <%-- 					<td><div>預覽連結: <a href="${videoBean.link}">${videoBean.link}</a> --%>

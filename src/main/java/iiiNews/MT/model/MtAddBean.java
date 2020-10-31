@@ -38,7 +38,7 @@ public class MtAddBean implements Serializable{
 	private String videoLink;		//影片連結
 	private String article;			//內文
 	private String comment;			//留言
-	private String add1;
+	private Integer status;			//文章狀態
 	private String add2;
 	private String add3;
 	
@@ -161,12 +161,12 @@ public class MtAddBean implements Serializable{
 		this.comment = comment;
 	}
 
-	public String getAdd1() {
-		return add1;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setAdd1(String add1) {
-		this.add1 = add1;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public String getAdd2() {

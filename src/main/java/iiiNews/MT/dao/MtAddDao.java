@@ -8,7 +8,7 @@ public interface MtAddDao {
 
 	public int saveMtAddDao(MtAddBean mtAddBean);
 
-	public List<MtAddBean> getAllAddDao();
+	public List<MtAddBean> getAllMtAdd();
 
 	public MtAddBean getLastRecord();
 

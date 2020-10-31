@@ -31,7 +31,8 @@
                         <p>建立者${trkNew.founder}</p>
                         <p>追蹤人數: ${trkNew.trcnum}</p>
                         <p>
-                        <a href="<spring:url value='trkNew?id=${trkNew.trackId}' />" 
+                        <a href="<spring:url value='/trkNew?id=${trkNew.trackId}' />" 
+                      <c:url value='/uploadAds' />
 									class="btn btn-primary"> <span
 									class="glyphicon-info-sigh glyphicon"></span>詳細資料 //查詢多筆/單筆詳細資料
 								</a>

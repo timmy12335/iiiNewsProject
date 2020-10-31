@@ -13,7 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import franktest.model.MemberBean;
+import iiiNews.MB.model.CpMemberBean;
+import iiiNews.MB.model.MBBean;
+
+
 
 @Entity
 @Table(name="CR_CustomerReport")
@@ -29,27 +32,51 @@ public class CRBean implements Serializable {
 	private Timestamp crApplyDate;
 	@Transient
 	private Integer memberId;
+	@Transient
+	private Integer companyId;
 	private String crReContent;
 	private Timestamp crReDate;
 	private String crReplier;
 	private String crReScore;
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="memberBean_pkey")
-	private MemberBean memberBean;
+	@JoinColumn(name="memberBean_fpkey")
+	private MBBean mbBean;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cpBean_fpkey")
+	private CpMemberBean cpBean;
+	
+	
+	public CpMemberBean getCpBean() {
+		return cpBean;
+	}
+
+	public void setCpBean(CpMemberBean cpBean) {
+		this.cpBean = cpBean;
+	}
+
+	public void setMbBean(MBBean mbBean) {
+		this.mbBean = mbBean;
+	}
+	public MBBean getMbBean() {
+		return mbBean;
+	}
 
 	public CRBean() {
 	}
 	
+
+
 	@Override
 	public String toString() {
 		return "CRBean [pk=" + pk + ", crClass=" + crClass + ", crTitle=" + crTitle + ", crContent=" + crContent
 				+ ", crApplyDate=" + crApplyDate + ", memberId=" + memberId + ", crReContent=" + crReContent
 				+ ", crReDate=" + crReDate + ", crReplier=" + crReplier + ", crReScore=" + crReScore + ", memberBean="
-				+ memberBean + "]";
+				+ mbBean + ", cpBean=" + cpBean + "]";
 	}
 
 	public CRBean(Integer pk, String crClass, String crTitle, String crContent, Timestamp crApplyDate, Integer memberId,
-			String crReContent, Timestamp crReDate, String crReplier, String crReScore) {
+			String crReContent, Timestamp crReDate, String crReplier, String crReScore, MBBean mbBean,
+			CpMemberBean cpBean) {
 		super();
 		this.pk = pk;
 		this.crClass = crClass;
@@ -61,6 +88,8 @@ public class CRBean implements Serializable {
 		this.crReDate = crReDate;
 		this.crReplier = crReplier;
 		this.crReScore = crReScore;
+		this.mbBean = mbBean;
+		this.cpBean = cpBean;
 	}
 
 	public Integer getPk() {
@@ -143,12 +172,6 @@ public class CRBean implements Serializable {
 		this.crReScore = crReScore;
 	}
 
-	public MemberBean getMemberBean() {
-		return memberBean;
-	}
 
-	public void setMemberBean(MemberBean memberBean) {
-		this.memberBean = memberBean;
-	}
 
 }

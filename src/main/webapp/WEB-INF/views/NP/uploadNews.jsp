@@ -12,7 +12,7 @@
 	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 	</nav>
-<div align='center' style="margin-top:100px;">
+<div align='center' style="margin-top:150px;">
 <form:form method="POST"  id="form1" modelAttribute="newsBean" enctype="multipart/form-data">
 <fieldset>
 <div>

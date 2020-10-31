@@ -8,4 +8,8 @@ public interface AdOrderDao {
 	
 	//^^^^ 注意此處memberId是String還是int 未來會用到!!!
 	public List<AdOrderBean> getMemberOrderList(String memberId);
+	
+	public AdOrderBean getLastRecord();
+	
+	public int saveOrders(AdOrderBean aob);
 }

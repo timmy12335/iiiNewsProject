@@ -34,7 +34,7 @@
                     <li><a href='#'>一般會員</a>
                         <ul>
                             <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-                            <li><a href="<c:url value=''/>">個人新聞列表</a></li>
+                            <li><a href="<c:url value='/getMemNewsList'/>">個人新聞列表</a></li>
                             
                         </ul>
                     </li>
@@ -76,7 +76,7 @@
                             <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
                         </ul>
                     </li>
-                    <li><a href="<c:url value='/getAllAds' />">還未新增的第三個功能</a></li>
+                    <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
                 </ul>
             </li>
             <li>

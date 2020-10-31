@@ -11,25 +11,27 @@
 <nav>
 <jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 </nav>
-	<div align="center" style="margin-top:100px;">
-	<h2>所有新聞列表</h2>	
+	<div align="center" style="margin-top:150px;">
+	<h2>單一新聞表</h2>	
 	</div>
 	<hr>
 	<div align="left">
-		<c:forEach var='news' items='${newsLists}'>
-			<p>新聞編號： ${ news.newsId }</p>
-			<p>上傳時間：${news.uploadTime}</p>
-			<p>新聞標題: &nbsp;${ news.title }</p>
-			<p>新聞類型: ${ news.newsType }</p>
-			<p>發生日期: ${ news.happenDate }</p>
-			<p>發生時間: ${ news.happenTime }</p>
-			<p>發生地點: ${ news.location }</p>
-			<p>新聞內文:</p><p>${ news.article }</p>
-			<p>價格: ${ news.price }</p>
-			<p>販賣計時: ${ news.limitTime }</p>
-			<a href="<c:url value="" />">修改</a>
-			<a href="<c:url value="" />">刪除</a>		
-		</c:forEach>	
+		
+			<p>新聞編號： ${ newsSingle.newsId }</p>
+			<p>上傳時間：${newsSingle.uploadTime}</p>
+			<p>新聞標題: &nbsp;${ newsSingle.title }</p>
+			<p>新聞類型: ${ newsSingle.newsType }</p>
+			<p>發生日期: ${ newsSingle.happenDate }</p>
+			<p>發生時間: ${ newsSingle.happenTime }</p>
+			<p>發生地點: ${ newsSingle.location }</p>
+			<img width='300' height='200' 
+	                    	src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>" >
+			<p>新聞內文:</p><p>${ newsSingle.article }</p>
+			<p>價格: ${ newsSingle.price }</p>
+			<p>販賣計時: ${ newsSingle.limitTime }</p>
+			<a href="<c:url value="" />">購買</a>
+			<a href="<c:url value="" />">回前頁</a>		
+		
 	</div>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import iiiNews.AD.model.AdBean;
 import iiiNews.MT.dao.MtAddDao;
+import iiiNews.MT.exception.ProductNotFoundException;
 import iiiNews.MT.model.MtAddBean;
 
 @Repository
@@ -54,14 +55,23 @@ public class MtAddDaoImpl implements MtAddDao{
 		return mtAddBean;
 	}
 
-	@Override	//抓pkey
-	public List<String> getAllAddDao1() {
-		String hql = "SELECT m.pkey From MtAddBean m";
-		List<String> list = new ArrayList<String>();
+	@Override
+	public MtAddBean getArticleById(String articleId) {
+		
+		String hql = "FROM MtAddBean WHERE articleId = :Id";
 		Session session = factory.getCurrentSession();
-		list = session.createQuery(hql)
-						.getResultList();
-		return list;
+		MtAddBean articleIdBean = (MtAddBean) session.createQuery(hql).setParameter("Id", articleId).getSingleResult();
+		return articleIdBean;
 	}
+
+//	@Override	//抓pkey
+//	public List<String> getAllAddDao1() {
+//		String hql = "SELECT m.pkey From MtAddBean m";
+//		List<String> list = new ArrayList<String>();
+//		Session session = factory.getCurrentSession();
+//		list = session.createQuery(hql)
+//						.getResultList();
+//		return list;
+//	}
 
 }

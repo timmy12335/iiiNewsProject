@@ -11,7 +11,9 @@ public interface MtAddDao {
 	public List<MtAddBean> getAllAddDao();
 
 	public MtAddBean getLastRecord();
+
+	public MtAddBean getArticleById(String articleId);
 	
-	public List<String> getAllAddDao1();	//抓pkey
+//	public List<String> getAllAddDao1();	//抓pkey
 	
 }

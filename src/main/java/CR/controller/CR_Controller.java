@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRBean;
@@ -70,9 +69,10 @@ public class CR_Controller {
 		
 	}
 	
-	@PatchMapping("/crReport")
-	public @ResponseBody Map<String, String> updateReportByPk(@RequestBody CRBean report){
+	@PatchMapping("/crReport/{pk}")
+	public @ResponseBody Map<String, String> updateReportByPk(@RequestBody CRBean report,@PathVariable Integer pk){
 		Map<String, String> map = new HashMap<>();	
+		CRBean cb0 = null;
 		try{
 			service.updateReport(report);
 			map.put("success","修改完成");

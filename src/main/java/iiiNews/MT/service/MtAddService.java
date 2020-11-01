@@ -14,5 +14,10 @@ public interface MtAddService {
 
 	public MtAddBean getArticleById(String articleId);		//抓到文章ID之後取出圖片
 
+	public MtAddBean deleteArticle(Integer pkey);			//未完成
+	
+	MtAddBean getpkey(int pkey);
+	void delete(Integer pkey);								//刪除文章
+
 //	public List<String> getAllAddDao1();	//抓pkey
 }

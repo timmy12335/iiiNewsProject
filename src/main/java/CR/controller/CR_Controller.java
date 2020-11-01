@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import CR.model.CRBean;
 import CR.service.CR_service;
 
+
 @Controller
 public class CR_Controller {
 	@Autowired
@@ -69,17 +70,19 @@ public class CR_Controller {
 		
 	}
 	
-	@PatchMapping("/crReport/{pk}")
-	public @ResponseBody Map<String, String> updateReportByPk(@RequestBody CRBean report,@PathVariable Integer pk){
+	@PatchMapping(value="/crReport/{pk}",
+			consumes= {"application/json"}, produces= {"application/json"})
+	public @ResponseBody Map<String, String> updateReportByPk(
+			@RequestBody CRBean cb,@PathVariable Integer pk){
 		Map<String, String> map = new HashMap<>();	
 		CRBean cb0 = null;
 		if(pk != null) {
 			cb0 = service.getReportById(pk);
 			service.evictReport(cb0);
 		}
-		
+		copyUnupdateField(cb0,cb);
 		try{
-			service.updateReport(report);
+			service.updateReport(cb);
 			map.put("success","修改完成");
 		}catch(Exception e) {
 			map.put("fail","修改失敗");
@@ -87,6 +90,12 @@ public class CR_Controller {
 		return map;
 		}
 	
+	private void copyUnupdateField(CRBean cb0, CRBean cb) {
+		cb.setMemberId(cb0.getMemberId());
+		cb.setPk(cb0.getPk());
+		cb.setCrApplyDate(cb0.getCrApplyDate());
+		cb.setMbBean(cb0.getMbBean());
+	}	
 
 
 	

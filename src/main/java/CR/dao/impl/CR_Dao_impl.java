@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import CR.dao.CR_Dao;
 import CR.model.CRBean;
-import franktest.model.MemberBean;
 import iiiNews.MB.model.MBBean;
 
 @Repository

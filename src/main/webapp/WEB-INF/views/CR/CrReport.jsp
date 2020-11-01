@@ -65,6 +65,7 @@
 						<th width='120' align='center'>標題</th>
 						<th width='120' align='center'>內容</th>
 						<th width='100' align='center'>申請日期</th>
+						<th width='100' align='center' colspan='2'>功能</th>
 					</tr>
 				</thead>
 				<c:choose>

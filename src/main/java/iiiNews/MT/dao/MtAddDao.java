@@ -13,6 +13,11 @@ public interface MtAddDao {
 	public MtAddBean getLastRecord();
 
 	public MtAddBean getArticleById(String articleId);
+
+	public MtAddBean deleteArticle(Integer pkey);
+
+	MtAddBean getpkey(int pkey);
+	void delete(Integer pkey);
 	
 //	public List<String> getAllAddDao1();	//抓pkey
 	

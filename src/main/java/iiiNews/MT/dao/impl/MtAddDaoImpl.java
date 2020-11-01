@@ -33,7 +33,8 @@ public class MtAddDaoImpl implements MtAddDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MtAddBean> getAllMtAdd() {
-		String hql = "FROM MtAddBean";
+		String hql = "FROM MtAddBean ORDER BY pkey DESC";
+//		String hql = "FROM MtAddBean";
 		Session session = factory.getCurrentSession();
 		List<MtAddBean> list = session.createQuery(hql).getResultList();
 		return list;
@@ -54,11 +55,31 @@ public class MtAddDaoImpl implements MtAddDao{
 
 	@Override
 	public MtAddBean getArticleById(String articleId) {
-		
 		String hql = "FROM MtAddBean WHERE articleId = :Id";
 		Session session = factory.getCurrentSession();
 		MtAddBean articleIdBean = (MtAddBean) session.createQuery(hql).setParameter("Id", articleId).getSingleResult();
 		return articleIdBean;
+	}
+
+	@Override
+	public MtAddBean deleteArticle(Integer pkey) {
+        Session session = factory.getCurrentSession();
+        String hql = "DELETE FROM MtAddBean WHERE pkey = :pkey";
+        MtAddBean bean = (MtAddBean) session.createQuery(hql).setParameter("pkey", pkey).getSingleResult();
+        return bean;
+	}
+	
+	@Override
+	public MtAddBean getpkey(int pkey) {
+		Session session = factory.getCurrentSession();
+		return session.get(MtAddBean.class, pkey);
+	}
+	
+	@Override
+	public void delete(Integer pkey) {
+		Session session = factory.getCurrentSession();
+		MtAddBean bean = getpkey(pkey);
+		session.delete(bean);
 	}
 
 //	@Override	//抓pkey

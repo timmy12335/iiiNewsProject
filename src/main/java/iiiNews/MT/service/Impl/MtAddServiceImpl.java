@@ -46,6 +46,25 @@ public class MtAddServiceImpl implements MtAddService{
 		return dao.getArticleById(articleId);
 	}
 
+	@Override
+	@Transactional
+	public MtAddBean deleteArticle(Integer pkey) {		//***********
+		return dao.deleteArticle(pkey);
+	}
+	
+	
+	@Override
+	@Transactional
+	public MtAddBean getpkey(int pkey) {	
+		return dao.getpkey(pkey);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Integer pkey) {		//刪除文章
+		dao.delete(pkey);		
+	}
+
 //	@Override		//抓pkey
 //	@Transactional
 //	public List<String> getAllAddDao1() {

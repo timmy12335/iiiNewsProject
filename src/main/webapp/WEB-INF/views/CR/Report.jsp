@@ -10,8 +10,8 @@
 <title>客服表單</title>
 <script>
 
-
-function updateCrReport(){
+window.onload=function(){
+	updateCrReport= function (){
 	var pk = document.getElementById("pk").value;
 	var nameValue = document.getElementById("name").value;
 	var classValue = document.getElementById("crClass").value;
@@ -38,7 +38,7 @@ function updateCrReport(){
 			 		divResult.innerHTML = "<font color='red' >"
 						+ result.fail + "</font>";
 		  		} else if (result.success) {
-						window.location.href="<c:url value='/customerReports'/>"
+						window.location.href="<c:url value='/customerReports'/>";
 		}
 	}
 	
@@ -48,7 +48,14 @@ function updateCrReport(){
 
 }
 
+	cancelCrReport=function (){
+	var result=confirm("取消修改客服表單?");
+	if(result){
+		window.location.href="<c:url value='/customerReports'/>";
+}
+}
 
+}
 </script>
 
 
@@ -101,8 +108,8 @@ function updateCrReport(){
 		</tr>
 		<tr>
 		<td align='center' colspan='2'>
-		<input type="button" id="btn_update" value="確認修改" onclick="updateCrReport()"/>
-		<input type="button" id="btn_delete" value="取消修改" onclick="deleteCrReport()" />
+		<input type="button" id="btn_update" value="確認修改" onclick="updateCrReport();"/>
+		<input type="button" id="btn_cancel" value="取消修改" onclick="cancelCrReport();" />
 		</td>
 		</tr>
 </table>

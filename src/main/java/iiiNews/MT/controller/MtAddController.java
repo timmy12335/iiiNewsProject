@@ -1,18 +1,13 @@
 package iiiNews.MT.controller;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +22,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import iiiNews.AD.model.AdBean;
-import iiiNews.MT.dao.MtAddDao;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
 
@@ -197,5 +191,21 @@ public class MtAddController {
 		model.addAttribute("getAllMtAddList",list);
 		return "MT/getAllMtAdd";
 	}
-
+	
+//	@GetMapping(value="/getAllMtAdd/{articleId}")		//刪除，未完成*******
+//	public String deleteArticle(@PathVariable Integer pkey,
+//			RedirectAttributes redirectAttributes
+//		) {
+//		service.deleteArticle(pkey);
+////		redirectAttributes.addFlashAttribute("SUCCESS", "刪除成功!!!");
+//		return "redirect:" + "/getAllMtAdd";
+//	}
+	
+	@RequestMapping("/getAllMtAdd/Del/{id}")		//刪除文章，OK
+	public String delete(@ModelAttribute("mtBean") MtAddBean bean, @PathVariable("id") Integer id) {
+		bean.setPkey(id);
+		service.delete(id);
+		return "redirect:/getAllMtAdd";
+	}
+	
 }

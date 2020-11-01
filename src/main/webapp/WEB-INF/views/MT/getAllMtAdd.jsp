@@ -5,7 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type='text/javascript'
+	src='${pageContext.request.contextPath}/scripts/jquery-1.9.1.min.js'></script>
+<title></title>
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/css/style.css' type="text/css" />
 <title>Get All MtBean</title>
+
 <style>
 td{
 padding: 3px;
@@ -60,7 +66,9 @@ font-weight:"bold";
 <!-- 							<input type="submit" value="加入購物車按鈕" /> -->
 						</form> 
 						<div align="center">
-						<a href="<c:url value="/******/${all.pkey}" />">刪除</a>
+						<input type="button" name="delete" value="刪除" onclick="confirmDelete(${all.memberId})" /> 
+						<a class='deletelink' href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">刪除</a>
+						<a href="${pageContext.request.contextPath}/getAllMtAdd/TimeOrder/${all.pkey}">排序</a>
 						</div>
 					</td>
 				</tr>
@@ -69,5 +77,20 @@ font-weight:"bold";
 		<hr>
 		<a href="<c:url value='/' />">回首頁</a>
 	</div>
+	
+<script type='text/javascript'>
+
+    $(document).ready(function() {				//刪除文章，OK
+        $('.deletelink').click(function() {
+        	if (confirm('確定刪除此筆紀錄? ')) {
+        		var href = $(this).attr('href');
+                $('form').attr('action', href).submit();
+        	} 
+        	return false;
+            
+        });
+    })
+
+</script>
 </body>
 </html>

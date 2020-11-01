@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.sql.rowset.serial.SerialBlob;
@@ -19,11 +21,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MimeType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import iiiNews.NP.model.NewsBean;
@@ -165,6 +168,31 @@ public class NewsProductController {
 		
 		service.delSingleNews(newsId);
 		return "redirect:/getMemNewsList/A0001";
+	}
+	@GetMapping("/showAllNewsbyPages")
+	public String showbookPage() {	
+			return"NP/ShowNewsByPageAjax";
+		
+	}
+	@GetMapping("/pagingNewsData.json")
+	public @ResponseBody List<NewsBean> getbookPage(
+			@RequestParam(value="pageNo",defaultValue = "1" )Integer pageNo) {	
+		
+		List<NewsBean> list =  service.getPageNews(pageNo);
+		return list;		
+	}
+	@GetMapping("/pagingNewsNo")
+	public @ResponseBody Map<String, Integer> getPage(
+			@RequestParam(value="pageNo",defaultValue = "1" )Integer pageNo,
+			@RequestParam(value="totalPage", defaultValue = "1") Integer totalPage) {	
+		
+		totalPage = service.getTotalPages();
+		
+		Map<String, Integer>  map = new HashMap<>();
+        map.put("totalPage", totalPage);
+        map.put("currPage", pageNo);
+		return map;
+	
 	}
 	
 }

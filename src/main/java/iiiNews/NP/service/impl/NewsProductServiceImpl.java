@@ -17,6 +17,10 @@ public class NewsProductServiceImpl implements NewsProductService {
 	
 	@Autowired
 	NewsProductDao newsProductDao;
+	@Override
+	public int getTotalPages() {
+		return newsProductDao.getTotalPages();
+	}
 
 	@Override
 	public int uploadNewsForm(NewsBean nb) {
@@ -73,6 +77,11 @@ public class NewsProductServiceImpl implements NewsProductService {
 			newsProductDao.updateStatus(newsId, newsbean.getStatus() - 1);
 		}
 		
+	}
+	@Override
+	public List<NewsBean> getPageNews(Integer pageNo) {
+		
+		return newsProductDao.getPageNews(pageNo);
 	}
 
 	

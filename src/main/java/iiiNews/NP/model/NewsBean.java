@@ -6,18 +6,18 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="NewsProducts")
 public class NewsBean implements Serializable{
@@ -31,9 +31,12 @@ public class NewsBean implements Serializable{
 	private String companyId;
 	private String newsType;
 	private String title;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp uploadTime;
 	private String location;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone="Asia/Taipei")
 	private String happenTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Date happenDate;
 	
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
@@ -46,8 +49,11 @@ public class NewsBean implements Serializable{
 	private String pic_One;
 	private String pic_Two;
 	private String pic_Three;
+	@JsonIgnore
 	private Blob img_I;
+	@JsonIgnore
 	private Blob img_II;
+	@JsonIgnore
 	private Blob img_III;
 	
 	@Transient

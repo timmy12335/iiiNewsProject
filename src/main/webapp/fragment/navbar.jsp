@@ -43,7 +43,7 @@
                     <li><a href='#'>企業專區</a>
                         <ul>
                         
-                            <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
+                            <li><a href="<c:url value='/showAllNewsbyPages'/>">所有新聞列表</a></li>
                             
                         </ul>
                     </li>

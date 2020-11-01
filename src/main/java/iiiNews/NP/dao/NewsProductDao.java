@@ -6,6 +6,8 @@ import java.util.List;
 import iiiNews.NP.model.NewsBean;
 
 public interface NewsProductDao {
+	public int getTotalPages();
+	List<NewsBean> getPageNews(Integer pageNo);
 	//新增一則新聞
 	public int uploadNewsForm(NewsBean nb); 
 	//抓最後一筆資料

@@ -15,7 +15,24 @@ import iiiNews.NP.model.NewsBean;
 public class NewsProductDaoImpl implements NewsProductDao {
 	@Autowired
 	SessionFactory factory;
+	Integer recordsPerPage = 5;
 	
+	@Override
+	public int getTotalPages() {
+		// 注意下一列敘述的每一個型態轉換
+		int totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
+
+		return totalPages;
+	}
+	
+	public long getRecordCounts() {
+		Long count = null; // 必須使用 long 型態		
+		String hql = "SELECT count(*) FROM NewsBean";
+		Session session = factory.getCurrentSession();		
+		count = (Long)session.createQuery(hql).getSingleResult();	
+		return count;
+	}
+
 	//新增一則新聞
 	@Override
 	public int uploadNewsForm(NewsBean nb) {
@@ -81,6 +98,19 @@ public class NewsProductDaoImpl implements NewsProductDao {
 				.setParameter("id", newsId).executeUpdate();
 	}
 	//修改單則新聞
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NewsBean> getPageNews(Integer pageNo) {
+		int startRecordNo = (pageNo - 1) * recordsPerPage;
+		String hql = "FROM NewsBean";
+		Session session = factory.getCurrentSession();
+		List<NewsBean> list = session.createQuery(hql)
+								.setMaxResults(recordsPerPage)
+								.setFirstResult(startRecordNo)
+								.getResultList();
+		return list;
+	}
 	
 
 	

@@ -39,7 +39,7 @@ public class AdMainDaoImpl implements AdMainDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<AdBean> getAllAds() {
-		String hql = "FROM AdBean";
+		String hql = "FROM AdBean WHERE stock > 0";
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql).getResultList();
 		return list;
@@ -87,11 +87,11 @@ public class AdMainDaoImpl implements AdMainDao {
 	//以會員id來查詢該會員的上傳廣告清單
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AdBean> getMemberAdList(String memberId) {
+	public List<AdBean> getMemberAdList(String cpmemberId) {
 		String hql = "FROM AdBean WHERE memberId = :mid";
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql)
-							.setParameter("mid", memberId)	//^^^^注意此處memberId是String還是int 未來會用到!!!
+							.setParameter("mid", cpmemberId)	//^^^^注意此處memberId是String還是int 未來會用到!!!
 							.getResultList();
 		return list;
 	}

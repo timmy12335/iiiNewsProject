@@ -20,11 +20,13 @@ public class AdOrderServiceImpl implements AdOrderService {
 	public AdOrderServiceImpl() {
 	}
 
+	
 	@Override
-	public List<AdOrderBean> getMemberOrderList(int memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public List<AdOrderBean> getMemberOrderList(String memberId) {
+		return adOrderDao.getMemberOrderList(memberId);
 	}
+	
 
 	@Override
 	@Transactional

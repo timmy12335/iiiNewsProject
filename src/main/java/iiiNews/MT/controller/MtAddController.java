@@ -124,8 +124,8 @@ public class MtAddController {
 		System.out.println(bean.getArticleId());
 		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 //		model.addAttribute("mtBean", bean);
-		return "/MT/showCreate";
-
+//		return "/MT/showCreate";
+		return "redirect:/getSingleArticle/" + str;
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -226,6 +226,13 @@ public class MtAddController {
 		return "MT/memAarticleList";
 	}
 		
+//	//下架一則新聞
+//	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態
+//	public String delSingleArticle(@PathVariable String articleId ,Model model) {
+//		service.delSingleArticle(articleId);
+//		return "redirect:/getAllMtAdd";
+//	}
+	
 	//下架一則新聞
 	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態
 	public String delSingleArticle(@PathVariable String articleId ,Model model) {

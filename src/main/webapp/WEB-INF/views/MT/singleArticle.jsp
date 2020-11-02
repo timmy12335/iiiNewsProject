@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>單一新聞表</title>
+<style>
+td{
+align:left;
+}
+</style>
 </head>
 <body>
 <nav>
@@ -15,21 +20,26 @@
 	<h2>查詢單一文章</h2>	
 	</div>
 	<hr>
-	<div align="left">
-		
-			<p>PK： ${singleArticle.pkey}</p>
-			<p>文章編號：${singleArticle.articleId}</p>
-			<p>會員編號: &nbsp;${ singleArticle.memberId }</p>
-			<p>更新時間: ${ singleArticle.updateDate }</p>
-			<p>文章狀態: ${ singleArticle.articleStatus }</p>
-			<p>標籤: ${ singleArticle.category }</p>
-			<p>標題: ${ singleArticle.title }</p>
-			<img width='300' height='200' 
+<!-- 	<form action="/singleArticle" method="post"  > -->
+	
+	<div align="center">
+		<table border="1">
+			<tr><td><div>PK： ${singleArticle.pkey}</div></td></tr>
+			<tr><td><div>文章編號：${singleArticle.articleId}</div></td></tr>
+			<tr><td><div>會員編號: &nbsp;${ singleArticle.memberId }</div></td></tr>
+			<tr><td><div>新增時間: ${ singleArticle.updateDate }</div></td></tr>
+			<tr><td><div>文章狀態: ${ singleArticle.articleStatus }</div></td></tr>
+			<tr><td><div>標籤: ${ singleArticle.category }</div></td></tr>
+			<tr><td><div>標題: ${ singleArticle.title }</div></td></tr>
+			<tr><td><div><img width='500' height='300' 
 	                    	src="<c:url value='/getMtCreate/${ singleArticle.articleId }'/>" >
-			<p>內文:</p><p>${ singleArticle.article }</p>
-			<a href="<c:url value="" />">-----查詢查詢-----</a>
-			<a href="<c:url value="" />">回前頁</a>		
-		
+	        </div></td></tr>            	
+			<tr><td><div>內文:<br>${ singleArticle.article }</div></td></tr>
+<%-- 			<tr><td><div style="width:500px;height:300px">內文:<br>${ singleArticle.article }</div></td></tr> --%>
+		</table>
+		<a href="<c:url value="" />">-----TOP-----</a>
+		<a href="<c:url value="" />">回前頁</a>		
 	</div>
+<!-- 	</form> -->
 </body>
 </html>

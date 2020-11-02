@@ -118,7 +118,7 @@ public class MtAddController {
 		}
 
 		// ---------------------------------------------------
-
+		bean.setStatus(1);
 		int n = service.saveMtAddService(bean);
 		System.out.println("成功筆數----" + n);
 		System.out.println(bean.getArticleId());
@@ -185,12 +185,7 @@ public class MtAddController {
 //		System.out.println("--------------------------------------------");
 //		return "MT/showCreate";
 //	}
-	@GetMapping("/getAllMtAdd")
-	public String getAllMtAddList(Model model){
-		List<MtAddBean> list = service.getAllMtAdd();
-		model.addAttribute("getAllMtAddList",list);
-		return "MT/getAllMtAdd";
-	}
+
 	
 //	@GetMapping(value="/getAllMtAdd/{articleId}")		//刪除，未完成*******
 //	public String deleteArticle(@PathVariable Integer pkey,
@@ -201,10 +196,40 @@ public class MtAddController {
 //		return "redirect:" + "/getAllMtAdd";
 //	}
 	
-	@RequestMapping("/getAllMtAdd/Del/{id}")		//刪除文章，OK
+	@RequestMapping("/getAllMtAdd/Del/{id}")		//刪除文章，OK，直接從DB刪除不留資料
 	public String delete(@ModelAttribute("mtBean") MtAddBean bean, @PathVariable("id") Integer id) {
 		bean.setPkey(id);
 		service.delete(id);
+		return "redirect:/getAllMtAdd";
+	}
+	//--------------------------------------------------
+	
+	
+	@GetMapping("/getAllMtAdd")			//查詢所有的文章
+	public String getAllMtList(Model model){	
+		List<MtAddBean> list = service.getAllMtAdd();
+		model.addAttribute("getAllMtList",list);
+		return "MT/getAllMtAdd";
+	}
+		
+	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章
+	public String getSingleArticle(@PathVariable String articleId ,Model model) {
+		MtAddBean bean = service.getSingleArticle(articleId);
+		model.addAttribute("singleArticle", bean);
+		return "MT/singleArticle";
+	}
+	
+	@GetMapping("/getMemAarticleList/{memberId}")	//查詢單一會員的文章列表
+	public String  getMemAarticleList(@PathVariable String memberId ,Model model) {
+		List<MtAddBean> list = service.getMemAarticle(memberId);
+		model.addAttribute("memAarticleList", list);
+		return "MT/memAarticleList";
+	}
+		
+	//下架一則新聞
+	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態
+	public String delSingleArticle(@PathVariable String articleId ,Model model) {
+		service.delSingleArticle(articleId);
 		return "redirect:/getAllMtAdd";
 	}
 	

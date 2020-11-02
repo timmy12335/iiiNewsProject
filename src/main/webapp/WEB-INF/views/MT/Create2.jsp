@@ -7,20 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>上架廣告欄位</title>
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script >
-window.onload = function(){
-		var btn = document.getElementById("clickme1");
-		var btn2 = document.getElementById("clickme2");
-		btn.onclick = function(){
-		A =  document.getElementById("Category")
-		A.value ="惡搞"
-		AA = document.getElementById("title")
-		AA.value = "今天吃什麼??"
-		article = document.getElementById("article")
-		article.value = "AAAAAAAAAAAAAAA"
-	}
-	</script>
 </head>
 <body>
 	<nav>
@@ -66,43 +52,15 @@ window.onload = function(){
 							<form:textarea name="article" id="article" cols="30" rows="10"
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
 						</div>
-					
-				<div id="grecaptcha" class="g-recaptcha"
-						data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB" style="padding:10px 70px "></div>
-				
-				<div class="login100-form-social flex-c-m">
-						<input type='button' class='btn btn-primary'  id='clickme1' value='Demo1' >
-						<span>&nbsp;&nbsp;</span>
-						<input type='button' class='btn btn-primary'  id='clickme2' value='Demo2' >
-						<span>&nbsp;&nbsp;</span>
 					</div>
-					</div>
-					<div id="btn" align="center">
+				</fieldset>
+				<div id="btn" align="center">
 					<input class="sub" type="submit" name="submit" id="submit" value="送出" />
 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
 				</div>
-				</fieldset>
 			</form:form>
 		</div>
 		<br> <input type="button" value="one" onclick="onebuttontodata()">
 	</div>
-	
-	
-	<script>
-		function submitUserForm() {
-			var response = grecaptcha.getResponse();
-			if (response.length == 0) {
-				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>';
-				return false;
-			}
-			return true;
-		}
-		function verifyCaptcha() {
-			document.getElementById('g-recaptcha-error').innerHTML = '';
-		}
-}
-	</script>
-	
-	
 </body>
 </html>

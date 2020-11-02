@@ -47,13 +47,13 @@ font-weight:"bold";
 				<td>內文</td>
 				<td>是否刪除</td>
 			</tr>
-			<c:forEach var="all" items="${getAllMtAddList}">
+			<c:forEach var="all" items="${getAllMtList}">
 				<tr>
 					<td>&nbsp;${all.pkey} &nbsp;</td>
 					<td>${all.articleId}</td>
 					<td>${all.memberId}</td>
 					<td>${all.updateDate}</td>
-					<td>${all.articleStatus}</td>
+					<td>${all.status}</td>
 					<td>${all.category}</td>
 					<td class="td1">${all.title}</td>
 					<td class="td1">${all.imgName}</td>

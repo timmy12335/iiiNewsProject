@@ -21,7 +21,7 @@ public class MtAddServiceImpl implements MtAddService{
 	
 	@Override
 	@Transactional
-	public int saveMtAddService(MtAddBean mtAddBean) {
+	public int saveMtAddService(MtAddBean mtAddBean) {		//存mtAddBean資料，對應saveMtAddDao
 		int n = 0;
 		dao.saveMtAddDao(mtAddBean);
 		n++;
@@ -30,25 +30,19 @@ public class MtAddServiceImpl implements MtAddService{
 
 	@Override
 	@Transactional
-	public List<MtAddBean> getAllMtAdd() {
-		return dao.getAllMtAdd();
-	}
-
-	@Override
-	@Transactional
-	public MtAddBean getLastRecord() {
+	public MtAddBean getLastRecord() {	//取一筆資料至新增成功頁面
 		return dao.getLastRecord();
 	}
 
 	@Override
 	@Transactional
-	public MtAddBean getArticleById(String articleId) {
+	public MtAddBean getArticleById(String articleId) {		//抓到文章ID之後取出圖片
 		return dao.getArticleById(articleId);
 	}
 
 	@Override
 	@Transactional
-	public MtAddBean deleteArticle(Integer pkey) {		//***********
+	public MtAddBean deleteArticle(Integer pkey) {		//未完成******
 		return dao.deleteArticle(pkey);
 	}
 	
@@ -63,6 +57,34 @@ public class MtAddServiceImpl implements MtAddService{
 	@Transactional
 	public void delete(Integer pkey) {		//刪除文章
 		dao.delete(pkey);		
+	}
+
+	//--------------------------------------------------------------
+	@Override
+	@Transactional
+	public List<MtAddBean> getAllMtAdd() {		//取所有mtAddBean資料，對應getAllMtAdd
+		return dao.getAllMtAdd();
+	}
+	
+	@Override
+	@Transactional
+	public MtAddBean getSingleArticle(String articleId) {		//查詢單一文章	
+		return dao.getSingleArticle(articleId);
+	}
+	
+	@Override
+	@Transactional
+	public List<MtAddBean> getMemAarticle(String memberId) {	//查詢單一會員的文章列表	
+		return dao.getMemAarticle(memberId);
+	}
+	
+	@Override
+	@Transactional
+	public void delSingleArticle(String articleId) {		//刪除文章，改狀態
+		MtAddBean bean = dao.getSingleArticle(articleId);
+		if(bean.getStatus() != null && bean.getStatus() > 0 ) {
+			dao.updateStatus(articleId, bean.getStatus() - 1);
+		}		
 	}
 
 //	@Override		//抓pkey

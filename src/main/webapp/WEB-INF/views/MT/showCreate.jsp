@@ -7,6 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>所有廣告列表</title>
+<style>
+td{
+padding: 3px;
+}
+.td1{
+width:150px;
+word-break: break-all;
+margin:5px;
+font-weight:"bold";
+}
+</style>
 </head>
 <body>
 	<nav>
@@ -51,7 +62,7 @@
 					<td><div><img style="width:500px;height:300px" src="<c:url value='/getMtCreate/${mtBean.articleId}' />" /></div></td>
 				</tr>
 				<tr>
-					<td><div style="width:500px;height:300px">內文: ${mtBean.article}***</div></td>
+					<td class="td1"><div style="width:500px;height:300px">內文: ${mtBean.article}***</div></td>
 				</tr>
 <!-- 				<tr> -->
 <%-- 					<td><div>預覽連結: <a href="${videoBean.link}">${videoBean.link}</a> --%>

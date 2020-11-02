@@ -74,7 +74,7 @@ function displayPageBooks(responseData){
 		for(var i=0; i < news.length; i++){
 			bgColor = (i % 2 == 0 ? "#d4f5b2" : "#b2f5e5");
 			content += "<tr height='80' bgcolor='" + bgColor + "'>" + 
-			           "<td  align='right'>" + news[i].title + "&nbsp;</td>" + 
+			           "<td  align='center' >" + news[i].title + "&nbsp;</td>" + 
 		               "<td>" + news[i].newsId + "</td>" +
 		               "<td align='center'>" + news[i].uploadTime + "</td>" +
 		               "<td align='right'>" + news[i].newsType + "&nbsp;</td>" +
@@ -139,7 +139,10 @@ function displayPageBooks(responseData){
 </script>
 </head>
 <body>
-<div align='center'>
+<nav>
+<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+</nav>
+<div align='center' style="margin-top:150px;">
 	<h3>分頁顯示新聞(JSON)</h3>
 	<hr>
 	<div id='somedivS'  style='height:260px;'> </div>

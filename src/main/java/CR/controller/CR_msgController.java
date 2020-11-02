@@ -10,10 +10,10 @@ import CR.service.CR_msgService;
 @RestController
 public class CR_msgController {
 
-	@Autowired
-	ServletContext ctx;
-	
-	@Autowired
-	CR_msgService service;
+//	@Autowired
+//	ServletContext ctx;
+//	
+//	@Autowired
+//	CR_msgService service;
 	
 }

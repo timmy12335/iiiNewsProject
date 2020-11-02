@@ -46,8 +46,11 @@ public class NewsBean implements Serializable{
 	private String price;
 	private Time limitTime;
 	private Integer status;
+	@JsonIgnore
 	private String pic_One;
+	@JsonIgnore
 	private String pic_Two;
+	@JsonIgnore
 	private String pic_Three;
 	@JsonIgnore
 	private Blob img_I;

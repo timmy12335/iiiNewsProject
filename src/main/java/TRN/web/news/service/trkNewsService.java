@@ -2,6 +2,7 @@ package TRN.web.news.service;
 
 import java.util.List;
 
+import TRN.web.news.model.rptNewsBean;
 import TRN.web.news.model.trkNewsBean;
 
 public interface trkNewsService {
@@ -15,6 +16,12 @@ public interface trkNewsService {
 	List<trkNewsBean> getNewsBytypes(String type); //分類查詢 show 單個分類所有新聞 
 
 	public trkNewsBean getNewsById(int NewsId); // 查詢單筆產品資料
+	
+	void addtrkNews(trkNewsBean trkNew);   //新增追蹤新聞
+
+	rptNewsBean getReportById(int reportId); // 取得報導資料
+
+	List<rptNewsBean> getReportList();    // 取得報導列表
 }
 
 

@@ -38,10 +38,13 @@ public class trkNewsBean implements Serializable {
 	private String filename;
 	private String type;
 	private Integer status;
-	@Transient
-	private Integer reportId;
+	private trkNewsBean trkNewsBean;
 	
-	private rptNewsBean rptNewsBean;
+
+	@Transient
+//	private Integer reportId;
+	
+//	private rptNewsBean rptNewsBean;
 
 	@OneToMany(mappedBy="trkNewsBean")
 	private Set<rptNewsBean> rpts = new LinkedHashSet<>();
@@ -63,7 +66,8 @@ public class trkNewsBean implements Serializable {
 			           String filename,
 			           String type, 
 			           int status,
-			           rptNewsBean rptNewsBean) {
+			           trkNewsBean trkNewsBean
+			           ) {
 		super();
 		this.trackId = trackId;
 		this.title = title;
@@ -78,7 +82,8 @@ public class trkNewsBean implements Serializable {
 		this.filename = filename;
 		this.type = type;
 		this.status = 1;
-		this.rptNewsBean = rptNewsBean;
+		this.trkNewsBean = trkNewsBean;
+//		this.rptNewsBean = rptNewsBean;
 	}
 	public trkNewsBean(Integer trackId, 
 			           String title, 
@@ -109,12 +114,12 @@ public class trkNewsBean implements Serializable {
 		this.status = 1;
 	}
 	
-	public Integer getReportId() {
-		return reportId;
+	public trkNewsBean getTrkNewsBean() {
+		return trkNewsBean;
 	}
 
-	public void setReportId(Integer reportId) {
-		this.reportId = reportId;
+	public void setTrkNewsBean(trkNewsBean trkNewsBean) {
+		this.trkNewsBean = trkNewsBean;
 	}
 	
 	public Integer getTrackId() {
@@ -229,14 +234,20 @@ public class trkNewsBean implements Serializable {
 		this.rpts = rpts;
 	}
 
-	public rptNewsBean getRptNewsBean() {
-		return rptNewsBean;
-	}
-
-	public void setRptNewsBean(rptNewsBean rptNewsBean) {
-		this.rptNewsBean = rptNewsBean;
-	}
-
+//	public rptNewsBean getRptNewsBean() {
+//		return rptNewsBean;
+//	}
+//
+//	public void setRptNewsBean(rptNewsBean rptNewsBean) {
+//		this.rptNewsBean = rptNewsBean;
+//	}
+//	public Integer getReportId() {
+//	return reportId;
+//}
+//
+//public void setReportId(Integer reportId) {
+//	this.reportId = reportId;
+//}
 	
 
 

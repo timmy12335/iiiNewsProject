@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import TRN.web.news.dao.trkNewsDao;
+import TRN.web.news.model.rptNewsBean;
 import TRN.web.news.model.trkNewsBean;
 
 @Repository
@@ -67,5 +68,33 @@ public class trkNewsDaoImpl implements trkNewsDao {
 			trkNewsBean bb = session.get(trkNewsBean.class, NewsId);
 			return bb;
 	}
+
+		@Override
+		public void addtrkNews(trkNewsBean trkNew) {       //新增資料
+			Session session = factory.getCurrentSession();
+//			System.out.println(trkNew.getFounder());               //配合原本的 product dao impl  方法是:要把書級資料新增到資料庫, 作法1.先取得連線,  
+//			rptNewsBean tb = getReportById(trkNew.getreportId());                              2. 因為書籍資料有外鍵companyBean 所以利用使用者給予的id查companybean對應名稱,
+//			System.out.println(tb);                                                            3.把查到的companybean存入bookbean,
+//			trkNew.setTrkNewsBean(tb);                                                         4. 將使用者輸入的資料一起存進bookbean並放入資料庫
+		    session.save(trkNew);
+		}
+		
+	
+
+		@Override
+		public rptNewsBean getReportById(int reportId) {       //原註記書本的出版公司
+//			rptNewsBean tb = null;
+//			Session session = factory.getCurrentSession();
+//			tb = session.get(rptNewsBean.class, reportId);
+			return null;
+		}
+		@SuppressWarnings("unchecked")                       //追蹤類別
+		@Override
+		public List<rptNewsBean> getReportList() {
+			String hql = "FROM rptNewsBean";
+			Session session = factory.getCurrentSession();
+			List<rptNewsBean> list = session.createQuery(hql).getResultList();
+			return list;
+		}
 
 }

@@ -60,6 +60,7 @@
                 <ul>
                  	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
                     <li><a href="<c:url value='/queryByType' />">分類追蹤</a></li>
+                    <li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>                    
                </ul>
             </li>
             <li><a href="<c:url value='/MtCreate' />">影音專欄</a>

@@ -21,13 +21,18 @@ public class AdOrderDaoImpl implements AdOrderDao {
 	public AdOrderDaoImpl() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	/*以會員的ID來查詢他的所有訂單*/
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<AdOrderBean> getMemberOrderList(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "FROM AdOrderBean WHERE buyerMemberId = :mId";
+		Session session = factory.getCurrentSession();
+		List<AdOrderBean> list = session.createQuery(hql).setParameter("mId", memberId).getResultList();
+		return list;
 	}
 
+	
 	@Override
 	public AdOrderBean getLastRecord() {
 		String hql = "FROM AdOrderBean ORDER BY orderDate DESC";

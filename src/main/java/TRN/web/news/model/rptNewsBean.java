@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "rptNews")
@@ -35,6 +36,8 @@ public class rptNewsBean implements Serializable {
 	private String repfilename;
 	private String reptype;
 	private Integer repstatus;
+	@Transient
+	private Integer trackId;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "trackId")

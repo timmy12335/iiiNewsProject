@@ -29,6 +29,12 @@ public class CR_Controller {
 	@Autowired
 	CR_service service;
 	
+	@GetMapping("/sendmail")
+	public String email(Model model) {
+		return "CR/sendEmail";
+	}
+	
+	
 	@GetMapping("/customerReports")
 	public String list(Model model) {
 	List<CRBean> beans = service.getRecord();
@@ -97,7 +103,7 @@ public class CR_Controller {
 		cb.setMbBean(cb0.getMbBean());
 	}	
 
-
+	
 	
 	
 }

@@ -54,6 +54,7 @@
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/chat' />">客服聊天</a></li>
                 </ul>
             </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>

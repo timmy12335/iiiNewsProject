@@ -12,7 +12,7 @@
       <section id='sidebar'>
         <i class='icon-align-justify icon-large' id='toggle'></i>
         <ul id='dock'>
-          <li class='active launcher'>
+          <li class='launcher'>
             <i class='icon-dashboard'></i>
             <a href="<c:url value='/dashboard'/>">後台查看</a>
           </li>

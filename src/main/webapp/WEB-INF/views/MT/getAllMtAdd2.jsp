@@ -59,7 +59,7 @@ td {
 			<c:forEach var="all" items="${getAllMtList}">
 				<tr>
 					<td>&nbsp;${all.pkey} &nbsp;</td>
-					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >${all.articleId}  </a> ${all.articleId}</td>
+					<td>${all.articleId}</td>
 					<td>${all.memberId}</td>
 					<td>${all.updateDate}</td>
 					<td>${all.status}</td>

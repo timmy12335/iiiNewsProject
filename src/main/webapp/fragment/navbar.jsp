@@ -79,6 +79,7 @@
                             <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
                         </ul>
                     </li>
+                    <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
                     <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
                 </ul>
             </li>

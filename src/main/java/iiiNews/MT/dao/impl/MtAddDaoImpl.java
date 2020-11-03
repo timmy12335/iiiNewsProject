@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.MT.dao.MtAddDao;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.NP.model.NewsBean;
@@ -76,6 +77,7 @@ public class MtAddDaoImpl implements MtAddDao{
 	@Override
 	public void update(MtAddBean mtAddBean) {			//更新文章資訊
 		Session session = factory.getCurrentSession();
+//		session.merge(mtAddBean);
 		session.update(mtAddBean);	
 	}
 
@@ -89,6 +91,16 @@ public class MtAddDaoImpl implements MtAddDao{
 		Session session = factory.getCurrentSession();
 		List<MtAddBean> list = session.createQuery(hql).getResultList();
 		return list;
+	}
+	
+	@Override
+	public int modifyArticle(MtAddBean ModArt) {		//編輯單一文章
+		int n = 0;
+		Session session = factory.getCurrentSession();
+		MtAddBean bean = (MtAddBean) session.merge(ModArt);
+		System.out.println(bean.toString());
+		n++;
+		return n;
 	}
 	
 	@Override

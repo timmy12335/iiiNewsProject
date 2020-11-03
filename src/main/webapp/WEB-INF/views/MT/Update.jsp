@@ -66,9 +66,10 @@
 					</div>
 					</div>
 					<div id="btn" align="center" class="container-login100-form-btn">
-					<button class="login100-form-btn">送出</button>
+					<button >送出</button>
+					<button >取消</button>
 <!-- 					<input class="sub" type="submit" name="submit" id="submit" value="送出" /> -->
-					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
+<!-- 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" /> -->
 				</div>
 				</fieldset>
 			</form:form>

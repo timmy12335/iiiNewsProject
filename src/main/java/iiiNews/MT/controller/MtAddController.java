@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,10 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
-import iiiNews.MT.validate.CheckArticleVaildator;
 
 @Controller
 public class MtAddController {
@@ -218,71 +213,71 @@ public class MtAddController {
 	}
 		
 	//---------------------------------------------------------
-	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章
-	public String getSingleArticle(@PathVariable String articleId ,Model model) {
-		MtAddBean bean = service.getSingleArticle(articleId);
+	@GetMapping("/modifyArticle/{pkey}")	//查詢單一文章
+	public String modifyArticle(@PathVariable int pkey ,Model model) {
+		MtAddBean bean = service.getpkey(pkey);
 		model.addAttribute("mtAddBean", bean);
 		return "MT/Update";
 	}
 	
-	
-	
-	@PostMapping("/getSingleArticle/{articleId}")	//更新單一文章
-	public String modify(@ModelAttribute("mtAddBean") MtAddBean mtAddBean, BindingResult result, Model model,
-//			@PathVariable Integer id,
-			HttpServletRequest request) {
-//		MBBean mbBean = (MBBean) model.getAttribute("mbBean");
-//		if (mbBean == null) {
-//			return "redirect: " + servletContext.getContextPath() + "/login";		//等會員登入畫面********待修改
-//		}
-
+	@PostMapping("/modifyArticle/{pkey}")	//更新單一文章
+	public String modify(@ModelAttribute("mtAddBean") MtAddBean mtAddBean, Model model,
+			@PathVariable int pkey) {
+		MtAddBean bean = null;
+		MultipartFile articleImage = mtAddBean.getImage();
+		System.out.println("productImage:-->" + articleImage);
+		//拿它原來的檔名取出來放到我們一個叫做FileName欄位
+		String originalFilename = articleImage.getOriginalFilename();
+//		oneItemBean.setAdImageName(originalFilename);
 		
-//		CheckArticleVaildator validator=new CheckArticleVaildator();
-//		validator.validate(mtAddBean, result);
-//		if (result.hasErrors()) {
-//			result.rejectValue("category", "", "資料更新出現問題請洽系統人員");
-//			System.out.println("result hasErrors(), MtAddBean=" + mtAddBean);
-//			List<ObjectError> list = result.getAllErrors();
-//			for (ObjectError error : list) {
-//				System.out.println("更新有錯誤：" + error);
-//			}
-//			return "MT/Update";
-//		}
-//		mtAddBean.setPkey(id);
-//		MultipartFile Image = mtAddBean.getImage();
-//		if (Image.getSize() == 0) {
-//			MtAddBean original = service.getpkey(id);
-//			mtAddBean.setImage(original.getImage());
-//		} else {
-//			String originalFilename = Image.getOriginalFilename();
-//			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1)
-//				mtAddBean.setImgName(originalFilename);
-//		}
-//
-//		if (Image != null && !Image.isEmpty()) {
-//			try {
-//				byte[] b = Image.getBytes();
-//				Blob blob = new SerialBlob(b);
-//				mtAddBean.setImgLink(blob);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				throw new RuntimeException("檔案上傳發生異常");
-//			}
-//		}
-		try {
-			service.update(mtAddBean);
-//			service.saveMtAddService(mtAddBean);
-		} catch (Exception e) {
-//			result.rejectValue("memberNumber", "", "資料新增出現問題請洽系統人員");
-			System.out.println("更新有問題,請洽系統人員");
-			 return "MT/Update";
+		MtAddBean originBean = service.getpkey(pkey);
+		originBean.setImgName(originalFilename);
+		
+		
+		/* 建立Blob物件，交由 Hibernate 寫入資料庫 要有圖片欄位 且圖片位元組(不為空)
+		 * 得到byte[] 建一個Blob物件要用實作介面的類別SerialBlob
+		 * 呼叫他的建構子SerialBlob(byte[] b)傳入陣列
+		 * 完成之後再放入Blob欄位(adImage)	*/
+		
+		if (articleImage != null && !articleImage.isEmpty() ) {
+			try {
+				byte[] b = articleImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				originBean.setImgLink(blob);
+				System.out.println("圖片上傳完成");
+			} catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
 		}
 		
-
+		System.out.println("originBean after:-->" + originBean.toString());
+		
+//		bean.setCategory(mtAddBean.getCategory());
+		originBean.setCategory(mtAddBean.getCategory());
+		originBean.setTitle(mtAddBean.getTitle());
+		originBean.setArticle(mtAddBean.getArticle());
+		
+		int n = service.modifyArticle(originBean);
+		System.out.println(n + "更改成功");
+		
+//		return "redirect:/";
 		return "redirect:/getAllMtAdd";
 	}
+		
+
+		
+	
 	
 	//---------------------------------------------------------
+	
+	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章，與上面編輯，必須擇一
+	public String getSingleArticle(@PathVariable String articleId ,Model model) {
+		MtAddBean bean = service.getSingleArticle(articleId);
+		model.addAttribute("singleArticle", bean);	//點文章編號後進入的頁面，用這兩行顯示
+		return "/MT/singleArticle";
+	}
+		
 	@GetMapping("/getMemAarticleList/{memberId}")	//查詢單一會員的文章列表
 	public String  getMemAarticleList(@PathVariable String memberId ,Model model) {
 		List<MtAddBean> list = service.getMemAarticle(memberId);

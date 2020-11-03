@@ -69,11 +69,11 @@ td {
 					<td class="td1">${all.article}</td>
 					<td>
 						<div align="center">
-<%-- 							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">刪除</a>--%>  <%--從資料庫直接刪除 --%>
+<%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
 							<a class='delSingle'
 								href="${pageContext.request.contextPath}/delSingleArticle/${all.articleId}">刪除</a>
 							<a
-								href="${pageContext.request.contextPath}/getSingleArticle/${all.articleId}">編輯資料</a>	
+								href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}">編輯資料</a>	
 							<a
 								href="${pageContext.request.contextPath}/delSingleArticle/TimeOrder/${all.articleId}">排序</a>
 						</div>

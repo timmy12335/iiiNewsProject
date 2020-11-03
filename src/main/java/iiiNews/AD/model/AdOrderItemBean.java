@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="AdOrderItems")
@@ -40,8 +43,8 @@ public class AdOrderItemBean {
 	private Double height;			//紀錄欄位的高
 	private Date adDate;			//欄位要販賣的日期
 	
-//	@Transient
-//	private MultipartFile productImage;		//$$$$image 處理上傳圖片的問題
+	@Transient
+	private MultipartFile productImage;		//$$$$image 處理上傳圖片的問題
 	
 	@ManyToOne
 	@JoinColumn(name = "FK_AdOrderBean_orderNo")
@@ -204,6 +207,14 @@ public class AdOrderItemBean {
 		return "AdOrderItemBean [itemPk=" + itemPk + ", adPk=" + adPk + ", adNo=" + adNo + ", unitPrice=" + unitPrice + ", quantity="
 				+ quantity + ", sellerMemberId=" + sellerMemberId + ", adImage=" + adImage + ", adImageName="
 				+ adImageName + ", buyerMemberId=" + buyerMemberId + ", adOrderBean=" + adOrderBean + "]";
+	}
+
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
 	}
 	
 	

@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name="NewsProducts")
+@Table(name="NP_NewsProducts")
 public class NewsBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -45,6 +45,8 @@ public class NewsBean implements Serializable{
 	private String article;
 	private String price;
 	private Time limitTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone="Asia/Taipei")
+	private Timestamp futureTime;
 	private Integer status;
 	@JsonIgnore
 	private String pic_One;
@@ -169,6 +171,13 @@ public class NewsBean implements Serializable{
 	public void setLimitTime(Time limitTime) {
 		this.limitTime = limitTime;
 	}
+	public Timestamp getFutureTime() {
+		return futureTime;
+	}
+	public void setFutureTime(Timestamp futureTime) {
+		this.futureTime = futureTime;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}

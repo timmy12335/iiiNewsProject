@@ -41,12 +41,12 @@
           </div>
           <div class='panel-body'>
             <div class='page-header'>
-              <h4>System usage</h4>
+              <h4>使用人數</h4>
             </div>
             <div class='progress'>
-              <div class='progress-bar progress-bar-success' style='width: 35%'></div>
-              <div class='progress-bar progress-bar-warning' style='width: 20%'></div>
-              <div class='progress-bar progress-bar-danger' style='width: 10%'></div>
+              <div class='progress-bar progress-bar-success' style='width: 35%'>觀看人數</div>
+              <div class='progress-bar progress-bar-warning' style='width: 20%'>點閱人數</div>
+              <div class='progress-bar progress-bar-danger' style='width: 45%%'>總計人數</div>
             </div>
             <div class='page-header'>
               <h4>使用者入站統計</h4>

@@ -47,7 +47,7 @@ font-weight:"bold";
 					<td><div>文章狀態: ${mtBean.articleStatus}</div></td>
 				</tr>
 				<tr>
-					<td class="td1"><div style="width:500px;height:50px">[${ mtBean.category }] ${mtBean.title}</div></td>
+					<td class="td1"><div style="width:500px;">[${ mtBean.category }] ${mtBean.title}</div></td>
 				</tr>
 <!-- 				<tr> -->
 <%-- 					<td><div>標籤: ${mtbean.category}</div></td> --%>

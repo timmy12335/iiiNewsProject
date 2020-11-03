@@ -10,6 +10,9 @@
 td{
 align:left;
 padding: 3px;
+width:150px;
+word-break: break-all;
+margin:5px;
 }
 </style>
 </head>

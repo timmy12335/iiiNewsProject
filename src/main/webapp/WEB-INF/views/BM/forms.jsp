@@ -9,147 +9,37 @@
     <meta charset='utf-8'>
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
     <title>Forms</title>
-    <meta content='lab2023' name='author'>
+    <meta content='' name='author'>
     <meta content='' name='description'>
     <meta content='' name='keywords'>
   	<link href="${pageContext.request.contextPath}/assets/stylesheets/application-a07755f5.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/images/favicon.ico" rel="icon" type="image/ico" />
   </head>
   <body class='main page'>
-    <!-- Navbar -->
-    <div class='navbar navbar-default' id='navbar'>
-      <a class='navbar-brand' href='#'>
-        <i class='icon-beer'></i>
-        iiiNews後台管理
-      </a>
-      <ul class='nav navbar-nav pull-right'>
-        <li class='dropdown'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-            <i class='icon-envelope'></i>
-            Messages
-            <span class='badge'>5</span>
-            <b class='caret'></b>
-          </a>
-          <ul class='dropdown-menu'>
-            <li>
-              <a href='#'>New message</a>
-            </li>
-            <li>
-              <a href='#'>Inbox</a>
-            </li>
-            <li>
-              <a href='#'>Out box</a>
-            </li>
-            <li>
-              <a href='#'>Trash</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href='#'>
-            <i class='icon-cog'></i>
-            Settings
-          </a>
-        </li>
-        <li class='dropdown user'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-            <i class='icon-user'></i>
-            <strong>John DOE</strong>
-            <img class="img-rounded" src="http://placehold.it/20x20/ccc/777" />
-            <b class='caret'></b>
-          </a>
-          <ul class='dropdown-menu'>
-            <li>
-              <a href='#'>Edit Profile</a>
-            </li>
-            <li class='divider'></li>
-            <li>
-              <a href="/">Sign out</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div id='wrapper'>
-      <!-- Sidebar -->
-      <section id='sidebar'>
-        <i class='icon-align-justify icon-large' id='toggle'></i>
-        <ul id='dock'>
-          <li class='launcher'>
-            <i class='icon-dashboard'></i>
-            <a href="dashboard.html">Dashboard</a>
-          </li>
-          <li class='active launcher'>
-            <i class='icon-file-text-alt'></i>
-            <a href="forms.html">Forms</a>
-          </li>
-          <li class='launcher'>
-            <i class='icon-table'></i>
-            <a href="tables.html">Tables</a>
-          </li>
-          <li class='launcher dropdown hover'>
-            <i class='icon-flag'></i>
-            <a href='#'>Reports</a>
-            <ul class='dropdown-menu'>
-              <li class='dropdown-header'>Launcher description</li>
-              <li>
-                <a href='#'>Action</a>
-              </li>
-              <li>
-                <a href='#'>Another action</a>
-              </li>
-              <li>
-                <a href='#'>Something else here</a>
-              </li>
-            </ul>
-          </li>
-          <li class='launcher'>
-            <i class='icon-bookmark'></i>
-            <a href='#'>Bookmarks</a>
-          </li>
-          <li class='launcher'>
-            <i class='icon-cloud'></i>
-            <a href='#'>Backup</a>
-          </li>
-          <li class='launcher'>
-            <i class='icon-bug'></i>
-            <a href='#'>Feedback</a>
-          </li>
-        </ul>
-        <div data-toggle='tooltip' id='beaker' title='Made by lab2023'></div>
-      </section>
-      <!-- Tools -->
-      <section id='tools'>
-        <ul class='breadcrumb' id='breadcrumb'>
-          <li class='title'>Forms</li>
-          <li><a href="#">Lorem</a></li>
-          <li class='active'><a href="#">ipsum</a></li>
-        </ul>
-        <div id='toolbar'>
-          
-        </div>
-      </section>
+  <jsp:include page="/fragment/BMnav.jsp"/>
+  <jsp:include page="/fragment/BMsidebar.jsp"/>  
+  <jsp:include page="/fragment/BMtool.jsp"/>  
       <!-- Content -->
       <div id='content'>
         <div class='panel panel-default'>
           <div class='panel-heading'>
             <i class='icon-edit icon-large'></i>
-            Form Default
+            	預設表單
           </div>
           <div class='panel-body'>
             <form>
               <fieldset>
-                <legend>Default Inputs</legend>
+                <legend>預設輸入</legend>
                 <div class='form-group'>
-                  <label class='control-label'>Text field</label>
-                  <input class='form-control' placeholder='Enter username' type='text'>
+                  <label class='control-label'>填寫使用者</label>
+                  <input class='form-control' placeholder='請輸入帳號?' type='text'>
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Password field</label>
+                  <label class='control-label'>輸入標題</label>
                   <input class='form-control' placeholder='Enter password' type='password'>
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Input field with help</label>
+                  <label class='control-label'>輸入內容</label>
                   <input class='form-control' placeholder='.help-block'>
                   <p class='help-block'>Example block-level help text here.</p>
                 </div>
@@ -211,12 +101,12 @@
                 </div>
               </fieldset>
               <fieldset>
-                <legend>Checkboxes and radios</legend>
+                <legend>勾選方格請參考這裡</legend>
                 <div class='form-group'>
                   <label class='control-label'>Checkbox</label>
                   <div class='checkbox'>
                     <input type='checkbox' value=''>
-                    Option one is this and that&mdash;be sure to include why it's great
+                   
                   </div>
                 </div>
                 <div class='form-group'>
@@ -236,20 +126,20 @@
                   </div>
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Radio</label>
+                  <label class='control-label'>單選按鍵請選這</label>
                   <div class='radio'>
                     <input checked name='options_radio' type='radio' value='option1'>
-                    Option one is this and that&mdash;be sure to include why it's great
+					選項一
                     <br>
                     <input checked name='options_radio' type='radio' value='option2'>
-                    Option two can be something else and selecting it will deselect option one
+					選項二
                   </div>
                 </div>
               </fieldset>
               <fieldset>
-                <legend>Selects</legend>
+                <legend>選單請參考這</legend>
                 <div class='form-group'>
-                  <label class='control-label'>Single select</label>
+                  <label class='control-label'>單選式選單</label>
                   <select class='form-control'>
                     <option>1</option>
                     <option>2</option>
@@ -259,7 +149,7 @@
                   </select>
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Multiple select</label>
+                  <label class='control-label'>多選式選單</label>
                   <select class='form-control' multiple>
                     <option>1</option>
                     <option>2</option>
@@ -270,8 +160,8 @@
                 </div>
               </fieldset>
               <div class='form-actions'>
-                <button class='btn btn-default' type='submit'>Submit</button>
-                <a class='btn' href='#'>Cancel</a>
+                <button class='btn btn-default' type='submit'>送出</button>
+                <a class='btn' href='#'>取消</a>
               </div>
             </form>
           </div>

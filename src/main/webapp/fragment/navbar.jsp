@@ -7,7 +7,7 @@
     <script src="${pageContext.request.contextPath}/jsmenu/nav_time_script.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/nav_styles.css">
     <!-- <link rel="shortcut icon" href="favicon.ico" rel="external nofollow" type="image/x-icon" /> -->
-    
+    <link href="${pageContext.request.contextPath}/image/favicon.ico" rel="icon" type="image/ico" />
 <meta charset="UTF-8">
  <div id='cssmenu'>
         <ul>

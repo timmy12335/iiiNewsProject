@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "NewsOrder")
+@Table(name = "NP_NewsOrder")
 public class NewsOrderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

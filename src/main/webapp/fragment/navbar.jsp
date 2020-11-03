@@ -7,7 +7,7 @@
     <script src="${pageContext.request.contextPath}/jsmenu/nav_time_script.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/nav_styles.css">
     <!-- <link rel="shortcut icon" href="favicon.ico" rel="external nofollow" type="image/x-icon" /> -->
-    
+    <link href="${pageContext.request.contextPath}/image/favicon.ico" rel="icon" type="image/ico" />
 <meta charset="UTF-8">
  <div id='cssmenu'>
         <ul>
@@ -43,7 +43,7 @@
                     <li><a href='#'>企業專區</a>
                         <ul>
                         
-                            <li><a href="<c:url value='/showAllNewsbyPages'/>">所有新聞列表</a></li>
+                            <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
                             
                         </ul>
                     </li>
@@ -54,6 +54,7 @@
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/chat' />">客服聊天</a></li>
                 </ul>
             </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>

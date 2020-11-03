@@ -12,119 +12,21 @@
     <meta content='lab2023' name='author'>
     <meta content='' name='description'>
     <meta content='' name='keywords'>
-  <link href="${pageContext.request.contextPath}/assets/stylesheets/application-a07755f5.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  	<link href="${pageContext.request.contextPath}/assets/stylesheets/application-a07755f5.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/images/favicon.ico" rel="icon" type="image/ico" />
     
   </head>
   <body class='main page'>
-    <!-- Navbar -->
-    <div class='navbar navbar-default' id='navbar'>
-      <a class='navbar-brand' href='#'>
-        <i class='icon-beer'></i>
-      iiiNews後台管理
-      </a>
-      <ul class='nav navbar-nav pull-right'>
-        <li class='dropdown'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-            <i class='icon-envelope'></i>
-            Messages
-            <span class='badge'>5</span>
-            <b class='caret'></b>
-          </a>
-          <ul class='dropdown-menu'>
-            <li>
-              <a href='#'>New message</a>
-            </li>
-            <li>
-              <a href='#'>Inbox</a>
-            </li>
-            <li>
-              <a href='#'>Out box</a>
-            </li>
-            <li>
-              <a href='#'>Trash</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href='#'>
-            <i class='icon-cog'></i>
-            Settings
-          </a>
-        </li>
-        <li class='dropdown user'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-            <i class='icon-user'></i>
-            <strong>John DOE</strong>
-            <img class="img-rounded" src="http://placehold.it/20x20/ccc/777" />
-            <b class='caret'></b>
-          </a>
-          <ul class='dropdown-menu'>
-            <li>
-              <a href='#'>Edit Profile</a>
-            </li>
-            <li class='divider'></li>
-            <li>
-              <a href="/">Sign out</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div id='wrapper'>
-      <!-- Sidebar -->
-      <section id='sidebar'>
-        <i class='icon-align-justify icon-large' id='toggle'></i>
-        <ul id='dock'>
-          <li class='launcher'>
-            <i class='icon-dashboard'></i>
-            <a href="dashboard.html">Dashboard</a>
-          </li>
-          <li class='launcher'>
-            <i class='icon-file-text-alt'></i>
-            <a href="forms.html">Forms</a>
-          </li>
-          <li class='active launcher'>
-            <i class='icon-table'></i>
-            <a href="tables.html">Tables</a>
-          </li>
-          <li class='launcher dropdown hover'>
-            <i class='icon-flag'></i>
-            <a href='#'>Reports</a>
-            <ul class='dropdown-menu'>
-              <li class='dropdown-header'>Launcher description</li>
-              <li>
-                <a href='#'>Action</a>
-              </li>
-              <li>
-                <a href='#'>Another action</a>
-              </li>
-              <li>
-                <a href='#'>Something else here</a>
-              </li>
-            </ul>
-          </li>
-          <li class='launcher'>
-            <i class='icon-bookmark'></i>
-            <a href='#'>Bookmarks</a>
-          </li>
-          <li class='launcher'>
-            <i class='icon-cloud'></i>
-            <a href='#'>Backup</a>
-          </li>
-          <li class='launcher'>
-            <i class='icon-bug'></i>
-            <a href='#'>Feedback</a>
-          </li>
-        </ul>
-        <div data-toggle='tooltip' id='beaker' title='Made by lab2023'></div>
-      </section>
+   <jsp:include page="/fragment/BMnav.jsp"/>
+  <jsp:include page="/fragment/BMsidebar.jsp"/>  
+  <jsp:include page="/fragment/BMtool.jsp"/>  
+   
       <!-- Tools -->
       <section id='tools'>
         <ul class='breadcrumb' id='breadcrumb'>
-          <li class='title'>Tables</li>
-          <li><a href="#">Lorem</a></li>
-          <li class='active'><a href="#">ipsum</a></li>
+          <li class='title'>表格</li>
+          <li><a href="#">表格一</a></li>
+          <li class='active'><a href="#">表格二</a></li>
         </ul>
         <div id='toolbar'>
           <div class='btn-group'>

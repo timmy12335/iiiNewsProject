@@ -59,6 +59,11 @@ public class MtAddServiceImpl implements MtAddService{
 		dao.delete(pkey);		
 	}
 
+	@Override
+	@Transactional
+	public void update(MtAddBean mtAddBean) {		//更新文章資訊
+		dao.update(mtAddBean);
+	}
 	//--------------------------------------------------------------
 	@Override
 	@Transactional
@@ -86,6 +91,7 @@ public class MtAddServiceImpl implements MtAddService{
 			dao.updateStatus(articleId, bean.getStatus() - 1);
 		}		
 	}
+
 
 //	@Override		//抓pkey
 //	@Transactional

@@ -16,6 +16,7 @@ public interface MtAddService {
 	
 	MtAddBean getpkey(int pkey);
 	void delete(Integer pkey);								//刪除文章
+	void update(MtAddBean mtAddBean);							//更新文章資訊
 	
 	public List<MtAddBean> getAllMtAdd();					//取所有mtAddBean資料，對應getAllMtAdd
 	public MtAddBean getSingleArticle(String articleId);	//查詢單一文章

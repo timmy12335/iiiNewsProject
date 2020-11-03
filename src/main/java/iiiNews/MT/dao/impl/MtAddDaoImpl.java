@@ -72,6 +72,12 @@ public class MtAddDaoImpl implements MtAddDao{
 		MtAddBean bean = getpkey(pkey);
 		session.delete(bean);
 	}
+	
+	@Override
+	public void update(MtAddBean mtAddBean) {			//更新文章資訊
+		Session session = factory.getCurrentSession();
+		session.update(mtAddBean);	
+	}
 
 	
 
@@ -114,6 +120,8 @@ public class MtAddDaoImpl implements MtAddDao{
 		session.createQuery(hql).setParameter("status", status)
 				.setParameter("id", articleId).executeUpdate();
 	}
+
+
 	
 	
 //	@Override	//抓pkey

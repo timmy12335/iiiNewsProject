@@ -31,9 +31,9 @@ font-weight:"bold";
 	</div>
 		<div align='center'>
 			<table border="1">
-				<tr>
-					<td><div>PKKKKKK: ${mtBean.pkey}</div></td>
-				</tr>
+<!-- 				<tr> -->
+<%-- 					<td><div>PKKKKKK: ${mtBean.pkey}</div></td> --%>
+<!-- 				</tr> -->
 				<tr>
 					<td><div>文章編號: ${mtBean.articleId}</div></td>
 				</tr>
@@ -47,7 +47,7 @@ font-weight:"bold";
 					<td><div>文章狀態: ${mtBean.articleStatus}</div></td>
 				</tr>
 				<tr>
-					<td><div>${mtBean.category} -- ${mtBean.title}</div></td>
+					<td><div>[${ mtBean.category }] ${mtBean.title}</div></td>
 				</tr>
 <!-- 				<tr> -->
 <%-- 					<td><div>標籤: ${mtbean.category}</div></td> --%>
@@ -74,5 +74,12 @@ font-weight:"bold";
 			<br> <a href="<c:url value='/' />">回首頁</a> <br>
 		</div>
 	</form>
+	
+<script type='text/javascript'>
+window.setTimeout(function(){
+	var href = $(this).attr('href');
+	location.href = href="<c:url value='/getAllMtAdd' />";
+	}, 5000);
+</script>
 </body>
 </html>

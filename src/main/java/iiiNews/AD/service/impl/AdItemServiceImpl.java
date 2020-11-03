@@ -30,6 +30,18 @@ public class AdItemServiceImpl implements AdItemService {
 	public AdOrderItemBean getOneItems(int itemPk) {
 		return adItemDao.getOneItems(itemPk);
 	}
+
+	@Override
+	@Transactional
+	public int updateItemPic(AdOrderItemBean aoib) {
+		int n = 0;
+		try {
+		n = adItemDao.updateItemPicture(aoib);
+		}catch(Exception e) {
+			System.out.println("OMG");;
+		}
+		return n;
+	}
 	
 	
 

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +28,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
+import iiiNews.MT.validate.CheckArticleVaildator;
 
 @Controller
 public class MtAddController {
@@ -124,8 +129,8 @@ public class MtAddController {
 		System.out.println(bean.getArticleId());
 		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 //		model.addAttribute("mtBean", bean);
-//		return "/MT/showCreate";
-		return "redirect:/getSingleArticle/" + str;
+		return "/MT/showCreate";
+//		return "redirect:/getSingleArticle/" + str;	//跳轉到顯示單篇文章
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -196,7 +201,7 @@ public class MtAddController {
 //		return "redirect:" + "/getAllMtAdd";
 //	}
 	
-	@RequestMapping("/getAllMtAdd/Del/{id}")		//刪除文章，OK，直接從DB刪除不留資料
+	@RequestMapping("/getAllMtAdd/Del/{id}")		//刪除文章，直接從DB刪除不留資料，getAllMtAdd內的${all.pkey}
 	public String delete(@ModelAttribute("mtBean") MtAddBean bean, @PathVariable("id") Integer id) {
 		bean.setPkey(id);
 		service.delete(id);
@@ -212,32 +217,88 @@ public class MtAddController {
 		return "MT/getAllMtAdd";
 	}
 		
+	//---------------------------------------------------------
 	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章
 	public String getSingleArticle(@PathVariable String articleId ,Model model) {
 		MtAddBean bean = service.getSingleArticle(articleId);
-		model.addAttribute("singleArticle", bean);
-		return "MT/singleArticle";
+		model.addAttribute("mtAddBean", bean);
+		return "MT/Update";
 	}
 	
+	
+	
+	@PostMapping("/getSingleArticle/{articleId}")	//更新單一文章
+	public String modify(@ModelAttribute("mtAddBean") MtAddBean mtAddBean, BindingResult result, Model model,
+//			@PathVariable Integer id,
+			HttpServletRequest request) {
+//		MBBean mbBean = (MBBean) model.getAttribute("mbBean");
+//		if (mbBean == null) {
+//			return "redirect: " + servletContext.getContextPath() + "/login";		//等會員登入畫面********待修改
+//		}
+
+		
+//		CheckArticleVaildator validator=new CheckArticleVaildator();
+//		validator.validate(mtAddBean, result);
+//		if (result.hasErrors()) {
+//			result.rejectValue("category", "", "資料更新出現問題請洽系統人員");
+//			System.out.println("result hasErrors(), MtAddBean=" + mtAddBean);
+//			List<ObjectError> list = result.getAllErrors();
+//			for (ObjectError error : list) {
+//				System.out.println("更新有錯誤：" + error);
+//			}
+//			return "MT/Update";
+//		}
+//		mtAddBean.setPkey(id);
+//		MultipartFile Image = mtAddBean.getImage();
+//		if (Image.getSize() == 0) {
+//			MtAddBean original = service.getpkey(id);
+//			mtAddBean.setImage(original.getImage());
+//		} else {
+//			String originalFilename = Image.getOriginalFilename();
+//			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1)
+//				mtAddBean.setImgName(originalFilename);
+//		}
+//
+//		if (Image != null && !Image.isEmpty()) {
+//			try {
+//				byte[] b = Image.getBytes();
+//				Blob blob = new SerialBlob(b);
+//				mtAddBean.setImgLink(blob);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				throw new RuntimeException("檔案上傳發生異常");
+//			}
+//		}
+		try {
+			service.update(mtAddBean);
+//			service.saveMtAddService(mtAddBean);
+		} catch (Exception e) {
+//			result.rejectValue("memberNumber", "", "資料新增出現問題請洽系統人員");
+			System.out.println("更新有問題,請洽系統人員");
+			 return "MT/Update";
+		}
+		
+
+		return "redirect:/getAllMtAdd";
+	}
+	
+	//---------------------------------------------------------
 	@GetMapping("/getMemAarticleList/{memberId}")	//查詢單一會員的文章列表
 	public String  getMemAarticleList(@PathVariable String memberId ,Model model) {
 		List<MtAddBean> list = service.getMemAarticle(memberId);
 		model.addAttribute("memAarticleList", list);
 		return "MT/memAarticleList";
 	}
-		
-//	//下架一則新聞
-//	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態
-//	public String delSingleArticle(@PathVariable String articleId ,Model model) {
-//		service.delSingleArticle(articleId);
-//		return "redirect:/getAllMtAdd";
-//	}
-	
-	//下架一則新聞
-	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態
+
+	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態，暫時OK
 	public String delSingleArticle(@PathVariable String articleId ,Model model) {
 		service.delSingleArticle(articleId);
 		return "redirect:/getAllMtAdd";
 	}
+	//---------------------------------------------------------
+
+
 	
+	
+	//---------------------------------------------------------
 }

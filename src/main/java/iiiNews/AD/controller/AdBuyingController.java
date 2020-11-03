@@ -1,5 +1,10 @@
 package iiiNews.AD.controller;
 
+import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 import iiiNews.AD.model.AdBean;
+import iiiNews.AD.model.AdOrderBean;
 import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.AD.model.BuyingCart;
 import iiiNews.AD.service.AdMainService;
+import iiiNews.AD.service.AdOrderService;
 
 @Controller
 @SessionAttributes({"shoppingCart"})
@@ -20,6 +29,9 @@ public class AdBuyingController {
 
 	@Autowired
 	AdMainService adMainService;
+	
+	@Autowired
+	AdOrderService adOrderService;
 	
 	public AdBuyingController() {
 	}
@@ -68,21 +80,70 @@ public class AdBuyingController {
 		return "redirect:/ShowCartContent";
 	}
 	
+	/*查看購物車內容*/
 	@GetMapping("/ShowCartContent")
 	public String showCartContent(Model model) {
 		//...未來保留寫確認會員登入
 		return  "AD/shoppingCart";
 	}
 	
-	
+	/*點選刪除購物車內容 一筆筆*/
 	@GetMapping("/DeleteFromCart/{adPk}")
 	public String deleteCartItem(Model model,
 							@PathVariable int adPk) {
-		System.out.println("hello--------");
 		BuyingCart cart = (BuyingCart) model.getAttribute("shoppingCart");
 		cart.removeFromCart(adPk);
-		
 		return "redirect:/ShowCartContent";
+	}
+	
+	
+	/* $$$$ 目前點選確認購物後直接執行 未來是等結帳後才會到這邊*/
+	@GetMapping("/checkoutOK.insert")
+	public String makingAdOrderItemBeanToRealItem(Model model, WebRequest webRequest, SessionStatus status) {
+	
+		BuyingCart cart = (BuyingCart) model.getAttribute("shoppingCart");
+		if(cart == null) {
+			System.out.println("成功進入/checkoutOK.insert方法 但被cart==null 退回");
+			return "redirect:/ShowCartContent";
+		}
+		
+
+		System.out.println("成功進入/checkoutOK.insert方法");
+		
+		//生成訂單編號
+		String adOrderNo = adOrderService.createOrderNo();
+		//取會員資料的部分暫時寫死
+		String buyerMemberId = "john";
+		//生成訂購時間
+		Timestamp orderDate = new Timestamp(System.currentTimeMillis());
+		//將資訊封裝到AdOrderBean
+		AdOrderBean aob = new AdOrderBean(null, adOrderNo, buyerMemberId, cart.getTotal(), orderDate, null, null);
+		
+		//取出購物車內的各項商品 把商品做成AdOrderItemBean的Set
+		Set<AdOrderItemBean> itemBeanSet = new LinkedHashSet<AdOrderItemBean>();
+		Map<Integer, AdOrderItemBean> cartItem = cart.getContent();
+		Set<Integer> items = cartItem.keySet();
+		for(int n : items) {
+			AdOrderItemBean aoib = cartItem.get(n);
+			aoib.setAdOrderBean(aob);
+			itemBeanSet.add(aoib);
+		}
+		aob.setItems(itemBeanSet);
+		
+		int n = adOrderService.saveOrders(aob);
+		
+		//印在console檢查用
+		System.out.println("訂單新增"+n+"筆");
+		System.out.println("======完成======");
+		System.out.println("aob:"+aob.toString());
+		
+		//若新增成功則清空購物車
+		if(n>0) {
+			System.out.println("交易成功，準備清空購物車");
+			status.setComplete();
+			webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
+		}
+		return "redirect:/";
 	}
 	
 	

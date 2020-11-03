@@ -7,6 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>上架廣告欄位</title>
+
+<script >
+window.onload = function(){
+		var btn = document.getElementById("clickme1");
+		var btn2 = document.getElementById("clickme2");
+		btn.onclick = function(){
+		A =  document.getElementById("Category")
+		A.value ="惡搞"
+		AA = document.getElementById("title")
+		AA.value = "今天吃什麼??"
+		article = document.getElementById("article")
+		article.value = "AAAAAAAAAAAAAAA"
+	}
+	</script>
 </head>
 <body>
 	<nav>
@@ -52,15 +66,24 @@
 							<form:textarea name="article" id="article" cols="30" rows="10"
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
 						</div>
+					
+				<div class="login100-form-social flex-c-m">
+						<input type='button' class='btn btn-primary'  id='clickme1' value='Demo1' >
+						<span>&nbsp;&nbsp;</span>
+						<input type='button' class='btn btn-primary'  id='clickme2' value='Demo2' >
+						<span>&nbsp;&nbsp;</span>
+				</div>
 					</div>
-				</fieldset>
-				<div id="btn" align="center">
+					<div id="btn" align="center">
 					<input class="sub" type="submit" name="submit" id="submit" value="送出" />
 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
 				</div>
+				</fieldset>
 			</form:form>
 		</div>
 		<br> <input type="button" value="one" onclick="onebuttontodata()">
 	</div>
+	
+	
 </body>
 </html>

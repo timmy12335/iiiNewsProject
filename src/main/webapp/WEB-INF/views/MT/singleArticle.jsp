@@ -9,6 +9,7 @@
 <style>
 td{
 align:left;
+padding: 3px;
 }
 </style>
 </head>
@@ -29,8 +30,8 @@ align:left;
 			<tr><td><div>會員編號: &nbsp;${ singleArticle.memberId }</div></td></tr>
 			<tr><td><div>新增時間: ${ singleArticle.updateDate }</div></td></tr>
 			<tr><td><div>文章狀態: ${ singleArticle.articleStatus }</div></td></tr>
-			<tr><td><div>標籤: ${ singleArticle.category }</div></td></tr>
-			<tr><td><div>標題: ${ singleArticle.title }</div></td></tr>
+			<tr><td><div>[${ singleArticle.category }] ${ singleArticle.title }</div></td></tr>
+<%-- 			<tr><td><div>標題: ${ singleArticle.title }</div></td></tr> --%>
 			<tr><td><div><img width='500' height='300' 
 	                    	src="<c:url value='/getMtCreate/${ singleArticle.articleId }'/>" >
 	        </div></td></tr>            	
@@ -38,7 +39,7 @@ align:left;
 <%-- 			<tr><td><div style="width:500px;height:300px">內文:<br>${ singleArticle.article }</div></td></tr> --%>
 		</table>
 		<a href="<c:url value="" />">-----TOP-----</a>
-		<a href="<c:url value="" />">回前頁</a>		
+		<a href="<c:url value="/getAllMtAdd" />">回前頁</a>		
 	</div>
 <!-- 	</form> -->
 </body>

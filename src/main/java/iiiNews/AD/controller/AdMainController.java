@@ -67,7 +67,7 @@ public class AdMainController {
 		Map<String, String> msg = new HashMap<>();
 		
 		//$$$$ 取得會員編號>>會員編號先寫死 未來再改
-		bean.setMemberId("frank");
+		bean.setMemberId("tina");
 		
 		//取得上傳時間
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());

@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import iiiNews.AD.model.AdBean;
 import iiiNews.AD.service.AdMainService;
 
 @Controller
+@SessionAttributes({"shoppingCart"})
 public class AdMainController {
 	
 	@Autowired
@@ -127,7 +129,7 @@ public class AdMainController {
 	
 	//$$$$ 根據會員資料(編號)取得該會員所有廣告列表
 	@GetMapping("/memberAllAdsList")
-	public String getMemberAdList(@PathVariable String id,Model model){
+	public String getMemberAdList(@PathVariable String cpmemberId,Model model){
 //		List<AdBean> list = service.getAllAds();
 //		model.addAttribute("adLists",list);
 		return "AD/memberAllAdsList";

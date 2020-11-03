@@ -7,12 +7,12 @@
     <script src="${pageContext.request.contextPath}/jsmenu/nav_time_script.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/nav_styles.css">
     <!-- <link rel="shortcut icon" href="favicon.ico" rel="external nofollow" type="image/x-icon" /> -->
-    
+    <link href="${pageContext.request.contextPath}/image/favicon.ico" rel="icon" type="image/ico" />
 <meta charset="UTF-8">
  <div id='cssmenu'>
         <ul>
             <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
-            <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
+            <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo2.PNG" style="width:100px;border:1px solid white"></a></li>
             
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
             <li><a href='#'>會員中心</a>
@@ -54,12 +54,14 @@
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/chat' />">客服聊天</a></li>
                 </ul>
             </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>
                 <ul>
                  	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
                     <li><a href="<c:url value='/queryByType' />">分類追蹤</a></li>
+                    <li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>                    
                </ul>
             </li>
             <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
@@ -78,6 +80,7 @@
                             <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
                         </ul>
                     </li>
+                    <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
                     <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
                 </ul>
             </li>
@@ -87,6 +90,6 @@
                 </div>
             </li>
             <li><a href="#" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
-            <li><a href="#" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
+            <li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
         </ul>
     </div>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import TRN.web.news.dao.trkNewsDao;
+import TRN.web.news.model.rptNewsBean;
 import TRN.web.news.model.trkNewsBean;
 import TRN.web.news.service.trkNewsService;
 
@@ -45,6 +46,22 @@ public class trkNewsServiceImpl implements trkNewsService {
 	@Override                  //查詢單筆產品資料
 	public trkNewsBean getNewsById(int NewsId) {
 		return dao.getNewsById(NewsId);
+	}
+	@Transactional
+	@Override
+	public void addtrkNews(trkNewsBean trkNew) {
+		dao.addtrkNews(trkNew);
+		
+	}
+	@Transactional
+	@Override
+	public rptNewsBean getReportById(int reportId) {
+		return dao.getReportById(reportId);
+	}
+	@Transactional
+	@Override
+	public List<rptNewsBean> getReportList() {
+		return dao.getReportList();
 	}
 
 }

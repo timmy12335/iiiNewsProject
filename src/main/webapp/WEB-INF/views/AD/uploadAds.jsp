@@ -12,7 +12,7 @@
 <nav>
 <jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 </nav>
-<div id="page" class="container" align="center">
+<div id="page" class="container" align="center" style="margin-top:100px;margin-bottom:100px">
     <h2 class="BoxTitle">廣告欄位置上傳</h2>
     <div>
     <form:form method="POST" modelAttribute="adBean">

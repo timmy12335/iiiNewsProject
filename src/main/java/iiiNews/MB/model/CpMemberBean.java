@@ -26,7 +26,7 @@ public class CpMemberBean implements Serializable {
 	String cptel;
 	String cpaddress;
 	String cpname;
-	Integer cpmbpoints;   //會員點數
+	Integer cpmbpoints; // 會員點數
 
 	public void setPkey(Integer pkey) {
 		this.pkey = pkey;

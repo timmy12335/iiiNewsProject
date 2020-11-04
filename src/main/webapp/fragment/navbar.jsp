@@ -50,7 +50,7 @@
                     
                 </ul>
             </li>
-            <li><a href='#'>客服中心</a>
+            <li><a href="<c:url value='/CRindex' />">客服中心</a>
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>

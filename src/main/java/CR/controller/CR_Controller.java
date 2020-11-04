@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,6 +30,22 @@ public class CR_Controller {
 	ServletContext ctx;
 	@Autowired
 	CR_service service;
+	@Autowired
+	JavaMailSender mailSender;
+	
+	@GetMapping("/sendmail")
+	public String email(Model model) {
+		return "CR/sendEmail";
+	}
+	
+	
+	@GetMapping("/CRindex")
+	public String showlist(Model model) {
+		
+		
+		return "CR/CRindex";		
+	}
+	
 	
 	@GetMapping("/customerReports")
 	public String list(Model model) {
@@ -52,7 +70,6 @@ public class CR_Controller {
 	
 	@PostMapping("/addReport")
 	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb) { 
-		
 		service.addReport(cb);
 	    return "redirect:/customerReports";
 	}
@@ -97,7 +114,7 @@ public class CR_Controller {
 		cb.setMbBean(cb0.getMbBean());
 	}	
 
-
+	
 	
 	
 }

@@ -124,8 +124,8 @@ public class MtAddController {
 		System.out.println(bean.getArticleId());
 		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 //		model.addAttribute("mtBean", bean);
-//		return "/MT/showCreate";
-		return "redirect:/getSingleArticle/" + str;
+		return "/MT/showCreate";
+//		return "redirect:/getSingleArticle/" + str;	//跳轉到顯示單篇文章
 	}
 
 	// +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -196,7 +196,7 @@ public class MtAddController {
 //		return "redirect:" + "/getAllMtAdd";
 //	}
 	
-	@RequestMapping("/getAllMtAdd/Del/{id}")		//刪除文章，OK，直接從DB刪除不留資料
+	@RequestMapping("/getAllMtAdd/Del/{id}")		//刪除文章，直接從DB刪除不留資料，getAllMtAdd內的${all.pkey}
 	public String delete(@ModelAttribute("mtBean") MtAddBean bean, @PathVariable("id") Integer id) {
 		bean.setPkey(id);
 		service.delete(id);
@@ -212,32 +212,88 @@ public class MtAddController {
 		return "MT/getAllMtAdd";
 	}
 		
-	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章
-	public String getSingleArticle(@PathVariable String articleId ,Model model) {
-		MtAddBean bean = service.getSingleArticle(articleId);
-		model.addAttribute("singleArticle", bean);
-		return "MT/singleArticle";
+	//---------------------------------------------------------
+	@GetMapping("/modifyArticle/{pkey}")	//查詢單一文章
+	public String modifyArticle(@PathVariable int pkey ,Model model) {
+		MtAddBean bean = service.getpkey(pkey);
+		model.addAttribute("mtAddBean", bean);
+		return "MT/Update";
 	}
 	
+	@PostMapping("/modifyArticle/{pkey}")	//更新單一文章
+	public String modify(@ModelAttribute("mtAddBean") MtAddBean mtAddBean, Model model,
+			@PathVariable int pkey) {
+		MtAddBean bean = null;
+		MultipartFile articleImage = mtAddBean.getImage();
+		System.out.println("productImage:-->" + articleImage);
+		//拿它原來的檔名取出來放到我們一個叫做FileName欄位
+		String originalFilename = articleImage.getOriginalFilename();
+//		oneItemBean.setAdImageName(originalFilename);
+		
+		MtAddBean originBean = service.getpkey(pkey);
+		originBean.setImgName(originalFilename);
+		
+		
+		/* 建立Blob物件，交由 Hibernate 寫入資料庫 要有圖片欄位 且圖片位元組(不為空)
+		 * 得到byte[] 建一個Blob物件要用實作介面的類別SerialBlob
+		 * 呼叫他的建構子SerialBlob(byte[] b)傳入陣列
+		 * 完成之後再放入Blob欄位(adImage)	*/
+		
+		if (articleImage != null && !articleImage.isEmpty() ) {
+			try {
+				byte[] b = articleImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				originBean.setImgLink(blob);
+				System.out.println("圖片上傳完成");
+			} catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
+		
+		System.out.println("originBean after:-->" + originBean.toString());
+		
+//		bean.setCategory(mtAddBean.getCategory());
+		originBean.setCategory(mtAddBean.getCategory());
+		originBean.setTitle(mtAddBean.getTitle());
+		originBean.setArticle(mtAddBean.getArticle());
+		
+		int n = service.modifyArticle(originBean);
+		System.out.println(n + "更改成功");
+		
+//		return "redirect:/";
+		return "redirect:/getAllMtAdd";
+	}
+		
+
+		
+	
+	
+	//---------------------------------------------------------
+	
+	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章，與上面編輯，必須擇一
+	public String getSingleArticle(@PathVariable String articleId ,Model model) {
+		MtAddBean bean = service.getSingleArticle(articleId);
+		model.addAttribute("singleArticle", bean);	//點文章編號後進入的頁面，用這兩行顯示
+		return "/MT/singleArticle";
+	}
+		
 	@GetMapping("/getMemAarticleList/{memberId}")	//查詢單一會員的文章列表
 	public String  getMemAarticleList(@PathVariable String memberId ,Model model) {
 		List<MtAddBean> list = service.getMemAarticle(memberId);
 		model.addAttribute("memAarticleList", list);
 		return "MT/memAarticleList";
 	}
-		
-//	//下架一則新聞
-//	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態
-//	public String delSingleArticle(@PathVariable String articleId ,Model model) {
-//		service.delSingleArticle(articleId);
-//		return "redirect:/getAllMtAdd";
-//	}
-	
-	//下架一則新聞
-	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態
+
+	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態，暫時OK
 	public String delSingleArticle(@PathVariable String articleId ,Model model) {
 		service.delSingleArticle(articleId);
 		return "redirect:/getAllMtAdd";
 	}
+	//---------------------------------------------------------
+
+
 	
+	
+	//---------------------------------------------------------
 }

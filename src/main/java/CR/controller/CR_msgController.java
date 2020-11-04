@@ -1,5 +1,6 @@
 package CR.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -32,10 +33,10 @@ public class CR_msgController {
 	@PostMapping(value="/msgChat",
 			consumes= {"application/json"}, produces= {"application/json"})
 	public @ResponseBody Map<String, String> addMsg(@RequestBody CrMsgBean msg){
-		
-		
-		
-		return null;
+		Map<String, String> map = new HashMap<>();
+		service.addMsg(msg);
+		map.put("success",msg.getSendmsg());
+		return map;
 		
 	}
 

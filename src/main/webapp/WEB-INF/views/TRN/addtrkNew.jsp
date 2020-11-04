@@ -27,7 +27,8 @@ fieldset {
 	<hr style="height: 1px; border: none; color: #333; background-color: #333;">
 	<section class="container">
 		<!--       三個地方要完全一樣 -->
-		<form:form method='POST' modelAttribute="trkNewsBean" class='form-horizontal'>
+		<form:form method='POST' modelAttribute="trkNewsBean" class='form-horizontal'
+			enctype="multipart/form-data" >
 			<fieldset >
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for='title'>
@@ -85,6 +86,18 @@ fieldset {
 						</form:select> --%>
 					</div>
 				</div>
+				
+				<div class="form-group">
+       				<label class='control-label col-lg-2 col-lg-2' for="newsImage">
+        				<%-- <spring:message code='spring.addProduct.form.image.label'/> --%>
+        				    <!--   為了多語言 先標註各功能在對應不同語系的字元 -->
+       				上傳圖片</label>
+					<div class='col-lg-10'>        				
+        				<form:input id="newsImage" path="newsImage" type='file' 
+            				class='form:input-large' />
+    				</div>
+				</div> 
+				
 				<div class="form-group">
 					<div class='col-lg-offset-2 col-lg-10'>
 						<input id="btnAdd" type='submit' class='btn btn-primary'

@@ -12,7 +12,7 @@
  <div id='cssmenu'>
         <ul>
             <!-- <li><img src="img/google-logo.png" style="width: 200px;height: 30px;"></li> -->
-            <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo2.PNG" style="width:100px;border:1px solid white"></a></li>
+            <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
             
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
             <li><a href='#'>會員中心</a>
@@ -52,11 +52,12 @@
                     
                 </ul>
             </li>
-            <li><a href='#'>客服中心</a>
+            <li><a href="<c:url value='/CRindex' />">客服中心</a>
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
                     <li><a href="<c:url value='/chat' />">客服聊天</a></li>
+                    <li><a href="<c:url value='/sendmail' />">寄信</a></li>
                 </ul>
             </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>

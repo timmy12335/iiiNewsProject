@@ -40,8 +40,14 @@ public class AdItemDaoImpl implements AdItemDao {
 
 	@Override
 	public int updateItemPicture(AdOrderItemBean aoib) {
-		// TODO Auto-generated method stub
-		return 0;
+		int n = 0;
+		
+		Session session = factory.getCurrentSession();
+		AdOrderItemBean bean = (AdOrderItemBean) session.merge(aoib);
+//		AdOrderItemBean entityBean = session.get(AdOrderItemBean.class,aoib.getItemPk());
+		System.out.println(bean.toString());
+		n++;
+		return n;
 	}
 	
 	

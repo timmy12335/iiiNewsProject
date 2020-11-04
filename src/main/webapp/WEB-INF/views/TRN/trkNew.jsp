@@ -18,6 +18,8 @@
 	</section>
 	<section class="container">
 		<div class="row">
+		<img width='100' height='200'
+							src="<c:url value='/getPictureTK/${trkNew.trackId}' />" /> 
 			<div class="col-md-5">
 				<h3>${trkNew.title}</h3>
 				<p>建立人: ${trkNew.founder}</p>

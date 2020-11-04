@@ -14,6 +14,8 @@ public interface NewsProductDao {
 	public NewsBean getLastRecord();
 	//查詢所有的新聞
 	public List<NewsBean> getAllNews();
+	//確認時間是否超過今天 若超過將status改為0
+	public List<NewsBean> checkTime();
 	//抓單一筆新聞
 	public NewsBean getSingleNews(String newsId);
 	//查詢單一會員的新聞列表

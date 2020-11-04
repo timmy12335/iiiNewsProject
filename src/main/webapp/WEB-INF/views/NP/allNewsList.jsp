@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>所有新聞列表</title>
 <script>
+	
 	//取得現在的時間，放入GetDateDiff()去計算時間
 	function timeNow() {
 		let time = new Date();
@@ -16,7 +17,6 @@
 		let H = time.getHours();
 		let m = time.getMinutes();
 		let s = time.getSeconds();
-//		console.log(Y+"-"+M+"-"+D+" "+H+":"+m+":"+s);
 		let twtime = Y+"-"+M+"-"+D+" "+H+":"+m+":"+s;
 		return twtime;
 	}	
@@ -30,7 +30,6 @@
 		var startTime = timeNow().replace(/\-/g, "/");
 		endTime = endTime.replace(/\-/g, "/");
 		//將計算間隔類性字元轉換為小寫 
-//		diffType = diffType.toLowerCase();
 		var sTime = new Date(startTime); //開始時間 
 		var eTime = new Date(endTime); //結束時間 
 		//作為除數的數字 
@@ -51,8 +50,8 @@
 <c:forEach var='news' items='${newsLists}' varStatus='loop'>
 <table>
 	<tr style="background-color:lightblue;"  height='36'>
-		<th width='600' align='center'>新聞標題 ${loop.index}</th>
-		<th width='100' align='center'>新聞編號:</th>
+		<th width='600' align='center'>新聞標題</th>
+		<th width='100' align='center'>新聞編號</th>
 		<th width='60' align='center'>上傳時間</th>		
 		<th width='100' align='center'>新聞類型</th>		
 		<th width='100' align='center'>發生地點</th>
@@ -75,8 +74,8 @@
 		<th width='600' align='center'>新聞大綱</th>
 		<th width='100' align='center'>發生日期</th>
 		<th width='100' align='center'>發生時間</th>
-		<th width='100' align='center'>到期時間</th>
-		<th width='60' align='center'>價格</th>	
+		<th width='100' align='center'>價格</th>
+		<th width='60' align='center'>到期時間</th>	
 		<th width='60' align='center'>時間倒數</th>	
 		</tr>
 		<tr>
@@ -98,29 +97,27 @@
 </div>
 <script>
 var num =  ${newsLists.size()};
-//將秒轉回時:分:秒
+//將秒轉回時:分:秒 
 function clock() {
 	let sec01,day,hr,hr01,min,sec;
 	for(var i=0;i<num;i++){
 		var ptime = document.getElementById("ftime"+[i]).innerHTML ;
-	
-	
-	console.log("ptime="+ptime);
 	sec01 = GetDateDiff(ptime);
-// 	console.log(sec01);
 	sec = sec01 % 60 <10 ? '0'+sec01 % 60 :sec01 % 60 ;		
-	min = (sec01-sec)/60%60 <10 ? '0'+(sec01-sec)/60%60 : (sec01-sec)/60%60;	
+	min = (sec01-sec)/60%60 <10 ? '0'+ (sec01-sec)/60%60 : (sec01-sec)/60%60;
 	hr01 =(((sec01-sec) /60) - min) / 60 ;
 	hr = hr01 <10 ?'0'+ hr01 :hr01 ;
-// 	console.log(hr);
-// 	console.log(min);
-// 	console.log(sec);
-	let time = hr+"小時"+min+"分"+sec+"秒";
-	document.getElementById("lastime"+[i]).innerHTML = time;
-	
+	let zr0 = hr + min + sec;
+//若為0時0分0秒 重整頁面下架
+	if(zr0 == 0){
+		window.location.reload();
+	}else{		
+		let time = hr+"小時"+min+"分"+sec+"秒";
+		document.getElementById("lastime"+[i]).innerHTML = time;
 	}
-	
 }
+}
+clock();
 //每一秒重新整理
 setInterval(clock,1000);
 

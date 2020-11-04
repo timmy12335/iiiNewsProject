@@ -44,6 +44,8 @@
                         <ul>
                         
                             <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
+                            <li><a href="<c:url value='/changeStautsForTime'/>">所有新聞列表test</a></li>
+                            
                             
                         </ul>
                     </li>

@@ -54,6 +54,7 @@
 		document.getElementById("lastime").innerHTML = time;
 
 	}
+	
 	//每一秒重新整理
 	setInterval(clock,1000);
 </script>
@@ -74,7 +75,7 @@
 		<p>新聞類型: ${ newsSingle.newsType }</p>
 		<p>發生日期: ${ newsSingle.happenDate }</p>
 		<p>發生時間: ${ newsSingle.happenTime }</p>
-		<p>發生地點: ${ newsSingle.location }</p>
+		<p>發生地點: ${ newsSingle.location }</p>		
 		<img width='300' height='200'
 			src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
 		<p>新聞內文:</p>
@@ -86,7 +87,8 @@
 		<a href="<c:url value="" />">購買</a> <a href="<c:url value="" />">回前頁</a>
 
 	</div>
-	
-
+	<script >
+clock();
+</script>
 </body>
 </html>

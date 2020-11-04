@@ -1,6 +1,10 @@
 package iiiNews.NP.service.impl;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -59,7 +63,8 @@ public class NewsProductServiceImpl implements NewsProductService {
 
 
 	@Override
-	public List<NewsBean> getAllNews() {		
+	public List<NewsBean> getAllNews() {
+		
 		return newsProductDao.getAllNews();
 	}
 	@Override
@@ -82,6 +87,40 @@ public class NewsProductServiceImpl implements NewsProductService {
 	public List<NewsBean> getPageNews(Integer pageNo) {
 		
 		return newsProductDao.getPageNews(pageNo);
+	}
+   //算出使用者輸入的限時時間，加上目前時間，塞進futureTime欄位
+	@Override
+	public Timestamp getfutureTime(Time ti) {	
+		SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
+		String sti = stf.format(ti);
+		String[] stiarr = sti.split(":");
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		java.util.Date d = null; 
+		Date date = new Date();
+		String strDate = sdFormat.format(date);
+
+		
+		String[] dateAndTime=strDate.split(" ");
+		String[] TimeStr=dateAndTime[1].split(":");
+		
+		int h = Integer.valueOf(stiarr[0]) + Integer.valueOf(TimeStr[0]);
+		int m = Integer.valueOf(stiarr[1]) + Integer.valueOf(TimeStr[1]);
+		int s = Integer.valueOf(stiarr[2]) + Integer.valueOf(TimeStr[2]);
+		String countime =dateAndTime[0]+" "+ h +":" + m + ":" + s;
+
+		try {
+			d = sdFormat.parse(countime);
+		} catch (ParseException e1) {			
+			e1.printStackTrace();
+		} 
+		java.sql.Timestamp countimesql = new java.sql.Timestamp(d.getTime());
+		
+		return countimesql;
+	}
+
+	@Override
+	public List<NewsBean> checkTime() {		
+		return newsProductDao.checkTime();
 	}
 
 	

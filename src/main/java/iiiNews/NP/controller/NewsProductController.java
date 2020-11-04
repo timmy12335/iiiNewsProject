@@ -57,43 +57,9 @@ public class NewsProductController {
 			@ModelAttribute("newsBean")NewsBean nb		
 			,Model model) {
 		Timestamp uploadTime = new Timestamp(System.currentTimeMillis());
-		nb.setUploadTime(uploadTime);
-//		System.out.println(uploadTime);
-		
-		Time ti = nb.getLimitTime();	
-		SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
-		String sti = stf.format(ti);
-		System.out.println(sti);
-		String[] stiarr = sti.split(":");
-		for(int i=0;i<stiarr.length;i++) {
-			System.out.println(stiarr[i]);
-		}
-		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		java.util.Date d = null; 
-		Date date = new Date();
-		String strDate = sdFormat.format(date);
-		System.out.println(strDate);
-		
-		String[] dateAndTime=strDate.split(" ");
-		String[] TimeStr=dateAndTime[1].split(":");
-		for(int i=0;i<TimeStr.length;i++) {
-			System.out.println(TimeStr[i]);
-		}
-		
-		int h = Integer.valueOf(stiarr[0]) + Integer.valueOf(TimeStr[0]);
-		int m = Integer.valueOf(stiarr[1]) + Integer.valueOf(TimeStr[1]);
-		int s = Integer.valueOf(stiarr[2]) + Integer.valueOf(TimeStr[2]);
-		String countime =dateAndTime[0]+" "+ h +":" + m + ":" + s;
-		System.out.println(countime);
-		System.out.println("----------------------------------------");
-		try {
-			d = sdFormat.parse(countime);
-		} catch (ParseException e1) {			
-			e1.printStackTrace();
-		} 
-		java.sql.Timestamp countimesql = new java.sql.Timestamp(d.getTime());
-		System.out.println(countimesql);
-		
+		nb.setUploadTime(uploadTime);		
+		Time ti = nb.getLimitTime();
+		java.sql.Timestamp countimesql = service.getfutureTime(ti);
 		nb.setFutureTime(countimesql);
 		
 		System.out.println("----------------------------------------");

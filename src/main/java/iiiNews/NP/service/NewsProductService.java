@@ -1,6 +1,8 @@
 package iiiNews.NP.service;
 
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import iiiNews.NP.model.NewsBean;
@@ -14,4 +16,6 @@ public interface NewsProductService {
 	public List<NewsBean> getMemNews(String memberId);
 	void delSingleNews(String newsId);
 	public List<NewsBean> getPageNews(Integer pageNo);
+	public Timestamp getfutureTime(Time limitTime);
+	public List<NewsBean> checkTime();
 }

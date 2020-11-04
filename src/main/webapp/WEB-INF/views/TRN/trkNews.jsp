@@ -23,6 +23,8 @@
         <c:forEach var='trkNew' items='${trkNews}'>
             <div class="col-sm-6 col-md-3" style="width: 360px; height: 360px">
                 <div class="thumbnail" style="width: 320px; height: 340px">
+                    <img width='100' height='200'
+							src="<c:url value='/getPictureTK/${trkNew.trackId}' />" /> 
                     <div class="caption">
                         <p>
                             <b style='font-size: 16px;'>${trkNew.title}</b>
@@ -31,7 +33,8 @@
                         <p>建立者${trkNew.founder}</p>
                         <p>追蹤人數: ${trkNew.trcnum}</p>
                         <p>
-                        <a href="<spring:url value='trkNew?id=${trkNew.trackId}' />" 
+                        <a href="<spring:url value='/trkNew?id=${trkNew.trackId}' />" 
+                      <c:url value='/uploadAds' />
 									class="btn btn-primary"> <span
 									class="glyphicon-info-sigh glyphicon"></span>詳細資料 //查詢多筆/單筆詳細資料
 								</a>

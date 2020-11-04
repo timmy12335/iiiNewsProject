@@ -1,18 +1,36 @@
 package iiiNews.NP.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import iiiNews.NP.model.NewsBean;
@@ -23,6 +41,8 @@ public class NewsProductController {
 	
 	@Autowired
 	NewsProductService service;
+	@Autowired
+	ServletContext servletContext;
 	
 	@GetMapping("/uploadNews")
 	public String goUploadForm(Model model) {
@@ -37,8 +57,13 @@ public class NewsProductController {
 			@ModelAttribute("newsBean")NewsBean nb		
 			,Model model) {
 		Timestamp uploadTime = new Timestamp(System.currentTimeMillis());
-		nb.setUploadTime(uploadTime);
-		System.out.println(uploadTime);
+		nb.setUploadTime(uploadTime);		
+		Time ti = nb.getLimitTime();
+		java.sql.Timestamp countimesql = service.getfutureTime(ti);
+		nb.setFutureTime(countimesql);
+		
+		System.out.println("----------------------------------------");
+	
 		
 		MultipartFile[] productImages = nb.getProductImage();
 		System.out.println(productImages);
@@ -78,6 +103,54 @@ public class NewsProductController {
 		return "redirect:/getMemNewsList/A0002";
 	}
 	
+
+	
+	@GetMapping("/getNewsPicture/{newsId}")
+	public ResponseEntity<byte[]> getNewsPicture(
+			@PathVariable String newsId)throws IOException, SQLException{
+		ResponseEntity<byte[]> npic = null;
+		
+		//定義一個InputStream來判斷圖片有沒有成功的叫出來 有可能Blob是null或是這筆資料不存在等等
+		InputStream is = null;
+		String mimeType = null;
+		//跟Service說 把我的bookId傳給你 你把BookBean傳回給我 我再從bean取出blob
+		//把blob變成位元組陣列byte[]
+		//檔名跟mimetype有關 要記得給瀏覽器
+		NewsBean nb = service.getSingleNews(newsId);
+		if(nb !=null) {
+			Blob blob = nb.getImg_I();
+			if(blob !=null) {
+				is = blob.getBinaryStream();
+				mimeType = servletContext.getMimeType(nb.getPic_One());			
+			}
+			
+			
+		}
+		if(is == null) {
+			is = servletContext.getResourceAsStream("/img/NoImage.jpg");
+			mimeType = servletContext.getMimeType("NoImage.jpg");
+		}
+		//寫mimeType出去 放在標頭給出去
+		//告訴瀏覽器收到這份資料要怎麼放到快取區 告訴她不要存 每次要用到都要抓最新
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(mediaType);
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		
+		//要來轉成位元組陣列了
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] b = new byte[81920];
+		int len = 0;
+		while ((len = is.read(b)) != -1) {
+			baos.write(b, 0, len);
+		}
+		byte[] content = baos.toByteArray();
+		
+		//要傳送請求本體 請求標頭 狀態列
+		npic = new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
+		return npic;
+	}
+	
 	
 	
 	//查詢所有的新聞
@@ -100,6 +173,38 @@ public class NewsProductController {
 		List<NewsBean> list = service.getMemNews(memberId);
 		model.addAttribute("memNewsList", list);
 		return "NP/memNewsList";
+	}
+	//下架一則新聞
+	@GetMapping("/delSingleNews/{newsId}")
+	public String delSingleNews(@PathVariable String newsId ,Model model) {
+		
+		service.delSingleNews(newsId);
+		return "redirect:/getMemNewsList/A0001";
+	}
+	@GetMapping("/showAllNewsbyPages")
+	public String showbookPage() {	
+			return"NP/ShowNewsByPageAjax";
+		
+	}
+	@GetMapping("/pagingNewsData.json")
+	public @ResponseBody List<NewsBean> getbookPage(
+			@RequestParam(value="pageNo",defaultValue = "1" )Integer pageNo) {	
+		
+		List<NewsBean> list =  service.getPageNews(pageNo);
+		return list;		
+	}
+	@GetMapping("/pagingNewsNo")
+	public @ResponseBody Map<String, Integer> getPage(
+			@RequestParam(value="pageNo",defaultValue = "1" )Integer pageNo,
+			@RequestParam(value="totalPage", defaultValue = "1") Integer totalPage) {	
+		
+		totalPage = service.getTotalPages();
+		
+		Map<String, Integer>  map = new HashMap<>();
+        map.put("totalPage", totalPage);
+        map.put("currPage", pageNo);
+		return map;
+	
 	}
 	
 }

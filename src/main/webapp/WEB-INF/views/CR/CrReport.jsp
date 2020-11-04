@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>所有客服表單</title>
+
 <script type="text/javascript">
 
 	function deleteCrReport(pk){
@@ -65,6 +66,7 @@
 						<th width='120' align='center'>標題</th>
 						<th width='120' align='center'>內容</th>
 						<th width='100' align='center'>申請日期</th>
+						<th width='100' align='center' colspan='2'>功能</th>
 					</tr>
 				</thead>
 				<c:choose>
@@ -77,7 +79,7 @@
 						<c:forEach var='ser' items='${CrReport}'>
 							<tr>
 								<td align='right'>${ser.pk}</td>
-								<td align='left'>&nbsp;${ser.memberBean.name}</td>
+								<td align='left'>&nbsp;${ser.mbBean.name}</td>
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
 								<td align='center'>${ser.crContent}</td>

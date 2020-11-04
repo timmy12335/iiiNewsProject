@@ -8,6 +8,57 @@
 <head>
 <meta charset="UTF-8">
 <title>客服表單</title>
+<script>
+
+window.onload=function(){
+	updateCrReport= function (){
+	var pk = document.getElementById("pk").value;
+	var nameValue = document.getElementById("name").value;
+	var classValue = document.getElementById("crClass").value;
+	var titleValue = document.getElementById("crTitle").value;
+	var contentValue = document.getElementById("crContent").value;
+	var xhr2 = new XMLHttpRequest();
+	var divResult = document.getElementById('resultMsg');
+	var result=confirm("確定修改此筆客服表單?");
+	if(result){
+		xhr2.open("PATCH","<c:url value='/crReport/'/>"+pk,true);
+		var jsonReport = {
+				"pk": pk, 					
+				"name": nameValue, 	
+				"crClass": classValue,
+				"crTitle": titleValue,
+				"crContent": contentValue
+	   		}
+		xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+		xhr2.send(JSON.stringify(jsonReport));
+		xhr2.onreadystatechange=function(){
+		if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
+	      result = JSON.parse(xhr2.responseText);
+	      if (result.fail) {		    	  
+			 		divResult.innerHTML = "<font color='red' >"
+						+ result.fail + "</font>";
+		  		} else if (result.success) {
+						window.location.href="<c:url value='/customerReports'/>";
+		}
+	}
+	
+}
+
+}
+
+}
+
+	cancelCrReport=function (){
+	var result=confirm("取消修改客服表單?");
+	if(result){
+		window.location.href="<c:url value='/customerReports'/>";
+}
+}
+
+}
+</script>
+
+
 </head>
 <body>
 
@@ -20,49 +71,48 @@
 <hr>
 <div align='center'>
 <div id='resultMsg'></div>
-<form:form method="patch" modelAttribute="report" 
-        id="forms" enctype="multipart/form-data">
 <table border='1'>
-
 	<tr>
 		<td width='60' align='center' colspan="2">單號:No.${report.pk}
+		<input type='text' name='pk' id='pk' value="${report.pk}" hidden='true'/>
 		</td>
 		</tr>
 		<tr>
 		<td width='120' align='center' colspan="2">
-		申請人姓名:${report.memberBean.name}
+		<input type='text' name='name' id='name' value="${report.mbBean.name}" hidden='true'/>
+		申請人姓名:${report.mbBean.name}
 		</td>
 		</tr>
 		<tr>
 		<td width='120' align='center'>類別</td>
-		<td><form:select path='crClass' style='width:180px' value='${report.crClass}'>
-		<form:option value="帳號相關"></form:option>
-		<form:option value="交易相關"></form:option>
-		<form:option value="商品相關"></form:option>
-		<form:option value="申請合作"></form:option>
-		<form:option value="提議"></form:option>
-		<form:option value="其他"></form:option>
-		</form:select></td>
+		<td>
+		<select id='crClass' name='crClass' value='${report.crClass}'>
+		<option value="帳號相關">帳號相關</option>
+		<option value="交易相關">交易相關</option>
+		<option value="商品相關">商品相關</option>
+		<option value="申請合作">申請合作</option>
+		<option value="提議">提議</option>
+		<option value="其他">其他</option>
+		</select></td>
 		</tr>
 		<tr>
 		<td width='120' align='center'>標題</td>
 		<td>
-		<form:input type='text' path='crTitle' style='width:180px' value='${report.crTitle}'></form:input></td>
+		<input type='text' name='crTitle' id='crTitle' style='width:180px' value='${report.crTitle}'/></td>
 		</tr>
 		<tr>
 		<td width='120' align='center'>內容</td>
 		<td align='center'>
-		<form:textarea style='resize:none;width:180px;height:80px;' value='${report.crContent}' path='crContent'></form:textarea>
+		<textarea style='resize:none;width:180px;height:80px;' name='crContent' id='crContent'>${report.crContent}</textarea>
 		</td>
 		</tr>
 		<tr>
 		<td align='center' colspan='2'>
-		<input type="submit" value="確認修改"/>
-		<input type="button" id="btn_delete" value="取消修改" onclick="deleteCrReport()" />
+		<input type="button" id="btn_update" value="確認修改" onclick="updateCrReport();"/>
+		<input type="button" id="btn_cancel" value="取消修改" onclick="cancelCrReport();" />
 		</td>
 		</tr>
 </table>
-</form:form>
 					
 					
 </div>

@@ -29,7 +29,8 @@
 		</tr>
                 <tr>
                     <td>客服類別:</td>
-                    <td><form:select path="crClass" >
+                    <td>
+                    <form:select path="crClass" >
                     	<option>帳號相關</option>
                     	<option>交易相關</option>                    	
                     	<option>商品相關</option>
@@ -53,7 +54,7 @@
                        
            <tr><td colspan="2" align="center">
             <input type="submit" value="送出表單" /> 
-            <input type="button" value="重設"  onclick="confirmreset()"/>
+            <input type="reset" value="重設" />
             <input type="button" value="取消申請"  onclick="confirmreturn()"/></td></tr>
        
  </table>

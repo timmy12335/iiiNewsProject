@@ -3,13 +3,13 @@ package CR.dao;
 import java.util.List;
 
 import CR.model.CRBean;
-import franktest.model.MemberBean;
+import iiiNews.MB.model.MBBean;
 
 public interface CR_Dao {
 	
 	public List<CRBean> getRecord();
 
-	public MemberBean getMemberById(int memberId);
+	public MBBean getMemberById(int memberId);
 
 	void addReport(CRBean report);
 	
@@ -18,4 +18,6 @@ public interface CR_Dao {
 	void deleteReportByPk(int pk);
 	
 	void updateReport(CRBean cb);
+	
+	void evictReport(CRBean cb);
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "trkNews")
@@ -35,10 +42,20 @@ public class trkNewsBean implements Serializable {
 	private String filename;
 	private String type;
 	private Integer status;
+	private trkNewsBean trkNewsBean;
+	
+	@JsonIgnore
+	@Transient
+	private MultipartFile newsImage; 
+	
+	
+	@Transient
+//	private Integer reportId;
+	
+//	private rptNewsBean rptNewsBean;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "reportsBean")
-//	private ReportsBean reportsBean;
+	@OneToMany(mappedBy="trkNewsBean")
+	private Set<rptNewsBean> rpts = new LinkedHashSet<>();
 		
 	public trkNewsBean() {
 		
@@ -56,7 +73,9 @@ public class trkNewsBean implements Serializable {
 			           Blob coverimage, 
 			           String filename,
 			           String type, 
-			           int status) {
+			           int status,
+			           trkNewsBean trkNewsBean
+			           ) {
 		super();
 		this.trackId = trackId;
 		this.title = title;
@@ -71,6 +90,8 @@ public class trkNewsBean implements Serializable {
 		this.filename = filename;
 		this.type = type;
 		this.status = 1;
+		this.trkNewsBean = trkNewsBean;
+//		this.rptNewsBean = rptNewsBean;
 	}
 	public trkNewsBean(Integer trackId, 
 			           String title, 
@@ -101,8 +122,22 @@ public class trkNewsBean implements Serializable {
 		this.status = 1;
 	}
 	
+	public trkNewsBean getTrkNewsBean() {
+		return trkNewsBean;
+	}
+
+	public void setTrkNewsBean(trkNewsBean trkNewsBean) {
+		this.trkNewsBean = trkNewsBean;
+	}
 	
-	
+	public MultipartFile getNewsImage() {
+		return newsImage;
+	}
+
+	public void setNewsImage(MultipartFile newsImage) {
+		this.newsImage = newsImage;
+	}
+
 	public Integer getTrackId() {
 		return trackId;
 	}
@@ -207,12 +242,30 @@ public class trkNewsBean implements Serializable {
 		this.status = status;
 	}
 
-//	public ReportsBean getReportsBean() {
-//		return reportsBean;
+	public Set<rptNewsBean> getRpts() {
+		return rpts;
+	}
+
+	public void setRpts(Set<rptNewsBean> rpts) {
+		this.rpts = rpts;
+	}
+
+//	public rptNewsBean getRptNewsBean() {
+//		return rptNewsBean;
 //	}
 //
-//	public void setReportsBean(ReportsBean reportsBean) {
-//		this.reportsBean = reportsBean;
+//	public void setRptNewsBean(rptNewsBean rptNewsBean) {
+//		this.rptNewsBean = rptNewsBean;
 //	}
+//	public Integer getReportId() {
+//	return reportId;
+//}
+//
+//public void setReportId(Integer reportId) {
+//	this.reportId = reportId;
+//}
+	
+
+
 
 }

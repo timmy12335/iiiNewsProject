@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "rptNews")
@@ -35,11 +36,15 @@ public class rptNewsBean implements Serializable {
 	private String repfilename;
 	private String reptype;
 	private Integer repstatus;
+	@Transient
+	private Integer trackId;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "reportsBean")
-//	private ReportsBean reportsBean;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "trackId")
+	private  trkNewsBean trkNewsBean;
 		
+	
+
 	public rptNewsBean() {
 		
 	}
@@ -175,6 +180,22 @@ public class rptNewsBean implements Serializable {
 
 	public void setRepstatus(Integer repstatus) {
 		this.repstatus = repstatus;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public trkNewsBean getTrkNewsBean() {
+		return trkNewsBean;
+	}
+
+	public void setTrkNewsBean(trkNewsBean trkNewsBean) {
+		this.trkNewsBean = trkNewsBean;
 	}
 
 //	public rptNewsBean(Integer trackId, 

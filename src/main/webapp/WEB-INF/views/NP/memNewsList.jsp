@@ -41,6 +41,7 @@
 		<th width='500' align='center'>新聞內文</th>
 		<th width='100' align='center'>販賣計時</th>
 		<th width='50' align='center'>價格</th>	
+		<th width='100' align='center'>到期時間</th>	
 		<th></th>
 		<th></th>
 		</tr>
@@ -48,8 +49,9 @@
 		<td align='left'>${news.article}</td>
 		<td align='center'>${news.price}</td>
 		<td align='center'>${news.limitTime}</td>
+		<td align='center'>${news.futureTime}</td>
 		<td align='center'><a href="<c:url value='' />">修改</a></td>
-		<td align='center'><a href="<c:url value='' />">刪除</a></td>
+		<td align='center'><a href="<c:url value='/delSingleNews/${news.newsId}' />">刪除</a></td>
 		
 	</tr>		
 	</table>

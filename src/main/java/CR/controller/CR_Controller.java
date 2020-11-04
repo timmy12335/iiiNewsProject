@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,11 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRBean;
 import CR.service.CR_service;
+
 
 @Controller
 public class CR_Controller {
@@ -27,6 +30,22 @@ public class CR_Controller {
 	ServletContext ctx;
 	@Autowired
 	CR_service service;
+	@Autowired
+	JavaMailSender mailSender;
+	
+	@GetMapping("/sendmail")
+	public String email(Model model) {
+		return "CR/sendEmail";
+	}
+	
+	
+	@GetMapping("/CRindex")
+	public String showlist(Model model) {
+		
+		
+		return "CR/CRindex";		
+	}
+	
 	
 	@GetMapping("/customerReports")
 	public String list(Model model) {
@@ -51,7 +70,6 @@ public class CR_Controller {
 	
 	@PostMapping("/addReport")
 	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb) { 
-		
 		service.addReport(cb);
 	    return "redirect:/customerReports";
 	}
@@ -69,14 +87,34 @@ public class CR_Controller {
 		
 	}
 	
-	@PatchMapping("/crReport/{pk}")
-	public String updateReportByPk(@ModelAttribute("report") CRBean cb){
+	@PatchMapping(value="/crReport/{pk}",
+			consumes= {"application/json"}, produces= {"application/json"})
+	public @ResponseBody Map<String, String> updateReportByPk(
+			@RequestBody CRBean cb,@PathVariable Integer pk){
+		Map<String, String> map = new HashMap<>();	
+		CRBean cb0 = null;
+		if(pk != null) {
+			cb0 = service.getReportById(pk);
+			service.evictReport(cb0);
+		}
+		copyUnupdateField(cb0,cb);
+		try{
 			service.updateReport(cb);
-			return "redirect:/customerReports";
+			map.put("success","修改完成");
+		}catch(Exception e) {
+			map.put("fail","修改失敗");
+		}
+		return map;
 		}
 	
+	private void copyUnupdateField(CRBean cb0, CRBean cb) {
+		cb.setMemberId(cb0.getMemberId());
+		cb.setPk(cb0.getPk());
+		cb.setCrApplyDate(cb0.getCrApplyDate());
+		cb.setMbBean(cb0.getMbBean());
+	}	
 
-
+	
 	
 	
 }

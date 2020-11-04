@@ -12,7 +12,7 @@
 <nav>
 <jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 </nav>
-<div id="page" class="container" align="center">
+<div id="page" class="container" align="center" style="margin-top:100px;margin-bottom:100px">
     <h2 class="BoxTitle">廣告欄位置上傳</h2>
     <div>
     <form:form method="POST" modelAttribute="adBean">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="divstyle">
                     <label for="idPrice">價錢:</label>
-                    <form:input type="number" step="100" min="0" max="1000" id="idPrice" name="idPrice" size="20" path="price"
+                    <form:input type="number" min="0" id="idPrice" name="idPrice" size="20" path="price"
                          placeholder="請輸入價錢" value="${param.idPrice }" />
                      <font color="red" size="-1">${errorMsg.errorPriceEmpty} ${errorMsg.mPrice}</font>
                 </div>
@@ -57,8 +57,8 @@
                      <font color="red" size="-1">${errorMsg.errorPriceEmpty} ${errorMsg.mPrice}</font>
                 </div>
                 <div id="uploadPhoto" class="divstyle">
-                    <label for="">上傳照片:</label>
-                    <input type="file" id="idPhoto1" name="idPhoto1">
+                    <label for="">敘述:</label>
+                    <input type="text" id="" name="">
                 </div>
             </fieldset>
             <div class="sub">

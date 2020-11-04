@@ -6,20 +6,20 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name="NewsProducts")
+@Table(name="NP_NewsProducts")
 public class NewsBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -31,9 +31,12 @@ public class NewsBean implements Serializable{
 	private String companyId;
 	private String newsType;
 	private String title;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp uploadTime;
 	private String location;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone="Asia/Taipei")
 	private String happenTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Date happenDate;
 	
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
@@ -42,12 +45,20 @@ public class NewsBean implements Serializable{
 	private String article;
 	private String price;
 	private Time limitTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone="Asia/Taipei")
+	private Timestamp futureTime;
 	private Integer status;
+	@JsonIgnore
 	private String pic_One;
+	@JsonIgnore
 	private String pic_Two;
+	@JsonIgnore
 	private String pic_Three;
+	@JsonIgnore
 	private Blob img_I;
+	@JsonIgnore
 	private Blob img_II;
+	@JsonIgnore
 	private Blob img_III;
 	
 	@Transient
@@ -160,6 +171,13 @@ public class NewsBean implements Serializable{
 	public void setLimitTime(Time limitTime) {
 		this.limitTime = limitTime;
 	}
+	public Timestamp getFutureTime() {
+		return futureTime;
+	}
+	public void setFutureTime(Timestamp futureTime) {
+		this.futureTime = futureTime;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}

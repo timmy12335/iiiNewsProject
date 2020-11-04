@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import CR.dao.CR_Dao;
 import CR.model.CRBean;
 import CR.service.CR_service;
-import franktest.model.MemberBean;
+import iiiNews.MB.model.MBBean;
 
 @Service
 @Transactional
@@ -24,7 +24,7 @@ public class CR_service_impl implements CR_service {
 	}
 
 	@Override
-	public MemberBean getMemberById(int memberId) {
+	public MBBean getMemberById(int memberId) {
 		
 		return dao.getMemberById(memberId);
 	}
@@ -50,6 +50,12 @@ public class CR_service_impl implements CR_service {
 	@Override
 	public void updateReport(CRBean cb) {
 		dao.updateReport(cb);
+		
+	}
+
+	@Override
+	public void evictReport(CRBean cb) {
+		dao.evictReport(cb);
 		
 	}
 

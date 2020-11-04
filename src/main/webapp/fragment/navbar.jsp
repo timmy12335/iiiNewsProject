@@ -6,6 +6,8 @@
     <script src="${pageContext.request.contextPath}/jsmenu/nav_script.js"></script>
     <script src="${pageContext.request.contextPath}/jsmenu/nav_time_script.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/nav_styles.css">
+    <!-- <link rel="shortcut icon" href="favicon.ico" rel="external nofollow" type="image/x-icon" /> -->
+    <link href="${pageContext.request.contextPath}/image/favicon.ico" rel="icon" type="image/ico" />
 <meta charset="UTF-8">
  <div id='cssmenu'>
         <ul>
@@ -42,30 +44,35 @@
                         <ul>
                         
                             <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
+                            <li><a href="<c:url value='/changeStautsForTime'/>">所有新聞列表test</a></li>
+                            
                             
                         </ul>
                     </li>
                     
                 </ul>
             </li>
-            <li><a href='#'>客服中心</a>
+            <li><a href="<c:url value='/CRindex' />">客服中心</a>
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/chat' />">客服聊天</a></li>
+                    <li><a href="<c:url value='/sendmail' />">寄信</a></li>
                 </ul>
             </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>
                 <ul>
                  	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
                     <li><a href="<c:url value='/queryByType' />">分類追蹤</a></li>
+                    <li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>                    
                </ul>
             </li>
             <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
-<!--             	<ul> -->
-<%--                     <li><a href="<c:url value='/MtCreate' />">上傳頁面</a></li> --%>
+            	<ul>
+                    <li><a href="<c:url value='/getAllMtAdd' />">檢視使用者所有資料</a></li>
 <%--                     <li><a href="<c:url value='/000' />">看所有廣告列表</a></li> --%>
 <%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
-<!--                 </ul> -->
+                </ul>
             </li>
             <li><a href='#'>廣告專區</a>
             	<ul>
@@ -76,6 +83,7 @@
                             <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
                         </ul>
                     </li>
+                    <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
                     <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
                 </ul>
             </li>
@@ -85,6 +93,6 @@
                 </div>
             </li>
             <li><a href="#" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
-            <li><a href="#" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
+            <li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
         </ul>
     </div>

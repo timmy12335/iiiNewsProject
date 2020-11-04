@@ -7,6 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>上架廣告欄位</title>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script >
+window.onload = function(){
+		var btn = document.getElementById("clickme1");
+		var btn2 = document.getElementById("clickme2");
+		btn.onclick = function(){
+		A =  document.getElementById("Category")
+		A.value ="惡搞"
+		AA = document.getElementById("title")
+		AA.value = "今天吃什麼??"
+		article = document.getElementById("article")
+		article.value = "AAAAAAAAAAAAAAA"
+	}
+	</script>
 </head>
 <body>
 	<nav>
@@ -14,14 +28,15 @@
 	</nav>
 	<div id="page" class="container" align="center">
 		<h2 class="BoxTitle">廣告欄位置上傳</h2>
-		<div>
-			<form:form method="POST" modelAttribute="mtBean" enctype="multipart/form-data">
+		<div class="container-login100">>
+			<form:form method="POST" modelAttribute="mtBean"
+				enctype="multipart/form-data" onsubmit="return submitUserForm();">
 				<fieldset>
-					<div align="center">
-						<h2>新增影片</h2>
+					<div align="center" style="margin-top: 50px;">
+						<h1>新增影片</h1>
 						<hr>
 						<div class="st1">
-							<label for="" class="t1">類別:</label>
+							<label for="Category">類別:</label>
 							<form:select path="Category">
 								<form:option value="生活">生活</form:option>
 								<form:option value="趣味">趣味</form:option>
@@ -31,38 +46,67 @@
 							</form:select>
 						</div>
 						<div class="st1">
-							<label class="t1" for="title1">標題:</label>
-							<form:input type="text" id="title1" name="title1" path="title"
+							<label for="title">標題:</label>
+							<form:input type="text" id="title" name="title" path="title"
 								size="30" placeholder="今晚我想來點..." autocomplete="on" />
-							<font color="red" size="1">${errorMsg.title}</font>
+						</div>
+<!-- 						<div class="st1"> -->
+<!-- 							<label for="videoLink">影片連結:</label> -->
+<%-- 							<form:input type="text" id="videoLink" name="videoLink" path="videoLink" --%>
+<%-- 								size="30" placeholder="https://www.youtube.com/..." --%>
+<%-- 								autocomplete="off" /> --%>
+<%-- 							<font color="red" size="1">${errorMsg.link}</font> --%>
+<!-- 						</div> -->
+						<div class="st1">
+							<label for="Image">照片:</label>
+							<form:input type="file" id="Image" name="Image" path="Image" />
 						</div>
 						<div class="st1">
-							<label class="t1" for="link1">影片連結:</label>
-							<form:input type="text" id="link1" name="link1" path="videoLink"
-								size="30" placeholder="https://www.youtube.com/..."
-								autocomplete="off" />
-							<font color="red" size="1">${errorMsg.link}</font>
-						</div>
-						<!-- 					<div class="st1"> -->
-						<!-- 						<label class="t1" for="">照片:</label> -->
-						<%-- 						<form:input type="file" id="img1" name="img1" path="imgLink" /> --%>
-						<!-- 					</div> -->
-						<div class="st1">
-							<label class="t1" for="text1">內容:</label>
-							<form:textarea name="text1" id="cols1" cols="30" rows="10"
+							<label for="article">內容:</label>
+							<form:textarea name="article" id="article" cols="30" rows="10"
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
 						</div>
+					
+					<div id="grecaptcha" class="g-recaptcha"
+						data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB" style="padding:10px 70px "></div>
+					<div id="g-recaptcha-error"style="padding:10px 70px "></div>
+					
+					<br><br>				
+
+				<div class="login100-form-social flex-c-m">
+						<input type='button' class='btn btn-primary'  id='clickme1' value='Demo1' >
+						<span>&nbsp;&nbsp;</span>
+						<input type='button' class='btn btn-primary'  id='clickme2' value='Demo2' >
+						<span>&nbsp;&nbsp;</span>
 					</div>
-				</fieldset>
-				<div id="btn" align="center">
-					<input class="sub" type="submit" name="submit" id="submit" value="送出" /> 
+					</div>
+					<div id="btn" align="center" class="container-login100-form-btn">
+					<button class="login100-form-btn">送出</button>
+<!-- 					<input class="sub" type="submit" name="submit" id="submit" value="送出" /> -->
 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
 				</div>
+				</fieldset>
 			</form:form>
-
-
 		</div>
 		<br> <input type="button" value="one" onclick="onebuttontodata()">
 	</div>
+	
+	
+	<script>
+		function submitUserForm() {
+			var response = grecaptcha.getResponse();
+			if (response.length == 0) {
+				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>';
+				return false;
+			}
+			return true;
+		}
+		function verifyCaptcha() {
+			document.getElementById('g-recaptcha-error').innerHTML = '';
+		}
+}
+	</script>
+	
+	
 </body>
 </html>

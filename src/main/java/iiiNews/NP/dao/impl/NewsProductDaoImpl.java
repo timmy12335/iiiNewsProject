@@ -1,5 +1,6 @@
 package iiiNews.NP.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -15,7 +16,24 @@ import iiiNews.NP.model.NewsBean;
 public class NewsProductDaoImpl implements NewsProductDao {
 	@Autowired
 	SessionFactory factory;
+	Integer recordsPerPage = 5;
 	
+	@Override
+	public int getTotalPages() {
+		// 注意下一列敘述的每一個型態轉換
+		int totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
+
+		return totalPages;
+	}
+	
+	public long getRecordCounts() {
+		Long count = null; // 必須使用 long 型態		
+		String hql = "SELECT count(*) FROM NewsBean";
+		Session session = factory.getCurrentSession();		
+		count = (Long)session.createQuery(hql).getSingleResult();	
+		return count;
+	}
+
 	//新增一則新聞
 	@Override
 	public int uploadNewsForm(NewsBean nb) {
@@ -45,11 +63,25 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getAllNews() {
-		String hql = "FROM NewsBean ORDER BY uploadTime DESC";
+		String hql = "FROM NewsBean WHERE status = 1 ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		List<NewsBean> list = session.createQuery(hql).getResultList();	
 		return list;
 	}
+	
+	//確認時間是否超過今天 若超過將status改為0
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NewsBean> checkTime() {
+		Timestamp statusTime = new Timestamp(System.currentTimeMillis());
+		String hql = "UPDATE NewsBean set status=0 WHERE futureTime < :sTime"; 
+		String hql2 = "FROM NewsBean WHERE status = 1 ORDER BY uploadTime DESC";
+		Session session = factory.getCurrentSession();
+		session.createQuery(hql).setParameter("sTime", statusTime).executeUpdate();
+		List<NewsBean> list = session.createQuery(hql2).getResultList();	
+		return list;
+	}
+		
 	//抓單一筆新聞
 	@Override
 	public NewsBean getSingleNews(String newsId) {
@@ -63,7 +95,8 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getMemNews(String memberId) {
-		String hql = "FROM NewsBean WHERE memberId = :memId AND status = 1 ORDER BY uploadTime DESC";
+		String hql = "FROM NewsBean WHERE memberId = :memId "
+				+ "AND status = 1 ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		 List<NewsBean> list = session.createQuery(hql)
 				.setParameter("memId", memberId)
@@ -72,10 +105,29 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	}
 	//刪除單一新聞紀錄
 	@Override
-	public NewsBean delSingleNews(String newsId) {
-		String hql = "FROM NewsBean WHERE memberId = :memId ORDER BY uploadTime DESC";
-		return null;
+	public void updateStatus(String newsId, int status) {
+		String hql = "UPDATE NewsBean nb SET nb.status= :status "
+				+ "WHERE nb.newsId = :id";
+		Session session = factory.getCurrentSession();
+		session.createQuery(hql).setParameter("status", status)
+				.setParameter("id", newsId).executeUpdate();
 	}
+	//修改單則新聞
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NewsBean> getPageNews(Integer pageNo) {
+		int startRecordNo = (pageNo - 1) * recordsPerPage;
+		String hql = "FROM NewsBean";
+		Session session = factory.getCurrentSession();
+		List<NewsBean> list = session.createQuery(hql)
+								.setMaxResults(recordsPerPage)
+								.setFirstResult(startRecordNo)
+								.getResultList();
+		return list;
+	}
+
+	
 
 	
 

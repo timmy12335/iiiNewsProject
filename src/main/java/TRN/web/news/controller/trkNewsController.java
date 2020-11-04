@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import TRN.web.news.model.trkNewsBean;
 import TRN.web.news.service.trkNewsService;
@@ -58,7 +59,7 @@ public class trkNewsController {
 	public String gettypeList(Model model) {
 		List<String>  list = service.getAlltypes();
 		model.addAttribute("typeList", list);
-		return "types/type";
+		return "TRN/type";
 	}
 
 	@RequestMapping("/trkNews/{type}")      //分類查詢 show 單個分類所有新聞 
@@ -83,14 +84,42 @@ public class trkNewsController {
 	public String getAddNewsForm(Model model) {
 		trkNewsBean tb = new trkNewsBean();      //取得新增產品表單欄位表格
 	    model.addAttribute("trkNewsBean", tb); 
-	    return "addtrkNew";
+	    return "TRN/addtrkNew";
 }
 	@RequestMapping(value = "/trknews/add", method = RequestMethod.POST)  //新增追蹤新聞
 	public String processAddNewsForm(@ModelAttribute("trkNewsBean") trkNewsBean tb) { 
 		//if (tb.getStock() ==null) {                      //原是判斷庫存
 		//	tb.setStock(0);
 		//}
-	    service.addtrkNews(tb);                         
+		
+		MultipartFile newsImage = tb.getNewsImage();              //新增上傳圖片
+		String originalFilename =newsImage.getOriginalFilename();               //
+		tb.setFilename(originalFilename);                                          //
+		//  建立Blob物件，交由 Hibernate 寫入資料庫                                                                                                            //
+		if (newsImage != null && !newsImage.isEmpty() ) {                  //
+			try {
+				byte[] b = newsImage.getBytes();                             //
+				Blob blob = new SerialBlob(b);                                  // 
+				tb.setCoverimage(blob);                                         //
+			} catch(Exception e) {                                             //
+				e.printStackTrace();                                          //
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());    //
+			}                                                                    //
+		}                                                           //新增上傳圖片
+		
+	    service.addtrkNews(tb);      
+	    
+	    String ext = originalFilename.substring(originalFilename.lastIndexOf("."));   //新增上傳圖片
+		String rootDirectory = context.getRealPath("/");                             //
+		try {                                                                       //
+			File imageFolder = new File(rootDirectory, "images");                   //
+			if (!imageFolder.exists()) imageFolder.mkdirs();                        //
+			File file = new File(imageFolder, tb.getTrackId() + ext);                //
+			newsImage.transferTo(file);                                          //
+		} catch(Exception e) {                                                      //
+			e.printStackTrace();                                                    //
+			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());           //
+		}               
 	    return "redirect:/trkNews";	   //不用加檔案外的資料夾
 	}
 	@RequestMapping(value = "/trknews/delete", method = RequestMethod.POST)  //刪除追蹤新聞

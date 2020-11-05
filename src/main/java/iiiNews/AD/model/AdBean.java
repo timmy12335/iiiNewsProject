@@ -31,6 +31,8 @@ public class AdBean implements Serializable {
 	private Integer price;			//價格（單價）
 	private Integer stock;			//庫存量
 	
+
+	private Integer status;			//上架狀態
 	
 	//$$$$ 要留一個外鍵欄位>>定義一個儲存一方的實例變數
 	//商品項目是多方
@@ -134,6 +136,14 @@ public class AdBean implements Serializable {
 
 	public void setStock(Integer stock) {
 		this.stock = stock;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 	

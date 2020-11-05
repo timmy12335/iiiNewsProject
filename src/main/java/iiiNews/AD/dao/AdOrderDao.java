@@ -2,6 +2,7 @@ package iiiNews.AD.dao;
 
 import java.util.List;
 
+import iiiNews.AD.model.AdBean;
 import iiiNews.AD.model.AdOrderBean;
 
 public interface AdOrderDao {
@@ -11,4 +12,6 @@ public interface AdOrderDao {
 	public AdOrderBean getLastRecord();
 	
 	public int saveOrders(AdOrderBean aob);
+	
+	public int changeQuantity(AdBean ab);
 }

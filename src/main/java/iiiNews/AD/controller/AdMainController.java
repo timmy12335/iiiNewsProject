@@ -46,10 +46,10 @@ public class AdMainController {
 		
 		//純粹是為了給初始值 可以不寫
 //		bean.setAdNo("AD20201024");
-		bean.setWidth(600.0);
-		bean.setHeight(200.0);
-		bean.setPrice(1000);
-		bean.setStock(10);
+//		bean.setWidth(600.0);
+//		bean.setHeight(200.0);
+//		bean.setPrice(1000);
+//		bean.setStock(10);
 		
 		model.addAttribute("adBean",bean);
 		return "AD/uploadAds";
@@ -67,53 +67,29 @@ public class AdMainController {
 		Map<String, String> msg = new HashMap<>();
 		
 		//$$$$ 取得會員編號>>會員編號先寫死 未來再改
+//		MBBean mb = (MBBean) model.getAttribute("Login_PK");
+//		String memberId = mb.getMemberId();
 		bean.setMemberId("tina");
 		
 		//取得上傳時間
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
 		bean.setUploadDate(uploadDate);
 		
-		/*處理廣告編號問題
-		 * 編號命名方式 AD+日期+編號 AD2020102500001
-		 * 取得最後一筆編號資料進行判斷
-		 * 如果不是今天日期 代表今天沒資料 則是今天日期然後編號是00001
-		 * 如果有今天日期 則後面數字加一*/
-		
-		String noStr = null;
-		java.util.Date dnow = new java.util.Date();
-		//取得最後一筆的編號資料
-		AdBean lastRecord = service.getLastRecord();
-		String lastRecordNo = null;
-		String lastRecordNoDate = null;
-		//設定時間格式	取得現在時間	將時間轉成想要的格式並設為Date型態以供比對
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
-		
-		if(lastRecord == null) {
-			noStr = "AD"+ft.format(dnow)+"00001";
-		}else {
-			lastRecordNo = lastRecord.getAdNo();
-			lastRecordNoDate = lastRecordNo.substring(2,10);
-			
-			noStr = "AD"+ft.format(dnow);
-			
-			//用字串的方式進行比較
-			if(ft.format(dnow).equals(lastRecordNoDate)) {
-				noStr += String.format("%05d",(Integer.parseInt(lastRecordNo.substring(10))+1));
-			}else {
-				noStr = "AD"+ft.format(dnow)+"00001";
-			}
-			System.out.println(noStr);
-			
-		}
+//		/*處理廣告編號問題
+//		 * 編號命名方式 AD+日期+編號 AD2020102500001
+//		 * 取得最後一筆編號資料進行判斷*/
+		String noStr = service.createAdNo();
 		bean.setAdNo(noStr);
 		
+		//預先設定上架狀態 1為上架
+		bean.setStatus(1);
 		
 		int n = service.saveAds(bean);
 		System.out.println("成功筆數："+n);
 		
 		//####優化 這裡要處理好傳送到前端的資訊的問題 要再想一下
-		msg.put("addStatus", "新增成功筆數："+n);
-		model.mergeAttributes(msg);
+		msg.put("addStatus", "上架廣告成功，已新增： "+n+" 筆");
+		model.addAttribute("processMsg", msg);
 		System.out.println(msg);
 		return "redirect:/getAllAds";
 	}
@@ -124,10 +100,10 @@ public class AdMainController {
 	public String getAllAdsList(Model model){
 		List<AdBean> list = service.getAllAds();
 		model.addAttribute("adLists",list);
-		return "AD/allAdsList";
+		return "AD/adlist/allAdsList";
 	}
 	
-	//$$$$ 根據會員資料(編號)取得該會員所有廣告列表
+	//$$$$ 根據企業會員資料(編號)取得該會員所有廣告列表
 	@GetMapping("/memberAllAdsList")
 	public String getMemberAdList(@PathVariable String cpmemberId,Model model){
 //		List<AdBean> list = service.getAllAds();

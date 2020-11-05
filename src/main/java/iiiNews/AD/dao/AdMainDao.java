@@ -4,6 +4,7 @@ import java.util.List;
 
 import iiiNews.AD.model.AdBean;
 import iiiNews.AD.model.AdOrderBean;
+import iiiNews.NP.model.NewsBean;
 
 public interface AdMainDao {
 
@@ -20,4 +21,9 @@ public interface AdMainDao {
 	public int deleteAdByMemberPkid(int pkId);
 	
 	public AdBean getOneAdByadPk(int adPk);
+	
+	//ajax
+	public List<AdBean> getPageAds(Integer pageNo);
+	public int getTotalPageCount();
+	public List<AdBean> getAdByCateNoAjax(String CateNo);
 }

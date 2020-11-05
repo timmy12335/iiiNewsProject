@@ -33,7 +33,7 @@ public class MBBean implements Serializable {
 	String identityId;   //身分證
 	Date birthday;
 	Integer mbpoints;   //會員點數
-	Blob sex;
+	String sex;
 //	Blob mbImage;
 //	Timestamp uploadTime2;
 	MultipartFile[] memberImage;
@@ -45,7 +45,7 @@ public class MBBean implements Serializable {
 		this.pkey = pkey;
 	}
 
-	public MBBean(Integer pkey, String memberId, String name, String password, String okpassword, String email, Blob sex,
+	public MBBean(Integer pkey, String memberId, String name, String password, String okpassword, String email, String sex,
 			String phone, String identityId, Date birthday, Integer mbpoints) {
 
 		super();
@@ -201,11 +201,11 @@ public class MBBean implements Serializable {
 //		this.uploadTime2 = uploadTime2;
 //	}
 	
-	public Blob getSex() {
+	public String getSex() {
 	      return sex;
 	  }
 
-	  public void setSex(Blob sex) {
+	  public void setSex(String sex) {
 	      this.sex = sex;
 	  }
 }

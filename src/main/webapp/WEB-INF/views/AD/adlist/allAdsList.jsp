@@ -5,7 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>所有廣告列表</title>
+<title>所有廣告列表(同步)</title>
+<style>
+	.cartBtn {
+	  background-color: #0066CC; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 5px 10px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	}
+</style>
 </head>
 <body>
 <nav>
@@ -13,10 +25,10 @@
 </nav>
 
 	<div align="center" style="margin-top:100px;">
-		<h2>所有廣告列表</h2>
+		<h2>所有廣告列表(同步)</h2>
 		<a href="<c:url value='/' />">回首頁</a>
 	</div>
-	<span>${msgMap.addStatus}</span>
+	<span>${processMsg}</span>
 	<hr>
 	<div align="center">
 		<table border="1">
@@ -47,7 +59,7 @@
 					<form action='<c:url value="/addProductToCart" />' method="POST">
 						<input type="hidden" name="quantity" value="1">
 						<input type="hidden" name="adPk" value="${ad.adPk}">
-						<input type="submit" value="加入購物車" />
+						<input type="submit" class="cartBtn" value="加入購物車" />
 					</form>
 					<a href="<c:url value="/deleteAdProduct/${ad.adPk}" />">刪除</a>
 				</td>

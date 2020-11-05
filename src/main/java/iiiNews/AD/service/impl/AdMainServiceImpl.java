@@ -117,6 +117,12 @@ public class AdMainServiceImpl implements AdMainService {
 		return adMaindao.getTotalPageCount();
 	}
 
+	@Override
+	@Transactional
+	public List<AdBean> getAdByCateNoAjax(String CateNo) {
+		return adMaindao.getAdByCateNoAjax(CateNo);
+	}
+
 	
 
 }

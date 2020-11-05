@@ -10,19 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 window.onload=function(){
-// 	$("#productImage").on('change', function(e){
-// 		console.log("OMG");
-// 		  const file = this.files[0];//將上傳檔案轉換為base64字串
-		      
-// 		  const fr = new FileReader();//建立FileReader物件
-// 		  fr.onload = function (e) {
-// 		    $("#preview_progressbarTW_img").attr('src', e.target.result);//读取的结果放入圖片
-// 		  };
-		      
-// 		  // 使用 readAsDataURL 將圖片轉成 Base64
-// 		  fr.readAsDataURL(file);
-// 		});
-	
 
 	$("#productImage").change(function(){
 		console.log("hello");
@@ -35,11 +22,18 @@ window.onload=function(){
 		if(input.files && input.files[0]){
 			var reader = new FileReader();
 			reader.onload = function (e) {
-		 	  $("#preview_progressbarTW_img").attr('src', e.target.result);
+		 	  $("#preview_img").attr('src', e.target.result);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+	
+	var yourImg = document.getElementById('preview_img');
+	if(yourImg && yourImg.style) {
+	    yourImg.style.height = ${oneItem.height}+'px';
+	    yourImg.style.width = ${oneItem.width}+'px';
+	}
+	
 }
 </script>
 </head>
@@ -47,9 +41,9 @@ window.onload=function(){
 <nav>
 <jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 </nav>
-
 	<div align="center" style="margin-top:100px;">
-		<h2>商品內容</h2>
+		<h2>商品內容 </h2>
+		<h2>編號：${oneItem.adNo} </h2>
 		<a href="<c:url value='/' />">回首頁</a>
 	</div>
 	<span>${msgMap.addStatus}</span>
@@ -67,7 +61,13 @@ window.onload=function(){
 				<td>${oneItem.adNo}</td>
 				<td>${oneItem.sellerMemberId}</td>
 				<td>${oneItem.adDate}</td>
-				<td>${oneItem.categoryNo}</td>
+				<td id="cate">
+					<c:if test="${oneItem.categoryNo == 100}">頭版頭</c:if>
+					<c:if test="${oneItem.categoryNo == 200}">頭版側標</c:if>
+					<c:if test="${oneItem.categoryNo == 300}">內頁版頭</c:if>
+					<c:if test="${oneItem.categoryNo == 400}">內頁側標</c:if>
+					<c:if test="${oneItem.categoryNo == 500}">小廣告</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td>寬</td>
@@ -85,23 +85,32 @@ window.onload=function(){
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td colspan="1">
 					PK :${oneItem.itemPk}
-					<img style="width:300px;height:200px;" id="preview_progressbarTW_img2" src="#" />
+<%-- 					<img style="width:300px;height:200px;" id="preview_img" src="<c:url value='/getPicture/${oneItem.itemPk}' />" /> --%>
 				</td>
-				<td colspan="2">
-					<img style="width:300px;height:200px;" id="preview_progressbarTW_img" src="<c:url value='/getPicture/${oneItem.itemPk}' />" />
+				<td colspan="3">
+					<img style="width:300px;height:200px;" id="preview_img" src="<c:url value='/getPicture/${oneItem.itemPk}' />" />
 					<span id="imgspan"></span>
 				</td>
 			</tr>
 			<tr>
 				<td  colspan="4">
 					<input type="submit" name="submit" id="submit" value="送出">
-					<a href="<c:url value='/downloadPicture/${oneItem.itemPk}' />">下載圖片</a>
+					<c:if test="${!empty oneItem.adImageName}">
+						<a href="<c:url value='/downloadPicture/${oneItem.itemPk}' />">下載圖片</a>
+					</c:if>
 				</td>
 			</tr>
 		</table>
 	</form:form>
 	</div>
+	<script>
+// 	var yourImg = document.getElementById('preview_img');
+// 	if(yourImg && yourImg.style) {
+// 	    yourImg.style.height = ${oneItem.height}+'px';
+// 	    yourImg.style.width = ${oneItem.width}+'px';
+// 	}
+	</script>
 </body>
 </html>

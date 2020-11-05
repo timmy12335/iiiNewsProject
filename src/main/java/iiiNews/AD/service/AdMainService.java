@@ -8,6 +8,8 @@ public interface AdMainService {
 	
 	public int saveAds(AdBean ab);
 	
+	public String createAdNo();
+	
 	public List<AdBean> getAllAds();
 	
 	public AdBean getLastRecord() ;
@@ -18,4 +20,8 @@ public interface AdMainService {
 	public int deleteAdByMemberPkid(int pkId);
 	
 	public AdBean getOneAdByadPk(int adPk);
+	
+	//ajax
+	public List<AdBean> getPageAds(Integer pageNo);
+	public int getTotalPageCount();
 }

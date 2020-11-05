@@ -20,17 +20,34 @@
 	<hr>
 	<div align="center">
 		<table border="1">
-			<tr><td>產品編號</td><td>上傳日期</td><td>發布者</td><td>分類</td><td>寬</td><td>高</td><td>日期</td><td>單價</td><td>庫存</td><td>設定</td></tr>
+			<tr>
+				<td>產品編號</td>
+				<td>上傳日期</td>
+				<td>發布者</td>
+				<td>分類</td>
+				<td>寬</td>
+				<td>高</td>
+				<td>日期</td>
+				<td>單價</td>
+				<td>庫存</td>
+				<td>設定</td>
+			</tr>
 			<c:forEach var="ad" items="${adLists}">
 				<tr>
-				<td>${ad.adNo}</td><td>${ad.uploadDate}</td><td>${ad.memberId}</td><td>${ad.categoryNo}</td>
-				<td>${ad.width}</td><td>${ad.height}</td><td>${ad.adDate}</td><td>${ad.price}</td><td>${ad.stock}</td>
+					<td>${ad.adNo}</td>
+					<td>${ad.uploadDate}</td>
+					<td>${ad.memberId}</td>
+					<td>${ad.categoryNo}</td>
+					<td>${ad.width}</td>
+					<td>${ad.height}</td>
+					<td>${ad.adDate}</td>
+					<td>${ad.price}</td>
+					<td>${ad.stock}</td>
 				<td>
-<!-- 					<form action="#" method="POST"> -->
 					<form action='<c:url value="/addProductToCart" />' method="POST">
-					<input type="hidden" name="quantity" value="1">
-					<input type="hidden" name="adPk" value="${ad.adPk}">
-					<input type="submit" value="加入購物車按鈕" />
+						<input type="hidden" name="quantity" value="1">
+						<input type="hidden" name="adPk" value="${ad.adPk}">
+						<input type="submit" value="加入購物車" />
 					</form>
 					<a href="<c:url value="/deleteAdProduct/${ad.adPk}" />">刪除</a>
 				</td>
@@ -38,10 +55,5 @@
 			</c:forEach>
 		</table>
 	</div>
-	
-	
-	
-	
-	
 </body>
 </html>

@@ -1,7 +1,9 @@
 package iiiNews.AD.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -123,15 +125,28 @@ public class AdBuyingController {
 		Set<AdOrderItemBean> itemBeanSet = new LinkedHashSet<AdOrderItemBean>();
 		Map<Integer, AdOrderItemBean> cartItem = cart.getContent();
 		Set<Integer> items = cartItem.keySet();
+		//
+		List<Integer> adpkList = new ArrayList<>();
 		for(int n : items) {
 			AdOrderItemBean aoib = cartItem.get(n);
 			aoib.setAdOrderBean(aob);
 			itemBeanSet.add(aoib);
+			//
+			adpkList.add(aoib.getAdPk());
 		}
 		aob.setItems(itemBeanSet);
 		
 		int n = adOrderService.saveOrders(aob);
 		
+		if(n == 1) {
+			for(int pk : adpkList) {
+				AdBean bean = adMainService.getOneAdByadPk(pk);
+				bean.setStock(bean.getStock()-1);
+				adOrderService.changeQuantity(bean);
+			}
+			
+			
+		}
 		//印在console檢查用
 		System.out.println("訂單新增"+n+"筆");
 		System.out.println("======完成======");

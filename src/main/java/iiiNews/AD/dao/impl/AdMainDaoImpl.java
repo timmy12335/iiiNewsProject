@@ -18,6 +18,8 @@ public class AdMainDaoImpl implements AdMainDao {
 	@Autowired
 	SessionFactory factory;
 	
+	Integer recordsPerPage = 5;
+	
 	public AdMainDaoImpl() {
 	}
 
@@ -39,7 +41,7 @@ public class AdMainDaoImpl implements AdMainDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<AdBean> getAllAds() {
-		String hql = "FROM AdBean WHERE stock > 0";
+		String hql = "FROM AdBean WHERE stock > 0 AND status = 1";
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql).getResultList();
 		return list;
@@ -113,6 +115,39 @@ public class AdMainDaoImpl implements AdMainDao {
 		Session session = factory.getCurrentSession();
 		AdBean ab = session.get(AdBean.class, adPk);
 		return ab;
+	}
+
+	
+	//ajax
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<AdBean> getPageAds(Integer pageNo) {
+		
+		
+		int startRecordNo = (pageNo - 1) * recordsPerPage;
+		String hql = "FROM AdBean WHERE stock > 0 AND status = 1";
+		Session session = factory.getCurrentSession();
+		List<AdBean> list = session.createQuery(hql)
+						.setMaxResults(recordsPerPage)
+						.setFirstResult(startRecordNo)
+						.getResultList();
+		return list;
+	}
+
+
+	@Override
+	public int getTotalPageCount() {
+		// 注意下一列敘述的每一個型態轉換
+		int totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
+		return totalPages;
+	}
+
+	public long getRecordCounts() {
+		Long count = null; // 必須使用 long 型態		
+		String hql = "SELECT count(*) FROM AdBean";
+		Session session = factory.getCurrentSession();		
+		count = (Long)session.createQuery(hql).getSingleResult();	
+		return count;
 	}
 	
 	

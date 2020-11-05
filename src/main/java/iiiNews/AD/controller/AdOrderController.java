@@ -92,12 +92,9 @@ public class AdOrderController {
 		System.out.println("productImage:-->" +productImage);
 		//拿它原來的檔名取出來放到我們一個叫做FileName欄位
 		String originalFilename = productImage.getOriginalFilename();
-//		oneItemBean.setAdImageName(originalFilename);
-		
 		
 		AdOrderItemBean originBean = itemService.getOneItems(itemPk);
 		originBean.setAdImageName(originalFilename);
-		
 		
 		/* 建立Blob物件，交由 Hibernate 寫入資料庫 要有圖片欄位 且圖片位元組(不為空)
 		 * 得到byte[] 建一個Blob物件要用實作介面的類別SerialBlob

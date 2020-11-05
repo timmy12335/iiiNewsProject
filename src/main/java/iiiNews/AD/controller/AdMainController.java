@@ -73,40 +73,43 @@ public class AdMainController {
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
 		bean.setUploadDate(uploadDate);
 		
-		/*處理廣告編號問題
-		 * 編號命名方式 AD+日期+編號 AD2020102500001
-		 * 取得最後一筆編號資料進行判斷
-		 * 如果不是今天日期 代表今天沒資料 則是今天日期然後編號是00001
-		 * 如果有今天日期 則後面數字加一*/
-		
-		String noStr = null;
-		java.util.Date dnow = new java.util.Date();
-		//取得最後一筆的編號資料
-		AdBean lastRecord = service.getLastRecord();
-		String lastRecordNo = null;
-		String lastRecordNoDate = null;
-		//設定時間格式	取得現在時間	將時間轉成想要的格式並設為Date型態以供比對
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
-		
-		if(lastRecord == null) {
-			noStr = "AD"+ft.format(dnow)+"00001";
-		}else {
-			lastRecordNo = lastRecord.getAdNo();
-			lastRecordNoDate = lastRecordNo.substring(2,10);
-			
-			noStr = "AD"+ft.format(dnow);
-			
-			//用字串的方式進行比較
-			if(ft.format(dnow).equals(lastRecordNoDate)) {
-				noStr += String.format("%05d",(Integer.parseInt(lastRecordNo.substring(10))+1));
-			}else {
-				noStr = "AD"+ft.format(dnow)+"00001";
-			}
-			System.out.println(noStr);
-			
-		}
+//		/*處理廣告編號問題
+//		 * 編號命名方式 AD+日期+編號 AD2020102500001
+//		 * 取得最後一筆編號資料進行判斷
+//		 * 如果不是今天日期 代表今天沒資料 則是今天日期然後編號是00001
+//		 * 如果有今天日期 則後面數字加一*/
+//		
+//		String noStr = null;
+//		java.util.Date dnow = new java.util.Date();
+//		//取得最後一筆的編號資料
+//		AdBean lastRecord = service.getLastRecord();
+//		String lastRecordNo = null;
+//		String lastRecordNoDate = null;
+//		//設定時間格式	取得現在時間	將時間轉成想要的格式並設為Date型態以供比對
+//		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
+//		
+//		if(lastRecord == null) {
+//			noStr = "AD"+ft.format(dnow)+"00001";
+//		}else {
+//			lastRecordNo = lastRecord.getAdNo();
+//			lastRecordNoDate = lastRecordNo.substring(2,10);
+//			
+//			noStr = "AD"+ft.format(dnow);
+//			
+//			//用字串的方式進行比較
+//			if(ft.format(dnow).equals(lastRecordNoDate)) {
+//				noStr += String.format("%05d",(Integer.parseInt(lastRecordNo.substring(10))+1));
+//			}else {
+//				noStr = "AD"+ft.format(dnow)+"00001";
+//			}
+//			System.out.println(noStr);
+//			
+//		}
+		String noStr = service.createAdNo();
 		bean.setAdNo(noStr);
 		
+		//預先設定上架狀態
+		bean.setStatus(1);
 		
 		int n = service.saveAds(bean);
 		System.out.println("成功筆數："+n);

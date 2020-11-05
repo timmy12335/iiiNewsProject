@@ -82,6 +82,7 @@
                     </li>
                     <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
                     <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
+                    <li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
                 </ul>
             </li>
             <li>

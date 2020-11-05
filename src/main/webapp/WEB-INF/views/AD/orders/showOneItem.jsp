@@ -7,6 +7,41 @@
 <head>
 <meta charset="UTF-8">
 <title>商品內容</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+// 	$("#productImage").on('change', function(e){
+// 		console.log("OMG");
+// 		  const file = this.files[0];//將上傳檔案轉換為base64字串
+		      
+// 		  const fr = new FileReader();//建立FileReader物件
+// 		  fr.onload = function (e) {
+// 		    $("#preview_progressbarTW_img").attr('src', e.target.result);//读取的结果放入圖片
+// 		  };
+		      
+// 		  // 使用 readAsDataURL 將圖片轉成 Base64
+// 		  fr.readAsDataURL(file);
+// 		});
+	
+
+	$("#productImage").change(function(){
+		console.log("hello");
+		readURL(this);// this代表<input id="imgInput">
+		let context = "<br>預覽中，送出後才儲存";
+		$("#imgspan")[0].innerHTML = context;
+ 	});
+	
+	function readURL(input){
+		if(input.files && input.files[0]){
+			var reader = new FileReader();
+			reader.onload = function (e) {
+		 	  $("#preview_progressbarTW_img").attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+}
+</script>
 </head>
 <body>
 <nav>
@@ -22,31 +57,49 @@
 	<div align="center">
 	<form:form method="POST" modelAttribute="oneItem" enctype="multipart/form-data">
 		<table border="1">
-			<tr><td>廣告編號</td><td>賣家</td><td>廣告日期</td><td>欄位分類</td></tr>
 			<tr>
-				<td>${oneItem.adNo}</td><td>${oneItem.sellerMemberId}</td><td>${oneItem.adDate}</td><td>${oneItem.categoryNo}</td>
-				</tr>
-			<tr><td>寬</td><td>高</td><td>單價</td><td>設定</td></tr>
-				<tr>
-				<td>${oneItem.width}</td><td>${oneItem.height}</td>
+				<td>廣告編號</td>
+				<td>賣家</td>
+				<td>廣告日期</td>
+				<td>欄位分類</td>
+			</tr>
+			<tr>
+				<td>${oneItem.adNo}</td>
+				<td>${oneItem.sellerMemberId}</td>
+				<td>${oneItem.adDate}</td>
+				<td>${oneItem.categoryNo}</td>
+			</tr>
+			<tr>
+				<td>寬</td>
+				<td>高</td>
+				<td>單價</td>
+				<td>設定</td>
+			</tr>
+			<tr>
+				<td>${oneItem.width}</td>
+				<td>${oneItem.height}</td>
 				<td>${oneItem.unitPrice}</td>
 				<td>
-                    <label for="">上傳照片:</label>
+                    <label>上傳照片:</label>
                     <input type="file" id="productImage" name="productImage">
-<%--                     <a href="<c:url value="#" />" onclick="return confirm('Are you sure?')">上傳圖片</a> --%>
 				</td>
-				</tr>
-				<tr>
-				<td>PK :${oneItem.itemPk}</td>
-				<td colspan="3"><img style="width:300px;height:200px;" src="<c:url value='/getPicture/${oneItem.itemPk}' />" /></td>
-				</tr>
-				<tr>
+			</tr>
+			<tr>
+				<td colspan="2">
+					PK :${oneItem.itemPk}
+					<img style="width:300px;height:200px;" id="preview_progressbarTW_img2" src="#" />
+				</td>
+				<td colspan="2">
+					<img style="width:300px;height:200px;" id="preview_progressbarTW_img" src="<c:url value='/getPicture/${oneItem.itemPk}' />" />
+					<span id="imgspan"></span>
+				</td>
+			</tr>
+			<tr>
 				<td  colspan="4">
-				<input type="submit" name="submit" id="submit" value="送出">
-				<input type="button" name="getPic" id="getPic" value="下載圖片" onclick="${pageContext.request.contextPath}/downloadPicture/${oneItem.itemPk}">
-				<a href="<c:url value='/downloadPicture/${oneItem.itemPk}' />">hello</a>
+					<input type="submit" name="submit" id="submit" value="送出">
+					<a href="<c:url value='/downloadPicture/${oneItem.itemPk}' />">下載圖片</a>
 				</td>
-				</tr>
+			</tr>
 		</table>
 	</form:form>
 	</div>

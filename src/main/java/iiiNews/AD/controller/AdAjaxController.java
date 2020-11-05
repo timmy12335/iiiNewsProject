@@ -28,7 +28,7 @@ public class AdAjaxController {
 	public String getajax() {
 		return "AD/ShowAdsByPageAjax";
 	}
-	
+
 	
 	@GetMapping("/pagingAdsData.json")
 	public @ResponseBody List<AdBean> getAdPage(
@@ -49,6 +49,23 @@ public class AdAjaxController {
 		return map;
 	
 	}
+	
+	
+	//****************************************
+	
+	@GetMapping("/getAjaxListSearch")
+	public String getajax2() {
+		return "AD/ShowAdsByPageAjaxSearch";
+	}
+	
+	@GetMapping("/getAdByCateNoAjax.json")
+	public @ResponseBody List<AdBean> getAdByCateNoAjax(
+			@RequestParam(value="cateNo",defaultValue = "100" )String cateNo) {
+		System.out.println(cateNo);
+		List<AdBean> list =  service.getAdByCateNoAjax(cateNo);
+		return list;		
+	}
+	
 	
 	
 }

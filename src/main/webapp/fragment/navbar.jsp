@@ -76,16 +76,32 @@
             </li>
             <li><a href='#'>廣告專區</a>
             	<ul>
-                    <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
-                    <li><a href="#">看所有廣告列表</a>
+            		<li><a href="<c:url value='/getAjaxListSearch' />">Ajax搜尋測試</a></li>
+            		<li><a href="#">企業會員功能</a>
                     	<ul>
-                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
-                            <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
+                            <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
+                            <li><a href="<c:url value='#' />">查詢所上架的商品##</a></li>
+                            <li><a href="<c:url value='#' />">查詢所賣出的商品(下載圖片)##</a></li>
                         </ul>
                     </li>
-                    <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
-                    <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
-                    <li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
+                    <li><a href="#">一般會員功能</a>
+                    	<ul>
+                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
+                            <li><a href="<c:url value='/getAjaxList' />">看所有廣告列表-Ajax</a></li>
+                            <li><a href="<c:url value='/getOrderListByMemberId' />">查看一般會員訂單</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="<c:url value='/ShowCartContent' />">購物車</a></li>
+					<li><a href="#">ALL & OLD</a>
+                    	<ul>
+                    		<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
+                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
+                            <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
+                            <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
+		                    <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
+		                    <li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>

@@ -6,12 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>分頁廣告列表</title>
+<style>
+	.cartBtn {
+	  background-color: #0066CC; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 5px 10px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	}
+</style>
 <script>
 window.onload=function(){
-
+	var cateName = "";
 	var pageNo = 0;
 	var totalPage  = 0;
-	//本網頁一開始時先向後端發出非同步請求：/ch04/_07/pagingBookData.json，要求第一頁 
+	//本網頁一開始時先向後端發出非同步請求，要求第一頁內容與頁數資訊
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "<c:url value='/pagingAdsData.json' />", true);
 	xhr.send();
@@ -47,7 +59,7 @@ window.onload=function(){
 		    	no = totalPage;	    	
 		    }
 		 // 查詢字串包含1.即將要讀取的頁數(pageNo), 2.總共有幾頁(totalPage)
-		    // 注意，查詢字串的前面有問號
+		 // 注意，查詢字串的前面有問號
 		    queryString = "?pageNo=" + no + "&totalPage=" + totalPage;
 			console.log(queryString);
 			xhr.open("GET", "<c:url value='/pagingAdsData.json' />" + queryString , true);
@@ -64,29 +76,50 @@ window.onload=function(){
 			}
 		}
 	}
-
+	//轉換類型型態
+	function cateNameTrans(categoryNo) {
+		if(categoryNo == 100){
+			cateName = "頭版頭";
+		}else if(categoryNo == 200){
+			cateName = "頭版側標";
+		}else if(categoryNo == 300){
+			cateName = "內頁版頭";
+		}else if(categoryNo == 400){
+			cateName = "內頁側標";
+		}else if(categoryNo == 500){
+			cateName = "小廣告";
+		}else{
+			cateName = "其他";
+		}
+		return cateName;
+	}
 
 function displayPageAds(responseData){
-	  var content = "<table border='1'><tr height='42' bgcolor='#fbdb98'><th width='10' align='center'>序號</th>";
-	      content +=  "<th width='600' align='center'>廣告PK值</th><th width='100' align='center'>廣告編號</th><th width='60' align='center'>上傳時間</th>";
-	      content +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='600' align='center'>單價</th>";	    
-		  content +=  "<th width='600' align='center'>texting</th></tr>";
+	  var content = "<table border='1'><tr height='42' bgcolor='#fbdb98'><th width='20' align='center'>序號</th>";
+	      content +=  "<th width='50' align='center'>廣告PK值</th><th width='100' align='center'>廣告編號</th><th width='100' align='center'>上傳時間</th>";
+	      content +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='100' align='center'>單價</th>";	    
+		  content +=  "<th width='100' align='center'>texting</th></tr>";
 		var data = responseData.split("&&&");
 		var ad = JSON.parse(data[0]);		// 傳回一個陣列
 		var mapData = JSON.parse(data[1]);		// 傳回一個JavaScript物件
 		var bgColor = "";   // 每一項商品的背影 
 		 
-		for(var i=0; i < ad.length; i++){
+		for(var i=0; i < ad.length; i++){		
 			bgColor = (i % 2 == 0 ? "#d4f5b2" : "#b2f5e5");
 			content += "<tr height='80' bgcolor='" + bgColor + "'>" + 
 						"<td  align='center' >" + (i+1) + "&nbsp;</td>" + 
-			           "<td  align='center' >" + ad[i].adPk + "&nbsp;</td>" + 
-		               "<td>" + ad[i].adNo + "</td>" +
-		               "<td align='center'>" + ad[i].uploadDate + "</td>" +
-		               "<td align='right'>" + ad[i].categoryNo + "&nbsp;</td>" +
-		               "<td align='center'>" + ad[i].adDate + "</td>" +
-		               "<td align='right'>" + ad[i].price + "</td>" + 
-		               "<td align='center'>hello</td>" +
+			           	"<td  align='center' >" + ad[i].adPk + "&nbsp;</td>" + 
+		               	"<td>" + ad[i].adNo + "</td>" +
+		               	"<td align='center'>" + ad[i].uploadDate + "</td>" +
+		               	"<td align='right'>" + cateNameTrans(ad[i].categoryNo) + "&nbsp;</td>" +
+		               	"<td align='center'>" + ad[i].adDate + "</td>" +
+		               	"<td align='right'>" + "NT$ " + ad[i].price + "</td>" + 
+		               	"<td align='center'>" +
+		               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +
+						"<input type='hidden' name='quantity' value='1'>" + 
+						"<input type='hidden' name='adPk' value='"+ad[i].adPk+"'>" + 
+						"<input type='submit' class='cartBtn' value='加入購物車' />" + 
+						"</form></td>" +
 //		               "<td><img  width='200' height='150' " +   
 //		               " src='../../ch00/util/GetImage?no=" + news[i].newsId + "'></td>" + 
 			           "</tr>";  			           
@@ -152,8 +185,9 @@ function displayPageAds(responseData){
 	<div align='center' style="margin-top: 150px;">
 		<h3>分頁顯示(JSON)</h3>
 		<hr>
-		<div id='somedivS' style='height: 260px;'></div>
-		<div id='navigation' style='height: 60px; margin: 250px;'></div>
+		<div id='somedivS'></div>
+<!-- 		 style='height: 260px;' style='height: 60px; margin: 250px;' -->
+		<div id='navigation'></div>
 		<hr>
 		<a href='..'>回前頁</a>
 	</div>

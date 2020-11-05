@@ -24,4 +24,5 @@ public interface AdMainService {
 	//ajax
 	public List<AdBean> getPageAds(Integer pageNo);
 	public int getTotalPageCount();
+	public List<AdBean> getAdByCateNoAjax(String CateNo);
 }

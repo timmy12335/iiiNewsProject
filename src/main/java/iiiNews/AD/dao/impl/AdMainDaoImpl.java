@@ -122,8 +122,6 @@ public class AdMainDaoImpl implements AdMainDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<AdBean> getPageAds(Integer pageNo) {
-		
-		
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "FROM AdBean WHERE stock > 0 AND status = 1";
 		Session session = factory.getCurrentSession();
@@ -144,10 +142,23 @@ public class AdMainDaoImpl implements AdMainDao {
 
 	public long getRecordCounts() {
 		Long count = null; // 必須使用 long 型態		
-		String hql = "SELECT count(*) FROM AdBean";
+		String hql = "SELECT count(*) FROM AdBean WHERE stock > 0 AND status = 1";
 		Session session = factory.getCurrentSession();		
 		count = (Long)session.createQuery(hql).getSingleResult();	
 		return count;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AdBean> getAdByCateNoAjax(String CateNo) {
+//		int startRecordNo = (pageNo - 1) * recordsPerPage;
+		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND categoryNo = :cateno";
+		Session session = factory.getCurrentSession();
+		List<AdBean> list = session.createQuery(hql)
+						.setParameter("cateno", CateNo)
+						.getResultList();
+		return list;
 	}
 	
 	

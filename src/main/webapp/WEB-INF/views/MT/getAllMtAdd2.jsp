@@ -16,6 +16,7 @@ window.onload = function() { //刪除文章，OK
 	});
 }
 
+
 </script>
 <title>Get All MtBean</title>
 
@@ -78,26 +79,26 @@ td {
 				<th>內文</th>
 				<th>維護</th>
 			</tr>
-			<c:forEach var="all" items="${getAllMtList}">
+			<c:forEach var="memList" items="${memArticleList}">
 				<tr>
-					<td>&nbsp;${all.pkey} &nbsp;</td>
-					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >${all.articleId}</a> </td>
-					<td>${all.memberId}</td>
-					<td>${all.updateDate}</td>
-					<c:if test="${ all.status == 1}"><td>可瀏覽</td></c:if>
-					<c:if test="${ all.status == 0}"><td>***已下架***</td></c:if>
-					<td>${all.category}</td>
-					<td class="td1">${all.title}</td>
-					<td class="td1">${all.imgName}</td>
-					<td class="td1">${all.article}</td>
+					<td>&nbsp;${memList.pkey} &nbsp;</td>
+					<td>${memList.articleId}</td>
+					<td>${memList.memberId}</td>
+					<td>${memList.updateDate}</td>
+					<c:if test="${ memList.status == 1}"><td>可瀏覽</td></c:if>
+					<c:if test="${ memList.status == 0}"><td>***已下架***</td></c:if>
+					<td>${memList.category}</td>
+					<td class="td1">${memList.title}</td>
+					<td class="td1">${memList.imgName}</td>
+					<td class="td1">${memList.article}</td>
 					<td>
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
-							<a class='delSingle' href="${pageContext.request.contextPath}/delSingleArticle/${all.articleId}">
-							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>
+							<a class='delSingle' href="${pageContext.request.contextPath}/getMemArticleList/${memList.memberId}">
+							<c:if test="${ memList.status == 0}" ><a href='' ></a></c:if>
 							刪除</a>
 							<a
-								href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}">編輯資料</a>
+								href="${pageContext.request.contextPath}/modifyArticle/${memList.pkey}">編輯資料</a>
 						</div>
 					</td>
 				</tr>

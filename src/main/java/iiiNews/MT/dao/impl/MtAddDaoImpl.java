@@ -86,7 +86,8 @@ public class MtAddDaoImpl implements MtAddDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MtAddBean> getAllMtAdd() {			//取所有mtAddBean資料，對應getAllMtAdd
-		String hql = "FROM MtAddBean ORDER BY pkey DESC";
+		String hql = "FROM MtAddBean ORDER BY pkey DESC ";		//選取狀態為1和0的使用者
+//		String hql = "FROM MtAddBean WHERE status = 1 ORDER BY pkey DESC "; //選取狀態為1的使用者
 //		String hql = "FROM MtAddBean";
 		Session session = factory.getCurrentSession();
 		List<MtAddBean> list = session.createQuery(hql).getResultList();
@@ -112,9 +113,9 @@ public class MtAddDaoImpl implements MtAddDao{
 		return bean;
 	}
 	
-	@SuppressWarnings("unchecked")		//---------開始修改以下
+	@SuppressWarnings("unchecked")			//---------開始修改以下
 	@Override
-	public List<MtAddBean> getMemAarticle(String memberId) {		//查詢單一會員的文章
+	public List<MtAddBean> getMemArticle(Integer memberId) {		//查詢單一會員的文章
 		String hql = "FROM MtAddBean WHERE memberId = :memId "
 				+ "AND status = 1 ORDER BY updateDate DESC";
 		Session session = factory.getCurrentSession();

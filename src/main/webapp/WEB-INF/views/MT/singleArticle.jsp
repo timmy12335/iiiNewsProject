@@ -41,8 +41,9 @@ margin:5px;
 			<tr><td><div>內文:<br>${ singleArticle.article }</div></td></tr>
 <%-- 			<tr><td><div style="width:500px;height:300px">內文:<br>${ singleArticle.article }</div></td></tr> --%>
 		</table>
+		<br>
 		<a href="<c:url value="" />">-----TOP-----</a>
-		<a href="<c:url value="/getAllMtAdd" />">回前頁</a>		
+		<a href="<c:url value="/getAllMtAdd" />">回前頁</a><br><br><br>	
 	</div>
 <!-- 	</form> -->
 </body>

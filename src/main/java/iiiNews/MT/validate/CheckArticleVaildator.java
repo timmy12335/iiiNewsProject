@@ -18,9 +18,6 @@ public class CheckArticleVaildator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		MtAddBean mtAddBean= (MtAddBean) target;
-
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "category", "","請選擇標籤");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "","標題不能空白");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "article", "","內文不能空白");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "imgLink", "","請選擇圖片");

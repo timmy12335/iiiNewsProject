@@ -15,11 +15,11 @@
             <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
             
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
-            <li><a href='#'>會員中心</a>
+            <li><a href="<c:url value='/password'/>">會員中心</a>
                 <ul>
                     <li><a href='#'>會員功能1</a>
                         <ul>
-                            <li><a href="#"></a></li>
+                            <li><a href=""></a></li>
                             <li><a href='#'>子功能</a></li>
                         </ul>
                     </li>
@@ -44,17 +44,20 @@
                         <ul>
                         
                             <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
+                            <li><a href="<c:url value='/changeStautsForTime'/>">所有新聞列表test</a></li>
+                            
                             
                         </ul>
                     </li>
                     
                 </ul>
             </li>
-            <li><a href='#'>客服中心</a>
+            <li><a href="<c:url value='/CRindex' />">客服中心</a>
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
                     <li><a href="<c:url value='/chat' />">客服聊天</a></li>
+                    <li><a href="<c:url value='/sendmail' />">寄信</a></li>
                 </ul>
             </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>

@@ -1,5 +1,6 @@
 package iiiNews.NP.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -67,6 +68,20 @@ public class NewsProductDaoImpl implements NewsProductDao {
 		List<NewsBean> list = session.createQuery(hql).getResultList();	
 		return list;
 	}
+	
+	//確認時間是否超過今天 若超過將status改為0
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NewsBean> checkTime() {
+		Timestamp statusTime = new Timestamp(System.currentTimeMillis());
+		String hql = "UPDATE NewsBean set status=0 WHERE futureTime < :sTime"; 
+		String hql2 = "FROM NewsBean WHERE status = 1 ORDER BY uploadTime DESC";
+		Session session = factory.getCurrentSession();
+		session.createQuery(hql).setParameter("sTime", statusTime).executeUpdate();
+		List<NewsBean> list = session.createQuery(hql2).getResultList();	
+		return list;
+	}
+		
 	//抓單一筆新聞
 	@Override
 	public NewsBean getSingleNews(String newsId) {
@@ -111,6 +126,7 @@ public class NewsProductDaoImpl implements NewsProductDao {
 								.getResultList();
 		return list;
 	}
+
 	
 
 	

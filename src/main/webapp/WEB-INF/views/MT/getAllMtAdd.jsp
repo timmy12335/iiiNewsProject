@@ -54,7 +54,7 @@ td {
 				<td>標題</td>
 				<td>圖片</td>
 				<td>內文</td>
-				<td>是否刪除</td>
+				<td>維護</td>
 			</tr>
 			<c:forEach var="all" items="${getAllMtList}">
 				<tr>
@@ -69,8 +69,11 @@ td {
 					<td class="td1">${all.article}</td>
 					<td>
 						<div align="center">
+<%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
 							<a class='delSingle'
 								href="${pageContext.request.contextPath}/delSingleArticle/${all.articleId}">刪除</a>
+							<a
+								href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}">編輯資料</a>	
 							<a
 								href="${pageContext.request.contextPath}/delSingleArticle/TimeOrder/${all.articleId}">排序</a>
 						</div>
@@ -79,7 +82,8 @@ td {
 			</c:forEach>
 		</table>
 		<hr>
-		<a href="<c:url value='/' />">回首頁</a>
+		<a href="<c:url value="" />">-----TOP-----</a><br><br>
+		<a href="<c:url value='/' />">回首頁</a><br><br>
 	</div>
 </body>
 </html>

@@ -18,6 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "trkNews")
 public class trkNewsBean implements Serializable {
@@ -40,7 +44,11 @@ public class trkNewsBean implements Serializable {
 	private Integer status;
 	private trkNewsBean trkNewsBean;
 	
-
+	@JsonIgnore
+	@Transient
+	private MultipartFile newsImage; 
+	
+	
 	@Transient
 //	private Integer reportId;
 	
@@ -122,6 +130,14 @@ public class trkNewsBean implements Serializable {
 		this.trkNewsBean = trkNewsBean;
 	}
 	
+	public MultipartFile getNewsImage() {
+		return newsImage;
+	}
+
+	public void setNewsImage(MultipartFile newsImage) {
+		this.newsImage = newsImage;
+	}
+
 	public Integer getTrackId() {
 		return trackId;
 	}

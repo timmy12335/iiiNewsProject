@@ -28,9 +28,9 @@ window.onload = function(){
 	</nav>
 	<div id="page" class="container" align="center">
 		<h2 class="BoxTitle">廣告欄位置上傳</h2>
-		<div>
+		<div class="container-login100">>
 			<form:form method="POST" modelAttribute="mtBean"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" onsubmit="return submitUserForm();">
 				<fieldset>
 					<div align="center" style="margin-top: 50px;">
 						<h1>新增影片</h1>
@@ -67,9 +67,12 @@ window.onload = function(){
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
 						</div>
 					
-				<div id="grecaptcha" class="g-recaptcha"
+					<div id="grecaptcha" class="g-recaptcha"
 						data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB" style="padding:10px 70px "></div>
-				
+					<div id="g-recaptcha-error"style="padding:10px 70px "></div>
+					
+					<br><br>				
+
 				<div class="login100-form-social flex-c-m">
 						<input type='button' class='btn btn-primary'  id='clickme1' value='Demo1' >
 						<span>&nbsp;&nbsp;</span>
@@ -77,8 +80,9 @@ window.onload = function(){
 						<span>&nbsp;&nbsp;</span>
 					</div>
 					</div>
-					<div id="btn" align="center">
-					<input class="sub" type="submit" name="submit" id="submit" value="送出" />
+					<div id="btn" align="center" class="container-login100-form-btn">
+					<button class="login100-form-btn">送出</button>
+<!-- 					<input class="sub" type="submit" name="submit" id="submit" value="送出" /> -->
 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
 				</div>
 				</fieldset>

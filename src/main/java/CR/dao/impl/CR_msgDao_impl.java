@@ -21,10 +21,10 @@ public class CR_msgDao_impl implements CR_msgDao {
 	@Override
 	public void addMsg(CrMsgBean msg) {
 		Session session=factory.getCurrentSession();
-		MBBean mb = getMemberById(msg.getMemberId());
+//		MBBean mb = getMemberById(msg.getMemberId()); 
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		msg.setSendTime(date);
-		msg.setMbBean(mb);
+//		msg.setMbBean(mb);
 		session.save(msg);
 	}
 	

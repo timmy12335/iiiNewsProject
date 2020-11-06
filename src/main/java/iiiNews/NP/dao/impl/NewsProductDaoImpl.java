@@ -91,6 +91,8 @@ public class NewsProductDaoImpl implements NewsProductDao {
 				.setParameter("nId", newsId).getSingleResult();
 		return newsbean;
 	}
+	
+	
 	//查詢單一會員的新聞列表
 	@SuppressWarnings("unchecked")
 	@Override

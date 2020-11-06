@@ -52,7 +52,6 @@ window.onload = function(){
 						<div class="st1">
 							<label for="Category">類別:</label>
 							<form:select path="Category">
-								<form:option value="未分類">未分類</form:option>
 								<form:option value="生活">生活</form:option>
 								<form:option value="娛樂">娛樂</form:option>
 								<form:option value="問卦">問卦</form:option>
@@ -62,12 +61,10 @@ window.onload = function(){
 								<form:option value="寵物">寵物</form:option>
 							</form:select>
 						</div>
-						
 						<div class="st1">
 							<label for="title">標題:</label>
 							<form:input type="text" id="title" name="title" path="title"
-								size="45" placeholder="今晚我想來點..." /><br>
-<%-- 							<form:errors path="title" style="font-size:12px;color:red" /> //11/05判斷功能，要改成Ajax --%>
+								size="45" placeholder="今晚我想來點..." autocomplete="on" />
 						</div>
 <!-- 						<div class="st1"> -->
 <!-- 							<label for="videoLink">影片連結:</label> -->
@@ -82,7 +79,7 @@ window.onload = function(){
 						</div>
 						<div class="st1">
 							<label for="article">內容:</label>
-							<form:textarea name="article" id="article" cols="45" rows="15"
+							<form:textarea name="article" id="article" cols="45" rows="20"
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
 						</div>
 					

@@ -6,6 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>單一新聞表</title>
+<!-- <a class="twitter-timeline" href="http://newsapi.org/v2/top-headlines？country = tw＆category = technology＆apiKey = 8e702b6238b04fd38c2f3cac1ef392e7">Tweets by NewsAPIorg</a>  -->
+<!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+<script>
+var url = 'http://newsapi.org/v2/top-headlines?' +
+'country=tw&' +
+'apiKey=8e702b6238b04fd38c2f3cac1ef392e7';
+
+var req = new Request(url);
+
+fetch(req)
+.then(function(response) {
+console.log(response.json());
+})
+</script>
 <style>
 td{
 align:left;

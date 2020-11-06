@@ -328,7 +328,10 @@ public class MtAddController {
 
 	
 	//---------------------------------------------------------
-	
+	@GetMapping("/getTodayNews")	//載入當日熱門新聞
+	public String getTodayNews(Model model) {
+		return "MT/NewsAPI";
+	}
 	
 	
 	

@@ -18,4 +18,5 @@ public interface NewsProductService {
 	public List<NewsBean> getPageNews(Integer pageNo);
 	public Timestamp getfutureTime(Time limitTime);
 	public List<NewsBean> checkTime();
+	
 }

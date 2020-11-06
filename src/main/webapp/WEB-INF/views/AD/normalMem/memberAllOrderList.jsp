@@ -55,7 +55,7 @@
         }
         
         .tablebyme tbody tr:hover{
-            border: 2px solid white;
+            background-color: rgba(255,255,255,0.3);
         }
         
 		#mainDiv{
@@ -83,6 +83,7 @@
 					<td>訂單編號</td>
 					<td>訂購日期</td>
 					<td>訂單價格</td>
+					<td>付款狀態</td>
 					<td>設定</td>
 				</tr>
 			</thead>
@@ -100,6 +101,11 @@
 								<c:set var="date" value="${fn:substring(ad.orderDate, 0, 16)}" />
 								<td>${date}</td>
 								<td>${ad.totalAmount}</td>
+								<td>還沒寫${ad.paymentStatus}
+									<c:if test="${ad.paymentStatus == 0}">未付款</c:if>
+									<c:if test="${ad.paymentStatus == 1}">已付款</c:if>
+									<c:if test="${ad.paymentStatus == 2}">其他</c:if>
+								</td>
 								<td>
 									<a href="<c:url value="/getItemByOrderPk/${ad.adOrderPk}" />">檢視訂單內容</a>
 								</td>

@@ -15,8 +15,8 @@
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<div id="page" class="container" align="center">
-		<h2 class="BoxTitle">廣告欄位置上傳</h2>
-		<div class="container-login100">>
+		
+		<div>
 			<form:form method="POST" modelAttribute="mtAddBean"
 				enctype="multipart/form-data" onsubmit="return submitUserForm();">
 				<fieldset>
@@ -27,11 +27,14 @@
 						<div class="st1">
 							<label for="Category">類別:</label>
 							<form:select path="Category" value="${mtAddBean.category}">
+								<form:option value="未分類">未分類</form:option>
 								<form:option value="生活">生活</form:option>
-								<form:option value="趣味">趣味</form:option>
+								<form:option value="娛樂">娛樂</form:option>
+								<form:option value="問卦">問卦</form:option>
 								<form:option value="美食">美食</form:option>
+								<form:option value="運動">運動</form:option>
+								<form:option value="趣味">趣味</form:option>
 								<form:option value="寵物">寵物</form:option>
-								<form:option value="惡搞">惡搞</form:option>
 							</form:select>
 						</div>
 						<div class="st1">
@@ -58,26 +61,23 @@
 
 					<br><br>				
 
-				<div class="login100-form-social flex-c-m">
-						<input type='button' class='btn btn-primary'  id='clickme1' value='Demo1' >
-						<span>&nbsp;&nbsp;</span>
-						<input type='button' class='btn btn-primary'  id='clickme2' value='Demo2' >
-						<span>&nbsp;&nbsp;</span>
+<!-- 				<div class="login100-form-social flex-c-m"> -->
+<!-- 						<input type='button' class='btn btn-primary'  id='clickme1' value='Demo1' > -->
+<!-- 						<span>&nbsp;&nbsp;</span> -->
+<!-- 						<input type='button' class='btn btn-primary'  id='clickme2' value='Demo2' > -->
+<!-- 						<span>&nbsp;&nbsp;</span> -->
+<!-- 					</div> -->
 					</div>
-					</div>
-					<div id="btn" align="center" class="container-login100-form-btn">
-					<button >送出</button>
-					<button >取消</button>
-<!-- 					<input class="sub" type="submit" name="submit" id="submit" value="送出" /> -->
-<!-- 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" /> -->
-				</div>
+<!-- 					<div id="btn" align="center"> -->
+<!-- 					<button >送出</button> -->
+<!-- 					<button >取消</button> -->
+					<input class="sub" type="submit" name="submit" id="submit" value="送出" />
+					<input type="button" onclick="history.back()" value="回前頁，取消編輯" />
+<%-- 					<br> <a href="<c:url value='/getAllMtAdd' />">回前頁</a> <br> --%>
+<!-- 				</div> -->
 				</fieldset>
 			</form:form>
 		</div>
-		<br> <input type="button" value="one" onclick="onebuttontodata()">
 	</div>
-
-	
-	
 </body>
 </html>

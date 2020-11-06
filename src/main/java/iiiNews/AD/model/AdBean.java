@@ -22,7 +22,7 @@ public class AdBean implements Serializable {
 	private Integer adPk;			//資料庫自增編號
 	
 	private String adNo;			//我們去撰寫的產品編號
-//	private String adTitle;			//自訂標題
+	private String adTitle;			//自訂標題
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Timestamp uploadDate;	//上傳的日期戳記
 	private String memberId;		//^^^^ 上傳的會員編號
@@ -148,6 +148,14 @@ public class AdBean implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getAdTitle() {
+		return adTitle;
+	}
+
+	public void setAdTitle(String adTitle) {
+		this.adTitle = adTitle;
 	}
 	
 	

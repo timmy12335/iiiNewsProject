@@ -26,6 +26,7 @@ public class AdOrderBean {
 	private Integer totalAmount;		//訂單總額
 	private Timestamp orderDate;			//訂單成立時間
 	
+	private Integer paymentStatus;		//付款狀態
 	private String payingDetail; 	//$$$$ 其他資訊 先備用
 	
 	@OneToMany(mappedBy="adOrderBean", cascade=CascadeType.ALL)
@@ -38,13 +39,14 @@ public class AdOrderBean {
 	
 	//有傳參數的建構子
 	public AdOrderBean(Integer adOrderPk, String adOrderNo, String buyerMemberId, Integer totalAmount, Timestamp orderDate,
-			String payingDetail, Set<AdOrderItemBean> items) {
+			Integer paymentStatus, String payingDetail, Set<AdOrderItemBean> items) {
 		super();
 		this.adOrderPk = adOrderPk;
 		this.adOrderNo = adOrderNo;
 		this.buyerMemberId = buyerMemberId;
 		this.totalAmount = totalAmount;
 		this.orderDate = orderDate;
+		this.paymentStatus = paymentStatus;
 		this.payingDetail = payingDetail;
 		this.items = items;
 	}
@@ -123,6 +125,14 @@ public class AdOrderBean {
 	public String toString() {
 		return "AdOrderBean [adOrderPk=" + adOrderPk + ", adOrderNo=" + adOrderNo + ", buyerMemberId=" + buyerMemberId
 				+ ", totalAmount=" + totalAmount + ", orderDate=" + orderDate + ", payingDetail=" + payingDetail + "]";
+	}
+
+	public Integer getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(Integer paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 
 	

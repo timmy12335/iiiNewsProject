@@ -23,7 +23,7 @@ public interface MtAddDao {
 	public int modifyArticle(MtAddBean ModArt);				//編輯單一文章	
 	
 	public MtAddBean getSingleArticle(String articleId);	//查詢單一文章
-	public List<MtAddBean> getMemAarticle(String memberId);	//查詢單一會員的文章列表
+	public List<MtAddBean> getMemArticle(Integer memberId);	//查詢單一會員的文章列表
 	void updateStatus(String articleId, int status);		//刪除文章，改狀態，對應至delSingleArticle
 
 	

@@ -17,6 +17,10 @@
     <div>
     <form:form method="POST" modelAttribute="adBean">
     	<fieldset>
+    			<div class="divstyle">
+                    <label for="adTitle">標題:</label>
+                    <form:input type="text" id="idTitle" name="idTitle" path="adTitle" />
+                </div>
                 <div class="divstyle">
                     <label for="category">欄位位置:</label>
                     <form:select path="categoryNo">
@@ -55,10 +59,6 @@
                     <form:input type="number" step="1" min="1" max="20" id="idStock" name="idStock" size="20" path="stock"
                          placeholder="請輸入庫存" value="${param.idStock }" />
                      <font color="red" size="-1">${errorMsg.errorPriceEmpty} ${errorMsg.mPrice}</font>
-                </div>
-                <div id="uploadPhoto" class="divstyle">
-                    <label for="">敘述:</label>
-                    <input type="text" id="" name="">
                 </div>
             </fieldset>
             <div class="sub">

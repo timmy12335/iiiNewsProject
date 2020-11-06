@@ -43,9 +43,7 @@ font-weight:"bold";
 				<tr>
 					<td><div>上傳時間: ${mtBean.updateDate}</div></td>
 				</tr>
-				<tr>
-					<td><div>文章狀態: ${mtBean.articleStatus}</div></td>
-				</tr>
+				<c:if test="${mtBean.status == 1}"><tr><td><div>文章狀態:上傳成功</div></td></tr></c:if>
 				<tr>
 					<td class="td1"><div style="width:500px;">[${ mtBean.category }] ${mtBean.title}</div></td>
 				</tr>
@@ -62,7 +60,7 @@ font-weight:"bold";
 					<td><div><img style="width:500px;height:300px" src="<c:url value='/getMtCreate/${mtBean.articleId}' />" /></div></td>
 				</tr>
 				<tr>
-					<td class="td1"><div style="width:500px;height:300px">內文: ${mtBean.article}***</div></td>
+					<td class="td1"><div style="width:500px;height:300px">內文: ${mtBean.article}</div></td>
 				</tr>
 <!-- 				<tr> -->
 <%-- 					<td><div>預覽連結: <a href="${videoBean.link}">${videoBean.link}</a> --%>

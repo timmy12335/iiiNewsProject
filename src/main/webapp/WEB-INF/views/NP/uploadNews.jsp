@@ -56,10 +56,10 @@
 	<label for="price">販賣價格：</label>
 	<form:input type="text" id="price" name="price" size="50" path="price" placeholder="請輸入販賣價格"  />
 </div>
-<div>
-	<label for="limitTime">限時時間：</label>
-	<form:input type="text" id="limitTime" name="limitTime" size="50" path="limitTime" placeholder="請輸入限時時間"  />
-</div>
+<!-- <div> -->
+<!-- 	<label for="limitTime">限時時間：</label> -->
+<%-- 	<form:input type="text" id="limitTime" name="limitTime" size="50" path="limitTime" placeholder="請輸入限時時間"  /> --%>
+<!-- </div> -->
 <div>
 <label>上傳照片：</label>
 file1:<input type="file" id="productImage" name="productImage" multiple ><br>

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import TRN.web.news.model.trkNewsBean;
@@ -196,4 +197,24 @@ public class trkNewsController {
 		}
 		return b;
 	}
+	// 轉送出能夠進行修改的網頁 網頁指令進入1 跳轉網頁
+	@GetMapping("/editNews/{NewsId}")
+	public String showEditMemberForm(@PathVariable Integer NewsId, Model model) {
+		model.addAttribute("NewsId", NewsId);
+		System.out.println("1106AA"+model.addAttribute("NewsId", NewsId));
+		return "TRN/editNews";
+	}
+	// 讀取並傳回單筆會員資料  網頁指令進入2
+			@GetMapping(value = "/editNews2/{NewsId}", produces= {"application/json"})
+			public @ResponseBody  trkNewsBean displayMember(@PathVariable Integer NewsId, Model model) {
+				trkNewsBean trkNewsBean = service.getNewsById(NewsId);
+				System.out.println("1106BB"+trkNewsBean);
+				return trkNewsBean;
+	}
+	
+	
+	
+	
+	
+	
 }

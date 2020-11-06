@@ -1,61 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<title>查詢</title>
-<link rel="stylesheet" href="/project/css/default.css">
-<style>
-body {
-	background-attachment: fixed;
-	/*background-color: #EBFFEB;*/
-	background-repeat: no-repeat;
-	background-position: 20px 50px;
-}
+<title>上架廣告欄位</title>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 
-.st1 {
-	text-align: left;
-	width: 200px;
-	margin: 20px;
-}
-
-.sub {
-	background-color: #dcdcdc;
-}
-</style>
 </head>
 <body>
-<%-- <jsp:include page="/test/topside.html"/> --%>
-<div id="content">
-	<div id="sidebar">
-		<ul>
-			<li><a href="IndexTest.jsp" accesskey="1" title="">首頁</a></li>
-			<li><a href="uploadFormTest.jsp" accesskey="2" title="">新增上傳</a></li>
-			<li><a href="../ExclusiveNews/GetNews.html" accesskey="3" title="">查詢</a></li>
-			<li><a href="/practice/RetrieveAllNews" accesskey="4" title="">全部內容</a></li>
-			<li><a href="#" accesskey="5" title="">Contact Us</a></li>
-		</ul>
-	</div>
-	<div id="page" class="container">
-	<form method="post" action="/project/SearchVideoController" >
-		<div align="center">
-			<h2>查詢資料</h2>
-			<hr>
-			<div class="st1">
-				<label class="t1" for="userNum1">會員帳號:</label> 
-				<input type="text" id="userNum1" name="userNum1" size="30" 
-				 autofocus placeholder="UserNumber" autocomplete="off">
-				 <font color="red" size="1">${errorMsg.userNumber}</font>
-			</div>
-			<div id="btnArea" align="center">
-				<input class="sub" type="submit" name="submit" id="submit" value="送出" /> 
-				<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
-			</div>
+	<nav>
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
+	</nav>
+	<div id="page" class="container" align="center">
+
+		<div>
+			<form method="GET" >
+				<fieldset>
+					<div align="center" style="margin-top: 50px;">
+						<h2>更新內文</h2>
+						<strong><h2>會員發文紀錄</h2></strong>
+
+						<hr>
+						<div>
+							<label class="t1" for="memberId">會員帳號:</label> 
+							<input type="text" id="memberId" name="memberId" size="30">
+						</div>
+						<br>
+						<div align="center">
+							<input type="button" onclick="memId()" value="SUBMIT" />
+							<input class="sub" type="submit" name="submit" id="submit" value="送出" /> &nbsp;&nbsp;
+							<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />&nbsp;&nbsp;
+							<input type="button" onclick="history.back()" value="回前頁" />
+						</div>
+					</div>
+				</fieldset>
+			</form>
 		</div>
-	</form>
 	</div>
-</div>
+<script>
+function memId() { 
+	var memIdObj = document.getElementById("memberId");		//抓submit鍵的ID值 (memberId)後跳轉至/getMemArticleList/{memberId}
+	memIdVal = memIdObj.value;
+	console.log(memIdVal);
+	window.location.href="<c:url value='/getMemArticleList/" + memIdVal + "' />";	
+};
+
+
+</script>
 </body>
 </html>

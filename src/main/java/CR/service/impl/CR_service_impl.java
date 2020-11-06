@@ -31,6 +31,8 @@ public class CR_service_impl implements CR_service {
 
 	@Override
 	public void addReport(CRBean report) {
+		
+		
 		dao.addReport(report);
 		
 	}

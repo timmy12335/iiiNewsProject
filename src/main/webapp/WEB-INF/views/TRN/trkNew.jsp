@@ -51,8 +51,9 @@
 					<a href="<spring:url value='/trkNews' />" class="btn btn-default">
 						<span class="glyphicon-hand-left glyphicon"></span>返回
 					</a> 
-					<a href='#' class='btn btn-warning btn-large'> 
-					    <span class='glyphicon-shopping-cart glyphicon'></span>加入購物車
+					<a href="<spring:url value='/editNews/${trkNew.trackId}'/>"class='btn btn-warning btn-large'> 
+					   <!-- 跳轉網頁連結 -->
+					    <span class='glyphicon-shopping-cart glyphicon'></span>修改追蹤新聞
 					</a>
 				</p>
 			</div>

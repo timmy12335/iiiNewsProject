@@ -22,7 +22,7 @@ public interface MtAddService {
 	public int modifyArticle(MtAddBean ModArt);				//編輯單一文章
 
 	public MtAddBean getSingleArticle(String articleId);	//查詢單一文章
-	public List<MtAddBean> getMemAarticle(String memberId);	//查詢單一會員的文章列表
+	public List<MtAddBean> getMemArticle(Integer memberId);	//查詢單一會員的文章列表
 	void delSingleArticle(String articleId);				//刪除文章，改狀態
 
 //	public List<String> getAllAddDao1();	//抓pkey

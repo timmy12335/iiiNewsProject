@@ -52,7 +52,7 @@ public class AdMainController {
 //		bean.setStock(10);
 		
 		model.addAttribute("adBean",bean);
-		return "AD/uploadAds";
+		return "AD/entMem/uploadAds";
 	}
 	
 	//送出使用者填好的上傳表格
@@ -108,7 +108,7 @@ public class AdMainController {
 	public String getMemberAdList(@PathVariable String cpmemberId,Model model){
 //		List<AdBean> list = service.getAllAds();
 //		model.addAttribute("adLists",list);
-		return "AD/memberAllAdsList";
+		return "AD/entMem/memberAllAdsList";
 	}
 
 	

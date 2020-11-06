@@ -61,7 +61,7 @@ public class AdOrderController {
 		
 		List<AdOrderBean> orderlist = adOrderService.getMemberOrderList(memberId);
 		model.addAttribute("memberOrderList", orderlist);
-		return "AD/memberAllOrderList";
+		return "AD/normalMem/memberAllOrderList";
 	}
 	
 	
@@ -71,7 +71,7 @@ public class AdOrderController {
 									@PathVariable int adOrderPk) {
 		List<AdOrderItemBean> itemBeans = itemService.getItemsInOneOrder(adOrderPk);
 		model.addAttribute("AdOrderItems", itemBeans);
-		return "AD/memberItemsList";
+		return "AD/normalMem/memberItemsList";
 	}
 	
 	
@@ -80,7 +80,7 @@ public class AdOrderController {
 							@PathVariable int itemPk) {
 		AdOrderItemBean oneItemBean = itemService.getOneItems(itemPk);
 		model.addAttribute("oneItem", oneItemBean);
-		return "AD/orders/showOneItem";
+		return "AD/normalMem/showOneItem";
 	}
 	
 	
@@ -127,7 +127,6 @@ public class AdOrderController {
 			@PathVariable Integer itemPk) throws IOException, SQLException {
 		
 		ResponseEntity<byte[]> re = null;
-		
 		
 		//定義一個InputStream來判斷圖片有沒有成功的叫出來 有可能Blob是null或是這筆資料不存在等等
 		InputStream is = null;

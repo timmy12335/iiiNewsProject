@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import iiiNews.AD.dao.AdOrderDao;
+import iiiNews.AD.model.AdBean;
 import iiiNews.AD.model.AdOrderBean;
 import iiiNews.AD.service.AdOrderService;
 
@@ -71,6 +72,16 @@ public class AdOrderServiceImpl implements AdOrderService {
 	public int saveOrders(AdOrderBean aob) {
 		int n = 0;
 		adOrderDao.saveOrders(aob);
+		n++;
+		return n;
+	}
+
+
+	@Override
+	@Transactional
+	public int changeQuantity(AdBean ab) {
+		int n = 0;
+		adOrderDao.changeQuantity(ab);
 		n++;
 		return n;
 	}

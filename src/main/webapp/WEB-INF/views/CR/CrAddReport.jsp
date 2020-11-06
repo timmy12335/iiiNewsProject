@@ -24,7 +24,7 @@
         id="forms" enctype="multipart/form-data">       
             <table class="table" border="1" >
             <tr><td>
-		<form:input type="text" path="memberId"></form:input>
+		<form:input type="text" path="memberId" value="1"></form:input>
 		</td>
 		</tr>
                 <tr>
@@ -60,7 +60,12 @@
  </table>
        </form:form> 
 </div>
+<div class="fb-customerchat"
+ page_id="110363554196945"
+ minimized="false">
+</div>
 </section>
+
 
 </body>
 </html>

@@ -15,11 +15,11 @@
             <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
             
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
-            <li><a href='#'>會員中心</a>
+            <li><a href="<c:url value='/password'/>">會員中心</a>
                 <ul>
                     <li><a href='#'>會員功能1</a>
                         <ul>
-                            <li><a href="#"></a></li>
+                            <li><a href=""></a></li>
                             <li><a href='#'>子功能</a></li>
                         </ul>
                     </li>
@@ -56,7 +56,7 @@
                 <ul>
                  	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
-                    <li><a href="<c:url value='/chat' />">客服聊天</a></li>
+                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
                     <li><a href="<c:url value='/sendmail' />">寄信</a></li>
                 </ul>
             </li>
@@ -67,24 +67,42 @@
                     <li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>                    
                </ul>
             </li>
-            <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
+            <li><a href="<c:url value='#' />">圖文專區</a>
             	<ul>
+            		<li><a href="<c:url value='/MtCreate' />">新增Po文</a>
                     <li><a href="<c:url value='/getAllMtAdd' />">檢視使用者所有資料</a></li>
-<%--                     <li><a href="<c:url value='/000' />">看所有廣告列表</a></li> --%>
+                    <li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
 <%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
                 </ul>
             </li>
             <li><a href='#'>廣告專區</a>
             	<ul>
-                    <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
-                    <li><a href="#">看所有廣告列表</a>
+            		<li><a href="<c:url value='/getAjaxListSearch' />">Ajax搜尋測試</a></li>
+            		<li><a href="#">企業會員功能</a>
                     	<ul>
-                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
-                            <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
+                            <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
+                            <li><a href="<c:url value='#' />">查詢所上架的商品##</a></li>
+                            <li><a href="<c:url value='#' />">查詢所賣出的商品(下載圖片)##</a></li>
                         </ul>
                     </li>
-                    <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
-                    <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
+                    <li><a href="#">一般會員功能</a>
+                    	<ul>
+                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
+                            <li><a href="<c:url value='/getAjaxList' />">看所有廣告列表-Ajax</a></li>
+                            <li><a href="<c:url value='/getOrderListByMemberId' />">查看一般會員訂單</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="<c:url value='/ShowCartContent' />">購物車</a></li>
+					<li><a href="#">ALL & OLD</a>
+                    	<ul>
+                    		<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
+                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
+                            <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
+                            <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
+		                    <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
+		                    <li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>

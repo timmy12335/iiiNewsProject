@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import iiiNews.AD.dao.AdOrderDao;
+import iiiNews.AD.model.AdBean;
 import iiiNews.AD.model.AdOrderBean;
 
 @Repository
@@ -54,5 +55,14 @@ public class AdOrderDaoImpl implements AdOrderDao {
 		n++;
 		return n;
 	}
+
+	@Override
+	public int changeQuantity(AdBean ab) {
+		Session session = factory.getCurrentSession();
+		session.update(ab);
+		return 0;
+	}
+	
+	
 
 }

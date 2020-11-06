@@ -15,18 +15,22 @@
 <nav><jsp:include page="/fragment/navbar.jsp"></jsp:include> </nav>
 <section style="margin-top: 100px;">
 <div class="container">
+	<a href="<c:url value='/addReport' />">
 	<div class="card">
 	<span></span>
-	<div class='imgBx'><a href="<c:url value='/addReport' />">
-	<img src="<c:url value='/image/CR1.jpg'/>"></a></div>
+	<div class='imgBx'>
+	<img src="<c:url value='/image/CR1.jpg'/>"></div>
 	<div class="content">
 	<div>
 	<h2>申請客服表單</h2>
-	<p>謝謝您iiiNews網站，請填寫您的需求或問題，我們會儘快提供相關訊息及回應。
-		另若對網站有相關建議及意見，也歡迎填寫表單告知我們需改進的目標及方向。<p>	
+	
+	謝謝您iiiNews網站，請填寫您的需求或問題，我們會儘快提供相關訊息及回應。
+		另若對網站有相關建議及意見，也歡迎填寫表單告知我們需改進的目標及方向。
+		
 	</div>
 	</div>
 	</div>
+	</a>
 	<div class="card">
 	<span></span>
 	<div class='imgBx'><img src="<c:url value='/image/CR2.jpg'/>"></div>

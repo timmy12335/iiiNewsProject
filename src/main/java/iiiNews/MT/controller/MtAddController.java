@@ -18,15 +18,18 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
+import iiiNews.MT.validate.CheckArticleVaildator;
 
 @Controller
 public class MtAddController {
@@ -47,6 +50,25 @@ public class MtAddController {
 	@PostMapping("/MtCreate")		//新增欄位頁面
 	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model) {
 
+		//-----------------------------------------11/05判斷功能，要改成Ajax
+//	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result) {
+//		CheckArticleVaildator validator = new CheckArticleVaildator();
+//		validator.validate(bean, result);
+//		try {
+//			if (bean.getTitle().isEmpty()) {
+//				result.rejectValue("title","","");
+//				System.out.println("---標題不能空白---");
+//				return "MT/Create";
+//			}
+//		} catch (Exception e) {
+//			System.out.println("---標題catch---");
+//			e.printStackTrace();
+//		}
+		
+		
+		
+		
+		//-----------------------------------------11/05判斷功能
 //		Map<String, String> map = new HashMap<>();
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
 		bean.setUpdateDate(uploadDate);
@@ -211,19 +233,20 @@ public class MtAddController {
 		model.addAttribute("getAllMtList",list);
 		return "MT/getAllMtAdd";
 	}
+	
 		
 	//---------------------------------------------------------
-	@GetMapping("/modifyArticle/{pkey}")	//查詢單一文章
+	@GetMapping("/modifyArticle/{pkey}")	//編輯單一文章，抓已存在DB的資料------OK
 	public String modifyArticle(@PathVariable int pkey ,Model model) {
 		MtAddBean bean = service.getpkey(pkey);
 		model.addAttribute("mtAddBean", bean);
 		return "MT/Update";
 	}
 	
-	@PostMapping("/modifyArticle/{pkey}")	//更新單一文章
+	@PostMapping("/modifyArticle/{pkey}")	//編輯單一文章
 	public String modify(@ModelAttribute("mtAddBean") MtAddBean mtAddBean, Model model,
 			@PathVariable int pkey) {
-		MtAddBean bean = null;
+//		MtAddBean bean = null;
 		MultipartFile articleImage = mtAddBean.getImage();
 		System.out.println("productImage:-->" + articleImage);
 		//拿它原來的檔名取出來放到我們一個叫做FileName欄位
@@ -231,6 +254,10 @@ public class MtAddController {
 //		oneItemBean.setAdImageName(originalFilename);
 		
 		MtAddBean originBean = service.getpkey(pkey);
+//		bean.setCategory(mtAddBean.getCategory());
+		originBean.setCategory(mtAddBean.getCategory());
+		originBean.setTitle(mtAddBean.getTitle());
+		originBean.setArticle(mtAddBean.getArticle());
 		originBean.setImgName(originalFilename);
 		
 		
@@ -253,10 +280,7 @@ public class MtAddController {
 		
 		System.out.println("originBean after:-->" + originBean.toString());
 		
-//		bean.setCategory(mtAddBean.getCategory());
-		originBean.setCategory(mtAddBean.getCategory());
-		originBean.setTitle(mtAddBean.getTitle());
-		originBean.setArticle(mtAddBean.getArticle());
+
 		
 		int n = service.modifyArticle(originBean);
 		System.out.println(n + "更改成功");
@@ -264,11 +288,6 @@ public class MtAddController {
 //		return "redirect:/";
 		return "redirect:/getAllMtAdd";
 	}
-		
-
-		
-	
-	
 	//---------------------------------------------------------
 	
 	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章，與上面編輯，必須擇一
@@ -277,13 +296,6 @@ public class MtAddController {
 		model.addAttribute("singleArticle", bean);	//點文章編號後進入的頁面，用這兩行顯示
 		return "/MT/singleArticle";
 	}
-		
-	@GetMapping("/getMemAarticleList/{memberId}")	//查詢單一會員的文章列表
-	public String  getMemAarticleList(@PathVariable String memberId ,Model model) {
-		List<MtAddBean> list = service.getMemAarticle(memberId);
-		model.addAttribute("memAarticleList", list);
-		return "MT/memAarticleList";
-	}
 
 	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態，暫時OK
 	public String delSingleArticle(@PathVariable String articleId ,Model model) {
@@ -291,9 +303,33 @@ public class MtAddController {
 		return "redirect:/getAllMtAdd";
 	}
 	//---------------------------------------------------------
-
-
 	
+//	@GetMapping("/getMemAarticleList")	//查詢單一會員的文章列表-----Backup
+//	public String getMemAarticleList(@PathVariable String memberId ,Model model) {
+//		List<MtAddBean> list = service.getMemAarticle(memberId);
+//		model.addAttribute("memAarticleList", list);
+//		return "MT/memAarticleList";
+//	
+	
+	//---------------------------------------------------------查詢會員發文，刪除功能未完成******
+	@GetMapping("/getMemArticleList")	//載入查詢會員發文資料畫面
+	public String getMemArticleList(Model model) {
+//		List<MtAddBean> list = service.getMemArticle();
+//		model.addAttribute("memArticleList", list);
+		return "MT/Search";
+	}
+
+	@GetMapping("/getMemArticleList/{memberId}")	//輸入ID後顯示文章列表
+	public String queryMemArticle(@PathVariable Integer memberId ,Model model) {
+		List<MtAddBean> list = service.getMemArticle(memberId);
+		model.addAttribute("memArticleList", list);
+		return "MT/getAllMtAdd2";
+	}
+
 	
 	//---------------------------------------------------------
+	
+	
+	
+	
 }

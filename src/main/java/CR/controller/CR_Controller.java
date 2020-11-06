@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRBean;
 import CR.service.CR_service;
+import iiiNews.MB.model.MBBean;
 
 
 @Controller
@@ -32,6 +33,7 @@ public class CR_Controller {
 	CR_service service;
 	@Autowired
 	JavaMailSender mailSender;
+
 	
 	@GetMapping("/sendmail")
 	public String email(Model model) {
@@ -70,6 +72,12 @@ public class CR_Controller {
 	
 	@PostMapping("/addReport")
 	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb) { 
+		MBBean mb = service.getMemberById(cb.getMemberId());
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setTo(mb.getEmail());
+		email.setSubject("eeit19no4@gmail.com");
+		email.setText(cb.getCrContent());
+		mailSender.send(email);
 		service.addReport(cb);
 	    return "redirect:/customerReports";
 	}

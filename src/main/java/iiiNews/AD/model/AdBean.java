@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "AdProduct")
 public class AdBean implements Serializable {
@@ -21,16 +23,20 @@ public class AdBean implements Serializable {
 	
 	private String adNo;			//我們去撰寫的產品編號
 //	private String adTitle;			//自訂標題
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Timestamp uploadDate;	//上傳的日期戳記
 	private String memberId;		//^^^^ 上傳的會員編號
 	
 	private String categoryNo;		//廣告欄位的位置分類
 	private Double width;			//紀錄欄位的寬
 	private Double height;			//紀錄欄位的高
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Date adDate;			//欄位要販賣的日期
 	private Integer price;			//價格（單價）
 	private Integer stock;			//庫存量
 	
+
+	private Integer status;			//上架狀態
 	
 	//$$$$ 要留一個外鍵欄位>>定義一個儲存一方的實例變數
 	//商品項目是多方
@@ -134,6 +140,14 @@ public class AdBean implements Serializable {
 
 	public void setStock(Integer stock) {
 		this.stock = stock;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 	

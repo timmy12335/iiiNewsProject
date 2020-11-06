@@ -6,20 +6,42 @@
 <head>
 <meta charset="UTF-8">
 <script type='text/javascript'>
-	window.onload = (function() { //刪除文章，OK
-		$('.delSingle').click(function() {
-			if (confirm('確定刪除此筆紀錄? ')) {
-				var href = $(this).attr('href');
-				location.href = href;
-			}
-			return false;
+window.onload = function() { //刪除文章，OK
+	$('.delSingle').click(function() {
+		if (confirm('確定刪除此筆紀錄? ')) {
+			var href = $(this).attr('href');
+			location.href = href;
+		}
+		return false;
+	});
+}
 
-		});
-	})
 </script>
 <title>Get All MtBean</title>
 
 <style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+#customers tr:hover {background-color: #ECF5FF;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #243aa6;
+  color: white;
+}
+
 td {
 	padding: 3px;
 }
@@ -43,26 +65,27 @@ td {
 	</div>
 	<hr>
 	<div align="center">
-		<table border="1">
+		<table id="customers">
 			<tr>
-				<td>PK</td>
-				<td>文章編號</td>
-				<td>使用者</td>
-				<td>上傳日期</td>
-				<td>文章狀態</td>
-				<td>類型</td>
-				<td>標題</td>
-				<td>圖片</td>
-				<td>內文</td>
-				<td>維護</td>
+				<th>PK</th>
+				<th>文章編號</th>
+				<th>使用者</th>
+				<th>上傳日期</th>
+				<th>文章狀態</th>
+				<th>類型</th>
+				<th>標題</th>
+				<th>圖片</th>
+				<th>內文</th>
+				<th>維護</th>
 			</tr>
 			<c:forEach var="all" items="${getAllMtList}">
 				<tr>
 					<td>&nbsp;${all.pkey} &nbsp;</td>
-					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >${all.articleId}  </a> ${all.articleId}</td>
+					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >${all.articleId}</a> </td>
 					<td>${all.memberId}</td>
 					<td>${all.updateDate}</td>
-					<td>${all.status}</td>
+					<c:if test="${ all.status == 1}"><td>可瀏覽</td></c:if>
+					<c:if test="${ all.status == 0}"><td>***已下架***</td></c:if>
 					<td>${all.category}</td>
 					<td class="td1">${all.title}</td>
 					<td class="td1">${all.imgName}</td>
@@ -70,12 +93,11 @@ td {
 					<td>
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
-							<a class='delSingle'
-								href="${pageContext.request.contextPath}/delSingleArticle/${all.articleId}">刪除</a>
+							<a class='delSingle' href="${pageContext.request.contextPath}/delSingleArticle/${all.articleId}">
+							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>
+							刪除</a>
 							<a
-								href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}">編輯資料</a>	
-							<a
-								href="${pageContext.request.contextPath}/delSingleArticle/TimeOrder/${all.articleId}">排序</a>
+								href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}">編輯資料</a>
 						</div>
 					</td>
 				</tr>

@@ -39,8 +39,12 @@ function confirmDelete(n) {
 			border-color:#FFFFFF;
 		}
 		.tablebyme a{
+ 			background-color:#0072E3;
+			padding:10px 20px;
 			text-decoration:none;
 			font-weight:500;
+			box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
 		}
 		
 		.tablebyme a:hover{
@@ -123,14 +127,19 @@ function confirmDelete(n) {
 			</c:choose>
 		
 			<tr height='16'>
-	          	<td colspan='4' align='right'>合計金額：</td>
+	          	<td colspan='5' align='right'>合計金額：</td>
 	          	<td align='right'>${shoppingCart.total} 元</td>
-	          	<td align='right'>
-	          		<a href="<c:url value='/getAllAds' />">返回購物</a>
-	          		<a href="<c:url value='/checkoutOK.insert' />">結帳</a>
-	          	</td>          
+	          	         
 	        </tr>
 	        </tbody>
+	        <tfoot>
+	        	<tr height='30'>
+		        	<td colspan='6' align='center'>
+		          		<a href="<c:url value='/getAllAds' />">返回購物</a>
+		          		<a href="<c:url value='/checkoutOK.insert' />">結帳</a>
+		          	</td> 
+	        	</tr>
+	        </tfoot>
 		</table>
 		 ${shoppingCart.content}
 	</div>

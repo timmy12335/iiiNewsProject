@@ -20,17 +20,20 @@ public class UserController {
 	ServletContext ctx;
 	@Autowired
 	MBService service;
-	
-	
-   @RequestMapping(value = "/password", method = RequestMethod.GET)
-   public ModelAndView student() {
-      return new ModelAndView("/MB/password", "command", new MBBean());
-   }
 
-   @RequestMapping(value = "/password", method = RequestMethod.POST)
-   public String adduser(@ModelAttribute("command")MBBean user, 
-   ModelMap model) {
-	   service.addMember(user);
+	@RequestMapping(value = "/UserMB", method = RequestMethod.GET)
+	public String usermb() {
+		return new String("/MB/UserMB");
+	}
+
+	@RequestMapping(value = "/password", method = RequestMethod.GET)
+	public ModelAndView student() {
+		return new ModelAndView("/MB/password", "command", new MBBean());
+	}
+
+	@RequestMapping(value = "/password", method = RequestMethod.POST)
+	public String adduser(@ModelAttribute("command") MBBean user, ModelMap model) {
+		service.addMember(user);
 //       System.out.println(user.getSex());
 //       System.out.println(user.getName());
 //      model.addAttribute("memberId", user.getMemberId());
@@ -45,6 +48,6 @@ public class UserController {
 //      model.addAttribute("mbpoints", user.getMbpoints());
 //      
 
-      return "/MB/UserList";
-   }
+		return "/MB/UserList";
+	}
 }

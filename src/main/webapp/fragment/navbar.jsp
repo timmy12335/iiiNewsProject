@@ -15,7 +15,7 @@
             <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
             
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
-            <li><a href="<c:url value='/password'/>">會員中心</a>
+            <li><a href="<c:url value='/UserMB'/>">會員中心</a>
                 <ul>
                     <li><a href='#'>會員功能1</a>
                         <ul>

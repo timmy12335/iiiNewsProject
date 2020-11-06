@@ -86,7 +86,7 @@ public class AdBuyingController {
 	@GetMapping("/ShowCartContent")
 	public String showCartContent(Model model) {
 		//...未來保留寫確認會員登入
-		return  "AD/shoppingCart";
+		return  "AD/shoppingCartTest";
 	}
 	
 	/*點選刪除購物車內容 一筆筆*/
@@ -119,7 +119,7 @@ public class AdBuyingController {
 		//生成訂購時間
 		Timestamp orderDate = new Timestamp(System.currentTimeMillis());
 		//將資訊封裝到AdOrderBean
-		AdOrderBean aob = new AdOrderBean(null, adOrderNo, buyerMemberId, cart.getTotal(), orderDate, null, null);
+		AdOrderBean aob = new AdOrderBean(null, adOrderNo, buyerMemberId, cart.getTotal(), orderDate, 0, null, null);
 		
 		//取出購物車內的各項商品 把商品做成AdOrderItemBean的Set
 		Set<AdOrderItemBean> itemBeanSet = new LinkedHashSet<AdOrderItemBean>();

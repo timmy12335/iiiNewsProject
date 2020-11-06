@@ -38,6 +38,7 @@ public class trkNewsBean implements Serializable {
 	private Clob descript;
 	private Integer trcnum;
 	private Integer clicnum;
+	@JsonIgnore
 	private Blob coverimage;
 	private String filename;
 	private String type;

@@ -166,8 +166,8 @@ public class MtAddController {
 			}
 		}
 		if (is == null) {
-			is = servletContext.getResourceAsStream("/img/NoImage.jpg");
-			mimeType = servletContext.getMimeType("NoImage.jpg");
+			is = servletContext.getResourceAsStream("/img/NO_IMAGE.png");
+			mimeType = servletContext.getMimeType("NO_IMAGE.png");
 		}
 		MediaType mediaType = MediaType.valueOf(mimeType);
 		HttpHeaders headers = new HttpHeaders();
@@ -297,7 +297,7 @@ public class MtAddController {
 		return "/MT/singleArticle";
 	}
 
-	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態，暫時OK
+	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態，OK
 	public String delSingleArticle(@PathVariable String articleId ,Model model) {
 		service.delSingleArticle(articleId);
 		return "redirect:/getAllMtAdd";
@@ -316,16 +316,22 @@ public class MtAddController {
 	public String getMemArticleList(Model model) {
 //		List<MtAddBean> list = service.getMemArticle();
 //		model.addAttribute("memArticleList", list);
-		return "MT/Search";
+		return "/MT/Search";
 	}
 
 	@GetMapping("/getMemArticleList/{memberId}")	//輸入ID後顯示文章列表
-	public String queryMemArticle(@PathVariable Integer memberId ,Model model) {
+	public String getMemArticleList(@PathVariable Integer memberId ,Model model) {
 		List<MtAddBean> list = service.getMemArticle(memberId);
 		model.addAttribute("memArticleList", list);
-		return "MT/getAllMtAdd2";
+		return "/MT/getMemArticle";
 	}
 
+	@GetMapping("/delMemArticle/{articleId}")	//刪除文章，改狀態，暫時OK
+	public String delMemArticle(@PathVariable String articleId ,Model model) {
+		Integer memberId = service.getSingleArticle(articleId).getMemberId();
+		service.delSingleArticle(articleId);
+		return "redirect:/getMemArticleList/"+memberId;
+	}
 	
 	//---------------------------------------------------------
 	@GetMapping("/getTodayNews")	//載入當日熱門新聞

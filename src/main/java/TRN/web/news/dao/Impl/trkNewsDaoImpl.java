@@ -97,4 +97,12 @@ public class trkNewsDaoImpl implements trkNewsDao {
 			return list;
 		}
 
+		@Override //依pk刪除單則追蹤
+		public void deletetrkNewsByPK(Integer trackId) {
+			Session session = factory.getCurrentSession();
+            trkNewsBean trkNewsBean = new trkNewsBean();
+            trkNewsBean.setTrackId(trackId);
+            session.delete(trkNewsBean);
+		}
+
 }

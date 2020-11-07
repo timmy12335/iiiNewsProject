@@ -58,9 +58,9 @@ public class NewsProductController {
 			,Model model) {
 		Timestamp uploadTime = new Timestamp(System.currentTimeMillis());
 		nb.setUploadTime(uploadTime);		
-		Time ti = nb.getLimitTime();
-		java.sql.Timestamp countimesql = service.getfutureTime(ti);
-		nb.setFutureTime(countimesql);
+//		Time ti = nb.getLimitTime();
+//		java.sql.Timestamp countimesql = service.getfutureTime(ti);
+//		nb.setFutureTime(countimesql);
 		
 		System.out.println("----------------------------------------");
 	

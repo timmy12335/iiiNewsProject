@@ -6,14 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>所有廣告列表</title>
-<script type="text/javascript">
-	function deleteCheck(){
-		if(confirm("確定更新此項資料")){
-		}else{
-			window.location.href="#"
-		}
-	}
-</script>
 </head>
 <body>
 <nav>

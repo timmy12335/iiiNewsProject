@@ -15,40 +15,41 @@
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<section style="margin-top: 100px;" align="center">
-<!-- 		<div class="container" style="margin-top: 30px"> -->
-			<div class="well" align="center" style="margin-left: 10%; margin-right: 10%">
-<!-- 				<div class="row" style="margin-top: 35px"> -->
-					<table class="table table-striped">
-						<caption>用戶列表</caption>
-						<thead>
-							<tr>
-								<th>生日</th>
-								<th>身分證</th>
-								<th>帳號</th>
-								<th>電話</th>
-								<th>郵箱</th>
-								<th>密碼</th>
-								<th>名字</th>
-								<th>性別</th>
-							</tr>
-						</thead>
-						<tbody>
+		<!-- 		<div class="container" style="margin-top: 30px"> -->
+		<div class="well" align="center"
+			style="margin-left: 10%; margin-right: 10%">
+			<!-- 				<div class="row" style="margin-top: 35px"> -->
+			<table class="table table-striped">
+				<caption>用戶列表</caption>
+				<thead>
+					<tr>
+						<th>生日</th>
+						<th>身分證</th>
+						<th>帳號</th>
+						<th>電話</th>
+						<th>郵箱</th>
+						<th>密碼</th>
+						<th>名字</th>
+						<th>性別</th>
+					</tr>
+				</thead>
+				<tbody>
 
-							<tr>
-								<td>${phone}</td>
-								<td>${email}</td>
-								<td>${password}</td>
-								<td>${name}</td>
-								<td>${sex}</td>
-								<td>${memberId}</td>
-								<td>${birthday}</td>
-								<td>${identityId}</td>
-							</tr>
-							<h3>${requestScope.user.name}恭喜您完成註冊</h3>
-						</tbody>
-					</table>
-				</div>
-			</div>
+					<tr>
+						<td>${phone}</td>
+						<td>${email}</td>
+						<td>${password}</td>
+						<td>${name}</td>
+						<td>${sex}</td>
+						<td>${memberId}</td>
+						<td>${birthday}</td>
+						<td>${identityId}</td>
+					</tr>
+					<h3>${requestScope.user.name}恭喜您完成註冊</h3>
+				</tbody>
+			</table>
+		</div>
+		</div>
 		</div>
 	</section>
 </body>

@@ -10,6 +10,47 @@
 
 <!-- </script> -->
 <title>註冊</title>
+<style>
+::-webkit-input-placeholder {
+	color: #FFA042;
+}
+
+:-moz-placeholder {
+	color: #FFA042;
+}
+
+::-moz-placeholder {
+	color: #FFA042;
+}
+
+:-ms-input-placeholder {
+	color: #FFA042;
+}
+
+.test {
+	border: 0;
+	background-color: #7E3D76;
+	color: #fff;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+input:hover {
+	color: #003C9D;
+	background-color: #C7C7E2;
+	border: 2px #003C9D solid;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+g-recaptcha{
+
+}
+</style>
+
+
 </head>
 <body>
 	<nav>
@@ -19,56 +60,57 @@
 		<div id="page" class="container"></div>
 		<form:form id="regform" onsubmit="return checkinput()"
 			modelAttribute="command">
-			<table width="600" align="center">
-				<h3 align="center">會員註冊</h3>
+			<table align="center">
+				<h2 align="center">會員註冊</h2>
 				<tr>
 					<td>登入帳號：</td>
 					<td><form:input type="text" path="memberId" required="true"
-							id='memberId' /></td>
-					<td>帳號只能是英文、數字，其餘字元均不接受</td>
+							id='memberId' placeholder="輸入帳號" /></td>
+					<!-- 					<td>帳號只能是英文、數字，其餘字元均不接受</td> -->
 				</tr>
 				<tr>
 					<td>登入密碼：</td>
 					<td><form:input type="password" path="password"
-							required="true" id='password' /></td>
-					<td>密碼只能是英文、數字，長度必須大於 5</td>
+							required="true" id='password' placeholder="輸入密碼" /></td>
+					<!-- 					<td>密碼只能是英文、數字，長度必須大於 5</td> -->
 				</tr>
 				<tr>
 					<td>確認密碼：</td>
 					<td><input type="password" name="okpassword"
-						required="required" id='okpassword' /></td>
-					<td>再輸入一次密碼，確認沒有打錯字</td>
+						required="required" id='okpassword' placeholder="再次輸入帳號" /></td>
+					<!-- 					<td>再輸入一次密碼，確認沒有打錯字</td> -->
 				</tr>
 				<tr>
 					<td>真實姓名：</td>
 					<td><form:input type="text" path="name" id="name"
-							required="true" /></td>
-					<td>填寫註冊者的姓名</td>
+							placeholder="請輸入真實姓名" required="true" /></td>
+					<!-- 					<td>填寫註冊者的姓名</td> -->
 				</tr>
 
 				<tr>
 					<td>電子郵件：</td>
-					<td><form:input type="email" path="email" /></td>
-					<td>請填慣用的電子郵件</td>
+					<td><form:input type="email" path="email" placeholder="輸入常用信箱" /></td>
+					<!-- 					<td>請填慣用的電子郵件</td> -->
 				</tr>
 
 				<tr>
-					<td>身分證：</td>
-					<td><form:input type="text" path="identityId" id='identityId'></form:input>
-					<td><input type="button" id="btnCheck" value="檢查格式是否正確"
-						onclick="checkID"></td>
+					<td>身分證號：</td>
+					<td><form:input type="text" path="identityId" id='identityId'
+							placeholder="請輸入正確格式"></form:input>
+					<td><input class="test" type="button" id="btnCheck"
+						value="點我檢查" onclick="checkID"></td>
 				</tr>
 
 				<tr>
 					<td>行動電話：</td>
-					<td><form:input type="text" id="phone" path="phone"></form:input>
-					<td><input type="button" id="btnCheckphone"
-						onclick="return checkphone()" value="檢查格式是否正確"></td>
+					<td><form:input type="text" id="phone" path="phone"
+							placeholder="格式:09xx-xxx-xxx"></form:input>
+					<td><input class="test" type="button" id="btnCheckphone"
+						onclick="return checkphone()" value="點我檢查"></td>
 				<tr>
 					<td>生日：</td>
 					<td><form:input type="date" path="birthday" required="true"
-							id='bday' />
-					<td>請使用 YYYY-MM-DD 的格式</td>
+							id='bday' /> <!-- 					<td>請使用 YYYY-MM-DD 的格式</td> -->
 				</tr>
 
 				<tr>
@@ -81,21 +123,33 @@
 				</tr>
 
 				<tr>
-					<td class="web-form-span ">驗證碼:</td>
+					<td class="web-form-span ">驗證號碼：</td>
 					<td><input type="text" class=" web-form-input"
 						required="required" id="Yzm" /></td>
-					<td><input type="button" id="code" value="產生驗證碼"
-						class="btn-list-btn" onclick="createCode()">
+					<td><input class="test" type="button" id="code" value="產生驗證碼"
+						onclick="createCode()">
 				</tr>
+				<tr>
+					<td colspan='5' id="grecaptcha" class="g-recaptcha"
+						data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB"></td>
+				</tr>
+				
+				<tr>
+					<td colspan='2' id="g-recaptcha-error"></td>
+				</tr>
+				
 				<tr>
 					<td colspan="3" style="text-align: center;"><input
 						type="hidden" name="action" value="reg" /> <input type="submit"
-						value="送出註冊" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="" class="btn btn-info">登錄</a></td>
+						value="送出註冊" class="test" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=""
+						class="btn btn-info">登錄</a></td>
 				</tr>
 			</table>
 		</form:form>
 	</section>
+
+	<script src="https://www.google.com/recaptcha/api.js"></script>
 
 	<script type="text/javascript">
 		function checkinput() {
@@ -168,6 +222,20 @@
 				$("#Yzm").blur();//繫結驗證碼輸入正確時要做的事
 				YZM = true;
 			}
+		}
+	</script>
+
+	<script>
+		function submitUserForm() {
+			var response = grecaptcha.getResponse();
+			if (response.length == 0) {
+				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>';
+				return false;
+			}
+			return true;
+		}
+		function verifyCaptcha() {
+			document.getElementById('g-recaptcha-error').innerHTML = '';
 		}
 	</script>
 

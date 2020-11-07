@@ -15,7 +15,7 @@
             <li style="margin:0"><a href='/iiiNews'><img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;border:1px solid white"></a></li>
             
 <%--             <li><a href="<c:url value='/test1023' />">測試功能1023</a></li> --%>
-            <li><a href="<c:url value='/password'/>">會員中心</a>
+            <li><a href="<c:url value='/UserMB'/>">會員中心</a>
                 <ul>
                     <li><a href='#'>會員功能1</a>
                         <ul>
@@ -67,10 +67,12 @@
                     <li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>                    
                </ul>
             </li>
-            <li><a href="<c:url value='/MtCreate' />">影音專欄</a>
+            <li><a href="<c:url value='#' />">圖文專區</a>
             	<ul>
+            		<li><a href="<c:url value='/MtCreate' />">新增Po文</a>
                     <li><a href="<c:url value='/getAllMtAdd' />">檢視使用者所有資料</a></li>
-<%--                     <li><a href="<c:url value='/000' />">看所有廣告列表</a></li> --%>
+                    <li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
+                    <li><a href="<c:url value='/getTodayNews' />">新聞推薦</a></li>
 <%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
                 </ul>
             </li>

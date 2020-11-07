@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,10 +14,10 @@ import javax.persistence.Table;
 public class NewsOrderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer newsProduct_pk;
-	private Integer order_pk;
+	private Integer order_pk;	
 	private String orderId;
 	private String memberId;
 	private String companyId;
@@ -24,23 +25,18 @@ public class NewsOrderBean implements Serializable {
 	private Integer orderPrice;
 	private Timestamp soldTime;
 	
-	
+	@OneToOne
+	NewsBean newsBean;
 	
 	
 	public NewsOrderBean() {
 	}
 	
-	@Override
-	public String toString() {
-		return "NewsOrderBean [newsProduct_pk=" + newsProduct_pk + ", order_pk=" + order_pk + ", orderId=" + orderId
-				+ ", memberId=" + memberId + ", companyId=" + companyId + ", newsId=" + newsId + ", orderPrice="
-				+ orderPrice + ", soldTime=" + soldTime + "]";
-	}
 
-	public NewsOrderBean(Integer newsProduct_pk, Integer order_pk, String orderId, String memberId, String companyId,
+	public NewsOrderBean( Integer order_pk, String orderId, String memberId, String companyId,
 			String newsId, Integer orderPrice, Timestamp soldTime) {
 		super();
-		this.newsProduct_pk = newsProduct_pk;
+		
 		this.order_pk = order_pk;
 		this.orderId = orderId;
 		this.memberId = memberId;

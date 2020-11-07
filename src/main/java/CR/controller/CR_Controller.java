@@ -79,18 +79,7 @@ public class CR_Controller {
 	@PostMapping("/addReport")
 	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb) { 
 		MBBean mb = service.getMemberById(cb.getMemberId());
-		MimeMessage msg = mailSender.createMimeMessage();
-		try {
-		MimeMessageHelper email = new MimeMessageHelper(msg,true,"utf-8");
-			email.setTo(mb.getEmail());
-			email.setSubject("eeit19no4@gmail.com");
-			email.setText("<table style='border:1px;'><tr><td>",true);
-			email.addAttachment(cb.getAttachmentName(), cb.getImage());
-			mailSender.send(msg);
-		} catch (MessagingException e) {
-			
-			e.printStackTrace();
-		}
+
 		MultipartFile images = cb.getImage();
 		if(images.isEmpty()) {
 			System.out.println("無法找到圖片");
@@ -106,6 +95,21 @@ public class CR_Controller {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
+		}
+		MimeMessage msg = mailSender.createMimeMessage();
+		try {
+		MimeMessageHelper email = new MimeMessageHelper(msg,true,"utf-8");
+			email.setTo(mb.getEmail());
+			email.setSubject("客服表單申請成功通知信");
+			String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>"
+					+ "<table><tr><td>客服類別:"+cb.getCrClass()+"</td></tr><tr><td>客服標題:"+
+							cb.getCrTitle()+"</td></tr><tr><td>客服內容:"+cb.getCrContent()+"</td></tr></table><br><p>感謝您的申請，我們將會盡快回覆您";
+			email.setText(text,true);
+			email.addAttachment(cb.getAttachmentName(), cb.getImage());
+			mailSender.send(msg);
+		} catch (MessagingException e) {
+			
+			e.printStackTrace();
 		}
 		service.addReport(cb);
 	    return "redirect:/customerReports";

@@ -23,27 +23,27 @@
 				<caption>用戶列表</caption>
 				<thead>
 					<tr>
+						<th>公司行號</th>
 						<th>帳號</th>
-						<th>名字</th>
 						<th>密碼</th>
-						<th>身分證</th>
-						<th>郵箱</th>
-						<th>電話</th>
-						<th>生日</th>
-						<th>性別</th>
+						<th>統一編號</th>
+						<th>公司地址</th>
+						<th>公司信箱</th>
+						<th>公司電話</th>
+						<th>創立日期</th>
 					</tr>
 				</thead>
 				<tbody>
 
 					<tr>
-						<td>${memberId}</td>
-						<td>${name}</td>
-						<td>${password}</td>
-						<td>${identityId}</td>
-						<td>${email}</td>
-						<td>${phone}</td>
-						<td>${birthday}</td>
-						<td>${sex}</td>
+						<td>${cpname}</td>
+						<td>${cpmemberId}</td>
+						<td>${password2}</td>
+						<td>${Uniformnumbers}</td>
+						<td>${cpaddress}</td>
+						<td>${cpemail}</td>
+						<td>${cptel}</td>
+						<td>${founddate}</td>
 					</tr>
 					<h3>${requestScope.user.name}恭喜您完成註冊</h3>
 				</tbody>

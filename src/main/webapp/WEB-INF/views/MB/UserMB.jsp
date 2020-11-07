@@ -36,11 +36,12 @@
 	<section style="margin-top: 100px;" align="center">
 		<form modelAttribute="command"></form>
 		<h2 align="center">請選擇您要註冊的會員</h2>
-		<tr>
-			<td><a href="<c:url value='/password'/>"> <input
-					type="submit" class="button" value="一般會員"></a></td>
-			<td><input type="submit" class="button" value="企業會員"></td>
-		</tr>
+		<div>
+			<a href="<c:url value='Member'/>"> <input
+					type="submit" class="button" value="一般會員"></a>
+			<a href="<c:url value='CpMember'/>">
+			<input type="submit" class="button" value="企業會員"></a>
+		</div>
 
 	</section>
 </HTML>

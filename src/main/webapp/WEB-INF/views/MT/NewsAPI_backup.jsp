@@ -23,8 +23,8 @@ console.log(response.json());
 </script>
 
 <div class="wrapper">
-	<h1 class="top">Free news</h1><hr>
-<!-- 	<h1><a href="https://newsapi.org/">www.newsapi.org</a></h1> -->
+	<p class="top">Free news API for Developers</p>
+	<h1><a href="https://newsapi.org/">www.newsapi.org</a></h1>
 </div>
 <script>
 
@@ -57,43 +57,19 @@ $.ajax({
 
 function processData(data) {
   var articleItems = [];
+
   for (var i = 0; i < data.articles.length; i++) {
-	  
-	  	var author = data.articles[i].author;
-	    var title = data.articles[i].title;
-	    var description = data.articles[i].description;
-	    var publishedAt = data.articles[i].publishedAt;
-	    var artUrl = data.articles[i].url;
+    var author = data.articles[i].author;
+    var title = data.articles[i].title;
+    var description = data.articles[i].description;
+    var artUrl = data.articles[i].url;
 
-	    var $author = $('<div class="author">新聞來源: ' + author + "</div >");
-	    var $title = $("<a href=" + artUrl + '><div class="title">' + title + "</div ></a>" );
-	    var $description = $("<div class='description'>" + description + "</div >");
-	    var $publishedAt = $('<div class="publishedAt">更新時間: ' + publishedAt + "</div ><hr>");
+    var $author = $('<div class="author">Author: ' + author + "</div >");
+    var $title = $("<a href=" + artUrl + '><div class="title">' + title + "</div ></a>" );
+    var $description = $("<div class='description'>" + description + "</div >");
 
-	    $(".wrapper").append($author, $title, $description, $publishedAt);
-	    console.log(artUrl);
-
-//     var author = data.articles[i].author;
-//     var content = data.articles[i].content;
-//     var description = data.articles[i].description;
-//     var publishedAt = data.articles[i].publishedAt;
-//     var source = data.articles[i].source;
-//     var title = data.articles[i].title;
-//     var artUrl = data.articles[i].url;
-//     var urlToImage = data.articles[i].urlToImage;
-
-//     var $author = $('<div class="author">Author: ' + author + "</div >");
-//     var $content = $('<div class="content">content: ' + content + "</div >");
-//     var $description = $("<div class='description'>" + description + "</div >");
-//     var $publishedAt = $('<div class="publishedAt">publishedAt: ' + publishedAt + "</div >");
-//     var $source = $('<div class="source">source: ' + source + "</div >");
-//     var $title =  $('<div class="title"><a href=' + artUrl + '>' + title + "</a></div >");
-//     var $url = $('<div class="url">url: ' + url + "</div >");
-//     var $urlToImage = $('<div class="urlToImage">urlToImage: ' + urlToImage + "</div >");
-    
-
-//     $(".wrapper").append($author, $content, $description, $publishedAt, $source, $title, $url, $urlToImage);
-//     console.log(artUrl);
+    $(".wrapper").append($author, $title, $description);
+    console.log(artUrl);
   }
 }
 

@@ -18,20 +18,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
-import iiiNews.MT.validate.CheckArticleVaildator;
 
 @Controller
+@SessionAttributes({""})
 public class MtAddController {
 
 	@Autowired
@@ -281,12 +280,13 @@ public class MtAddController {
 		System.out.println("originBean after:-->" + originBean.toString());
 		
 
-		
+		String getMemId = originBean.getMemberId();
 		int n = service.modifyArticle(originBean);
 		System.out.println(n + "更改成功");
 		
 //		return "redirect:/";
-		return "redirect:/getAllMtAdd";
+//		return "redirect:/getAllMtAdd";
+		return "redirect:/getMemArticleList/" + getMemId;
 	}
 	//---------------------------------------------------------
 	
@@ -320,7 +320,7 @@ public class MtAddController {
 	}
 
 	@GetMapping("/getMemArticleList/{memberId}")	//輸入ID後顯示文章列表
-	public String getMemArticleList(@PathVariable Integer memberId ,Model model) {
+	public String getMemArticleList(@PathVariable String memberId ,Model model) {
 		List<MtAddBean> list = service.getMemArticle(memberId);
 		model.addAttribute("memArticleList", list);
 		return "/MT/getMemArticle";
@@ -328,7 +328,7 @@ public class MtAddController {
 
 	@GetMapping("/delMemArticle/{articleId}")	//刪除文章，改狀態，暫時OK
 	public String delMemArticle(@PathVariable String articleId ,Model model) {
-		Integer memberId = service.getSingleArticle(articleId).getMemberId();
+		String memberId = service.getSingleArticle(articleId).getMemberId();
 		service.delSingleArticle(articleId);
 		return "redirect:/getMemArticleList/"+memberId;
 	}

@@ -93,7 +93,7 @@ public class MtAddServiceImpl implements MtAddService {
 
 	@Override
 	@Transactional
-	public List<MtAddBean> getMemArticle(Integer memberId) { // 查詢單一會員的文章列表
+	public List<MtAddBean> getMemArticle(String memberId) { // 查詢單一會員的文章列表
 		return dao.getMemArticle(memberId);
 	}
 

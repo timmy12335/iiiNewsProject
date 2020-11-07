@@ -94,10 +94,9 @@ td {
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
 							<a class='delSingle' href="${pageContext.request.contextPath}/delSingleArticle/${all.articleId}">
-							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>
-							刪除</a>
-							<a
-								href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}">編輯資料</a>
+							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>刪除</a>
+<%-- 							<a href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}"> 	//Admin不可編輯--%>
+<%-- 							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>編輯資料</a> --%>
 						</div>
 					</td>
 				</tr>

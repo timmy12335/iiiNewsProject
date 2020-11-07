@@ -19,11 +19,30 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ScreenCapture {
-
+	public static void main(String[] args) throws Exception {
+		String userdir = System.getProperty("user.dir");
+		File tempFile = new File("d:", "temp.png");
+		ScreenCapture capture = ScreenCapture.getInstance();
+		capture.captureImage();
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		JLabel imagebox = new JLabel();
+		panel.add(BorderLayout.CENTER, imagebox);
+		imagebox.setIcon(capture.getPickedIcon());
+		capture.saveToFile(tempFile);
+		capture.captureImage();
+		imagebox.setIcon(capture.getPickedIcon());
+		frame.setContentPane(panel);
+		frame.setSize(400, 300);
+		frame.show();
+		System.out.println("Over");
+		}
 	private ScreenCapture() {
 		try {
 		robot = new Robot();

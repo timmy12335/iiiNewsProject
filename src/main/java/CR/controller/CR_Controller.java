@@ -1,14 +1,18 @@
 package CR.controller;
 
+import java.sql.Blob;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import CR.model.CRBean;
 import CR.service.CR_service;
@@ -56,6 +61,7 @@ public class CR_Controller {
 		return "CR/CrReport";
 	}
 	
+	
 	@GetMapping("/crReport/{pk}")
 	public String getReportByPk(@PathVariable Integer pk, Model model) {
 		CRBean cb = service.getReportById(pk);
@@ -73,11 +79,34 @@ public class CR_Controller {
 	@PostMapping("/addReport")
 	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb) { 
 		MBBean mb = service.getMemberById(cb.getMemberId());
-		SimpleMailMessage email = new SimpleMailMessage();
-		email.setTo(mb.getEmail());
-		email.setSubject("eeit19no4@gmail.com");
-		email.setText(cb.getCrContent());
-		mailSender.send(email);
+		MimeMessage msg = mailSender.createMimeMessage();
+		try {
+		MimeMessageHelper email = new MimeMessageHelper(msg,true,"utf-8");
+			email.setTo(mb.getEmail());
+			email.setSubject("eeit19no4@gmail.com");
+			email.setText("<table style='border:1px;'><tr><td>",true);
+			email.addAttachment(cb.getAttachmentName(), cb.getImage());
+			mailSender.send(msg);
+		} catch (MessagingException e) {
+			
+			e.printStackTrace();
+		}
+		MultipartFile images = cb.getImage();
+		if(images.isEmpty()) {
+			System.out.println("無法找到圖片");
+		}else {
+			cb.setAttachmentName(images.getOriginalFilename());
+		}
+		if(images != null && !images.isEmpty()) {
+			try {
+				byte[] bb = images.getBytes();
+				Blob blob = new SerialBlob(bb);
+				cb.setAttachment(blob);
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		service.addReport(cb);
 	    return "redirect:/customerReports";
 	}

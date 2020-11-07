@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>上架廣告欄位</title>
-<script src="https://www.google.com/recaptcha/api.js"></script>
+<!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
 <script >
 window.onload = function(){
 		var btn = document.getElementById("clickme1");
@@ -19,8 +19,8 @@ window.onload = function(){
 		AA.value = "有沒有雙11前 電商先漲一波的八卦"
 		article = document.getElementById("article")
 		article.value = "這陣子上網找適合的筆電\n發現昨天價格還在47xxx\n今天再上去看變成51xxx\n一開始還以為看錯機型\n發現電商的價格還連動\n有沒有先漲再降大特賣的八卦"
-		submitUserForm = document.getElementById("grecaptcha")
-		submitUserForm.value = true;
+// 		submitUserForm = document.getElementById("grecaptcha")
+// 		submitUserForm.value = true;
 		}
 		
 		btn2.onclick = function(){
@@ -30,8 +30,8 @@ window.onload = function(){
 		BB.value = "為什麼很多老人喜歡把發票印出來?"
 		article = document.getElementById("article")
 		article.value = "因為現在超商，都可以把發票存在會員裡面，發票開獎時還會自動對獎\n可是常常去超商的時候，還是會看到很多老人一定要店員把發票印出來\n有沒有為什麼老人這麼喜歡把發票印出來的八卦?"
-		submitUserForm111 = document.getElementById("grecaptcha")
-		submitUserForm111.value = false;
+// 		submitUserForm111 = document.getElementById("grecaptcha")
+// 		submitUserForm111.value = false;
 	}
 }
 	</script>
@@ -86,9 +86,9 @@ window.onload = function(){
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
 						</div>
 					
-					<div id="grecaptcha" class="g-recaptcha"
-						data-sitekey="6LfoZd4ZAAAAAI7CSpjpT5lOFf4mT1YxtkdTLUSp" style="padding:10px 70px "></div>
-					<div id="g-recaptcha-error"style="padding:10px 70px "></div>
+<!-- 					<div id="grecaptcha" class="g-recaptcha" -->
+<!-- 						data-sitekey="6LfoZd4ZAAAAAI7CSpjpT5lOFf4mT1YxtkdTLUSp" style="padding:10px 70px "></div> -->
+<!-- 					<div id="g-recaptcha-error"style="padding:10px 70px "></div> -->
 
 				
 					</div>
@@ -111,20 +111,20 @@ window.onload = function(){
 	</div>
 	
 	
-	<script>
-		function submitUserForm() {
-			var response = grecaptcha.getResponse();
-			if (response.length == 0) {
-				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>';
-				return false;
-			}
-			return true;
-		}
-		function verifyCaptcha() {
-			document.getElementById('g-recaptcha-error').innerHTML = '';
-		}
+<!-- 	<script> -->
+<!-- 		function submitUserForm() { -->
+<!-- 			var response = grecaptcha.getResponse(); -->
+<!-- 			if (response.length == 0) { -->
+<!-- 				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>'; -->
+<!-- 				return false; -->
+<!-- 			} -->
+<!-- 			return true; -->
+<!-- 		} -->
+<!-- 		function verifyCaptcha() { -->
+<!-- 			document.getElementById('g-recaptcha-error').innerHTML = ''; -->
+<!-- 		} -->
 
-	</script>
+<!-- 	</script> -->
 	
 	
 </body>

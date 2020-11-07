@@ -35,4 +35,12 @@ public class BMcontroll {
 		
 		return "BM/tables";
 	}
+	
+	@GetMapping("/iiiNewsIndex")
+	public String getindex(Model model) {
+		
+		return "index";
+	}
+	
+	
 }

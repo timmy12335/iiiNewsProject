@@ -23,4 +23,6 @@ public interface trkNewsDao {
 	rptNewsBean getReportById(int reportId); // 取得報導資料
 
 	List<rptNewsBean> getReportList();    // 取得報導列表
+	
+	void deletetrkNewsByPK(Integer trackId); //依pk值刪除追蹤新聞
 }

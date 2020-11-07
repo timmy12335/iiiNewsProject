@@ -63,5 +63,10 @@ public class trkNewsServiceImpl implements trkNewsService {
 	public List<rptNewsBean> getReportList() {
 		return dao.getReportList();
 	}
+	@Transactional  
+	@Override
+	public void deletetrkNewsByPK(Integer trackId) {
+		dao.deletetrkNewsByPK(trackId);
+	}
 
 }

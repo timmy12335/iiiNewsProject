@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -211,7 +214,20 @@ public class trkNewsController {
 				System.out.println("1106BB"+trkNewsBean);
 				return trkNewsBean;
 	}
-	
+			// 依照鍵值刪除單筆會員資料	
+			@DeleteMapping(value = "/editNews3/{NewsId}")
+			public @ResponseBody Map<String, String>   deletetrkNews(@PathVariable(required = true) Integer NewsId) {
+				Map<String, String> map = new HashMap<>();
+				try {
+					service.deletetrkNewsByPK(NewsId);
+					map.put("success", "刪除成功");
+				} catch(Exception e) {
+					e.printStackTrace();
+					map.put("fail", "刪除失敗");
+					System.out.println("刪除失敗");
+				}
+				return map;
+		    }
 	
 	
 	

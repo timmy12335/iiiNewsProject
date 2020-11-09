@@ -62,13 +62,13 @@
 		<a href="<c:url value='/getSingleNews/${news.newsId}'/>" >${news.title}  </a> 
 		
 		</td>
-		<td width='600' align='center'>${news.newsId}</td>
+		<td width='100' align='center'>${news.newsId}</td>
 		<td align='center'>${news.uploadTime}</td>		
 		<td align='center'>${ news.newsType}</td>
 		
 		<td align='center'>${news.location}</td>
 		<td><img width='200' height='150' 
-	                    	src="<c:url value='/getNewsPicture/${news.newsId}'/>" ></td>
+	                    	src="<c:url value='/getUpNewsPicture/${news.newsId}'/>" ></td>
 		</tr>
     <tr style="background-color:lightblue;"  height='36'>
 		<th width='600' align='center'>新聞大綱</th>
@@ -77,6 +77,7 @@
 		<th width='100' align='center'>價格</th>
 		<th width='60' align='center'>到期時間</th>	
 		<th width='60' align='center'>時間倒數</th>	
+		<th></th>
 		</tr>
 		<tr>
 		<td width='600' align='center'>${news.outline}</td>
@@ -85,6 +86,9 @@
 		<td align='center'>${news.price}</td>
 		<td align='center' id="ftime${loop.index}">${news.futureTime}</td>
 		<td align='center' id='lastime${loop.index}'></td>
+		<td>
+		<a href="<c:url value="/insertToOrderBean/${news.newsId}" />" onclick="return confirm('確定購買?')">購買</a>
+		</td>
 	</tr>		
 	</table>
 	<hr>
@@ -92,7 +96,7 @@
 				
 
 
-<input type="button" value="回目錄" onclick="location.href='index.jsp'">
+<input type="button" value="回目錄" onclick="location.href='/iiiNews'">
 <!--<a href="<c:url value='/' />">回前頁</a>   -->
 </div>
 <script>

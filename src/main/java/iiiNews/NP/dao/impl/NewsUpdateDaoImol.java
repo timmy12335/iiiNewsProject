@@ -20,10 +20,12 @@ public class NewsUpdateDaoImol implements NewsUpdateDao {
 	@Autowired
 	SessionFactory factory ;
 
+	
+	//將限時時間塞進單則新聞(DB),並將新聞上架(status=1)
 	@Override
 	public void updatelimitTime(String limitTime01,String newsId) {
 		
-		String hql = "UPDATE NewsBean SET limitTime=:lit , futureTime=:fTi "
+		String hql = "UPDATE NewsBean SET limitTime=:lit , futureTime=:fTi ,status=1 "
 				+ "WHERE newsId = :id";
 		Session session = factory.getCurrentSession();
 		SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
@@ -61,9 +63,7 @@ public class NewsUpdateDaoImol implements NewsUpdateDao {
 			e.printStackTrace();
 		}
 		java.sql.Time limitTime = new java.sql.Time(ltime.getTime());
-		System.out.println("limitTime = "+limitTime);
-		System.out.println("futureTime = "+futureTime);
-		System.out.println("newsId = "+newsId);
+		
 		session.createQuery(hql).setParameter("lit", limitTime)
 								.setParameter("fTi", futureTime)			
 								.setParameter("id", newsId)						
@@ -77,5 +77,5 @@ public class NewsUpdateDaoImol implements NewsUpdateDao {
 		session.update(newsBean);
 		
 	}
-
+	
 }

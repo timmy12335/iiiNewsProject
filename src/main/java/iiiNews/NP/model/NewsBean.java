@@ -28,7 +28,6 @@ public class NewsBean implements Serializable{
 	private Integer newsProduct_pk;
 	private String newsId;
 	private String memberId;
-	private String companyId;
 	private String newsType;
 	private String title;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
@@ -43,7 +42,7 @@ public class NewsBean implements Serializable{
 	private String outline;
 	@Column(columnDefinition = "nvarchar(MAX) NOT NULL")
 	private String article;
-	private String price;
+	private Integer price;
 	private Time limitTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp futureTime;
@@ -71,14 +70,13 @@ public class NewsBean implements Serializable{
 	
 	
 
-	public NewsBean(Integer newsProduct_pk, String newsId, String memberId, String companyId, String newsType,
+	public NewsBean(Integer newsProduct_pk, String newsId, String memberId, String newsType,
 			String title, Timestamp uploadTime, String location, String happenTime, String outline, String article,
-			String price, Time limitTime, Integer status) {
+			Integer price, Time limitTime, Integer status) {
 		super();
 		this.newsProduct_pk = newsProduct_pk;
 		this.newsId = newsId;
 		this.memberId = memberId;
-		this.companyId = companyId;
 		this.newsType = newsType;
 		this.title = title;
 		this.uploadTime = uploadTime;
@@ -110,12 +108,7 @@ public class NewsBean implements Serializable{
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
+	
 	public String getNewsType() {
 		return newsType;
 	}
@@ -159,10 +152,10 @@ public class NewsBean implements Serializable{
 	public void setArticle(String article) {
 		this.article = article;
 	}
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public Time getLimitTime() {

@@ -36,15 +36,16 @@
                     <li><a href='#'>一般會員</a>
                         <ul>
                             <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-                            <li><a href="<c:url value='/getMemNewsList'/>">個人新聞列表</a></li>
-                            
+                            <li><a href="<c:url value='/getMemNewsList/A0002'/>">個人未上架新聞列表</a></li>
+                            <li><a href="<c:url value='/getUpMemNewsList/A0002'/>">個人已上架新聞列表</a></li>                            
                         </ul>
                     </li>
                     <li><a href='#'>企業專區</a>
                         <ul>
                         
-                            <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li>
-                            <li><a href="<c:url value='/changeStautsForTime'/>">所有新聞列表test</a></li>
+<%--                             <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li> --%>
+                            <li><a href="<c:url value='/changeStautsForTime'/>">所有即時新聞列表</a></li>
+                            <li><a href="<c:url value=''/>">購買紀錄</a></li>
                             
                             
                         </ul>

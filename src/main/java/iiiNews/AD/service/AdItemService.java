@@ -11,4 +11,6 @@ public interface AdItemService {
 	public AdOrderItemBean getOneItems(int itemPk);
 	
 	public int updateItemPic(AdOrderItemBean aoib);
+	
+	public List<AdOrderItemBean> getCpMemberSoldList(String memberId);
 }

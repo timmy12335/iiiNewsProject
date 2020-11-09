@@ -42,6 +42,12 @@ public class AdItemServiceImpl implements AdItemService {
 		}
 		return n;
 	}
+
+	@Override
+	@Transactional
+	public List<AdOrderItemBean> getCpMemberSoldList(String memberId) {
+		return adItemDao.getCpMemberSoldList(memberId);
+	}
 	
 	
 

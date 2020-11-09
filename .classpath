@@ -6,6 +6,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="test" value="true"/>
@@ -24,5 +25,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/USER/Downloads/ECPayAIO_Java-master/jars/javax.servlet-3.0.0.v201112011016.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USER/Downloads/ECPayAIO_Java-master/jars/log4j.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

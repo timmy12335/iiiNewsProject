@@ -6,16 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>會員訂單的商品列表</title>
-<script type="text/javascript">
-	function deleteCheck(){
-		if(confirm("確定更新此項資料")){
+	<script>
+	function status(num){
+		console.log(num);
+		let status = document.getElementById("statusTd");
+		if(num == 0){
+			status.innerHTML = "未付款";
+		}else if(num == 1){
+			status.innerHTML = "已付款";
 		}else{
-			window.location.href="#"
+			status.innerHTML = "狀態異常";
 		}
 	}
-</script>
+	</script>
 </head>
-<body>
+<body onload="status(${orderInfo.paymentStatus})">
 <nav>
 <jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 </nav>
@@ -27,7 +32,8 @@
 	<span>${msgMap.addStatus}</span>
 	<hr>
 	<div align="center">
-		<table border="1">
+		<table border="1" >
+		<tr align="right"><td colspan="9" align="right" id="statusTd">狀態：${orderInfo.paymentStatus}</td></tr>
 			<tr>
 				<td>item PK</td>
 				<td>廣告編號</td>

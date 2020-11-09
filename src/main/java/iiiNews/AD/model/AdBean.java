@@ -26,6 +26,7 @@ public class AdBean implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Timestamp uploadDate;	//上傳的日期戳記
 	private String memberId;		//^^^^ 上傳的會員編號
+	private String memberName;		//^^^^ 上傳的會員名稱
 	
 	private String categoryNo;		//廣告欄位的位置分類
 	private Double width;			//紀錄欄位的寬
@@ -34,6 +35,7 @@ public class AdBean implements Serializable {
 	private Date adDate;			//欄位要販賣的日期
 	private Integer price;			//價格（單價）
 	private Integer stock;			//庫存量
+	private String statement;		//備註
 	
 
 	private Integer status;			//上架狀態
@@ -47,11 +49,12 @@ public class AdBean implements Serializable {
 	}
 
 	//傳參數建構子
-	public AdBean(String adNo, Timestamp uploadDate, String memberId, String categoryNo, Double width, Double height,
-			Date adDate, Integer price, Integer stock) {
+	public AdBean(String adNo, Timestamp uploadDate, String memberId, String memberName, String categoryNo, Double width, Double height,
+			Date adDate, Integer price, Integer stock, String statement) {
 		this.adNo = adNo;
 		this.uploadDate = uploadDate;
 		this.memberId = memberId;
+		this.memberName = memberName;
 		this.categoryNo = categoryNo;
 		this.width = width;
 		this.height = height;
@@ -156,6 +159,22 @@ public class AdBean implements Serializable {
 
 	public void setAdTitle(String adTitle) {
 		this.adTitle = adTitle;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getStatement() {
+		return statement;
+	}
+
+	public void setStatement(String statement) {
+		this.statement = statement;
 	}
 	
 	

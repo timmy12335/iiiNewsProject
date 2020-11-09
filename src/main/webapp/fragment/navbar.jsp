@@ -81,7 +81,7 @@
             		<li><a href="#">企業會員功能</a>
                     	<ul>
                             <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
-                            <li><a href="<c:url value='#' />">查詢所上架的商品##</a></li>
+                            <li><a href="<c:url value='/memberAllAdsList' />">查詢所上架的商品列表</a></li>
                             <li><a href="<c:url value='#' />">查詢所賣出的商品(下載圖片)##</a></li>
                         </ul>
                     </li>

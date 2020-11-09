@@ -14,7 +14,7 @@
 	</nav>
 	<div align='center' style="margin-top: 150px;">
 		<h3>
-			<b>會員${memberId}新聞列表</b>
+			<b>會員${memberId}未上架新聞列表</b>
 		</h3>
 		<c:choose>
 			<c:when test="${empty memNewsList}">
@@ -38,7 +38,7 @@
 						</tr>
 						<tr>
 							<td align='center'><a
-								href="<c:url value='/getSingleNews/${news.newsId}'/>">${news.title}
+								href="<c:url value='/getSingleNewsForUpdate/${news.newsId}'/>">${news.title}
 							</a></td>
 							<td align='center'>${news.newsId}</td>
 							<td align='center'>${news.uploadTime}</td>
@@ -50,14 +50,11 @@
 						<tr style="background-color: lightblue;" height='36'>
 							<th width='500' align='center'>新聞內文</th>
 							<th width='100' align='center'>價格</th> 
-<!-- 							<th width='100' align='center'>販賣計時</th> -->
 							<th width='50' align='center'>販賣計時</th>
-<!-- 							<th width='100' align='center'>到期時間</th> -->
 							<th></th>
 							<th></th>
 							<th></th>
 							<th></th>
-<!-- 							<th></th> -->
 						</tr>
 						<tr>
 							<td align='left'>${news.article}</td>
@@ -66,16 +63,10 @@
 								<input type="text" id="limitTime${loop.index}"  readonly />
 								<input type="hidden" id="newsId${loop.index}" value="${news.newsId}"/>
 							</td>
-							
-							
-
-<%-- 							<td align='center'>${news.limitTime}</td> --%>
-<%-- 							<td align='center'>${news.futureTime}</td> --%>
 							<td align='center'><a href="<c:url value='/getUpdateSingleNews/${news.newsId}' />">修改本則新聞</a></td>
 							<td align='center'><a href="<c:url value='/delSingleNews/${news.newsId}' />">刪除</a></td>
 							<td align='center'><input type="button" value="輸入計時時間" onclick="inputLimitTime(${loop.index})"></td>
 							<td align='center'><input type="submit" name="submit" id="submit" value="確認送出"></td>
-<%-- 							<td align='center'><a href="<c:url value='' />">確認送出</a></td> --%>
 							
 						</tr>
 					</table>					
@@ -86,8 +77,8 @@
 		</c:choose>
 
 		<br>
-		<input type="button" value="回目錄" onclick="location.href='index.jsp'">
-		<!--<a href="<c:url value='/' />">回前頁</a>   -->
+		<input type="button" value="回目錄" onclick="location.href='/iiiNews'">
+
 	</div>
 	<script>
 	function inputLimitTime(g) {
@@ -100,10 +91,7 @@
 		}else{
 			alert("請輸入正確時間") 
 		}
-		}
-
-	
-	
+	}
 	</script>
 </body>
 </html>

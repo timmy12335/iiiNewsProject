@@ -3,7 +3,6 @@ package iiiNews.MT.validate;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import iiiNews.MT.model.MtAddBean;
 
 public class CheckArticleVaildator implements Validator {
 

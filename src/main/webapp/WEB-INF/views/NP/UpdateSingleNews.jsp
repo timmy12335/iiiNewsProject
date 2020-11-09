@@ -66,6 +66,7 @@
 		file1:<input type="file" id="productImage" name="productImage" multiple ><br>
 		file2:<input type="file" id="productImage" name="productImage" multiple ><br>
 		file3:<input type="file" id="productImage" name="productImage" multiple ><br>
+		
 		<img width='300' height='200' id="productImage1"
 			src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
 		<div>
@@ -78,14 +79,15 @@
 		</div>	
 		<div>
 			<label for="price">販賣價格：</label>
-			<form:input type="text" id="price" name="price" size="50" path="price" value=" ${ newsSingle.price }"  />
+			<form:input type="text" id="price" name="price" size="50" path="price" value="${ newsSingle.price }"  />
 		</div>	
 
 		
 <!-- 		<input type="text" id="limitTime"  name="limitTime" size="20"  placeholder="請輸入限時時間" /> -->
 		
 		<input type="submit" name="submit" id="submit" value="確認送出"><br>
-		<a href="<c:url value="/getMemNewsList/A0002" />">回前頁</a>
+<%-- 		<a href="<c:url value="/getMemNewsList/A0002" />">回前頁</a> --%>
+		<input type ="button" onclick="history.back()" value="回前頁"></input>
 	</div>
 	</fieldset>
 	</form:form>

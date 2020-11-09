@@ -51,7 +51,7 @@
 		console.log(min);
 		console.log(sec);
 		let time = hr+"小時"+min+"分"+sec+"秒";
-		document.getElementById("lastime").innerHTML ="剩餘時間 :"+ time;
+		document.getElementById("lastime").innerHTML = time;
 
 	}
 	
@@ -77,15 +77,11 @@
 		<p>發生時間: ${ newsSingle.happenTime }</p>
 		<p>發生地點: ${ newsSingle.location }</p>		
 		<img width='300' height='200'
-			src="<c:url value='/getUpNewsPicture/${ newsSingle.newsId }'/>">
+			src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
 		<p>新聞內文:</p>
 		<p>${ newsSingle.article }</p>
 		<p>價格: ${ newsSingle.price }</p>
-		<p>販賣計時: ${ newsSingle.limitTime }</p>
-		<p>到期時間: ${ newsSingle.futureTime }</p>
-		<div id=lastime></div>
-		<br>
-		<a href="<c:url value="/insertToOrderBean/${newsSingle.newsId}" />" onclick="return confirm('確定購買?')">購買</a>
+		<p style="color: red;">尚未輸入販賣計時</p>
 		<input type ="button" onclick="history.back()" value="回前頁"></input>
 
 	</div>

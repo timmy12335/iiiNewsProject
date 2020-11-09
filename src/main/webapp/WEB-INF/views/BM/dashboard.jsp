@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="tw">
 
@@ -7,7 +10,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>RoyalUI Admin</title>
+  <title>iiiNews Admin</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
@@ -20,6 +23,9 @@
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 <body>
+<<<<<<< Updated upstream
+<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
+=======
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -75,9 +81,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="連結">
+            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
               <i class="ti-star menu-icon"></i>
-              <span class="menu-title">備用</span>
+              <span class="menu-title">社群</span>
             </a>
           </li>
           <li class="nav-item">
@@ -111,22 +117,14 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+>>>>>>> Stashed changes
 
-  <!-- plugins:js -->
-  <script src="vendors/base/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="vendors/chart.js/Chart.min.js"></script>
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <!-- End custom js for this page-->
+
+
+
+        
+   
+<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
 
 </html>

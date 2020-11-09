@@ -8,7 +8,6 @@ import iiiNews.MB.model.MBBean;
 public interface CR_service {
 	public List<CRBean> getRecord();
 	
-	public MBBean getMemberById(int memberId);
 
 	void addReport(CRBean report);
 	
@@ -16,4 +15,6 @@ public interface CR_service {
 	public CRBean getReportById(int pk);
 	void updateReport(CRBean cb);
 	void evictReport(CRBean cb);
+
+	public MBBean getMemberById(int memberId);
 }

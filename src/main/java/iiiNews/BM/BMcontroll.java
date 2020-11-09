@@ -33,7 +33,7 @@ public class BMcontroll {
 	@GetMapping("/tables")
 	public String gettables(Model model) {
 		
-		return "BM/tables";
+		return "BM/NewBMLook";
 	}
 	
 	@GetMapping("/iiiNewsIndex")

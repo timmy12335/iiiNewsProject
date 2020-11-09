@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +28,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
+import iiiNews.MT.validate.CheckArticleVaildator;
 
 @Controller
-@SessionAttributes({""})
+@SessionAttributes({"MBBean"})
 public class MtAddController {
 
 	@Autowired
@@ -39,30 +43,51 @@ public class MtAddController {
 	ServletContext servletContext;
 	
 	@GetMapping("/MtCreate")
-	public String toCreateForm(Model model) {		//載入新增欄位頁面getBean
+	public String toCreateForm(Model model, HttpSession session) {		//載入新增欄位頁面getBean
+		
+		MBBean mb = (MBBean) session.getAttribute("MBBean");	//抓會員session
+        String memberId = mb.getMemberId();
+		
 		MtAddBean bean = new MtAddBean();
 		model.addAttribute("mtBean", bean);
-		System.out.println("*******************************************");
+		System.out.println("*******************************************" + memberId);
 		return "MT/Create";
 	}
 
 	@PostMapping("/MtCreate")		//新增欄位頁面
-	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model) {
+//	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model) {
 
 		//-----------------------------------------11/05判斷功能，要改成Ajax
-//	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result) {
-//		CheckArticleVaildator validator = new CheckArticleVaildator();
-//		validator.validate(bean, result);
-//		try {
-//			if (bean.getTitle().isEmpty()) {
-//				result.rejectValue("title","","");
-//				System.out.println("---標題不能空白---");
-//				return "MT/Create";
-//			}
-//		} catch (Exception e) {
-//			System.out.println("---標題catch---");
-//			e.printStackTrace();
-//		}
+	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result) {
+        CheckArticleVaildator validator = new CheckArticleVaildator();
+        validator.validate(bean, result);
+        MBBean mbb = (MBBean) model.getAttribute("MBBean");
+        bean.setMemberId(mbb.getMemberId());
+        
+        try {
+            if (bean.getTitle().isEmpty()) {
+                result.rejectValue("title","","");
+                System.out.println("---標題不能空白---");
+                return "MT/Create";
+            }
+        } catch (Exception e) {
+            System.out.println("---標題catch---");
+            e.printStackTrace();
+        }
+        //-----------------------------------------------
+        try {
+            if (bean.getArticle().isEmpty()) {
+                result.rejectValue("article","","內文不能空白");
+                System.out.println("---內文不能空白---");
+                return "MT/Create";
+            }
+        } catch (Exception e) {
+            System.out.println("---標題catch---");
+            e.printStackTrace();
+        }
+        
+        
+        //-----------------------------------------------
 		
 		
 		
@@ -230,6 +255,11 @@ public class MtAddController {
 	public String getAllMtList(Model model){	
 		List<MtAddBean> list = service.getAllMtAdd();
 		model.addAttribute("getAllMtList",list);
+        //--------------------------手動測試才加
+//        MBBean mb = new MBBean();   //手動設session
+//        mb.setMemberId("9999");
+//        model.addAttribute("MBBean", mb);
+        //--------------------------手動測試才加
 		return "MT/getAllMtAdd";
 	}
 	

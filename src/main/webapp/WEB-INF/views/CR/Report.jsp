@@ -62,11 +62,9 @@ window.onload=function(){
 </head>
 <body>
 
-<nav>
-<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
-</nav>
+<jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
 
-<section style="margin-top:100px">
+<!-- <section style="margin-top:100px"> -->
 <h2 class="title" align='center'>編號:${report.pk}&nbsp表單</h2>
 <hr>
 <div align='center'>
@@ -116,6 +114,6 @@ window.onload=function(){
 					
 					
 </div>
-</section>
+	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include> 
 </body>
 </html>

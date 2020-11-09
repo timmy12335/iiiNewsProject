@@ -15,11 +15,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import franktest.model.MemberBean;
+import iiiNews.MB.model.MBBean;
 
 @Entity
 @Table(name="MtComment")
-public class MtCommentBean {
+public class MtCommentBean {				//複合主鍵
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Comment_Id")
@@ -34,10 +34,10 @@ public class MtCommentBean {
 				@JoinColumn(name = "FK_Comment_Id", referencedColumnName = "Comment_Id")	//留言欄位
 		},
 		inverseJoinColumns = {
-				@JoinColumn(name = "FK_AUTHOR_Id", referencedColumnName = "seqNo")	//會員欄位，待修改*****
+				@JoinColumn(name = "FK_Member_Id", referencedColumnName = "MBNo")	//會員欄位，待修改*****
 		}
 	)
-	private Set<MemberBean> members = new HashSet<MemberBean>(0);	//會員名稱，待修改*****
+	private Set<MBBean> members = new HashSet<MBBean>(0);	//會員名稱，待修改*****
 
 	public MtCommentBean() {
 	}
@@ -58,11 +58,11 @@ public class MtCommentBean {
 		CommentBox = commentBox;
 	}
 
-	public Set<MemberBean> getMembers() {
+	public Set<MBBean> getMembers() {
 		return members;
 	}
 
-	public void setMembers(Set<MemberBean> members) {
+	public void setMembers(Set<MBBean> members) {
 		this.members = members;
 	}
 

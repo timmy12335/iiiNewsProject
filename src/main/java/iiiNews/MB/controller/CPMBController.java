@@ -10,27 +10,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import CR.service.CR_service;
-import iiiNews.MB.model.MBBean;
-import iiiNews.MB.service.MBService;
+import iiiNews.MB.model.CpMemberBean;
+import iiiNews.MB.service.CPMBService;
 
 @Controller
-public class UserController {
+public class CPMBController {
 	@Autowired
 	ServletContext ctx;
 	@Autowired
-	MBService service;
-	
-	
-   @RequestMapping(value = "/password", method = RequestMethod.GET)
-   public ModelAndView student() {
-      return new ModelAndView("/MB/password", "command", new MBBean());
-   }
+	CPMBService service;
 
-   @RequestMapping(value = "/password", method = RequestMethod.POST)
-   public String adduser(@ModelAttribute("command")MBBean user, 
-   ModelMap model) {
-	   service.addMember(user);
+	@RequestMapping(value = "/UserCPMB", method = RequestMethod.GET)
+	public String usercpmb() {
+		return new String("/MB/UserCPMB");
+	}
+
+	@RequestMapping(value = "/CpMember", method = RequestMethod.GET)
+	public ModelAndView cpstudent() {
+		return new ModelAndView("/MB/CpMember", "command_CP", new CpMemberBean());
+//		CpMemberBean command_Cp = new CpMemberBean();
+//		model.addAttribute("command_Cp", command_Cp);
+//		return "/MB/CpMember";
+	}
+
+	@RequestMapping(value = "/CpMember", method = RequestMethod.POST)
+	public String addcpuser(@ModelAttribute("command_CP") CpMemberBean cpuser, ModelMap model) {
+		service.addCpMember(cpuser);
 //       System.out.println(user.getSex());
 //       System.out.println(user.getName());
 //      model.addAttribute("memberId", user.getMemberId());
@@ -45,6 +50,6 @@ public class UserController {
 //      model.addAttribute("mbpoints", user.getMbpoints());
 //      
 
-      return "/MB/UserList";
-   }
+		return "/MB/UserListCP";
+	}
 }

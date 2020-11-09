@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>單一新聞表</title>
+
 <style>
 td{
 align:left;

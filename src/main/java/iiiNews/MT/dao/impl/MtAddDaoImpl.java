@@ -115,7 +115,7 @@ public class MtAddDaoImpl implements MtAddDao{
 	
 	@SuppressWarnings("unchecked")			//---------開始修改以下
 	@Override
-	public List<MtAddBean> getMemArticle(Integer memberId) {		//查詢單一會員的文章
+	public List<MtAddBean> getMemArticle(String memberId) {		//查詢單一會員的文章
 		String hql = "FROM MtAddBean WHERE memberId = :memId "
 				+ "AND status = 1 ORDER BY updateDate DESC";
 		Session session = factory.getCurrentSession();

@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>分頁廣告列表</title>
+<script>
+window.onload=function(){
+	var origincontent = "<table border='1'><tr height='42' bgcolor='#fbdb98'><th width='20' align='center'>序號</th>";
+	origincontent +=  "<th width='50' align='center'>廣告PK值</th><th width='150' align='center'>廣告編號</th><th width='100' align='center'>上傳時間</th>";
+	origincontent +=  "<th width='150' align='center'>刊登者</th>"
+	origincontent +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='100' align='center'>單價</th>";	    
+	origincontent +=  "<th width='100' align='center'>texting</th></tr>";
+	origincontent +=  "<tr><td colspan='8' align='center'><b>請選擇欲搜尋的類別</b></td></tr></table>";
+	document.getElementById("somedivS").innerHTML = origincontent;
+}
+</script>
 <style>
 	.cartBtn {
 	  background-color: #0066CC; /* Green */
@@ -28,15 +39,19 @@
 	</nav>
 	<div align='center' style="margin-top: 150px;">
 		<h3>分頁顯示(JSON)</h3>
-		<input type="text" class="search" />
-		<select id="cateChoose" onchange="myFunction()">
-			<option value="none">分類項目</option>
+		<label>關鍵字查詢：</label>
+		<input type="text" class="search" id="wordChoose" onkeyup="searchByWord()"/>
+		<label>按分類搜尋：</label>
+		<select id="cateChoose" onchange="searchBycateNo()">
+			<option value="none">請選擇</option>
 			<option value="100">頭版頭</option>
 			<option value="200">頭版側標</option>
 			<option value="300">內頁版頭</option>
 			<option value="400">內頁側標</option>
 			<option value="500">小廣告</option>
          </select>
+         <label>按日期搜尋：</label>
+         <input type="date" id="dateChoose" onchange="searchByDate()"/>
 		<hr>
 		<div id='somedivS'></div>
 <!-- 		 style='height: 260px;' style='height: 60px; margin: 250px;' -->
@@ -66,7 +81,8 @@
 
 	function displayPageAds(responseData){
 		  var content = "<table border='1'><tr height='42' bgcolor='#fbdb98'><th width='20' align='center'>序號</th>";
-		      content +=  "<th width='50' align='center'>廣告PK值</th><th width='100' align='center'>廣告編號</th><th width='100' align='center'>上傳時間</th>";
+		      content +=  "<th width='50' align='center'>廣告PK值</th><th width='150' align='center'>廣告編號</th><th width='100' align='center'>上傳時間</th>";
+		      content +=  "<th width='150' align='center'>刊登者</th>"
 		      content +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='100' align='center'>單價</th>";	    
 			  content +=  "<th width='100' align='center'>texting</th></tr>";
 			var ad = JSON.parse(responseData);		// 傳回一個陣列
@@ -78,6 +94,7 @@
 				           	"<td  align='center' >" + ad[i].adPk + "&nbsp;</td>" + 
 			               	"<td>" + ad[i].adNo + "</td>" +
 			               	"<td align='center'>" + ad[i].uploadDate + "</td>" +
+			               	"<td align='center'>" + ad[i].memberName + "</td>" +
 			               	"<td align='right'>" + cateNameTrans(ad[i].categoryNo) + "&nbsp;</td>" +
 			               	"<td align='center'>" + ad[i].adDate + "</td>" +
 			               	"<td align='right'>" + "NT$ " + ad[i].price + "</td>" + 
@@ -95,14 +112,48 @@
 			document.getElementById("somedivS").innerHTML = content;
 	}
 	
-	function myFunction(){
+	function searchBycateNo(){
 		let no = document.getElementById("cateChoose").value;
-		console.log(no);
 	
 		var queryString = "?cateNo=" + no;
 		console.log(queryString);
 		var xhr0 = new XMLHttpRequest();
 		xhr0.open("GET", "<c:url value='/getAdByCateNoAjax.json' />" + queryString , true);
+		xhr0.send();
+		
+		xhr0.onreadystatechange = function() {
+			if (xhr0.readyState == 4 && xhr0.status == 200) {
+				var responseData = xhr0.responseText;
+				displayPageAds(responseData);
+			}
+		}
+	}
+	
+	function searchByDate(){
+		let no = document.getElementById("dateChoose").value;
+		
+		var queryStringDate = "?date=" + no;
+		console.log(queryStringDate);
+		var xhr0 = new XMLHttpRequest();
+		xhr0.open("GET", "<c:url value='/getAdByDateAjax.json' />" + queryStringDate , true);
+		xhr0.send();
+		
+		xhr0.onreadystatechange = function() {
+			if (xhr0.readyState == 4 && xhr0.status == 200) {
+				var responseData = xhr0.responseText;
+				displayPageAds(responseData);
+			}
+		}
+	}
+	
+	function searchByWord(){
+		let word = document.getElementById("wordChoose").value;
+		console.log(word);
+		
+		var queryStringWord = "?word=" + word;
+		console.log(queryStringWord);
+		var xhr0 = new XMLHttpRequest();
+		xhr0.open("GET", "<c:url value='/getAdByWordAjax.json' />" + queryStringWord , true);
 		xhr0.send();
 		
 		xhr0.onreadystatechange = function() {

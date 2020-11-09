@@ -55,7 +55,6 @@
             </li>
             <li><a href="<c:url value='/CRindex' />">客服中心</a>
                 <ul>
-                 	<li><a href="<c:url value='/customerReports' />">所有客服表單(test)</a></li>
                     <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
                     <li><a href="<c:url value='/msg' />">客服聊天</a></li>
                     <li><a href="<c:url value='/sendmail' />">寄信</a></li>
@@ -68,12 +67,12 @@
                     <li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>                    
                </ul>
             </li>
-            <li><a href="<c:url value='#' />">圖文專區</a>
+            <li><a href="<c:url value='#' />">社群專區</a>
             	<ul>
             		<li><a href="<c:url value='/MtCreate' />">新增Po文</a>
                     <li><a href="<c:url value='/getAllMtAdd' />">檢視使用者所有資料</a></li>
                     <li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
-                    <li><a href="<c:url value='/getTodayNews' />">新聞推薦</a></li>
+                    <li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
 <%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
                 </ul>
             </li>
@@ -83,7 +82,7 @@
             		<li><a href="#">企業會員功能</a>
                     	<ul>
                             <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
-                            <li><a href="<c:url value='#' />">查詢所上架的商品##</a></li>
+                            <li><a href="<c:url value='/memberAllAdsList' />">查詢所上架的商品列表</a></li>
                             <li><a href="<c:url value='#' />">查詢所賣出的商品(下載圖片)##</a></li>
                         </ul>
                     </li>

@@ -16,9 +16,8 @@ window.onload = function() { //刪除文章，OK
 	});
 }
 
-
 </script>
-<title>Get All MtBean</title>
+<title>Get Member MtBean</title>
 
 <style>
 #customers {
@@ -61,7 +60,7 @@ td {
 	</nav>
 	<div align="center" style="margin-top: 100px;">
 		<br>
-		<h2>所有影片資料</h2>
+		<h2>會員${memberId}的文章紀錄</h2>
 		<a href="<c:url value='/' />">回首頁</a>
 	</div>
 	<hr>
@@ -88,13 +87,13 @@ td {
 					<c:if test="${ memList.status == 1}"><td>可瀏覽</td></c:if>
 					<c:if test="${ memList.status == 0}"><td>***已下架***</td></c:if>
 					<td>${memList.category}</td>
-					<td class="td1">${memList.title}</td>
-					<td class="td1">${memList.imgName}</td>
+					<td class="td1"><a href="<c:url value='/getSingleArticle/${memList.articleId}'/>" >${memList.title}</a> </td>
+					<td class="td1"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${memList.articleId}' />" />${memList.imgName}</td>
 					<td class="td1">${memList.article}</td>
 					<td>
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
-							<a class='delSingle' href="${pageContext.request.contextPath}/getMemArticleList/${memList.memberId}">
+							<a class='delSingle' href="${pageContext.request.contextPath}/delMemArticle/${memList.articleId}">
 							<c:if test="${ memList.status == 0}" ><a href='' ></a></c:if>
 							刪除</a>
 							<a

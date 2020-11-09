@@ -33,6 +33,14 @@ public class BMcontroll {
 	@GetMapping("/tables")
 	public String gettables(Model model) {
 		
-		return "BM/tables";
+		return "BM/NewBMLook";
 	}
+	
+	@GetMapping("/iiiNewsIndex")
+	public String getindex(Model model) {
+		
+		return "index";
+	}
+	
+	
 }

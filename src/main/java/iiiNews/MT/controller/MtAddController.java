@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
 import iiiNews.MT.validate.CheckArticleVaildator;
 
 @Controller
+@SessionAttributes({"MBBean"})
 public class MtAddController {
 
 	@Autowired
@@ -40,30 +43,51 @@ public class MtAddController {
 	ServletContext servletContext;
 	
 	@GetMapping("/MtCreate")
-	public String toCreateForm(Model model) {		//載入新增欄位頁面getBean
+	public String toCreateForm(Model model, HttpSession session) {		//載入新增欄位頁面getBean
+		
+		MBBean mb = (MBBean) session.getAttribute("MBBean");	//抓會員session
+        String memberId = mb.getMemberId();
+		
 		MtAddBean bean = new MtAddBean();
 		model.addAttribute("mtBean", bean);
-		System.out.println("*******************************************");
+		System.out.println("*******************************************" + memberId);
 		return "MT/Create";
 	}
 
 	@PostMapping("/MtCreate")		//新增欄位頁面
-	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model) {
+//	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model) {
 
 		//-----------------------------------------11/05判斷功能，要改成Ajax
-//	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result) {
-//		CheckArticleVaildator validator = new CheckArticleVaildator();
-//		validator.validate(bean, result);
-//		try {
-//			if (bean.getTitle().isEmpty()) {
-//				result.rejectValue("title","","");
-//				System.out.println("---標題不能空白---");
-//				return "MT/Create";
-//			}
-//		} catch (Exception e) {
-//			System.out.println("---標題catch---");
-//			e.printStackTrace();
-//		}
+	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result) {
+        CheckArticleVaildator validator = new CheckArticleVaildator();
+        validator.validate(bean, result);
+        MBBean mbb = (MBBean) model.getAttribute("MBBean");
+        bean.setMemberId(mbb.getMemberId());
+        
+        try {
+            if (bean.getTitle().isEmpty()) {
+                result.rejectValue("title","","");
+                System.out.println("---標題不能空白---");
+                return "MT/Create";
+            }
+        } catch (Exception e) {
+            System.out.println("---標題catch---");
+            e.printStackTrace();
+        }
+        //-----------------------------------------------
+        try {
+            if (bean.getArticle().isEmpty()) {
+                result.rejectValue("article","","內文不能空白");
+                System.out.println("---內文不能空白---");
+                return "MT/Create";
+            }
+        } catch (Exception e) {
+            System.out.println("---標題catch---");
+            e.printStackTrace();
+        }
+        
+        
+        //-----------------------------------------------
 		
 		
 		
@@ -166,8 +190,8 @@ public class MtAddController {
 			}
 		}
 		if (is == null) {
-			is = servletContext.getResourceAsStream("/img/NoImage.jpg");
-			mimeType = servletContext.getMimeType("NoImage.jpg");
+			is = servletContext.getResourceAsStream("/img/NO_IMAGE.png");
+			mimeType = servletContext.getMimeType("NO_IMAGE.png");
 		}
 		MediaType mediaType = MediaType.valueOf(mimeType);
 		HttpHeaders headers = new HttpHeaders();
@@ -231,6 +255,11 @@ public class MtAddController {
 	public String getAllMtList(Model model){	
 		List<MtAddBean> list = service.getAllMtAdd();
 		model.addAttribute("getAllMtList",list);
+        //--------------------------手動測試才加
+//        MBBean mb = new MBBean();   //手動設session
+//        mb.setMemberId("9999");
+//        model.addAttribute("MBBean", mb);
+        //--------------------------手動測試才加
 		return "MT/getAllMtAdd";
 	}
 	
@@ -281,12 +310,13 @@ public class MtAddController {
 		System.out.println("originBean after:-->" + originBean.toString());
 		
 
-		
+		String getMemId = originBean.getMemberId();
 		int n = service.modifyArticle(originBean);
 		System.out.println(n + "更改成功");
 		
 //		return "redirect:/";
-		return "redirect:/getAllMtAdd";
+//		return "redirect:/getAllMtAdd";
+		return "redirect:/getMemArticleList/" + getMemId;
 	}
 	//---------------------------------------------------------
 	
@@ -297,7 +327,7 @@ public class MtAddController {
 		return "/MT/singleArticle";
 	}
 
-	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態，暫時OK
+	@GetMapping("/delSingleArticle/{articleId}")	//刪除文章，改狀態，OK
 	public String delSingleArticle(@PathVariable String articleId ,Model model) {
 		service.delSingleArticle(articleId);
 		return "redirect:/getAllMtAdd";
@@ -316,16 +346,22 @@ public class MtAddController {
 	public String getMemArticleList(Model model) {
 //		List<MtAddBean> list = service.getMemArticle();
 //		model.addAttribute("memArticleList", list);
-		return "MT/Search";
+		return "/MT/Search";
 	}
 
 	@GetMapping("/getMemArticleList/{memberId}")	//輸入ID後顯示文章列表
-	public String queryMemArticle(@PathVariable Integer memberId ,Model model) {
+	public String getMemArticleList(@PathVariable String memberId ,Model model) {
 		List<MtAddBean> list = service.getMemArticle(memberId);
 		model.addAttribute("memArticleList", list);
-		return "MT/getAllMtAdd2";
+		return "/MT/getMemArticle";
 	}
 
+	@GetMapping("/delMemArticle/{articleId}")	//刪除文章，改狀態，暫時OK
+	public String delMemArticle(@PathVariable String articleId ,Model model) {
+		String memberId = service.getSingleArticle(articleId).getMemberId();
+		service.delSingleArticle(articleId);
+		return "redirect:/getMemArticleList/"+memberId;
+	}
 	
 	//---------------------------------------------------------
 	@GetMapping("/getTodayNews")	//載入當日熱門新聞

@@ -1,5 +1,7 @@
 package iiiNews.AD.dao.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -86,14 +88,14 @@ public class AdMainDaoImpl implements AdMainDao {
 	}
 
 	
-	//以會員id來查詢該會員的上傳廣告清單
+	//以企業會員id來查詢該會員的上傳廣告清單
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AdBean> getMemberAdList(String cpmemberId) {
+	public List<AdBean> getCpMemberAdList(String cpmemberId) {
 		String hql = "FROM AdBean WHERE memberId = :mid";
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql)
-							.setParameter("mid", cpmemberId)	//^^^^注意此處memberId是String還是int 未來會用到!!!
+							.setParameter("mid", cpmemberId)
 							.getResultList();
 		return list;
 	}
@@ -148,18 +150,21 @@ public class AdMainDaoImpl implements AdMainDao {
 		return count;
 	}
 
-
-	@SuppressWarnings("unchecked")
+//---------------------------------------------------------
+	//依照時間去判斷並且修改上架狀態
 	@Override
-	public List<AdBean> getAdByCateNoAjax(String CateNo) {
-//		int startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND categoryNo = :cateno";
+	public void changeStatus() {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String todayStr = sdf.format(date);
+		java.sql.Date today = java.sql.Date.valueOf(todayStr);
+		String hql = "UPDATE AdBean SET status = 0 WHERE adDate < :today";
+		
 		Session session = factory.getCurrentSession();
-		List<AdBean> list = session.createQuery(hql)
-						.setParameter("cateno", CateNo)
-						.getResultList();
-		return list;
+		session.createQuery(hql).setParameter("today", today).executeUpdate();
+		System.out.println("檢查日期完成");
 	}
+	
 	
 	
 }

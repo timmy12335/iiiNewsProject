@@ -71,6 +71,7 @@
 <div style="z-index:-100;position: relative;">
 <header class="header">
 	<img src="images/room.jpg" alt="banner" class="img-fluid" style="height: 550px;">
+<!-- 	<img src="images/CCC.jpg" alt="banner" class="img-fluid" style="height: 550px;"> -->
 </header> 
 <!-- 頁首/結束 -->
 <!-- 特色/開始 -->

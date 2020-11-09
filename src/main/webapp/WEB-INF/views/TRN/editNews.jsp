@@ -41,7 +41,31 @@ window.onload = function() {
 		   type.value = trkNewsBean.type;
 	    }
      }
-}
+	console.log(NewsId2)
+	var deleteData = document.getElementById("deleteData");
+	
+	 deleteData.addEventListener('click', (e)=> {
+		 var result = confirm("確定刪除此筆記錄(帳號:" + NewsId2 + ")?");
+		 if (result) {
+			 var xhr2 = new XMLHttpRequest();
+			 xhr2.open("DELETE", "<c:url value='/editNews3/' />" + NewsId2, true);
+		   	 xhr2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		   	 xhr2.send();
+		   	 xhr2.onreadystatechange = function() {
+		   	// 伺服器請求完成
+		   	if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
+		   		result = JSON.parse(xhr2.responseText);
+		   		if (result.fail) {
+		   			divResult.innerHTML = "<font color='red'>"
+						+ result.fail + "</font>";
+		   		}else if (result.success) {
+		   			window.location.href ="http://localhost:8080/iiiNews/trkNews";
+		   		}
+		   	}
+		   	}
+		 }
+	 })
+  };
 
 
 

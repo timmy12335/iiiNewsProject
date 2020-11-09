@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <script type='text/javascript'>
 window.onload = function() { //刪除文章，OK
@@ -15,10 +16,9 @@ window.onload = function() { //刪除文章，OK
 		return false;
 	});
 }
-
 </script>
-<title>Get All MtBean</title>
 
+<title>Get All MtBean</title>
 <style>
 #customers {
   font-family: Arial, Helvetica, sans-serif;
@@ -30,7 +30,6 @@ window.onload = function() { //刪除文章，OK
   border: 1px solid #ddd;
   padding: 8px;
 }
-
 
 #customers tr:hover {background-color: #ECF5FF;}
 
@@ -60,7 +59,7 @@ td {
 	</nav>
 	<div align="center" style="margin-top: 100px;">
 		<br>
-		<h2>所有影片資料</h2>
+		<h2>所有文章</h2>
 		<a href="<c:url value='/' />">回首頁</a>
 	</div>
 	<hr>
@@ -81,23 +80,23 @@ td {
 			<c:forEach var="all" items="${getAllMtList}">
 				<tr>
 					<td>&nbsp;${all.pkey} &nbsp;</td>
-					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >${all.articleId}</a> </td>
+					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >
+						<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>${all.articleId}</a> </td>
 					<td>${all.memberId}</td>
 					<td>${all.updateDate}</td>
 					<c:if test="${ all.status == 1}"><td>可瀏覽</td></c:if>
 					<c:if test="${ all.status == 0}"><td>***已下架***</td></c:if>
 					<td>${all.category}</td>
 					<td class="td1">${all.title}</td>
-					<td class="td1">${all.imgName}</td>
+					<td class="td1"><div id="Demo" class="demo"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${all.articleId}' />" /></div>${all.imgName}</td>
 					<td class="td1">${all.article}</td>
 					<td>
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
 							<a class='delSingle' href="${pageContext.request.contextPath}/delSingleArticle/${all.articleId}">
-							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>
-							刪除</a>
-							<a
-								href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}">編輯資料</a>
+							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>刪除</a>
+<%-- 							<a href="${pageContext.request.contextPath}/modifyArticle/${all.pkey}"> 	//Admin不可編輯--%>
+<%-- 							<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>編輯資料</a> --%>
 						</div>
 					</td>
 				</tr>

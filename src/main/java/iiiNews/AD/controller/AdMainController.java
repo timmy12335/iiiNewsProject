@@ -66,10 +66,12 @@ public class AdMainController {
 		
 		Map<String, String> msg = new HashMap<>();
 		
-		//$$$$ 取得會員編號>>會員編號先寫死 未來再改
-//		MBBean mb = (MBBean) model.getAttribute("Login_PK");
-//		String memberId = mb.getMemberId();
+		//$$$$ 未來要寫得到企業memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+//		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CPLogin_OK");
+//		String cpmemberId = mb.getCpmemberId();
+//		String cpname = mb.getCpname();
 		bean.setMemberId("tina");
+		bean.setMemberName("TVBS新聞台");
 		
 		//取得上傳時間
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
@@ -98,6 +100,7 @@ public class AdMainController {
 	//取得所有廣告列表
 	@GetMapping("/getAllAds")
 	public String getAllAdsList(Model model){
+		service.changeStatus();
 		List<AdBean> list = service.getAllAds();
 		model.addAttribute("adLists",list);
 		return "AD/adlist/allAdsList";
@@ -105,9 +108,16 @@ public class AdMainController {
 	
 	//$$$$ 根據企業會員資料(編號)取得該會員所有廣告列表
 	@GetMapping("/memberAllAdsList")
-	public String getMemberAdList(@PathVariable String cpmemberId,Model model){
-//		List<AdBean> list = service.getAllAds();
-//		model.addAttribute("adLists",list);
+	public String getMemberAdList(Model model){
+		
+//		$$$$ 未來要寫得到企業memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+//		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CPLogin_OK");
+//		String cpmemberId = mb.getCpmemberId();
+//		String cpname = mb.getCpname();
+		
+		String cpmemberId = "tina2";
+		List<AdBean> list = service.getCpMemberAdList(cpmemberId);
+		model.addAttribute("CpAdLists",list);
 		return "AD/entMem/memberAllAdsList";
 	}
 

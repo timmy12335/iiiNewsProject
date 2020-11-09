@@ -77,7 +77,7 @@ g-recaptcha{
 				<tr>
 					<td>確認密碼：</td>
 					<td><input type="password" name="okpassword"
-						required="required" id='okpassword' placeholder="再次輸入帳號" /></td>
+						required="required" id='okpassword' placeholder="再次輸入密碼" /></td>
 					<!-- 					<td>再輸入一次密碼，確認沒有打錯字</td> -->
 				</tr>
 				<tr>
@@ -248,7 +248,7 @@ g-recaptcha{
 			var regTel2 = /^(\d{10})?$/.test(value);
 			if (value != "") {
 				if (!regTel1 && !regTel2) {
-					alert("電話號碼輸入有誤！");
+					alert("電話號碼格式不正確！");
 					obj.focus();
 					return false;
 				}
@@ -256,7 +256,7 @@ g-recaptcha{
 				alert("請輸入電話號碼！");
 				return false;
 			}
-			alert("電話號碼輸入正確！");
+			alert("正確！");
 			return true;
 		}
 	</script>

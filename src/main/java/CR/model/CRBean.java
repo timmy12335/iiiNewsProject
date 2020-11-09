@@ -1,6 +1,7 @@
 package CR.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
@@ -38,6 +43,37 @@ public class CRBean implements Serializable {
 	private Timestamp crReDate;
 	private String crReplier;
 	private String crReScore;
+	private String attachmentName;
+	
+	public String getAttachmentName() {
+		return attachmentName;
+	}
+
+	public void setAttachmentName(String attachmentName) {
+		this.attachmentName = attachmentName;
+	}
+
+	@JsonIgnore
+	private Blob attachment;
+	@Transient
+	private MultipartFile image;
+	
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public Blob getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(Blob attachment) {
+		this.attachment = attachment;
+	}
+
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberBean_fpkey")
 	private MBBean mbBean;

@@ -110,13 +110,15 @@ function confirmDelete(n) {
 				<c:forEach var="ad" items="${shoppingCart.content}">
 					<tr>
 	                    <td>${ad.value.adNo}</td>
-	                    <td>${ad.value.categoryNo}
-<%-- 	                    	<c:if test="${ad.value.categoryNo == 100}">頭版頭</c:if> --%>
-<%-- 							<c:if test="${ad.value.categoryNo == 200}">頭版側標</c:if> --%>
-<%-- 							<c:if test="${ad.value.categoryNo == 300}">內頁版頭</c:if> --%>
-<%-- 							<c:if test="${ad.value.categoryNo == 400}">內頁側標</c:if> --%>
-<%-- 							<c:if test="${ad.value.categoryNo == 500}">小廣告</c:if> --%>
-<%-- 							<c:if test="${ad.value.categoryNo == none}">XXX</c:if> --%>
+	                    <td>
+	                    <c:choose>
+	                    	<c:when test="${ad.value.categoryNo == 100}">頭版頭</c:when>
+							<c:when test="${ad.value.categoryNo == 200}">頭版側標</c:when>
+							<c:when test="${ad.value.categoryNo == 300}">內頁版頭</c:when>
+							<c:when test="${ad.value.categoryNo == 400}">內頁側標</c:when>
+							<c:when test="${ad.value.categoryNo == 500}">小廣告</c:when>
+							<c:otherwise>其他</c:otherwise>
+						</c:choose>
 	                    </td>
 	                    <td>${ad.value.adDate}</td>
 	                    <td>${ad.value.unitPrice}</td>

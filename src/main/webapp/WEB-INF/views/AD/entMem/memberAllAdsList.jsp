@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
 				<td>分類</td>
 				<td>寬</td>
 				<td>高</td>
-				<td>日期</td>
+				<td>欲販售日期</td>
 				<td>單價</td>
 				<td>上架狀態</td>
 				<td>庫存</td>
@@ -48,17 +49,29 @@
 				<c:forEach var="ad" items="${CpAdLists}">
 					<tr>
 						<td>${ad.adNo}</td>
-						<td>${ad.uploadDate}</td>
-						<td>${ad.categoryNo}</td>
+						<td>${fn:substring(ad.uploadDate,0,19)}</td>
+						<td>
+						<c:choose>
+	                    	<c:when test="${ad.categoryNo == 100}">頭版頭</c:when>
+							<c:when test="${ad.categoryNo == 200}">頭版側標</c:when>
+							<c:when test="${ad.categoryNo == 300}">內頁版頭</c:when>
+							<c:when test="${ad.categoryNo == 400}">內頁側標</c:when>
+							<c:when test="${ad.categoryNo == 500}">小廣告</c:when>
+							<c:otherwise>其他</c:otherwise>
+						</c:choose>
+						</td>
 						<td>${ad.width}</td>
 						<td>${ad.height}</td>
 						<td>${ad.adDate}</td>
 						<td>${ad.price}</td>
-						<td>${ad.status}</td>
+						<td>
+							<c:if test="${ad.status == 0}">已下架</c:if>
+							<c:if test="${ad.status == 1}">上架中</c:if>
+						</td>
 						<td>${ad.stock}</td>
 					<td>
 						<a href="<c:url value="#" />">修改</a>
-						<a href="<c:url value="/deleteAdProduct/${ad.adPk}" />" onclick="return confirm('Are you sure?')">刪除</a>
+<%-- 						<a href="<c:url value="/deleteAdProduct/${ad.adPk}" />" onclick="return confirm('Are you sure?')">刪除</a> --%>
 					</td>
 					</tr>
 				</c:forEach>

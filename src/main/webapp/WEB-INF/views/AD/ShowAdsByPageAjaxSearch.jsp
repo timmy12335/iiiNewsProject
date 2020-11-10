@@ -9,12 +9,24 @@
 <script>
 window.onload=function(){
 	var origincontent = "<table border='1'><tr height='42' bgcolor='#fbdb98'><th width='20' align='center'>序號</th>";
-	origincontent +=  "<th width='50' align='center'>廣告PK值</th><th width='150' align='center'>廣告編號</th><th width='100' align='center'>上傳時間</th>";
-	origincontent +=  "<th width='150' align='center'>刊登者</th>"
-	origincontent +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='100' align='center'>單價</th>";	    
+	origincontent +=  "<th width='50' align='center'>廣告PK值</th><th width='150' align='center'>廣告編號</th>";
+	origincontent +=  "<th width='150' align='center'>刊登者</th>";
+	origincontent +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='100' align='center'>單價</th>";
+	origincontent +=  "<th width='100' align='center'>備註</th>";
 	origincontent +=  "<th width='100' align='center'>texting</th></tr>";
-	origincontent +=  "<tr><td colspan='8' align='center'><b>請選擇欲搜尋的類別</b></td></tr></table>";
+	origincontent +=  "<tr><td colspan='9' align='center'><b>請選擇欲搜尋的類別</b></td></tr></table>";
 	document.getElementById("somedivS").innerHTML = origincontent;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/getAdByAjax.json' />", true);
+	xhr.send();
+	
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var responseData = xhr.responseText;
+			displayPageAds(responseData);
+		}
+	}
 }
 </script>
 <style>
@@ -43,7 +55,7 @@ window.onload=function(){
 		<input type="text" class="search" id="wordChoose" onkeyup="searchByWord()"/>
 		<label>按分類搜尋：</label>
 		<select id="cateChoose" onchange="searchBycateNo()">
-			<option value="none">請選擇</option>
+			<option value="-1">請選擇</option>
 			<option value="100">頭版頭</option>
 			<option value="200">頭版側標</option>
 			<option value="300">內頁版頭</option>
@@ -81,9 +93,10 @@ window.onload=function(){
 
 	function displayPageAds(responseData){
 		  var content = "<table border='1'><tr height='42' bgcolor='#fbdb98'><th width='20' align='center'>序號</th>";
-		      content +=  "<th width='50' align='center'>廣告PK值</th><th width='150' align='center'>廣告編號</th><th width='100' align='center'>上傳時間</th>";
-		      content +=  "<th width='150' align='center'>刊登者</th>"
-		      content +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='100' align='center'>單價</th>";	    
+		      content +=  "<th width='50' align='center'>廣告PK值</th><th width='150' align='center'>廣告編號</th>";
+		      content +=  "<th width='150' align='center'>刊登者</th>";
+		      content +=  "<th width='100' align='center'>類型</th><th width='100' align='center'>販賣日期</th><th width='100' align='center'>單價</th>";
+		      content +=  "<th width='100' align='center'>備註</th>";
 			  content +=  "<th width='100' align='center'>texting</th></tr>";
 			var ad = JSON.parse(responseData);		// 傳回一個陣列
 			var bgColor = "";   // 每一項商品的背影 
@@ -93,11 +106,11 @@ window.onload=function(){
 							"<td  align='center' >" + (i+1) + "&nbsp;</td>" + 
 				           	"<td  align='center' >" + ad[i].adPk + "&nbsp;</td>" + 
 			               	"<td>" + ad[i].adNo + "</td>" +
-			               	"<td align='center'>" + ad[i].uploadDate + "</td>" +
 			               	"<td align='center'>" + ad[i].memberName + "</td>" +
 			               	"<td align='right'>" + cateNameTrans(ad[i].categoryNo) + "&nbsp;</td>" +
 			               	"<td align='center'>" + ad[i].adDate + "</td>" +
-			               	"<td align='right'>" + "NT$ " + ad[i].price + "</td>" + 
+			               	"<td align='right'>" + "NT$ " + ad[i].price + "</td>" +
+			               	"<td align='right'>" + ad[i].statement + "</td>" + 
 			               	"<td align='center'>" +
 			               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +
 							"<input type='hidden' name='quantity' value='1'>" + 

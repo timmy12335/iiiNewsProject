@@ -21,29 +21,35 @@ import iiiNews.NP.service.NewsUpdateService;
 public class updateNewsController {
 	
 	@Autowired
-	NewsProductService service;
+	NewsProductService produstservice;
 	@Autowired
 	NewsUpdateService updateService;
 	
 		//查詢單一筆新聞，顯示在修改的頁面
 		@GetMapping("/getUpdateSingleNews/{newsId}")
 		public String getSingleNews(@PathVariable String newsId ,Model model) {
-			NewsBean newsBean = service.getSingleNews(newsId);
+			NewsBean newsBean = produstservice.getSingleNewsForUpdate(newsId);
 			
 			model.addAttribute("newsSingle", newsBean);
 			return "NP/UpdateSingleNews";
 		}
 		
+		//一般會員修改單一則新聞
 		@PostMapping("/getUpdateSingleNews/{newsId}")
 		public String UpdateSingleNews(@ModelAttribute("newsSingle") NewsBean nb		
 				,@PathVariable String newsId,Model model) {	
-			
+			NewsBean newsBean = produstservice.getSingleNewsForUpdate(newsId);
 			MultipartFile[] productImages = nb.getProductImage();
 			System.out.println(productImages);
 
-				if(productImages[0].isEmpty()) {
-					System.out.println("無法找到圖片");
-				}else {
+			
+			if (productImages[0].getSize()==0) {
+							
+				nb.setImg_I(newsBean.getImg_I());
+				nb.setImg_II(newsBean.getImg_II());
+				nb.setImg_III(newsBean.getImg_III());
+				
+			}else {
 					nb.setPic_One(productImages[0].getOriginalFilename());
 					nb.setPic_Two(productImages[1].getOriginalFilename());
 					nb.setPic_Three(productImages[2].getOriginalFilename());
@@ -66,11 +72,9 @@ public class updateNewsController {
 					}
 				}
 			}
-			System.out.println("Hello"+nb.getNewsProduct_pk());
-			System.out.println("Hello"+nb.getNewsType());
-			System.out.println("Hello"+nb.getStatus());
+			
 			updateService.updateNewsProduct(nb);
-			return "redirect:/getSingleNews/{newsId}";
+			return "redirect:/getSingleNewsForUpdate/{newsId}";
 		}
 		
 		

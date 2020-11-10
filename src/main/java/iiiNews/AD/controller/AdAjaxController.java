@@ -68,12 +68,20 @@ public class AdAjaxController {
 	}
 	
 	//以類別來搜尋
+	@GetMapping("/getAdByAjax.json")
+	public @ResponseBody List<AdBean> getAdByAjax() {
+		List<AdBean> list = new ArrayList<AdBean>();
+			list = ajaxService.getAllAdByAjax();
+		return list;		
+	}
+	
+	//以類別來搜尋
 	@GetMapping("/getAdByCateNoAjax.json")
 	public @ResponseBody List<AdBean> getAdByCateNoAjax(
-			@RequestParam(value="cateNo",defaultValue = "100" )String cateNo) {
+			@RequestParam(value="cateNo",defaultValue = "-1" )String cateNo) {
 		System.out.println(cateNo);
 		List<AdBean> list = new ArrayList<AdBean>();
-		if(cateNo.equals("none")) {
+		if(cateNo.equals("-1")) {
 			list = ajaxService.getAllAdByAjax();
 		}else {
 			list = ajaxService.getAdByCateNoAjax(cateNo);

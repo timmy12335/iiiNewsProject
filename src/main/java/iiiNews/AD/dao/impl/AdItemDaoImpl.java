@@ -49,6 +49,16 @@ public class AdItemDaoImpl implements AdItemDao {
 		n++;
 		return n;
 	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AdOrderItemBean> getCpMemberSoldList(String memberId) {
+		String hql = "FROM AdOrderItemBean WHERE sellerMemberId = :mid";
+		Session session = factory.getCurrentSession();
+		List<AdOrderItemBean> list = session.createQuery(hql).setParameter("mid", memberId).getResultList();
+		return list;
+	}
 	
 	
 

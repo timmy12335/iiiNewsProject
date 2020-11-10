@@ -64,6 +64,21 @@ public class AdOrderController {
 	}
 	
 	
+	//$$$$ 此方法打算是用企業會員Id來查訂單
+		@GetMapping("/getSoldOrderByCpMemberId")
+		public String CpMemberSoldList(Model model) {
+			
+			//$$$$ 未來要寫得到memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+//			CbMemberBean mb = (CbMemberBean) model.getAttribute("Login_PK");
+//			String memberId = mb.getMemberId();
+			
+			String memberId = "storeFrank";
+			List<AdOrderItemBean> orderlist = itemService.getCpMemberSoldList(memberId);
+			model.addAttribute("CpSoldList", orderlist);
+			return "AD/entMem/AllSoldList";
+		}
+	
+	
 	/*傳入訂單pk編號 得到該訂單的所有內容品項清單*/
 	@GetMapping("/getItemByOrderPk/{adOrderPk}")
 	public String GetAdOrderByOrderPk(Model model,

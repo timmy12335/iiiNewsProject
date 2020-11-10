@@ -81,7 +81,7 @@
   $(document).ready(function () {
 
     $("#cssmenu").menumaker({
-      title: "功能選單XXX",
+      title: "iiiNews新聞",
       format: "multitoggle"
     });
 

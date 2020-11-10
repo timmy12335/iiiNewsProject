@@ -62,6 +62,24 @@ public class AdOrderDaoImpl implements AdOrderDao {
 		session.update(ab);
 		return 0;
 	}
+
+	@Override
+	public AdOrderBean getOneOrder(int adOrderPk) {
+		Session session = factory.getCurrentSession();
+		AdOrderBean bean = session.get(AdOrderBean.class, adOrderPk);
+		return bean;
+	}
+
+	@Override
+	public int changePaymentStatus(int adOrderPk) {
+		int n = 0;
+		Session session = factory.getCurrentSession();
+		AdOrderBean bean = session.get(AdOrderBean.class, adOrderPk);
+		bean.setPaymentStatus(1);
+		session.update(bean);
+		n++;
+		return n;
+	}
 	
 	
 

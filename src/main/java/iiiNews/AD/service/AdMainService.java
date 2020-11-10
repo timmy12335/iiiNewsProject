@@ -14,15 +14,17 @@ public interface AdMainService {
 	
 	public AdBean getLastRecord() ;
 	
-	//^^^^注意此處memberId是String還是int 未來會用到!!!
-	public List<AdBean> getMemberAdList(String cpmemberId);
+	public List<AdBean> getCpMemberAdList(String cpmemberId);
 	
 	public int deleteAdByMemberPkid(int pkId);
 	
 	public AdBean getOneAdByadPk(int adPk);
 	
+	public void changeStatus();
+	
 	//ajax
 	public List<AdBean> getPageAds(Integer pageNo);
 	public int getTotalPageCount();
-	public List<AdBean> getAdByCateNoAjax(String CateNo);
+	
+	
 }

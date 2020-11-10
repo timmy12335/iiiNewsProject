@@ -86,4 +86,18 @@ public class AdOrderServiceImpl implements AdOrderService {
 		return n;
 	}
 
+
+	@Override
+	@Transactional
+	public AdOrderBean getOneOrder(int adOrderPk) {
+		return adOrderDao.getOneOrder(adOrderPk);
+	}
+
+
+	@Override
+	@Transactional
+	public int changePaymentStatus(int adOrderPk) {
+		return adOrderDao.changePaymentStatus(adOrderPk);
+	}
+
 }

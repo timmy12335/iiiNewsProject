@@ -91,7 +91,7 @@
 				<c:choose>
 	            	<c:when test="${empty memberOrderList}">
 	            		<tr>
-	            			<td colspan='8' align="center">您無上傳清單</td>
+	            			<td colspan='8' align="center">您無購物紀錄</td>
 	            		</tr>
 	            	</c:when>
 	            	<c:otherwise>
@@ -108,6 +108,8 @@
 								</td>
 								<td>
 									<a href="<c:url value="/getItemByOrderPk/${ad.adOrderPk}" />">檢視訂單內容</a>
+									<c:if test="${ad.paymentStatus == 0}"><a href="<c:url value="/checkoutOK.Pay/${ad.adOrderPk}" />">前往付款</a></c:if>
+									
 								</td>
 							</tr>
 						</c:forEach>

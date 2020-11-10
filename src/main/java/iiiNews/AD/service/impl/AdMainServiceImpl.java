@@ -81,11 +81,10 @@ public class AdMainServiceImpl implements AdMainService {
 	}
 	
 	
-	//^^^^注意此處memberId是String還是int 未來會用到!!!
 	@Override
 	@Transactional
-	public List<AdBean> getMemberAdList(String cpmemberId) {
-		return adMaindao.getMemberAdList(cpmemberId);
+	public List<AdBean> getCpMemberAdList(String cpmemberId) {
+		return adMaindao.getCpMemberAdList(cpmemberId);
 	}
 
 	@Override
@@ -103,6 +102,12 @@ public class AdMainServiceImpl implements AdMainService {
 		return adMaindao.getOneAdByadPk(adPk);
 	}
 	
+	@Override
+	@Transactional
+	public void changeStatus() {
+		adMaindao.changeStatus();
+	}
+	
 	//ajax
 	@Override
 	@Transactional
@@ -117,12 +122,11 @@ public class AdMainServiceImpl implements AdMainService {
 		return adMaindao.getTotalPageCount();
 	}
 
-	@Override
-	@Transactional
-	public List<AdBean> getAdByCateNoAjax(String CateNo) {
-		return adMaindao.getAdByCateNoAjax(CateNo);
-	}
+	
+	
 
+
+	
 	
 
 }

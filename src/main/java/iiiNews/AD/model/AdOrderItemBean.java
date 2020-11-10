@@ -2,6 +2,7 @@ package iiiNews.AD.model;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="AdOrderItems")
 public class AdOrderItemBean {
@@ -23,7 +26,7 @@ public class AdOrderItemBean {
 	private Integer itemPk;			//資料庫自增編號
 	
 	
-	private Integer adPk;			//商品(廣告的)的編號資料庫自增編號
+	private Integer adPk;				//商品(廣告的)的編號資料庫自增編號
 	private String adNo;				//商品的編號 (廣告的編號)
 	
 	
@@ -32,6 +35,9 @@ public class AdOrderItemBean {
 	
 	private String sellerMemberId;		//^^^^賣家會員帳號
 	private String buyerMemberId;		//賣家會員帳號
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
+	private Timestamp soldDate;	//上傳的日期戳記
 	
 	private Blob adImage;				//客戶上傳的照片
 	private String adImageName;			//客戶上傳照片的檔名
@@ -58,7 +64,7 @@ public class AdOrderItemBean {
 
 	//有傳參數的建構子
 	public AdOrderItemBean(Integer itemPk,Integer adPk, String adNo, Integer unitPrice, Integer quantity, String sellerMemberId,
-			String buyerMemberId, String categoryNo, Double width, Double height, Date adDate) {
+			String buyerMemberId, String categoryNo, Double width, Double height, Date adDate, Timestamp soldDate) {
 		super();
 		this.itemPk = itemPk;
 		this.adPk = adPk;
@@ -71,6 +77,7 @@ public class AdOrderItemBean {
 		this.width = width;
 		this.height = height;
 		this.adDate = adDate;
+		this.soldDate = soldDate;
 	}
 
 	public Integer getItemPk() {
@@ -215,6 +222,14 @@ public class AdOrderItemBean {
 
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
+	}
+
+	public Timestamp getSoldDate() {
+		return soldDate;
+	}
+
+	public void setSoldDate(Timestamp soldDate) {
+		this.soldDate = soldDate;
 	}
 	
 	

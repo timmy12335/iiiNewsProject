@@ -37,8 +37,16 @@ window.onload=function(){
 		}
 
 	};
+	
+	document.getElementById("onein").onclick=function(){
+		var account = document.getElementById("account");
+		var password = document.getElementById("password");
+		account.value = "Admin";
+		password.value ="Admin!23";
+		
+		
+	}
 }
-
 
 </script>
 
@@ -80,6 +88,7 @@ window.onload=function(){
 <!-- 							                    	記住我 -->
 <!-- 							                  </label> -->
 						<button  id="signin" class="btn btn-default">Sign in</button>
+						<button  id="onein" class="btn btn-default">Auto Input</button>
 						<br> <a href="<c:url value='/'/>">回iiiNews首頁</a>
 			</div>
 			</fieldset>

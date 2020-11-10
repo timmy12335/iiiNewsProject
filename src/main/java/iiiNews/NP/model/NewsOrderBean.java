@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "NP_NewsOrder")
 public class NewsOrderBean implements Serializable {
@@ -23,10 +25,11 @@ public class NewsOrderBean implements Serializable {
 	private String companyId;
 	private String newsId;
 	private Integer orderPrice;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp soldTime;
 	
 	@OneToOne
-	NewsBean newsBean;
+	private NewsBean newsBean;
 	
 	
 	public NewsOrderBean() {
@@ -87,6 +90,16 @@ public class NewsOrderBean implements Serializable {
 	}
 	public void setSoldTime(Timestamp soldTime) {
 		this.soldTime = soldTime;
+	}
+
+
+	public NewsBean getNewsBean() {
+		return newsBean;
+	}
+
+
+	public void setNewsBean(NewsBean newsBean) {
+		this.newsBean = newsBean;
 	}
 	
 	

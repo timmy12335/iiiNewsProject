@@ -1,64 +1,119 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>iiiNews Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
 
-    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
-    <link href="${pageContext.request.contextPath}/assets/stylesheets/application-a07755f5.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/images/favicon.ico" rel="icon" type="image/ico" />
-  
-    <!-- Navbar -->
-    <div class='navbar navbar-default' id='navbar'>
-      <a class='navbar-brand' href='#'>
-        <i class='icon-beer'></i>
-        iiiNews後台管理
-      </a>
-      <ul class='nav navbar-nav pull-right'>
-        <li class='dropdown'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-            <i class='icon-envelope'></i>
-            Messages
-            <span class='badge'>5</span>
-            <b class='caret'></b>
-          </a>
-          <ul class='dropdown-menu'>
-            <li>
-              <a href='#'>New message</a>
-            </li>
-            <li>
-              <a href='#'>Inbox</a>
-            </li>
-            <li>
-              <a href='#'>Out box</a>
-            </li>
-            <li>
-              <a href='#'>Trash</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href='#'>
-            <i class='icon-cog'></i>
-            Settings
-          </a>
-        </li>
-        <li class='dropdown user'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-            <i class='icon-user'></i>
-            <strong>John DOE</strong>
-            <img class="img-rounded" src="http://placehold.it/20x20/ccc/777" />
-            <b class='caret'></b>
-          </a>
-          <ul class='dropdown-menu'>
-            <li>
-              <a href='#'>Edit Profile</a>
-            </li>
-            <li class='divider'></li>
-            <li>
-              <a href="/">Sign out</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+ <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/images/logo-mini.svg" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="ti-view-list"></span>
+        </button>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">
+              <i class="ti-shield menu-icon"></i>
+              <span class="menu-title">回首頁</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title">商品類</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="連結">商品1</a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結">商品2</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="連結">
+              <i class="ti-layout-list-post menu-icon"></i>
+              <span class="menu-title">人員維護</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="連結">
+              <i class="ti-pie-chart menu-icon"></i>
+              <span class="menu-title">金額</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="連結">
+              <i class="ti-view-list-alt menu-icon"></i>
+              <span class="menu-title">訂單管理系統</span>
+            </a>
+          </li>
+<!--           <li class="nav-item"> -->
+<!--             <a class="nav-link" href="連結"> -->
+<!--               <i class="ti-star menu-icon"></i> -->
+<!--               <span class="menu-title">備用</span> -->
+<!--             </a> -->
+<!--           </li> -->
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="ti-user menu-icon"></i>
+              <span class="menu-title">會員管理系統</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="連結"> 查看所有會員 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 2 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 3</a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 4 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 5</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#CRList" aria-expanded="false" aria-controls="CRList">
+              <i class="ti-write menu-icon"></i>
+              <span class="menu-title">客服管理系統</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="CRList">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/customerReports'/>"> 查看所有客服表單</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/tables'/>"> 表格 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 3</a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 4 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 5</a></li>
+              </ul>
+              </div>
+          </li>
+      </nav>
+      <div class="main-panel">
+      <div class="content-wrapper">
+                 <div class="card">
+           <div class="card-body">
+
+         

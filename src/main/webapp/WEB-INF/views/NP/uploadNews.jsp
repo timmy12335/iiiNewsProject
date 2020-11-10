@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,14 @@
 <form:form method="POST"  id="form1" modelAttribute="newsBean" enctype="multipart/form-data">
 <fieldset>
 <div>
+	<label for="title">新聞標題：</label>
+	<form:input type="text" id="title" name="title" size="50" path="title" placeholder="請輸入標題"  />
+</div>
+<div>
+	<label for="location">發生地點：</label>
+	<form:input type="text" id="location" name="location" size="50" path="location" placeholder="請輸入發生地點"  />
+</div>
+<div>
 	<label for="newsType">新聞類型：</label>
 	<form:select path="newsType">
 		<form:option value="none">分類項目</form:option>
@@ -28,14 +37,7 @@
 	</form:select>
 <%-- 	<font color="red" size="-1">${errorMsg.errorCategoryNoEmpty}</font> --%>
 </div>
-<div>
-	<label for="title">新聞標題：</label>
-	<form:input type="text" id="title" name="title" size="50" path="title" placeholder="請輸入標題"  />
-</div>
-<div>
-	<label for="location">發生地點：</label>
-	<form:input type="text" id="location" name="location" size="50" path="location" placeholder="請輸入發生地點"  />
-</div>
+
 <div>
 	<label for="happenDate">發生日期：</label>
 	<form:input type="Date" id="happenDate" name="happenDate" size="50" path="happenDate" placeholder="請輸入發生時間"  />

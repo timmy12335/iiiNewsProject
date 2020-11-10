@@ -67,7 +67,7 @@ window.onload = function(){
 							<label for="title">標題:</label>
 							<form:input type="text" id="title" name="title" path="title"
 								size="45" placeholder="今晚我想來點..." /><br>
-<%-- 							<form:errors path="title" style="font-size:12px;color:red" /> //11/05判斷功能，要改成Ajax --%>
+							<div><form:errors path="title" style="font-size:12px;color:red" /></div> <!-- //11/05判斷功能，要改成Ajax-->
 						</div>
 <!-- 						<div class="st1"> -->
 <!-- 							<label for="videoLink">影片連結:</label> -->
@@ -84,6 +84,7 @@ window.onload = function(){
 							<label for="article">內容:</label>
 							<form:textarea name="article" id="article" cols="45" rows="15"
 								path="article" maxlength="250" placeholder="限輸入250字"></form:textarea>
+							<div><form:errors path="article" style="font-size:12px;color:red" /></div>
 						</div>
 					
 <!-- 					<div id="grecaptcha" class="g-recaptcha" -->

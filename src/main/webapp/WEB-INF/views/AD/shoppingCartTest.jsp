@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +41,7 @@ function confirmDelete(n) {
 		}
 		.tablebyme a{
  			background-color:#0072E3;
+ 			color:white;
 			padding:10px 20px;
 			text-decoration:none;
 			font-weight:500;
@@ -109,11 +111,14 @@ function confirmDelete(n) {
 					<tr>
 	                    <td>${ad.value.adNo}</td>
 	                    <td>
-	                    	<c:if test="${ad.value.categoryNo == 100}">頭版頭</c:if>
-							<c:if test="${ad.value.categoryNo == 200}">頭版側標</c:if>
-							<c:if test="${ad.value.categoryNo == 300}">內頁版頭</c:if>
-							<c:if test="${ad.value.categoryNo == 400}">內頁側標</c:if>
-							<c:if test="${ad.value.categoryNo == 500}">小廣告</c:if>
+	                    <c:choose>
+	                    	<c:when test="${ad.value.categoryNo == 100}">頭版頭</c:when>
+							<c:when test="${ad.value.categoryNo == 200}">頭版側標</c:when>
+							<c:when test="${ad.value.categoryNo == 300}">內頁版頭</c:when>
+							<c:when test="${ad.value.categoryNo == 400}">內頁側標</c:when>
+							<c:when test="${ad.value.categoryNo == 500}">小廣告</c:when>
+							<c:otherwise>其他</c:otherwise>
+						</c:choose>
 	                    </td>
 	                    <td>${ad.value.adDate}</td>
 	                    <td>${ad.value.unitPrice}</td>
@@ -125,18 +130,21 @@ function confirmDelete(n) {
 				</c:forEach>
 			</c:otherwise>
 			</c:choose>
-		
+			<tr height='16'>
+				<td colspan='5' align='right'>合計數量：</td>
+	          	<td align='right'>${fn:length(shoppingCart.content)}</td>
+	        </tr>
 			<tr height='16'>
 	          	<td colspan='5' align='right'>合計金額：</td>
 	          	<td align='right'>${shoppingCart.total} 元</td>
-	          	         
 	        </tr>
 	        </tbody>
 	        <tfoot>
 	        	<tr height='30'>
 		        	<td colspan='6' align='center'>
 		          		<a href="<c:url value='/getAllAds' />">返回購物</a>
-		          		<a href="<c:url value='/checkoutOK.insert' />">結帳</a>
+		          		<a onclick="checkoutfunction(${fn:length(shoppingCart.content)})" href="#">結帳</a>
+<%-- 		          		<a onclick="checkoutfunction()" href="<c:url value='/checkoutOK.insert' />">結帳</a> --%>
 		          	</td> 
 	        	</tr>
 	        </tfoot>
@@ -144,7 +152,20 @@ function confirmDelete(n) {
 		 ${shoppingCart.content}
 	</div>
 	
-	
+	<script>
+		function checkoutfunction(count){
+			if (confirm("確定前往結帳 ") ) {
+				if(count == 0){
+					alert("您的購物車中無商品");
+					return;
+				}else{
+					location.href="<c:url value='/checkoutOK.insert' />"
+				}
+			} else {
+			
+			}
+		}
+	</script>
 	
 	
 	

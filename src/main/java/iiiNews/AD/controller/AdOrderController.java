@@ -58,23 +58,40 @@ public class AdOrderController {
 //		String memberId = mb.getMemberId();
 		
 		String memberId = "john";
-		
 		List<AdOrderBean> orderlist = adOrderService.getMemberOrderList(memberId);
 		model.addAttribute("memberOrderList", orderlist);
 		return "AD/normalMem/memberAllOrderList";
 	}
 	
 	
+	//$$$$ 此方法打算是用企業會員Id來查訂單
+		@GetMapping("/getSoldOrderByCpMemberId")
+		public String CpMemberSoldList(Model model) {
+			
+			//$$$$ 未來要寫得到memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+//			CbMemberBean mb = (CbMemberBean) model.getAttribute("Login_PK");
+//			String memberId = mb.getMemberId();
+			
+			String memberId = "storeFrank";
+			List<AdOrderItemBean> orderlist = itemService.getCpMemberSoldList(memberId);
+			model.addAttribute("CpSoldList", orderlist);
+			return "AD/entMem/AllSoldList";
+		}
+	
+	
 	/*傳入訂單pk編號 得到該訂單的所有內容品項清單*/
 	@GetMapping("/getItemByOrderPk/{adOrderPk}")
 	public String GetAdOrderByOrderPk(Model model,
 									@PathVariable int adOrderPk) {
+		AdOrderBean order = adOrderService.getOneOrder(adOrderPk);
+		model.addAttribute("orderInfo", order);
 		List<AdOrderItemBean> itemBeans = itemService.getItemsInOneOrder(adOrderPk);
 		model.addAttribute("AdOrderItems", itemBeans);
 		return "AD/normalMem/memberItemsList";
 	}
 	
 	
+	/*傳入單一品項pk編號 得到該訂單的內指定品項的內容 get方法用來呈現*/
 	@GetMapping("/getOneItem/{itemPk}")
 	public String GetOneOrder(Model model,
 							@PathVariable int itemPk) {
@@ -83,7 +100,7 @@ public class AdOrderController {
 		return "AD/normalMem/showOneItem";
 	}
 	
-	
+	/*傳入單一品項pk編號 得到該訂單的內指定品項的內容 post方法去寫入由一般會員所上傳圖片*/
 	@PostMapping("/getOneItem/{itemPk}")
 	public String UploadItemPic(Model model,
 							@ModelAttribute("oneItem") AdOrderItemBean oneItemBean,
@@ -122,6 +139,7 @@ public class AdOrderController {
 		return "redirect:/";
 	}
 	
+	//從資料庫取得該圖片 來顯示在畫面上
 	@GetMapping("/getPicture/{itemPk}")
 	public ResponseEntity<byte[]> getPicture(
 			@PathVariable Integer itemPk) throws IOException, SQLException {
@@ -180,7 +198,7 @@ public class AdOrderController {
 	}
 	
 	
-	//下載圖片
+	//點選下載圖片時的方法 
 	@GetMapping("/downloadPicture/{itemPk}")
 	public void downloadPicture(HttpServletResponse response,
 								@PathVariable Integer itemPk) throws SQLException, IOException {

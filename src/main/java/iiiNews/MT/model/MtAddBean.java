@@ -27,7 +27,7 @@ public class MtAddBean implements Serializable{
 	private String articleId;		//文章編號
 	@Column(columnDefinition = "datetime2(2)")	//修改型態，預設為datetime2(7)
 	private Timestamp updateDate;	//上傳時間
-	private Integer memberId;		//會員編號
+	private String memberId;		//會員編號
 	private String articleStatus;	//文章狀態
 	private String category;		//標籤分類
 	private String title;			//標題
@@ -54,7 +54,7 @@ public class MtAddBean implements Serializable{
 		this.imgName = imgName;
 	}
 
-	public MtAddBean(Integer pkey, String articleId, Timestamp updateDate, Integer memberId, String articleStatus,
+	public MtAddBean(Integer pkey, String articleId, Timestamp updateDate, String memberId, String articleStatus,
 			String category, String title, Blob imgLink, String videoLink, String article, String comment) {
 		super();
 		this.pkey = pkey;
@@ -97,11 +97,11 @@ public class MtAddBean implements Serializable{
 		this.updateDate = updateDate;
 	}
 
-	public Integer getMemberId() {
+	public String getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Integer memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 

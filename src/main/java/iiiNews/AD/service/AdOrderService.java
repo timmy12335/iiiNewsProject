@@ -14,4 +14,8 @@ public interface AdOrderService {
 	public int saveOrders(AdOrderBean aob);
 	
 	public int changeQuantity(AdBean ab);
+	
+	public AdOrderBean getOneOrder(int adOrderPk);
+	
+	public int changePaymentStatus(int adOrderPk);
 }

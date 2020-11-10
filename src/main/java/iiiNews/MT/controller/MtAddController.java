@@ -45,12 +45,13 @@ public class MtAddController {
 	@GetMapping("/MtCreate")
 	public String toCreateForm(Model model, HttpSession session) {		//載入新增欄位頁面getBean
 		
-		MBBean mb = (MBBean) session.getAttribute("MBBean");	//抓會員session
-        String memberId = mb.getMemberId();
+//		MBBean mb = (MBBean) session.getAttribute("MBBean");	//抓會員session
+//        String memberId = mb.getMemberId();
 		
 		MtAddBean bean = new MtAddBean();
 		model.addAttribute("mtBean", bean);
-		System.out.println("*******************************************" + memberId);
+		System.out.println("*******************************************");
+//		System.out.println("*******************************************" + memberId);
 		return "MT/Create";
 	}
 

@@ -10,7 +10,7 @@
 <title>客服表單</title>
 <script>
 
-
+window.onload=function(){
 	updateCrReport= function (){
 	var pk = document.getElementById("pk").value;
 	var nameValue = document.getElementById("name").value;
@@ -55,18 +55,9 @@
 }
 }
 
-	
-
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script>
-
-window.onload=function(){
-	var cc = $("#cc").val();
-$("#crClass option[value = '"+cc+"']").attr("selected",true);
-
 }
 </script>
+
 
 </head>
 <body>
@@ -78,7 +69,7 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 <hr>
 <div align='center'>
 <div id='resultMsg'></div>
-<table border='1' class="table table-bordered">
+<table border='1'>
 	<tr>
 		<td width='60' align='center' colspan="2">單號:No.${report.pk}
 		<input type='text' name='pk' id='pk' value="${report.pk}" hidden='true'/>
@@ -93,8 +84,7 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		<tr>
 		<td width='120' align='center'>類別</td>
 		<td>
-		<input type='text' name='cc' id='cc' hidden='true' value='${report.crClass}'/>
-		<select id='crClass' name='crClass' class="form-coontrol form-control">
+		<select id='crClass' name='crClass' value='${report.crClass}'>
 		<option value="帳號相關">帳號相關</option>
 		<option value="交易相關">交易相關</option>
 		<option value="商品相關">商品相關</option>
@@ -104,20 +94,20 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		</select></td>
 		</tr>
 		<tr>
-		<td align='center'>標題</td>
+		<td width='120' align='center'>標題</td>
 		<td>
-		<input type='text'class="form-control" name='crTitle' id='crTitle' value='${report.crTitle}'/></td>
+		<input type='text' name='crTitle' id='crTitle' style='width:180px' value='${report.crTitle}'/></td>
 		</tr>
 		<tr>
 		<td width='120' align='center'>內容</td>
 		<td align='center'>
-		<textarea class="form-control" rows="10" name='crContent' id='crContent'>${report.crContent}</textarea>
+		<textarea style='resize:none;width:180px;height:80px;' name='crContent' id='crContent'>${report.crContent}</textarea>
 		</td>
 		</tr>
 		<tr>
 		<td align='center' colspan='2'>
 		<input type="button" id="btn_update" value="確認修改" onclick="updateCrReport();"/>
-		<input type="button" id="btn_cancel" value="取消修改" onclick="cancelCrReport();"/>
+		<input type="button" id="btn_cancel" value="取消修改" onclick="cancelCrReport();" />
 		</td>
 		</tr>
 </table>

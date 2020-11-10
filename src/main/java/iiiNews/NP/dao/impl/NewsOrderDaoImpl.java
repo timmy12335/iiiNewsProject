@@ -1,5 +1,7 @@
 package iiiNews.NP.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
@@ -37,6 +39,26 @@ public class NewsOrderDaoImpl implements NewsOrderDao {
 		return n;
 		
 	}
+	//取出企業所購買的新聞列表
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NewsOrderBean> getOrderListByAjax(String companyId) {
+		String hql = "FROM NewsOrderBean nob WHERE nob.companyId = :cId ";
+		Session session = factory.getCurrentSession();
+		List<NewsOrderBean> list = session.createQuery(hql).setParameter("cId", companyId).getResultList();
+		return list;
+	}
+	//列出會員被購買紀錄
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NewsOrderBean> getOrderMemListByAjax(String memberId) {
+		String hql = "FROM NewsOrderBean nob WHERE nob.memberId = :mId ";
+		Session session = factory.getCurrentSession();
+		List<NewsOrderBean> list = session.createQuery(hql).setParameter("mId", memberId).getResultList();
+		return list;
+	}
+	
+	
 	
 	
 	

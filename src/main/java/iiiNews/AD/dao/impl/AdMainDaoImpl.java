@@ -158,7 +158,7 @@ public class AdMainDaoImpl implements AdMainDao {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String todayStr = sdf.format(date);
 		java.sql.Date today = java.sql.Date.valueOf(todayStr);
-		String hql = "UPDATE AdBean SET status = 0 WHERE adDate < :today";
+		String hql = "UPDATE AdBean SET status = 0 WHERE adDate < :today OR stock = 0";
 		
 		Session session = factory.getCurrentSession();
 		session.createQuery(hql).setParameter("today", today).executeUpdate();

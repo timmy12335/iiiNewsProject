@@ -35,7 +35,7 @@ public class NewsBuyingController {
 		nOrderBean.setMemberId(nb.getMemberId());
 		nOrderBean.setCompanyId("C0001");
 		nOrderBean.setOrderId(npOrderService.getOrderRecord());
-		
+		//改上架狀態
 		npOrderService.updateStatusZero(newsId);
 		npOrderService.uploadNewsOrder(nOrderBean);
 				

@@ -9,37 +9,36 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import iiiNews.MB.dao.MBDao;
 import iiiNews.MB.model.MBBean;
 
-
-
 @Repository
 public class MBDaoImpl implements MBDao {
-	
+
 	@Autowired
 	SessionFactory factory;
 
 	@Override
 	public int passwordForm(MBBean mb) {
-		
-			int n = 0;
-			Session session = factory.getCurrentSession();
-			session.save(mb);
-		
-			n++;
-			return n;
-		}
+
+		int n = 0;
+		Session session = factory.getCurrentSession();
+		session.save(mb);
+
+		n++;
+		return n;
+	}
 
 	@Override
 	public MBBean saveMember() {
-		
-		String hql = "FROM NewsBean ORDER BY uploadTime DESC";		
+
+		String hql = "FROM NewsBean ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		MBBean mbbean = null;
 		try {
-			mbbean = (MBBean)session.createQuery(hql).setMaxResults(1).getSingleResult();
-		}catch(NoResultException e) {
+			mbbean = (MBBean) session.createQuery(hql).setMaxResults(1).getSingleResult();
+		} catch (NoResultException e) {
 			;
 		}
 		return mbbean;
@@ -71,7 +70,24 @@ public class MBDaoImpl implements MBDao {
 
 	@Override
 	public void addMember(MBBean member) {
-		Session session =factory.getCurrentSession();
+		Session session = factory.getCurrentSession();
 		session.save(member);
+	}
+
+	@Override
+	public MBBean login(String account, String password) {
+		MBBean mb = null;
+		Session session = factory.getCurrentSession();
+		String hql = "From MemberBean m WHERE m.memberNumber = :acc and m.memberPassword = :pwd";
+		try {
+			mb = (MBBean) session.createQuery(hql).setParameter("acc", account).setParameter("pwd", password)
+					.getSingleResult();
+			System.out.println(mb.getMemberId());
+			System.out.println("登入成功");
+		} catch (NoResultException e) {
+			System.out.println("登入失敗");
+		}
+
+		return mb;
 	}
 }

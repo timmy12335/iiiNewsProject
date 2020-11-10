@@ -111,7 +111,7 @@
                     <script>startTime()</script>
                 </div>
             </li>
-            <li><a href="#" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
+            <li><a href="<c:url value='/Login' />" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
             <li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
         </ul>
     </div>

@@ -24,6 +24,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< Updated upstream
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -31,5 +32,9 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/luis/Downloads/log4j.jar"/>
 	<classpathentry kind="lib" path="C:/Users/luis/Downloads/javax.servlet-3.0.0.v201112011016.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/_springMVC/jar/javax.servlet-3.0.0.v201112011016.jar"/>
+	<classpathentry kind="lib" path="C:/_springMVC/jar/log4j.jar"/>
+>>>>>>> Stashed changes
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

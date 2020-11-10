@@ -32,6 +32,7 @@ import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
 import iiiNews.MT.validate.CheckArticleVaildator;
+import iiiNews.NP.model.NewsBean;
 
 @Controller
 @SessionAttributes({"MBBean"})
@@ -62,8 +63,8 @@ public class MtAddController {
 	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result) {
         CheckArticleVaildator validator = new CheckArticleVaildator();
         validator.validate(bean, result);
-        MBBean mbb = (MBBean) model.getAttribute("MBBean");
-        bean.setMemberId(mbb.getMemberId());
+//        MBBean mbb = (MBBean) model.getAttribute("MBBean");
+//        bean.setMemberId(mbb.getMemberId());
         
         try {
             if (bean.getTitle().isEmpty()) {
@@ -276,19 +277,22 @@ public class MtAddController {
 	@PostMapping("/modifyArticle/{pkey}")	//編輯單一文章
 	public String modify(@ModelAttribute("mtAddBean") MtAddBean mtAddBean, Model model,
 			@PathVariable int pkey) {
+		MtAddBean mtModifyBean = service.getpkey(pkey);
+//		MtAddBean mtModifyBean = service.getSingleArticle(articleId);
+//		System.out.println("articleId------> " + articleId);
 //		MtAddBean bean = null;
 		MultipartFile articleImage = mtAddBean.getImage();
 		System.out.println("productImage:-->" + articleImage);
 		//拿它原來的檔名取出來放到我們一個叫做FileName欄位
-		String originalFilename = articleImage.getOriginalFilename();
+//		String originalFilename = articleImage.getOriginalFilename();
 //		oneItemBean.setAdImageName(originalFilename);
 		
-		MtAddBean originBean = service.getpkey(pkey);
+//		MtAddBean originBean = service.getpkey(pkey);
 //		bean.setCategory(mtAddBean.getCategory());
-		originBean.setCategory(mtAddBean.getCategory());
-		originBean.setTitle(mtAddBean.getTitle());
-		originBean.setArticle(mtAddBean.getArticle());
-		originBean.setImgName(originalFilename);
+//		mtAddBean.setCategory(mtModifyBean.getCategory());
+//		mtAddBean.setTitle(mtModifyBean.getTitle());
+//		mtAddBean.setArticle(mtModifyBean.getArticle());
+//		mtAddBean.setImgName(originalFilename);
 		
 		
 		/* 建立Blob物件，交由 Hibernate 寫入資料庫 要有圖片欄位 且圖片位元組(不為空)
@@ -296,11 +300,17 @@ public class MtAddController {
 		 * 呼叫他的建構子SerialBlob(byte[] b)傳入陣列
 		 * 完成之後再放入Blob欄位(adImage)	*/
 		
+		if (articleImage.getSize()==0) {
+			mtAddBean.setImgLink(mtModifyBean.getImgLink());
+		}else {
+			mtAddBean.setImgName(articleImage.getOriginalFilename());
+		}
+		
 		if (articleImage != null && !articleImage.isEmpty() ) {
 			try {
 				byte[] b = articleImage.getBytes();
 				Blob blob = new SerialBlob(b);
-				originBean.setImgLink(blob);
+				mtAddBean.setImgLink(blob);
 				System.out.println("圖片上傳完成");
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -308,12 +318,13 @@ public class MtAddController {
 			}
 		}
 		
-		System.out.println("originBean after:-->" + originBean.toString());
+		System.out.println("originBean after:-->" + mtAddBean.toString());
 		
 
-		String getMemId = originBean.getMemberId();
-		int n = service.modifyArticle(originBean);
-		System.out.println(n + "更改成功");
+		String getMemId = mtModifyBean.getMemberId();
+		System.out.println("getMemId=================== " + getMemId);
+		service.modifyArticle(mtAddBean);
+//		System.out.println(n + "更改成功");
 		
 //		return "redirect:/";
 //		return "redirect:/getAllMtAdd";

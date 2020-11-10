@@ -28,7 +28,9 @@ public class NPOrderServiceImpl implements NPOrderService {
 		java.util.Date dnow = new java.util.Date();
 		String lastRecordNo = null;
 		String lastRecordNoDate = null;
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");if(lastRecord == null) {
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
+		
+		if(lastRecord == null) {
 			noStr = "NPorder"+ft.format(dnow)+"00001";
 		}else {
 			lastRecordNo = lastRecord.getNewsId();

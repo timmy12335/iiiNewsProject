@@ -1,5 +1,6 @@
 package iiiNews.AD.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import iiiNews.AD.model.AdBean;
@@ -18,4 +19,6 @@ public interface AdOrderService {
 	public AdOrderBean getOneOrder(int adOrderPk);
 	
 	public int changePaymentStatus(int adOrderPk);
+	
+	public List<AdOrderBean> getMonthOrder();
 }

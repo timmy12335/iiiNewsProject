@@ -50,7 +50,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="連結">商品1</a></li>
-                <li class="nav-item"> <a class="nav-link" href="連結">商品2</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
               </ul>
             </div>
           </li>

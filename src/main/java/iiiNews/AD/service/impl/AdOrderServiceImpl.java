@@ -1,5 +1,6 @@
 package iiiNews.AD.service.impl;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -98,6 +99,17 @@ public class AdOrderServiceImpl implements AdOrderService {
 	@Transactional
 	public int changePaymentStatus(int adOrderPk) {
 		return adOrderDao.changePaymentStatus(adOrderPk);
+	}
+
+
+	@Override
+	@Transactional
+	public List<AdOrderBean> getMonthOrder() {
+		java.util.Date dnow = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String todayStr = sdf.format(dnow).substring(0, 8)+"01";
+		java.sql.Date thismonth=java.sql.Date.valueOf(todayStr);
+		return adOrderDao.getMonthOrder(thismonth);
 	}
 
 }

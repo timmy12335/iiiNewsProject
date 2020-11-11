@@ -67,55 +67,57 @@ public class AdAjaxController {
 		return "AD/ShowAdsByPageAjaxSearch";
 	}
 	
-	//以類別來搜尋
+	//後臺請求ajax的頁面
+		@GetMapping("/backGetAdListAjax")
+		public String getajaxBack() {
+			service.changeStatus();
+			return "AD/backend/BackAdsAjax";
+		}
+	
+	//全部搜尋 (限制上架)
 	@GetMapping("/getAdByAjax.json")
 	public @ResponseBody List<AdBean> getAdByAjax() {
 		List<AdBean> list = new ArrayList<AdBean>();
-			list = ajaxService.getAllAdByAjax();
+		list = ajaxService.getAllAdByAjax("");
 		return list;		
 	}
 	
-	//以類別來搜尋
+	//以類別來搜尋 (限制上架)
 	@GetMapping("/getAdByCateNoAjax.json")
 	public @ResponseBody List<AdBean> getAdByCateNoAjax(
-			@RequestParam(value="cateNo",defaultValue = "-1" )String cateNo) {
+			@RequestParam(value="cateNo",defaultValue = "-1" )String cateNo,
+			@RequestParam(value="set",defaultValue = "onsale" )String set) {
 		System.out.println(cateNo);
 		List<AdBean> list = new ArrayList<AdBean>();
-		if(cateNo.equals("-1")) {
-			list = ajaxService.getAllAdByAjax();
+		if(cateNo.equals("-1")&&set.equals("ALL")) {
+			list = ajaxService.getAllAdByAjax(set);
+		}else if(cateNo.equals("-1")){
+			list = ajaxService.getAllAdByAjax("");
 		}else {
-			list = ajaxService.getAdByCateNoAjax(cateNo);
+			list = ajaxService.getAdByCateNoAjax(cateNo,set);
 		}
-		return list;		
+		return list;
 	}
 	
-	//以日期來搜尋
+	//以日期來搜尋 (限制上架)
 	@GetMapping("/getAdByDateAjax.json")
 	public @ResponseBody List<AdBean> getAdByDateAjax(
-			@RequestParam(value="date",defaultValue = "2020-11-07" )Date date) {
+			@RequestParam(value="date",defaultValue = "2020-11-07" )Date date,
+			@RequestParam(value="set",defaultValue = "onsale" )String set) {
 		System.out.println(date);
 		List<AdBean> list = new ArrayList<AdBean>();
-//		String dateStr = String.valueOf(date);
-//		if(dateStr.equals("2020-11-07")) {
-//			list = service.getAllAdByAjax();
-//		}else {
-			list = ajaxService.getAdByDateAjax(date);
-//		}
+		list = ajaxService.getAdByDateAjax(date,set);
 		return list;		
 	}
 	
-	//以關鍵字來搜尋
+	//以關鍵字來搜尋 (限制上架)
 	@GetMapping("/getAdByWordAjax.json")
 	public @ResponseBody List<AdBean> getAdByWordAjax(
-			@RequestParam(value="word",defaultValue = "2020-11-07" )String SearchWord) {
+			@RequestParam(value="word",defaultValue = "2020-11-07")String SearchWord,
+			@RequestParam(value="set",defaultValue = "onsale" )String set) {
 		System.out.println();
 		List<AdBean> list = new ArrayList<AdBean>();
-//		String dateStr = String.valueOf(date);
-//		if(dateStr.equals("2020-11-07")) {
-//			list = service.getAllAdByAjax();
-//		}else {
-			list = ajaxService.getAdByWordAjax(SearchWord);
-//		}
+		list = ajaxService.getAdByWordAjax(SearchWord,set);
 		return list;		
 	}
 	

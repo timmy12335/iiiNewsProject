@@ -22,8 +22,15 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AdBean> getAllAdByAjax() {
+	public List<AdBean> getAllAdByAjax(String set) {
+		
 		String hql = "FROM AdBean WHERE stock > 0 AND status = 1";
+		
+		if(set.equals("ALL")) {
+			hql = "FROM AdBean";
+			System.out.println("all print by dao");
+		}
+		
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql)
 						.getResultList();
@@ -32,9 +39,14 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AdBean> getAdByCateNoAjax(String CateNo) {
+	public List<AdBean> getAdByCateNoAjax(String CateNo,String set) {
 //		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND categoryNo = :cateno";
+		
+		if(set.equals("ALL")) {
+			hql = "FROM AdBean WHERE categoryNo = :cateno";
+			System.out.println("all print by dao");
+		}
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql)
 						.setParameter("cateno", CateNo)
@@ -45,8 +57,14 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AdBean> getAdByDateAjax(Date adDate) {
+	public List<AdBean> getAdByDateAjax(Date adDate,String set) {
 		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND adDate = :date";
+		
+		if(set.equals("ALL")) {
+			hql = "FROM AdBean WHERE adDate = :date";
+			System.out.println("all print by dao");
+		}
+		
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql)
 						.setParameter("date", adDate)
@@ -57,11 +75,19 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AdBean> getAdByWordAjax(String searchword) {
+	public List<AdBean> getAdByWordAjax(String searchword,String set) {
 		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND "
 				+ "(memberName LIKE :word OR adNo LIKE :word "
 				+ "OR adTitle LIKE :word OR statement LIKE :word"
 				+ ")";
+		
+		if(set.equals("ALL")) {
+			hql = "FROM AdBean WHERE "
+					+ "(memberName LIKE :word OR adNo LIKE :word "
+					+ "OR adTitle LIKE :word OR statement LIKE :word"
+					+ ")";
+			System.out.println("all print by dao");
+		}
 		Session session = factory.getCurrentSession();
 		List<AdBean> list = session.createQuery(hql)
 						.setParameter("word", "%"+searchword+"%")

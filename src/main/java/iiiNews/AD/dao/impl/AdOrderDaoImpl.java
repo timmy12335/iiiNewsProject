@@ -1,5 +1,6 @@
 package iiiNews.AD.dao.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -79,6 +80,18 @@ public class AdOrderDaoImpl implements AdOrderDao {
 		session.update(bean);
 		n++;
 		return n;
+	}
+	
+	
+	//得到整個月的訂單
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AdOrderBean> getMonthOrder(Date thismonth) {
+		System.out.println("dao===");
+		String hql = "FROM AdOrderBean WHERE orderDate >= :startday";
+		Session session = factory.getCurrentSession();
+		List<AdOrderBean> list = session.createQuery(hql).setParameter("startday", thismonth).getResultList();
+		return list;
 	}
 	
 	

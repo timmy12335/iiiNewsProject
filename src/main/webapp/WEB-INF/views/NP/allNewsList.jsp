@@ -100,7 +100,7 @@
 <!--<a href="<c:url value='/' />">回前頁</a>   -->
 </div>
 <script>
-var num =  ${newsLists.size()};
+var num = ${newsLists.size()};
 //將秒轉回時:分:秒 
 function clock() {
 	let sec01,day,hr,hr01,min,sec;

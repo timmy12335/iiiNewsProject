@@ -74,15 +74,8 @@ public class MtAddServiceImpl implements MtAddService {
 
 	@Override
 	@Transactional
-	public int modifyArticle(MtAddBean ModArt) {
-		int n = 0;
-		try {
-			n = dao.modifyArticle(ModArt);
-		} catch (Exception e) {
-			System.out.println("GGGGGGGG");
-			;
-		}
-		return n;
+	public void modifyArticle(MtAddBean ModArt) {
+		 dao.modifyArticle(ModArt);
 	}
 
 	@Override

@@ -24,6 +24,12 @@ public interface trkNewsService {
 	List<rptNewsBean> getReportList();    // 取得報導列表
 	
 	void deletetrkNewsByPK(Integer trackId); //依pk值刪除追蹤新聞
+	
+    void updatetrkNews(trkNewsBean trkNew);  //修改追蹤新聞
+	
+	void evicttrkNews(trkNewsBean trkNew);  //驅逐未修改的屬性
+	
+	trkNewsBean findByPrimaryKey(Integer NewsId); //為修改資料先找主鍵
 }
 
 

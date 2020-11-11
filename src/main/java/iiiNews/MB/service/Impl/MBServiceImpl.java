@@ -15,7 +15,7 @@ import iiiNews.MB.service.MBService;
 //import com.web.store.model.BookBean;
 
 @Service
-public class MBServiceImpl implements MBService{
+public class MBServiceImpl implements MBService {
 
 	@Autowired
 	MBDao mbdao;
@@ -24,7 +24,7 @@ public class MBServiceImpl implements MBService{
 	@Override
 	public void addMember(MBBean member) {
 		mbdao.addMember(member);
-		
+
 	}
 
 	@Override
@@ -55,5 +55,11 @@ public class MBServiceImpl implements MBService{
 	public List<MBBean> getMember(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Transactional
+	@Override
+	public MBBean login(String account, String password) {
+		System.out.println("service");
+		return mbdao.login(account, password);
 	}
 }

@@ -1,6 +1,7 @@
 package iiiNews.MB.dao;
 
 import java.util.List;
+
 import iiiNews.MB.model.MBBean;
 
 public interface MBDao {
@@ -18,4 +19,7 @@ public interface MBDao {
 	void addMember(MBBean member);
 
 	MBBean saveMember();
+
+	public MBBean login(String account, String password);
+
 }

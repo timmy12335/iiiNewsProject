@@ -61,9 +61,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="連結">
+            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
               <i class="ti-pie-chart menu-icon"></i>
-              <span class="menu-title">金額</span>
+              <span class="menu-title">社群新聞文章管理</span>
             </a>
           </li>
           <li class="nav-item">

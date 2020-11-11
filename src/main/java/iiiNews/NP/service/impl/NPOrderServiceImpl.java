@@ -1,6 +1,7 @@
 package iiiNews.NP.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -33,7 +34,7 @@ public class NPOrderServiceImpl implements NPOrderService {
 		if(lastRecord == null) {
 			noStr = "NPorder"+ft.format(dnow)+"00001";
 		}else {
-			lastRecordNo = lastRecord.getNewsId();
+			lastRecordNo = lastRecord.getOrderId();
 			lastRecordNoDate = lastRecordNo.substring(7,15);
 			
 			noStr = "NPorder"+ft.format(dnow);
@@ -62,6 +63,15 @@ public class NPOrderServiceImpl implements NPOrderService {
 			newsProductDao.updateStatus(newsId, newsbean.getStatus() - 2);
 		}
 		
+	}
+	//列出企業購買紀錄
+	@Override
+	public List<NewsOrderBean> getOrderListByAjax(String companyId) {
+		return newsOrderDao.getOrderListByAjax(companyId);
+	}
+	@Override
+	public List<NewsOrderBean> getOrderMemListByAjax(String memberId) {
+		return newsOrderDao.getOrderMemListByAjax(memberId);
 	}
 
 }

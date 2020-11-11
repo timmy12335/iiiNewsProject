@@ -6,7 +6,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<title>上架廣告欄位</title>
+<title>發文紀錄</title>
 <script src="https://www.google.com/recaptcha/api.js"></script>
 
 </head>
@@ -20,7 +20,6 @@
 			<form method="GET" >
 				<fieldset>
 					<div align="center" style="margin-top: 50px;">
-						<h2>更新內文</h2>
 						<strong><h2>會員發文紀錄</h2></strong>
 
 						<hr>

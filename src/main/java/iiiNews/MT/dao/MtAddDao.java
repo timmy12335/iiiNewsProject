@@ -20,7 +20,7 @@ public interface MtAddDao {
 	void update(MtAddBean mtAddBean);							//更新文章資訊
 
 	public List<MtAddBean> getAllMtAdd();					//取所有mtAddBean資料，對應getAllMtAdd
-	public int modifyArticle(MtAddBean ModArt);				//編輯單一文章	
+	public void modifyArticle(MtAddBean ModArt);				//編輯單一文章	
 	
 	public MtAddBean getSingleArticle(String articleId);	//查詢單一文章
 	public List<MtAddBean> getMemArticle(String memberId);	//查詢單一會員的文章列表

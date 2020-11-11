@@ -105,4 +105,22 @@ public class trkNewsDaoImpl implements trkNewsDao {
             session.delete(trkNewsBean);
 		}
 
+		@Override
+		public void updatetrkNews(trkNewsBean trkNew) {
+			Session session = factory.getCurrentSession();
+			session.update(trkNew);
+		}
+		@Override
+		public void evicttrkNews(trkNewsBean trkNew) {
+			Session session = factory.getCurrentSession();
+			session.evict(trkNew);
+		}
+
+		@Override
+		public trkNewsBean findByPrimaryKey(Integer NewsId) { //為修改資料先找主鍵
+			Session session = factory.getCurrentSession();
+			trkNewsBean trkNewsBean = session.get(trkNewsBean.class, NewsId);
+			return trkNewsBean;
+		}
+
 }

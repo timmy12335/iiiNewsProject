@@ -43,8 +43,9 @@ margin:5px;
 <%-- 			<tr><td><div style="width:500px;height:300px">內文:<br>${ singleArticle.article }</div></td></tr> --%>
 		</table>
 		<br>
-		<a href="<c:url value="" />">-----TOP-----</a>
-		<a href="<c:url value="/getAllMtAdd" />">回前頁</a><br><br><br>	
+		<input type="button" onclick="location.href=<c:url value='' />" value="-----TOP-----" />
+		<input type="button" onclick="history.back()" value="回前頁，取消編輯" />
+<%-- 		<a href="<c:url value="/getAllMtAdd" />">回前頁</a><br><br><br>	 --%>
 	</div>
 <!-- 	</form> -->
 </body>

@@ -4,12 +4,10 @@
 <html>
 
 <head>
-    <!-- <script type="text/javascript" src="jquery-1.3.2.min.js"></script> -->
-    <!-- <script type="text/javascript" src="json2.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-    <title>News API</title>
+    <title>Hot News</title>
     <script>
         var url = 'http://newsapi.org/v2/top-headlines?' +
             'country=kr&' +
@@ -52,7 +50,6 @@
 
         <div id="todayNews"></div>
     </div>
-    <!-- <input class="sub" type="submit" name="submit" id="submit" value="送出" /> -->
     <script>
         var mySelect = document.getElementById("Country");//定位id(获取select)
         var index = mySelect.selectedIndex;// 选中索引(选取select中option选中的第几个)
@@ -62,9 +59,7 @@
         mySelect.options[index].selected
         mySelect.onchange = function () {
 
-            //         	author = "";
             var content = '';
-
 
             if (mySelect.options[0].selected == true) {
                 strCountry = "";
@@ -93,7 +88,7 @@
                 'country=' + strCountry +
                 '&apiKey=054094dd99a94d729e84890939ac8370';
 
-
+            //----------------------------------------------------------------
             var cateSelect = document.getElementById("Category");//定位id(获取select)
             var index = cateSelect.selectedIndex;// 选中索引(选取select中option选中的第几个)
             var text = cateSelect.options[index].text; // 选中文本
@@ -146,21 +141,6 @@
 
                 console.log("url----->" + url);
 
-
-
-
-
-
-                //             var url = 'http://newsapi.org/v2/top-headlines?' +
-                //             'country=' + strCountry +
-                //             '&apiKey=054094dd99a94d729e84890939ac8370';
-
-                //----------------------------------------------------------------
-                //             category
-                //             var url = 'http://newsapi.org/v2/top-headlines?' +
-                //             'country=' + strCountry +
-                //             '&category=business&apiKey=8e702b6238b04fd38c2f3cac1ef392e7';
-
                 //----------------------------------------------------------------
 
                 $.ajax({
@@ -177,7 +157,6 @@
                     }
                 });
 
-                //  processData(data)
                 function processData(data) {
                     var articleItems = [];
                     var divs = document.getElementById("todayNews");
@@ -190,18 +169,6 @@
                         var artUrl = data.articles[i].url;
                         var urlToImage = data.articles[i].urlToImage;
 
-
-                        //                     var strImg = ".jpg";				//等圖片連結不是.jpg or .png測試用
-
-                        //--------------------------------------------------------------------------------------------
-                        //                     var imgStr = urlToImage.substr(-4);
-                        //                     console.log("---------" + imgStr + "---------");
-
-                        //                     if (urlToImage == null || urlToImage.substr(-4) != imgStr){
-                        //                     	urlToImage = noImage;
-                        //                     }
-                        //--------------------------------------------------------------------------------------------   
-
                         if (urlToImage == null) {
                             urlToImage = noImage;
                         }
@@ -212,19 +179,17 @@
                         }
 
                         content += '<div class="author">新聞來源: ' + author + "</div >" +
-                            "<a href=" + artUrl + '><div class="title">' + title + "</div ></a> " +
+                            "<a href=" + artUrl + '><div class="title">' + title + "</div ></a>" +
                             "<div class='description'>" + description + "</div >" +
-                            '<div class="publishedAt">更新時間: ' + publishedAt + "</div >" +
-                            '<div class="urlToImage"><img src=' + urlToImage + " width=200 height=100'/> </div ><hr>"
+                            '<div class="urlToImage"><img src=' + urlToImage + " width=200 height=100'/> </div >"+
+                            '<div class="publishedAt">更新時間: ' + publishedAt + "</div ><hr>" 
 
                         divs.innerHTML = content;
-                        //                 	$('todayNews').remove();
                     }
                 }
             }
         }
-
+        
     </script>
 </body>
-
 </html>

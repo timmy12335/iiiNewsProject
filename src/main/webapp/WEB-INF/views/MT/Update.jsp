@@ -22,6 +22,13 @@
 				<fieldset>
 					<div align="center" style="margin-top: 50px;">
 						<h2>更新內文</h2>
+						<div>		
+							<form:input type="hidden" id="articleId" name="articleId"  path="articleId" value="${ mtAddBean.articleId }"  />
+							<form:input type="hidden" id="imgName" name="imgName"  path="imgName" value="${ mtAddBean.imgName }"  />
+							<form:input type="hidden" id="memberId" name="memberId"  path="memberId" value="${ mtAddBean.memberId }"  />
+							<form:input type="hidden" id="status" name="status"  path="status" value="${ mtAddBean.status }"  />			
+							<form:input type="hidden" id="updateDate" name="updateDate"  path="updateDate" value="${ mtAddBean.updateDate }"  />
+						</div>	
 						<strong><h4>文章編號:${mtAddBean.articleId}</h4></strong>
 						<hr>
 						<div class="st1">

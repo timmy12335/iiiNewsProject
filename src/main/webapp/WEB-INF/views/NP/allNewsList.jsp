@@ -7,6 +7,19 @@
 <meta charset="UTF-8">
 <title>所有新聞列表</title>
 <script>
+	function GetDateDiff(endTime) {
+		//將xxxx-xx-xx的時間格式，轉換為 xxxx/xx/xx的格式 
+		var startTime = timeNow().replace(/\-/g, "/");
+		endTime = endTime.replace(/\-/g, "/");
+		//將計算間隔類性字元轉換為小寫 
+		var sTime = new Date(startTime); //開始時間 
+		var eTime = new Date(endTime); //結束時間 
+		//作為除數的數字 
+		var divsec = 1000;
+		let sec = parseInt((eTime.getTime() - sTime.getTime()) / parseInt(divsec));
+	//	console.log("sec="+sec);
+		return sec;
+	}
 	
 	//取得現在的時間，放入GetDateDiff()去計算時間
 	function timeNow() {
@@ -25,18 +38,7 @@
 	 * 其中，年月日為全格式，例如 ： 2010-10-12 01:00:00 
 	 * 返回精度為：秒 
 	 */
-	function GetDateDiff(endTime) {
-		//將xxxx-xx-xx的時間格式，轉換為 xxxx/xx/xx的格式 
-		var startTime = timeNow().replace(/\-/g, "/");
-		endTime = endTime.replace(/\-/g, "/");
-		//將計算間隔類性字元轉換為小寫 
-		var sTime = new Date(startTime); //開始時間 
-		var eTime = new Date(endTime); //結束時間 
-		//作為除數的數字 
-		var divsec = 1000;
-		let sec = parseInt((eTime.getTime() - sTime.getTime()) / parseInt(divsec));
-		return sec;
-	}
+	
 	
 </script>
 </head>
@@ -100,12 +102,13 @@
 <!--<a href="<c:url value='/' />">回前頁</a>   -->
 </div>
 <script>
+
 var num = ${newsLists.size()};
 //將秒轉回時:分:秒 
 function clock() {
 	let sec01,day,hr,hr01,min,sec;
 	for(var i=0;i<num;i++){
-		var ptime = document.getElementById("ftime"+[i]).innerHTML ;
+	var ptime = document.getElementById("ftime"+[i]).innerHTML ;
 	sec01 = GetDateDiff(ptime);
 	sec = sec01 % 60 <10 ? '0'+sec01 % 60 :sec01 % 60 ;		
 	min = (sec01-sec)/60%60 <10 ? '0'+ (sec01-sec)/60%60 : (sec01-sec)/60%60;

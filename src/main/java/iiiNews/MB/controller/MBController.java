@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import iiiNews.MB.model.LoginBean;
 import iiiNews.MB.model.MBBean;
@@ -24,6 +28,7 @@ import iiiNews.MB.service.MBService;
 import iiiNews.MB.validate.LoginBeanValidator;
 
 @Controller
+@SessionAttributes("MBBean")
 public class MBController {
 	@Autowired
 	ServletContext ctx;
@@ -148,5 +153,19 @@ public class MBController {
 		response.addCookie(cookieUser);
 		response.addCookie(cookiePassword);
 		response.addCookie(cookieRememberMe);
+	}
+	
+	@GetMapping("/logout")
+	// @ModelAttribute("LoginOK") MemberBean memberBean,
+	public String logout(HttpSession session,  Model model, SessionStatus status, HttpServletRequest req) {
+		String name = "";
+		MBBean mbbean = (MBBean) session.getAttribute("LoginOK");
+		if (mbbean != null) {
+			name = mbbean.getName();
+		}
+		model.addAttribute("memberName", name);
+		status.setComplete();
+		session.invalidate();
+		return "redirect: " + req.getContextPath();
 	}
 }

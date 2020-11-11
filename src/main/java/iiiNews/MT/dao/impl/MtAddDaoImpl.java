@@ -95,13 +95,11 @@ public class MtAddDaoImpl implements MtAddDao{
 	}
 	
 	@Override
-	public int modifyArticle(MtAddBean ModArt) {		//編輯單一文章
-		int n = 0;
+	public void modifyArticle(MtAddBean ModArt) {		//編輯單一文章
 		Session session = factory.getCurrentSession();
-		MtAddBean bean = (MtAddBean) session.merge(ModArt);
-		System.out.println(bean.toString());
-		n++;
-		return n;
+		session.update(ModArt);
+//		MtAddBean bean = (MtAddBean) session.merge(ModArt);
+//		System.out.println(bean.toString());
 	}
 	
 	@Override

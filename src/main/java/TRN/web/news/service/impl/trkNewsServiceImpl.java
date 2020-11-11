@@ -68,5 +68,22 @@ public class trkNewsServiceImpl implements trkNewsService {
 	public void deletetrkNewsByPK(Integer trackId) {
 		dao.deletetrkNewsByPK(trackId);
 	}
+	@Transactional
+	@Override
+	public void updatetrkNews(trkNewsBean trkNew) {
+		dao.updatetrkNews(trkNew);
+		
+	}
+	@Transactional
+	@Override
+	public void evicttrkNews(trkNewsBean trkNew) {
+		dao.evicttrkNews(trkNew);
+		
+	}
+	@Transactional
+	@Override
+	public trkNewsBean findByPrimaryKey(Integer NewsId) {
+		return dao.findByPrimaryKey(NewsId);
+	}
 
 }

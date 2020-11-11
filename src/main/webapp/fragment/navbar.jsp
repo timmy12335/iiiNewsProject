@@ -72,7 +72,7 @@
             <li><a href="<c:url value='#' />">社群專區</a>
             	<ul>
             		<li><a href="<c:url value='/MtCreate' />">新增Po文</a>
-                    <li><a href="<c:url value='/getAllMtAdd' />">檢視使用者所有資料</a></li>
+                    <li><a href="<c:url value='/getAllMtAdd' />">檢視所有資料---待刪除</a></li>
                     <li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
                     <li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
 <%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
@@ -100,7 +100,7 @@
                     	<ul>
                     		<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
                             <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
-                            <li><a href="<c:url value='/memberAllAdsList' />">依會員查詢test未完成</a></li>
+                            <li><a href="<c:url value='/testingMonthOrder' />">test</a></li>
                             <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
 		                    <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
 		                    <li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
@@ -113,7 +113,7 @@
                     <script>startTime()</script>
                 </div>
             </li>
-            <li><a href="#" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
+            <li><a href="<c:url value='/Login' />" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
             <li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
         </ul>
     </div>

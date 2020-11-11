@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -229,8 +231,44 @@ public class trkNewsController {
 				return map;
 		    }
 	
+			@PutMapping(value = "/editNews4/{NewsId}", 
+					consumes= {"application/json"}, produces= {"application/json"})
+			public @ResponseBody Map<String, String> updatetrkNews(
+		            @RequestBody trkNewsBean trkNewsBean, @PathVariable Integer NewsId) {
+				System.out.println("1107key----->"+NewsId);
+				trkNewsBean trkNewsBean0=null;
+//				if (key != null) {
+				trkNewsBean0 = service.findByPrimaryKey(NewsId);
+				System.out.println("1107CC----->"+trkNewsBean0);
+					//member0原本舊資料
+//					if (member0 == null) {
+//						throw new RuntimeException("鍵值不存在, key=" + key);
+//					}
+//					serviceUpdate.evictMember(member0);
+//				} else {
+//					throw new RuntimeException("鍵值不存在, key=" + key);
+//				}
+				
+				//members 新植入資料
+						copyUnupdateField(trkNewsBean0, trkNewsBean);
+						System.out.println("1107AA----->"+trkNewsBean0); 
+						System.out.println("1107BB----->"+trkNewsBean); //
+						Map<String, String> map = new HashMap<>();
+						try {
+				     		service.updatetrkNews(trkNewsBean);
+				     		
+							map.put("success", "更新成功");
+						} catch(Exception e) {
+							e.printStackTrace();
+							map.put("fail", "更新失敗");
+						}
+						//System.out.println("1107CC"+map);
+						return map;
+			}
 	
-	
+			private void copyUnupdateField(trkNewsBean trkNewsBean0, trkNewsBean trkNewsBean) {
+				trkNewsBean.setExtra(trkNewsBean0.getExtra()); //取得未更新的值
+			}
 	
 	
 }

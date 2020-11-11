@@ -43,7 +43,7 @@ public class trkNewsBean implements Serializable {
 	private String filename;
 	private String type;
 	private Integer status;
-	private trkNewsBean trkNewsBean;
+	private String extra;
 	
 	@JsonIgnore
 	@Transient
@@ -75,7 +75,7 @@ public class trkNewsBean implements Serializable {
 			           String filename,
 			           String type, 
 			           int status,
-			           trkNewsBean trkNewsBean
+			           String extra
 			           ) {
 		super();
 		this.trackId = trackId;
@@ -91,7 +91,7 @@ public class trkNewsBean implements Serializable {
 		this.filename = filename;
 		this.type = type;
 		this.status = 1;
-		this.trkNewsBean = trkNewsBean;
+		this.extra = extra;
 //		this.rptNewsBean = rptNewsBean;
 	}
 	public trkNewsBean(Integer trackId, 
@@ -123,14 +123,16 @@ public class trkNewsBean implements Serializable {
 		this.status = 1;
 	}
 	
-	public trkNewsBean getTrkNewsBean() {
-		return trkNewsBean;
+
+	
+	public String getExtra() {
+		return extra;
 	}
 
-	public void setTrkNewsBean(trkNewsBean trkNewsBean) {
-		this.trkNewsBean = trkNewsBean;
+	public void setExtra(String extra) {
+		this.extra = extra;
 	}
-	
+
 	public MultipartFile getNewsImage() {
 		return newsImage;
 	}
@@ -243,13 +245,13 @@ public class trkNewsBean implements Serializable {
 		this.status = status;
 	}
 
-	public Set<rptNewsBean> getRpts() {
-		return rpts;
-	}
-
-	public void setRpts(Set<rptNewsBean> rpts) {
-		this.rpts = rpts;
-	}
+//	public Set<rptNewsBean> getRpts() {
+//		return rpts;
+//	}
+//
+//	public void setRpts(Set<rptNewsBean> rpts) {
+//		this.rpts = rpts;
+//	}
 
 //	public rptNewsBean getRptNewsBean() {
 //		return rptNewsBean;

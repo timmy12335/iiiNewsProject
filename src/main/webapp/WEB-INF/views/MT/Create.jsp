@@ -42,7 +42,7 @@ window.onload = function(){
 	</nav>
 	<div id="page" class="container" align="center">
 		<h2 class="BoxTitle">-----廣告欄位置上傳-----</h2>
-		<div class="container-login100">>
+		<div class="container-login100">
 			<form:form method="POST" modelAttribute="mtBean"
 				enctype="multipart/form-data" onsubmit="return submitUserForm();">
 				<fieldset>

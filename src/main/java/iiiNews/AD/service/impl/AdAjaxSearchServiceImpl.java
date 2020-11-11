@@ -23,26 +23,26 @@ public class AdAjaxSearchServiceImpl implements AdAjaxSearchService {
 	
 	@Override
 	@Transactional
-	public List<AdBean> getAllAdByAjax() {
-		return ajaxdao.getAllAdByAjax();
+	public List<AdBean> getAllAdByAjax(String set) {
+		return ajaxdao.getAllAdByAjax(set);
 	}
 	
 	@Override
 	@Transactional
-	public List<AdBean> getAdByCateNoAjax(String CateNo) {
-		return ajaxdao.getAdByCateNoAjax(CateNo);
+	public List<AdBean> getAdByCateNoAjax(String CateNo,String set) {
+		return ajaxdao.getAdByCateNoAjax(CateNo,set);
 	}
 	
 	@Override
 	@Transactional
-	public List<AdBean> getAdByDateAjax(Date adDate) {
-		return ajaxdao.getAdByDateAjax(adDate);
+	public List<AdBean> getAdByDateAjax(Date adDate,String set) {
+		return ajaxdao.getAdByDateAjax(adDate,set);
 	}
 
 	@Override
 	@Transactional
-	public List<AdBean> getAdByWordAjax(String searchword) {
-		return ajaxdao.getAdByWordAjax(searchword);
+	public List<AdBean> getAdByWordAjax(String searchword,String set) {
+		return ajaxdao.getAdByWordAjax(searchword,set);
 	}
 
 }

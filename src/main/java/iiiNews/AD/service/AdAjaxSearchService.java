@@ -7,10 +7,11 @@ import iiiNews.AD.model.AdBean;
 
 public interface AdAjaxSearchService {
 	
-	public List<AdBean> getAllAdByAjax();
-	public List<AdBean> getAdByCateNoAjax(String CateNo);
+	public List<AdBean> getAllAdByAjax(String set);
 	
-	public List<AdBean> getAdByDateAjax(Date adDate);
+	public List<AdBean> getAdByCateNoAjax(String CateNo,String set);
 	
-	public List<AdBean> getAdByWordAjax(String searchword);
+	public List<AdBean> getAdByDateAjax(Date adDate,String set);
+	
+	public List<AdBean> getAdByWordAjax(String searchword,String set);
 }

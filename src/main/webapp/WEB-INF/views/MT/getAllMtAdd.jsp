@@ -18,7 +18,7 @@ window.onload = function() { //刪除文章，OK
 }
 </script>
 
-<title>Get All MtBean</title>
+<title>使用者文章管理</title>
 <style>
 #customers {
   font-family: Arial, Helvetica, sans-serif;
@@ -31,18 +31,20 @@ window.onload = function() { //刪除文章，OK
   padding: 8px;
 }
 
-#customers tr:hover {background-color: #ECF5FF;}
+#customers tr:hover {background-color: #F0F0F0;}
 
 #customers th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #243aa6;
+  background-color: #0066CC;
   color: white;
 }
 
 td {
 	padding: 3px;
+	 text-align:center; 
+	 valign:middle;'
 }
 
 .td1 {
@@ -54,20 +56,20 @@ td {
 </style>
 </head>
 <body>
-	<nav>
-		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
-	</nav>
-	<div align="center" style="margin-top: 100px;">
-		<br>
-		<h2>所有文章</h2>
-		<a href="<c:url value='/' />">回首頁</a>
+	
+		<jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
+	
+	<div align="center" style="margin-top: 30px;">
+			<h2>所有文章</h2>
+<%-- 			<a href="<c:url value='/dashboard ' />">回首頁</a> --%>
 	</div>
 	<hr>
-	<div align="center">
+<!-- 	<div class="card-body"> -->
+	<div align="center" class="table-responsive pt-3">
 		<table id="customers">
 			<tr>
-				<th>PK</th>
-				<th>文章編號</th>
+				<th style="vertical-align: inherit;">PK</th>
+				<th style="vertical-align: inherit;">文章編號</th>
 				<th>使用者</th>
 				<th>上傳日期</th>
 				<th>文章狀態</th>
@@ -83,9 +85,9 @@ td {
 					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >
 						<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>${all.articleId}</a> </td>
 					<td>${all.memberId}</td>
-					<td>${all.updateDate}</td>
-					<c:if test="${ all.status == 1}"><td>可瀏覽</td></c:if>
-					<c:if test="${ all.status == 0}"><td>***已下架***</td></c:if>
+					<td width="10px" height="20px">${all.updateDate}</td>
+					<c:if test="${ all.status == 1}"><td><label class="badge badge-success">可瀏覽</label></td></c:if>
+					<c:if test="${ all.status == 0}"><td><label class=" badge badge-danger">已下架</label></td></c:if>
 					<td>${all.category}</td>
 					<td class="td1">${all.title}</td>
 					<td class="td1"><div id="Demo" class="demo"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${all.articleId}' />" /></div>${all.imgName}</td>
@@ -106,5 +108,7 @@ td {
 		<a href="<c:url value="" />">-----TOP-----</a><br><br>
 		<a href="<c:url value='/' />">回首頁</a><br><br>
 	</div>
+<!-- 	</div> -->
+	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
 </html>

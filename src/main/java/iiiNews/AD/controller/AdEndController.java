@@ -28,4 +28,9 @@ public class AdEndController {
 		return "/";
 	}
 	
+	@GetMapping("/getOrderListEnd")
+	public String getOrderListEnd() {
+		return "/AD/backend/BackOrderList";
+	}
+	
 }

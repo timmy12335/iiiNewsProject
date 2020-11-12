@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import iiiNews.AD.dao.AdAjaxSearchDao;
 import iiiNews.AD.dao.AdMainDao;
 import iiiNews.AD.model.AdBean;
+import iiiNews.AD.model.AdOrderBean;
 import iiiNews.AD.service.AdAjaxSearchService;
 
 @Service
@@ -43,6 +44,12 @@ public class AdAjaxSearchServiceImpl implements AdAjaxSearchService {
 	@Transactional
 	public List<AdBean> getAdByWordAjax(String searchword,String set) {
 		return ajaxdao.getAdByWordAjax(searchword,set);
+	}
+
+	@Override
+	@Transactional
+	public List<AdOrderBean> getOrderByAjax(String buyerMemberId, String adOrderNo, String orderDate) {
+		return ajaxdao.getOrderByAjax(buyerMemberId, adOrderNo, orderDate);
 	}
 
 }

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script> -->
 <meta charset="UTF-8">
 <script type='text/javascript'>
 window.onload = function() { //刪除文章，OK
@@ -82,8 +82,11 @@ td {
 			<c:forEach var="all" items="${getAllMtList}">
 				<tr>
 					<td>&nbsp;${all.pkey} &nbsp;</td>
-					<td><a href="<c:url value='/getSingleArticle/${all.articleId}'/>" >
-						<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>${all.articleId}</a> </td>
+					<td>
+<%-- 						<a href="<c:url value='/getSingleArticle/${all.articleId}'/>" > --%>
+						<c:if test="${ all.status == 0}" ><a href='' ></a></c:if>${all.articleId}
+<!-- 						</a>  -->
+						</td>
 					<td>${all.memberId}</td>
 					<td width="10px" height="20px">${all.updateDate}</td>
 					<c:if test="${ all.status == 1}"><td><label class="badge badge-success">可瀏覽</label></td></c:if>

@@ -9,7 +9,7 @@
 <!-- <script> -->
 
 <!-- </script> -->
-<title>註冊</title>
+<title>會員登入</title>
 <style>
 ::-webkit-input-placeholder {
 	color: #FFA042;
@@ -70,6 +70,11 @@ g-recaptcha {
 					<td>登入密碼：</td>
 					<td><form:input type="password" path="password"
 							required="true" id='password' placeholder="輸入密碼" /></td>
+				</tr>
+				<tr>
+					<td align="center" colspan='2'><form:checkbox
+							path="rememberMe" /><span class="text-muted">記住密碼</span></td>
+
 				</tr>
 				<tr>
 					<td colspan='5' id="grecaptcha" class="g-recaptcha"

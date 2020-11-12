@@ -31,7 +31,7 @@ public class NewsProductTimesController {
 	public String changeStautsForTime(Model model) {
 		List<NewsBean> list = productservice.checkTime();
 		model.addAttribute("newsLists", list);
-		return "/NP/allNewsList";
+		return "/NP/allNewsListTest";
 	}
 
 }

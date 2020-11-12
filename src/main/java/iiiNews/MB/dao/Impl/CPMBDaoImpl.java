@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import iiiNews.MB.dao.CPMBDao;
 import iiiNews.MB.model.CpMemberBean;
 
+
 @Repository
 public class CPMBDaoImpl implements CPMBDao {
 
@@ -31,7 +32,7 @@ public class CPMBDaoImpl implements CPMBDao {
 
 	@Override
 	public CpMemberBean saveCpMember() {
-		
+
 		String hql = "FROM NewsBean ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		CpMemberBean cpmbbean = null;
@@ -72,6 +73,23 @@ public class CPMBDaoImpl implements CPMBDao {
 		Session session = factory.getCurrentSession();
 		session.save(cpmember);
 
+	}
+
+	@Override
+	public CpMemberBean cplogin(String account, String password) {
+		CpMemberBean cpmb = null;
+		Session session = factory.getCurrentSession();
+		String hql = "From CpMemberBean m WHERE m.cpmemberId = :acc and m.password2 = :pwd";
+		try {
+			cpmb = (CpMemberBean) session.createQuery(hql).setParameter("acc", account).setParameter("pwd", password)
+					.getSingleResult();
+			System.out.println(cpmb.getCpmemberId());
+			System.out.println("登入成功");
+		} catch (NoResultException e) {
+			System.out.println("登入失敗");
+		}
+
+		return cpmb;
 	}
 
 }

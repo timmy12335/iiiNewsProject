@@ -2,6 +2,7 @@ package iiiNews.NP.service;
 
 import java.util.List;
 
+import iiiNews.NP.model.NewsBean;
 import iiiNews.NP.model.NewsOrderBean;
 
 public interface NPOrderService {
@@ -15,6 +16,8 @@ public interface NPOrderService {
 	public List<NewsOrderBean> getOrderListByAjax(String companyId);
 	//列出會員被購買紀錄
 	public List<NewsOrderBean> getOrderMemListByAjax(String memberId);
+	//取得被購買單一新聞
+	public NewsBean getOrderedSingleNews(String newsId);
 
 
 }

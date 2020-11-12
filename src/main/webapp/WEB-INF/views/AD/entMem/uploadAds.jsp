@@ -78,8 +78,10 @@
 			<div class="row">
 				<div class="col-md-6 grid-margin stretch-card">
 					<div class="card">
-						<div class="card-body">
+						<div class="card-header">
 							<h2>廣告欄位上架</h2>
+						</div>
+						<div class="card-body">
 							<form:form method="POST" modelAttribute="adBean">
 								<fieldset>
 									<div class="form-group row">
@@ -109,7 +111,7 @@
 										<div class="col-sm-9">
 											<form:input class="form-control" type="text" id="idWidth"
 												name="idWidth" path="width" placeholder="請輸入寬" />
-											<form:errors path="width" cssClass="error" />
+											
 										</div>
 									</div>
 									<div class="form-group row">
@@ -159,12 +161,17 @@
 									<!-- 									class="btn btn-primary mr-2"> -->
 
 									<button type="submit" class="btn btn-primary btn-icon-text">
-										<i class="ti-files btn-icon-prepend"></i>送出
+										<i class="fa fa-file-o btn-icon-prepend"></i>&nbsp送出
 									</button>
-									
+									<button type="reset" class="btn btn-danger btn-icon-text">
+										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp清除
+									</button>
+									<button type="button" class="btn btn-outline-info btn-icon-text" onclick="onebuttontodata()">
+										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp一鍵輸入
+									</button>
 
-									<input type="reset" value="清除" class="btn btn-light"> <input
-										type="button" value="one" onclick="onebuttontodata()"
+									<input type="reset" value="" class="btn btn-light">
+									<input type="button" value="one" onclick="onebuttontodata()"
 										class="btn btn-light">
 								</div>
 							</form:form>

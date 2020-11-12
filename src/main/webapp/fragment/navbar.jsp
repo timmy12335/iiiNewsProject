@@ -18,9 +18,9 @@
             </li>
             <li><a href="<c:url value='/UserMB'/>">會員中心</a>
                 <ul>
-                    <li><a href='#'>會員功能1</a>
+                    <li><a href='#'>會員功能</a>
                         <ul>
-                            <li><a href=""></a></li>
+                            <li><a href="">修改密碼</a></li>
                             <li><a href='#'>子功能</a></li>
                         </ul>
                     </li>
@@ -113,7 +113,7 @@
                     <script>startTime()</script>
                 </div>
             </li>
-            <li><a href="<c:url value='/Login' />" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
+            <li><a href="<c:url value='/LoginMB' />" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
             <li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
         </ul>
     </div>

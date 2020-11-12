@@ -17,4 +17,8 @@ public interface CR_service {
 	void evictReport(CRBean cb);
 
 	public MBBean getMemberById(int memberId);
+	public MBBean getMembersByMemberId(String memberId);
+
+
+	public List<CRBean> getReportBymemberId(String memberId);
 }

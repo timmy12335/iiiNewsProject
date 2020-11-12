@@ -55,13 +55,6 @@
                     
                 </ul>
             </li>
-            <li><a href="<c:url value='/CRindex' />">客服中心</a>
-                <ul>
-                    <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
-                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
-                    <li><a href="<c:url value='/sendmail' />">寄信</a></li>
-                </ul>
-            </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>
                 <ul>
                  	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
@@ -106,6 +99,13 @@
 		                    <li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
                         </ul>
                     </li>
+                </ul>
+            </li>
+                        <li><a href="<c:url value='/CRindex' />">客服中心</a>
+                <ul>
+                    <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
+                    <li><a href="<c:url value='crindex' />">公告欄</a></li>
                 </ul>
             </li>
             <li>

@@ -8,7 +8,17 @@
 <head>
 <meta charset="UTF-8">
 <title>申請客服表單</title>
+<style type="text/css">
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 5pt;
+}
 
+.fieldset-auto-width {
+	display: inline-block;
+}
+</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -51,7 +61,16 @@ window.onload=function(){
 	    yourImg.style.height = ${oneItem.height}+'px';
 	    yourImg.style.width = ${oneItem.width}+'px';
 	}
-	
+}
+	document.getElementById("crContent").onkeydown=function(){
+	var length = document.getElementById("crContent").value.length;
+	var word = 200-length;
+	if(word <= 200){
+	document.getElementById("num").innerHTML = "剩餘"+word+"字可輸入";
+	}else{
+	document.getElementById("num").innerHTML = "剩餘0字可輸入";
+		}
+	}
 	
 	
 }
@@ -69,15 +88,16 @@ window.onload=function(){
 		<div align="center">
 			<form:form method="post" modelAttribute="crBean" id="forms"
 				enctype="multipart/form-data">
-				<table class="table" border="1" style="width: 500px;">
+				<table class="table" border="1" style="width: 800px;">
 					<tr>
-						<td colspan='2'><form:input type="text" path="memberId"
-								id="memberId" value="1"></form:input></td>
+						<td class="form-group">帳號:<span>請先註冊好帳號才使用</span></td>
+						<td colspan='2'align="center"><form:input type="text" path="memberId"
+								id="memberId" value="A001"></form:input></td>
 					</tr>
 					<tr>
 						<td class="form-group">客服類別:</td>
-						<td><form:select path="crClass" id="crClass"
-								class="was-validated">
+						<td align="center"><form:select path="crClass" id="crClass"
+								class="was-validated" style="width: 400px">
 								<option>帳號相關</option>
 								<option>交易相關</option>
 								<option>商品相關</option>
@@ -88,20 +108,22 @@ window.onload=function(){
 					</tr>
 					<tr>
 						<td class="form-group">客服主題:</td>
-						<td><form:input class="form-control" type="text"
+						<td align="center"><form:input class="form-control" type="text" style="width: 400px"
 								placeholder="請輸入客服主題" path="crTitle" id="crTitle"></form:input>
+								<form:errors path="crTitle" cssClass="error"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="form-group">客服內容:</td>
-						<td><form:input class="form-control" type="textarea"
-								cols="30" rows="5" path="crContent" id="crContent"></form:input>
-
+						<td align="center" ><form:textarea class="form-control" 
+								style="height: 100px;width: 400px;resize: none;" path="crContent" id="crContent" maxlength="200"></form:textarea>
+							<div id='num'></div>
+							<form:errors path="crContent" cssClass="error"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="form-group">附件檔案:</td>
-						<td><input type="file" name="image" id="image">
+						<td align="center"><input type="file" name="image" id="image">
 					</tr>
 					<tr>
 						<td colspan="3" align="center"><img
@@ -130,10 +152,6 @@ window.onload=function(){
 	</section>
 	<script>
 
-	document.getElementById("crContent").change=function(){
-	var length = document.getElementById("crContent").value.length;
-	document.getElementById("num").innerHTML = length;
-	};
 
 </script>
 </body>

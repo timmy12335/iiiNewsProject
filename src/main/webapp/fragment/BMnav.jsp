@@ -6,7 +6,6 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>iiiNews Admin</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css">
@@ -36,7 +35,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">
+            <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">回首頁</span>
             </a>
@@ -61,9 +60,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
+            <a class="nav-link" href="連結">
               <i class="ti-pie-chart menu-icon"></i>
-              <span class="menu-title">社群新聞文章管理</span>
+              <span class="menu-title">金額</span>
             </a>
           </li>
           <li class="nav-item">

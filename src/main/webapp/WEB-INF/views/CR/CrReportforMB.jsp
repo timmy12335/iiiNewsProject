@@ -34,57 +34,21 @@ display: -webkit-box;
 white-space: normal;
 }
   </style>
-<script type="text/javascript">
 
-
-
-	function deleteCrReport(pk){
-		var xhr2 = new XMLHttpRequest();
-		var divResult = document.getElementById('resultmsg');
-		var result=confirm("確定刪除此筆客服表單(單號:"+pk+")?");
-		if(result){
-			xhr2.open("DELETE","<c:url value='/customerReports/'/>"+pk,true);
-			xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-			xhr2.send();
-			xhr2.onreadystatechange=function(){
-			if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
-		      result = JSON.parse(xhr2.responseText);
-		      if (result.fail) {		    	  
-				 		divResult.innerHTML = "<font color='red' >"
-							+ result.fail + "</font>";
-			  		} else if (result.success) {
-				 		divResult.innerHTML = "<font color='green' >"
-							+ result.success + "</font>";
-							window.location.href="<c:url value='/customerReports'/>";						
-			}
-		}	
-	}
-	}
-	}
-	
-	function updateCrReport(pk){
-		
-		var result=confirm("回覆/修改此筆客服表單(單號:"+pk+")?");
-		if(result){
-					window.location.href="<c:url value='/crReport/'/>"+pk;
-					}
-	}
-	
-
-	
-
-		</script>
 
 </head>
 <body>
 
 <%-- 		<jsp:include page="/fragment/navbar.jsp"></jsp:include> --%>
-<jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
+	<nav>
+	<jsp:include page="/fragment/navbar.jsp"></jsp:include>
+	</nav>
+	<section style="margin-top: 100px">
 
 
-                  <h4 class="font-weight-bold mb-0">顯示所有客服表單</h4>
+                  <h4 class="font-weight-bold mb-0" align="center">客服表單申請成功</h4>
                   <div id="resultmsg"></div>
-			<table class="table table-hover" style="width:1000px;">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 <!-- 						<th width='60' align='center'>單號</th> -->
@@ -113,34 +77,35 @@ white-space: normal;
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var='ser' items='${CrReport}' varStatus='report'>
+						<c:forEach var='ser' items='${CrReport}' varStatus="report">
 							<tr>
 								<td align='left'>${ser.pk}</td>
 								<td align='left'>&nbsp;${ser.mbBean.name}</td>
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
-								<td align='center' onclick="MBfolded(${report.index})" class="box"><p class="ellipsis">${ser.crContent}</p></td>
+								<td align='center'onclick="MBfolded(${report.index})" class="box"><p class="ellipsis">${ser.crContent}</p></td>
 								<td align='center'><fmt:formatDate value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-								<td align='center' onclick="folded(${report.index})" class="box"><p class="ellipsis">${ser.crReContent}</p></td>
+								<td align='center'  onclick="folded(${report.index})" class="box"><p class="ellipsis">${ser.crReContent}</p></td>
 								<td align='center'>${ser.crReplier}</td>
 								<td align='center'><fmt:formatDate value="${ser.crReDate}" pattern="yyyy-MM-dd"/></td>
 								<td><button id="btn_update" class="btn btn-outline-secondary btn-icon-text" 
-								onclick="updateCrReport(${ser.pk})" >回覆<i class="ti-pencil-alt btn-icon-append"></i>
+								onclick="updateCrReport(${ser.pk})" >回覆確認<i class="ti-pencil-alt btn-icon-append"></i>
 								</button>
 								<button id="btn_delete" class="btn btn-outline-danger btn-icon-text"
-									onclick="deleteCrReport(${ser.pk})" >刪除<i class="ti-trash btn-icon-append"></i></button></td>
+									onclick="deleteCrReport(${ser.pk})" >取消申請<i class="ti-trash btn-icon-append"></i></button></td>
 							</tr>
-							<tr><td id="MBcontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:1000px;height:500px;" disabled>
+							<tr id="MBcontent${report.index}" style="display:none ;word-wrap : break-word ;"><td>客服內容</td>
+							<td  colspan="10" > 
+							<textarea style="width:1000px;height:200px;" disabled>
 							${ser.crContent}</textarea>
-							<tr><td id="recontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:1000px;height:500px;" disabled>
+							<tr id="recontent${report.index}" style="display:none ;word-wrap : break-word ;"><td>回覆內容</td><td  colspan="10" > 
+							<textarea style="width:1000px;height:300px;" disabled>
 							${ser.crReContent}</textarea>
-							</td></tr>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</table>
+</section>
 	<script>
 	function MBfolded(index){	
 		
@@ -161,6 +126,5 @@ white-space: normal;
 			}
 	
 	</script>
-	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include> 
 </body>
 </html>

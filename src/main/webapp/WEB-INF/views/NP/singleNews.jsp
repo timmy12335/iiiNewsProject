@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>單一新聞表</title>
 <script>
+
 	//取得現在的時間，放入GetDateDiff()去計算時間
 	function timeNow() {
 		let time = new Date();

@@ -18,13 +18,7 @@ public class SearchNewsController {
 	@Autowired
 	NewsProductService service;
 	
-	//查詢所有上架的新聞(給企業看)
-		@GetMapping("/getAllNews")
-		public String getAllNewsList(Model model) {
-			List<NewsBean> list = service.getAllNews();
-			model.addAttribute("newsLists", list);
-			return "NP/allNewsList";
-		}
+	
 
 		// 查詢單一筆未上架新聞
 		@GetMapping("/getSingleNewsForUpdate/{newsId}")

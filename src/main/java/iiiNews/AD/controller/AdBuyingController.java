@@ -123,7 +123,7 @@ public class AdBuyingController {
 		//生成訂單編號
 		String adOrderNo = adOrderService.createOrderNo();
 		//取會員資料的部分暫時寫死
-		String buyerMemberId = "john";
+		String buyerMemberId = "eric";
 		//生成訂購時間
 		Timestamp orderDate = new Timestamp(System.currentTimeMillis());
 		//將資訊封裝到AdOrderBean 設定0為未付款狀態

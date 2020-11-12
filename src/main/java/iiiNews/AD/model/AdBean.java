@@ -23,7 +23,7 @@ public class AdBean implements Serializable {
 	
 	private String adNo;			//我們去撰寫的產品編號
 	private String adTitle;			//自訂標題
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp uploadDate;	//上傳的日期戳記
 	private String memberId;		//^^^^ 上傳的會員編號
 	private String memberName;		//^^^^ 上傳的會員名稱

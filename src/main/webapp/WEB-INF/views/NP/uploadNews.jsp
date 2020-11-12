@@ -7,6 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/bootstrap_index.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/ed0adb3a32.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <title>上傳新聞欄位</title>
 </head>
 <body>
@@ -16,9 +22,9 @@
 <div align='center' style="margin-top:150px;">
 <form:form method="POST"  id="form1" modelAttribute="newsBean" enctype="multipart/form-data">
 <fieldset>
-<div>
+<div class="col-5">
 	<label for="title">新聞標題：</label>
-	<form:input type="text" id="title" name="title" size="50" path="title" placeholder="請輸入標題"  />
+	<form:input type="text" class="form-control" id="title" name="title" size="50" path="title" placeholder="請輸入標題"  />
 </div>
 <div>
 	<label for="location">發生地點：</label>

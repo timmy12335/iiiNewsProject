@@ -78,7 +78,7 @@ public class MBDaoImpl implements MBDao {
 	public MBBean login(String account, String password) {
 		MBBean mb = null;
 		Session session = factory.getCurrentSession();
-		String hql = "From MemberBean m WHERE m.memberNumber = :acc and m.memberPassword = :pwd";
+		String hql = "From MBBean m WHERE m.memberId = :acc and m.password = :pwd";
 		try {
 			mb = (MBBean) session.createQuery(hql).setParameter("acc", account).setParameter("pwd", password)
 					.getSingleResult();

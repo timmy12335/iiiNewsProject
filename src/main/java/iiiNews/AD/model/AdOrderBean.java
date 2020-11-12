@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "AdOrders")
 public class AdOrderBean {
@@ -24,11 +27,13 @@ public class AdOrderBean {
 	
 	private String buyerMemberId;	//^^^^ 訂購者帳號
 	private Integer totalAmount;		//訂單總額
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp orderDate;			//訂單成立時間
 	
 	private Integer paymentStatus;		//付款狀態
 	private String payingDetail; 	//$$$$ 其他資訊 先備用
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="adOrderBean", cascade=CascadeType.ALL)
 	Set<AdOrderItemBean> items = new LinkedHashSet<>();
 	//雙向多對一  一方有個多 儲存多方的物件 告訴他本類別沒有外鍵 提供外鍵的相關資訊給他
@@ -134,6 +139,8 @@ public class AdOrderBean {
 	public void setPaymentStatus(Integer paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
+
+
 
 	
 	

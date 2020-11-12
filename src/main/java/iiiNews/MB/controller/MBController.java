@@ -34,6 +34,11 @@ public class MBController {
 	ServletContext ctx;
 	@Autowired
 	MBService service;
+	
+	@RequestMapping(value = "/LoginMB", method = RequestMethod.GET)
+	public String login() {
+		return new String("/MB/LoginMB");
+	}
 
 	@RequestMapping(value = "/UserMB", method = RequestMethod.GET)
 	public String usermb() {

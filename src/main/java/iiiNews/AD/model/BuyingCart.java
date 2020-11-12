@@ -61,6 +61,12 @@ public class BuyingCart {
 		}
 	}
 
+
+	@Override
+	public String toString() {
+		return "BuyingCart [cart=" + cart + "]";
+	}
+
 	
 	
 

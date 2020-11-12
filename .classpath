@@ -36,5 +36,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="log4j.jar"/>
+	<classpathentry kind="lib" path="javax.servlet-3.0.0.v201112011016.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

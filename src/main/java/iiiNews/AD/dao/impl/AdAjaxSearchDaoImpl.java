@@ -1,6 +1,7 @@
 package iiiNews.AD.dao.impl;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import iiiNews.AD.dao.AdAjaxSearchDao;
 import iiiNews.AD.model.AdBean;
+import iiiNews.AD.model.AdOrderBean;
 @Repository
 public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	
@@ -92,6 +94,33 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 		List<AdBean> list = session.createQuery(hql)
 						.setParameter("word", "%"+searchword+"%")
 						.getResultList();
+		return list;
+	}
+
+/*訂單系列的ajax*/
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AdOrderBean> getOrderByAjax(String buyerMemberId, String adOrderNo, String orderDate) {
+		Session session = factory.getCurrentSession();
+		List<AdOrderBean> list = new ArrayList<>();
+		System.out.println("參數buyerMemberId："+buyerMemberId+"參數adOrderNo："+adOrderNo+"參數orderDate："+orderDate);
+		
+		String hql = "FROM AdOrderBean";
+		if (buyerMemberId.equals("ALL")&&adOrderNo.equals("ALL")) {
+			hql = "FROM AdOrderBean";
+			list = session.createQuery(hql).getResultList();
+			System.out.println("======================  方法一  ======================");
+		}else if(! buyerMemberId.equals("ALL")) {
+			hql = "FROM AdOrderBean WHERE buyerMemberId = :mid";
+			list = session.createQuery(hql).setParameter("mid", buyerMemberId).getResultList();
+			System.out.println("======================  方法2  ======================");
+		}else {
+			hql = "FROM AdOrderBean";
+			list = session.createQuery(hql).getResultList();
+			System.out.println("======================  方法3  ======================");
+		}
+		
+//		List<AdOrderBean> list = session.createQuery(hql).getResultList();
 		return list;
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import iiiNews.NP.dao.NewsOrderDao;
+import iiiNews.NP.model.NewsBean;
 import iiiNews.NP.model.NewsOrderBean;
 @Repository
 public class NewsOrderDaoImpl implements NewsOrderDao {
@@ -43,7 +44,7 @@ public class NewsOrderDaoImpl implements NewsOrderDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsOrderBean> getOrderListByAjax(String companyId) {
-		String hql = "FROM NewsOrderBean nob WHERE nob.companyId = :cId ";
+		String hql = "FROM NewsOrderBean nob WHERE nob.companyId = :cId ORDER BY soldTime DESC";
 		Session session = factory.getCurrentSession();
 		List<NewsOrderBean> list = session.createQuery(hql).setParameter("cId", companyId).getResultList();
 		return list;
@@ -52,10 +53,19 @@ public class NewsOrderDaoImpl implements NewsOrderDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsOrderBean> getOrderMemListByAjax(String memberId) {
-		String hql = "FROM NewsOrderBean nob WHERE nob.memberId = :mId ";
+		String hql = "FROM NewsOrderBean nob WHERE nob.memberId = :mId ORDER BY soldTime DESC";
 		Session session = factory.getCurrentSession();
 		List<NewsOrderBean> list = session.createQuery(hql).setParameter("mId", memberId).getResultList();
 		return list;
+	}
+	//取得被購買單一新聞
+	@Override
+	public NewsBean getOrderedSingleNews(String newsId) {
+		String hql = "FROM NewsBean WHERE newsId = :nId ";
+		Session session = factory.getCurrentSession();
+		NewsBean newsbean = (NewsBean) session.createQuery(hql)
+				.setParameter("nId", newsId).getSingleResult();
+		return newsbean;
 	}
 	
 	

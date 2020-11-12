@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import iiiNews.AD.model.AdBean;
+import iiiNews.AD.model.AdOrderBean;
 import iiiNews.AD.service.AdAjaxSearchService;
 import iiiNews.AD.service.AdMainService;
 
@@ -120,5 +121,19 @@ public class AdAjaxController {
 		list = ajaxService.getAdByWordAjax(SearchWord,set);
 		return list;		
 	}
+	
+	
+	@GetMapping("/getOrderListByAjax.json")
+	public @ResponseBody List<AdOrderBean> getOrderByAjax(
+			@RequestParam(value="buyerMemberId",defaultValue = "ALL" )String buyerMemberId,
+			@RequestParam(value="adOrderNo",defaultValue = "ALL" )String adOrderNo,
+			@RequestParam(value="orderDate",defaultValue = "2020-11-07" )String orderDate) {
+		List<AdOrderBean> list = new ArrayList<AdOrderBean>();
+		list = ajaxService.getOrderByAjax(buyerMemberId, adOrderNo, orderDate);
+		return list;		
+	}
+	
+	
+	
 	
 }

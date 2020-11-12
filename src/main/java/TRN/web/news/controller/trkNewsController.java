@@ -153,7 +153,7 @@ public class trkNewsController {
 	}
 	@RequestMapping(value = "/getPictureTK/{trackId}", method = RequestMethod.GET) //取得圖片再顯示圖片
 	public ResponseEntity<byte[]> getPicture(HttpServletResponse resp1, @PathVariable Integer trackId) {
-		String filePath = "/resources/images/NoImage.jpg";
+		String filePath = "/resources/TRN/images/NoImage.jpg";
 
 		byte[] media = null; 
 		HttpHeaders headers = new HttpHeaders();

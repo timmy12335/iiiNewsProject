@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>客服社群功能列表</title>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link href="${pageContext.request.contextPath}/css/CRindex.css" rel="stylesheet" type="text/css" />
 </head>
 <body>

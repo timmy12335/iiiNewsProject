@@ -67,15 +67,15 @@
             </a>
           </li>
           <li class="nav-item">
-<<<<<<< Updated upstream
+
             <a class="nav-link" href="連結">
               <i class="ti-pie-chart menu-icon"></i>
               <span class="menu-title">金額</span>
-=======
+
             <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
               <i class="ti-flag-alt menu-icon"></i>
               <span class="menu-title">社群文章管理</span>
->>>>>>> Stashed changes
+
             </a>
           </li>
           <li class="nav-item">
@@ -114,8 +114,8 @@
             </a>
             <div class="collapse" id="CRList">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/customerReports'/>"> 查看所有客服表單</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/tables'/>"> 表格 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/customerReports'/>"> 查看客服表單</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/allemployee'/>"> 客服人員管理 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 3</a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 4 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 5</a></li>

@@ -5,12 +5,14 @@
 //
 //import CR.model.CRemployee;
 //
+//
+////公告欄
 //@Controller
 //public class CR_BoardController {
 //
 //	
 //	@Autowired
-//	CRemployee ce;
+//	
 //	
 //	@GetMapping(value="/")
 //	

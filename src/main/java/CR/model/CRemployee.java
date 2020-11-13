@@ -23,6 +23,8 @@ public class CRemployee implements Serializable{
 	private Integer empPk;
 	private String empId;
 	private String empName;
+	private String empemail;
+
 	private Date applyDate;
 	private Integer replyamt;
 	private Integer untreatamt;
@@ -71,6 +73,11 @@ public class CRemployee implements Serializable{
 	public void setCrBean(Set<CRBean> crBean) {
 		this.crBean = crBean;
 	}
-
+	public String getEmpemail() {
+		return empemail;
+	}
+	public void setEmpemail(String empemail) {
+		this.empemail = empemail;
+	}
 	
 }

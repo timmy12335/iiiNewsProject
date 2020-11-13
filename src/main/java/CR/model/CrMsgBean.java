@@ -31,7 +31,7 @@ public class CrMsgBean implements Serializable{
 	@Transient
 	private String receiver;
 	private Timestamp receiveTime;
-	private String sendmsg;
+	private String msg;
 	@Transient
 	private String sender;
 	private Timestamp sendTime;
@@ -46,12 +46,6 @@ public class CrMsgBean implements Serializable{
 	@JoinColumn(name="company_Id")
 	private CpMemberBean cpBean;
 	
-	@Override
-	public String toString() {
-		return "CrMsgBean [pk=" + pk + ", receivemsg=" + receivemsg + ", receiver=" + receiver + ", receiveTime="
-				+ receiveTime + ", sendmsg=" + sendmsg + ", sender=" + sender + ", sendTime=" + sendTime + ", memberId="
-				+ memberId + ", companyId=" + companyId + ", mbBean=" + mbBean + ", cpBean=" + cpBean + "]";
-	}
 
 
 
@@ -59,7 +53,7 @@ public class CrMsgBean implements Serializable{
 
 
 
-	public CrMsgBean(Integer pk, String receivemsg, String receiver, Timestamp receiveTime, String sendmsg,
+	public CrMsgBean(Integer pk, String receivemsg, String receiver, Timestamp receiveTime, String msg,
 			String sender, Timestamp sendTime, Integer memberId, Integer companyId, MBBean mbBean,
 			CpMemberBean cpBean) {
 		super();
@@ -67,7 +61,7 @@ public class CrMsgBean implements Serializable{
 		this.receivemsg = receivemsg;
 		this.receiver = receiver;
 		this.receiveTime = receiveTime;
-		this.sendmsg = sendmsg;
+		this.msg = msg;
 		this.sender = sender;
 		this.sendTime = sendTime;
 		this.memberId = memberId;
@@ -162,8 +156,8 @@ public class CrMsgBean implements Serializable{
 
 
 
-	public String getSendmsg() {
-		return sendmsg;
+	public String getMsg() {
+		return msg;
 	}
 
 
@@ -172,8 +166,8 @@ public class CrMsgBean implements Serializable{
 
 
 
-	public void setSendmsg(String sendmsg) {
-		this.sendmsg = sendmsg;
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 

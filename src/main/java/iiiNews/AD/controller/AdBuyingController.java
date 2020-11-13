@@ -31,9 +31,10 @@ import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.AD.model.BuyingCart;
 import iiiNews.AD.service.AdMainService;
 import iiiNews.AD.service.AdOrderService;
+import iiiNews.MB.model.MBBean;
 
 @Controller
-@SessionAttributes({"shoppingCart"})
+@SessionAttributes({"shoppingCart","MBBean"})
 public class AdBuyingController {
 
 	@Autowired
@@ -94,6 +95,20 @@ public class AdBuyingController {
 	@GetMapping("/ShowCartContent")
 	public String showCartContent(Model model) {
 		//...未來保留寫確認會員登入
+		//$$$$ MBBean未來要寫得到memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+		MBBean mb = (MBBean) model.getAttribute("MBBean");
+		String memberId = null;
+		if(mb == null) {
+			System.out.println("尚未登入");
+			model.addAttribute("showmemberId", memberId);
+		}else {
+			System.out.println("已登入完成");
+			memberId = mb.getMemberId();
+			System.out.println(memberId);
+			model.addAttribute("showmemberId", memberId);
+		}
+		
+		
 		return  "AD/shoppingCartTest";
 	}
 	
@@ -110,6 +125,19 @@ public class AdBuyingController {
 	/* $$$$ 目前點選確認購物後直接執行 生成一筆訂單 未來是等結帳後才會到這邊*/
 	@GetMapping("/checkoutOK.insert")
 	public String makingAdOrderItemBeanToRealItem(Model model, WebRequest webRequest, SessionStatus status) {
+		
+		//$$$$ MBBean未來要寫得到memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+		MBBean mb = (MBBean) model.getAttribute("MBBean");
+		String memberId ="";
+		if(mb == null) {
+			System.out.println("按下確認購物 但尚未登入");
+			return "redirect:/Login";
+		}else {
+			System.out.println("按下確認購物 登入完成");
+			memberId = mb.getMemberId();
+			System.out.println(memberId);
+			model.addAttribute("showmemberId", memberId);
+		}
 	
 		BuyingCart cart = (BuyingCart) model.getAttribute("shoppingCart");
 		if(cart == null) {
@@ -122,8 +150,8 @@ public class AdBuyingController {
 		
 		//生成訂單編號
 		String adOrderNo = adOrderService.createOrderNo();
-		//取會員資料的部分暫時寫死
-		String buyerMemberId = "eric";
+		//取會員資料的部分暫時按上面寫的
+		String buyerMemberId = memberId;
 		//生成訂購時間
 		Timestamp orderDate = new Timestamp(System.currentTimeMillis());
 		//將資訊封裝到AdOrderBean 設定0為未付款狀態
@@ -161,12 +189,13 @@ public class AdBuyingController {
 		System.out.println("======完成======");
 		
 		//若新增成功則清空購物車 移除購物車
-		if(n>0) {
-			System.out.println("交易成功，準備清空購物車");
-			status.setComplete();
-			webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
-		}
-		return "redirect:/getOrderListByMemberId";
+//		if(n>0) {
+//			System.out.println("交易成功，準備清空購物車");
+//			status.setComplete();
+//			webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
+//		}
+//		return "redirect:/getOrderListByMemberId";
+		return "redirect:/removeShoppingCart";
 	}
 	
 	

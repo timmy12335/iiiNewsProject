@@ -54,5 +54,10 @@ public class CPMBServiceImpl implements CPMBService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Transactional
+	@Override
+	public CpMemberBean cplogin(String account, String password) {
+		System.out.println("service");
+		return cpmbdao.cplogin(account, password);
+	}
 }

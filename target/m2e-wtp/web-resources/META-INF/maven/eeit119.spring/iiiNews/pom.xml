@@ -40,6 +40,7 @@
     		<artifactId>mail</artifactId>
     		<version>1.4.7</version>
 		</dependency>
+		<!-- websocket -->
 	<dependency>
     <groupId>javax.websocket</groupId>
     <artifactId>javax.websocket-api</artifactId>
@@ -117,7 +118,7 @@
     <artifactId>spring-beans</artifactId>
     <version>${spring.version}</version>
 </dependency>
-
+	<!-- websocket -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-websocket</artifactId>
@@ -169,8 +170,6 @@
 		</dependency>
 
 	</dependencies>
-	
-
 	
 	<build>
 		<plugins>

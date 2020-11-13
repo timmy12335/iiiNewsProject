@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CrMsgBean;
@@ -25,17 +26,25 @@ public class CR_msgController {
 	CR_msgService service;
 	
 	@GetMapping("/chat")
-	public String getChatById(CrMsgBean msg) {
+	public String tomsgroom(CrMsgBean msg) {
 		return "/CR/msgRoom";
 	}
 	
+	@GetMapping("/msgChat")
+	public @ResponseBody Map<String, String> getChatById(CrMsgBean msg) {
+		Map<String, String> map = new HashMap<>();
+		map.put("success",msg.getMsg());
+		
+		
+		return map;
+	}
 	
 	@PostMapping(value="/msgChat",
 			consumes= {"application/json"}, produces= {"application/json"})
 	public @ResponseBody Map<String, String> addMsg(@RequestBody CrMsgBean msg){
 		Map<String, String> map = new HashMap<>();
 		service.addMsg(msg);
-		map.put("success",msg.getSendmsg());
+		map.put("success",msg.getMsg());
 		return map;
 		
 	}

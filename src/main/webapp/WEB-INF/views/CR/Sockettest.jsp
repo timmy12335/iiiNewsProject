@@ -22,7 +22,7 @@
 	// Recive Message
 	socketConn.onmessage = function(event) {
 		var serverMsg = document.getElementById('serverMsg');
-		serverMsg.value = event.data;
+		serverMsg.append(event.data+"\n"); 
 	}
 </script>
 </head>

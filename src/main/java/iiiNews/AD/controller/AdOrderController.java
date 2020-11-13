@@ -31,9 +31,10 @@ import iiiNews.AD.model.AdOrderBean;
 import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.AD.service.AdItemService;
 import iiiNews.AD.service.AdOrderService;
+import iiiNews.MB.model.MBBean;
 
 @Controller
-@SessionAttributes({"shoppingCart"})
+@SessionAttributes({"shoppingCart","MBBean"})
 public class AdOrderController {
 	
 	@Autowired
@@ -53,11 +54,20 @@ public class AdOrderController {
 	@GetMapping("/getOrderListByMemberId")
 	public String MemberAdOrderList(Model model) {
 		
-		//$$$$ 未來要寫得到memberId 目前暫時寫從Attribute取 尚未驗證過!!!
-//		MBBean mb = (MBBean) model.getAttribute("Login_PK");
-//		String memberId = mb.getMemberId();
+		//$$$$ MBBean未來要寫得到memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+		MBBean mb = (MBBean) model.getAttribute("MBBean");
+		String memberId ="";
+		if(mb == null) {
+			System.out.println("查訂單 但尚未登入");
+			return "redirect:/Login";
+		}else {
+			System.out.println("查訂單 登入完成");
+			memberId = mb.getMemberId();
+			System.out.println(memberId);
+			model.addAttribute("showmemberId", memberId);
+		}
 		
-		String memberId = "john";
+//		String memberId = "john";
 		List<AdOrderBean> orderlist = adOrderService.getMemberOrderList(memberId);
 		model.addAttribute("memberOrderList", orderlist);
 		return "AD/normalMem/memberAllOrderList";

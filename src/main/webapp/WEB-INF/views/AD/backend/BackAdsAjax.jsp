@@ -31,10 +31,10 @@ window.onload=function(){
 }
 </script>
 <style>
-	html{
-		margin-left:calc(100vw - 100%);
-		overflow-y: scroll;
-	}
+/* 	html{ */
+/* 		margin-left:calc(100vw - 100%); */
+/* 		overflow-y: scroll; */
+/* 	} */
 </style>
 </head>
 <body>

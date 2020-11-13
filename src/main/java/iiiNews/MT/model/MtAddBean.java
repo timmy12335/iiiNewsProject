@@ -3,18 +3,24 @@ package iiiNews.MT.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import iiiNews.AD.model.AdOrderItemBean;
 
 @Entity
 @Table(name = "MtArticleAdd")
@@ -25,7 +31,7 @@ public class MtAddBean implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer pkey;			//PK
 	private String articleId;		//文章編號
-	@Column(columnDefinition = "datetime2(2)")	//修改型態，預設為datetime2(7)
+	@Column(columnDefinition = "datetime2(7)")	//修改型態，預設為datetime2(7)
 	private Timestamp updateDate;	//上傳時間
 	private String memberId;		//會員編號
 	private String articleStatus;	//文章狀態
@@ -42,6 +48,10 @@ public class MtAddBean implements Serializable{
 	private String add2;
 	private String add3;
 	
+	@OneToMany(mappedBy="mtAddBean", cascade=CascadeType.ALL)
+	Set<MtCommentBean> items = new LinkedHashSet<>();
+	//雙向多對一  一方有個多 儲存多方的物件 告訴他本類別沒有外鍵 提供外鍵的相關資訊給他
+	
 	@Transient
 	private MultipartFile Image;
 	
@@ -54,6 +64,10 @@ public class MtAddBean implements Serializable{
 		this.imgName = imgName;
 	}
 
+
+	public MtAddBean() {
+	}
+	
 	public MtAddBean(Integer pkey, String articleId, Timestamp updateDate, String memberId, String articleStatus,
 			String category, String title, Blob imgLink, String videoLink, String article, String comment) {
 		super();
@@ -68,9 +82,6 @@ public class MtAddBean implements Serializable{
 		this.videoLink = videoLink;
 		this.article = article;
 		this.comment = comment;
-	}
-
-	public MtAddBean() {
 	}
 
 	public Integer getPkey() {

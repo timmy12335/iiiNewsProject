@@ -29,6 +29,8 @@ public class CR_service_impl implements CR_service {
 		return dao.getMemberById(memberId);
 	}
 
+	
+	
 	@Override
 	public void addReport(CRBean report) {
 		
@@ -59,6 +61,18 @@ public class CR_service_impl implements CR_service {
 	public void evictReport(CRBean cb) {
 		dao.evictReport(cb);
 		
+	}
+
+	@Override
+	public MBBean getMembersByMemberId(String memberId) {
+		
+		return dao.getMembersByMemberId(memberId);
+	}
+
+	@Override
+	public  List<CRBean> getReportBymemberId(String memberId) {
+		
+		return dao.getReportBymemberId(memberId);
 	}
 
 

@@ -32,7 +32,7 @@ public class CR_Dao_impl implements CR_Dao {
 	@Override
 	public void addReport(CRBean report) {
 		Session session=factory.getCurrentSession();
-		MBBean mb = getMemberById(report.getMemberId());
+		MBBean mb = getMembersByMemberId(report.getMemberId());
 		Timestamp date=new Timestamp(System.currentTimeMillis());
 		report.setCrApplyDate(date);
 		report.setMbBean(mb);
@@ -83,4 +83,28 @@ public class CR_Dao_impl implements CR_Dao {
 		session.evict(cb);		
 	}
 	
+	@Override
+	public MBBean getMembersByMemberId(String memberId) {
+		Session session=factory.getCurrentSession();
+		MBBean mb=null;
+		String hql ="FROM MBBean WHERE memberId = :mId";
+		try {
+			mb =(MBBean) session.createQuery(hql)
+					.setParameter("mId", memberId)
+					.getSingleResult();
+
+		}catch(NonUniqueResultException e) {
+			e.printStackTrace();
+		}
+		return mb;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRBean> getReportBymemberId(String memberId) {
+		Session session=factory.getCurrentSession();
+		String hql ="FROM CRBean where memberId=:mId";
+		return session.createQuery(hql).setParameter("mId", memberId).getResultList();
+	}
 }

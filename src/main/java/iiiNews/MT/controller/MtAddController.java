@@ -32,7 +32,6 @@ import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
 import iiiNews.MT.validate.CheckArticleVaildator;
-import iiiNews.NP.model.NewsBean;
 
 @Controller
 @SessionAttributes({"MBBean"})

@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import iiiNews.MT.model.MtCommentBean;
-
 
 @Entity
 @Table(name="Memberooo")
@@ -26,8 +24,8 @@ public class MemberBean implements Serializable {
 	String memberId;
 	String name;
 	
-	@ManyToMany(mappedBy = "members")				//連結到MtCommentBean
-	private Set<MtCommentBean> comments = new HashSet<MtCommentBean>(0);	//連結到MtCommentBean
+//	@ManyToMany(mappedBy = "members")				//連結到MtCommentBean
+//	private Set<MtCommentBean> comments = new HashSet<MtCommentBean>(0);	//連結到MtCommentBean
 	
 	public MemberBean() {
 	}

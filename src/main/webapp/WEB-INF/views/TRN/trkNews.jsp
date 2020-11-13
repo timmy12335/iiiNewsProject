@@ -371,7 +371,7 @@ body {
                               <span class="text-muted">發生時間：:${trkNew.octime}</span>
                            </div>
                            <div class="mt-2 mb-2">
-                              <h4>追蹤人數: ${trkNew.trcnum}</h4>
+                              <h4>點閱人數: ${trkNew.clicnum}</h4>
                            </div>
                            <a href="<spring:url value='/trkNew?id=${trkNew.trackId}' />">
                                  <button type="button" class="btn btn-outline-secondary">繼續看下去</button>
@@ -383,24 +383,7 @@ body {
         </div>
     </section>
   </main>
-  <!-- 點擊累加 -->
-  <%
-    Integer hitsCount = 
-      (Integer)application.getAttribute("hitCounter");
-    if( hitsCount ==null || hitsCount == 0 ){
-       /* 第一次访问 */
-       out.println("欢迎访问菜鸟教程!");
-       hitsCount = 1;
-    }else{
-       /* 返回访问值 */
-       out.println("欢迎再次访问菜鸟教程!");
-       hitsCount += 1;
-    }
-    application.setAttribute("hitCounter", hitsCount);
-%>
-
-<p>页面访问量为: <%= hitsCount%></p>
-<!-- 點擊累加 -->
+  
   
 </body>
 </html>

@@ -67,6 +67,7 @@
             </a>
           </li>
           <li class="nav-item">
+<<<<<<< Updated upstream
 
             <a class="nav-link" href="連結">
               <i class="ti-pie-chart menu-icon"></i>
@@ -76,6 +77,15 @@
               <i class="ti-flag-alt menu-icon"></i>
               <span class="menu-title">社群文章管理</span>
 
+=======
+            <a class="nav-link" href="連結">
+              <i class="ti-pie-chart menu-icon"></i>
+              <span class="menu-title">金額</span>
+             </a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
+              <i class="ti-flag-alt menu-icon"></i>
+              <span class="menu-title">社群文章管理</span>
+>>>>>>> Stashed changes
             </a>
           </li>
           <li class="nav-item">

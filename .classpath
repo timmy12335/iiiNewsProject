@@ -30,6 +30,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="log4j.jar"/>
+<<<<<<< Updated upstream
 	<classpathentry kind="lib" path="C:/Users/小蝸/Desktop/javax.servlet-3.0.0.v201112011016.jar"/>
+=======
+	<classpathentry kind="lib" path="javax.servlet-3.0.0.v201112011016.jar"/>
+>>>>>>> Stashed changes
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

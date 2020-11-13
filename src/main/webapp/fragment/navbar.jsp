@@ -18,9 +18,9 @@
             </li>
             <li><a href="<c:url value='/UserMB'/>">會員中心</a>
                 <ul>
-                    <li><a href='#'>會員功能1</a>
+                    <li><a href='#'>會員功能</a>
                         <ul>
-                            <li><a href=""></a></li>
+                            <li><a href="">修改密碼</a></li>
                             <li><a href='#'>子功能</a></li>
                         </ul>
                     </li>
@@ -55,13 +55,6 @@
                     
                 </ul>
             </li>
-            <li><a href="<c:url value='/CRindex' />">客服中心</a>
-                <ul>
-                    <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
-                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
-                    <li><a href="<c:url value='/sendmail' />">寄信</a></li>
-                </ul>
-            </li>
             <li><a href="<c:url value='#' />">新聞追蹤</a>
                 <ul>
                  	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
@@ -75,6 +68,8 @@
                     <li><a href="<c:url value='/getAllMtAdd' />">檢視所有資料---待刪除</a></li>
                     <li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
                     <li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
+                    <li><a href="<c:url value='/AllArticleComment' />">文章瀏覽</a></li>
+                    <li><a href="<c:url value='/CreateComment' />">留言功能測試，OK後移入文章瀏覽功能內</a></li>
 <%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
                 </ul>
             </li>
@@ -108,12 +103,19 @@
                     </li>
                 </ul>
             </li>
+                        <li><a href="<c:url value='/CRindex' />">客服中心</a>
+                <ul>
+                    <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
+                    <li><a href="<c:url value='crindex' />">公告欄</a></li>
+                </ul>
+            </li>
             <li>
                 <div id="nowDateTimeSpan">
                     <script>startTime()</script>
                 </div>
             </li>
-            <li><a href="<c:url value='/Login' />" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
+            <li><a href="<c:url value='/LoginMB' />" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
             <li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
         </ul>
     </div>

@@ -1,59 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/nav_styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/bootstrap_index.css">
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/jsmenu/nav_script.js"></script>
-    <script src="${pageContext.request.contextPath}/jsmenu/nav_time_script.js"></script>
     <script src="https://kit.fontawesome.com/ed0adb3a32.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <title>所有新聞列表</title>
-<script>
-	
-	//取得現在的時間，放入GetDateDiff()去計算時間
-	function timeNow() {
-		let time = new Date();
-		let Y = time.getFullYear();
-		let M = time.getMonth() + 1;
-		let D = time.getDate();
-		let H = time.getHours();
-		let m = time.getMinutes();
-		let s = time.getSeconds();
-		let twtime = Y+"-"+M+"-"+D+" "+H+":"+m+":"+s;
-		return twtime;
-	}	
-	/* 
-	 * 獲得時間差,時間格式為 年-月-日 小時:分鐘:秒 或者 年/月/日 小時：分鐘：秒 
-	 * 其中，年月日為全格式，例如 ： 2010-10-12 01:00:00 
-	 * 返回精度為：秒 
-	 */
-	function GetDateDiff(endTime) {
-		//將xxxx-xx-xx的時間格式，轉換為 xxxx/xx/xx的格式 
-		
-		let startTime = timeNow().replace(/\-/g, "/");
-		console.log("startTime="+startTime);
-		endTime = endTime.replace(/\-/g, "/");
-		console.log("endTime1="+endTime);
-		//將計算間隔類性字元轉換為小寫 
-		var sTime = new Date(startTime); //開始時間 
-		console.log("sTime="+sTime);
-		var eTime = new Date(endTime); //結束時間 
-		console.log("eTime2="+eTime);
-		//作為除數的數字 
-		let divsec = 1000;
-		let sec = parseInt((eTime.getTime() - sTime.getTime()) / parseInt(divsec));
-//		console.log("sec="+sec);
-		return sec;
-	}
-	
-</script>
 <style>
 .tablebyme {
 	width: 70%;
@@ -109,14 +69,72 @@
 #cssmenu {
 	border-bottom: 2px solid white;
 }
+.wei-grid-special0 {
+position: relative;
+/* left: 10%; */
+top: 0;
+margin: 0px 10px 0px 10px;
+overflow: hidden;
+transition: box-shadow 500ms;
+}
+
+
+.wei-grid-special0:hover {
+box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
+}
 </style>
+<script>
+	
+	function goSingleNews(e) {
+		
+		console.log(e);
+
+//		location.href="/getSingleNews/" + e;
+		location.href="<c:url value='/getSingleNews/'/>"+ e;
+	}
+	
+	//取得現在的時間，放入GetDateDiff()去計算時間
+	function timeNow() {
+		let time = new Date();
+		let Y = time.getFullYear();
+		let M = time.getMonth() + 1;
+		let D = time.getDate();
+		let H = time.getHours();
+		let m = time.getMinutes();
+		let s = time.getSeconds();
+		let twtime = Y+"-"+M+"-"+D+" "+H+":"+m+":"+s;
+		return twtime;
+	}	
+	/* 
+	 * 獲得時間差,時間格式為 年-月-日 小時:分鐘:秒 或者 年/月/日 小時：分鐘：秒 
+	 * 其中，年月日為全格式，例如 ： 2010-10-12 01:00:00 
+	 * 返回精度為：秒 
+	 */
+	function GetDateDiff(endTime) {
+		//將xxxx-xx-xx的時間格式，轉換為 xxxx/xx/xx的格式 
+		
+		let startTime = timeNow().replace(/\-/g, "/");
+		endTime = endTime.replace(/\-/g, "/");
+		//將計算間隔類性字元轉換為小寫 
+		var sTime = new Date(startTime); //開始時間 
+		var eTime = new Date(endTime); //結束時間 
+		//作為除數的數字 
+		let divsec = 1000;
+		let sec = parseInt((eTime.getTime() - sTime.getTime()) / parseInt(divsec));
+		return sec;
+	}
+	
+	
+</script>
+
 </head>
 <body>
 	<nav class="navbar fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<section class="container" style="margin-top:150px;">
-		<div class="row">
+	
+		<div class="row " >
 			<!-- 標題/開始 -->
 			<div class="col-12">
 				<h1 class="text-center">
@@ -126,10 +144,10 @@
 			<!-- 標題/結束 -->
 			<!-- 課程1/開始 -->
 			<c:forEach var='news' items='${newsLists}' varStatus='loop'>
-				<div class="col-12 col-md-4 p2">
-					<div class="box-content bg-white">
-						<div>
-							<img width='200' height='150'
+				<div class="col-12 col-md-4 p2 ">
+					<div class="box-content bg-white wei-grid-special0">
+						<div >
+							<img  width='400' height='300'
 								src="<c:url value='/getUpNewsPicture/${news.newsId}'/>"
 								alt="Unity" class="img-fluid d-block m-auto w-75">
 						</div>
@@ -141,30 +159,32 @@
 							</a>
 						</div>
 						<div class="mt-2 mb-2">
-							<span class="text-muted">${ news.newsType}</span>
+							<span class="text-muted">${ news.location}</span>
 						</div>
 						<div class="mt-2 mb-2">
-							<span class="text-muted">上架時間：${news.uploadTime}</span><br>
+							<span class="text-muted">上架時間：${fn:substring(news.uploadTime,0,19)}</span><br>
 							
 <%-- 							到期時間:<span class="text-muted" id="ftime${loop.index}">${news.futureTime}</span> --%>
 						</div>
-						<div class="text-center mt-2 mb-2">
+						<div class="text-left mt-2 mb-2">
 							<h4 class="text-danger">
-								<small class="text-muted"><s>原價 NT$ 1600</s></small>NT$${news.price}
+								<small class="text-muted"></small>NT$${news.price}
 								<br>
 							</h4>
 						</div>
 						<div class="mt-3">
-							<div  id="ftime${loop.index}">${news.futureTime}</div>
+							<div  id="ftime${loop.index}" style="display:none">${news.futureTime}</div>
 							<div class="btn btn-danger btn-lg btn-block" id='lastime${loop.index}'></div>
-							<button type="button" class="btn btn-outline-primary btn-lg btn-block">購買</button>
+							<button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="goSingleNews('${news.newsId}')">
+							購買
+							</button>
 							
 						</div>
 					</div>
 				</div>
 			</c:forEach>
+			
 		</div>
-
 	</section>
 	<%-- <c:forEach var='news' items='${newsLists}' varStatus='loop'> --%>
 	<!-- <table> -->
@@ -226,9 +246,7 @@ function clock() {
 	let sec01,day,hr,hr01,min,sec;
 	for(var i=0;i<num;i++){
 	var ptime = document.getElementById("ftime"+[i]).innerHTML ;
-	console.log("ptime="+ptime);
 	sec01 = GetDateDiff(ptime);
-//	console.log("sec01="+sec01);
 	sec = sec01 % 60 <10 ? '0'+sec01 % 60 :sec01 % 60 ;		
 	min = (sec01-sec)/60%60 <10 ? '0'+ (sec01-sec)/60%60 : (sec01-sec)/60%60;
 	hr01 =(((sec01-sec) /60) - min) / 60 ;
@@ -239,7 +257,6 @@ function clock() {
 		window.location.reload();
 	}else{		
 		let time = hr+"小時"+min+"分"+sec+"秒";
-//		console.log(time);
 		document.getElementById("lastime"+[i]).innerHTML = time;
 	}
 }

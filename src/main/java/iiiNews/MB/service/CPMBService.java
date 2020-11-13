@@ -3,6 +3,7 @@ package iiiNews.MB.service;
 import java.util.List;
 
 import iiiNews.MB.model.CpMemberBean;
+import iiiNews.MB.model.MBBean;
 
 public interface CPMBService {
 
@@ -17,4 +18,6 @@ public interface CPMBService {
 	public List<CpMemberBean> getCpMember(String cpname);
 
 	void addCpMember(CpMemberBean cpmember);
+	
+	public CpMemberBean cplogin(String account, String password);
 }

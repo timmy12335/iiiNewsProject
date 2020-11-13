@@ -31,7 +31,7 @@ window.onload=function(){
 function displayNewsOrderList(responseData){
 	  var content = "<table border='1'><tr height='42' bgcolor='#fbdb98'>";
 	      content +=  " <th width='100' align='center'>訂單編號</th><th width='200' align='center'>新聞標題</th><th width='100' align='center'>購買時間</th>";
-	      content +=  "<th width='100' align='center'>新聞編號</th><th width='100' align='center'>購買價錢</th>";	    
+	      content +=  "<th width='100' align='center'>新聞編號</th><th width='100' align='center'>購買價錢</th><th width='100' align='center'>詳細內容</th>";	    
 		  
 		
 		var newsOrderList = JSON.parse(responseData);		// 傳回一個陣列
@@ -45,7 +45,9 @@ function displayNewsOrderList(responseData){
 		               "<td>" + newsOrderList[i].newsBean.title + "</td>" +
 		               "<td>" + newsOrderList[i].soldTime + "</td>" +
 		               "<td align='center'>" + newsOrderList[i].newsId + "</td>" +
-		               "<td align='right'>" + newsOrderList[i].orderPrice + "&nbsp;</td>" +	      		               
+		               "<td align='right'>" + newsOrderList[i].orderPrice + "&nbsp;</td>" +	 
+		               "<td align='right'><a href=<c:url value='/getOrderedSingleNews/"+newsOrderList[i].newsId+"' /> >看單一新聞</a></td>"+
+// 		               							  <c:url value='/getUpNewsPicture/${news.newsId}'/>
 			           "</tr>";  			           
 		}
 		content += "</table><hr><a href=''>回前頁</a>";

@@ -43,10 +43,13 @@
 </script>
 </head>
 <body>
-<nav>
-<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
-</nav>
-<div align='center' style="margin-top:150px;">
+
+
+<jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
+<div class="card-body">
+
+
+<div align='center' >
 <h3><b>新聞列表</b></h3>
 
 <c:forEach var='news' items='${newsLists}' varStatus='loop'>
@@ -79,7 +82,6 @@
 		<th width='100' align='center'>價格</th>
 		<th width='60' align='center'>到期時間</th>	
 		<th width='60' align='center'>時間倒數</th>	
-		<th></th>
 		</tr>
 		<tr>
 		<td width='600' align='center'>${news.outline}</td>
@@ -88,9 +90,7 @@
 		<td align='center'>${news.price}</td>
 		<td align='center' id="ftime${loop.index}">${news.futureTime}</td>
 		<td align='center' id='lastime${loop.index}'></td>
-		<td>
-		<a href="<c:url value="/insertToOrderBean/${news.newsId}" />" onclick="return confirm('確定購買?')">購買</a>
-		</td>
+		
 	</tr>		
 	</table>
 	<hr>
@@ -98,8 +98,10 @@
 				
 
 
-<input type="button" value="回目錄" onclick="location.href='/iiiNews'">
+
 <!--<a href="<c:url value='/' />">回前頁</a>   -->
+</div>
+
 </div>
 <script>
 
@@ -131,5 +133,6 @@ setInterval(clock,1000);
 
 
 </script>
+<jsp:include page="/fragment/BMfoot.jsp"></jsp:include> 
 </body>
 </html>

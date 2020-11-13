@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.MT.dao.MtAddDao;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;

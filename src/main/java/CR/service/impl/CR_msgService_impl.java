@@ -22,6 +22,7 @@ public class CR_msgService_impl implements CR_msgService{
 		
 	}
 
+	
 	@Override
 	public MBBean getMemberById(int memberId) {
 		

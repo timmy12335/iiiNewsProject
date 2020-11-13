@@ -69,9 +69,15 @@ public class NPOrderServiceImpl implements NPOrderService {
 	public List<NewsOrderBean> getOrderListByAjax(String companyId) {
 		return newsOrderDao.getOrderListByAjax(companyId);
 	}
+	//列出會員被購買紀錄
 	@Override
 	public List<NewsOrderBean> getOrderMemListByAjax(String memberId) {
 		return newsOrderDao.getOrderMemListByAjax(memberId);
+	}
+	//取得被購買單一新聞
+	@Override
+	public NewsBean getOrderedSingleNews(String newsId) {
+		return newsOrderDao.getOrderedSingleNews(newsId);
 	}
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -9,31 +9,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Email with Spring MVC</title>
+<script
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 </head>
 <body>
-    <center>
-        <h1>Sending e-mail with Spring MVC</h1>
-        <form method="post" action="<c:url value='/sendmail'/>">
-            <table border="0" width="80%">
-                <tr>
-                    <td>To:</td>
-                    <td><input type="text" name="recipient" size="65" /></td>
-                </tr>
-                <tr>
-                    <td>Subject:</td>
-                    <td><input type="text" name="subject" size="65" /></td>
-                </tr>
-                <tr>
-                    <td>Message:</td>
-                    <td><textarea cols="50" rows="10" name="message"></textarea></td>
-                </tr>               
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" />
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </center>
+<nav>
+<jsp:include page="/fragment/navbar.jsp"></jsp:include>
+</nav>
+<center style="margin-top:100px">
+<form action="/message" method="post">
+		<table>
+    
+    <tr>
+        <td>用户名</td>
+        <td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+        <td>标题</td>
+        <td><input type="text" name="title"></td>
+    </tr>
+    <tr>
+        <td>内容</td>
+        <td><textarea name="content" id="" cols="30" rows="10"></textarea></td>
+    </tr>
+    <tr>
+        <td colspan="2">  <input type="submit" value="提交"></td>
+    </tr>
+    
+</table>
+</form>
+
+	</center>
 </body>
 </html>

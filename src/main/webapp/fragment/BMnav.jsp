@@ -17,6 +17,12 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
+  <style>
+	html{
+		margin-left:calc(100vw - 100%);
+		overflow-y: scroll;
+	}
+</style>
 
  <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->

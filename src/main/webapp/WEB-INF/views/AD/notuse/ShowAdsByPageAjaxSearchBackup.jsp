@@ -53,75 +53,35 @@ window.onload=function(){
 </style>
 </head>
 <body>
-	<nav class="navbar fixed-top">
+	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 
 <div class="iiinewsContainer">
-	<div class="container-fluid">	
+	<div class="container">	
 	<!--container  -->
 	
-	<div class="row">
-		<div class="col-3">
-		<!-- Card -->
-			<div class="card mb-3">
-				<div class="card-header">
-					<h4>條件搜尋</h4>
-				</div>
-				<div class="card-body">
-					<label class="col-form-label">關鍵字查詢：</label>
-					<input type="text" class="form-control" id="wordChoose" onkeyup="searchByWord()"/>
-					<label class="col-form-label">按分類搜尋：</label>
-					<select class="form-control" id="cateChoose" onchange="searchBycateNo()">
-						<option value="-1">請選擇</option>
-						<option value="100">頭版頭</option>
-						<option value="200">頭版側標</option>
-						<option value="300">內頁版頭</option>
-						<option value="400">內頁側標</option>
-						<option value="500">小廣告</option>
-			         </select>
-			         <label class="col-form-label">按日期搜尋：</label>
-			         <input type="date" class="form-control" id="dateChoose" onchange="searchByDate()"/>
-				</div>
-			</div>
-		<!-- Card -->
-			<div class="card mb-3">
-			<h3>進階搜尋2</h3>
-			</div>
-		</div>
-		<div class="col-9">
-			<div class="card">
-				<div class="card-header">
-					<h2>廣告欄位商品搜尋(JSON)</h2>
-				</div>
-			
-			
-<!-- 			<label>關鍵字查詢：</label> -->
-<!-- 			<input type="text" class="search" id="wordChoose" onkeyup="searchByWord()"/> -->
-<!-- 			<label>按分類搜尋：</label> -->
-<!-- 			<select id="cateChoose" onchange="searchBycateNo()"> -->
-<!-- 				<option value="-1">請選擇</option> -->
-<!-- 				<option value="100">頭版頭</option> -->
-<!-- 				<option value="200">頭版側標</option> -->
-<!-- 				<option value="300">內頁版頭</option> -->
-<!-- 				<option value="400">內頁側標</option> -->
-<!-- 				<option value="500">小廣告</option> -->
-<!-- 	         </select> -->
-<!-- 	         <label>按日期搜尋：</label> -->
-<!-- 	         <input type="date" id="dateChoose" onchange="searchByDate()"/> -->
-<!-- 			<hr> -->
-			<div id='somedivS'></div>
-	<!-- 		 style='height: 260px;' style='height: 60px; margin: 250px;' -->
-			<div id='navigation'></div>
-			<hr>
-			<a href='..'>回前頁</a>
-			
-			</div>
-		</div>
-		
-		
-		
-		
+	<div align='center' style="margin-top: 150px;">
+		<h3>分頁顯示(JSON)</h3>
+		<label>關鍵字查詢：</label>
+		<input type="text" class="search" id="wordChoose" onkeyup="searchByWord()"/>
+		<label>按分類搜尋：</label>
+		<select id="cateChoose" onchange="searchBycateNo()">
+			<option value="-1">請選擇</option>
+			<option value="100">頭版頭</option>
+			<option value="200">頭版側標</option>
+			<option value="300">內頁版頭</option>
+			<option value="400">內頁側標</option>
+			<option value="500">小廣告</option>
+         </select>
+         <label>按日期搜尋：</label>
+         <input type="date" id="dateChoose" onchange="searchByDate()"/>
+		<hr>
+		<div id='somedivS'></div>
+<!-- 		 style='height: 260px;' style='height: 60px; margin: 250px;' -->
+		<div id='navigation'></div>
+		<hr>
+		<a href='..'>回前頁</a>
 	</div>
 	
 	
@@ -150,7 +110,7 @@ window.onload=function(){
 	
 
 	function displayPageAds(responseData){
-		  var content = "<table class='table'><tr bgcolor='#fbdb98'><th>序號</th>";
+		  var content = "<table border='1'><tr bgcolor='#fbdb98'><th>序號</th>";
 		      content +=  "<th>廣告PK值</th><th>廣告編號</th>";
 		      content +=  "<th>刊登者</th>";
 		      content +=  "<th>類型</th><th>販賣日期</th><th>單價</th>";

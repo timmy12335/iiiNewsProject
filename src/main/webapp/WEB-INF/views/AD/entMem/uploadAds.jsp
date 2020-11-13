@@ -14,6 +14,10 @@
 	margin-bottom: 100px;
 	position: relative;
 }
+	html{
+		margin-left:calc(100vw - 100%);
+		overflow-y: scroll;
+	}
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"

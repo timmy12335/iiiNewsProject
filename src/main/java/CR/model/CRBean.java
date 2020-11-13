@@ -5,6 +5,7 @@ import java.sql.Blob;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,15 +34,17 @@ public class CRBean implements Serializable {
 	
 	private String crClass;
 	private String crTitle;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String crContent;
 	private Timestamp crApplyDate;
-	@Transient
-	private Integer memberId;
+	private String memberId;
 	@Transient
 	private Integer companyId;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String crReContent;
 	private Timestamp crReDate;
 	private String crReplier;
+	private String state;
 	private String crReScore;
 	private String attachmentName;
 	
@@ -58,22 +61,12 @@ public class CRBean implements Serializable {
 	@Transient
 	private MultipartFile image;
 	
-	public MultipartFile getImage() {
-		return image;
-	}
 
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
 
-	public Blob getAttachment() {
-		return attachment;
-	}
-
-	public void setAttachment(Blob attachment) {
-		this.attachment = attachment;
-	}
-
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cremployee_id")
+	private CRemployee cremployee;
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberBean_fpkey")
 	private MBBean mbBean;
@@ -110,7 +103,7 @@ public class CRBean implements Serializable {
 				+ mbBean + ", cpBean=" + cpBean + "]";
 	}
 
-	public CRBean(Integer pk, String crClass, String crTitle, String crContent, Timestamp crApplyDate, Integer memberId,
+	public CRBean(Integer pk, String crClass, String crTitle, String crContent, Timestamp crApplyDate, String memberId,
 			String crReContent, Timestamp crReDate, String crReplier, String crReScore, MBBean mbBean,
 			CpMemberBean cpBean) {
 		super();
@@ -168,11 +161,11 @@ public class CRBean implements Serializable {
 		this.crApplyDate = crApplyDate;
 	}
 
-	public Integer getMemberId() {
+	public String getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Integer memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
@@ -208,6 +201,28 @@ public class CRBean implements Serializable {
 		this.crReScore = crReScore;
 	}
 
+	public MultipartFile getImage() {
+		return image;
+	}
 
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Blob getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(Blob attachment) {
+		this.attachment = attachment;
+	}
 
 }

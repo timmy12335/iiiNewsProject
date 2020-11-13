@@ -39,7 +39,8 @@ import TRN.web.news.service.trkNewsService;
 
 @Controller
 public class trkNewsController {
-
+    
+	@Autowired
 	trkNewsService service;
 
 	@Autowired
@@ -80,11 +81,11 @@ public class trkNewsController {
 		model.addAttribute("trkNew", service.getNewsById(id));
 		return "TRN/trkNew";
 	}
-//	@RequestMapping("/update/news")            //點按鈕直接更新數量
-//	public String updateStock(Model model) {
-//		service.updateAllStocks();
-//		return "redirect:/products";
-//	}
+	@RequestMapping("/update/news")            //點按鈕直接更新數量
+	public String updateStock(Model model) {
+		service.updateNews(null, null);
+		return null;
+	}
 	
 	@RequestMapping(value = "/trknews/add", method = RequestMethod.GET)   
 	public String getAddNewsForm(Model model) {

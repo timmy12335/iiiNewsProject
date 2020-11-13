@@ -41,17 +41,18 @@
 	</div>
 	</div>
 	</div>
+	<a href="<c:url value='/chat' />">
 	<div class="card">
 	<span></span>
 	<div class='imgBx'><img src="<c:url value='/image/CR3.jpg'/>"></div>
 	<div class="content">
 	<div>
-	<h2>討論區Test</h2>
+	<h2>聊天室Test</h2>
 	<p>沒做出來就當混分的<p>	
 	</div>
 	</div>
 	</div>
-
+</a>
 </div>
 </section>
 

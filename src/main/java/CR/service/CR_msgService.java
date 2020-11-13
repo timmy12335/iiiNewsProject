@@ -9,4 +9,5 @@ public interface CR_msgService {
 
 	MBBean getMemberById(int memberId);
 	
+	
 }

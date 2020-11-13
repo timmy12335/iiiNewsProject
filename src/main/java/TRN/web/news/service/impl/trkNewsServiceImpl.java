@@ -28,9 +28,8 @@ public class trkNewsServiceImpl implements trkNewsService {
 
 	@Transactional
 	@Override               //點按鈕直接更新數量
-	public void updateNews() {
-		// TODO Auto-generated method stub
-		
+	public void updateNews(Integer trackId, Integer clicnum) {
+		dao.updateNews(trackId, clicnum);;
 	}
 	@Transactional
 	@Override                     //分類查詢 show有哪些分類

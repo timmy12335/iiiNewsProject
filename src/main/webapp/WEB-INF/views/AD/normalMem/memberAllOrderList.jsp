@@ -71,7 +71,7 @@
 </nav>
 <div id="mainDiv">
 	<div align="center">
-		<h2>會員XXX的所有訂單列表</h2>
+		<h2>會員${showmemberId}的所有訂單列表</h2>
 		<a href="<c:url value='/' />">回首頁</a>
 	</div>
 	<span>${msgMap.addStatus}</span>

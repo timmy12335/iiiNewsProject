@@ -138,7 +138,7 @@ overflow:auto;
 }
 </style>
 <script type="text/javascript">
-//記錄當前獲取到的id的最大值，防止獲取到重複的資訊
+// 記錄當前獲取到的id的最大值，防止獲取到重複的資訊
 var maxId = 0;
 function showmessage(){
 var ajax = new XMLHttpRequest();
@@ -147,18 +147,19 @@ ajax.onreadystatechange = function(){
 if(ajax.readyState==4) {
 //alert(ajax.responseText); 
 // 將獲取到的字串轉換成實體
-eval('var data = ' ajax.responseText);
+// eval('var data = '+ajax.responseText);
+var s=JSON.stringify(ajax.responseText)
 // 遍歷data陣列，把內部的資訊一個個的顯示到頁面上
-var s = "";
-for(var i = 0 ; i < data.length;i  ){
-data[i];
-s  = "(" data[i].add_time ") >>>";
-s  = "<p style='color:" data[i].color ";'>";  
-s  = data[i].sender  " 對 "   data[i].receiver  "  "  data[i].biaoqing "說："   data[i].msg;
-s  = "</p>";
-// 把已經獲得的最大的記錄id更新
-maxId = data[i].id;
-}
+// var s = "";
+// for(var i = 0 ; i < data.length;i  ){
+// data[i];
+// s  = "("+ data[i].add_time+ ") >>>";
+// s  = "<p style='color:"+ data[i].color+ ";'>";  
+// s  = data[i].sender+  " 對 " +  data[i].receiver + "  " + data[i].biaoqing+ "說：" +  data[i].msg;
+// s  = "</p>";
+// // 把已經獲得的最大的記錄id更新
+// maxId = data[i].id;
+// }
 // 開始向頁面時追加資訊
 var showmessage = document.getElementById("up");
 showmessage.innerHTML  = s;
@@ -167,8 +168,8 @@ showmessage.innerHTML  = s;
 showmessage.scrollTop = showmessage.scrollHeight-showmessage.style.height;
 }
 }
-ajax.open('get','./chatroom.php?maxId=' maxId);
-ajax.send(null);  
+ajax.open('get',"<c:url value='/msgChat'/>");
+ajax.send();  
 }
 // 更新資訊的執行時機
 window.onload = function(){
@@ -190,20 +191,20 @@ setInterval("showmessage()",3000);
 <hr />
 <h3>發言欄</h3>
 <div id="bottom">
-<form action="./chatroom_insert.php">
+<form action="<c:url value='/msgChat'/>">
 <div id="chat_up">
-<span>顏色</span>
-<input type="color" name="color"/>
-<span>表情</span>
-<select name="biaoqing">
-<option value="微笑地">微笑地</option>
-<option value="猥瑣地">猥瑣地</option>
-<option value="和藹地">和藹地</option>
-<option value="目不轉睛地">目不轉睛地</option>
-<option value="傻傻地">傻傻地</option>
-</select>
+<!-- <span>顏色</span> -->
+<!-- <input type="color" name="color"/> -->
+<!-- <span>表情</span> -->
+<!-- <select name="biaoqing"> -->
+<!-- <option value="微笑地">微笑地</option> -->
+<!-- <option value="猥瑣地">猥瑣地</option> -->
+<!-- <option value="和藹地">和藹地</option> -->
+<!-- <option value="目不轉睛地">目不轉睛地</option> -->
+<!-- <option value="傻傻地">傻傻地</option> -->
+<!-- </select> -->
 <span>聊天物件</span>
-<select name="receiver">
+<select id="receiver" name="receiver">
 <option value="">所有的人</option>
 <option value="老郭">老郭</option>
 <option value="小郭">小郭</option>
@@ -211,11 +212,18 @@ setInterval("showmessage()",3000);
 </select>
 </div>
 <div id="chat_bottom">
+<textarea id="msg" name="msg" style="width:380px;height:auto;"></textarea>
+<input type="button" value="發言" onclick="send()" />
+發言：<span id="result"></span>
+</div>
+</form>
+</div>
+</div>
 <script>
 function send(){
 // 向伺服器差入相關的資料
-var form = document.getElementsByTagName('form')[0];
-var formdata = new FormData(form);
+var receiverValue = document.getElementById('receiver');
+var msgValue = document.getElementById('msg');
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function(){
 if(xhr.readyState==4) {
@@ -224,8 +232,15 @@ document.getElementById("result").innerHTML = xhr.responseText;
 setTimeout("hideresult()",2000);
 }
 }
-xhr.open('post','./chatroom_insert.php');
-xhr.send(formdata);
+xhr.open('post',"<c:url value='/msgChat'/>");
+var jsonReport = {					
+		"receiver": receiverValue, 	
+		"msg": msgValue
+		}
+xhr.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+xhr.send(JSON.stringify(jsonReport));
+
+// xhr.send(formdata);
 document.getElementById("msg").value="";
 //return false;
 }
@@ -234,12 +249,5 @@ function hideresult(){
 document.getElementById('result').innerHTML = "";  
 }
 </script>
-<textarea id="msg" name="msg" style="width:380px;height:auto;"></textarea>
-<input type="button" value="發言" onclick="send()" />
-發言：<span id="result"></span>
-</div>
-</form>
-</div>
-</div>
 </body>
 </html>

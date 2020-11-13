@@ -9,10 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.MT.dao.MtAddDao;
 import iiiNews.MT.model.MtAddBean;
-import iiiNews.NP.model.NewsBean;
 
 @Repository
 public class MtAddDaoImpl implements MtAddDao{

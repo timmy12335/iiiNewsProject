@@ -11,6 +11,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import CR.model.CRBean;
@@ -37,6 +38,7 @@ import iiiNews.MB.model.MBBean;
 
 
 @Controller
+@SessionAttributes({"MBBean","CpMemberBean"})
 public class CR_Controller {
 	@Autowired
 	ServletContext ctx;
@@ -76,7 +78,16 @@ public class CR_Controller {
 	//會員申請客服表單
 	//給空白表單的方法
 	@GetMapping("/addReport")
-	public String getAddNewReportForm(Model model) {
+	public String getAddNewReportForm(Model model,HttpServletRequest request,HttpServletResponse response) {
+		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
+		if (memberBean == null) {
+			return "redirect: " + ctx.getContextPath() + "/Login";
+		}
+	
+		HttpSession session = request.getSession(false); 
+		if (session == null) {
+			return "redirect: " + ctx.getContextPath() + "/Login";
+		}
 		CRBean cb = new CRBean();
 		model.addAttribute("crBean", cb);
 		return "CR/CrAddReport";

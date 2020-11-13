@@ -62,6 +62,7 @@ window.onload=function(){
 	    yourImg.style.width = ${oneItem.width}+'px';
 	}
 }
+}
 	document.getElementById("crContent").onkeydown=function(){
 	var length = document.getElementById("crContent").value.length;
 	var word = 200-length;
@@ -73,7 +74,7 @@ window.onload=function(){
 	}
 	
 	
-}
+
 
 </script>
 </head>
@@ -90,9 +91,9 @@ window.onload=function(){
 				enctype="multipart/form-data">
 				<table class="table" border="1" style="width: 800px;">
 					<tr>
-						<td class="form-group">帳號:<span>請先註冊好帳號才使用</span></td>
+						<td class="form-group">帳號:</td>
 						<td colspan='2'align="center"><form:input type="text" path="memberId"
-								id="memberId" value="A001"></form:input></td>
+								id="memberId" value="${MBBean.memberId}"></form:input></td>
 					</tr>
 					<tr>
 						<td class="form-group">客服類別:</td>
@@ -110,6 +111,7 @@ window.onload=function(){
 						<td class="form-group">客服主題:</td>
 						<td align="center"><form:input class="form-control" type="text" style="width: 400px"
 								placeholder="請輸入客服主題" path="crTitle" id="crTitle"></form:input>
+								<div></div>
 								<form:errors path="crTitle" cssClass="error"/>
 						</td>
 					</tr>
@@ -150,9 +152,19 @@ window.onload=function(){
 		</div>
 
 	</section>
-	<script>
-
-
+	<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5fad42d07279c47e5dcf3598/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
+<!--End of Tawk.to Script-->
+
 </body>
 </html>

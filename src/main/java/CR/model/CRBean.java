@@ -61,30 +61,12 @@ public class CRBean implements Serializable {
 	@Transient
 	private MultipartFile image;
 	
-	public MultipartFile getImage() {
-		return image;
-	}
 
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public Blob getAttachment() {
-		return attachment;
-	}
-
-	public void setAttachment(Blob attachment) {
-		this.attachment = attachment;
-	}
-
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="cremployee_id")
+	private CRemployee cremployee;
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="memberBean_fpkey")
 	private MBBean mbBean;
@@ -219,6 +201,28 @@ public class CRBean implements Serializable {
 		this.crReScore = crReScore;
 	}
 
+	public MultipartFile getImage() {
+		return image;
+	}
 
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Blob getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(Blob attachment) {
+		this.attachment = attachment;
+	}
 
 }

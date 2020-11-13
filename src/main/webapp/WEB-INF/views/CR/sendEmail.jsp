@@ -17,73 +17,27 @@
 <jsp:include page="/fragment/navbar.jsp"></jsp:include>
 </nav>
 <center style="margin-top:100px">
-		<ul>
-
-			<c:forEach var='ser' items='${CrReport}' varStatus="report">
-
-			<table width="825" height="43" border="0">
-
-				<tr>
-						
-					<td width="64"><li>${ msg.getUsername}</li></td>
-
-					<td width="127"><li>${msg.getTitle}</li></td>
-
-					<td width="620">${msg.getContent}</td>
-
-				</tr>
-
-			</table>
-
-			</c:forEach>
-
-		</ul>
-
-		在這裡把那個留言列表 列出來就可以了
-
-		<form action="/insermsg" method="post" name="loginform">
-
-			<table bgcolor="#B3B3FF">
-
-				<caption>歡迎訪問留言板</caption>
-
-				<tr>
-
-					<td>使用者名稱：</td>
-
-					<td><input type="text" name="username" size="40"></td>
-
-				</tr>
-
-				<tr>
-
-					<td>主題：</td>
-
-					<td><input type="text" name="title" size="40"></td>
-
-				</tr>
-
-				<tr>
-
-					<td>內容：</td>
-
-					<td><textarea name="content" rows="10" cols="40"></textarea>
-
-					</td>
-
-				</tr>
-
-				<tr>
-
-					<td><input type="submit" value=" 提交 "></td>
-
-					<td><input type="reset" value=" 重填 "></td>
-
-				</tr>
-
-			</table>
-
-		</form>
+<form action="/message" method="post">
+		<table>
+    
+    <tr>
+        <td>用户名</td>
+        <td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+        <td>标题</td>
+        <td><input type="text" name="title"></td>
+    </tr>
+    <tr>
+        <td>内容</td>
+        <td><textarea name="content" id="" cols="30" rows="10"></textarea></td>
+    </tr>
+    <tr>
+        <td colspan="2">  <input type="submit" value="提交"></td>
+    </tr>
+    
+</table>
+</form>
 
 	</center>
 </body>

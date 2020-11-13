@@ -45,8 +45,7 @@ public class CPMBServiceImpl implements CPMBService {
 
 	@Override
 	public CpMemberBean getSingleCpMember(String cpmemberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cpmbdao.getSingleCpMmeber(cpmemberId);
 	}
 
 	@Override

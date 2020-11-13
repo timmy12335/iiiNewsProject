@@ -47,8 +47,7 @@ public class MBServiceImpl implements MBService {
 
 	@Override
 	public MBBean getSingleMember(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return mbdao.getSingleMmeber(memberId);
 	}
 
 	@Override

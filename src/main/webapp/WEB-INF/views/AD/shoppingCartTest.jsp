@@ -62,7 +62,7 @@ function confirmDelete(n) {
 									(<span> ${shoppingCart.content.size()}</span> 項商品)
 								</c:if>
 							</h5>
-							<h5 class="mb-4">本次使用者session: ${pageContext.session.id }</h5>
+<%-- 							<h5 class="mb-4">本次使用者session: ${pageContext.session.id }</h5> --%>
 							<hr>
 							<c:choose>
 								<c:when test="${empty shoppingCart.content}">
@@ -82,7 +82,7 @@ function confirmDelete(n) {
 												<div
 													class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
 													<img class="img-fluid w-100"
-														src="https://img.ltn.com.tw/Upload/news/600/2017/06/10/php3XTNaa.png"
+														src="https://i.imgur.com/3tpEXt1.jpg"
 														alt="Sample">
 												</div>
 											</div>
@@ -90,8 +90,8 @@ function confirmDelete(n) {
 												<div>
 													<div class="d-flex justify-content-between">
 														<div>
-															<h5>標題 ${ad.value.adNo}</h5>
-															<p class="mb-3 text-muted text-uppercase small">
+															<h5>商品代號： ${ad.value.adNo}</h5>
+															<p class="mb-3 text-muted text-uppercase small">販售欄位：
 																<c:choose>
 																	<c:when test="${ad.value.categoryNo == 100}">頭版頭</c:when>
 																	<c:when test="${ad.value.categoryNo == 200}">頭版側標</c:when>
@@ -101,8 +101,8 @@ function confirmDelete(n) {
 																	<c:otherwise>其他</c:otherwise>
 																</c:choose>
 															</p>
-															<p class="mb-2 text-muted text-uppercase small">日期：${ad.value.adDate}</p>
-															<p class="mb-3 text-muted text-uppercase small">賣的人：${ad.value.sellerMemberId}</p>
+															<p class="mb-2 text-muted text-uppercase small">販售之上架日期：${ad.value.adDate}</p>
+															<p class="mb-3 text-muted text-uppercase small">賣家名稱 / 帳號：${ad.value.sellerMemberId}</p>
 														</div>
 														<div>
 															<div
@@ -121,16 +121,16 @@ function confirmDelete(n) {
 													<div
 														class="d-flex justify-content-between align-items-center">
 														<div>
-															<a href="#!" type="button"
-																class="card-link-secondary small text-uppercase mr-3">
-																<i class="fas fa-trash-alt mr-1"></i> Remove item
-															</a> <a href="#" type="button"
+<!-- 															<a href="#!" type="button" -->
+<!-- 																class="card-link-secondary small text-uppercase mr-3"> -->
+<!-- 																<i class="fas fa-trash-alt mr-1"></i> Remove item  </a>-->
+															<a href="#" type="button"
 																onclick="confirmDelete(${ad.value.adPk})"
 																class="card-link-secondary small text-uppercase mr-3">
 																<i class="fas fa-trash-alt mr-1"></i> 移除商品
 															</a> <a href="#!" type="button"
 																class="card-link-secondary small text-uppercase"><i
-																class="fas fa-heart mr-1"></i> Move to wish list </a>
+																class="fas fa-heart mr-1"></i> 加入最愛 </a>
 														</div>
 														<p class="mb-0">
 															<span><strong>NT$ ${ad.value.unitPrice}</strong></span>
@@ -175,7 +175,18 @@ function confirmDelete(n) {
 								<c:forEach var="ad" items="${shoppingCart.content}">
 									<li
 										class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-										${ad.value.adNo} <span>$ ${ad.value.unitPrice}</span>
+										${ad.value.adNo}
+										<br>(&nbsp;
+										<c:choose>
+											<c:when test="${ad.value.categoryNo == 100}">頭版頭</c:when>
+											<c:when test="${ad.value.categoryNo == 200}">頭版側標</c:when>
+											<c:when test="${ad.value.categoryNo == 300}">內頁版頭</c:when>
+											<c:when test="${ad.value.categoryNo == 400}">內頁側標</c:when>
+											<c:when test="${ad.value.categoryNo == 500}">小廣告</c:when>
+											<c:otherwise>其他</c:otherwise>
+										</c:choose>
+										/&nbsp;${ad.value.adDate} &nbsp;)
+										 <span>$ ${ad.value.unitPrice}</span>
 									</li>
 								</c:forEach>
 								<li
@@ -217,7 +228,7 @@ function confirmDelete(n) {
 						<div class="card-body">
 							<a class="dark-grey-text d-flex justify-content-between"
 								data-toggle="collapse" href="#collapseExample"
-								aria-expanded="false" aria-controls="collapseExample"> Add a discount code (optional) 
+								aria-expanded="false" aria-controls="collapseExample"> 加入折扣代碼 (optional) 
 								<span><i class="fas fa-chevron-down pt-1"></i></span>
 							</a>
 

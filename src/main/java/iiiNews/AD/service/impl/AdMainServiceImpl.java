@@ -95,6 +95,15 @@ public class AdMainServiceImpl implements AdMainService {
 		n++;
 		return n;
 	}
+	
+	@Override
+	@Transactional
+	public int updateAds(AdBean ab) {
+		int n = 0;
+		adMaindao.updateAds(ab);
+		n++;
+		return n;
+	}
 
 	@Override
 	@Transactional
@@ -121,6 +130,8 @@ public class AdMainServiceImpl implements AdMainService {
 	public int getTotalPageCount() {
 		return adMaindao.getTotalPageCount();
 	}
+
+	
 
 	
 	

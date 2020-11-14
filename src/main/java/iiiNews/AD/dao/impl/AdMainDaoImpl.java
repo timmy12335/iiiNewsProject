@@ -68,21 +68,25 @@ public class AdMainDaoImpl implements AdMainDao {
 	
 	//$$$$ 更新廣告上架資料 還沒測試沒寫完!!!!
 	@Override
-	public int updateAds(String adNo, AdBean ab) {
+	public int updateAds(AdBean ab) {
+//	public int updateAds(String adNo, AdBean ab) {
 		int n = 0;
-		String hql = "UPDATE AdBean ab" 
-				+" SET ab.categoryNo=:cateNo, ab.width=:width, ab.height=:height, ab.adDate=:adDate,"
-				+" ab.price=:price, ab.stock=:stock"
-				+" WHERE ab.adNo";
+//		String hql = "UPDATE AdBean ab" 
+//				+" SET ab.categoryNo=:cateNo, ab.width=:width, ab.height=:height, ab.adDate=:adDate,"
+//				+" ab.price=:price, ab.stock=:stock"
+//				+" WHERE ab.adNo";
 		Session session = factory.getCurrentSession();
-		session.createQuery(hql).setParameter("cateNo", ab.getCategoryNo())
-								.setParameter("width", ab.getWidth())
-								.setParameter("height", ab.getHeight())
-								.setParameter("adDate", ab.getAdDate())
-								.setParameter("price", ab.getPrice())
-								.setParameter("stock", ab.getStock())
-								.executeUpdate();
+//		session.createQuery(hql).setParameter("cateNo", ab.getCategoryNo())
+//								.setParameter("width", ab.getWidth())
+//								.setParameter("height", ab.getHeight())
+//								.setParameter("adDate", ab.getAdDate())
+//								.setParameter("price", ab.getPrice())
+//								.setParameter("stock", ab.getStock())
+//								.executeUpdate();
 		//$$$$ ..............
+//		AdBean origin = session.get(AdBean.class, pkId);
+		session.merge(ab);
+		System.out.println("merge success!!!");
 		n++;
 		return n;
 	}

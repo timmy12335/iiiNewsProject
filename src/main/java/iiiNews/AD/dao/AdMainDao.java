@@ -13,7 +13,7 @@ public interface AdMainDao {
 	
 	public AdBean getLastRecord() ;
 	
-	public int updateAds(String adNo, AdBean ab);
+	public int updateAds(AdBean ab);
 	
 	public List<AdBean> getCpMemberAdList(String cpmemberId); 
 	

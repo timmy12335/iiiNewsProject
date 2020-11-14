@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import iiiNews.AD.model.AdBean;
@@ -145,7 +146,23 @@ public class AdMainController {
 		return "redirect:/memberAllAdsList";
 	}
 	
-	
+	@PostMapping("/updateAdProduct/{adPk}")
+	public String updateAdProductById(@PathVariable Integer adPk,
+									@RequestParam Double width,
+									@RequestParam Double height,
+									@RequestParam Integer price,
+									@RequestParam Integer stock,Model model) {
+		
+		AdBean ab = service.getOneAdByadPk(adPk);
+		ab.setWidth(width);
+		ab.setHeight(height);
+		ab.setPrice(price);
+		ab.setStock(stock);
+		service.updateAds(ab);
+//		int n = service.deleteAdByMemberPkid(adPk);
+//		System.out.println("成功更動 "+n+" 筆");
+		return "redirect:/memberAllAdsList";
+	}
 
 	
 	

@@ -119,9 +119,11 @@ white-space: normal;
 								<td align='left'>&nbsp;${ser.mbBean.name}</td>
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
-								<td align='center' onclick="MBfolded(${report.index})" class="box" style="cursor:pointer"><p class="ellipsis">${ser.crContent}</p></td>
+								<td align='center' onclick="MBfolded(${report.index})" class="box" style="cursor:pointer">
+								<p class="ellipsis">${ser.crContent}</p></td>
 								<td align='center'><fmt:formatDate value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-								<td align='center' onclick="folded(${report.index})" class="box" style="cursor:pointer"><p class="ellipsis">${ser.crReContent}</p></td>
+								<td align='center' onclick="folded(${report.index})" class="box" style="cursor:pointer">
+								<p class="ellipsis">${ser.crReContent}</p></td>
 								<td align='center'>${ser.cremployee.empName}</td>
 								<td align='center'><fmt:formatDate value="${ser.crReDate}" pattern="yyyy-MM-dd"/></td>
 								<td><button id="btn_update" class="btn btn-outline-secondary btn-icon-text" 

@@ -200,6 +200,8 @@ public class CR_Controller {
 		cb.setPk(cb0.getPk());
 		cb.setCrApplyDate(cb0.getCrApplyDate());
 		cb.setMbBean(cb0.getMbBean());
+		cb.setCremployee(cb0.getCremployee());
+		cb.setMbBean(cb0.getMbBean());
 		Timestamp today=new Timestamp(System.currentTimeMillis());
 		cb.setCrReDate(today);
 	}	

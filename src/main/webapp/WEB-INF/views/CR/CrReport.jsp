@@ -84,7 +84,7 @@ white-space: normal;
 
                   <h4 class="font-weight-bold mb-0">顯示所有客服表單</h4>
                   <div id="resultmsg"></div>
-			<table class="table table-hover" style="width:1000px;">
+			<table class="table" style="width:1000px;">
 				<thead>
 					<tr>
 <!-- 						<th width='60' align='center'>單號</th> -->
@@ -119,9 +119,9 @@ white-space: normal;
 								<td align='left'>&nbsp;${ser.mbBean.name}</td>
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
-								<td align='center' onclick="MBfolded(${report.index})" class="box"><p class="ellipsis">${ser.crContent}</p></td>
+								<td align='center' onclick="MBfolded(${report.index})" class="box" style="cursor:pointer"><p class="ellipsis">${ser.crContent}</p></td>
 								<td align='center'><fmt:formatDate value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-								<td align='center' onclick="folded(${report.index})" class="box"><p class="ellipsis">${ser.crReContent}</p></td>
+								<td align='center' onclick="folded(${report.index})" class="box" style="cursor:pointer"><p class="ellipsis">${ser.crReContent}</p></td>
 								<td align='center'>${ser.crReplier}</td>
 								<td align='center'><fmt:formatDate value="${ser.crReDate}" pattern="yyyy-MM-dd"/></td>
 								<td><button id="btn_update" class="btn btn-outline-secondary btn-icon-text" 
@@ -131,10 +131,10 @@ white-space: normal;
 									onclick="deleteCrReport(${ser.pk})" >刪除<i class="ti-trash btn-icon-append"></i></button></td>
 							</tr>
 							<tr><td id="MBcontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:1000px;height:500px;" disabled>
+							<textarea style="width:800px;height:200px;" class="form-control" disabled>
 							${ser.crContent}</textarea>
 							<tr><td id="recontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:1000px;height:500px;" disabled>
+							<textarea style="width:800px;height:200px;" class="form-control" disabled>
 							${ser.crReContent}</textarea>
 							</td></tr>
 						</c:forEach>

@@ -46,12 +46,14 @@ public class CR_empDao_impl implements CR_empDao {
 	@Override
 	public void updateemployee(CRemployee crb) {
 		Session session = factory.getCurrentSession();
-		String hql ="UPDATE CRemployee ce"
-				+"SET ce.empId=:empId, ce.empName=:empname, ce.empemail=:empemail "
+		String hql ="UPDATE CRemployee "
+				+"SET empId=:Id, empName=:name, empemail=:email "
 				+ "where empPk = :pk";
-		session.createQuery(hql).setParameter("empId", crb.getEmpId())
-								.setParameter("empname", crb.getEmpName())
-								.setParameter("empemail", crb.getEmpemail())
+		System.out.println("HI"+crb.getEmpId()+crb.getEmpemail()+"pk="+crb.getEmpPk());
+		session.createQuery(hql).setParameter("Id", crb.getEmpId())
+								.setParameter("name", crb.getEmpName())
+								.setParameter("email", crb.getEmpemail())
+								.setParameter("pk", crb.getEmpPk())
 								.executeUpdate();
 	}
 	

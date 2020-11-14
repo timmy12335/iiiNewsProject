@@ -53,7 +53,7 @@ public class CPMBController {
 	}
 
 	@RequestMapping(value = "/CpMember", method = RequestMethod.POST)
-	public String addcpuser(@ModelAttribute("command_CP") CpMemberBean cpuser, ModelMap model) {
+	public String addcpuser(@ModelAttribute("command_CP") CpMemberBean cpuser, Model model) {
 		service.addCpMember(cpuser);
 //       System.out.println(user.getSex());
 //       System.out.println(user.getName());
@@ -68,7 +68,7 @@ public class CPMBController {
 //      model.addAttribute("birthday", user.getBirthday());
 //      model.addAttribute("mbpoints", user.getMbpoints());
 //      
-
+		model.addAttribute("cpmb", cpuser);
 		return "/MB/UserListCP";
 	}
 

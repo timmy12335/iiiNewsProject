@@ -9,7 +9,7 @@ public interface trkNewsService {
 	
 	List<trkNewsBean> getAllProducts(); // 查詢所有資料
 
-	void updateNews(); // 點按鈕直接更新數量
+	void updateNews(Integer trackId, Integer clicnum); // 原點按鈕直接更新數量  想改成 點擊次數更新
 
 	List<String> getAlltypes();  //分類查詢 show有哪些分類
 

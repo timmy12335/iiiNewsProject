@@ -24,4 +24,6 @@ public interface CR_Dao {
 	public MBBean getMembersByMemberId(String memberId);
 	
 	public  List<CRBean> getReportBymemberId(String memberId);
+	
+	public List<CRBean> getReportByStatus(String status);
 }

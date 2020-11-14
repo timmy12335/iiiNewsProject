@@ -121,7 +121,6 @@ public class CR_Controller {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
-				
 		}
 				//寄信確認
 				MimeMessage msg = mailSender.createMimeMessage();

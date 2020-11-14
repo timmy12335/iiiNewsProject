@@ -61,8 +61,8 @@ window.onload=function(){
 	    yourImg.style.height = ${oneItem.height}+'px';
 	    yourImg.style.width = ${oneItem.width}+'px';
 	}
-}
-}
+
+
 	document.getElementById("crContent").onkeydown=function(){
 	var length = document.getElementById("crContent").value.length;
 	var word = 200-length;
@@ -73,7 +73,7 @@ window.onload=function(){
 		}
 	}
 	
-	
+	}
 
 
 </script>
@@ -87,8 +87,8 @@ window.onload=function(){
 			<h3 class="title">客服表單申請</h3>
 		</div>
 		<div align="center">
-			<form:form method="post" modelAttribute="crBean" id="forms"
-				enctype="multipart/form-data">
+			<form:form method="post" modelAttribute="crBean" id="forms" class="form-sample"
+		enctype="multipart/form-data">
 				<table class="table" border="1" style="width: 800px;">
 					<tr>
 						<td class="form-group">帳號:</td>
@@ -97,7 +97,8 @@ window.onload=function(){
 					</tr>
 					<tr>
 						<td class="form-group">客服類別:</td>
-						<td align="center"><form:select path="crClass" id="crClass"
+						<td align="center">
+						<form:select path="crClass" id="crClass"
 								class="was-validated" style="width: 400px">
 								<option>帳號相關</option>
 								<option>交易相關</option>
@@ -105,7 +106,7 @@ window.onload=function(){
 								<option>申請合作</option>
 								<option>提議</option>
 								<option>其他</option>
-							</form:select></td>
+						</form:select></td>
 					</tr>
 					<tr>
 						<td class="form-group">客服主題:</td>
@@ -133,8 +134,11 @@ window.onload=function(){
 							src="<c:url value='/image/CR2.jpg' />" /></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="送出表單" /> <input type="reset" id='reset' value="重設" /> <input
+						<td colspan="2" align="center">
+						<input type="submit"
+							value="送出表單" />
+							 <input type="reset" id='reset' value="重設" /> 
+							 <input
 							type="button" id='cancel' value="取消申請" /></td>
 					</tr>
 					<tr>
@@ -162,7 +166,7 @@ s1.src='https://embed.tawk.to/5fad42d07279c47e5dcf3598/default';
 s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
-})();
+});
 </script>
 <!--End of Tawk.to Script-->
 

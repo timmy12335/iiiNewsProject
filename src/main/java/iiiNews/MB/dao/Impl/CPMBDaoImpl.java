@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import iiiNews.MB.dao.CPMBDao;
 import iiiNews.MB.model.CpMemberBean;
+import iiiNews.MB.model.MBBean;
 
 
 @Repository
@@ -58,8 +59,11 @@ public class CPMBDaoImpl implements CPMBDao {
 
 	@Override
 	public CpMemberBean getSingleCpMmeber(String cpmemberId) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "FROM MBBean WHERE memberId = :mId AND status = 1 ";
+		Session session = factory.getCurrentSession();
+		CpMemberBean cpmbbean = (CpMemberBean) session.createQuery(hql)
+				.setParameter("nId", cpmemberId).getSingleResult();
+		return cpmbbean;
 	}
 
 	@Override

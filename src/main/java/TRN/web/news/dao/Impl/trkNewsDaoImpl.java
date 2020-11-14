@@ -34,11 +34,11 @@ public class trkNewsDaoImpl implements trkNewsDao {
 
 	@SuppressWarnings("unused")    //點按鈕直接更新數量
 	@Override
-	public void updateNews(int productId, int newQuantity) {
-		String hql = "UPDATE BookBean b SET b.stock = :stock WHERE bookId = :id";
+	public void updateNews(Integer trackId, Integer clicnum) {
+		String hql = "UPDATE trkNewsBean b SET b.clicnum = :clicnum WHERE trackId = :trackId";
 		Session session = factory.getCurrentSession();
-		int n = session.createQuery(hql).setParameter("stock", newQuantity)
-	                            .setParameter("id", productId)
+		int n = session.createQuery(hql).setParameter("clicnum", clicnum)
+	                            .setParameter("trackId", trackId)
 	                            .executeUpdate();
 	}
 

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>客服社群功能列表</title>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link href="${pageContext.request.contextPath}/css/CRindex.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -41,17 +41,18 @@
 	</div>
 	</div>
 	</div>
+	<a href="<c:url value='/chat' />">
 	<div class="card">
 	<span></span>
 	<div class='imgBx'><img src="<c:url value='/image/CR3.jpg'/>"></div>
 	<div class="content">
 	<div>
-	<h2>討論區Test</h2>
+	<h2>聊天室Test</h2>
 	<p>沒做出來就當混分的<p>	
 	</div>
 	</div>
 	</div>
-
+</a>
 </div>
 </section>
 

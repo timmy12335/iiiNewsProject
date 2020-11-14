@@ -28,6 +28,13 @@ public class CpMemberBean implements Serializable {
 	String cpaddress;
 	String cpname;
 	Integer Uniformnumbers;    //統一編號
+	public Integer getUniformnumbers() {
+		return Uniformnumbers;
+	}
+
+	public void setUniformnumbers(Integer uniformnumbers) {
+		Uniformnumbers = uniformnumbers;
+	}
 	Date founddate;    //創立日期
 	Integer cpmbpoints; // 會員點數
 	
@@ -79,6 +86,7 @@ public class CpMemberBean implements Serializable {
 	}
 
 	public CpMemberBean() {
+		super();
 	}
 	
 	public Integer getPkey() {
@@ -129,12 +137,12 @@ public class CpMemberBean implements Serializable {
 	public void setCpname(String cpname) {
 		this.cpname = cpname;
 	}
-	public Integer getUniformnumbers() {
-		return Uniformnumbers;
-	}
-	public void setUniformnumbers(Integer uniformnumbers) {
-		Uniformnumbers = uniformnumbers;
-	}
+//	public Integer getUniformnumbers() {
+//		return Uniformnumbers;
+//	}
+//	public void setUniformnumbers(Integer uniformnumbers) {
+//		this.Uniformnumbers = uniformnumbers;
+//	}
 	public Date getFounddate() {
 		return founddate;
 	}

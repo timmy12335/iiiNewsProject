@@ -1,69 +1,101 @@
 package iiiNews.MT.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import iiiNews.MB.model.MBBean;
 
 @Entity
-@Table(name="MtComment")
-public class MtCommentBean {				//複合主鍵
+@Table(name = "MtArticleComment")
+public class MtCommentBean {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Comment_Id")
-	private Integer CommentId;
+	private Integer commentPkey;
+	private String comMemberId;		//會員編號
+	private String commentId;	//留言ID
+	@Column(columnDefinition = "datetime2(7)")	//修改型態，預設為datetime2(7)
+	private Timestamp uploadTime;	//上傳時間
 	
-	@Column(name = "Comment_Box")
-	private String CommentBox;
+	private String comment;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "members_Comment",		//會員欄位，待修改*****
-		joinColumns = {
-				@JoinColumn(name = "FK_Comment_Id", referencedColumnName = "Comment_Id")	//留言欄位
-		},
-		inverseJoinColumns = {
-				@JoinColumn(name = "FK_Member_Id", referencedColumnName = "MBNo")	//會員欄位，待修改*****
-		}
-	)
-	private Set<MBBean> members = new HashSet<MBBean>(0);	//會員名稱，待修改*****
+	@ManyToOne
+	@JoinColumn(name = "article_FK")
+	private MtAddBean mtAddBean;
+	//雙向多對一  多方內有個儲存一方物件參考的實例變數
+	//外鍵在多方 定義說明外鍵的名字是什麼是誰
+	
+	
 
-	public MtCommentBean() {
+
+
+	public MtCommentBean(){
 	}
 
-	public Integer getCommentId() {
-		return CommentId;
+
+	public Integer getCommentPkey() {
+		return commentPkey;
 	}
 
-	public void setCommentId(Integer commentId) {
-		CommentId = commentId;
+
+	public void setCommentPkey(Integer commentPkey) {
+		this.commentPkey = commentPkey;
 	}
 
-	public String getCommentBox() {
-		return CommentBox;
+
+	public String getComMemberId() {
+		return comMemberId;
 	}
 
-	public void setCommentBox(String commentBox) {
-		CommentBox = commentBox;
+
+	public void setComMemberId(String comMemberId) {
+		this.comMemberId = comMemberId;
 	}
 
-	public Set<MBBean> getMembers() {
-		return members;
+
+	public String getCommentId() {
+		return commentId;
 	}
 
-	public void setMembers(Set<MBBean> members) {
-		this.members = members;
+
+	public void setCommentId(String commentId) {
+		this.commentId = commentId;
+	}
+
+
+	public Timestamp getUploadTime() {
+		return uploadTime;
+	}
+
+
+	public void setUploadTime(Timestamp uploadTime) {
+		this.uploadTime = uploadTime;
+	}
+
+
+	public String getComment() {
+		return comment;
+	}
+
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
+	public MtAddBean getMtAddBean() {
+		return mtAddBean;
+	}
+
+
+	public void setMtAddBean(MtAddBean mtAddBean) {
+		this.mtAddBean = mtAddBean;
 	}
 
 }

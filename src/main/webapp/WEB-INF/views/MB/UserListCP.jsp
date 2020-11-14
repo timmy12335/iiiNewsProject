@@ -5,6 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用戶列表</title>
+<style>
+#container {
+	margin: 20px;
+	background-color: lightblue;
+	width: 100%;
+	max-width: 240px;
+	font-family: Microsoft JhengHei;
+	text-align: center;
+	font-size: 20px;
+}
+</style>
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jqPaginator.min.js"></script>
@@ -21,35 +32,60 @@
 			<!-- 				<div class="row" style="margin-top: 35px"> -->
 			<table class="table table-striped">
 				<caption>用戶列表</caption>
-				<thead>
-					<tr>
-						<th>公司行號</th>
-						<th>帳號</th>
-						<th>密碼</th>
-						<th>統一編號</th>
-						<th>公司地址</th>
-						<th>公司信箱</th>
-						<th>公司電話</th>
-						<th>創立日期</th>
-					</tr>
-				</thead>
-				<tbody>
+				<tr id="container">
+					<th>帳號:</th>
+					<td>${cpmb.cpmemberId}</td>
+				</tr>
+				<tr id="container">
+					<th>密碼:</th>
+					<td>${cpmb.password2}</td>
+				</tr>
+				<tr id="container">
+					<th>公司行號:</th>
+					<td>${cpmb.cpname}</td>
+				</tr>
+				<tr id="container">
+					<th>統一編號:</th>
+					<td>${cpmb.uniformnumbers}</td>
+				</tr>
+				<tr id="container">
+					<th>公司信箱:</th>
+					<td>${cpmb.cpemail}</td>
+				</tr>
+				<tr id="container">
+					<th>公司電話:</th>
+					<td>${cpmb.cptel}</td>
+				</tr>
+				<tr id="container">
+					<th>公司地址:</th>
+					<td>${cpmb.cpaddress}</td>
+				</tr>
+				<tr id="container">
+					<th>創立日期:</th>
+					<td>${cpmb.founddate}</td>
+				</tr>
+				<tr>
+					<td colspan='4'><span style="color: red;">系統將於<span
+							style="text-align: center;" style="color: red;" id='timer'>5</span>秒後，將為您跳轉至首頁。
+					</span></td>
+				</tr>
 
-					<tr>
-						<td>${cpname}</td>
-						<td>${cpmemberId}</td>
-						<td>${password2}</td>
-						<td>${Uniformnumbers}</td>
-						<td>${cpaddress}</td>
-						<td>${cpemail}</td>
-						<td>${cptel}</td>
-						<td>${founddate}</td>
-					</tr>
-					<h3>${requestScope.user.name}恭喜您完成註冊</h3>
+				<script type='text/javascript'>
+					setTimeout('countdown()', 1000);
+
+					function countdown() {
+						var s = document.getElementById('timer');
+						s.innerHTML = s.innerHTML - 1;
+						if (s.innerHTML == 0)
+							window.location = 'http://localhost:8080/iiiNews/'
+						else
+							setTimeout('countdown()', 1000);
+					}
+				</script>
+				<h1 style="color: red;">${cpmb.cpname}</h1>
+				<h3>恭喜您完成註冊</h3>
 				</tbody>
 			</table>
-		</div>
-		</div>
 		</div>
 	</section>
 </body>

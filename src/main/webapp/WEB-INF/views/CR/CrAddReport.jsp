@@ -8,7 +8,17 @@
 <head>
 <meta charset="UTF-8">
 <title>申請客服表單</title>
+<style type="text/css">
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 5pt;
+}
 
+.fieldset-auto-width {
+	display: inline-block;
+}
+</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -51,10 +61,20 @@ window.onload=function(){
 	    yourImg.style.height = ${oneItem.height}+'px';
 	    yourImg.style.width = ${oneItem.width}+'px';
 	}
+
+
+	document.getElementById("crContent").onkeydown=function(){
+	var length = document.getElementById("crContent").value.length;
+	var word = 200-length;
+	if(word <= 200){
+	document.getElementById("num").innerHTML = "剩餘"+word+"字可輸入";
+	}else{
+	document.getElementById("num").innerHTML = "剩餘0字可輸入";
+		}
+	}
 	
-	
-	
-}
+	}
+
 
 </script>
 </head>
@@ -67,41 +87,46 @@ window.onload=function(){
 			<h3 class="title">客服表單申請</h3>
 		</div>
 		<div align="center">
-			<form:form method="post" modelAttribute="crBean" id="forms"
-				enctype="multipart/form-data">
-				<table class="table" border="1" style="width: 500px;">
+			<form:form method="post" modelAttribute="crBean" id="forms" class="form-sample"
+		enctype="multipart/form-data">
+				<table class="table" border="1" style="width: 800px;">
 					<tr>
-						<td colspan='2'><form:input type="text" path="memberId"
-								id="memberId" value="1"></form:input></td>
+						<td class="form-group">帳號:</td>
+						<td colspan='2'align="center"><form:input type="text" path="memberId"
+								id="memberId" value="${MBBean.memberId}"></form:input></td>
 					</tr>
 					<tr>
 						<td class="form-group">客服類別:</td>
-						<td><form:select path="crClass" id="crClass"
-								class="was-validated">
+						<td align="center">
+						<form:select path="crClass" id="crClass"
+								class="was-validated" style="width: 400px">
 								<option>帳號相關</option>
 								<option>交易相關</option>
 								<option>商品相關</option>
 								<option>申請合作</option>
 								<option>提議</option>
 								<option>其他</option>
-							</form:select></td>
+						</form:select></td>
 					</tr>
 					<tr>
 						<td class="form-group">客服主題:</td>
-						<td><form:input class="form-control" type="text"
+						<td align="center"><form:input class="form-control" type="text" style="width: 400px"
 								placeholder="請輸入客服主題" path="crTitle" id="crTitle"></form:input>
+								<div></div>
+								<form:errors path="crTitle" cssClass="error"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="form-group">客服內容:</td>
-						<td><form:input class="form-control" type="textarea"
-								cols="30" rows="5" path="crContent" id="crContent"></form:input>
-
+						<td align="center" ><form:textarea class="form-control" 
+								style="height: 100px;width: 400px;resize: none;" path="crContent" id="crContent" maxlength="200"></form:textarea>
+							<div id='num'></div>
+							<form:errors path="crContent" cssClass="error"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="form-group">附件檔案:</td>
-						<td><input type="file" name="image" id="image">
+						<td align="center"><input type="file" name="image" id="image">
 					</tr>
 					<tr>
 						<td colspan="3" align="center"><img
@@ -109,8 +134,11 @@ window.onload=function(){
 							src="<c:url value='/image/CR2.jpg' />" /></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="送出表單" /> <input type="reset" id='reset' value="重設" /> <input
+						<td colspan="2" align="center">
+						<input type="submit"
+							value="送出表單" />
+							 <input type="reset" id='reset' value="重設" /> 
+							 <input
 							type="button" id='cancel' value="取消申請" /></td>
 					</tr>
 					<tr>
@@ -128,13 +156,19 @@ window.onload=function(){
 		</div>
 
 	</section>
-	<script>
-
-	document.getElementById("crContent").change=function(){
-	var length = document.getElementById("crContent").value.length;
-	document.getElementById("num").innerHTML = length;
-	};
-
+	<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5fad42d07279c47e5dcf3598/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+});
 </script>
+<!--End of Tawk.to Script-->
+
 </body>
 </html>

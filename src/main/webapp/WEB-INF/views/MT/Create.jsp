@@ -43,8 +43,9 @@ window.onload = function(){
 	<div id="page" class="container" align="center">
 		<h2 class="BoxTitle">-----廣告欄位置上傳-----</h2>
 		<div class="container-login100">
-			<form:form method="POST" modelAttribute="mtBean"
-				enctype="multipart/form-data" onsubmit="return submitUserForm();">
+			<form:form method="POST" modelAttribute="mtBean" enctype="multipart/form-data">
+<%-- 			<form:form method="POST" modelAttribute="mtBean" --%>
+<%-- 				enctype="multipart/form-data" onsubmit="return submitUserForm();"> --%>
 				<fieldset>
 					<div align="center" style="margin-top: 40px;">
 						<h1>建立貼文</h1>
@@ -94,7 +95,7 @@ window.onload = function(){
 				
 					</div>
 					<div id="btn" align="center">
-					<button class="login100-form-btn">送出</button>
+					<button>送出</button>
 <!-- 					<input class="sub" type="submit" name="submit" id="submit" value="送出" /> -->
 					<input class="sub" type="reset" name="cancel" id="cancel" value="清除" />
 				</div>

@@ -3,6 +3,7 @@ package iiiNews.MB.dao;
 import java.util.List;
 
 import iiiNews.MB.model.CpMemberBean;
+import iiiNews.MB.model.MBBean;
 
 public interface CPMBDao {
 
@@ -19,4 +20,6 @@ public interface CPMBDao {
 	void addCpMember(CpMemberBean cpmember);
 
 	CpMemberBean saveCpMember();
+	
+	public CpMemberBean cplogin(String account, String password);
 }

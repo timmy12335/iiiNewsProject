@@ -6,7 +6,6 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>iiiNews Admin</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css">
@@ -17,6 +16,12 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
+  <style>
+	html{
+		margin-left:calc(100vw - 100%);
+		overflow-y: scroll;
+	}
+</style>
 
  <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -36,7 +41,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">
+            <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">回首頁</span>
             </a>
@@ -62,9 +67,25 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
+<<<<<<< Updated upstream
+
+            <a class="nav-link" href="連結">
               <i class="ti-pie-chart menu-icon"></i>
-              <span class="menu-title">社群新聞文章管理</span>
+              <span class="menu-title">金額</span>
+
+            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
+              <i class="ti-flag-alt menu-icon"></i>
+              <span class="menu-title">社群文章管理</span>
+
+=======
+            <a class="nav-link" href="連結">
+              <i class="ti-pie-chart menu-icon"></i>
+              <span class="menu-title">金額</span>
+             </a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
+              <i class="ti-flag-alt menu-icon"></i>
+              <span class="menu-title">社群文章管理</span>
+>>>>>>> Stashed changes
             </a>
           </li>
           <li class="nav-item">
@@ -103,8 +124,8 @@
             </a>
             <div class="collapse" id="CRList">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/customerReports'/>"> 查看所有客服表單</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/tables'/>"> 表格 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/customerReports'/>"> 查看客服表單</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/allemployee'/>"> 客服人員管理 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 3</a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 4 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 5</a></li>

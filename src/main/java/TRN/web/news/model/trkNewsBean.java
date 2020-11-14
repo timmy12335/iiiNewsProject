@@ -2,12 +2,13 @@ package TRN.web.news.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
-import java.sql.Clob;
+
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,8 @@ public class trkNewsBean implements Serializable {
 	private Timestamp fondtime;
 	private Timestamp octime;
 	private String ocplace;
-	private Clob descript;
+	@Column(columnDefinition = "nvarchar(MAX)")
+	private String descript;
 	private Integer trcnum;
 	private Integer clicnum;
 	@JsonIgnore
@@ -68,7 +70,7 @@ public class trkNewsBean implements Serializable {
 			           Timestamp fondtime, 
 			           Timestamp octime,
 			           String ocplace, 
-			           Clob descript, 
+			           String descript, 
 			           Integer trcnum, 
 			           Integer clicnum, 
 			           Blob coverimage, 
@@ -100,7 +102,7 @@ public class trkNewsBean implements Serializable {
 			           Timestamp fondtime, 
 			           Timestamp octime,
 			           String ocplace, 
-			           Clob descript, 
+			           String descript, 
 			           Integer trcnum, 
 			           Integer clicnum, 
 			           Blob coverimage, 
@@ -189,11 +191,11 @@ public class trkNewsBean implements Serializable {
 		this.ocplace = ocplace;
 	}
 
-	public Clob getDescript() {
+	public String getDescript() {
 		return descript;
 	}
 
-	public void setDescript(Clob descript) {
+	public void setDescript(String descript) {
 		this.descript = descript;
 	}
 

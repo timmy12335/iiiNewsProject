@@ -20,7 +20,6 @@ public class CR_Dao_impl implements CR_Dao {
 	@Autowired
 	SessionFactory factory;
 	
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CRBean> getRecord() {
@@ -32,9 +31,10 @@ public class CR_Dao_impl implements CR_Dao {
 	@Override
 	public void addReport(CRBean report) {
 		Session session=factory.getCurrentSession();
-		MBBean mb = getMemberById(report.getMemberId());
+		MBBean mb = getMembersByMemberId(report.getMemberId());
 		Timestamp date=new Timestamp(System.currentTimeMillis());
 		report.setCrApplyDate(date);
+		report.setState("未回覆");
 		report.setMbBean(mb);
 		session.save(report);
 		
@@ -81,6 +81,40 @@ public class CR_Dao_impl implements CR_Dao {
 	public void evictReport(CRBean cb) {
 		Session session = factory.getCurrentSession();
 		session.evict(cb);		
+	}
+	
+	@Override
+	public MBBean getMembersByMemberId(String memberId) {
+		Session session=factory.getCurrentSession();
+		MBBean mb=null;
+		String hql ="FROM MBBean WHERE memberId = :mId";
+		try {
+			mb =(MBBean) session.createQuery(hql)
+					.setParameter("mId", memberId)
+					.getSingleResult();
+
+		}catch(NonUniqueResultException e) {
+			e.printStackTrace();
+		}
+		return mb;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRBean> getReportBymemberId(String memberId) {
+		Session session=factory.getCurrentSession();
+		String hql ="FROM CRBean where memberId=:mId";
+		return session.createQuery(hql).setParameter("mId", memberId).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRBean> getReportByStatus(String status) {
+		Session session=factory.getCurrentSession();
+		String hql ="FROM CRBean WHERE status = :status";
+		return session.createQuery(hql).setParameter("status", status).getResultList();
+		
 	}
 	
 }

@@ -37,6 +37,10 @@ function confirmDelete(n) {
 	margin-bottom: 100px;
 	position: relative;
 }
+	html{
+		margin-left:calc(100vw - 100%);
+		overflow-y: scroll;
+	}
 </style>
 </head>
 <body>
@@ -44,7 +48,7 @@ function confirmDelete(n) {
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<div class="iiinewsContainer">
-		<div class="container">
+		<div class="container-fluid">
 			<!--Grid row-->
 			<div class="row">
 				<!--Grid column-->
@@ -78,7 +82,7 @@ function confirmDelete(n) {
 												<div
 													class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
 													<img class="img-fluid w-100"
-														src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
+														src="https://img.ltn.com.tw/Upload/news/600/2017/06/10/php3XTNaa.png"
 														alt="Sample">
 												</div>
 											</div>
@@ -144,7 +148,7 @@ function confirmDelete(n) {
 
 						</div>
 						<div class="col-4">
-							<div>${shoppingCart.content}</div>
+<%-- 							<div>${shoppingCart.content}</div> --%>
 						</div>
 
 
@@ -187,14 +191,21 @@ function confirmDelete(n) {
 									</div> <span><strong>${shoppingCart.total} 元</strong></span>
 								</li>
 							</ul>
+							
+							<button type="button"
+								class="btn btn-outline-danger btn-block waves-effect waves-light"
+								onclick='location.href="<c:url value='/removeShoppingCart.returnCartPage' />"'>
+								清空購物車&nbsp<i class="fa fa-frown-o" aria-hidden="true"></i></button>
 
 							<button type="button"
-								class="btn btn-info btn-block waves-effect waves-light"
-								onclick='location.href="<c:url value='/getAllAds' />"'>返回購物</button>
+								class="btn btn-outline-info btn-block waves-effect waves-light"
+								onclick='location.href="<c:url value='/getAllAds' />"'>
+								繼續購物&nbsp&nbsp&nbsp<i class="fa fa-cart-plus" aria-hidden="true"></i></button>
 
 							<button type="button"
 								class="btn btn-primary btn-block waves-effect waves-light"
-								onclick="checkoutfunction(${fn:length(shoppingCart.content)})">送出訂單</button>
+								onclick="checkoutfunction(${fn:length(shoppingCart.content)},'${showmemberId}')">
+								送出訂單&nbsp&nbsp&nbsp<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 
 
 						</div>
@@ -231,13 +242,18 @@ function confirmDelete(n) {
 		</div>
 	</div>
 	<script>
-		function checkoutfunction(count){
+		function checkoutfunction(count,loginmember){
 			if (confirm("確定前往結帳 ") ) {
 				if(count == 0){
 					alert("您的購物車中無商品");
 					return;
 				}else{
-					location.href="<c:url value='/checkoutOK.insert' />"
+					if(loginmember==""){
+						alert("您尚未登入");
+						location.href="<c:url value='/Login' />"
+					}else{
+						location.href="<c:url value='/checkoutOK.insert' />"
+					}
 				}
 			} else {
 			

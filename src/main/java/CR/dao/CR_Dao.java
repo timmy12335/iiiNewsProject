@@ -20,4 +20,10 @@ public interface CR_Dao {
 	void updateReport(CRBean cb);
 	
 	void evictReport(CRBean cb);
+	
+	public MBBean getMembersByMemberId(String memberId);
+	
+	public  List<CRBean> getReportBymemberId(String memberId);
+	
+	public List<CRBean> getReportByStatus(String status);
 }

@@ -1,8 +1,6 @@
 package iiiNews.MT.dao;
 
 import java.util.List;
-
-import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.MT.model.MtAddBean;
 
 public interface MtAddDao {

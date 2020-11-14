@@ -16,5 +16,6 @@ public interface CR_empDao {
 	
 	void updateemployee(CRemployee crb);
 	
+	public CRemployee getemployeeBytreatamt();
 	
 }

@@ -43,6 +43,12 @@ public class CR_empService_impl implements CR_empService {
 		
 	}
 
+	@Override
+	public CRemployee getemployeeBytreatamt() {
+		
+		return dao.getemployeeBytreatamt();
+	}
+
 	
 
 }

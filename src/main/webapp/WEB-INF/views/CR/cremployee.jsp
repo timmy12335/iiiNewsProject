@@ -108,10 +108,10 @@
 						<td align='center'><fmt:formatDate value="${ser.applyDate}"
 								pattern="yyyy-MM-dd" /></td>
 								<td>
-								${ser.replyamt}
+								${ser.untreatamt}
 								</td>
 								<td>
-								${ser.untreatamt}
+								${ser.replyamt}
 								</td>
 						<td><button id="btn_update"
 								class="btn btn-outline-secondary btn-icon-text"
@@ -137,10 +137,11 @@
 						<fmt:formatDate value="${ser.applyDate}"
 								pattern="yyyy-MM-dd" /></td>
 								<td>
-								${ser.replyamt}
+								${ser.untreatamt}
 								</td>
 								<td>
-								${ser.untreatamt}
+								
+								${ser.replyamt}
 								</td>
 								<td><input type="button" id="confirmup" onclick="send(${emp.index})" value="確認修改"></td>
 					</tr>

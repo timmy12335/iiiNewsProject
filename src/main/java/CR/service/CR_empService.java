@@ -14,4 +14,6 @@ public List<CRemployee> getemployee();
 	void deleteemployeeByPk(int empPk);
 	
 	void updateemployee(CRemployee crb);
+	
+	public CRemployee getemployeeBytreatamt();
 }

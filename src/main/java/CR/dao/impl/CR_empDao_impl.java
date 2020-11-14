@@ -23,6 +23,8 @@ public class CR_empDao_impl implements CR_empDao {
 		Session session=factory.getCurrentSession();
 		Date date=new Date(System.currentTimeMillis());
 		emp.setApplyDate(date);
+		emp.setReplyamt(0);
+		emp.setUntreatamt(0);
 		session.save(emp);
 	}
 
@@ -49,12 +51,21 @@ public class CR_empDao_impl implements CR_empDao {
 		String hql ="UPDATE CRemployee "
 				+"SET empId=:Id, empName=:name, empemail=:email "
 				+ "where empPk = :pk";
-		System.out.println("HI"+crb.getEmpId()+crb.getEmpemail()+"pk="+crb.getEmpPk());
 		session.createQuery(hql).setParameter("Id", crb.getEmpId())
 								.setParameter("name", crb.getEmpName())
 								.setParameter("email", crb.getEmpemail())
 								.setParameter("pk", crb.getEmpPk())
 								.executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public CRemployee getemployeeBytreatamt() {
+		Session session=factory.getCurrentSession();
+		String hql ="SELECT MIN(untreatamt) FROM CRemployee";
+		List<CRemployee> list =session.createQuery(hql).getResultList();
+		CRemployee first = list.get(0);
+		return first;
 	}
 	
 	

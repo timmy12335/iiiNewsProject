@@ -51,7 +51,7 @@ public class MBController {
 	}
 
 	@RequestMapping(value = "/Member", method = RequestMethod.POST)
-	public String adduser(@ModelAttribute("command") MBBean user, ModelMap model) {
+	public String adduser(@ModelAttribute("command") MBBean user, Model model) {
 		service.addMember(user);
 //       System.out.println(user.getSex());
 //       System.out.println(user.getName());
@@ -66,7 +66,7 @@ public class MBController {
 //      model.addAttribute("birthday", user.getBirthday());
 //      model.addAttribute("mbpoints", user.getMbpoints());
 //      
-
+		model.addAttribute("mb", user);
 		return "/MB/UserList";
 	}
 	
@@ -160,17 +160,11 @@ public class MBController {
 		response.addCookie(cookieRememberMe);
 	}
 	
-	@GetMapping("/logout")
-	// @ModelAttribute("LoginOK") MemberBean memberBean,
-	public String logout(HttpSession session,  Model model, SessionStatus status, HttpServletRequest req) {
-		String name = "";
-		MBBean mbbean = (MBBean) session.getAttribute("LoginOK");
-		if (mbbean != null) {
-			name = mbbean.getName();
-		}
-		model.addAttribute("memberName", name);
+	@RequestMapping("loginout")
+	public String getLogOut(SessionStatus status) {
+		System.out.println("執行session,setComplete();");
+		System.out.println("以登出");
 		status.setComplete();
-		session.invalidate();
-		return "redirect: " + req.getContextPath();
+		return "redirect:/";
 	}
 }

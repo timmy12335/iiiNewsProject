@@ -43,6 +43,7 @@ public class CRBean implements Serializable {
 	@Column(columnDefinition = "nvarchar(MAX)")
 	private String crReContent;
 	private Timestamp crReDate;
+	@Transient
 	private String crReplier;
 	private String state;
 	private String crReScore;
@@ -62,6 +63,22 @@ public class CRBean implements Serializable {
 	private MultipartFile image;
 	
 
+
+	public Integer getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Integer companyId) {
+		this.companyId = companyId;
+	}
+
+	public CRemployee getCremployee() {
+		return cremployee;
+	}
+
+	public void setCremployee(CRemployee cremployee) {
+		this.cremployee = cremployee;
+	}
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cremployee_id")

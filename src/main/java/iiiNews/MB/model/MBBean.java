@@ -95,6 +95,7 @@ public class MBBean implements Serializable {
 	}
 
 	public MBBean() {
+		super();
 	}
 
 	public Integer getPkey() {

@@ -29,19 +29,27 @@ margin:5px;
 	<form:form method="POST" modelAttribute="mtArtComBean" >
 	<div align="center">
 		<table border="1">
-			<tr><td><div>PK： ${CreateComment.pkey}</div></td></tr>
-			<tr><td><div>文章編號：${CreateComment.articleId}</div></td></tr>
-			<tr><td><div>會員編號: &nbsp;${CreateComment.memberId }</div></td></tr>
-			<tr><td><div>新增時間: ${CreateComment.updateDate }</div></td></tr>
-			<tr><td><div>文章狀態: ${CreateComment.articleStatus }</div></td></tr>
-			<tr><td><div>[${CreateComment.category }] ${CreateComment.title }</div></td></tr>
+			<tr><td colspan="2"><div>PK： ${CreateComment.pkey}</div></td></tr>
+			<tr><td colspan="2"><div>文章編號：${CreateComment.articleId}</div></td></tr>
+			<tr><td colspan="2"><div>會員編號: &nbsp;${CreateComment.memberId }</div></td></tr>
+			<tr><td colspan="2"><div>新增時間: ${CreateComment.updateDate }</div></td></tr>
+			<tr><td colspan="2"><div>文章狀態: ${CreateComment.articleStatus }</div></td></tr>
+			<tr><td colspan="2"><div>[${CreateComment.category }] ${CreateComment.title }</div></td></tr>
 <%-- 			<tr><td><div>標題: ${ singleArticle.title }</div></td></tr> --%>
-			<tr><td><div><img width='500' height='300' 
+			<tr><td colspan="2"><div><img width='500' height='300' 
 	                    	src="<c:url value='/getMtCreate/${CreateComment.articleId }'/>" >
 	        </div></td></tr>            	
-			<tr><td><div>內文:<br>${CreateComment.article }</div></td></tr>
+			<tr><td colspan="2"><div>內文:<br>${CreateComment.article }</div></td></tr>
 			
-			<tr><td><label for="comment">測試測試:</label><div class="st1">
+				<c:forEach var="comBean" items="${CreateComment.items}">
+				<tr><td><div>留言:<br>${comBean.comment }</div></td><td><div>時間:<br>${comBean.uploadTime }</div></td></tr>
+				</c:forEach>
+			
+<%-- 			<c:forEach var="com" items="${CreateComment.items }"> --%>
+<%-- 			<tr><td><div>留言區:<br>${CreateComment.comment }</div></td></tr> --%>
+
+<%-- 			</c:forEach> --%>
+			<tr><td colspan="2"><label for="comment">測試測試:</label><div class="st1">
 					<textarea name="comment" id="comment" cols="58" rows="5" maxlength="250" placeholder="限輸入250字"></textarea>
 					<input class="sub" type="submit" name="submit" id="submit" value="送出" />
 			</div></td></tr>

@@ -132,22 +132,68 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 	<nav class="navbar fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-	<section class="container" style="margin-top:150px;">
+	<section class="container-fluid" style="margin-top:150px;">
 	
-		<div class="row " >
+		<div class="row col-12 " >
 			<!-- 標題/開始 -->
-			<div class="col-12">
+			<div class="col-12 ">
+			
 				<h1 class="text-center">
 					<strong>新聞列表</strong>
-				</h1>
+				</h1><br>
 			</div>
 			<!-- 標題/結束 -->
+			<div class="col-3" style="border-radius:15px;">
+<!-- 				<div class="col-12 col-md-4"> -->
+                <!-- 搜尋/start -->
+                <form action="" class="bg-white p-3 mb-3 border rounded" >
+                    <div class="input-group" >
+                        <input type="text" class="form-control" placeholder="搜尋" aria-label="Search for">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-secondary">Go!</button>
+                        </span>
+                    </div>
+                </form>
+                <!-- 搜尋/end -->
+                <!-- 分類/start -->
+                <div class="bg-white p-3 mb-3 border rounded">
+                    <h5 class="mb-3">
+                        <strong>分類</strong>
+                    </h5>
+                    <ul class="list-category category">
+                        <li>
+                            <a href="#">糾紛
+                                <span class="badge badge-pill badge-secondary ml-2">3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">爆料
+                                <span class="badge badge-pill badge-secondary ml-2">1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">交通
+                                <span class="badge badge-pill badge-secondary ml-2">1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">詐騙
+                                <span class="badge badge-pill badge-secondary ml-2">1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 分類/end -->
+<!--                 </div> -->
+          	</div>
 			<!-- 課程1/開始 -->
+			<div class="col-9">
+			<div class="row">
 			<c:forEach var='news' items='${newsLists}' varStatus='loop'>
-				<div class="col-12 col-md-4 p2 ">
-					<div class="box-content bg-white wei-grid-special0">
+				<div class="col-12 col-md-4">
+					<div class="box-content bg-white wei-grid-special0" style="margin-bottom:20px;border-radius:15px;">
 						<div >
-							<img  width='400' height='300'
+							<img  width='220' height='150'
 								src="<c:url value='/getUpNewsPicture/${news.newsId}'/>"
 								alt="Unity" class="img-fluid d-block m-auto w-75">
 						</div>
@@ -176,67 +222,23 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 							<div  id="ftime${loop.index}" style="display:none">${news.futureTime}</div>
 							<div class="btn btn-danger btn-lg btn-block" id='lastime${loop.index}'></div>
 							<button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="goSingleNews('${news.newsId}')">
-							購買
+							<i class="fas fa-shopping-cart"></i>&ensp;購買
 							</button>
 							
 						</div>
 					</div>
 				</div>
+				<br>
 			</c:forEach>
+			</div>
+			</div> 
 			
-		</div>
+			
+			</div>
+			
+		
+		 
 	</section>
-	<%-- <c:forEach var='news' items='${newsLists}' varStatus='loop'> --%>
-	<!-- <table> -->
-	<!-- 	<tr style="background-color:lightblue;"  height='36'> -->
-	<!-- 		<th width='600' align='center'>新聞標題</th> -->
-	<!-- 		<th width='100' align='center'>新聞編號</th> -->
-	<!-- 		<th width='60' align='center'>上傳時間</th>		 -->
-	<!-- 		<th width='100' align='center'>新聞類型</th>		 -->
-	<!-- 		<th width='100' align='center'>發生地點</th> -->
-	<!-- 		<th width='200' align='center'>影像</th> -->
-	<!-- 	</tr> -->
-	<!-- 	<tr> -->
-	<!-- 		<td align='center' >  -->
-	<%-- 		<a href="<c:url value='/getSingleNews/${news.newsId}'/>" >${news.title}  </a>  --%>
-
-	<!-- 		</td> -->
-	<%-- 		<td width='100' align='center'>${news.newsId}</td> --%>
-	<%-- 		<td align='center'>${news.uploadTime}</td>		 --%>
-	<%-- 		<td align='center'>${ news.newsType}</td> --%>
-
-	<%-- 		<td align='center'>${news.location}</td> --%>
-	<!-- 		<td><img width='200' height='150'  -->
-	<%-- 	                    	src="<c:url value='/getUpNewsPicture/${news.newsId}'/>" ></td> --%>
-	<!-- 		</tr> -->
-	<!--     <tr style="background-color:lightblue;"  height='36'> -->
-	<!-- 		<th width='600' align='center'>新聞大綱</th> -->
-	<!-- 		<th width='100' align='center'>發生日期</th> -->
-	<!-- 		<th width='100' align='center'>發生時間</th> -->
-	<!-- 		<th width='100' align='center'>價格</th> -->
-	<!-- 		<th width='60' align='center'>到期時間</th>	 -->
-	<!-- 		<th width='60' align='center'>時間倒數</th>	 -->
-	<!-- 		<th></th> -->
-	<!-- 		</tr> -->
-	<!-- 		<tr> -->
-	<%-- 		<td width='600' align='center'>${news.outline}</td> --%>
-	<%-- 		<td align='center'>${news.happenDate}</td> --%>
-	<%-- 		<td align='center'>${news.happenTime}</td> --%>
-	<%-- 		<td align='center'>${news.price}</td> --%>
-	<%-- 		<td align='center' id="ftime${loop.index}">${news.futureTime}</td> --%>
-	<%-- 		<td align='center' id='lastime${loop.index}'></td> --%>
-	<!-- 		<td> -->
-	<%-- 		<a href="<c:url value="/insertToOrderBean/${news.newsId}" />" onclick="return confirm('確定購買?')">購買</a> --%>
-	<!-- 		</td> -->
-	<!-- 	</tr>		 -->
-	<!-- 	</table> -->
-	<!-- 	<hr> -->
-	<%-- </c:forEach> --%>
-
-
-
-<!-- 	<input type="button" value="回目錄" onclick="location.href='/iiiNews'"> -->
-	<!--<a href="<c:url value='/' />">回前頁</a>   -->
 
 <script>
 	
@@ -257,7 +259,7 @@ function clock() {
 		window.location.reload();
 	}else{		
 		let time = hr+"小時"+min+"分"+sec+"秒";
-		document.getElementById("lastime"+[i]).innerHTML = time;
+		document.getElementById("lastime"+[i]).innerHTML = "<i class='fas fa-stopwatch'></i>&ensp;"+time;
 	}
 }
 }

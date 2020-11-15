@@ -47,7 +47,7 @@ public class SearchNewsController {
 			public String getUpMemNewaList(@PathVariable String memberId, Model model) {
 				List<NewsBean> list = service.getUpMemNews(memberId);
 				model.addAttribute("upMemNewsList", list);
-				return "NP/upMemNewsList";
+				return "NP/upMemNewsListTest";
 			}
 			
 //			@ModelAttribute

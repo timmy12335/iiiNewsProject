@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import CR.model.CRBean;
+import CR.model.CRemployee;
+import CR.service.CR_empService;
 import CR.service.CR_service;
 import CR.validation.CRaddValidator;
 import iiiNews.MB.model.MBBean;
@@ -44,6 +46,9 @@ public class CR_Controller {
 	ServletContext ctx;
 	@Autowired
 	CR_service service;
+	@Autowired
+	CR_empService empService;
+	
 	@Autowired
 	JavaMailSender mailSender;
 	
@@ -121,7 +126,6 @@ public class CR_Controller {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
-				
 		}
 				//寄信確認
 				MimeMessage msg = mailSender.createMimeMessage();
@@ -195,6 +199,8 @@ public class CR_Controller {
 		cb.setMemberId(cb0.getMemberId());
 		cb.setPk(cb0.getPk());
 		cb.setCrApplyDate(cb0.getCrApplyDate());
+		cb.setMbBean(cb0.getMbBean());
+		cb.setCremployee(cb0.getCremployee());
 		cb.setMbBean(cb0.getMbBean());
 		Timestamp today=new Timestamp(System.currentTimeMillis());
 		cb.setCrReDate(today);

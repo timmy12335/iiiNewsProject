@@ -3,6 +3,7 @@ package CR.service;
 import java.util.List;
 
 import CR.model.CRBean;
+import CR.model.CRemployee;
 import iiiNews.MB.model.MBBean;
 
 public interface CR_service {
@@ -21,4 +22,6 @@ public interface CR_service {
 
 
 	public List<CRBean> getReportBymemberId(String memberId);
+	
+	public CRemployee getemployeeBytreatamt();
 }

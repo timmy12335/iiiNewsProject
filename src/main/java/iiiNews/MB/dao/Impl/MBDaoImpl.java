@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import iiiNews.MB.dao.MBDao;
 import iiiNews.MB.model.MBBean;
 
+
 @Repository
 public class MBDaoImpl implements MBDao {
 
@@ -52,8 +53,11 @@ public class MBDaoImpl implements MBDao {
 
 	@Override
 	public MBBean getSingleMmeber(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "FROM MBBean WHERE memberId = :mId AND status = 1 ";
+		Session session = factory.getCurrentSession();
+		MBBean mbbean = (MBBean) session.createQuery(hql)
+				.setParameter("nId", memberId).getSingleResult();
+		return mbbean;
 	}
 
 	@Override

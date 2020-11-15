@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import CR.dao.CR_empDao;
+import CR.model.CRBean;
 import CR.model.CRemployee;
 import CR.service.CR_empService;
 
@@ -27,6 +28,25 @@ public class CR_empService_impl implements CR_empService {
 	public void addemployee(CRemployee emp) {
 		dao.addemployee(emp);
 		
+	}
+
+	@Override
+	public void deleteemployeeByPk(int empPk) {
+		
+		dao.deleteemployeeByPk(empPk);
+	}
+
+	@Override
+	public void updateemployee(CRemployee crb) {
+		dao.updateemployee(crb);
+		System.out.println("success");
+		
+	}
+
+	@Override
+	public CRemployee getemployeeBytreatamt() {
+		
+		return dao.getemployeeBytreatamt();
 	}
 
 	

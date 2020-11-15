@@ -35,7 +35,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/EEIT19/javax.servlet-3.0.0.v201112011016.jar"/>
-	<classpathentry kind="lib" path="C:/EEIT19/log4j.jar"/>
+	<classpathentry kind="lib" path="C:/_springMVC/jar/javax.servlet-3.0.0.v201112011016.jar"/>
+	<classpathentry kind="lib" path="C:/_springMVC/jar/log4j.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

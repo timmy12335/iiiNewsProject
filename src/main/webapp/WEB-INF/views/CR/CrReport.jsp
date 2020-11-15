@@ -21,7 +21,7 @@
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
   <style>
 .box {
-width: 300px;
+width: 100px;
 padding: 10px;
 }
 .ellipsis {
@@ -84,7 +84,7 @@ white-space: normal;
 
                   <h4 class="font-weight-bold mb-0">顯示所有客服表單</h4>
                   <div id="resultmsg"></div>
-			<table class="table table-hover" style="width:1000px;">
+			<table class="table">
 				<thead>
 					<tr>
 <!-- 						<th width='60' align='center'>單號</th> -->
@@ -98,9 +98,9 @@ white-space: normal;
 						<th >姓名</th>
 						<th >類別</th>
 						<th >標題</th>
-						<th >內容</th>
+						<th width='150px;'>內容</th>
 						<th align='center'>申請日期</th>
-						<th>回覆內容</th>
+						<th width='150px;'>回覆內容</th>
 						<th>回覆人員</th>
 						<th>最新回覆時間</th>
 						<th colspan='2'>功能</th>
@@ -119,10 +119,12 @@ white-space: normal;
 								<td align='left'>&nbsp;${ser.mbBean.name}</td>
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
-								<td align='center' onclick="MBfolded(${report.index})" class="box"><p class="ellipsis">${ser.crContent}</p></td>
+								<td align='center' onclick="MBfolded(${report.index})" class="box" style="cursor:pointer">
+								<p class="ellipsis">${ser.crContent}</p></td>
 								<td align='center'><fmt:formatDate value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-								<td align='center' onclick="folded(${report.index})" class="box"><p class="ellipsis">${ser.crReContent}</p></td>
-								<td align='center'>${ser.crReplier}</td>
+								<td align='center' onclick="folded(${report.index})" class="box" style="cursor:pointer">
+								<p class="ellipsis">${ser.crReContent}</p></td>
+								<td align='center'>${ser.cremployee.empName}</td>
 								<td align='center'><fmt:formatDate value="${ser.crReDate}" pattern="yyyy-MM-dd"/></td>
 								<td><button id="btn_update" class="btn btn-outline-secondary btn-icon-text" 
 								onclick="updateCrReport(${ser.pk})" >回覆<i class="ti-pencil-alt btn-icon-append"></i>
@@ -131,10 +133,10 @@ white-space: normal;
 									onclick="deleteCrReport(${ser.pk})" >刪除<i class="ti-trash btn-icon-append"></i></button></td>
 							</tr>
 							<tr><td id="MBcontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:1000px;height:500px;" disabled>
+							<textarea style="width:800px;height:200px;" class="form-control" disabled>
 							${ser.crContent}</textarea>
 							<tr><td id="recontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:1000px;height:500px;" disabled>
+							<textarea style="width:800px;height:200px;" class="form-control" disabled>
 							${ser.crReContent}</textarea>
 							</td></tr>
 						</c:forEach>

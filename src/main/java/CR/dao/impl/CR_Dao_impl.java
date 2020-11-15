@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import CR.dao.CR_Dao;
 import CR.model.CRBean;
+import CR.model.CRemployee;
 import iiiNews.MB.model.MBBean;
 
 @Repository
@@ -32,10 +33,12 @@ public class CR_Dao_impl implements CR_Dao {
 	public void addReport(CRBean report) {
 		Session session=factory.getCurrentSession();
 		MBBean mb = getMembersByMemberId(report.getMemberId());
+		CRemployee crb = getemployeeBytreatamt();
 		Timestamp date=new Timestamp(System.currentTimeMillis());
 		report.setCrApplyDate(date);
 		report.setState("未回覆");
 		report.setMbBean(mb);
+		report.setCremployee(crb);
 		session.save(report);
 		
 	}
@@ -73,6 +76,7 @@ public class CR_Dao_impl implements CR_Dao {
 	@Override
 	public void updateReport(CRBean report) {
 		Session session=factory.getCurrentSession();
+		
 		session.update(report);		
 		
 	}
@@ -115,6 +119,22 @@ public class CR_Dao_impl implements CR_Dao {
 		String hql ="FROM CRBean WHERE status = :status";
 		return session.createQuery(hql).setParameter("status", status).getResultList();
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public CRemployee getemployeeBytreatamt() {
+		Session session=factory.getCurrentSession();
+		String hql ="FROM CRemployee ORDER BY untreatamt ASC";
+		
+		CRemployee list =(CRemployee) session.createQuery(hql).setMaxResults(1).getSingleResult();
+		System.out.println(list);
+		System.out.println("hql2="+list.getUntreatamt());
+		String hql2 ="UPDATE CRemployee SET untreatamt=:unamt Where empPk=:pk";
+		session.createQuery(hql2).setParameter("unamt", list.getUntreatamt()+1)
+								.setParameter("pk", list.getEmpPk()).executeUpdate();
+		
+		return list;
 	}
 	
 }

@@ -39,7 +39,14 @@ public class CR_empService_impl implements CR_empService {
 	@Override
 	public void updateemployee(CRemployee crb) {
 		dao.updateemployee(crb);
+		System.out.println("success");
 		
+	}
+
+	@Override
+	public CRemployee getemployeeBytreatamt() {
+		
+		return dao.getemployeeBytreatamt();
 	}
 
 	

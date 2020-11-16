@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-public class CheckArticleVaildator implements Validator {
+public class CheckCommentVaildator implements Validator {
 
 	private static final Integer Integer = null;
 
@@ -17,9 +17,8 @@ public class CheckArticleVaildator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "","標題不能空白");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "article", "","內文不能空白");
-
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "comment", "","留言不能空白");
+	
 	}
 
 }

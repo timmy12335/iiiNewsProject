@@ -22,13 +22,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import iiiNews.MB.model.CpMemberBean;
+import iiiNews.MB.model.MBBean;
 import iiiNews.NP.model.NewsBean;
 import iiiNews.NP.model.NewsOrderBean;
 import iiiNews.NP.service.NPOrderService;
 import iiiNews.NP.service.NewsProductService;
 
 @Controller
+@SessionAttributes({"MBBean","CpMemberBean"})
 public class NewsBuyingController {
 	@Autowired
 	NewsProductService productService;
@@ -41,44 +45,64 @@ public class NewsBuyingController {
 	@GetMapping("/insertToOrderBean/{newsId}")
 	public String BuyingNews(@ModelAttribute NewsOrderBean nOrderBean ,
 							 @PathVariable String newsId ,Model model) {
-		NewsBean nb = productService.getSingleNews(newsId);
-		nOrderBean.setNewsId(nb.getNewsId());
-		Timestamp soldTime = new Timestamp(System.currentTimeMillis());
-		nOrderBean.setSoldTime(soldTime);
-		nOrderBean.setOrderPrice(nb.getPrice());
-		nOrderBean.setNewsBean(nb);
-		nOrderBean.setMemberId(nb.getMemberId());
-		nOrderBean.setCompanyId("C0001");
-		nOrderBean.setOrderId(npOrderService.getOrderRecord());
-		//改上架狀態
-		npOrderService.updateStatusZero(newsId);
-		npOrderService.uploadNewsOrder(nOrderBean);
-				
-		return "NP/allNewsList";		
+		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CpMemberBean");
+		
+		if (cpmb == null) {
+			return "redirect:/CpLogin";
+		}else {
+			NewsBean nb = productService.getSingleNews(newsId);
+			nOrderBean.setNewsId(nb.getNewsId());
+			Timestamp soldTime = new Timestamp(System.currentTimeMillis());
+			nOrderBean.setSoldTime(soldTime);
+			nOrderBean.setOrderPrice(nb.getPrice());
+			nOrderBean.setNewsBean(nb);
+			nOrderBean.setMemberId(nb.getMemberId());
+			nOrderBean.setCompanyId(cpmb.getCpmemberId());
+			nOrderBean.setOrderId(npOrderService.getOrderRecord());
+			//改上架狀態
+			npOrderService.updateStatusZero(newsId);
+			npOrderService.uploadNewsOrder(nOrderBean);
+					
+			return "redirect:/showOrderList";					
+		}				
 	}
 	//列出企業訂單列表
 	@GetMapping("/showOrderList")
-	public String showOrderList() {
-		return "NP/NewsOrderListAjax";	
+	public String showOrderList(Model model) {
+		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CpMemberBean");		
+		if (cpmb == null) {
+			return "redirect:/CpLogin";
+		}else {
+			return "NP/NewsOrderListAjax";	
+		}
+		
 	}
 
 	@GetMapping("/getOrderByAjax.json")
-	public @ResponseBody List<NewsOrderBean> getOrderList(){
-		String companyId = "C0001";
+	public @ResponseBody List<NewsOrderBean> getOrderList(Model model){
+		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CpMemberBean");
+		String companyId = cpmb.getCpmemberId();
 		return npOrderService.getOrderListByAjax(companyId);
 	}
 	
 	//列出會員被購買訂單列表
-	@GetMapping("/getOrderMemNewsList/{memberId}")
-	public String showOrderMemNewsList(@PathVariable String memberId, Model model) {
-		return "NP/NewsOrderMemListByAjax";	
+	@GetMapping("/getOrderMemNewsList")
+	public String showOrderMemNewsList(Model model) {
+		MBBean mb = (MBBean) model.getAttribute("MBBean");
+		if(mb == null) {			
+			return "redirect:/Login";
+		}else {
+			return "NP/NewsOrderMemListByAjax";	
+		}
+		
 	}	
 	@GetMapping("/getOrderMemNewsListByAjax.json")
-	public @ResponseBody List<NewsOrderBean> getOrderMemNewsList(){
-		String memberId = "A0001";
-		return npOrderService.getOrderMemListByAjax(memberId);
-		
+	public @ResponseBody List<NewsOrderBean> getOrderMemNewsList(Model model){
+		MBBean mb = (MBBean) model.getAttribute("MBBean");		
+		String 	memberId = mb.getMemberId();
+		return npOrderService.getOrderMemListByAjax(memberId);		
 	}
+	
 	@GetMapping("/getOrderedSingleNews/{newsId}")
 	public String getOrderedNews(@PathVariable String newsId, Model model) {
 		NewsBean nBean = npOrderService.getOrderedSingleNews(newsId);

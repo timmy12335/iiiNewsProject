@@ -38,8 +38,7 @@ public class CRBean implements Serializable {
 	private String crContent;
 	private Timestamp crApplyDate;
 	private String memberId;
-	@Transient
-	private Integer companyId;
+	private String companyId;
 	@Column(columnDefinition = "nvarchar(MAX)")
 	private String crReContent;
 	private Timestamp crReDate;
@@ -64,13 +63,7 @@ public class CRBean implements Serializable {
 	
 
 
-	public Integer getCompanyId() {
-		return companyId;
-	}
 
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
-	}
 
 	public CRemployee getCremployee() {
 		return cremployee;
@@ -110,32 +103,12 @@ public class CRBean implements Serializable {
 	public CRBean() {
 	}
 	
-
-
-	@Override
-	public String toString() {
-		return "CRBean [pk=" + pk + ", crClass=" + crClass + ", crTitle=" + crTitle + ", crContent=" + crContent
-				+ ", crApplyDate=" + crApplyDate + ", memberId=" + memberId + ", crReContent=" + crReContent
-				+ ", crReDate=" + crReDate + ", crReplier=" + crReplier + ", crReScore=" + crReScore + ", memberBean="
-				+ mbBean + ", cpBean=" + cpBean + "]";
+	public String getCompanyId() {
+		return companyId;
 	}
 
-	public CRBean(Integer pk, String crClass, String crTitle, String crContent, Timestamp crApplyDate, String memberId,
-			String crReContent, Timestamp crReDate, String crReplier, String crReScore, MBBean mbBean,
-			CpMemberBean cpBean) {
-		super();
-		this.pk = pk;
-		this.crClass = crClass;
-		this.crTitle = crTitle;
-		this.crContent = crContent;
-		this.crApplyDate = crApplyDate;
-		this.memberId = memberId;
-		this.crReContent = crReContent;
-		this.crReDate = crReDate;
-		this.crReplier = crReplier;
-		this.crReScore = crReScore;
-		this.mbBean = mbBean;
-		this.cpBean = cpBean;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 	public Integer getPk() {

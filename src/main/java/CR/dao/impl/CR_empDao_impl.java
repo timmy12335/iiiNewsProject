@@ -35,13 +35,24 @@ public class CR_empDao_impl implements CR_empDao {
 		Session session=factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRemployee> getemployeeisstay() {
+		String hql ="FROM CRemployee where isstay=1";
+		Session session=factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
+	
 
 	@Override
 	public void deleteemployeeByPk(int empPk) {
 		Session session = factory.getCurrentSession();
 		CRemployee crb = new CRemployee(); 
 		crb.setEmpPk(empPk);
-		session.delete(crb);
+		String hql ="UPDATE CRemployee SET isstay=0 Where empPk=:emppk";
+		
+		session.createQuery(hql).setParameter("emppk", empPk).executeUpdate();
 
 	}
 
@@ -66,6 +77,14 @@ public class CR_empDao_impl implements CR_empDao {
 		List<CRemployee> list =session.createQuery(hql).getResultList();
 		CRemployee first = list.get(0);
 		return first;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRemployee> getemployeenotstay() {
+		String hql ="FROM CRemployee where isstay=0";
+		Session session=factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
 	}
 	
 	

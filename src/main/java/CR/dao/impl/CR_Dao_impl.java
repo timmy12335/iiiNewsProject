@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import CR.dao.CR_Dao;
 import CR.model.CRBean;
 import CR.model.CRemployee;
+import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
 
 @Repository
@@ -76,11 +77,28 @@ public class CR_Dao_impl implements CR_Dao {
 	@Override
 	public void updateReport(CRBean report) {
 		Session session=factory.getCurrentSession();
-		
-		session.update(report);		
+		session.update(report);
 		
 	}
 
+	@Override
+	public void reviseemp(CRBean report) {
+		Session session=factory.getCurrentSession();
+		String hql = "UPDATE CRemployee SET untreatamt=:un,replyamt=:re Where empPk=:pk";
+		Integer untr = report.getCremployee().getUntreatamt()-1;
+		Integer retr = report.getCremployee().getReplyamt()+1;
+		System.out.println("回覆人數"+retr);
+		Integer test = session.createQuery(hql)
+		.setParameter("un", untr)
+		.setParameter("re",  retr)
+		.setParameter("pk", report.getCremployee().getEmpPk())
+		.executeUpdate();
+		session.flush();
+		System.out.println(test);
+		report.setState("已回覆");
+			
+	}
+	
 	@Override
 	public void evictReport(CRBean cb) {
 		Session session = factory.getCurrentSession();
@@ -101,8 +119,26 @@ public class CR_Dao_impl implements CR_Dao {
 			e.printStackTrace();
 		}
 		return mb;
-		
 	}
+	
+	@Override
+	public CpMemberBean getCpMembersByMemberId(String memberId) {
+		Session session=factory.getCurrentSession();
+		CpMemberBean mb=null;
+		String hql ="FROM CpMemberBean WHERE cpmemberId = :mId";
+		try {
+			mb =(CpMemberBean) session.createQuery(hql)
+					.setParameter("mId", memberId)
+					.getSingleResult();
+
+		}catch(NonUniqueResultException e) {
+			e.printStackTrace();
+		}
+		return mb;
+	}
+
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -111,6 +147,16 @@ public class CR_Dao_impl implements CR_Dao {
 		String hql ="FROM CRBean where memberId=:mId";
 		return session.createQuery(hql).setParameter("mId", memberId).getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRBean> getReportBycpmemberId(String memberId) {
+		Session session=factory.getCurrentSession();
+		String hql ="FROM CRBean where companyId=:cpmId";
+		return session.createQuery(hql).setParameter("cpmId", memberId).getResultList();
+	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -121,7 +167,6 @@ public class CR_Dao_impl implements CR_Dao {
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public CRemployee getemployeeBytreatamt() {
 		Session session=factory.getCurrentSession();

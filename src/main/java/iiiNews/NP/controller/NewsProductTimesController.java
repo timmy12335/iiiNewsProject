@@ -23,7 +23,7 @@ public class NewsProductTimesController {
 	public String findtime(@RequestParam String newsId, @RequestParam String limitTime) {
 		System.out.println("limitTime1106=" + limitTime);
 		updateService.updatelimitTime(limitTime, newsId);
-		return "redirect:/getUpMemNewsList/A0002"; //之後要跳轉到會員個人頁面{MemberId}
+		return "redirect:/getUpMemNewsList"; //之後要跳轉到會員個人頁面{MemberId}
 	}
 
 	// 判斷若時間到就下架,並重整頁面

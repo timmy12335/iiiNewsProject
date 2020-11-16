@@ -34,14 +34,14 @@
 						<li><a href='#'>Sub Product</a></li>
 					</ul></li>
 			</ul></li>
-		<li><a href='#'>新聞專區</a>
+		<li><a href="<c:url value='/changeStautsForTime'/>">新聞專區</a>
 			<ul>
 				<li><a href='#'>一般會員</a>
 					<ul>
 						<li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-						<li><a href="<c:url value='/getMemNewsList/A0002'/>">個人未上架新聞列表</a></li>
-						<li><a href="<c:url value='/getUpMemNewsList/A0002'/>">個人已上架新聞列表</a></li>
-						<li><a href="<c:url value='/getOrderMemNewsList/A0002'/>">個人已被購買新聞列表</a></li>
+						<li><a href="<c:url value='/getMemNewsList'/>">個人未上架新聞列表</a></li>
+						<li><a href="<c:url value='/getUpMemNewsList'/>">個人已上架新聞列表</a></li>
+						<li><a href="<c:url value='/getOrderMemNewsList'/>">個人已被購買新聞列表</a></li>
 					</ul></li>
 				<li><a href='#'>企業專區</a>
 					<ul>
@@ -54,12 +54,12 @@
 					</ul></li>
 
 			</ul></li>
-		<li><a href="<c:url value='/CRindex' />">客服中心</a>
-			<ul>
-				<li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
-				<li><a href="<c:url value='/msg' />">客服聊天</a></li>
-				<li><a href="<c:url value='/sendmail' />">寄信</a></li>
-			</ul></li>
+<%-- 		<li><a href="<c:url value='/CRindex' />">客服中心</a> --%>
+<!-- 			<ul> -->
+<%-- 				<li><a href="<c:url value='/addReport' />">申請客服表單</a></li> --%>
+<%-- 				<li><a href="<c:url value='/msg' />">客服聊天</a></li> --%>
+<%-- 				<li><a href="<c:url value='/sendmail' />">寄信</a></li> --%>
+<!-- 			</ul></li> -->
 		<li><a href="<c:url value='#' />">新聞追蹤</a>
 			<ul>
 				<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
@@ -68,10 +68,16 @@
 			</ul></li>
 		<li><a href="<c:url value='#' />">社群專區</a>
 			<ul>
-				<li><a href="<c:url value='/MtCreate' />">新增Po文</a>
-				<li><a href="<c:url value='/getAllMtAdd' />">檢視所有資料---待刪除</a></li>
-				<li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
-				<li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
+                <li><a href="<c:url value='#' />">討論區</a>
+                	<ul>
+                		<li><a href="<c:url value='/AllArticleComment' />">文章瀏覽</a>
+                		<c:if test="${MBBean != null}"><li><a href="<c:url value='/MtCreate' />">新增Po文</a></li>
+                		<li><a href="<c:url value='/getMemArticleList/${MBBean.memberId}' />">查詢發文紀錄</a></li></c:if>
+                	</ul>
+                </li>
+                <li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
+<%--                 <li><a href="<c:url value='/getAllMtAdd' />">檢視所有資料---待刪除</a></li> --%>
+<%--                 <li><a href="<c:url value='/CreateComment' />">留言功能測試，OK後移入文章瀏覽功能內</a></li> --%>
 				<%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
 			</ul></li>
 		<li><a href='#'>廣告專區</a>
@@ -100,6 +106,14 @@
 						<li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
 					</ul></li>
 			</ul></li>
+			                  <li><a href="<c:url value='/CRindex' />">客服中心</a>
+                <ul>
+                    <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/success' />">個人客服表單申請確認</a></li>
+                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
+                    <li><a href="<c:url value='/board' />">公告欄</a></li>
+                </ul>
+            </li>
 		<li>
 			<div id="nowDateTimeSpan">
 				<script>

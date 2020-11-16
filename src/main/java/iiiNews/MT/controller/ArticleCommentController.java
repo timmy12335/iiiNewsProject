@@ -2,27 +2,29 @@ package iiiNews.MT.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.model.MtCommentBean;
 import iiiNews.MT.service.MtAddService;
 import iiiNews.MT.service.MtCommentService;
-import iiiNews.MT.validate.CheckArticleVaildator;
+import iiiNews.MT.validate.CheckCommentVaildator;
 
 @Controller
 @SessionAttributes({"MBBean"})
@@ -39,15 +41,28 @@ public class ArticleCommentController {
 	
 	
 	@GetMapping("/AllArticleComment")			//使用者進入查看所有文章頁面，暫時OK
-	public String ArticleComment(Model model){	
-		List<MtAddBean> list = AddService.getAllMtAdd();
+	public String ArticleComment(@ModelAttribute("mtBean") MtAddBean bean, Model model, HttpSession session, HttpServletRequest request){	
+		
+		
+		MBBean mbb = (MBBean) model.getAttribute("MBBean");
+		if (mbb == null) {
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+	
+		session = request.getSession(false); 
+		if (session == null) {
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+		bean.setMemberId(mbb.getMemberId());
+		
+		List<MtAddBean> list = AddService.getMtAdd();//++++++++++++++++++++
 		model.addAttribute("ArticleComment",list);
         //--------------------------手動測試才加
 //        MBBean mb = new MBBean();   //手動設session
 //        mb.setMemberId("9999");
 //        model.addAttribute("MBBean", mb);
         //--------------------------手動測試才加
-		System.out.println("********************USER查看文章囉********************");
+		System.out.println("**********" + bean.getMemberId() + "查看文章囉**********");
 		return "MT/AllArticleComment";
 	}
 	
@@ -65,26 +80,49 @@ public class ArticleCommentController {
 //	}
 	
 	@GetMapping("/CreateComment/{articleId}")	//USER瀏覽文章，要留言了，暫時OK
-	public String CreateComment(@PathVariable String articleId ,Model model) {
+	public String CreateComment(@PathVariable String articleId ,Model model, HttpServletRequest request) {
 		MtAddBean bean = AddService.getSingleArticle(articleId);
 		model.addAttribute("CreateComment", bean);	//點文章編號後進入的頁面，用這兩行顯示
 		System.out.println("getItems====" + bean.getItems().toString());
+		
+		MBBean mbb = (MBBean) model.getAttribute("MBBean");
+//        bean.setMemberId(mbb.getMemberId());
+        
+        if (mbb.getMemberId() == null) {		//抓會員session
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+	
+		HttpSession session = request.getSession(false); 
+		if (session == null) {
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+		System.out.println( "<----------" + bean.getMemberId() + "---------->");
 		return "/MT/CreateComment";
+		
 	}
 
 	@PostMapping("/CreateComment/{articleId}")		//新增欄位頁面
-	public String CreateForm(@ModelAttribute("mtArtComBean") MtCommentBean mtArtComBean,
-							 @PathVariable String articleId, Model model) {
-//        CheckArticleVaildator validator = new CheckArticleVaildator();
-//        validator.validate(bean, result);
+	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean,
+							 @ModelAttribute("mtArtComBean") MtCommentBean mtArtComBean,
+							 @PathVariable String articleId, BindingResult result, Model model) {
+//		CheckCommentVaildator validator = new CheckCommentVaildator();
+//        validator.validate(mtArtComBean, result);
+//		String strurl = articleId;
+        new CheckCommentVaildator().validate(mtArtComBean, result);
+		
+		if (result.hasErrors()) {
+    		System.out.println("---留言不能空白---");
+            return "redirect:/CreateComment/"+articleId;
+//            return "/MT/CreateComment/" + articleId;
+        }
 //        MBBean mbb = (MBBean) model.getAttribute("MBBean");
 //        bean.setMemberId(mbb.getMemberId());
-        
+//        
 //        try {
-//            if (bean.getTitle().isEmpty()) {
-//                result.rejectValue("title","","");
-//                System.out.println("---標題不能空白---");
-//                return "MT/Create";
+//            if (mtArtComBean.getComment().isEmpty()) {
+//                result.rejectValue("comment","","");
+//                System.out.println("---留言不能空白---");
+//                return "/CreateComment/{articleId}";
 //            }
 //        } catch (Exception e) {
 //            System.out.println("---標題catch---");
@@ -103,6 +141,7 @@ public class ArticleCommentController {
 //        }
         
 		// ---------------------------------------------------
+		MBBean mbb = (MBBean) model.getAttribute("MBBean");
 		MtAddBean mtAddBean = AddService.getSingleArticle(articleId);
 		mtArtComBean.setMtAddBean(mtAddBean);
 		
@@ -111,8 +150,8 @@ public class ArticleCommentController {
 		
 //		mtArtComBean.setCommentId(mtAddBean.getComment());
 //		System.out.println("<-----CommentId----->");
-		mtArtComBean.setComMemberId("user");
-		System.out.println("<-----" + mtArtComBean.getComMemberId() + "----->");
+		mtArtComBean.setComMemberId(mbb.getMemberId()); //要抓登入會員ID*****未完成
+		System.out.println("<-----目前登入ID-----" + mtArtComBean.getComMemberId() + "----->");
 //		mtArtComBean.setCommentPkey(mtAddBean.getPkey());
 //		System.out.println("<-----CommentPkey----->");
 		Timestamp uploadTime = new Timestamp(System.currentTimeMillis());
@@ -163,10 +202,10 @@ public class ArticleCommentController {
 		mtArtComBean.setCommentId(str);
 
 		// ---------------------------------------------------
-		Set<MtCommentBean> items = new LinkedHashSet<>();
+		List<MtCommentBean> items = new ArrayList<>();
 		items.add(mtArtComBean);
 		mtAddBean.setItems(items);
-		
+		System.out.println(mtAddBean.getItems());
 		
 
 		// ---------------------------------------------------

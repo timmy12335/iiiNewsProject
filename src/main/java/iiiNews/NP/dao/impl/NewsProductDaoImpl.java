@@ -105,9 +105,12 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getUpMemNews(String memberId) {
+		Timestamp statusTime = new Timestamp(System.currentTimeMillis());
+		String hql0 = "UPDATE NewsBean set status=0 WHERE futureTime < :sTime";
 		String hql = "FROM NewsBean WHERE memberId = :memId "
 				+ "AND status = 1 ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
+		session.createQuery(hql0).setParameter("sTime", statusTime).executeUpdate();
 		 List<NewsBean> list = session.createQuery(hql)
 				.setParameter("memId", memberId)
 				.getResultList();

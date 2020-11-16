@@ -28,6 +28,13 @@ public class CRemployee implements Serializable{
 	private Date applyDate;
 	private Integer replyamt;
 	private Integer untreatamt;
+	private Integer isstay;
+	public Integer getIsstay() {
+		return isstay;
+	}
+	public void setIsstay(Integer isstay) {
+		this.isstay = isstay;
+	}
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="cremployee")
 	private Set<CRBean> crBean;
 	

@@ -34,7 +34,7 @@ window.onload = function(){
 // 		submitUserForm111.value = false;
 	}
 }
-	</script>
+</script>
 </head>
 <body>
 	<nav>
@@ -49,6 +49,7 @@ window.onload = function(){
 				<fieldset>
 					<div align="center" style="margin-top: 40px;">
 						<h1>建立貼文</h1>
+						<p>目前使用者: ${MBBean.memberId}</p>
 						<hr>
 						<div class="st1">
 							<label for="Category">類別:</label>

@@ -9,6 +9,6 @@ public class socketController {
 	
 	@GetMapping("/msg")
 	public String index() {
-	      return "CR/Sockettest";
+	      return "CR/scoket";
 	   }
 }

@@ -74,7 +74,7 @@ td {
 	<div align="center" class="table-responsive pt-3">
 		<table id="customers">
 			<tr>
-<!-- 				<th style="vertical-align: inherit;">PK</th> -->
+				<th style="vertical-align: inherit;">PK</th>
 <!-- 				<th style="vertical-align: inherit;">文章編號</th> -->
 				<th>類型</th>
 				<th>標題</th>
@@ -89,7 +89,7 @@ td {
 			</tr>
 			<c:forEach var="artcom" items="${ArticleComment}">
 				<tr>
-<%-- 					<td>&nbsp;${artcom.pkey} &nbsp;</td> --%>
+					<td class="td1">&nbsp;${artcom.pkey} &nbsp;</td>
 <%-- 					<td><a href="<c:url value='/CreateComment/${.articleId}'/>" > --%>
 <%-- 						<c:if test="${ artcom.status == 0}" ><a href='' ></a></c:if>${artcom.articleId}</a> </td> --%>
 					<td class="td1">${artcom.category}</td>

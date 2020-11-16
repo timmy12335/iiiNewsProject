@@ -3,6 +3,7 @@ package CR.dao;
 import java.util.List;
 
 import CR.model.CRBean;
+import CR.model.CRemployee;
 import iiiNews.MB.model.MBBean;
 
 public interface CR_Dao {
@@ -24,4 +25,8 @@ public interface CR_Dao {
 	public MBBean getMembersByMemberId(String memberId);
 	
 	public  List<CRBean> getReportBymemberId(String memberId);
+	
+	public List<CRBean> getReportByStatus(String status);
+	
+	public CRemployee getemployeeBytreatamt();
 }

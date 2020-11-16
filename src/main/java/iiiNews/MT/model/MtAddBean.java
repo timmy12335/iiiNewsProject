@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import iiiNews.AD.model.AdOrderItemBean;
 
 @Entity
 @Table(name = "MtArticleAdd")
@@ -48,7 +48,7 @@ public class MtAddBean implements Serializable{
 	private String add2;
 	private String add3;
 	
-	@OneToMany(mappedBy="mtAddBean", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="mtAddBean", cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
 	Set<MtCommentBean> items = new LinkedHashSet<>();
 	//雙向多對一  一方有個多 儲存多方的物件 告訴他本類別沒有外鍵 提供外鍵的相關資訊給他
 	
@@ -203,6 +203,18 @@ public class MtAddBean implements Serializable{
 	public void setImage(MultipartFile image) {
 		Image = image;
 	}
-	
+
+	public Set<MtCommentBean> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<MtCommentBean> items) {
+		this.items = items;
+	}
+
+	@Override
+	public String toString() {
+		return "MtAddBean [items=" + items + "]";
+	}
 	
 }

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>客服社群功能列表</title>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link href="${pageContext.request.contextPath}/css/CRindex.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -19,7 +19,7 @@
 	<div class="card">
 	<span></span>
 	<div class='imgBx'>
-	<img src="<c:url value='/image/CR1.jpg'/>"></div>
+	<img src="<c:url value='/image/CR4.png'/>"></div>
 	<div class="content">
 	<div>
 	<h2>申請客服表單</h2>
@@ -33,7 +33,7 @@
 	</a>
 	<div class="card">
 	<span></span>
-	<div class='imgBx'><img src="<c:url value='/image/CR2.jpg'/>"></div>
+	<div class='imgBx'><img src="<c:url value='/image/CR1.jpg'/>"></div>
 	<div class="content">
 	<div>
 	<h2>關於我們</h2>
@@ -44,7 +44,7 @@
 	<a href="<c:url value='/chat' />">
 	<div class="card">
 	<span></span>
-	<div class='imgBx'><img src="<c:url value='/image/CR3.jpg'/>"></div>
+	<div class='imgBx'><img src="<c:url value='/image/CR5.jpg'/>"></div>
 	<div class="content">
 	<div>
 	<h2>聊天室Test</h2>

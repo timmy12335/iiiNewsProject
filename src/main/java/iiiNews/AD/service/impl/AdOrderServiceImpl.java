@@ -109,6 +109,7 @@ public class AdOrderServiceImpl implements AdOrderService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String todayStr = sdf.format(dnow).substring(0, 8)+"01";
 		java.sql.Date thismonth=java.sql.Date.valueOf(todayStr);
+		System.out.println("getMonthOrder方法的thismonth:"+thismonth);
 		return adOrderDao.getMonthOrder(thismonth);
 	}
 

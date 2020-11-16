@@ -6,6 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/bootstrap_index.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/ed0adb3a32.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>會員新聞列表</title>
 <script>
 	
@@ -42,9 +50,11 @@
 </script>
 </head>
 <body>
-	<nav>
+	<nav  class="navbar fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
+	
+	<div class="container">
 	<div align='center' style="margin-top: 150px;">
 		<h3>
 			<b>會員${memberId}已上架新聞列表</b>
@@ -59,9 +69,10 @@
 			
 				<c:forEach var='news' items='${upMemNewsList}' varStatus='loop' >
 				
-					<table>
-						<tr style="background-color: lightblue;" height='36'>
-							<th width='500' align='center'>新聞標題</th>
+					<table class="table table-hover">
+					 <thead >
+						<tr  height='36' class="thead-Warning ">
+							<th  align='center'>新聞標題</th>
 							<th width='60' align='center'>新聞編號</th>
 							<th width='60' align='center'>上傳時間</th>
 							<th width='100' align='center'>新聞類型</th>
@@ -70,6 +81,7 @@
 							<th width='120' align='center'>發生地點</th>
 							<th width='200' align='center'>影像</th>
 						</tr>
+						</thead>
 						<tr>
 							<td align='center'><a
 								href="<c:url value='/getSingleNews/${news.newsId}'/>">${news.title}
@@ -107,6 +119,7 @@
 		<br>
 		<input type="button" value="回目錄" onclick="location.href='/iiiNews'">
 <%-- 		<a href="<c:url value='history.back()' />">回前頁</a>   --%>
+	</div>
 	</div>
 	<script>
 	var num =  ${upMemNewsList.size()};

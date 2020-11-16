@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import CR.dao.CR_Dao;
 import CR.model.CRBean;
+import CR.model.CRemployee;
 import CR.service.CR_service;
 import iiiNews.MB.model.MBBean;
 
@@ -73,6 +74,11 @@ public class CR_service_impl implements CR_service {
 	public  List<CRBean> getReportBymemberId(String memberId) {
 		
 		return dao.getReportBymemberId(memberId);
+	}
+
+	@Override
+	public CRemployee getemployeeBytreatamt() {
+		return dao.getemployeeBytreatamt();
 	}
 
 

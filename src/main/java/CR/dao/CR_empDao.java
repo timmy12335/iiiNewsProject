@@ -12,8 +12,10 @@ public interface CR_empDao {
 	
 	public List<CRemployee> getemployee();
 	
-	void deleteemployeeByPk(int pk);
+	void deleteemployeeByPk(int empPk);
 	
-	void updateemployee(CRBean cb);
+	void updateemployee(CRemployee crb);
+	
+	public CRemployee getemployeeBytreatamt();
 	
 }

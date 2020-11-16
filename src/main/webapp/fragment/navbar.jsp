@@ -15,6 +15,7 @@
 <link href="${pageContext.request.contextPath}/image/favicon.ico"
 	rel="icon" type="image/ico" />
 <meta charset="UTF-8">
+<<<<<<< Updated upstream
 <div id='cssmenu'>
 	<ul>
 		<li><a href='/iiiNews' style="padding: 5px 20px;"> <img
@@ -118,3 +119,116 @@
 				class="fas fa-tools"></i></a></li>
 	</ul>
 </div>
+=======
+ <div id='cssmenu'>
+        <ul>
+            <li>
+            	<a href='/iiiNews' style="padding:5px 20px;">
+            		<img src="${pageContext.request.contextPath}/image/Logo.png" style="width:100px;">
+            	</a>
+            </li>
+            <li><a href="<c:url value='/UserMB'/>">會員中心</a>
+                <ul>
+                    <li><a href='#'>會員功能</a>
+                        <ul>
+                            <li><a href="">修改密碼</a></li>
+                            <li><a href='#'>子功能</a></li>
+                        </ul>
+                    </li>
+                    <li><a href='#'>Product 2</a>
+                        <ul>
+                            <li><a href='#'>Sub Product</a></li>
+                            <li><a href='#'>Sub Product</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href='#'>新聞專區</a>
+                <ul>
+                    <li><a href='#'>一般會員</a>
+                        <ul>
+                            <li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
+                            <li><a href="<c:url value='/getMemNewsList/A0002'/>">個人未上架新聞列表</a></li>
+                            <li><a href="<c:url value='/getUpMemNewsList/A0002'/>">個人已上架新聞列表</a></li>  
+                            <li><a href="<c:url value='/getOrderMemNewsList/A0002'/>">個人已被購買新聞列表</a></li>                            
+                        </ul>					
+                    </li>
+                    <li><a href='#'>企業專區</a>
+                        <ul>
+                        
+<%--                             <li><a href="<c:url value='/getAllNews'/>">所有新聞列表</a></li> --%>
+                            <li><a href="<c:url value='/changeStautsForTime'/>">所有即時新聞列表</a></li>
+                            <li><a href="<c:url value='/showOrderList'/>">購買紀錄</a></li>
+                            
+                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li><a href="<c:url value='#' />">新聞追蹤</a>
+                <ul>
+                 	<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
+                    <li><a href="<c:url value='/queryByType' />">分類追蹤</a></li>
+                    <li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>                    
+               </ul>
+            </li>
+            <li><a href="<c:url value='#' />">社群專區</a>
+            	<ul>
+            		<li><a href="<c:url value='/MtCreate' />">新增Po文</a>
+                    <li><a href="<c:url value='/getAllMtAdd' />">檢視所有資料---待刪除</a></li>
+                    <li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
+                    <li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
+                    <li><a href="<c:url value='/AllArticleComment' />">文章瀏覽</a></li>
+                    <li><a href="<c:url value='/CreateComment' />">留言功能測試，OK後移入文章瀏覽功能內</a></li>
+<%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
+                </ul>
+            </li>
+            <li><a href='#'>廣告專區</a>
+            	<ul>
+            		<li><a href="<c:url value='/getAjaxListSearch' />">Ajax搜尋測試</a></li>
+            		<li><a href="#">企業會員功能</a>
+                    	<ul>
+                            <li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
+                            <li><a href="<c:url value='/memberAllAdsList' />">查詢所上架的商品列表</a></li>
+                            <li><a href="<c:url value='/getSoldOrderByCpMemberId' />">查詢所賣出的商品(下載圖片)#$#</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">一般會員功能</a>
+                    	<ul>
+                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
+                            <li><a href="<c:url value='/getAjaxList' />">看所有廣告列表-Ajax</a></li>
+                            <li><a href="<c:url value='/getOrderListByMemberId' />">查看一般會員訂單</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="<c:url value='/ShowCartContent' />">購物車</a></li>
+					<li><a href="#">ALL & OLD</a>
+                    	<ul>
+                    		<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
+                            <li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
+                            <li><a href="<c:url value='/testingMonthOrder' />">test</a></li>
+                            <li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
+		                    <li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
+		                    <li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+                        <li><a href="<c:url value='/CRindex' />">客服中心</a>
+                <ul>
+                    <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/success' />">個人客服表單申請確認</a></li>
+                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
+                    <li><a href="<c:url value='/board' />">公告欄</a></li>
+                </ul>
+            </li>
+            <li>
+                <div id="nowDateTimeSpan">
+                    <script>startTime()</script>
+                </div>
+            </li>
+            <li><a href="<c:url value='/LoginMB' />" title="">登入&nbsp;<i class="far fa-user-circle"></i></a></li>
+            <li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i class="fas fa-tools"></i></a></li>
+        </ul>
+    </div>
+>>>>>>> Stashed changes

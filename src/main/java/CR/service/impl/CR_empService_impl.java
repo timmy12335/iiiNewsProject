@@ -49,6 +49,17 @@ public class CR_empService_impl implements CR_empService {
 		return dao.getemployeeBytreatamt();
 	}
 
+	@Override
+	public List<CRemployee> getemployeeisstay() {
+		
+		return dao.getemployeeisstay();
+	}
+
+	@Override
+	public List<CRemployee> getemployeenotstay() {
+		return dao.getemployeenotstay();
+	}
+
 	
 
 }

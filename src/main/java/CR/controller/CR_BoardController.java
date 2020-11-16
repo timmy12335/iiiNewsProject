@@ -32,4 +32,6 @@ public class CR_BoardController {
 		return "CR/BMBoard";
 	}
 	
+	
+	
 }

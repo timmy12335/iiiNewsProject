@@ -132,7 +132,7 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		</td></tr>
 		<tr>
 		<td align='center'>客服人員</td><td>
-		<input type="text" class="form-control" name='crReplier' id='crReplier' value='${report.cremployee.empName}'>
+		<input type="text" class="form-control" name='crReplier' id='crReplier' value='${report.cremployee.empName}' disabled>
 		</td></tr>
 		<tr>
 		<td align='center' colspan='2'>

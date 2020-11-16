@@ -4,6 +4,7 @@ import java.util.List;
 
 import CR.model.CRBean;
 import CR.model.CRemployee;
+import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
 
 public interface CR_Dao {
@@ -29,4 +30,10 @@ public interface CR_Dao {
 	public List<CRBean> getReportByStatus(String status);
 	
 	public CRemployee getemployeeBytreatamt();
+
+	CpMemberBean getCpMembersByMemberId(String memberId);
+
+	List<CRBean> getReportBycpmemberId(String memberId);
+
+	void reviseemp(CRBean report);
 }

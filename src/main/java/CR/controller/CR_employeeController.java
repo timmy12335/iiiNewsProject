@@ -61,6 +61,8 @@ public class CR_employeeController {
 			map.put("success","刪除成功");
 		}catch(Exception e) {
 			map.put("fail","刪除失敗");
+			e.printStackTrace();
+			System.out.println("GG");
 		}
 		return map;
 	}

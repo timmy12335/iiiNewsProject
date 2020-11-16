@@ -25,7 +25,7 @@
 			<ul>
 				<li><a href='#'>會員功能</a>
 					<ul>
-						<li><a href="">修改密碼</a></li>
+						<li><a href="<c:url value='/Forget'/>">修改密碼</a></li>
 						<li><a href='#'>子功能</a></li>
 					</ul></li>
 				<li><a href='#'>Product 2</a>
@@ -110,7 +110,7 @@
 		<c:if test="${MBBean.memberId == null}"></c:if>
 		<li><a href="<c:url value='/LoginMB' />" title="">登入&nbsp;<i
 				class="far fa-user-circle"></i></a></li>
-		<li><a href="<c:url value='/loginout' />" title="">登出&nbsp;<i
+		<li><a href="<c:url value='/Loginout' />" title="">登出&nbsp;<i
 				class="far fa-user-circle"></i></a></li>
 		<li><a href="<c:url value='/BMindex'/>" title="">後臺管理&nbsp;<i
 				class="fas fa-tools"></i></a></li>

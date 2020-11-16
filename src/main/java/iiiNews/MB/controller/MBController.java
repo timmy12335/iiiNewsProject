@@ -1,15 +1,25 @@
 package iiiNews.MB.controller;
 
+import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +31,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import iiiNews.MB.model.ForgetBean;
 import iiiNews.MB.model.LoginBean;
 import iiiNews.MB.model.MBBean;
 import iiiNews.MB.service.MBService;
@@ -34,6 +44,11 @@ public class MBController {
 	ServletContext ctx;
 	@Autowired
 	MBService service;
+	
+	@RequestMapping(value = "/Forget", method = RequestMethod.GET)
+	public String forget() {
+		return new String("/MB/Forget");
+	}
 	
 	@RequestMapping(value = "/LoginMB", method = RequestMethod.GET)
 	public String login() {
@@ -160,11 +175,77 @@ public class MBController {
 		response.addCookie(cookieRememberMe);
 	}
 	
-	@RequestMapping("loginout")
+	@RequestMapping("Loginout")
 	public String getLogOut(SessionStatus status) {
 		System.out.println("執行session,setComplete();");
-		System.out.println("以登出");
+		System.out.println("已登出");
 		status.setComplete();
 		return "redirect:/";
 	}
+	
+//	public void Gmailsend(String email) {
+//		System.out.println("email");
+//		System.out.println(email);
+//		String host = "smtp.gmail.com";
+//		int port = 587;
+//		String username = "lintest546@gmail.com";
+//		String password = "0928103546";// your password
+//		Properties props = new Properties();
+//		props.put("mail.smtp.host", host);
+//		props.put("mail.smtp.auth", "true");
+//		props.put("mail.smtp.starttls.enable", "true");
+//		props.put("mail.smtp.port", port);
+//		Session session = Session.getInstance(props, new Authenticator() {
+//			protected PasswordAuthentication getPasswordAuthentication() {
+//				return new PasswordAuthentication(username, password);
+//			}
+//		});
+//		String div = "忘記密碼， 您的密碼已預設成，"+"<h2 style='color:red'>"+"@8M75K"+"</h2>"+"，請登入後修改密碼";
+//		try {
+//			Message message = new MimeMessage(session);
+//			message.setFrom(new InternetAddress("lintest546@gmail.com"));
+//			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+//			message.setSubject("忘記密碼.");
+//			message.setContent(div,"text/html;charset=UTF-8");
+//
+//			Transport transport = session.getTransport("smtp");
+//			transport.connect(host, port, username, password);
+//			Transport.send(message);
+//			System.out.println("HIHIHI");
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//			throw new RuntimeException(e);
+//		}
+//	}
+//	
+//	@GetMapping("/forgetpwd")
+//	public String forgetpwd(Model model, HttpServletRequest request) {
+//		ForgetBean mb1 = new ForgetBean();
+//		model.addAttribute("forgot", mb1);
+//		return "MB/forget";
+//	}
+//
+//	@PostMapping("/forgetpwd")
+//	public String forgotpwds(@ModelAttribute("forgot") ForgetBean mb, Model model, BindingResult result,
+//			HttpServletRequest request, HttpServletResponse response) {
+//		List<String> list = service.seachMemberaccount();
+//		ForgetPassword validator = new ForgetPassword();
+//		validator.validate(mb, result);
+//
+//		if (list.contains(mb.getMemberEmail())) {
+//			System.out.println("有");
+//			try {
+//				Gmailsend(mb.getMemberEmail());
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return "MB/error";
+//			}
+//			
+//			service.updatePassword(mb.getMemberEmail());
+//			return "redirect:/Login";
+//		} else {
+//			result.rejectValue("invalidCredentials", "", "該帳號不存在");
+//			return "MB/forget";
+//		}
+//	}
 }

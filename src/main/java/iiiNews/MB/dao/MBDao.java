@@ -21,5 +21,8 @@ public interface MBDao {
 	MBBean saveMember();
 
 	public MBBean login(String account, String password);
-
+	
+	public void updatePasswd(String email);
+	
+	public List<String> seachMemberaccount();
 }

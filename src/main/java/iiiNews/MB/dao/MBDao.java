@@ -22,6 +22,8 @@ public interface MBDao {
 
 	public MBBean login(String account, String password);
 	
+	public boolean idExists(String id);
+	
 	public void updatePasswd(String email);
 	
 	public List<String> seachMemberaccount();

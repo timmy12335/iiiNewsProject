@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import iiiNews.MB.dao.CPMBDao;
 import iiiNews.MB.model.CpMemberBean;
-import iiiNews.MB.model.MBBean;
-
 
 @Repository
 public class CPMBDaoImpl implements CPMBDao {
@@ -61,8 +59,8 @@ public class CPMBDaoImpl implements CPMBDao {
 	public CpMemberBean getSingleCpMmeber(String cpmemberId) {
 		String hql = "FROM MBBean WHERE memberId = :mId AND status = 1 ";
 		Session session = factory.getCurrentSession();
-		CpMemberBean cpmbbean = (CpMemberBean) session.createQuery(hql)
-				.setParameter("nId", cpmemberId).getSingleResult();
+		CpMemberBean cpmbbean = (CpMemberBean) session.createQuery(hql).setParameter("nId", cpmemberId)
+				.getSingleResult();
 		return cpmbbean;
 	}
 
@@ -96,4 +94,15 @@ public class CPMBDaoImpl implements CPMBDao {
 		return cpmb;
 	}
 
+	@Override
+	public boolean idcpExists(String id) {
+		boolean exist = false;
+		String hql = "FROM CpMemberBean m WHERE m.cpmemberId = :maccount";
+		Session session = factory.getCurrentSession();
+		List<CpMemberBean> beans = session.createQuery(hql).setParameter("maccount", id).getResultList();
+		if (beans.size() > 0) {
+			exist = true;
+		}
+		return exist;
+	}
 }

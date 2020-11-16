@@ -22,4 +22,6 @@ public interface CPMBDao {
 	CpMemberBean saveCpMember();
 	
 	public CpMemberBean cplogin(String account, String password);
+
+	public boolean idcpExists(String id);
 }

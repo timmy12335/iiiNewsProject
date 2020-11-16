@@ -1,21 +1,9 @@
 package iiiNews.MB.controller;
 
-import java.util.List;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,11 +19,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import iiiNews.MB.model.ForgetBean;
 import iiiNews.MB.model.LoginBean;
 import iiiNews.MB.model.MBBean;
 import iiiNews.MB.service.MBService;
 import iiiNews.MB.validate.LoginBeanValidator;
+import iiiNews.MB.validate.UserBeanValidator;
 
 @Controller
 @SessionAttributes("MBBean")
@@ -44,12 +32,12 @@ public class MBController {
 	ServletContext ctx;
 	@Autowired
 	MBService service;
-	
+
 	@RequestMapping(value = "/Forget", method = RequestMethod.GET)
 	public String forget() {
 		return new String("/MB/Forget");
 	}
-	
+
 	@RequestMapping(value = "/LoginMB", method = RequestMethod.GET)
 	public String login() {
 		return new String("/MB/LoginMB");
@@ -65,26 +53,28 @@ public class MBController {
 		return new ModelAndView("/MB/Member", "command", new MBBean());
 	}
 
-	@RequestMapping(value = "/Member", method = RequestMethod.POST)
-	public String adduser(@ModelAttribute("command") MBBean user, Model model) {
-		service.addMember(user);
-//       System.out.println(user.getSex());
-//       System.out.println(user.getName());
-//      model.addAttribute("memberId", user.getMemberId());
-//      model.addAttribute("phone", user.getPhone());
-//      model.addAttribute("email", user.getEmail());
-//      model.addAttribute("password", user.getPassword());
-//      model.addAttribute("name", user.getName());
-//      model.addAttribute("repassword", user.getOkPassword());
-//      model.addAttribute("sex", user.getSex());
-//      model.addAttribute("identityId", user.getIdentityId());
-//      model.addAttribute("birthday", user.getBirthday());
-//      model.addAttribute("mbpoints", user.getMbpoints());
-//      
-		model.addAttribute("mb", user);
-		return "/MB/UserList";
+//	@RequestMapping(value = "/Member", method = RequestMethod.POST)
+//	public String adduser(@ModelAttribute("command") MBBean user, Model model) {
+//		service.addMember(user); 
+//		model.addAttribute("mb", user);
+//		return "/MB/UserList";
+//	}
+
+	@PostMapping("/Member")
+	public String adduser(@ModelAttribute("command") MBBean mb, Model model, BindingResult result) {
+
+		UserBeanValidator validator = new UserBeanValidator();
+
+		validator.validate(mb, result);
+		if (service.idExists(mb.getMemberId())) {
+			result.rejectValue("memberId", "", "*帳號已存在，請重新輸入");
+			return "MB/Member";
+		}
+		service.addMember(mb);
+		model.addAttribute("mb", mb);
+		return "MB/UserList";
 	}
-	
+
 	@GetMapping("/Login")
 	public String LoginContext(HttpServletRequest request, Model model,
 			@CookieValue(value = "user", required = false) String user,
@@ -105,7 +95,7 @@ public class MBController {
 
 		return "MB/Login";
 	}
-	
+
 	@PostMapping("/Login")
 	public String LoginContextCheck(@ModelAttribute("LoginBean") LoginBean lb, Model model, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -125,17 +115,16 @@ public class MBController {
 			mmm = (MBBean) model.getAttribute("MBBean");
 			if (mmm.getPassword().equals("1234")) {
 				processCookies(lb, request, response);
-				return "redirect:/updatee/"+mmm.getMemberId()+"";
-			}else if(mmm.getPassword().equals("@8M75K")) {
-				return "redirect:/updatepasswd/"+mmm.getMemberId()+"";
-			}
-			else {
+				return "redirect:/updatee/" + mmm.getMemberId() + "";
+			} else if (mmm.getPassword().equals("@8M75K")) {
+				return "redirect:/updatepasswd/" + mmm.getMemberId() + "";
+			} else {
 				processCookies(lb, request, response);
-			return "redirect:/";
-			}			
+				return "redirect:/";
+			}
 		}
 	}
-	
+
 	private void processCookies(LoginBean bean, HttpServletRequest request, HttpServletResponse response) {
 		Cookie cookieUser = null;
 		Cookie cookiePassword = null;
@@ -174,7 +163,7 @@ public class MBController {
 		response.addCookie(cookiePassword);
 		response.addCookie(cookieRememberMe);
 	}
-	
+
 	@RequestMapping("Loginout")
 	public String getLogOut(SessionStatus status) {
 		System.out.println("執行session,setComplete();");
@@ -182,7 +171,7 @@ public class MBController {
 		status.setComplete();
 		return "redirect:/";
 	}
-	
+
 //	public void Gmailsend(String email) {
 //		System.out.println("email");
 //		System.out.println(email);

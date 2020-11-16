@@ -67,6 +67,7 @@ g-recaptcha {
 					<td>登入帳號：</td>
 					<td><form:input type="text" path="memberId" required="true"
 							id='memberId' placeholder="輸入帳號" /></td>
+					<td><form:errors style="color:red;font-size:12px" path="memberId"></form:errors></td>
 					<!-- 					<td>帳號只能是英文、數字，其餘字元均不接受</td> -->
 				</tr>
 				<tr>

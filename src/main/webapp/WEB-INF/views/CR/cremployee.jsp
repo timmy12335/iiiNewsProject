@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>客服人員管理</title>
 </head>
+
 <script>
 	function deleteCrReport(emppk){
 		var xhr2 = new XMLHttpRequest();

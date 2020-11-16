@@ -29,7 +29,10 @@ public class EchoServerEndpoint {
 		String msg=null;
 		if(message.equals("你好")) {
 			msg="你好";
+		}else {
+			msg="不好意思沒有服務";
 		}
+		
 	    return msg;
 	}
 	

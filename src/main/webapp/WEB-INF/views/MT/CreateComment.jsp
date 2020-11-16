@@ -5,8 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script >
+window.onload = function(){
+		var btn = document.getElementById("clickme1");
+		var btn2 = document.getElementById("clickme2");
+		btn.onclick = function(){
+		A =  document.getElementById("comment")
+		A.value ="AAAAA留言留言"
+		}
+		
+		btn2.onclick = function(){
+		B =  document.getElementById("comment")
+		B.value ="BBB留言"
+	}
+}
+	</script>
 <title>單一新聞表</title>
-
 <style>
 td{
 align:left;
@@ -42,18 +56,27 @@ margin:5px;
 			<tr><td colspan="2"><div>內文:<br>${CreateComment.article}</div></td></tr>
 			
 				<c:forEach var="comBean" items="${CreateComment.items}">
-				<tr><td><div>留言>><br>${CreateComment.memberId} : ${comBean.comment}</div></td><td><div>時間:<br>${comBean.uploadTime }</div></td></tr>
+				<tr><td><div>留言>><br>${comBean.comMemberId} : ${comBean.comment}</div></td><td><div>時間:<br>${comBean.uploadTime }</div></td></tr>
 				</c:forEach>
 			
 <%-- 			<c:forEach var="com" items="${CreateComment.items }"> --%>
 <%-- 			<tr><td><div>留言區:<br>${CreateComment.comment }</div></td></tr> --%>
 
 <%-- 			</c:forEach> --%>
-			<tr><td colspan="2"><label for="comment">測試測試:</label><div class="st1">
-					<textarea name="comment" id="comment" cols="58" rows="5" maxlength="250" placeholder="限輸入250字"></textarea>
-					<div><form:errors path="comment" style="font-size:12px;color:red" /></div>
+			<tr><td colspan="2" style="width:300px;height:250px"><label for="comment">我想說:</label><div class="st1">
+					<textarea name="comment" id="comment" cols="58" rows="6" maxlength="250" placeholder="限輸入250字..."></textarea>
+					
 					<input class="sub" type="submit" name="submit" id="submit" value="送出" />
-			</div></td></tr>
+					
+			</div><div><form:errors path="comment" style="font-size:12px;color:red" /></div>
+				<div>
+					<input type='button' class=''  id='clickme1' value='Demo1' >
+					<span>&nbsp;&nbsp;</span>
+					<input type='button' class=''  id='clickme2' value='Demo2' >
+					<span>&nbsp;&nbsp;</span>
+				</div>
+			
+			</td></tr>
 <%-- 			<tr><td><div style="width:500px;height:300px">內文:<br>${ singleArticle.article }</div></td></tr> --%>
 		</table>
 		
@@ -67,5 +90,6 @@ margin:5px;
 <%-- 		<a href="<c:url value="/getAllMtAdd" />">回前頁</a><br><br><br>	 --%>
 	</div>
 	</form:form>
+
 </body>
 </html>

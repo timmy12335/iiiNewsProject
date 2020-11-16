@@ -109,7 +109,7 @@ td {
 		</table>
 		<hr>
 		<a href="<c:url value="" />">-----TOP-----</a><br><br>
-		<a href="<c:url value='/' />">回首頁</a><br><br>
+<%-- 		<a href="<c:url value='/' />">回首頁</a><br><br> --%>
 	</div>
 <!-- 	</div> -->
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>

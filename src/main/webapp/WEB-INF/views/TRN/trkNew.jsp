@@ -24,6 +24,10 @@ border:2px blue solid;　//DIV區塊邊框，參閱：CSS border 邊框設計。
 margin-right:10px;　//靠右外距，參閱：CSS margin 邊界使用介紹範例教學。
 float:left;
 }
+img{
+width:450px;
+height:350;
+}
 </style>
 </head>
 <body>
@@ -41,20 +45,20 @@ float:left;
 	       
 	       
 	       
-	<section class="container" style="background-color:gray; float:left; width:800px" >
+	<section class="container" style="background-color:gray; float:left; width:600px;margin:50px" >
 	              
 		<div  class="row"  >
 			      
 			<div class="col-md-5" >
-				<h3>${trkNew.title}</h3>
+				<h3 style="background-color:red;width:550px;font-family:Microsoft JhengHei">${trkNew.title}</h3>
 				      <figure class="figure">
-                           <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
+                           <img style="" src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
                            <figcaption class="figure-caption"></figcaption>
                       </figure>
 				<p>建立人: ${trkNew.founder}</p>
 				<p>建立時間: ${trkNew.fondtime}</p>
 				<p>追蹤人數: ${trkNew.trcnum}</p>
-				<p class="text-xl-left">內容: ${trkNew.descript}</p>
+				<p class="text-xl-left" style="font-family:Microsoft JhengHei; width:550px;font-size:larger;">內容: ${trkNew.descript}</p>
 				<p>發生地點: ${trkNew.ocplace}</p>
 				<p>發生時間: ${trkNew.octime}</p>
 				<p>點閱人數: ${trkNew.clicnum}</p>
@@ -71,7 +75,7 @@ float:left;
 					</c:otherwise>
 				</c:choose> --%>
 				<%-- 	<p>書商: ${product.companyBean.name}</p> --%>
-				<p>新聞分類: ${trkNew.type}</p>
+				<p style="font-family:Microsoft JhengHei">新聞分類: ${trkNew.type}</p>
 				<p>
 					<strong>追蹤編號: </strong> <span class='label label-warning'>
 						${trkNew.trackId} </span>
@@ -88,11 +92,12 @@ float:left;
 		</div>
 		
 	</section>
-<div  style="float:left" >
-			            <h1 id="002" class="display-4" >各媒體相關報導</h1> 
+<div  style="float:left; margin-top:100px;"  >
+			            <h3 id="002" class="display-4" style="font-family:Microsoft JhengHei" >各媒體相關報導</h3> 
+			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:800px;font-size:larger;"">
 			      <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
 			      
-			      
+			      </div>
 			      </div>
 	<!-- 點擊累加 -->
 	 <%-- <%
@@ -165,13 +170,19 @@ float:left;
 	var visits = getCookie("counter")
 	var clicnum = ${trkNew.clicnum};
 	
-	if (!visits)
+	if (!visits){
 	        visits = 1
-	else
+	}else{
 	        visits = parseInt(visits) + 1
+	}
 	setCookie("counter", visits, now)
-	var t1 = visits + clicnum;
+	if(visits>1){
+		var t1 = 1 + clicnum;
+	}else{
+		
+	}
 	console.log("Aaaaaaa="+visits);
+	
 	document.write("您是到访的第" + t1 + "位用户！");
 	window.onload = function() {
     

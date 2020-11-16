@@ -59,4 +59,10 @@ public class CPMBServiceImpl implements CPMBService {
 		System.out.println("service");
 		return cpmbdao.cplogin(account, password);
 	}
+	
+	@Transactional
+	@Override
+	public boolean idcpExists(String id) {
+		return cpmbdao.idcpExists(id);
+	}
 }

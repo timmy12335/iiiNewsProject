@@ -107,7 +107,7 @@ public class CR_Controller {
 	
 	//會員申請客服表單送出並寄信
 	@PostMapping("/addReport")
-	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb,Model model, BindingResult bindingResult) { //bindingResult表單綁定
+	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb,Model model, BindingResult bindingResult,HttpServletRequest request,HttpServletResponse response) { //bindingResult表單綁定
 		CpMemberBean cpmb = null;
 		MBBean mb = null;
 		//通過會員編號取得會員資料

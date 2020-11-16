@@ -15,7 +15,6 @@
 <link href="${pageContext.request.contextPath}/image/favicon.ico"
 	rel="icon" type="image/ico" />
 <meta charset="UTF-8">
-<<<<<<< Updated upstream
 <div id='cssmenu'>
 	<ul>
 		<li><a href='/iiiNews' style="padding: 5px 20px;"> <img
@@ -55,12 +54,12 @@
 					</ul></li>
 
 			</ul></li>
-		<li><a href="<c:url value='/CRindex' />">客服中心</a>
-			<ul>
-				<li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
-				<li><a href="<c:url value='/msg' />">客服聊天</a></li>
-				<li><a href="<c:url value='/sendmail' />">寄信</a></li>
-			</ul></li>
+<%-- 		<li><a href="<c:url value='/CRindex' />">客服中心</a> --%>
+<!-- 			<ul> -->
+<%-- 				<li><a href="<c:url value='/addReport' />">申請客服表單</a></li> --%>
+<%-- 				<li><a href="<c:url value='/msg' />">客服聊天</a></li> --%>
+<%-- 				<li><a href="<c:url value='/sendmail' />">寄信</a></li> --%>
+<!-- 			</ul></li> -->
 		<li><a href="<c:url value='#' />">新聞追蹤</a>
 			<ul>
 				<li><a href="<c:url value='/trkNews' />">所有追蹤</a></li>
@@ -103,6 +102,14 @@
 						<li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
 					</ul></li>
 			</ul></li>
+			                  <li><a href="<c:url value='/CRindex' />">客服中心</a>
+                <ul>
+                    <li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
+                    <li><a href="<c:url value='/success' />">個人客服表單申請確認</a></li>
+                    <li><a href="<c:url value='/msg' />">客服聊天</a></li>
+                    <li><a href="<c:url value='/board' />">公告欄</a></li>
+                </ul>
+            </li>
 		<li>
 			<div id="nowDateTimeSpan">
 				<script>

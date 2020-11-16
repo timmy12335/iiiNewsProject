@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +24,7 @@ import iiiNews.MB.model.CpLoginBean;
 import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.service.CPMBService;
 import iiiNews.MB.validate.LoginBeanValidator;
+import iiiNews.MB.validate.UserCpBeanValidator;
 
 @Controller
 @SessionAttributes("CpMemberBean")
@@ -33,7 +33,7 @@ public class CPMBController {
 	ServletContext ctx;
 	@Autowired
 	CPMBService service;
-	
+
 	@RequestMapping(value = "/CpLoginMB", method = RequestMethod.GET)
 	public String cplogin() {
 		return new String("/MB/CpLoginMB");
@@ -47,14 +47,11 @@ public class CPMBController {
 	@RequestMapping(value = "/CpMember", method = RequestMethod.GET)
 	public ModelAndView cpstudent() {
 		return new ModelAndView("/MB/CpMember", "command_CP", new CpMemberBean());
-//		CpMemberBean command_Cp = new CpMemberBean();
-//		model.addAttribute("command_Cp", command_Cp);
-//		return "/MB/CpMember";
 	}
 
-	@RequestMapping(value = "/CpMember", method = RequestMethod.POST)
-	public String addcpuser(@ModelAttribute("command_CP") CpMemberBean cpuser, Model model) {
-		service.addCpMember(cpuser);
+//	@RequestMapping(value = "/CpMember", method = RequestMethod.POST)
+//	public String addcpuser(@ModelAttribute("command_CP") CpMemberBean cpuser, Model model) {
+//		service.addCpMember(cpuser);
 //       System.out.println(user.getSex());
 //       System.out.println(user.getName());
 //      model.addAttribute("memberId", user.getMemberId());
@@ -68,8 +65,23 @@ public class CPMBController {
 //      model.addAttribute("birthday", user.getBirthday());
 //      model.addAttribute("mbpoints", user.getMbpoints());
 //      
-		model.addAttribute("cpmb", cpuser);
-		return "/MB/UserListCP";
+//		model.addAttribute("cpmb", cpuser);
+//		return "/MB/UserListCP";
+//	}
+
+	@PostMapping("/CpMember")
+	public String addcpuser(@ModelAttribute("command_CP") CpMemberBean cpmb, Model model, BindingResult result) {
+
+		UserCpBeanValidator validator = new UserCpBeanValidator();
+
+		validator.validate(cpmb, result);
+		if (service.idcpExists(cpmb.getCpmemberId())) {
+			result.rejectValue("cpmemberId", "", "*帳號已存在，請重新輸入");
+			return "MB/CpMember";
+		}
+		service.addCpMember(cpmb);
+		model.addAttribute("cpmb", cpmb);
+		return "MB/UserListCP";
 	}
 
 	@GetMapping("/CpLogin")

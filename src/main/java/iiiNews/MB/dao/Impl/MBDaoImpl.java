@@ -10,7 +10,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import iiiNews.MB.dao.MBDao;
 import iiiNews.MB.model.MBBean;
 
@@ -119,5 +118,19 @@ public class MBDaoImpl implements MBDao {
 					  .getResultList();
 		System.out.println("da05"+list);
 		return list;
+	}
+
+	@Override
+	public boolean idExists(String id) {
+		boolean exist = false;
+		String hql = "FROM MBBean m WHERE m.memberId = :maccount" ; 
+		Session session = factory.getCurrentSession();
+		List<MBBean> beans = session.createQuery(hql)
+										.setParameter("maccount",id)
+										.getResultList();
+		if (beans.size() > 0) {
+			exist = true;
+		}
+		return exist;
 	}
 }

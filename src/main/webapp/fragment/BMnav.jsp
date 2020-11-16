@@ -66,12 +66,29 @@
               <span class="menu-title">人員維護</span>
             </a>
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">
+            <a class="nav-link" data-toggle="collapse" href="#aaa" aria-expanded="false" aria-controls="aaa">
               <i class="ti-flag-alt menu-icon"></i>
-              <span class="menu-title">社群文章管理</span>
+              <span class="menu-title">社群管理</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="aaa">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">查看所有會員文章 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getMemArticleList "> 查詢會員發文紀錄 </a></li>
+              </ul>
+            </div>
           </li>
+          
+          
+<!--           <li class="nav-item"> -->
+<%--             <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd"> --%>
+<!--               <i class="ti-flag-alt menu-icon"></i> -->
+<!--               <span class="menu-title">社群文章管理</span> -->
+<!--             </a> -->
+<!--           </li> -->
+
           <li class="nav-item">
             <a class="nav-link" href="連結">
               <i class="ti-view-list-alt menu-icon"></i>

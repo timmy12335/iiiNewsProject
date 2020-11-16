@@ -67,6 +67,8 @@ g-recaptcha {
 					<td>登入帳號：</td>
 					<td><form:input type="text" path="cpmemberId" required="true"
 							id='cpmemberId' placeholder="輸入帳號" /></td>
+					<td><form:errors style="color:red;font-size:12px"
+							path="cpmemberId"></form:errors></td>
 					<!-- 					<td>帳號只能是英文、數字，其餘字元均不接受</td> -->
 				</tr>
 				<tr>
@@ -241,7 +243,7 @@ g-recaptcha {
 		function submitUserForm() {
 			var response = grecaptcha.getResponse();
 			if (response.length == 0) {
-				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>';
+				document.getElementById('g-recaptcha-error').innerHTML = '_$tag____________________請點選我不是機器人_$tag__';
 				return false;
 			}
 			return true;

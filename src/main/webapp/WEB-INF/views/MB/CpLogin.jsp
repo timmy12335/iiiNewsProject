@@ -65,6 +65,8 @@ g-recaptcha {
 					<td>登入帳號：</td>
 					<td><form:input type="text" path="userId" required="true"
 							id='cpmemberId' placeholder="輸入帳號" /></td>
+					<td><form:errors style="color:red;font-size:12px"
+							path="invalidCredentials"></form:errors></td>
 				</tr>
 				<tr>
 					<td>登入密碼：</td>

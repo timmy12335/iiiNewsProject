@@ -73,4 +73,9 @@ public class MBServiceImpl implements MBService {
 	public List<String> seachMemberaccount() {
 		return mbdao.seachMemberaccount();
 	}
+	@Transactional
+	@Override
+	public boolean idExists(String id) {
+		return mbdao.idExists(id);
+	}
 }

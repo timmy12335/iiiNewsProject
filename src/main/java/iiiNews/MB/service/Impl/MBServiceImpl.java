@@ -61,4 +61,16 @@ public class MBServiceImpl implements MBService {
 		System.out.println("service");
 		return mbdao.login(account, password);
 	}
+
+	@Transactional
+	@Override
+	public void updatePassword(String email) {
+		mbdao.updatePasswd(email);
+		System.out.println("session 更新密碼");	
+	}
+
+	@Override
+	public List<String> seachMemberaccount() {
+		return mbdao.seachMemberaccount();
+	}
 }

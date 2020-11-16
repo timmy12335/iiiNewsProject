@@ -29,6 +29,7 @@ public class AdUploadValidator implements Validator {
 			errors.rejectValue("width", "","寬度欄位有誤，請重新輸入");
 		}
 		
+		
 		if(adBean.getHeight() != null && adBean.getHeight() <=0) {
 			errors.rejectValue("height", "","高度欄位有誤，請重新輸入");
 		}
@@ -45,7 +46,7 @@ public class AdUploadValidator implements Validator {
 //			errors.rejectValue("width", "","庫存欄位有誤，請重新輸入");
 //		}
 		
-		if(adBean.getCategoryNo() != null && adBean.getCategoryNo().equals("none")) {
+		if(adBean.getCategoryNo() != null && adBean.getCategoryNo().equals("-1")) {
 			errors.rejectValue("categoryNo", "","請選擇欲販售之欄位");
 		}
 		

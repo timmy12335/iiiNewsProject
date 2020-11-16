@@ -152,6 +152,19 @@ g-recaptcha {
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 
 	<script type="text/javascript">
+		//我不是機器人
+		function submitUserForm() {
+			var response = grecaptcha.getResponse();
+			if (response.length == 0) {
+				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>';
+				return false;
+			}
+			return true;
+		}
+		function verifyCaptcha() {
+			document.getElementById('g-recaptcha-error').innerHTML = '';
+		}
+
 		function checkinput() {
 			// 檢查登入帳號是否有特殊字元
 			var re = /[^a-zA-Z0-9.-_]/;
@@ -192,7 +205,7 @@ g-recaptcha {
 		//產生驗證碼
 		function createCode() {
 			code = "";
-			var codeLength = 8;//驗證碼的長度
+			var codeLength = 6;//驗證碼的長度
 			var checkCode = document.getElementById("code");
 			var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C',
 					'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -222,20 +235,6 @@ g-recaptcha {
 				$("#Yzm").blur();//繫結驗證碼輸入正確時要做的事
 				YZM = true;
 			}
-		}
-	</script>
-
-	<script>
-		function submitUserForm() {
-			var response = grecaptcha.getResponse();
-			if (response.length == 0) {
-				document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">請點選我不是機器人</span>';
-				return false;
-			}
-			return true;
-		}
-		function verifyCaptcha() {
-			document.getElementById('g-recaptcha-error').innerHTML = '';
 		}
 	</script>
 

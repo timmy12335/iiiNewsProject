@@ -85,8 +85,16 @@ white-space: normal;
 								<td align='left'>&nbsp;${ser.crTitle}</td>
 								<td align='center'onclick="MBfolded(${report.index})" class="box"><p class="ellipsis">${ser.crContent}</p></td>
 								<td align='center'><fmt:formatDate value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-								<td align='center'  onclick="folded(${report.index})" class="box"><p class="ellipsis">${ser.crReContent}</p></td>
-								<td align='center'>${ser.crReplier}</td>
+								<c:choose>
+								<c:when test="${not empty ser.crReContent}">
+								<td align='center'  onclick="folded(${report.index})" class="box"><p class="ellipsis"><c:out value="${ser.crReContent}"></c:out></p></td>
+								<td align='center'><c:out value="${ser.cremployee.empName}"/></td>
+								</c:when>
+								<c:otherwise>
+								<td align='center'  onclick="folded(${report.index})" class="box"><p class="ellipsis"></p></td>
+								<td align='center'></td>
+								</c:otherwise>
+								</c:choose>
 								<td align='center'><fmt:formatDate value="${ser.crReDate}" pattern="yyyy-MM-dd"/></td>
 								<td><button id="btn_update" class="btn btn-outline-secondary btn-icon-text" 
 								onclick="updateCrReport(${ser.pk})" >回覆確認<i class="ti-pencil-alt btn-icon-append"></i>

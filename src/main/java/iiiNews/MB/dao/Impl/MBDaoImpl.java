@@ -1,5 +1,6 @@
 package iiiNews.MB.dao.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -93,5 +94,30 @@ public class MBDaoImpl implements MBDao {
 		}
 
 		return mb;
+	}
+
+	@Override
+	public void updatePasswd(String email) {
+		String password = "@8M75K";
+		String hql = "UPDATE MBBean mb SET mb.password = :mpwd " +
+					"Where mb.email = :memail";
+		Session session = factory.getCurrentSession();
+		System.out.println("密碼更新中0000000000000");
+		session.createQuery(hql)
+				.setParameter("mpwd", password)
+				.setParameter("memail", email)
+				.executeUpdate();
+		System.out.println("密碼已更新");
+	}
+
+	@Override
+	public List<String> seachMemberaccount() {
+		String hql = "SELECT DISTINCT m.email From MBBean m ";
+		List<String> list = new ArrayList<String>();
+		Session session = factory.getCurrentSession();
+		list = session.createQuery(hql)
+					  .getResultList();
+		System.out.println("da05"+list);
+		return list;
 	}
 }

@@ -3,8 +3,11 @@ package iiiNews.MT.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +52,7 @@ public class MtAddBean implements Serializable{
 	private String add3;
 	
 	@OneToMany(mappedBy="mtAddBean", cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
-	Set<MtCommentBean> items = new LinkedHashSet<>();
+	List<MtCommentBean> items = new ArrayList<>();
 	//雙向多對一  一方有個多 儲存多方的物件 告訴他本類別沒有外鍵 提供外鍵的相關資訊給他
 	
 	@Transient
@@ -204,11 +207,11 @@ public class MtAddBean implements Serializable{
 		Image = image;
 	}
 
-	public Set<MtCommentBean> getItems() {
+	public List<MtCommentBean> getItems() {
 		return items;
 	}
 
-	public void setItems(Set<MtCommentBean> items) {
+	public void setItems(List<MtCommentBean> items) {
 		this.items = items;
 	}
 

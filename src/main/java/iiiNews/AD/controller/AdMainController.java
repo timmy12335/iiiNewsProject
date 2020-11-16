@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import iiiNews.AD.model.AdBean;
 import iiiNews.AD.service.AdMainService;
 import iiiNews.AD.validate.AdUploadValidator;
+import iiiNews.MB.model.CpMemberBean;
 
 @Controller
-@SessionAttributes({"shoppingCart"})
+@SessionAttributes({"shoppingCart","CpMemberBean"})
 public class AdMainController {
 	
 	@Autowired
@@ -45,6 +47,19 @@ public class AdMainController {
 		*最後回傳上傳的網頁的網址*/
 		
 		AdBean bean = new AdBean();
+		
+		//先確定他有登入 且是企業會員
+		CpMemberBean cpbean = (CpMemberBean) model.getAttribute("CpMemberBean");
+		String cpmemberId ="";
+		if(cpbean == null) {
+			System.out.println("按下上傳廣告 但尚未登入企業會員 彈回到企業登入");
+			return "redirect:/CpLogin";
+		}else {
+			System.out.println("按下上傳廣告 企業會員登入完成");
+			cpmemberId = cpbean.getCpmemberId();
+			System.out.println("登入的帳號是"+cpmemberId);
+			model.addAttribute("showmemberId", cpmemberId);
+		}
 		
 		//純粹是為了給初始值 可以不寫
 //		bean.setAdNo("AD20201024");
@@ -80,11 +95,22 @@ public class AdMainController {
 		Map<String, String> msg = new HashMap<>();
 		
 		//$$$$ 未來要寫得到企業memberId 目前暫時寫從Attribute取 尚未驗證過!!!
-//		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CPLogin_OK");
-//		String cpmemberId = mb.getCpmemberId();
-//		String cpname = mb.getCpname();
-		bean.setMemberId("tina");
-		bean.setMemberName("TVBS新聞台");
+		//先確定他有登入 且是企業會員
+		CpMemberBean cpbean = (CpMemberBean) model.getAttribute("CpMemberBean");
+		String cpmemberId ="";
+		String cpname = "";
+		if(cpbean == null) {
+			System.out.println("送出上傳廣告 但尚未登入企業會員 彈回到企業登入");
+			return "redirect:/CpLogin";
+		}else {
+			System.out.println("按下上傳廣告 企業會員登入完成");
+			cpmemberId = cpbean.getCpmemberId();
+			cpname = cpbean.getCpname();
+			System.out.println("登入的帳號是"+cpmemberId+",名稱是："+cpname);
+		}
+		
+		bean.setMemberId(cpmemberId);
+		bean.setMemberName(cpname);
 		
 		//取得上傳時間
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
@@ -106,7 +132,7 @@ public class AdMainController {
 		msg.put("addStatus", "上架廣告成功，已新增： "+n+" 筆");
 		model.addAttribute("processMsg", msg);
 		System.out.println(msg);
-		return "redirect:/getAllAds";
+		return "redirect:/memberAllAdsList";
 	}
 	
 	
@@ -123,12 +149,20 @@ public class AdMainController {
 	@GetMapping("/memberAllAdsList")
 	public String getMemberAdList(Model model){
 		
-//		$$$$ 未來要寫得到企業memberId 目前暫時寫從Attribute取 尚未驗證過!!!
-//		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CPLogin_OK");
-//		String cpmemberId = mb.getCpmemberId();
-//		String cpname = mb.getCpname();
+		//$$$$ 未來要寫得到企業memberId 目前暫時寫從Attribute取 尚未驗證過!!!
+		//先確定他有登入 且是企業會員
+		CpMemberBean cpbean = (CpMemberBean) model.getAttribute("CpMemberBean");
+		String cpmemberId ="";
+		if(cpbean == null) {
+			System.out.println("企業會員想查自己的單 但尚未登入 彈回到企業登入");
+			return "redirect:/CpLogin";
+		}else {
+			System.out.println("企業會員想查自己的單 登入完成");
+			cpmemberId = cpbean.getCpmemberId();
+			System.out.println("登入的帳號是"+cpmemberId);
+		}
+
 		
-		String cpmemberId = "tina";
 		List<AdBean> list = service.getCpMemberAdList(cpmemberId);
 		model.addAttribute("CpAdLists",list);
 		return "AD/entMem/memberAllAdsList";
@@ -145,7 +179,23 @@ public class AdMainController {
 		return "redirect:/memberAllAdsList";
 	}
 	
-	
+	@PostMapping("/updateAdProduct/{adPk}")
+	public String updateAdProductById(@PathVariable Integer adPk,
+									@RequestParam Double width,
+									@RequestParam Double height,
+									@RequestParam Integer price,
+									@RequestParam Integer stock,Model model) {
+		
+		AdBean ab = service.getOneAdByadPk(adPk);
+		ab.setWidth(width);
+		ab.setHeight(height);
+		ab.setPrice(price);
+		ab.setStock(stock);
+		service.updateAds(ab);
+//		int n = service.deleteAdByMemberPkid(adPk);
+//		System.out.println("成功更動 "+n+" 筆");
+		return "redirect:/memberAllAdsList";
+	}
 
 	
 	

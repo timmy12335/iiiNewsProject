@@ -115,7 +115,7 @@
 										<div class="col-sm-9">
 											<form:input class="form-control" type="text" id="idWidth"
 												name="idWidth" path="width" placeholder="請輸入寬" />
-											
+											<form:errors path="width" cssClass="error" />
 										</div>
 									</div>
 									<div class="form-group row">

@@ -7,8 +7,10 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.sql.rowset.serial.SerialBlob;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -17,15 +19,22 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+
+import iiiNews.MB.model.MBBean;
 import iiiNews.NP.model.NewsBean;
 import iiiNews.NP.service.NewsProductService;
+import iiiNews.NP.validation.NPUploadValidator;
 
 @Controller
+@SessionAttributes({"MBBean"})
 public class NewsProductController {
 
 	@Autowired
@@ -36,14 +45,40 @@ public class NewsProductController {
 	// 讓Bean有一個記憶體空間
 	@GetMapping("/uploadNews")
 	public String goUploadForm(Model model) {
-		NewsBean nb = new NewsBean();
-		model.addAttribute("newsBean", nb);
-		return "NP/uploadNews";
+		MBBean mb = (MBBean) model.getAttribute("MBBean");
+		if(mb == null) {			
+			return "redirect:/Login";
+		}else {
+			NewsBean nb = new NewsBean();
+			model.addAttribute("newsBean", nb);		
+			return "NP/uploadNews";
+		}
+		
 	}
 
 	// 新增上傳一則新聞 ,(status=2)(check)
 	@PostMapping("/uploadNews")
-	public String uploadNewsForm(@ModelAttribute("newsBean") NewsBean nb, Model model) {
+	public String uploadNewsForm(@ModelAttribute("newsBean") NewsBean nb, Model model, BindingResult bindingResult) {		
+		MBBean mb = (MBBean) model.getAttribute("MBBean");
+		String memberId = null;
+		if(mb == null) {
+			model.addAttribute("showmemberId", memberId);
+		}else {
+			System.out.println("已登入完成");
+			memberId = mb.getMemberId();
+			System.out.println(memberId);
+			nb.setMemberId(memberId);
+		}
+		new NPUploadValidator().validate(nb, bindingResult);
+		if(bindingResult.hasErrors()) {
+			System.out.println("==============");
+			List<ObjectError> list = bindingResult.getAllErrors();
+			for(ObjectError error : list) {
+				System.out.println("有錯："+error);
+			}
+			return "NP/uploadNews";
+		}
+		
 		Timestamp uploadTime = new Timestamp(System.currentTimeMillis());
 		nb.setUploadTime(uploadTime);
 
@@ -79,12 +114,15 @@ public class NewsProductController {
 			}
 		}
 
+		System.out.println(nb.getHappenTime());
+		
+		
 		String md = service.getLastRecord();
-		nb.setMemberId("A0002");
+		
 		nb.setNewsId(md);
 		nb.setStatus(2);
 		service.uploadNewsForm(nb);
-		return "redirect:/getMemNewsList/A0002";
+		return "redirect:/getMemNewsList";
 	}
 	//將圖片顯示給企業看(已上架)
 		@GetMapping("/getUpNewsPicture/{newsId}")
@@ -183,7 +221,7 @@ public class NewsProductController {
 	public String delSingleNews(@PathVariable String newsId, Model model) {
 
 		service.delSingleNews(newsId);
-		return "redirect:/getMemNewsList/A0002";
+		return "redirect:/getMemNewsList";
 	}
 
 }

@@ -70,7 +70,7 @@ p{
 	<div class="container-fluid">
 		<div align='center' style="margin-top: 150px;">
 			<h3>
-				<b>會員${memberId}已上架新聞列表</b>
+				<b>會員${MBBean.memberId}已上架新聞列表</b>
 			</h3>
 			<c:choose>
 				<c:when test="${empty upMemNewsList}">

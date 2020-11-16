@@ -34,14 +34,14 @@
 						<li><a href='#'>Sub Product</a></li>
 					</ul></li>
 			</ul></li>
-		<li><a href='#'>新聞專區</a>
+		<li><a href="<c:url value='/changeStautsForTime'/>">新聞專區</a>
 			<ul>
 				<li><a href='#'>一般會員</a>
 					<ul>
 						<li><a href="<c:url value='/uploadNews'/>">上傳新聞</a></li>
-						<li><a href="<c:url value='/getMemNewsList/A0002'/>">個人未上架新聞列表</a></li>
-						<li><a href="<c:url value='/getUpMemNewsList/A0002'/>">個人已上架新聞列表</a></li>
-						<li><a href="<c:url value='/getOrderMemNewsList/A0002'/>">個人已被購買新聞列表</a></li>
+						<li><a href="<c:url value='/getMemNewsList'/>">個人未上架新聞列表</a></li>
+						<li><a href="<c:url value='/getUpMemNewsList'/>">個人已上架新聞列表</a></li>
+						<li><a href="<c:url value='/getOrderMemNewsList'/>">個人已被購買新聞列表</a></li>
 					</ul></li>
 				<li><a href='#'>企業專區</a>
 					<ul>

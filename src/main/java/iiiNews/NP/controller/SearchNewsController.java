@@ -8,11 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import iiiNews.MB.model.MBBean;
 import iiiNews.NP.model.NewsBean;
 import iiiNews.NP.service.NewsProductService;
 
 @Controller
+@SessionAttributes({"MBBean"})
 public class SearchNewsController {
 	
 	@Autowired
@@ -36,24 +39,38 @@ public class SearchNewsController {
 			}
 
 		// 查詢單一會員未上架的新聞列表
-		@GetMapping("/getMemNewsList/{memberId}")
-		public String getMemNewaList(@PathVariable String memberId, Model model) {
-			List<NewsBean> list = service.getMemNews(memberId);
-			model.addAttribute("memNewsList", list);
-			return "NP/memNewsList";
-		}
-		// 查詢單一會員已上架的新聞列表
-			@GetMapping("/getUpMemNewsList/{memberId}")
-			public String getUpMemNewaList(@PathVariable String memberId, Model model) {
-				List<NewsBean> list = service.getUpMemNews(memberId);
-				model.addAttribute("upMemNewsList", list);
-				return "NP/upMemNewsListTest";
+		
+		@GetMapping("/getMemNewsList")
+		public String getMemNewaList( Model model) {
+			MBBean mb = (MBBean) model.getAttribute("MBBean");
+			
+			if(mb == null) {	
+				System.out.println("請登入");
+				return "redirect:/Login";				
+			}else {
+				String memberId = mb.getMemberId();
+				List<NewsBean> list = service.getMemNews(memberId);
+				model.addAttribute("memNewsList", list);
+				return "NP/memNewsList";
 			}
 			
-//			@ModelAttribute
-//			public NewsBean editNewsBean() {
-//				NewsBean nBean;
-//				return nBean;
-//			}
+		}
+		// 查詢單一會員已上架的新聞列表
+			@GetMapping("/getUpMemNewsList")
+			public String getUpMemNewaList( Model model) {
+				MBBean mb = (MBBean) model.getAttribute("MBBean");
+				if(mb == null) {			
+					return "redirect:/Login";
+				}else {
+					String memberId = mb.getMemberId();
+					List<NewsBean> list = service.getUpMemNews(memberId);
+					model.addAttribute("upMemNewsList", list);
+					return "NP/upMemNewsListTest";
+				}
+				
+			}
+			
+	
+			
 
 }

@@ -90,9 +90,9 @@
 
 	<!-- 頁首/開始 -->
 	<div style="z-index: -100; position: relative;">
-		<header class="header">
+		<header class="header"  >
 
-			<video autoplay muted loop id="myVideo">
+			<video autoplay muted loop id="myVideo" style="object-fit:fill;height:500px;"  >
 				<source src="images/covid19.mp4" type="video/mp4">
 			</video>
 

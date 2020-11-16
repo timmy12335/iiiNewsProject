@@ -65,11 +65,7 @@ public class MtAddServiceImpl implements MtAddService {
 	}
 
 	// --------------------------------------------------------------
-	@Override
-	@Transactional
-	public List<MtAddBean> getAllMtAdd() { // 取所有mtAddBean資料，對應getAllMtAdd
-		return dao.getAllMtAdd();
-	}
+	
 
 	@Override
 	@Transactional
@@ -79,16 +75,29 @@ public class MtAddServiceImpl implements MtAddService {
 
 	@Override
 	@Transactional
-	public MtAddBean getSingleArticle(String articleId) { // 查詢單一文章
-		return dao.getSingleArticle(articleId);
-	}
-
-	@Override
-	@Transactional
 	public List<MtAddBean> getMemArticle(String memberId) { // 查詢單一會員的文章列表
 		return dao.getMemArticle(memberId);
 	}
-
+	
+	@Override
+	@Transactional
+	public List<MtAddBean> getMtAdd() { 		//登入後查看所有人文章
+		return dao.getMtAdd();
+	}
+	
+	//********************後台********************
+	@Override
+	@Transactional
+	public List<MtAddBean> getAllMtAdd() { // 取所有mtAddBean資料，對應getAllMtAdd
+		return dao.getAllMtAdd();
+	}
+	
+	@Override
+	@Transactional
+	public MtAddBean getSingleArticle(String articleId) { // 查詢單一文章
+		return dao.getSingleArticle(articleId);
+	}
+	
 	@Override
 	@Transactional
 	public void delSingleArticle(String articleId) { // 刪除文章，改狀態
@@ -97,11 +106,6 @@ public class MtAddServiceImpl implements MtAddService {
 			dao.updateStatus(articleId, bean.getStatus() - 1);
 		}
 	}
-
-//	@Override		//抓pkey
-//	@Transactional
-//	public List<String> getAllAddDao1() {
-//		return dao.getAllAddDao1();
-//	}
+	//********************後台********************
 
 }

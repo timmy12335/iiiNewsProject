@@ -15,14 +15,18 @@ public interface MtAddService {
 	
 	MtAddBean getpkey(int pkey);
 	void delete(Integer pkey);								//刪除文章
-	void update(MtAddBean mtAddBean);							//更新文章資訊
+	void update(MtAddBean mtAddBean);						//更新文章資訊
 	
-	public List<MtAddBean> getAllMtAdd();					//取所有mtAddBean資料，對應getAllMtAdd
-	public void modifyArticle(MtAddBean ModArt);				//編輯單一文章
-
-	public MtAddBean getSingleArticle(String articleId);	//查詢單一文章
+	public void modifyArticle(MtAddBean ModArt);			//編輯單一文章
+	
 	public List<MtAddBean> getMemArticle(String memberId);	//查詢單一會員的文章列表
+	
+	public List<MtAddBean> getMtAdd();						//登入後查看所有人文章
+	
+	//********************後台********************
+	public List<MtAddBean> getAllMtAdd();					//取所有mtAddBean資料，對應getAllMtAdd
+	public MtAddBean getSingleArticle(String articleId);	//查詢單一文章
 	void delSingleArticle(String articleId);				//刪除文章，改狀態
+	//********************後台********************
 
-//	public List<String> getAllAddDao1();	//抓pkey
 }

@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import CR.dao.CR_Dao;
 import CR.model.CRBean;
+import CR.model.CRemployee;
 import CR.service.CR_service;
+import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
 
 @Service
@@ -54,7 +56,9 @@ public class CR_service_impl implements CR_service {
 	@Override
 	public void updateReport(CRBean cb) {
 		dao.updateReport(cb);
-		
+		if(cb.getState().equals("未回覆")) {
+			dao.reviseemp(cb);
+		}
 	}
 
 	@Override
@@ -73,6 +77,23 @@ public class CR_service_impl implements CR_service {
 	public  List<CRBean> getReportBymemberId(String memberId) {
 		
 		return dao.getReportBymemberId(memberId);
+	}
+
+	@Override
+	public CRemployee getemployeeBytreatamt() {
+		return dao.getemployeeBytreatamt();
+	}
+
+	@Override
+	public CpMemberBean getCpMembersByMemberId(String memberId) {
+		
+		return dao.getCpMembersByMemberId(memberId);
+	}
+
+	@Override
+	public List<CRBean> getReportBycpmemberId(String memberId) {
+		
+		return dao.getReportBycpmemberId(memberId);
 	}
 
 

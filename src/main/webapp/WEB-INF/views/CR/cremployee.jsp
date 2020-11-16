@@ -33,26 +33,27 @@
 	
 	function send(emppk){
 		var xhr2 = new XMLHttpRequest();
-		var empnameValue = document.getElementById("empName").value;
-		var empIValue = document.getElementById("empId").value;
-		var titleValue = document.getElementById("crTitle").value;
-		var result=confirm("確定修改此筆客服表單(單號:"+emppk+")?");
+		var pk = document.getElementById("emppk"+emppk).value
+		var empnameValue = document.getElementById("empName"+emppk).value;
+		var empIdValue = document.getElementById("empId"+emppk).value;
+		var empemailValue = document.getElementById("empemail"+emppk).value;
+		var result=confirm("確定修改此筆客服表單(單號:"+pk+")?");
 		if(result){
-			xhr2.open("PUT","<c:url value='/allemployee/'/>"+emppk,true);
+			xhr2.open("POST","<c:url value='/allemployee/'/>"+pk,true);
 			xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 			var jsonReport = {
-					"emppk": pk, 					
-					"empId": nameValue, 	
-					"empName": classValue,
-					"empemail":emailValue
+					"empPk": pk, 					
+					"empId": empIdValue, 	
+					"empName": empnameValue,
+					"empemail":empemailValue
 		   		}
-			xhr2.send();
+			xhr2.send(JSON.stringify(jsonReport));
 			xhr2.onreadystatechange=function(){
 			if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
 		      result = JSON.parse(xhr2.responseText);
+		      console.log(result);
 		      if (result.fail) {		    	  
-				 		divResult.innerHTML = "<font color='red' >"
-							+ result.fail + "</font>";
+					console.log("fail");
 			  		} else if (result.success) {
 							window.location.href="<c:url value='/allemployee'/>";						
 			}
@@ -76,19 +77,19 @@
 
 
 	<h4 class="font-weight-bold mb-0">客服人員管理表單</h4>
-	<div style="width:400px;" align="left"><a href="<c:url value='/addemployee'/>"><button id="add">新增客服人員</button></a></div>
+	<div align="right"><a href="<c:url value='/addemployee'/>"><button id="add">新增客服人員</button></a></div>
 	<div id="resultmsg"></div>
-	<table class="table table-hover" style="width: 1000px;">
+	<table class="table table-hover" style=" table-layout:fixed; width:1100px;">
 		<thead>
 			<tr>
-				<th width='60'>員工流水號</th>
-				<th>姓名</th>
-				<th>客服人員帳號</th>
-				<th>客服人員信箱</th>
-				<th align='center'>入職日期</th>
-				<th>處理中客服表單</th>
-				<th>處理完客服表單</th>
-				<th>功能</th>
+				<th width='60'>編號</th>
+				<th width='60'>姓名</th>
+				<th width='100'>客服人員帳號</th>
+				<th width='220'>客服人員信箱</th>
+				<th width='150'>入職日期</th>
+				<th  width='180'>處理中客服表單</th>
+				<th  width='180'>處理完客服表單</th>
+				<th >功能</th>
 			</tr>
 		</thead>
 		<c:choose>
@@ -107,36 +108,42 @@
 						<td align='center'><fmt:formatDate value="${ser.applyDate}"
 								pattern="yyyy-MM-dd" /></td>
 								<td>
-								${ser.replyamt}
+								${ser.untreatamt}
 								</td>
 								<td>
-								${ser.untreatamt}
+								${ser.replyamt}
 								</td>
 						<td><button id="btn_update"
 								class="btn btn-outline-secondary btn-icon-text"
-								onclick="show(${report.index})">
+								onclick="show(${emp.index})">
 								修改<i class="ti-pencil-alt btn-icon-append"></i>
 							</button>
+							<br>
 							<button id="btn_delete"
 								class="btn btn-outline-danger btn-icon-text"
 								onclick="deleteCrReport(${ser.empPk})">
 								刪除<i class="ti-trash btn-icon-append"></i>
 							</button></td>
 					</tr>
-					<tr id="up" style="display:none">
-					<td align='left'>${ser.empPk}</td>
-						<td align='left'><input type="text" id="empName${emp.index}" name="empName">${ser.empName}</td>
-						<td align='center'><input type="text" id="empId${emp.index}" name="empId">${ser.empId}</td>
-						<td align='left'><input type="text" id="empemail${emp.index}" name="empemail">${ser.empemail}</td>
-						<td align='center'><fmt:formatDate value="${ser.applyDate}"
+					<tr id="up${emp.index}" style="display:none;">
+					<td align='left'><input type="text" value="${ser.empPk}" id="emppk${emp.index}" disabled></td>
+						<td align='left'>
+						<input type="text" id="empName${emp.index}" name="empName" value="${ser.empName}" width="100px;"></td>
+						<td align='center'>
+						<input type="text" id="empId${emp.index}" name="empId" value="${ser.empId}" width="200px"></td>
+						<td align='left'>
+						<input type="text" id="empemail${emp.index}" name="empemail" value="${ser.empemail}" width="100px"></td>
+						<td align='center'>
+						<fmt:formatDate value="${ser.applyDate}"
 								pattern="yyyy-MM-dd" /></td>
-								<td>
-								${ser.replyamt}
-								</td>
 								<td>
 								${ser.untreatamt}
 								</td>
-								<td><input type="button" id="confirmup" onclick="send(${emp.index})"></td>
+								<td>
+								
+								${ser.replyamt}
+								</td>
+								<td><input type="button" id="confirmup" onclick="send(${emp.index})" value="確認修改"></td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

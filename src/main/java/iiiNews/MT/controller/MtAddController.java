@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -43,14 +44,36 @@ public class MtAddController {
 	ServletContext servletContext;
 	
 	@GetMapping("/MtCreate")
-	public String toCreateForm(Model model, HttpSession session) {		//載入新增欄位頁面getBean
+	public String toCreateForm(Model model, HttpSession session, HttpServletRequest request) {		//載入新增欄位頁面getBean
+
+		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
+		if (memberBean == null) {
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+	
+		session = request.getSession(false); 
+		if (session == null) {
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
 		
-//		MBBean mb = (MBBean) session.getAttribute("MBBean");	//抓會員session
-//        String memberId = mb.getMemberId();
 		
+//		String memberId = null;
+//		try {
+//			MBBean mb = (MBBean) session.getAttribute("MBBean");	//抓會員session*****未完成
+//			memberId = mb.getMemberId();
+//			
+//			if (memberId == null) {
+//				return "redirect:/Login";
+//			}
+//		} catch (Exception e) {
+//			System.out.println("未登入");
+//			e.printStackTrace();
+//		}
+        
 		MtAddBean bean = new MtAddBean();
+//		bean.setMemberId(mb.getMemberId());
 		model.addAttribute("mtBean", bean);
-		System.out.println("*******************************************");
+		System.out.println("*******************************************" + memberBean.getMemberId());
 //		System.out.println("*******************************************" + memberId);
 		return "MT/Create";
 	}
@@ -59,39 +82,36 @@ public class MtAddController {
 //	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model) {
 
 		//-----------------------------------------11/05判斷功能，要改成Ajax
-	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result) {
+	public String CreateForm(@ModelAttribute("mtBean") MtAddBean bean, Model model, BindingResult result, HttpServletRequest request) {
         CheckArticleVaildator validator = new CheckArticleVaildator();
         validator.validate(bean, result);
-//        MBBean mbb = (MBBean) model.getAttribute("MBBean");
-//        bean.setMemberId(mbb.getMemberId());
+        MBBean mbb = (MBBean) model.getAttribute("MBBean");
+        bean.setMemberId(mbb.getMemberId());
         
-        try {
-            if (bean.getTitle().isEmpty()) {
-                result.rejectValue("title","","");
-                System.out.println("---標題不能空白---");
+        if (mbb.getMemberId() == null) {		//抓會員session
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+	
+		HttpSession session = request.getSession(false); 
+		if (session == null) {
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+        if (result.hasErrors()) {
+        		System.out.println("---標題不能空白---");
                 return "MT/Create";
-            }
-        } catch (Exception e) {
-            System.out.println("---標題catch---");
-            e.printStackTrace();
         }
+
         //-----------------------------------------------
-        try {
-            if (bean.getArticle().isEmpty()) {
-                result.rejectValue("article","","內文不能空白");
-                System.out.println("---內文不能空白---");
-                return "MT/Create";
-            }
-        } catch (Exception e) {
-            System.out.println("---標題catch---");
-            e.printStackTrace();
-        }
-        
+//
+//            if (result.hasErrors()) {
+//                System.out.println("---內文不能空白---");
+//                return "MT/Create";
+//            }
+
         
         //-----------------------------------------------
 		
-		
-		
+        //**********圖片不需做判斷**********
 		
 		//-----------------------------------------11/05判斷功能
 //		Map<String, String> map = new HashMap<>();

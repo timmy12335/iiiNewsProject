@@ -8,25 +8,53 @@
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <title>Product</title>
+<style>
+#002{
+width:200px;
+line-height:50px;
+padding:20px;
+border:2px green solid;
+float:left;
+}
+#001{
+width:200px;　//DIV區塊寬度
+line-height:50px;　//DIV區塊高度
+padding:20px;　//DIV區塊內距，參閱：CSS padding 內距。
+border:2px blue solid;　//DIV區塊邊框，參閱：CSS border 邊框設計。
+margin-right:10px;　//靠右外距，參閱：CSS margin 邊界使用介紹範例教學。
+float:left;
+}
+</style>
 </head>
 <body>
-	<section>
+	<!-- <section>
 		<div>
 			<div class="container" style="text-align: center">
 				<h2>產品資料</h2>
 			</div>
 		</div>
-	</section>
-	<section class="container">
-		<div class="row">
-			<img width='100' height='200'
-				src="<c:url value='/getPictureTK/${trkNew.trackId}' />" />
-			<div class="col-md-5">
+	</section> -->
+	      
+	      
+	       
+	       
+	       
+	       
+	       
+	<section class="container" style="background-color:gray; float:left; width:800px" >
+	              
+		<div  class="row"  >
+			      
+			<div class="col-md-5" >
 				<h3>${trkNew.title}</h3>
+				      <figure class="figure">
+                           <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
+                           <figcaption class="figure-caption"></figcaption>
+                      </figure>
 				<p>建立人: ${trkNew.founder}</p>
 				<p>建立時間: ${trkNew.fondtime}</p>
 				<p>追蹤人數: ${trkNew.trcnum}</p>
-				<p>內容: ${trkNew.descript}</p>
+				<p class="text-xl-left">內容: ${trkNew.descript}</p>
 				<p>發生地點: ${trkNew.ocplace}</p>
 				<p>發生時間: ${trkNew.octime}</p>
 				<p>點閱人數: ${trkNew.clicnum}</p>
@@ -58,8 +86,14 @@
 				</p>
 			</div>
 		</div>
+		
 	</section>
-
+<div  style="float:left" >
+			            <h1 id="002" class="display-4" >各媒體相關報導</h1> 
+			      <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
+			      
+			      
+			      </div>
 	<!-- 點擊累加 -->
 	 <%-- <%
 		Integer hitsCount = (Integer) application.getAttribute("hitCounter");
@@ -137,6 +171,7 @@
 	        visits = parseInt(visits) + 1
 	setCookie("counter", visits, now)
 	var t1 = visits + clicnum;
+	console.log("Aaaaaaa="+visits);
 	document.write("您是到访的第" + t1 + "位用户！");
 	window.onload = function() {
     

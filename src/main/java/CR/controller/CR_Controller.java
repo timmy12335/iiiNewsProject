@@ -32,8 +32,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import CR.model.CRBean;
+import CR.model.CRemployee;
+import CR.service.CR_empService;
 import CR.service.CR_service;
 import CR.validation.CRaddValidator;
+import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
 
 
@@ -44,6 +47,9 @@ public class CR_Controller {
 	ServletContext ctx;
 	@Autowired
 	CR_service service;
+	@Autowired
+	CR_empService empService;
+	
 	@Autowired
 	JavaMailSender mailSender;
 	
@@ -80,7 +86,11 @@ public class CR_Controller {
 	@GetMapping("/addReport")
 	public String getAddNewReportForm(Model model,HttpServletRequest request,HttpServletResponse response) {
 		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
+		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
 		if (memberBean == null) {
+			if(cpmemberBean == null) {
+			return "redirect: " + ctx.getContextPath() + "/Login";
+			}
 			return "redirect: " + ctx.getContextPath() + "/Login";
 		}
 	
@@ -92,11 +102,26 @@ public class CR_Controller {
 		model.addAttribute("crBean", cb);
 		return "CR/CrAddReport";
 	}
+	
+	
+	
 	//會員申請客服表單送出並寄信
 	@PostMapping("/addReport")
 	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb,Model model, BindingResult bindingResult) { //bindingResult表單綁定
+		CpMemberBean cpmb = null;
+		MBBean mb = null;
 		//通過會員編號取得會員資料
-		MBBean mb = service.getMembersByMemberId(cb.getMemberId());
+		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
+		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
+		if (memberBean == null) {
+			if(cpmemberBean == null) {
+			return "redirect: " + ctx.getContextPath() + "/Login";
+			}
+			cpmb = service.getCpMembersByMemberId(cpmemberBean.getCpmemberId());
+		}else{
+			mb = service.getMembersByMemberId(memberBean.getMemberId());
+		}
+		
 		//確認欄位
 		new CRaddValidator().validate(cb, bindingResult);
 		if(bindingResult.hasErrors()) {
@@ -126,7 +151,11 @@ public class CR_Controller {
 				MimeMessage msg = mailSender.createMimeMessage();
 				try {
 					MimeMessageHelper email = new MimeMessageHelper(msg,true,"utf-8");
+					if(mb.getEmail() !=null) {
 					email.setTo(mb.getEmail());
+					}else {
+					email.setTo(cpmb.getCpemail());
+					};
 					email.setSubject("iiiNews客服表單申請成功通知信");
 					String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>"
 							+ "<table><tr><td>客服類別:"+cb.getCrClass()+"</td></tr><tr><td>客服標題:"+
@@ -142,17 +171,31 @@ public class CR_Controller {
 					e.printStackTrace();
 				}
 		service.addReport(cb);
-	    return "redirect:/success/"+cb.getMemberId();
+	    return "redirect:/success";
 	}
 	
-	@GetMapping("/success/{memberId}")
-	public String successjsp(@PathVariable String memberId, Model model) {
-		 List<CRBean> cb = service.getReportBymemberId(memberId);
-		model.addAttribute("CrReport", cb);
+	@GetMapping("/success")
+	public String successjsp(Model model, HttpServletRequest request,HttpServletResponse response) {
+		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
+		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
+		List<CRBean> cb=null;
+		if(memberBean == null) {
+			if(cpmemberBean == null) {
+				return "redirect: " + ctx.getContextPath() + "/Login";
+			}
+			cb=service.getReportBycpmemberId(cpmemberBean.getCpmemberId());
+		}else {
+			cb = service.getReportBymemberId(memberBean.getMemberId());
+		}
 		
+		HttpSession session = request.getSession(false); 
+		if (session == null) {
+			return "redirect: " + ctx.getContextPath() + "/Login";
+		}
+		
+		model.addAttribute("CrReport", cb);
 		return "CR/CrReportforMB";
 	}
-	
 	
 	
 	
@@ -194,6 +237,9 @@ public class CR_Controller {
 		cb.setMemberId(cb0.getMemberId());
 		cb.setPk(cb0.getPk());
 		cb.setCrApplyDate(cb0.getCrApplyDate());
+		cb.setMbBean(cb0.getMbBean());
+		cb.setState(cb0.getState());
+		cb.setCremployee(cb0.getCremployee());
 		cb.setMbBean(cb0.getMbBean());
 		Timestamp today=new Timestamp(System.currentTimeMillis());
 		cb.setCrReDate(today);

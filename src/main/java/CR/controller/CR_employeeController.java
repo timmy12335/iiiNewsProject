@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRemployee;
@@ -61,18 +61,21 @@ public class CR_employeeController {
 			map.put("success","刪除成功");
 		}catch(Exception e) {
 			map.put("fail","刪除失敗");
+			e.printStackTrace();
+			System.out.println("GG");
 		}
 		return map;
 	}
 	
-	@PutMapping(value="/allemployee/{empPk}")
-	public @ResponseBody Map<String, String> updateemployee(@PathVariable Integer empPk){
+	@PostMapping(value="/allemployee/{empPk}")
+	public @ResponseBody Map<String, String> updateemployee(@RequestBody CRemployee cre){
 		Map<String, String> map = new HashMap<>();
 		try {
-			service.deleteemployeeByPk(empPk);
-			map.put("success","刪除成功");
+			service.updateemployee(cre);
+			map.put("success","修改成功");
 		}catch(Exception e) {
-			map.put("fail","刪除失敗");
+			e.printStackTrace();
+			map.put("fail","修改失敗");
 		}
 		return map;
 	}

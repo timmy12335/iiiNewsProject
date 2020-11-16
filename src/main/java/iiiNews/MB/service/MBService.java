@@ -13,4 +13,6 @@ public interface MBService {
 	public List<MBBean> getMember(String name);	
 	void  addMember(MBBean member);
 	public MBBean login(String account, String password);
+	public void updatePassword(String email);
+	public List<String> seachMemberaccount();
 }

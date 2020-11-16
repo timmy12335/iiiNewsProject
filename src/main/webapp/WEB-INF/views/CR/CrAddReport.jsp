@@ -91,9 +91,10 @@ window.onload=function(){
 		enctype="multipart/form-data">
 				<table class="table" border="1" style="width: 800px;">
 					<tr>
-						<td class="form-group">帳號:</td>
-						<td colspan='2'align="center"><form:input type="text" path="memberId"
-								id="memberId" value="${MBBean.memberId}"></form:input></td>
+						<td class="form-group">會員姓名:</td>
+						<td colspan='2'align="center"><input type='text' value='${MBBean.name}'>
+						<form:input type="text" path="memberId"
+								id="memberId" value="${MBBean.memberId}" hidden='true'></form:input></td>
 					</tr>
 					<tr>
 						<td class="form-group">客服類別:</td>

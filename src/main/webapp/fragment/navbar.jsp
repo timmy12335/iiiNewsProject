@@ -71,7 +71,9 @@
 				<li><a href="<c:url value='/MtCreate' />">新增Po文</a>
 				<li><a href="<c:url value='/getAllMtAdd' />">檢視所有資料---待刪除</a></li>
 				<li><a href="<c:url value='/getMemArticleList' />">查詢會員發文紀錄</a></li>
-				<li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
+                <li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>
+                <li><a href="<c:url value='/AllArticleComment' />">文章瀏覽</a></li>
+                <li><a href="<c:url value='/CreateComment' />">留言功能測試，OK後移入文章瀏覽功能內</a></li>
 				<%--                     <li><a href="<c:url value='/000' />">ADD</a></li> --%>
 			</ul></li>
 		<li><a href='#'>廣告專區</a>

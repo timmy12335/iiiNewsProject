@@ -73,7 +73,7 @@ public class AdBuyingController {
 		
 		//名字暫時寫死的
 		String buyername = "frank";
-		String sellername = "storeFrank";
+		String sellername = adbean.getMemberId();
 		Timestamp soldDate = new Timestamp(System.currentTimeMillis());
 		AdOrderItemBean aoib = new AdOrderItemBean(null, adbean.getAdPk(), adbean.getAdNo(), adbean.getPrice(),
 										quantity, sellername, buyername, adbean.getCategoryNo(), adbean.getWidth(),
@@ -165,6 +165,7 @@ public class AdBuyingController {
 		List<Integer> adpkList = new ArrayList<>();
 		for(int n : items) {
 			AdOrderItemBean aoib = cartItem.get(n);
+			aoib.setBuyerMemberId(buyerMemberId);
 			aoib.setAdOrderBean(aob);
 			itemBeanSet.add(aoib);
 			//

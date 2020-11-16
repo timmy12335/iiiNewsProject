@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,10 +34,11 @@ import iiiNews.AD.model.AdOrderBean;
 import iiiNews.AD.model.AdOrderItemBean;
 import iiiNews.AD.service.AdItemService;
 import iiiNews.AD.service.AdOrderService;
+import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
 
 @Controller
-@SessionAttributes({"shoppingCart","MBBean"})
+@SessionAttributes({"shoppingCart","MBBean","CpMemberBean"})
 public class AdOrderController {
 	
 	@Autowired
@@ -79,13 +83,28 @@ public class AdOrderController {
 		public String CpMemberSoldList(Model model) {
 			
 			//$$$$ 未來要寫得到memberId 目前暫時寫從Attribute取 尚未驗證過!!!
-//			CbMemberBean mb = (CbMemberBean) model.getAttribute("Login_PK");
-//			String memberId = mb.getMemberId();
+			//先確定他有登入 且是企業會員
+			CpMemberBean cpbean = (CpMemberBean) model.getAttribute("CpMemberBean");
+			String cpmemberId ="";
+			if(cpbean == null) {
+				System.out.println("企業會員查賣出ALL 但尚未登入 彈回到企業登入");
+				return "redirect:/CpLogin";
+			}else {
+				System.out.println("企業會員查賣出ALL 登入完成");
+				cpmemberId = cpbean.getCpmemberId();
+				System.out.println("登入的帳號是"+cpmemberId);
+			}
 			
-			String memberId = "storeFrank";
-			List<AdOrderItemBean> orderlist = itemService.getCpMemberSoldList(memberId);
+			List<AdOrderItemBean> orderlist = itemService.getCpMemberSoldList(cpmemberId);
 			model.addAttribute("CpSoldList", orderlist);
 			return "AD/entMem/AllSoldList";
+		}
+		
+	@GetMapping("/getCpMemeberSoldListByAjax.json")
+		public @ResponseBody List<AdOrderItemBean> getCpMemeberSoldByAjax(
+				@RequestParam(value="memberId",defaultValue = "ALL" )String cpmemberId) {
+			List<AdOrderItemBean> orderlist = itemService.getCpMemberSoldList(cpmemberId);
+			return orderlist;		
 		}
 	
 	

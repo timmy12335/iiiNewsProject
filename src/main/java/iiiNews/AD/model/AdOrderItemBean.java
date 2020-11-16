@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="AdOrderItems")
@@ -36,9 +37,9 @@ public class AdOrderItemBean {
 	private String sellerMemberId;		//^^^^賣家會員帳號
 	private String buyerMemberId;		//賣家會員帳號
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp soldDate;	//上傳的日期戳記
-	
+	@JsonIgnore
 	private Blob adImage;				//客戶上傳的照片
 	private String adImageName;			//客戶上傳照片的檔名
 	
@@ -47,6 +48,7 @@ public class AdOrderItemBean {
 	private String categoryNo;		//廣告欄位的位置分類
 	private Double width;			//紀錄欄位的寬
 	private Double height;			//紀錄欄位的高
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Date adDate;			//欄位要販賣的日期
 	
 	@Transient

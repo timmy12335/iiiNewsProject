@@ -1,5 +1,7 @@
 package CR.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRemployee;
@@ -37,7 +40,7 @@ public class CR_employeeController {
 	public String showempolyee(Model model,HttpServletRequest request, HttpServletResponse response) {
 		List<CRemployee> cre =service.getemployee();
 		model.addAttribute("cremployee", cre);
-		return "CR/cremployee";		
+		return "CR/cremployee2";		
 	}
 	
 	@GetMapping("/addemployee")
@@ -80,4 +83,38 @@ public class CR_employeeController {
 		return map;
 	}
 	
+	@GetMapping(value="/creemployee")
+	public @ResponseBody List<CRemployee> getempByState(@RequestParam(value="isstay",defaultValue="-1") Integer isstay){
+		List<CRemployee> list = new ArrayList<CRemployee>();
+		if(isstay==1) {
+			list = service.getemployeeisstay();
+		}else if(isstay==0) {
+			list = service.getemployeenotstay();
+		}else {
+			list = service.getemployee();
+		}
+		return list;
+	}
+	
+	@GetMapping(value="/getEmpByWord")
+	public @ResponseBody List<CRemployee> getempByWord(@RequestParam(value="word",required=false) String empName){
+		List<CRemployee> list = new ArrayList<CRemployee>();
+		if(empName==null) {
+			list = service.getemployee();
+		}else {
+			list = service.getempByName(empName);
+		}
+		return list;
+	}
+	
+	@GetMapping(value="/getempByDate")
+	public @ResponseBody List<CRemployee> getempByDate(@RequestParam(value="date",defaultValue="2020-01-01", required=false) Date date){
+		List<CRemployee> list = new ArrayList<CRemployee>();
+		if(date==null) {
+			list = service.getemployee();
+		}else {
+			list = service.getempByDate(date);
+		}
+		return list;
+	}
 }

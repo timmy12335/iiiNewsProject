@@ -127,6 +127,12 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		<textarea class="form-control" rows="10" name='crContent' id='crContent' disabled>${report.crContent}</textarea>
 		</td>
 		</tr>
+		<tr>
+		<td>附件
+		</td>
+		<td>
+		<img style="width:160px;height:100px" src="<c:url value='/getCRimg/${report.pk}' />" />
+		</td></tr>
 		<tr><td align='center'>回覆內容</td><td>
 		<textarea class="form-control" rows="10" name='crReContent' id='crReContent'>${report.crReContent}</textarea>
 		</td></tr>

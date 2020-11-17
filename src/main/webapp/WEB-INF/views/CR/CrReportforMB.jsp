@@ -63,6 +63,7 @@ white-space: normal;
 						<th >類別</th>
 						<th >標題</th>
 						<th >內容</th>
+						<th> 附件</th>
 						<th align='center'>申請日期</th>
 						<th>回覆內容</th>
 						<th>回覆人員</th>
@@ -84,6 +85,7 @@ white-space: normal;
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
 								<td align='center'onclick="MBfolded(${report.index})" class="box"><p class="ellipsis">${ser.crContent}</p></td>
+								<td><img style="width:160px;height:100px" src="<c:url value='/getCRimg/${ser.pk}' />" /></td>
 								<td align='center'><fmt:formatDate value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 								<c:choose>
 								<c:when test="${not empty ser.crReContent}">

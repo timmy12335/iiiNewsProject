@@ -1,5 +1,6 @@
 package CR.controller;
 
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -14,7 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -32,7 +39,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import CR.model.CRBean;
-import CR.model.CRemployee;
 import CR.service.CR_empService;
 import CR.service.CR_service;
 import CR.validation.CRaddValidator;
@@ -49,14 +55,13 @@ public class CR_Controller {
 	CR_service service;
 	@Autowired
 	CR_empService empService;
-	
 	@Autowired
 	JavaMailSender mailSender;
 	
-	@GetMapping("/sendmail")
-	public String email(Model model) {
-		return "CR/sendEmail";
-	}
+//	@GetMapping("/sendmail")
+//	public String email(Model model) {
+//		return "CR/sendEmail";
+//	}
 	
 	
 	@GetMapping("/CRindex")
@@ -173,7 +178,7 @@ public class CR_Controller {
 		service.addReport(cb);
 	    return "redirect:/success";
 	}
-	
+	//成功後跳轉其會員以申請表單畫面
 	@GetMapping("/success")
 	public String successjsp(Model model, HttpServletRequest request,HttpServletResponse response) {
 		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
@@ -212,6 +217,7 @@ public class CR_Controller {
 		return map;
 		
 	}
+	
 	//依客服單編號修改
 	@PatchMapping(value="/crReport/{pk}",
 			consumes= {"application/json"}, produces= {"application/json"})
@@ -232,19 +238,57 @@ public class CR_Controller {
 		}
 		return map;
 		}
-	
+	//取未被更新的資料
 	private void copyUnupdateField(CRBean cb0, CRBean cb) {
 		cb.setMemberId(cb0.getMemberId());
 		cb.setPk(cb0.getPk());
 		cb.setCrApplyDate(cb0.getCrApplyDate());
-		cb.setMbBean(cb0.getMbBean());
+		
+		cb.setAttachment(cb0.getAttachment());
+		cb.setAttachmentName(cb0.getAttachmentName());
 		cb.setState(cb0.getState());
 		cb.setCremployee(cb0.getCremployee());
 		cb.setMbBean(cb0.getMbBean());
+		cb.setCpBean(cb0.getCpBean());
 		Timestamp today=new Timestamp(System.currentTimeMillis());
 		cb.setCrReDate(today);
 	}	
 
+	
+	@GetMapping(value="/getCRimg/{pk}")
+	public ResponseEntity<byte[]> getPicture(@PathVariable Integer pk) throws Exception {
+		ResponseEntity<byte[]> re = null;
+		InputStream is = null;
+		String mimeType = null;
+		CRBean bean = service.getReportById(pk);
+		if (bean != null) {
+			Blob blob = bean.getAttachment();
+			if (blob != null) {
+				is = blob.getBinaryStream();
+				mimeType = ctx.getMimeType(bean.getAttachmentName());
+			}
+		}
+		if (is == null) {
+			is = ctx.getResourceAsStream("/img/NO_IMAGE.png");
+			mimeType = ctx.getMimeType("NO_IMAGE.png");
+		}
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(mediaType);
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] b = new byte[81920];
+		int len = 0;
+		while ((len = is.read(b)) != -1) {
+			baos.write(b, 0, len);
+		}
+		byte[] content = baos.toByteArray();
+//re = new ResponseEntity<byte[]>(content, HttpStatus.OK);
+		re = new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
+		return re;
+	}
+	
+	
 //	@ModelAttribute("cb0")
 //	public CRBean editCrBean(@RequestParam(value="pk", required=false) Integer pk) {
 //		CRBean cb0; 

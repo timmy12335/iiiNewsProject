@@ -17,7 +17,7 @@
   	width: 10px;
   	position: fixed;
   	right:10px;
-  	bottom:50px;
+  	bottom:0px;
 	}
 .hidechatbot{
 background:"";
@@ -36,6 +36,7 @@ background:"";
 		var btnSend = document.getElementById('btnSend');
 		var btnClose = document.getElementById('btnClose');
 		var message = document.getElementById('message');
+		var chatbot = document.getElementById('chatbot');
 		var serverResponseArea = document.getElementById('serverResponseArea');
 		var socket = null;
 		btnClose.disabled = true;
@@ -70,7 +71,7 @@ background:"";
 			message.value = "";
 		}
 		
-		btnConn.onclick = function() {
+		chatbot.onclick = function() {
 			socket = new WebSocket(connString);
 			document.getElementById("show").style.display="";
 			document.getElementById("chatbot").className="hidechatbot";
@@ -99,7 +100,9 @@ background:"";
 				alert("[error] 連線發生錯誤，原因：" + error.message);
 			};
 		}
+		
 		btnClose.onclick = function() {
+		
 			if (socket == null) {
 				status.innerHTML = "必須先連到主機才能關閉連線";
 				return;
@@ -109,8 +112,9 @@ background:"";
 				
 				socket.close();
 				status.innerHTML = "已離線";
+
 			}
-			document.getElementById("show").style.display="none";
+			show.style.display="none";
 			document.getElementById("chatbot").className="chatbot";
 			btnClose.disabled = true;
 			btnSend.disabled = true;
@@ -126,20 +130,22 @@ background:"";
 <jsp:include page="/fragment/navbar.jsp"></jsp:include>
 </nav>
 <section style="margin-top:100px"></section>
-<div style="width:200px; height:400px;" class="chatbot" id="chatbot" align="center">
-	<button id='btnConn'>開啟客服聊天</button>
+
+<!-- 	<button id='btnConn'>開啟客服聊天</button> -->
 	&nbsp;
 <div style="display:none" id="show">
+<span id='status'></span>
 	<button id='btnClose'>關閉客服聊天</button>
 	<hr>
 	訊息：
 	<input type='text' id='message'>&nbsp;
 	<button id='btnSend'>送出訊息</button>
 	<hr>
-	<span id='status'></span>
+	
 	<textarea cols='60' rows='20' id='serverResponseArea'>
 </textarea>
 </div>	
+<div style="width:200px; height:400px;" class="chatbot" id="chatbot" align="center">
 </div>
 </body>
 </html>

@@ -60,7 +60,7 @@ function displayNewsOrderList(responseData){
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<div align='center' style="margin-top: 150px;">
-		<h3>顯示企業訂單列表(JSON)</h3>
+		<h3>顯示會員${MBBean.memberId}訂單列表(JSON)</h3>
 		<hr>
 		<div id='somedivS' style='height: 300px;'></div>
 <!-- 		<div id='navigation' style='height: 60px; margin: 250px;'></div> -->

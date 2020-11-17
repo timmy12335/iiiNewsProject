@@ -60,16 +60,23 @@ td {
 	</nav>
 	<div align="center" style="margin-top: 100px;">
 		<br>
-		<h2>會員${memberId}的文章紀錄</h2>
-		<a href="<c:url value='/' />">回首頁</a>
+		<h2>會員${memberId}的發文紀錄</h2>
+<%-- 		<a href="<c:url value='/' />">回首頁</a> --%>
 	</div>
 	<hr>
+	<c:choose>
+			<c:when test="${empty memArticleList}">
+			<tr>
+				<td colspan="10"><div style="font-size:20px;color:red;text-align:center;">&nbsp;暫無發文紀錄&nbsp;</div></td>
+			</tr>
+			</c:when>
+			<c:otherwise>
 	<div align="center">
 		<table id="customers">
 			<tr>
 				<th>PK</th>
 				<th>文章編號</th>
-				<th>使用者</th>
+				<th>發文者</th>
 				<th>上傳日期</th>
 				<th>文章狀態</th>
 				<th>類型</th>
@@ -78,6 +85,7 @@ td {
 				<th>內文</th>
 				<th>維護</th>
 			</tr>
+<%-- 			<c:if test="${MBBean != null}"> --%>
 			<c:forEach var="memList" items="${memArticleList}">
 				<tr>
 					<td>&nbsp;${memList.pkey} &nbsp;</td>
@@ -102,10 +110,18 @@ td {
 					</td>
 				</tr>
 			</c:forEach>
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${MBBean == null}"> --%>
+<!-- 				<tr> -->
+<!-- 					<td colspan="10"><div style="font-size:20px;color:red;text-align:center;">&nbsp;暫無發文紀錄&nbsp;</div></td> -->
+<!-- 				</tr> -->
+<%-- 			</c:if> --%>
 		</table>
 		<hr>
 		<a href="<c:url value="" />">-----TOP-----</a><br><br>
 		<a href="<c:url value='/' />">回首頁</a><br><br>
 	</div>
+	</c:otherwise>
+		</c:choose>
 </body>
 </html>

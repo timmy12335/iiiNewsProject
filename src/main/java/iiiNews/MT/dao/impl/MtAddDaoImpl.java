@@ -79,19 +79,6 @@ public class MtAddDaoImpl implements MtAddDao{
 		session.update(mtAddBean);	
 	}
 
-	
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<MtAddBean> getAllMtAdd() {			//取所有mtAddBean資料，對應getAllMtAdd
-		String hql = "FROM MtAddBean ORDER BY pkey DESC ";		//選取狀態為1和0的使用者
-//		String hql = "FROM MtAddBean WHERE status = 1 ORDER BY pkey DESC "; //選取狀態為1的使用者
-//		String hql = "FROM MtAddBean";
-		Session session = factory.getCurrentSession();
-		List<MtAddBean> list = session.createQuery(hql).getResultList();
-		return list;
-	}
-	
 	@Override
 	public void modifyArticle(MtAddBean ModArt) {		//編輯單一文章
 		Session session = factory.getCurrentSession();
@@ -100,14 +87,7 @@ public class MtAddDaoImpl implements MtAddDao{
 //		System.out.println(bean.toString());
 	}
 	
-	@Override
-	public MtAddBean getSingleArticle(String articleId) {		//抓單一筆文章
-		String hql = "FROM MtAddBean WHERE articleId = :artId AND status = 1 ";
-		Session session = factory.getCurrentSession();
-		MtAddBean bean = (MtAddBean) session.createQuery(hql)
-				.setParameter("artId", articleId).getSingleResult();
-		return bean;
-	}
+	
 	
 	@SuppressWarnings("unchecked")			//---------開始修改以下
 	@Override
@@ -121,6 +101,38 @@ public class MtAddDaoImpl implements MtAddDao{
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MtAddBean> getMtAdd() {					//登入後查看所有人文章
+//		String hql = "FROM MtAddBean ORDER BY pkey DESC ";		//選取狀態為1和0的使用者
+		String hql = "FROM MtAddBean WHERE status = 1 ORDER BY pkey DESC "; //選取狀態為1的使用者
+//		String hql = "FROM MtAddBean";
+		Session session = factory.getCurrentSession();
+		List<MtAddBean> list = session.createQuery(hql).getResultList();
+		return list;
+	}
+	
+	//********************後台********************
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MtAddBean> getAllMtAdd() {			//取所有mtAddBean資料，對應getAllMtAdd
+		String hql = "FROM MtAddBean ORDER BY pkey DESC ";		//選取狀態為1和0的使用者
+//		String hql = "FROM MtAddBean WHERE status = 1 ORDER BY pkey DESC "; //選取狀態為1的使用者
+//		String hql = "FROM MtAddBean";
+		Session session = factory.getCurrentSession();
+		List<MtAddBean> list = session.createQuery(hql).getResultList();
+		return list;
+	}
+	
+	@Override
+	public MtAddBean getSingleArticle(String articleId) {		//抓單一筆文章
+		String hql = "FROM MtAddBean WHERE articleId = :artId AND status = 1 ";
+		Session session = factory.getCurrentSession();
+		MtAddBean bean = (MtAddBean) session.createQuery(hql)
+				.setParameter("artId", articleId).getSingleResult();
+		return bean;
+	}
+	
 	@Override
 	public void updateStatus(String articleId, int status) {		//刪除單一文章紀錄
 		String hql = "UPDATE MtAddBean mtb SET mtb.status= :status "
@@ -129,18 +141,5 @@ public class MtAddDaoImpl implements MtAddDao{
 		session.createQuery(hql).setParameter("status", status)
 				.setParameter("id", articleId).executeUpdate();
 	}
-
-
-	
-	
-//	@Override	//抓pkey
-//	public List<String> getAllAddDao1() {
-//		String hql = "SELECT m.pkey From MtAddBean m";
-//		List<String> list = new ArrayList<String>();
-//		Session session = factory.getCurrentSession();
-//		list = session.createQuery(hql)
-//						.getResultList();
-//		return list;
-//	}
 
 }

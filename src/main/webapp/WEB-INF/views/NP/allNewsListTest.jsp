@@ -146,14 +146,26 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 			<div class="col-3" style="border-radius:15px;">
 <!-- 				<div class="col-12 col-md-4"> -->
                 <!-- 搜尋/start -->
-                <form action="" class="bg-white p-3 mb-3 border rounded" >
+                
+                <div  id="WordsForm"  class="bg-white p-3 mb-3 border rounded" >
                     <div class="input-group" >
-                        <input type="text" class="form-control" placeholder="搜尋" aria-label="Search for">
+                        <input type="text"  id="wordsSearch"  class="form-control" placeholder="搜尋" aria-label="Search for">
                         <span class="input-group-append">
-                            <button type="submit" class="btn btn-secondary">Go!</button>
+                            <button type="submit" class="btn btn-secondary" onclick="searchByWord()">Go!</button>
                         </span>
                     </div>
-                </form>
+                </div>
+                <div id="TypeForm" class="bg-white p-3 mb-3 border rounded">
+							<select id="type" class="form-control" onchange="searchByType()">
+								<option value="-1">分類項目</option>
+								<option value="交通">交通</option>
+								<option value="糾紛">糾紛</option>
+								<option value="感情">感情</option>
+								<option value="詐騙">詐騙</option>
+								<option value="災情">災情</option>
+								<option value="爆料">爆料</option>
+							</select>
+				</div>
                 <!-- 搜尋/end -->
                 <!-- 分類/start -->
                 <div class="bg-white p-3 mb-3 border rounded">
@@ -162,24 +174,24 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
                     </h5>
                     <ul class="list-category category">
                         <li>
-                            <a href="#">糾紛
+                            <a href="<c:url value='/getNewsByType?type=交通' />">交通
                                 <span class="badge badge-pill badge-secondary ml-2">3</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">爆料
-                                <span class="badge badge-pill badge-secondary ml-2">1</span>
-                            </a>
+                            <a href="<c:url value='/getNewsByType?type=糾紛' />">糾紛</a>
                         </li>
                         <li>
-                            <a href="#">交通
-                                <span class="badge badge-pill badge-secondary ml-2">1</span>
-                            </a>
+                            <a href="<c:url value='/getNewsByType?type=感情' />">感情</a>
                         </li>
                         <li>
-                            <a href="#">詐騙
-                                <span class="badge badge-pill badge-secondary ml-2">1</span>
-                            </a>
+                            <a href="<c:url value='/getNewsByType?type=詐騙' />">詐騙</a>
+                        </li>
+                        <li>
+                            <a href="<c:url value='/getNewsByType?type=災情' />">災情</a>
+                        </li>
+                        <li>
+                            <a href="<c:url value='/getNewsByType?type=爆料' />">爆料</a>
                         </li>
                     </ul>
                 </div>
@@ -189,6 +201,13 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 			<!-- 課程1/開始 -->
 			<div class="col-9">
 			<div class="row">
+			<c:choose>
+				<c:when test="${empty newsLists}">
+					<tr height='36'class="text-center">
+						<td class="text-center"><font color='red'>無符合條件新聞</font></td>
+					</tr>
+				</c:when>
+				<c:otherwise>
 			<c:forEach var='news' items='${newsLists}' varStatus='loop'>
 				<div class="col-12 col-md-4">
 					<div class="box-content bg-white wei-grid-special0" style="margin-bottom:20px;border-radius:15px;">
@@ -230,6 +249,8 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 				</div>
 				<br>
 			</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			</div>
 			</div> 
 			
@@ -241,6 +262,26 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 	</section>
 
 <script>
+
+function searchByType() {
+	let type = document.getElementById("type").value;
+	var queryStringtype = "?type=" + type;
+	console.log(queryStringtype);
+	var urlType = '<c:url value='/getNewsByType' />'+queryStringtype;
+	window.location.href = urlType;
+}
+
+function searchByWord() {
+//	var WordsForm = document.getElementById("WordsForm");
+	let words = document.getElementById("wordsSearch").value;
+	var queryStringWord = "?words=" + words;
+	console.log(queryStringWord);
+//	WordsForm.setAttribute('action','<c:url value='/getNewsByWords' />'+queryStringWord);
+	var urla = '<c:url value='/getNewsByWords' />'+queryStringWord;
+	console.log(urla);
+// 	$("#WordsForm").attr('action',urla);
+ 	window.location.href = urla;
+}
 	
 var num = ${newsLists.size()};
 //將秒轉回時:分:秒 

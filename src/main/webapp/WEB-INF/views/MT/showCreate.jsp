@@ -38,7 +38,7 @@ font-weight:"bold";
 					<td><div>文章編號: ${mtBean.articleId}</div></td>
 				</tr>
 				<tr>
-					<td><div>會員編號: ${mtBean.memberId}</div></td>
+					<td><div>發文者: ${mtBean.memberId}</div></td>
 				</tr>
 				<tr>
 					<td><div>上傳時間: ${mtBean.updateDate}</div></td>

@@ -46,6 +46,7 @@ public class trkNewsBean implements Serializable {
 	private String type;
 	private Integer status;
 	private String extra;
+	private String tag;
 	
 	@JsonIgnore
 	@Transient
@@ -77,7 +78,8 @@ public class trkNewsBean implements Serializable {
 			           String filename,
 			           String type, 
 			           int status,
-			           String extra
+			           String extra,
+			           String tag
 			           ) {
 		super();
 		this.trackId = trackId;
@@ -94,6 +96,7 @@ public class trkNewsBean implements Serializable {
 		this.type = type;
 		this.status = 1;
 		this.extra = extra;
+		this.tag = tag;
 //		this.rptNewsBean = rptNewsBean;
 	}
 	public trkNewsBean(Integer trackId, 
@@ -245,6 +248,14 @@ public class trkNewsBean implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 //	public Set<rptNewsBean> getRpts() {

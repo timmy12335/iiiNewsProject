@@ -86,6 +86,29 @@ public class CR_empDao_impl implements CR_empDao {
 		Session session=factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRemployee> getempByName(String empName) {
+		Session session=factory.getCurrentSession();
+		String hql ="FROM CRemployee where empName LIKE :empname";
+		List<CRemployee> list = session.createQuery(hql)
+				.setParameter("empname", "%"+empName+"%")
+				.getResultList();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CRemployee> getempByDate(Date date) {
+		Session session=factory.getCurrentSession();
+		String hql ="FROM CRemployee where applyDate= :date";
+		
+		List<CRemployee> list = session.createQuery(hql)
+				.setParameter("date", date)
+				.getResultList();
+		return list;
+	}
 	
 	
 }

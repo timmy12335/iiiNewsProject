@@ -6,11 +6,15 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="CR_employee")
@@ -24,7 +28,7 @@ public class CRemployee implements Serializable{
 	private String empId;
 	private String empName;
 	private String empemail;
-
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Date applyDate;
 	private Integer replyamt;
 	private Integer untreatamt;
@@ -35,7 +39,9 @@ public class CRemployee implements Serializable{
 	public void setIsstay(Integer isstay) {
 		this.isstay = isstay;
 	}
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="cremployee")
+	
+	@JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="cremployee",fetch=FetchType.EAGER)
 	private Set<CRBean> crBean;
 	
 	public Integer getEmpPk() {

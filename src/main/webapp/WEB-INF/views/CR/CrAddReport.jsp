@@ -92,7 +92,7 @@ window.onload=function(){
 				<table class="table" border="1" style="width: 800px;">
 					<tr>
 						<td class="form-group">會員姓名:</td>
-						<td colspan='2'align="center"><input type='text' value='${MBBean.name}'>
+						<td colspan='2'align="center">${MBBean.name}
 						<form:input type="text" path="memberId"
 								id="memberId" value="${MBBean.memberId}" hidden='true'></form:input></td>
 					</tr>

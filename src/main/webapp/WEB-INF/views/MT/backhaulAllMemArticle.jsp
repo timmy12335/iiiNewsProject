@@ -55,23 +55,21 @@ td {
 </style>
 </head>
 <body>
-	<nav>
-		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
-	</nav>
+	<jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
+	
 	<div align="center" style="margin-top: 30px;">
-		<br><br><br>
 		<h2>會員${memberId}的發文紀錄</h2>
 <%-- 		<a href="<c:url value='/' />">回首頁</a> --%>
 	</div>
 	<hr>
 	<c:choose>
-			<c:when test="${empty memArticleList}">
+			<c:when test="${empty AllMemArticle}">
 			<tr>
 				<td colspan="10"><div style="font-size:20px;color:red;text-align:center;">&nbsp;暫無發文紀錄&nbsp;</div></td>
 			</tr>
 			</c:when>
 			<c:otherwise>
-	<div align="center">
+	<div align="center" class="table-responsive pt-3">
 		<table id="customers">
 			<tr>
 				<th>PK</th>
@@ -86,26 +84,24 @@ td {
 				<th>維護</th>
 			</tr>
 <%-- 			<c:if test="${MBBean != null}"> --%>
-			<c:forEach var="memList" items="${memArticleList}">
+			<c:forEach var="memList" items="${AllMemArticle}">
 				<tr>
 					<td>&nbsp;${memList.pkey} &nbsp;</td>
 					<td>${memList.articleId}</td>
 					<td>${memList.memberId}</td>
-					<td>${memList.updateDate}</td>
-					<c:if test="${ memList.status == 1}"><td>可瀏覽</td></c:if>
-					<c:if test="${ memList.status == 0}"><td>***已下架***</td></c:if>
+					<td width="10px" height="20px">${memList.updateDate}</td>
+					<c:if test="${ memList.status == 1}"><td><label class="badge badge-success">可瀏覽</label></td></c:if>
+					<c:if test="${ memList.status == 0}"><td><label class="badge badge-danger">已下架</label></td></c:if>
 					<td>${memList.category}</td>
-					<td class="td1"><a href="<c:url value='/getSingleArticle/${memList.articleId}'/>" >${memList.title}</a> </td>
+					<td class="td1">${memList.title}</td>
 					<td class="td1"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${memList.articleId}' />" />${memList.imgName}</td>
 					<td class="td1">${memList.article}</td>
 					<td>
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
-							<a class='delSingle' href="${pageContext.request.contextPath}/delMemArticle/${memList.articleId}">
-							<c:if test="${ memList.status == 0}" ><a href='' ></a></c:if>
-							刪除</a>
-							<a
-								href="${pageContext.request.contextPath}/modifyArticle/${memList.pkey}">編輯資料</a>
+							<a class='delSingle' href="${pageContext.request.contextPath}/delAllMemArticle/${memList.articleId}">
+							<c:if test="${ memList.status == 0}" ><a href='' ></a></c:if>刪除</a>
+<%-- 							<a href="${pageContext.request.contextPath}/modifyArticle/${memList.pkey}">編輯資料</a> --%>
 						</div>
 					</td>
 				</tr>
@@ -119,9 +115,11 @@ td {
 		</table>
 		<hr>
 		<a href="<c:url value="" />">-----TOP-----</a><br><br>
-		<a href="<c:url value='/' />">回首頁</a><br><br>
+<!-- 		<input type="button" onclick="history.back()" value="重新查詢" /> -->
+<%-- 		<a href="<c:url value='/' />">回首頁</a><br><br> --%>
 	</div>
 	</c:otherwise>
 		</c:choose>
+		<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
 </html>

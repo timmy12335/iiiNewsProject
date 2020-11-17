@@ -31,7 +31,7 @@ window.onload = function() { //刪除文章，OK
   padding: 8px;
 }
 
-#customers tr:hover {background-color: #F0F0F0;}
+#customers tr:hover {background-color: #ECF5FF;}
 
 #customers th {
   padding-top: 12px;
@@ -90,7 +90,7 @@ td {
 					<td>${all.memberId}</td>
 					<td width="10px" height="20px">${all.updateDate}</td>
 					<c:if test="${ all.status == 1}"><td><label class="badge badge-success">可瀏覽</label></td></c:if>
-					<c:if test="${ all.status == 0}"><td><label class=" badge badge-danger">已下架</label></td></c:if>
+					<c:if test="${ all.status == 0}"><td><label class="badge badge-danger">已下架</label></td></c:if>
 					<td>${all.category}</td>
 					<td class="td1">${all.title}</td>
 					<td class="td1"><div id="Demo" class="demo"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${all.articleId}' />" /></div>${all.imgName}</td>

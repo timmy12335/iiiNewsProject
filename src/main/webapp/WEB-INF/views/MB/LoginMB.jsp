@@ -14,7 +14,7 @@
 	font-size: 24px;
 	cursor: pointer;
 	color: #984B4B; /*字色 */
-	background-color: #84C1FF; /*底色 */
+	background-color: #FF9D6F; /*底色 */
 	border-rddius: 15px;
 	box-shadow: 0 8px #999;
 	outline: none;

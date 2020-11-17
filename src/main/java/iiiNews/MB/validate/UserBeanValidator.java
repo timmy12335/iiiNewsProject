@@ -18,8 +18,6 @@ public class UserBeanValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberId", "","*請輸入帳號");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "Password", "","*請輸入密碼");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberSalary", "","*請輸入薪資");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberDepartment", "","*請輸入部門");
 		MBBean mb  = (MBBean) target;
 		
 		if (mb.getMemberId() != null  && mb.getMemberId().contains(" ")) {

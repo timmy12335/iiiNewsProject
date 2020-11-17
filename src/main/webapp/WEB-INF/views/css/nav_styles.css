@@ -14,7 +14,8 @@
 
 /*設定主體body的背景顏色*/
 body{
-  background-color: rgb(214, 234, 253);
+/*   background-color: rgb(214, 234, 253); */
+  background-color: white;
 }
 
 
@@ -62,7 +63,7 @@ body{
 /*主要bar的背景顏色與字體*/
 #cssmenu {
   font-family: Montserrat, sans-serif;
-  background: #001f63;
+  background: #BC214C ;
   /* background: #333333; */
 }
 #cssmenu > ul > li {

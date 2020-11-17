@@ -13,6 +13,9 @@
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ed0adb3a32.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+   
+<%--     <script  type="text/javascript" src="${pageContext.request.contextPath}/js/Hoverpulse.js"></script> --%>
 <title>所有新聞列表</title>
 <style>
 .tablebyme {
@@ -80,10 +83,13 @@ transition: box-shadow 500ms;
 
 
 .wei-grid-special0:hover {
-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
+box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
 }
 </style>
+
+<script src="js/jquery.hoverpulse.js"></script>
 <script>
+	
 	
 	function goSingleNews(e) {
 		
@@ -211,7 +217,7 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 			<c:forEach var='news' items='${newsLists}' varStatus='loop'>
 				<div class="col-12 col-md-4">
 					<div class="box-content bg-white wei-grid-special0" style="margin-bottom:20px;border-radius:15px;">
-						<div >
+						<div id="imgdiv">
 							<img  width='220' height='150'
 								src="<c:url value='/getUpNewsPicture/${news.newsId}'/>"
 								alt="Unity" class="img-fluid d-block m-auto w-75">
@@ -254,7 +260,7 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 			</div>
 			</div> 
 			
-			
+			<script type="text/javascript">hello();</script>
 			</div>
 			
 		
@@ -262,6 +268,9 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
 	</section>
 
 <script>
+$(document).ready(function() {
+    $("div.imgdiv img").hoverpulse();
+});
 
 function searchByType() {
 	let type = document.getElementById("type").value;

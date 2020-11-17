@@ -54,7 +54,7 @@
 
 <c:forEach var='news' items='${newsLists}' varStatus='loop'>
 <table>
-	<tr style="background-color:lightblue;"  height='36'>
+	<tr style="background-color:#C9FFEA;"  height='36'>
 		<th width='600' align='center'>新聞標題</th>
 		<th width='100' align='center'>新聞編號</th>
 		<th width='60' align='center'>上傳時間</th>		
@@ -75,7 +75,7 @@
 		<td><img width='200' height='150' 
 	                    	src="<c:url value='/getUpNewsPicture/${news.newsId}'/>" ></td>
 		</tr>
-    <tr style="background-color:lightblue;"  height='36'>
+    <tr style="background-color:#C9FFEA;"  height='36'>
 		<th width='600' align='center'>新聞大綱</th>
 		<th width='100' align='center'>發生日期</th>
 		<th width='100' align='center'>發生時間</th>

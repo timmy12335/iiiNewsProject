@@ -31,6 +31,13 @@ height:350;
 </style>
 </head>
 <body>
+<div class="input-group mb-3" style="margin:100px ; width:500px" >
+  <div class="input-group-prepend">
+  <!-- <a href='httpclient1'> -->
+    <button onclick="searchByWord()" class="btn btn-outline-secondary" type="button" id="button-addon1">TVBS SERCH</button><!-- </a> -->
+  </div>
+  <input   id="wordChoose"  size="1" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" >
+</div>
 	<!-- <section>
 		<div>
 			<div class="container" style="text-align: center">
@@ -50,7 +57,8 @@ height:350;
 		<div  class="row"  >
 			      
 			<div class="col-md-5" >
-				<h3 style="background-color:red;width:550px;font-family:Microsoft JhengHei">${trkNew.title}</h3>
+			<!-- 追蹤主要頁面 -->
+				<h3 style="background-color:;width:550px;font-family:Microsoft JhengHei">${trkNew.title}</h3>
 				      <figure class="figure">
                            <img style="" src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
                            <figcaption class="figure-caption"></figcaption>
@@ -92,13 +100,26 @@ height:350;
 		</div>
 		
 	</section>
+	<!-- 媒體搜尋區域  -->
 <div  style="float:left; margin-top:100px;"  >
 			            <h3 id="002" class="display-4" style="font-family:Microsoft JhengHei" >各媒體相關報導</h3> 
 			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:800px;font-size:larger;"">
-			      <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
+                            <div style="background: ">
+                            <button onclick="searchByWord()" style="text-align:center color:#4F4F4F" type="button" class="btn btn-primary btn-lg">TVBS新聞</button>
+                            <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-secondary btn-lg">三立新聞</button>
+                            <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-primary btn-lg">東森新聞</button>
+                            <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-secondary btn-lg">壹新聞</button>
+                            </div>
+                                   <div id="News1" class="News1">
+                              
+                              
+                              
+                                  </div>
+<%-- 			      <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="..."> --%>
 			      
+			            </div>
 			      </div>
-			      </div>
+			      
 	<!-- 點擊累加 -->
 	 <%-- <%
 		Integer hitsCount = (Integer) application.getAttribute("hitCounter");
@@ -179,28 +200,79 @@ height:350;
 	if(visits>1){
 		var t1 = 1 + clicnum;
 	}else{
-		
+		var t1 = 0 + clicnum;
 	}
-	console.log("Aaaaaaa="+visits);
+	console.log("Session人數="+visits);
 	
-	document.write("您是到访的第" + t1 + "位用户！");
+	document.write("您是到訪的第" + t1 + "位用户！");
 	window.onload = function() {
     
-    console.log(t1);
+    
     var xhr = new XMLHttpRequest();
 	xhr.open("PUT", "<c:url value='/editNews5/' />" + NewsId2, true);
 	var jsontrkNewsBean = {
 			"trackId": NewsId2,
 			"clicnum": t1  
 	               }
-	console.log(jsontrkNewsBean);
-	console.log(NewsId2);
+	console.log("Bean物件:"+jsontrkNewsBean);
+	console.log("pk值:"+NewsId2);
 	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xhr.send(JSON.stringify(jsontrkNewsBean));
 	};
-	console.log(t1);
+	console.log("累積點閱數:"+t1);
 </script>
+<script>
 
+
+
+let o1 = document.getElementById("wordChoose").value;
+console.log("搜尋字:"+o1);
+function searchByWord(){
+	let word = document.getElementById("wordChoose").value;
+	console.log("搜尋字值:"+word);
+	
+	var queryStringWord = "?word=" + word;
+	//var queryStringWord = word;
+	console.log(queryStringWord);
+	var xhr0 = new XMLHttpRequest(); 
+	xhr0.open("GET", "<c:url value='/httpclient1' />" + queryStringWord , true);
+	xhr0.send();
+	console.log("00000000000000000000001"+xhr0);
+	xhr0.onreadystatechange = function() {
+		if (xhr0.readyState == 4 && xhr0.status == 200) {
+	    var responseData = xhr0.responseText;
+			//console.log("00000000000000000000002"+responseData);
+		displayPageAds(responseData);
+          console.log("ABC======="+responseData)
+        //  document.write(responseData);
+          document.getElementById("News1").innerHTML=responseData;
+	}
+	}
+}
+        
+function displayPageAds(responseData) {
+	console.log("ABCD======="+responseData)
+	var content = "<table border='1'>";
+	content += "<th>廣告PK值</th><th>廣告編號</th>";
+	content += "<th>刊登者</th>";
+	content += "<th>類型</th><th>販賣日期</th><th>單價</th>";
+	content += "<th>備註</th>";
+	content += "<th>texting</th></tr></thead><tbody class='text-center'>";
+	var ad = JSON.parse(responseData); // 傳回一個陣列
+	console.log("ABCDE======="+ad)
+	if(ad==""){
+		content += "<tr><td colspan='9' align='center'><b>無搜尋結果</b></td></tr></tbody></table>";
+	}else{
+	var bgColor = ""; // 每一項商品的背影 
+	
+	}
+	content += "</tbody></table>";
+	document.getElementById("somedivS").innerHTML = content;
+}
+
+
+
+</script> 
 
 
 </body>

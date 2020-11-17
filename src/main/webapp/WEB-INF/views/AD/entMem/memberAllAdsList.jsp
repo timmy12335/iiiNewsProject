@@ -24,10 +24,10 @@
 	margin-bottom: 100px;
 	position: relative;
 }
-	html{
-		margin-left:calc(100vw - 100%);
-		overflow-y: scroll;
-	}
+html{
+	margin-left:calc(100vw - 100%);
+	overflow-y: scroll;
+}
 </style>
 </head>
 <body>
@@ -55,8 +55,7 @@
 				  	</div>
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-					<div class="card">
+					<div class="tab-pane fade show active p-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 						<h3>總覽</h3>
 						<div class="row">
 							<div class="col-4">本月上傳：${fn:length(CpAdLists)}則</div>
@@ -64,8 +63,7 @@
 							<div class="col-4">本月收入：</div>
 						</div>
 					</div>
-					</div>
-					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+					<div class="tab-pane fade p-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 						<h3>您所有上傳的廣告列表</h3>
 						<div class="table-responsive">
 							<table class="table table-bordered">
@@ -151,7 +149,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+					<div class="tab-pane fade p-4" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 						<h3>已賣出列表</h3>
 						<div class="table-responsive" id="soldlist"></div>
 					</div>

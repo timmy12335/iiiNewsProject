@@ -36,4 +36,6 @@ public interface CR_Dao {
 	List<CRBean> getReportBycpmemberId(String memberId);
 
 	void reviseemp(CRBean report);
+	
+	
 }

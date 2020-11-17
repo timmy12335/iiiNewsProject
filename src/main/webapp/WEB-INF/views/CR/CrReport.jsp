@@ -87,13 +87,6 @@ white-space: normal;
 			<table class="table">
 				<thead>
 					<tr>
-<!-- 						<th width='60' align='center'>單號</th> -->
-<!-- 						<th width='120' align='center'>姓名</th> -->
-<!-- 						<th width='120' align='center'>類別</th> -->
-<!-- 						<th width='120' align='center'>標題</th> -->
-<!-- 						<th width='120' align='center'>內容</th> -->
-<!-- 						<th width='100' align='center'>申請時間</th> -->
-<!-- 						<th width='100' align='center' colspan='2'>功能</th> -->
 						<th width='60'>單號</th>
 						<th >姓名</th>
 						<th >類別</th>
@@ -154,7 +147,6 @@ white-space: normal;
 		}
 	
 	function folded(index){	
-		
 			if(document.getElementById("recontent"+index).style.display =='none') {
 				document.getElementById("recontent"+index).style.display='';
 				}else{

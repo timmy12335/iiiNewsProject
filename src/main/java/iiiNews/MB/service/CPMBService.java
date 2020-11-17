@@ -20,4 +20,6 @@ public interface CPMBService {
 	void addCpMember(CpMemberBean cpmember);
 	
 	public CpMemberBean cplogin(String account, String password);
+
+	public boolean idcpExists(String id);
 }

@@ -34,7 +34,31 @@ display: -webkit-box;
 white-space: normal;
 }
   </style>
-
+<script>
+function deleteCrReport(pk){
+	var xhr2 = new XMLHttpRequest();
+	var divResult = document.getElementById('resultmsg');
+	var result=confirm("確定刪除此筆客服表單(單號:"+pk+")?");
+	if(result){
+		xhr2.open("DELETE","<c:url value='/customerReports/'/>"+pk,true);
+		xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+		xhr2.send();
+		xhr2.onreadystatechange=function(){
+		if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
+	      result = JSON.parse(xhr2.responseText);
+	      if (result.fail) {		    	  
+			 		divResult.innerHTML = "<font color='red' >"
+						+ result.fail + "</font>";
+		  		} else if (result.success) {
+			 		divResult.innerHTML = "<font color='green' >"
+						+ result.success + "</font>";
+						window.location.href="<c:url value='/customerReports'/>";						
+		}
+	}	
+}
+}
+}
+</script>
 
 </head>
 <body>
@@ -46,23 +70,17 @@ white-space: normal;
 	<section style="margin-top: 100px">
 
 
-                  <h4 class="font-weight-bold mb-0" align="center">客服表單申請成功</h4>
+                  <h4 class="font-weight-bold mb-0" align="center">已申請客服</h4>
                   <div id="resultmsg"></div>
-			<table class="table table-hover">
+			<table class="table table-hover" style="width:1100px;" align="center">
 				<thead>
 					<tr>
-<!-- 						<th width='60' align='center'>單號</th> -->
-<!-- 						<th width='120' align='center'>姓名</th> -->
-<!-- 						<th width='120' align='center'>類別</th> -->
-<!-- 						<th width='120' align='center'>標題</th> -->
-<!-- 						<th width='120' align='center'>內容</th> -->
-<!-- 						<th width='100' align='center'>申請時間</th> -->
-<!-- 						<th width='100' align='center' colspan='2'>功能</th> -->
 						<th width='60'>單號</th>
 						<th >姓名</th>
 						<th >類別</th>
 						<th >標題</th>
 						<th >內容</th>
+						<th> 附件</th>
 						<th align='center'>申請日期</th>
 						<th>回覆內容</th>
 						<th>回覆人員</th>
@@ -72,7 +90,7 @@ white-space: normal;
 				</thead>
 				<c:choose>
 					<c:when test="${empty CrReport}">
-						<tr >
+						<tr>
 							<td colspan='8' align='center'><font color='red'>無客服資料</font></td>
 						</tr>
 					</c:when>
@@ -84,24 +102,30 @@ white-space: normal;
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
 								<td align='center'onclick="MBfolded(${report.index})" class="box"><p class="ellipsis">${ser.crContent}</p></td>
+								<td><img style="width:160px;height:100px" src="<c:url value='/getCRimg/${ser.pk}' />" /></td>
 								<td align='center'><fmt:formatDate value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 								<c:choose>
 								<c:when test="${not empty ser.crReContent}">
 								<td align='center'  onclick="folded(${report.index})" class="box"><p class="ellipsis"><c:out value="${ser.crReContent}"></c:out></p></td>
 								<td align='center'><c:out value="${ser.cremployee.empName}"/></td>
+								<td align='center'><fmt:formatDate value="${ser.crReDate}" pattern="yyyy-MM-dd"/></td>
+								<td><button id="btn_update" class="btn btn-outline-secondary btn-icon-text" 
+								onclick="confirmReply(${ser.pk})" >確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
+								</button>
 								</c:when>
 								<c:otherwise>
 								<td align='center'  onclick="folded(${report.index})" class="box"><p class="ellipsis"></p></td>
 								<td align='center'></td>
-								</c:otherwise>
-								</c:choose>
 								<td align='center'><fmt:formatDate value="${ser.crReDate}" pattern="yyyy-MM-dd"/></td>
 								<td><button id="btn_update" class="btn btn-outline-secondary btn-icon-text" 
-								onclick="updateCrReport(${ser.pk})" >回覆確認<i class="ti-pencil-alt btn-icon-append"></i>
+								onclick="confirmReply(${ser.pk})" disabled>確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
 								</button>
+								</c:otherwise>
+								</c:choose>
 								<button id="btn_delete" class="btn btn-outline-danger btn-icon-text"
-									onclick="deleteCrReport(${ser.pk})" >取消申請<i class="ti-trash btn-icon-append"></i></button></td>
-							</tr>
+									onclick="deleteCrReport(${ser.pk})" >取消申請<i class="ti-trash btn-icon-append"></i></button>
+								</td>
+								</tr>
 							<tr id="MBcontent${report.index}" style="display:none ;word-wrap : break-word ;"><td>客服內容</td>
 							<td  colspan="10" > 
 							<textarea style="width:1000px;height:200px;" disabled>

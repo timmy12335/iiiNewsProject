@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +19,7 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -35,12 +33,13 @@ public class MtAddBean implements Serializable{
 	private Integer pkey;			//PK
 	private String articleId;		//文章編號
 	@Column(columnDefinition = "datetime2(7)")	//修改型態，預設為datetime2(7)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp updateDate;	//上傳時間
 	private String memberId;		//會員編號
 	private String articleStatus;	//文章狀態
 	private String category;		//標籤分類
 	private String title;			//標題
-//	@JsonIgnore
+	@JsonIgnore
 	private Blob imgLink;			//圖片連結
 	private String imgName;			//圖片名字
 	@Column(columnDefinition = "varchar(MAX)")
@@ -51,6 +50,7 @@ public class MtAddBean implements Serializable{
 	private String add2;
 	private String add3;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="mtAddBean", cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
 	List<MtCommentBean> items = new ArrayList<>();
 	//雙向多對一  一方有個多 儲存多方的物件 告訴他本類別沒有外鍵 提供外鍵的相關資訊給他

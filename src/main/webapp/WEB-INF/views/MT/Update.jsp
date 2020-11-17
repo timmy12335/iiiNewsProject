@@ -6,9 +6,31 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<title>上架廣告欄位</title>
+<title>更新內文</title>
 <script src="https://www.google.com/recaptcha/api.js"></script>
-
+<script >
+window.onload = function(){
+		var btn = document.getElementById("update1");
+		var btn2 = document.getElementById("update2");
+		btn.onclick = function(){
+		A =  document.getElementById("Category")
+		A.value ="生活"
+		AA = document.getElementById("title")
+		AA.value = "買4萬筆電，只來贈品背包"
+		article = document.getElementById("article")
+		article.value = "好啦標題殺人了，\n已經跟店家溝通過並退費了，\n不過還沒收到退款。\n\n我在今天早上收到了之前買的筆電，\n不過一拿到包裹，\n那個重量和大小，\n就知道裡面絕對沒有筆電，\n我心想這大概只有贈品的背包滑鼠吧。"
+		}
+		
+		btn2.onclick = function(){
+		B =  document.getElementById("Category")
+		B.value ="問卦"
+		BB = document.getElementById("title")
+		BB.value = "為什麼有些咖啡店熱得比冰的貴?"
+		article = document.getElementById("article")
+		article.value = "如題\n想請問一下\n為什麼有些咖啡店\n熱的會比冰的貴\n會問這個\n主要是因為有些咖啡店熱和冰沒有差\n有人知道嗎?"
+		}
+}
+	</script>
 </head>
 <body>
 	<nav>
@@ -46,8 +68,8 @@
 						</div>
 						<div class="st1">
 							<label for="title">標題:</label>
-							<form:input type="text" id="title" name="title" path="title"
-								size="30" value="${mtAddBean.title}" />
+							<form:input type="text" id="title" name="title" path="title" size="30" value="${mtAddBean.title}" />
+							<div><form:errors path="title" style="font-size:12px;color:red" /></div>
 						</div>
 <!-- 						<div class="st1"> -->
 <!-- 							<label for="videoLink">影片連結:</label> -->
@@ -64,6 +86,7 @@
 							<label for="article">內容:</label>
 							<form:textarea name="article" id="article" cols="30" rows="10"
 								path="article" maxlength="250" value="${mtAddBean.article}"></form:textarea>
+							<div><form:errors path="article" style="font-size:12px;color:red" /></div>
 						</div>
 
 					<br><br>				
@@ -82,6 +105,13 @@
 					<input type="button" onclick="history.back()" value="回前頁，取消編輯" />
 <%-- 					<br> <a href="<c:url value='/getAllMtAdd' />">回前頁</a> <br> --%>
 <!-- 				</div> -->
+
+					<div>
+						<input type='button' class=''  id='update1' value='Update1' >
+						<span>&nbsp;&nbsp;</span>
+						<input type='button' class=''  id='update2' value='Update2' >
+						<span>&nbsp;&nbsp;</span>
+					</div>
 				</fieldset>
 			</form:form>
 		</div>

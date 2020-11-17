@@ -78,12 +78,20 @@ function confirmDelete(n) {
 									<c:forEach var="ad" items="${shoppingCart.content}">
 
 										<div class="row mb-4">
-											<div class="col-md-5 col-lg-3 col-xl-3">
+											<div class="col-md-5 col-lg-3 col-xl-3 text-center">
 												<div
 													class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-													<img class="img-fluid w-100"
-														src="https://i.imgur.com/3tpEXt1.jpg"
-														alt="Sample">
+													<c:choose>
+													<c:when test='${ad.value.categoryNo == 100 || ad.value.categoryNo == 200}' >
+														<img class="img-fluid w-50" src="/iiiNews/img/ad_header.jpeg" alt="Sample">
+													</c:when>
+													<c:when test='${ad.value.categoryNo == 300 || ad.value.categoryNo == 400 || ad.value.categoryNo == 500}' >
+														<img class="img-fluid w-50" src="/iiiNews/img/ad_article.jpeg" alt="Sample">
+													</c:when>
+													<c:otherwise>
+														<img class="img-fluid w-50" src="/iiiNews/img/NoImage.jpg" alt="Sample">
+													</c:otherwise>
+													</c:choose>
 												</div>
 											</div>
 											<div class="col-md-7 col-lg-9 col-xl-9">
@@ -93,11 +101,11 @@ function confirmDelete(n) {
 															<h5>商品代號： ${ad.value.adNo}</h5>
 															<p class="mb-3 text-muted text-uppercase small">販售欄位：
 																<c:choose>
-																	<c:when test="${ad.value.categoryNo == 100}">頭版頭</c:when>
-																	<c:when test="${ad.value.categoryNo == 200}">頭版側標</c:when>
-																	<c:when test="${ad.value.categoryNo == 300}">內頁版頭</c:when>
-																	<c:when test="${ad.value.categoryNo == 400}">內頁側標</c:when>
-																	<c:when test="${ad.value.categoryNo == 500}">小廣告</c:when>
+																	<c:when test="${ad.value.categoryNo == 100}">A&nbsp;頭版頁首</c:when>
+																	<c:when test="${ad.value.categoryNo == 200}">B&nbsp;頭版側標</c:when>
+																	<c:when test="${ad.value.categoryNo == 300}">C&nbsp;內頁頁首</c:when>
+																	<c:when test="${ad.value.categoryNo == 400}">D&nbsp;內頁側標</c:when>
+																	<c:when test="${ad.value.categoryNo == 500}">E&nbsp;內文小廣告</c:when>
 																	<c:otherwise>其他</c:otherwise>
 																</c:choose>
 															</p>

@@ -1,123 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>所有會員訂單列表</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
 <script type="text/javascript">
-	function deleteCheck(){
-		if(confirm("確定更新此項資料")){
-		}else{
-			window.location.href="#"
+	function deleteCheck() {
+		if (confirm("確定更新此項資料")) {
+		} else {
+			window.location.href = "#"
 		}
 	}
 </script>
 <style>
-		.tablebyme {
-  			width: 70%;
-  			border-collapse: collapse;
-		}
-		.tablebyme td {
-   			padding:10px;
-		}
-		.tablebyme tbody tr:nth-of-type(even){
-			background-color:rgba(194, 223, 255, 0.5)
-		}
-		.tablebyme tbody tr:hover{
-			color:#212529;
-			background-color:rgba(0,0,0,.075)
-		}
-		.tablebyme th{
-			color:#fff;
-			background-color:#005AB5;
-			border-color:#FFFFFF;
-		}
-		.tablebyme a{
-			text-decoration:none;
-			font-weight:500;
-		}
-		
-		.tablebyme a:hover{
-			text-decoration:none;
-			background:	#005AB5;
-			color:white;
-			font-weight:500;
-        }
-
-        .tablebyme thead{
-            text-align: center;
-            background-color: #001f63;
-            color: white;
-            border: 1px solid white;
-        }
-        
-        .tablebyme tbody tr:hover{
-            background-color: rgba(255,255,255,0.3);
-        }
-        
-		#mainDiv{
-			margin-top:100px;
-			margin-bottom:100px;
-		}
-		
-	</style>
+/*在此設定margin 以防止被navbar壓到*/
+.iiinewsContainer {
+	margin-top: 100px;
+	margin-bottom: 100px;
+	position: relative;
+}
+html{
+	margin-left:calc(100vw - 100%);
+	overflow-y: scroll;
+}
+</style>
 </head>
 <body>
-<nav>
-<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
-</nav>
-<div id="mainDiv">
-	<div align="center">
-		<h2>會員${showmemberId}的所有訂單列表</h2>
-		<a href="<c:url value='/' />">回首頁</a>
+	<nav class="navbar fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
+	</nav>
+	<div class="iiinewsContainer">
+		<div class="container">
+		<div class="row bg-white shadow-sm rounded">
+		
+			<div class="col-12 bg-info text-white p-4">
+				<h2>會員${showmemberId}的訂單列表</h2>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead class='text-center' style="background-color:	#F0F0F0;">
+						<tr>
+							<td>訂單編號</td>
+							<td>訂購日期</td>
+							<td class='text-right'>訂單價格</td>
+							<td class='text-center'>付款狀態</td>
+							<td>設定</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${empty memberOrderList}">
+								<tr>
+									<td colspan='5' align="center">您無購物紀錄</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="ad" items="${memberOrderList}">
+									<tr>
+										<td class='text-center'>${ad.adOrderNo}</td>
+										<c:set var="date" value="${fn:substring(ad.orderDate, 0, 16)}" />
+										<td class='text-center'>${date}</td>
+										<td class='text-right'>NT$ ${ad.totalAmount}</td>
+										<td class='text-center'>
+											<c:if test="${ad.paymentStatus == 0}">
+												<span class="text-danger">未付款&nbsp;<i class="fas fa-exclamation-circle"></i></span>
+												<c:if test="${ad.paymentStatus == 0}">
+												&nbsp;&nbsp;<a class="btn btn-danger" href="<c:url value="/checkoutOK.Pay/${ad.adOrderPk}" />">前往付款</a>
+												</c:if>
+											</c:if>
+											<c:if test="${ad.paymentStatus == 1}">
+												<span class='text-success'>已付款&nbsp;<i class='fas fa-check-circle'></i></span>
+											</c:if>
+											<c:if test="${ad.paymentStatus == 2}">
+												<span class="text-secondary">已取消&nbsp;<i class="fas fa-exclamation-triangle"></i></span>
+											</c:if>
+										</td>
+										<td class='text-center'><a class="btn btn-info" href="<c:url value="/getItemByOrderPk/${ad.adOrderPk}" />">檢視訂單 / 上傳圖片</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- container -->
+		</div>
+	<!-- iiinewsContainer -->
 	</div>
-	<span>${msgMap.addStatus}</span>
-	<hr>
-	<div align="center">
-		<table class="tablebyme">
-			<thead>
-				<tr>
-					<td>訂單編號</td>
-					<td>訂購日期</td>
-					<td>訂單價格</td>
-					<td>付款狀態</td>
-					<td>設定</td>
-				</tr>
-			</thead>
-			<tbody>
-				<c:choose>
-	            	<c:when test="${empty memberOrderList}">
-	            		<tr>
-	            			<td colspan='8' align="center">您無購物紀錄</td>
-	            		</tr>
-	            	</c:when>
-	            	<c:otherwise>
-						<c:forEach var="ad" items="${memberOrderList}">
-							<tr>
-								<td>${ad.adOrderNo}</td>
-								<c:set var="date" value="${fn:substring(ad.orderDate, 0, 16)}" />
-								<td>${date}</td>
-								<td>${ad.totalAmount}</td>
-								<td>還沒寫${ad.paymentStatus}
-									<c:if test="${ad.paymentStatus == 0}">未付款</c:if>
-									<c:if test="${ad.paymentStatus == 1}">已付款</c:if>
-									<c:if test="${ad.paymentStatus == 2}">其他</c:if>
-								</td>
-								<td>
-									<a href="<c:url value="/getItemByOrderPk/${ad.adOrderPk}" />">檢視訂單內容</a>
-									<c:if test="${ad.paymentStatus == 0}"><a href="<c:url value="/checkoutOK.Pay/${ad.adOrderPk}" />">前往付款</a></c:if>
-									
-								</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
-	</div>
-</div>
 </body>
 </html>

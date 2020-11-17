@@ -1,5 +1,6 @@
 package CR.service.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import CR.dao.CR_empDao;
-import CR.model.CRBean;
 import CR.model.CRemployee;
 import CR.service.CR_empService;
 
@@ -58,6 +58,18 @@ public class CR_empService_impl implements CR_empService {
 	@Override
 	public List<CRemployee> getemployeenotstay() {
 		return dao.getemployeenotstay();
+	}
+
+	@Override
+	public List<CRemployee> getempByName(String empName) {
+		
+		return dao.getempByName(empName);
+	}
+
+	@Override
+	public List<CRemployee> getempByDate(Date date) {
+		
+		return dao.getempByDate(date);
 	}
 
 	

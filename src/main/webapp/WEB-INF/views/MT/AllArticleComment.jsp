@@ -31,7 +31,7 @@
   padding: 8px;
 }
 
-#customers tr:hover {background-color: #F0F0F0;}
+#customers tr:hover {background-color: #ECF5FF;}
 
 #customers th {
   padding-top: 12px;
@@ -78,7 +78,7 @@ td {
 <!-- 				<th style="vertical-align: inherit;">文章編號</th> -->
 				<th>類型</th>
 				<th>標題</th>
-				<th>文章作者</th>
+				<th>發文者</th>
 				<th>上傳日期</th>
 <!-- 				<th>文章狀態</th> -->
 				

@@ -38,12 +38,14 @@ window.onload = function() { //刪除文章，OK
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #FF8F59;
-  color: white;
+  background-color: #FFAD86;
+  color: block;
 }
 
 td {
+	background-color: #FFF3EE;
 	padding: 3px;
+	text-align:center;
 }
 
 .td1 {
@@ -58,6 +60,7 @@ td {
 	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
+	<div align="center" style="background-color: #f8f2e4">
 	<div align="center" style="margin-top: 30px;">
 		<br><br><br>
 		<h2>會員${memberId}的發文紀錄</h2>
@@ -123,5 +126,6 @@ td {
 	</div>
 	</c:otherwise>
 		</c:choose>
+		</div>
 </body>
 </html>

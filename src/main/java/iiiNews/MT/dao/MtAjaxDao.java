@@ -9,5 +9,8 @@ public interface MtAjaxDao {
 	// 使用AJAX顯示新聞頁面
 	public int getTotalPages();
 	public List<MtAddBean> getPageComment(Integer pageComNo);
+	
+	public List<MtAddBean> getAllArtWord(String searchword,String set);
+	
 
 }

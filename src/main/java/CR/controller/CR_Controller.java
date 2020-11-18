@@ -227,34 +227,32 @@ public class CR_Controller {
 			@RequestBody CRBean cb,@PathVariable Integer pk){
 		Map<String, String> map = new HashMap<>();	
 		CRBean cb0 = null;
-		if(pk != null) {
-			cb0 = service.getReportById(pk);
-			service.evictReport(cb0);
-		}
-		copyUnupdateField(cb0,cb);
+		cb0 = service.getReportById(pk);
+		cb0.setCrReContent(cb.getCrReContent());
 		try{
-			service.updateReport(cb);
+			service.updateReport(cb0);
 			map.put("success","修改完成");
 		}catch(Exception e) {
+			e.printStackTrace();
 			map.put("fail","修改失敗");
 		}
 		return map;
 		}
 	//取未被更新的資料
-	private void copyUnupdateField(CRBean cb0, CRBean cb) {
-		cb.setMemberId(cb0.getMemberId());
-		cb.setPk(cb0.getPk());
-		cb.setCrApplyDate(cb0.getCrApplyDate());
-		
-		cb.setAttachment(cb0.getAttachment());
-		cb.setAttachmentName(cb0.getAttachmentName());
-		cb.setState(cb0.getState());
-		cb.setCremployee(cb0.getCremployee());
-		cb.setMbBean(cb0.getMbBean());
-		cb.setCpBean(cb0.getCpBean());
-		Timestamp today=new Timestamp(System.currentTimeMillis());
-		cb.setCrReDate(today);
-	}	
+//	private void copyUnupdateField(CRBean cb0, CRBean cb) {
+//		cb.setMemberId(cb0.getMemberId());
+//		cb.setPk(cb0.getPk());
+//		cb.setCrApplyDate(cb0.getCrApplyDate());
+//		
+//		cb.setAttachment(cb0.getAttachment());
+//		cb.setAttachmentName(cb0.getAttachmentName());
+//		cb.setState(cb0.getState());
+//		cb.setCremployee(cb0.getCremployee());
+//		cb.setMbBean(cb0.getMbBean());
+//		cb.setCpBean(cb0.getCpBean());
+//		Timestamp today=new Timestamp(System.currentTimeMillis());
+//		cb.setCrReDate(today);
+//	}	
 
 	
 	@GetMapping(value="/getCRimg/{pk}")

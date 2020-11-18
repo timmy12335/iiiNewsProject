@@ -33,6 +33,18 @@ display: -webkit-box;
 -webkit-box-orient: vertical;
 white-space: normal;
 }
+
+#div1{
+    width:700px;
+    margin:50px auto;
+}
+#score{
+    width:150px;
+    margin:10px auto;
+    font-size: large;
+    font-family: "標楷體";            
+    color:darkblue;
+}
   </style>
 <script>
 function deleteCrReport(pk){
@@ -52,7 +64,7 @@ function deleteCrReport(pk){
 		  		} else if (result.success) {
 			 		divResult.innerHTML = "<font color='green' >"
 						+ result.success + "</font>";
-						window.location.href="<c:url value='/customerReports'/>";						
+						window.location.href="<c:url value='/success'/>";						
 		}
 	}	
 }
@@ -157,6 +169,11 @@ function deleteCrReport(pk){
 				} 
 			}
 	
+	function confirmReply(pk){
+		document.getElementById("div1").style.display="";
+		
+	}
+
 	</script>
 </body>
 </html>

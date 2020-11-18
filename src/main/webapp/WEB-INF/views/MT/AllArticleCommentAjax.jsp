@@ -13,18 +13,22 @@
   width: 90%;
 }
 
-#customers td, #customers th {
+#customers td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#customers tr:hover {background-color: #ECF5FF;}
+#customers tr:hover {background-color: #FFF3EE;}
 
 #customers th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #0066CC;
+  background-color: #FF8F59;
   color: white;
 }
 
@@ -136,7 +140,7 @@ function displayPageBooks(responseData){
 		pageNoCom = mapData.currPage;
 		totalPageCom  = mapData.totalPageCom;
 		
-		var navContent = "<table border='1' ><tr height='36' bgcolor='#fbdb98'>" ;
+		var navContent = "<table border='1' ><tr height='36'>" ;
 		if (pageNoCom != 1){
 			navContent += "<td width='80' align='center'><button id='first'>第一頁</button></td>";
 			navContent += "<td width='80' align='center'><button id='prev'>前一頁</button></td>";

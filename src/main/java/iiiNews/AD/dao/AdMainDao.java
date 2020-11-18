@@ -19,6 +19,8 @@ public interface AdMainDao {
 	
 	public int deleteAdByMemberPkid(int pkId);
 	
+	public int offShelfAdByMemberPkid(int pkId);
+	
 	public AdBean getOneAdByadPk(int adPk);
 	
 	//ajax

@@ -111,7 +111,7 @@ public class httpController {
 		
 		for(int i = 0 ; i <=20 ; i++) {
 		 e1 = c1.get(i).attr("href");
-		 System.out.println("應該有網址"+e1);
+		
 		
 		 list1.add(new String(e1)); //將字串加入list
 		

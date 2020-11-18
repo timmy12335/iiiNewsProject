@@ -21,7 +21,7 @@ fieldset {
 <body>
 	<section>
 		<div class="container">
-			<h1 style="text-align: center">新增產品資料</h1>
+			<h1 style="text-align: center">建立追蹤新聞</h1>
 		</div>
 	</section>
 	<hr style="height: 1px; border: none; color: #333; background-color: #333;">
@@ -47,7 +47,16 @@ fieldset {
 							class='form:input-large' />
 					</div>
 				</div>
-
+                
+                <div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2"  for='author'>
+						標籤 </label>
+					<div class="col-lg-10">
+						<form:input id="tag" path="tag" type='text'
+							class='form:input-large' />
+					</div>
+				</div>
+                
 				<div class="form-group">
 					<label class='control-label col-lg-2 col-lg-2' for="category">
 						類型 </label>
@@ -77,13 +86,11 @@ fieldset {
 				</div>
 
 				<div class="form-group">
-					<label class='control-label col-lg-2 col-lg-2' for="companyId">
-						書商 </label>
+					<label class='control-label col-lg-2 col-lg-2' for="price">
+						內容 </label>
 					<div class='col-lg-10'>
-						<%-- <form:select path="companyId">
-							<form:option value="-1" label="請挑選" />
-							<form:options items="${companyList}" />
-						</form:select> --%>
+						<form:textarea style="resize:none;width:300px;height:200px;" id="descript" path="descript" type='text'
+							class='form:input-large' />
 					</div>
 				</div>
 				

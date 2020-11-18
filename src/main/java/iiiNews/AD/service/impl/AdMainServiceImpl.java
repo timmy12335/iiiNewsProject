@@ -98,6 +98,15 @@ public class AdMainServiceImpl implements AdMainService {
 	
 	@Override
 	@Transactional
+	public int offShelfAdByMemberPkid(int pkId) {
+		int n = 0;
+		adMaindao.offShelfAdByMemberPkid(pkId);
+		n++;
+		return n;
+	}
+	
+	@Override
+	@Transactional
 	public int updateAds(AdBean ab) {
 		int n = 0;
 		adMaindao.updateAds(ab);
@@ -130,6 +139,8 @@ public class AdMainServiceImpl implements AdMainService {
 	public int getTotalPageCount() {
 		return adMaindao.getTotalPageCount();
 	}
+
+	
 
 	
 

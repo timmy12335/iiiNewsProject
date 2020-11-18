@@ -31,13 +31,13 @@ height:350;
 </style>
 </head>
 <body>
-<div class="input-group mb-3" style="margin:100px ; width:500px" >
-  <div class="input-group-prepend">
-  <!-- <a href='httpclient1'> -->
-    <button onclick="searchByWord()" class="btn btn-outline-secondary" type="button" id="button-addon1">TVBS SERCH</button><!-- </a> -->
-  </div>
-  <input   id="wordChoose"  size="1" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" >
-</div>
+<!-- <div class="input-group mb-3" style="margin:100px ; width:500px" > -->
+<!--   <div class="input-group-prepend"> -->
+<!--   <!-- <a href='httpclient1'> --> -->
+<!--     <button onclick="searchByWord()" class="btn btn-outline-secondary" type="button" id="button-addon1">TVBS SERCH</button></a> -->
+<!--   </div> -->
+<!--   <input     size="1" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" > -->
+<!-- </div> -->
 	<!-- <section>
 		<div>
 			<div class="container" style="text-align: center">
@@ -70,7 +70,8 @@ height:350;
 				<p>發生地點: ${trkNew.ocplace}</p>
 				<p>發生時間: ${trkNew.octime}</p>
 				<p>點閱人數: ${trkNew.clicnum}</p>
-
+                <p>標籤: ${trkNew.tag}</p>
+                 <p id="wordChoose" style="visibility:hidden">${trkNew.tag}</p>
 				<%-- 	<c:choose>
 					<c:when test='${product.discount != 1.0 }'>
 						<p>
@@ -200,9 +201,11 @@ height:350;
 	console.log("Session人數="+visits);
 	
 	document.write("您是到訪的第" + t1 + "位用户！");
+	
+	
+	
 	window.onload = function() {
-    
-    
+		
     var xhr = new XMLHttpRequest();
 	xhr.open("PUT", "<c:url value='/editNews5/' />" + NewsId2, true);
 	var jsontrkNewsBean = {
@@ -220,8 +223,8 @@ height:350;
 
 function searchByWordURL(responseData){
 	var responseDatatit = responseData
-	let word = document.getElementById("wordChoose").value;
-	
+	//let word = document.getElementById("wordChoose").value;
+	let word = "${trkNew.tag}";
 	
 	var queryStringWord = "?word=" + word;
 	console.log(queryStringWord);
@@ -239,7 +242,8 @@ function searchByWordURL(responseData){
 
 
 function searchByWord(){
-	let word = document.getElementById("wordChoose").value;
+	//let word = document.getElementById("wordChoose").value;
+	let word = "${trkNew.tag}";
 	console.log("搜尋字值:"+word);
 	
 	var queryStringWord = "?word=" + word;

@@ -114,6 +114,25 @@ public class AdMainDaoImpl implements AdMainDao {
 		n++;
 		return n;
 	}
+	
+	@Override
+	public int offShelfAdByMemberPkid(int pkId) {
+		int n = 0;
+		Session session = factory.getCurrentSession();
+		AdBean ab = session.get(AdBean.class, pkId);
+		System.out.println(ab.getStatus());
+		if(ab.getStatus() == 0) {
+			System.out.println("0 to 1");
+			ab.setStatus(1);
+		}else {
+			System.out.println("1 to 0");
+			ab.setStatus(0);
+		}
+		
+		session.update(ab);
+		n++;
+		return n;
+	}
 
 
 	@Override
@@ -168,6 +187,9 @@ public class AdMainDaoImpl implements AdMainDao {
 		session.createQuery(hql).setParameter("today", today).executeUpdate();
 		System.out.println("檢查日期完成");
 	}
+
+
+
 	
 	
 	

@@ -51,7 +51,7 @@ window.onload = function() {
 				jsonlength++;
 			}
 			$("#thismonthsell").html(selltotal);
-			$("#thismonthuploadcount").html(jsonlength);
+			$("#thismonthsoldcount").html(jsonlength);
 			console.log("jsonlength:"+jsonlength);
 		}
 	}
@@ -69,7 +69,7 @@ window.onload = function() {
 		<div class="row">
 			<div class="col-3">
 				<div class="col-12 bg-white rounded shadow-sm p-3 mb-5">
-					<h3>商業會員<br>${CpAdLists[0].memberName}，您好</h3>
+					<h3>${CpAdLists[0].memberName}，您好</h3>
 					<h4>帳號：${CpAdLists[0].memberId}</h4>
 					<h4>廣告列表專區</h4>
 				</div>
@@ -88,22 +88,61 @@ window.onload = function() {
 						<div class="row">
 							<div class="col-4">
 <%-- 								<h3>本月上傳：${fn:length(CpAdLists)}則</h3> --%>
-								<canvas id="example" width="400" height="200"></canvas>
+								<div class="card">
+						        	<div class="card-body">
+						             	<p class="card-title textleft">本月總上傳比數</p>
+						                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+							                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" id="thismonthupload">${fn:length(CpAdLists)}</h3>
+							                <i class="fas fa-file-upload icon-md text-muted fa-3x"></i>
+						                </div>  
+						                <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+						        	</div>
+						        </div>
+							</div>
+							<div class="col-4">
+								<div class="card">
+						        	<div class="card-body">
+						             	<p class="card-title textleft">本月收入金額</p>
+						                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+							                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" id="thismonthsell"></h3>
+							                <i class="fas fa-money-bill-wave icon-md text-muted fa-3x"></i>
+						                </div>  
+						                <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+						        	</div>
+						        </div>
+							</div>
+							<div class="col-4">
+								<div class="card">
+					            	<div class="card-body">
+					             		<p class="card-title textleft">本月賣出則數</p>
+					                	<div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+						                	<h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" id="thismonthsoldcount"></h3>
+						                	<i class="fas fa-file-upload icon-md text-muted fa-3x"></i>
+					                	</div>  
+					                	<p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+					        		</div>
+					        	</div>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 30px;">
+							<div class="col-6">
+								<div class="card">
+									<canvas id="example" width="400" height="200"></canvas>
   <script>
   if ($("#example").length) {
       var SalesChartCanvas = $("#example").get(0).getContext("2d");
       var SalesChart = new Chart(SalesChartCanvas, {
         type: 'bar',
         data: {
-          labels: ["Jan", "Feb", "Mar"],
+          labels: ["九月", "十月", "十一月"],
           datasets: [{
               label: '上傳則數',
-              data: [480, 230, 470],
+              data: [0, 0, 470],
               backgroundColor: '#8EB0FF'
             },
             {
               label: '賣出則數',
-              data: [400, 340, 550],
+              data: [0, 0, 550],
               backgroundColor: '#316FFF'
             }
           ]
@@ -111,6 +150,11 @@ window.onload = function() {
         options: {
           responsive: true,
           maintainAspectRatio: true,
+          title:{
+        	  display:true,
+        	  text:"近三個月賣出筆數",
+        	  fontSize:15
+          },
           layout: {
             padding: {
               left: 0,
@@ -146,7 +190,9 @@ window.onload = function() {
             }]
           },
           legend: {
-            display: false
+            display: true,
+            position: 'left',
+            labels:{fontSize:15}
           },
           elements: {
             point: {
@@ -156,31 +202,11 @@ window.onload = function() {
         },
       });
     }
-  </script>
+  </script>						</div>
 							</div>
-							<div class="col-4">
-								<div class="card">
-						        	<div class="card-body">
-						             	<p class="card-title textleft">本月收入金額</p>
-						                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-							                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" id="thismonthsell"></h3>
-							                <i class="fas fa-money-bill-wave icon-md text-muted fa-3x"></i>
-						                </div>  
-						                <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
-						        	</div>
-						        </div>
-							</div>
-							<div class="col-4">
-								<div class="card">
-					            	<div class="card-body">
-					             		<p class="card-title textleft">本月賣出則數</p>
-					                	<div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-						                	<h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" id="thismonthuploadcount"></h3>
-						                	<i class="fas fa-file-upload icon-md text-muted fa-3x"></i>
-					                	</div>  
-					                	<p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
-					        		</div>
-					        	</div>
+							<div class="col-6">
+							<div>預留圓餅圖</div>
+								<canvas id="pie" width="400" height="200"></canvas>
 							</div>
 						</div>
 					</div>

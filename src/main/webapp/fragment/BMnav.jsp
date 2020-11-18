@@ -55,6 +55,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllNews'/>">新聞商品列表</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/iiiNews/src/main/webapp/WEB-INF/views/NP/backBoard/NewsTypepie.jsp">新聞商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">商品訂單暫放列表</a></li>
               </ul>

@@ -35,7 +35,7 @@
   font-size: 90%;
 }
 .shadow0{
-  box-shadow: 3px 3px 3px #9D9D9D;
+  box-shadow: 4px 4px 4px #9D9D9D;
 }
 p{
   margin: 3px;

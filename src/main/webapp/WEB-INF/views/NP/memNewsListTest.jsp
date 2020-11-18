@@ -22,6 +22,21 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>會員新聞列表</title>
 <style>
+.incss{
+			width:150px;
+			height:45px;
+			margin:10px;
+			font-size:20px;
+			background-color:#BC214C;
+			border:none;
+			outline: none;
+			box-shadow: 3px 3px 3px #9D9D9D;
+			color:white;
+		}
+		.incss:hover{
+			background-color:#e884a0;
+		}
+
 p{
  margin:4px auto;
 
@@ -38,6 +53,13 @@ display: block;
 height: 4px;
 background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂的顏色 */
 }
+.dstyle{
+	background-color:lightpink;
+	margin:20px;
+	border-radius:15px;
+	box-shadow: 4px 4px 4px #9D9D9D;
+}
+
 </style>
 </head>
 <body>
@@ -62,7 +84,7 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 			<form method="POST"  id="form1" action="<c:url value='/updateLimitTime' />" >
 			
 				<c:forEach var='news' items='${memNewsList}' varStatus='loop' >
-				<div class="border " style="background-color:lightpink;margin:20px;border-radius:15px;box-shadow: 3px 3px 3px #9D9D9D; ">
+				<div class="border dstyle" >
 							<div style="background-color:lavenderblush;border-radius:15px;margin:0px 20px">
 							<div class="row" style="margin:15px">
 								<div class="col-sm-2" >
@@ -71,12 +93,12 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 																								
 								<div class="col-sm-3" align='left'  style="padding-left:60px;">								
 									
-									<p>${news.newsId}</p>
+									<p><b>${news.newsId}</b></p>
 									<p>新聞類型：${news.newsType}</p>
 									<p>發生時間：${news.happenDate}&ensp;${news.happenTime}</p>
 									<p>發生地點：${news.location}</p>									
 									<p>上傳時間：${fn:substring(news.uploadTime,0,19)}</p>
-									<p class="text-danger">販賣計時：尚未輸入</p>
+									<p class="text-danger"><b>販賣計時：尚未輸入</b></p>
 								</div>
 								<div class="col-sm-5" >
 									<div class="col-12 text-left">
@@ -193,7 +215,10 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 		</c:choose>
 
 		<br>
-		<input type="button" value="回目錄" onclick="location.href='/iiiNews'">
+		<div  align="center">
+			<input type="button" class="incss" value="回首頁" onclick="location.href='/iiiNews'">
+		</div>
+		
 </div>
 	</div>
 	<script>

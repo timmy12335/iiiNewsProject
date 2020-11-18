@@ -88,6 +88,10 @@ public class ArticleCommentController {
 		MBBean mbb = (MBBean) model.getAttribute("MBBean");
 //        bean.setMemberId(mbb.getMemberId());
         
+		if (mbb == null) {		//抓會員session
+			return "redirect: " + servletContext.getContextPath() + "/Login";
+		}
+		
         if (mbb.getMemberId() == null) {		//抓會員session
 			return "redirect: " + servletContext.getContextPath() + "/Login";
 		}

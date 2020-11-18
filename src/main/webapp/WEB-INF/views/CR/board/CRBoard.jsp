@@ -77,6 +77,33 @@
 	</div>
 	</div>
 </section>
+<script>
+window.onload=loading();
+function loading(){
+var origincontent = "<table class='table table-primary'><thead><tr><th width='60px'>公告編號</th>";
+origincontent +=  "<th>主題</th>";
+origincontent +=  "<th width='80px'>發表者</th>";
+origincontent +=  "<th width='80px'>觀看人數</th>";
+origincontent +=  "<th width='80px'>發表日期</th>";
+origincontent +=  "<th>功能></th></tr></thead>";
+origincontent +=  "<tr><td colspan='9'><b>請選擇欲搜尋的類別</b></td></tr></table>";
+document.getElementById("somedivS").innerHTML = origincontent;
 
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "<c:url value='/getboard' />" , true);
+//	xhr.open("GET", "<c:url value='/getAdByAjax.json' />", true);
+xhr.send();
+
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+		var responseData = xhr.responseText;
+		displayPageEmps(responseData);
+	}
+}
+}
+
+
+
+</script>
 </body>
 </html>

@@ -3,12 +3,15 @@ package iiiNews.NP.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
 import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
 import iiiNews.NP.model.NewsBean;
@@ -32,7 +37,7 @@ import iiiNews.NP.service.NPOrderService;
 import iiiNews.NP.service.NewsProductService;
 
 @Controller
-@SessionAttributes({"MBBean","CpMemberBean"})
+@SessionAttributes({"MBBean","CpMemberBean","green"})
 public class NewsBuyingController {
 	@Autowired
 	NewsProductService productService;
@@ -44,7 +49,7 @@ public class NewsBuyingController {
 	//企業購買後新增一筆訂單
 	@GetMapping("/insertToOrderBean/{newsId}")
 	public String BuyingNews(@ModelAttribute NewsOrderBean nOrderBean ,
-							 @PathVariable String newsId ,Model model) {
+							 @PathVariable String newsId ,Model model){
 		CpMemberBean cpmb = (CpMemberBean) model.getAttribute("CpMemberBean");
 		
 		if (cpmb == null) {
@@ -58,14 +63,53 @@ public class NewsBuyingController {
 			nOrderBean.setNewsBean(nb);
 			nOrderBean.setMemberId(nb.getMemberId());
 			nOrderBean.setCompanyId(cpmb.getCpmemberId());
-			nOrderBean.setOrderId(npOrderService.getOrderRecord());
+			String OrderNo = npOrderService.getOrderRecord();
+			nOrderBean.setOrderId(OrderNo);
 			//改上架狀態
 			npOrderService.updateStatusZero(newsId);
 			npOrderService.uploadNewsOrder(nOrderBean);
-					
-			return "redirect:/showOrderList";					
+			
+			/* 提供金額 訂單編號 時間 商品名稱給綠界
+			 * 得到訂單金額並轉成字串
+			 * 取得時間並轉成API要的格式*/
+			String money = String.valueOf(nb.getPrice());
+			
+			Timestamp orderDate = new Timestamp(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			String tradeDate = sdf.format(orderDate);
+			String itemName = "iiiNews News products#";
+			itemName += "#"+OrderNo+"#Thank you for purchasing.";
+			
+			System.out.println("=====進入綠界的結帳=====");
+			//(串接綠界的結帳API)
+			AllInOne all = new AllInOne("");
+			AioCheckOutALL obj = new AioCheckOutALL();
+			obj.setMerchantTradeNo(OrderNo);
+			obj.setMerchantTradeDate(tradeDate);
+			obj.setTotalAmount(money);
+			obj.setTradeDesc("test Description");
+			obj.setItemName(itemName);
+			obj.setReturnURL("http://localhost:8080/iiiNews/");
+			obj.setClientBackURL("http://localhost:8080/iiiNews/showOrderList");
+			obj.setNeedExtraPaidInfo("Y");
+			String greenword = all.aioCheckOut(obj, null);
+			model.addAttribute("green", greenword);
+			
+			return "redirect:/gotogreenpage";
+			
+//			return "redirect:/showOrderList";				
 		}				
 	}
+	
+	@GetMapping("/gotogreenpage")
+	public void gotogreenpage(Model model, HttpServletResponse response) throws IOException {
+		System.out.println("green");
+		PrintWriter out = response.getWriter();
+		String greenword = (String) model.getAttribute("green");
+		System.out.println(greenword);
+		out.print("<div>"+greenword+"</div>");
+	}
+	
 	//列出企業訂單列表
 	@GetMapping("/showOrderList")
 	public String showOrderList(Model model) {

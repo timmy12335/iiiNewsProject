@@ -56,7 +56,6 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllNews'/>">新聞商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">商品訂單暫放列表</a></li>
               </ul>
             </div>
           </li>
@@ -88,12 +87,17 @@
 <!--               <span class="menu-title">社群文章管理</span> -->
 <!--             </a> -->
 <!--           </li> -->
-
-          <li class="nav-item">
-            <a class="nav-link" href="連結">
+		<li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">訂單管理系統</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="ui-order">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">廣告商品訂單列表</a></li>
+              </ul>
+            </div>
           </li>
 <!--           <li class="nav-item"> -->
 <!--             <a class="nav-link" href="連結"> -->

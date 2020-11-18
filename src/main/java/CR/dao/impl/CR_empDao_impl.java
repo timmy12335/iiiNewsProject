@@ -25,6 +25,7 @@ public class CR_empDao_impl implements CR_empDao {
 		emp.setApplyDate(date);
 		emp.setReplyamt(0);
 		emp.setUntreatamt(0);
+		emp.setIsstay(1);
 		session.save(emp);
 	}
 
@@ -53,8 +54,17 @@ public class CR_empDao_impl implements CR_empDao {
 		String hql ="UPDATE CRemployee SET isstay=0 Where empPk=:emppk";
 		
 		session.createQuery(hql).setParameter("emppk", empPk).executeUpdate();
-
 	}
+	
+	@Override
+	public void returnemployeeByPk(int empPk) {
+		Session session = factory.getCurrentSession();
+		System.out.println(empPk+"___________________________________________");
+		String hql ="UPDATE CRemployee SET isstay=1 Where empPk=:emppk";
+		
+		session.createQuery(hql).setParameter("emppk", empPk).executeUpdate();
+	}
+	
 
 	@Override
 	public void updateemployee(CRemployee crb) {

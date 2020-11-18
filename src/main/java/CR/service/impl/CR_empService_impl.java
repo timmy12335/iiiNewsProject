@@ -72,6 +72,12 @@ public class CR_empService_impl implements CR_empService {
 		return dao.getempByDate(date);
 	}
 
+	@Override
+	public void returnemployeeByPk(int empPk) {
+		dao.returnemployeeByPk(empPk);
+		
+	}
+
 	
 
 }

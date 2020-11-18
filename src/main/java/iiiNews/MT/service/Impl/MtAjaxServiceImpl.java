@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import iiiNews.AD.model.AdOrderBean;
 import iiiNews.MT.dao.MtAjaxDao;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAjaxService;
@@ -30,6 +31,17 @@ public class MtAjaxServiceImpl implements MtAjaxService {
 	@Transactional
 	public List<MtAddBean> getPageComment(Integer pageComNo) {
 		return ajaxDao.getPageComment(pageComNo);
+	}
+	
+	@Override
+	@Transactional
+	public List<MtAddBean> getAllArtWord(String buyerMemberId, String adOrderNo, String orderDate) {
+		return ajaxDao.getAllArtWord(buyerMemberId, adOrderNo, orderDate);
+	}
+
+	@Override
+	public List<MtAddBean> getAllArtWord(String searchword, String set) {
+		return ajaxDao.getAllArtWord(buyerMemberId, adOrderNo, orderDate);
 	}
 
 }

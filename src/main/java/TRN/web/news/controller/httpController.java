@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import TRN.web.news.dao.Impl.MyHttpclient;
 
 @Controller
@@ -63,7 +64,9 @@ public class httpController {
 		System.out.println(word);
 		
 		MyHttpclient t1 = new MyHttpclient();
-		Elements d1 =t1.httpclientData(word);
+		
+		Elements d1 =t1.httpclientData(word).getElementsByClass("newsimg-area-text-2");
+		
 		//System.out.println("AAAAAAAA"+d1);
 		for(int i = 0 ; i <=6 ; i++) {
 		 e1 = d1.get(i).text();
@@ -73,7 +76,7 @@ public class httpController {
 		
 		// System.out.println("BBBBBBB"+list);
 		}
-		System.out.println("CCCCCCC"+ list);
+		
 		//String a1 =e1.toString() ;
 		//List<String> list = Arrays.asList(a1);
 		
@@ -89,12 +92,51 @@ public class httpController {
 		//String d1 = b1.get(0).text();
 //		System.out.println("9999"+d1);
 //		String s1= d1.text();
-		System.out.println("1113------------->"+list);
+	
 		//model.addAttribute("d1", d1);
 		return list;
 	}
 	
+	@GetMapping("/httpclient2") // 連線查詢所有資料
+	public @ResponseBody List<String> httpclientURL(
+		   @RequestParam (value="word")String word) throws IOException {
+		String e1 = ""; //第一次宣告,不能重複宣告
+		List<String> list1 = new ArrayList<String>();
+		System.out.println(word);
+		
+		MyHttpclient t1 = new MyHttpclient();
+		Elements d1 =t1.httpclientData(word).select("div.newsimg-area-item-2");
 	
+		Elements c1 = d1.select("a");
+		
+		for(int i = 0 ; i <=20 ; i++) {
+		 e1 = c1.get(i).attr("href");
+		
+		
+		 list1.add(new String(e1)); //將字串加入list
+		
+		// System.out.println("BBBBBBB"+list);
+		}
+		System.out.println("CCCCCCC"+ list1);
+		//String a1 =e1.toString() ;
+		//List<String> list = Arrays.asList(a1);
+		
+		File writename = new File("C:\\_springMVC\\outwritestream\\input.txtoutputURL.txt"); // 相對路徑，如果沒有則要建立一個新的output。txt檔案
+		writename.createNewFile(); // 建立新檔案
+		BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+		 for(String l:list1){
+		out.write(l); // \r\n即為換行
+		 }
+		out.flush(); // 把快取區內容壓入檔案
+		out.close(); // 最後記得關閉檔案
+		
+		//String d1 = b1.get(0).text();
+//		System.out.println("9999"+d1);
+//		String s1= d1.text();
+		System.out.println("1113------------->"+list1);
+		//model.addAttribute("d1", d1);
+		return list1;
+	}
 	//@GetMapping("/httpclient2")
 //	public @ResponseBody String httpclient3 (
 //			@RequestParam(value="word")String SearchWord,Model model){

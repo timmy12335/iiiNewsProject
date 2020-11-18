@@ -34,4 +34,16 @@ public class CR_msgDao_impl implements CR_msgDao {
 		return session.get(MBBean.class, memberId);
 	}
 
+	@Override
+	public void updateMsg(CrMsgBean msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteMsg(int pk) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

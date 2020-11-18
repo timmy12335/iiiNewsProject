@@ -104,6 +104,8 @@ public class CRBean implements Serializable {
 	public CRBean() {
 	}
 	
+
+
 	public String getCompanyId() {
 		return companyId;
 	}

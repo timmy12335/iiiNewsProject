@@ -71,7 +71,7 @@ function confirmDelete(n) {
 										<br>
 										<button type="button"
 											class="btn btn-outline-danger btn-block waves-effect waves-light"
-											onclick='location.href="<c:url value='/getAllAds' />"'>前往購物</button>
+											onclick='location.href="<c:url value='/getAjaxListSearch' />"'>前往購物</button>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -218,7 +218,7 @@ function confirmDelete(n) {
 
 							<button type="button"
 								class="btn btn-outline-info btn-block waves-effect waves-light"
-								onclick='location.href="<c:url value='/getAllAds' />"'>
+								onclick='location.href="<c:url value='/getAjaxListSearch' />"'>
 								繼續購物&nbsp&nbsp&nbsp<i class="fa fa-cart-plus" aria-hidden="true"></i></button>
 
 							<button type="button"

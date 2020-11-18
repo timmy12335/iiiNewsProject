@@ -31,6 +31,7 @@
 	</div>
 	</div>
 	</a>
+	<a>
 	<div class="card">
 	<span></span>
 	<div class='imgBx'><img src="<c:url value='/image/CR1.jpg'/>"></div>
@@ -41,14 +42,15 @@
 	</div>
 	</div>
 	</div>
-	<a href="<c:url value='/chat' />">
+	</a>
+	<a href="<c:url value='/msg' />">
 	<div class="card">
 	<span></span>
 	<div class='imgBx'><img src="<c:url value='/image/CR5.jpg'/>"></div>
 	<div class="content">
 	<div>
 	<h2>聊天室Test</h2>
-	<p>沒做出來就當混分的<p>	
+	<p>慘烈<p>	
 	</div>
 	</div>
 	</div>

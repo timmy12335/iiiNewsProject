@@ -94,9 +94,8 @@ public class CR_Controller {
 		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
 		if (memberBean == null) {
 			if(cpmemberBean == null) {
-			return "redirect: " + ctx.getContextPath() + "/Login";
+			return "redirect: " + ctx.getContextPath() + "/LoginMB";
 			}
-			return "redirect: " + ctx.getContextPath() + "/Login";
 		}
 	
 		HttpSession session = request.getSession(false); 
@@ -156,10 +155,13 @@ public class CR_Controller {
 				MimeMessage msg = mailSender.createMimeMessage();
 				try {
 					MimeMessageHelper email = new MimeMessageHelper(msg,true,"utf-8");
-					if(mb.getEmail() !=null) {
-					email.setTo(mb.getEmail());
-					}else {
-					email.setTo(cpmb.getCpemail());
+					if(mb !=null) {
+						System.out.println("有要進來?");
+						email.setTo(mb.getEmail());
+					}else if(cpmb !=null) {
+						email.setTo(cpmb.getCpemail());
+					}else{
+						email.setTo("eeit@gmail.com");	
 					};
 					email.setSubject("iiiNews客服表單申請成功通知信");
 					String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>"
@@ -225,34 +227,32 @@ public class CR_Controller {
 			@RequestBody CRBean cb,@PathVariable Integer pk){
 		Map<String, String> map = new HashMap<>();	
 		CRBean cb0 = null;
-		if(pk != null) {
-			cb0 = service.getReportById(pk);
-			service.evictReport(cb0);
-		}
-		copyUnupdateField(cb0,cb);
+		cb0 = service.getReportById(pk);
+		cb0.setCrReContent(cb.getCrReContent());
 		try{
-			service.updateReport(cb);
+			service.updateReport(cb0);
 			map.put("success","修改完成");
 		}catch(Exception e) {
+			e.printStackTrace();
 			map.put("fail","修改失敗");
 		}
 		return map;
 		}
 	//取未被更新的資料
-	private void copyUnupdateField(CRBean cb0, CRBean cb) {
-		cb.setMemberId(cb0.getMemberId());
-		cb.setPk(cb0.getPk());
-		cb.setCrApplyDate(cb0.getCrApplyDate());
-		
-		cb.setAttachment(cb0.getAttachment());
-		cb.setAttachmentName(cb0.getAttachmentName());
-		cb.setState(cb0.getState());
-		cb.setCremployee(cb0.getCremployee());
-		cb.setMbBean(cb0.getMbBean());
-		cb.setCpBean(cb0.getCpBean());
-		Timestamp today=new Timestamp(System.currentTimeMillis());
-		cb.setCrReDate(today);
-	}	
+//	private void copyUnupdateField(CRBean cb0, CRBean cb) {
+//		cb.setMemberId(cb0.getMemberId());
+//		cb.setPk(cb0.getPk());
+//		cb.setCrApplyDate(cb0.getCrApplyDate());
+//		
+//		cb.setAttachment(cb0.getAttachment());
+//		cb.setAttachmentName(cb0.getAttachmentName());
+//		cb.setState(cb0.getState());
+//		cb.setCremployee(cb0.getCremployee());
+//		cb.setMbBean(cb0.getMbBean());
+//		cb.setCpBean(cb0.getCpBean());
+//		Timestamp today=new Timestamp(System.currentTimeMillis());
+//		cb.setCrReDate(today);
+//	}	
 
 	
 	@GetMapping(value="/getCRimg/{pk}")

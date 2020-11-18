@@ -24,13 +24,13 @@ import org.jsoup.select.Elements;
 public class MyHttpclient  {
 	
 	public Elements txt ;
-
+	Document document ;
 
 	
 
 
 	//public  Elements httpclientData(String SearchWord) {
-		public  Elements httpclientData(String SearchWord) {
+		public  Document httpclientData(String SearchWord) {
 				
         //1.生成httpclient，相当于该打开一个浏览器
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -53,7 +53,7 @@ public class MyHttpclient  {
                 HttpEntity httpEntity = response.getEntity();
                 String html = EntityUtils.toString(httpEntity, "utf-8");
                // System.out.println(html);
-                System.out.println("------------------------------------------------------------------------------------------");
+                System.out.println("有爬到------------------------------------------------------------------------------------------");
                 /**
                  * 下面是Jsoup展现自我的平台
                  */
@@ -61,13 +61,14 @@ public class MyHttpclient  {
                 Document document = Jsoup.parse(html);
                // System.out.println(document);
                 //像js一样，通过标签获取title
-                System.out.println(document.getElementsByTag("title").first());
+               // System.out.println(document.getElementsByTag("title").first());
                 //像js一样，通过id 获取文章列表元素对象
                // Element ById = document.getElementById("");
                // Elements txt = document.getElementsContainingOwnText("天氣");
                 //Elements txt = document.select("div.newsimg-area-text-2");
                 
                 Elements txt = document.getElementsByClass("newsimg-area-text-2");
+               
                // for(int i = 0 ; i <=6 ; i++) {
               //  String txt = txt0.get().text();
             //    System.out.println(txt);
@@ -106,7 +107,7 @@ public class MyHttpclient  {
 //                }
                 
                // System.out.println("A"+txt);
-                return txt;
+                return document;
             } else {
                // 如果返回状态不是200，比如404（页面不存在）等，根据情况做处理，这里略
                 System.out.println("返回状态不是200");
@@ -123,7 +124,7 @@ public class MyHttpclient  {
           
         }
         //System.out.println("1113--------------------aa>"+txt);
-		return txt;
+		return document;
 	
 }
 

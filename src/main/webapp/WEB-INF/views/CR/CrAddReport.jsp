@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>申請客服表單</title>
+
 <style type="text/css">
 span.error {
 	color: red;
@@ -73,8 +74,7 @@ window.onload=function(){
 		}
 	}
 	
-	}
-
+}
 
 </script>
 </head>
@@ -141,7 +141,7 @@ window.onload=function(){
 					<tr>
 						<td colspan="3" align="center"><img
 							style="width: 300px; height: 200px;" id="preview_img"
-							src="<c:url value='/image/CR2.jpg' />" /></td>
+							src="<c:url value='/image/CR5.jpg' />" /></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
@@ -166,6 +166,6 @@ window.onload=function(){
 		</div>
 
 	</section>
-
+<jsp:include page="/fragment/chat.jsp"></jsp:include>
 </body>
 </html>

@@ -36,21 +36,19 @@ public class CR_BoardController {
 	}
 	
 	@GetMapping(value="/getboard")
-	public @ResponseBody String getBorad(@RequestBody Model model) {
+	public @ResponseBody List<CRBoardBean> getBorad() {
 		List<CRBoardBean> beans = service.getboard();
-		model.addAttribute("boards",beans);
-		return "CR/board/CRBoard";	
+		return beans;	
 	}
-	
-	
 	
 	@GetMapping(value="/addboard")
 	public String getaddBoradform(Model model,HttpServletRequest request,HttpServletResponse response) {
 		
 		CRBoardBean crb = new CRBoardBean();
 		model.addAttribute("crbBean", crb);
-		return "CR/BMBoard";
+		return "CR/board/BMBoard";
 	}
+	
 	
 	
 	

@@ -21,16 +21,16 @@ import org.jsoup.select.Elements;
 
 
 
-public class MyHttpclient  {
+public class MyHttpclientURL  {
 	
 	public Elements txt ;
-	Document document ;
+	public Document document;
 
 	
 
 
 	//public  Elements httpclientData(String SearchWord) {
-		public  Document httpclientData(String SearchWord) {
+		public  Document httpclientData1(String SearchWord) {
 				
         //1.生成httpclient，相当于该打开一个浏览器
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -53,7 +53,7 @@ public class MyHttpclient  {
                 HttpEntity httpEntity = response.getEntity();
                 String html = EntityUtils.toString(httpEntity, "utf-8");
                // System.out.println(html);
-                System.out.println("有爬到------------------------------------------------------------------------------------------");
+                System.out.println("------------------------------------------------------------------------------------------");
                 /**
                  * 下面是Jsoup展现自我的平台
                  */
@@ -61,14 +61,14 @@ public class MyHttpclient  {
                 Document document = Jsoup.parse(html);
                // System.out.println(document);
                 //像js一样，通过标签获取title
-               // System.out.println(document.getElementsByTag("title").first());
+                System.out.println(document.getElementsByTag("title").first());
                 //像js一样，通过id 获取文章列表元素对象
                // Element ById = document.getElementById("");
                // Elements txt = document.getElementsContainingOwnText("天氣");
                 //Elements txt = document.select("div.newsimg-area-text-2");
                 
-                Elements txt = document.getElementsByClass("newsimg-area-text-2");
-               
+                Elements txt = document.select("div.newsimg-area-text-2").select("a");
+                System.out.println("URL網頁所有資料"+document);
                // for(int i = 0 ; i <=6 ; i++) {
               //  String txt = txt0.get().text();
             //    System.out.println(txt);
@@ -123,8 +123,10 @@ public class MyHttpclient  {
             HttpClientUtils.closeQuietly(httpClient);
           
         }
-        //System.out.println("1113--------------------aa>"+txt);
+       
+		//System.out.println("1113--------------------aa>"+txt);
 		return document;
+		
 	
 }
 

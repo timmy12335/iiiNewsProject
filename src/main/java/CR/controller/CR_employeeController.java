@@ -117,4 +117,18 @@ public class CR_employeeController {
 		}
 		return list;
 	}
+	
+	@GetMapping(value="/returnemp")
+	public @ResponseBody Map<String, String> returnempByPk(@RequestParam(value="pk", required=false) Integer emppk){
+		Map<String, String> map = new HashMap<>();
+		try {
+			service.returnemployeeByPk(emppk);
+			map.put("success","修改成功");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("fail","修改失敗");
+		}
+		return map;
+		
+	}
 }

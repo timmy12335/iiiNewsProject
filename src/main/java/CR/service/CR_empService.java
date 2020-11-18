@@ -21,4 +21,5 @@ public List<CRemployee> getempByDate(Date date);
 	void updateemployee(CRemployee crb);
 	
 	public CRemployee getemployeeBytreatamt();
+	void returnemployeeByPk(int empPk);
 }

@@ -13,18 +13,22 @@
   width: 90%;
 }
 
-#customers td, #customers th {
+#customers td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#customers tr:hover {background-color: #ECF5FF;}
+#customers tr:hover {background-color: #FFF3EE;}
 
 #customers th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #0066CC;
+  background-color: #FF8F59;
   color: white;
 }
 

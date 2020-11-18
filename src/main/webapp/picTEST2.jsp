@@ -2,76 +2,66 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
 <style>
-* {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  font-family: Arial;
-  font-size: 17px;
-}
-
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-}
-
-.content {
-  position: fixed;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: #f1f1f1;
-  width: 100%;
-  padding: 20px;
-}
-
-#myBtn {
-  width: 200px;
-  font-size: 18px;
-  padding: 10px;
-  border: none;
-  background: #000;
-  color: #fff;
-  cursor: pointer;
-}
-
-#myBtn:hover {
-  background: #ddd;
-  color: black;
-}
 </style>
 </head>
 <body>
 
-<video autoplay muted loop id="myVideo">
-  <source src="Images/covid19.mp4" type="video/mp4">
-
-</video>
-
-<div class="content">
-  <h1>iiiNEWS</h1>
-  <p>新聞金錢報在此為您服務</p>
-  <button id="myBtn" onclick="myFunction()">Pause</button>
-</div>
+<canvas id="pie-chart"></canvas>
 
 <script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
+var data = [{
+	   data: [50, 55, 60, 33],
+	   labels: ["India", "China", "US", "Canada"],
+	   backgroundColor: [
+	     "#4b77a9",
+	     "#5f255f",
+	     "#d21243",
+	     "#B27200"
+	   ],
+	   borderColor: "#fff"
+	 }];
 
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
+	 var options = {
+	   tooltips: {
+	     enabled: false
+	   },
+	   plugins: {
+	     datalabels: {
+	       formatter: (value, ctx) => {
+
+	         let datasets = ctx.chart.data.datasets;
+
+	         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+	           let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+	           let percentage = Math.round((value / sum) * 100) + '%';
+	           return percentage;
+	         } else {
+	           return percentage;
+	         }
+	       },
+	       color: '#fff',
+	     }
+	   }
+	 };
+
+
+	 var ctx = document.getElementById("pie-chart").getContext('2d');
+	 var myChart = new Chart(ctx, {
+	   type: 'pie',
+	   data: {
+	     datasets: data
+	   },
+	   options: options
+	 });
+	        
+	        
 </script>
 
 </body>

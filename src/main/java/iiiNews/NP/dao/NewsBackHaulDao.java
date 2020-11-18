@@ -6,5 +6,5 @@ import iiiNews.NP.model.NewsBean;
 
 public interface NewsBackHaulDao {
 	//類別查詢For報表	
-	public List<NewsBean> getNewByTypeForBB(String Type);
+	public Integer getNewByTypeForBB(String Type);
 }

@@ -12,7 +12,17 @@
 	<script src="js/utils.js"></script>
 	<script src="js/Moment.js"></script>
 	
+	<script>
+	window.onload = function() {
+		
+		
+		let xhr = newXMLHttpRequest();
+		xhr.open("GET", "<c:url value='/getNewsTypeForBB.json' />" ,true);
+		xhr.send();
+	}
 	
+	
+	</script>
 	<style>
 	canvas {
 		-moz-user-select: none;

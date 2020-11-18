@@ -15,16 +15,15 @@ public class NewsBackHaulDaoImpl implements NewsBackHaulDao {
 	SessionFactory factory;
 	
 	
-	//依類別查詢For後台
-		@SuppressWarnings("unchecked")
+	//依類別查詢For後台		
 		@Override
-		public List<NewsBean> getNewByTypeForBB(String Type) {
-			String hql = "FROM NewsBean WHERE AND newsType=:Type ";				
+		public Integer getNewByTypeForBB(String Type) {
+			String hql = "SELECT count(*) FROM NewsBean WHERE newsType=:Type ";				
 			Session session = factory.getCurrentSession();
-			List<NewsBean> list = session.createQuery(hql)
+			Integer typeNum = (Integer) session.createQuery(hql)
 					.setParameter("Type", Type)
-					.getResultList();
-			return list;
+					.getSingleResult();
+			return typeNum;
 		}
 
 }

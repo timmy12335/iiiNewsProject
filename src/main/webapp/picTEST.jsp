@@ -121,6 +121,9 @@
 			window.myDoughnut.update();
 		});
 	</script>
+	<script type="text/javascript">
+	
+	</script>
 	</div>
 </body>
 

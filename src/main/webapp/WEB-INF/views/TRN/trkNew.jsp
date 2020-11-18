@@ -103,7 +103,7 @@ height:350;
 	<!-- 媒體搜尋區域  -->
 				   <div style="float:left; margin-top:100px;">
 			            <h3 id="002" class="display-4" style="font-family:Microsoft JhengHei" >各媒體相關報導</h3> 
-			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:800px;font-size:larger;">
+			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:700px;font-size:larger;">
                             <div style="background: ">
                             <button onclick="searchByWord()" style="text-align:center color:#4F4F4F" type="button" class="btn btn-primary btn-lg">TVBS新聞</button>
                             <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-secondary btn-lg">三立新聞</button>
@@ -218,6 +218,26 @@ height:350;
 </script>
 <script>
 
+function searchByWordURL(responseData){
+	var responseDatatit = responseData
+	let word = document.getElementById("wordChoose").value;
+	
+	
+	var queryStringWord = "?word=" + word;
+	console.log(queryStringWord);
+	var xhr0 = new XMLHttpRequest(); 
+	xhr0.open("GET", "<c:url value='/httpclient2' />" + queryStringWord , true);
+	xhr0.send();
+	xhr0.onreadystatechange = function() {
+		if (xhr0.readyState == 4 && xhr0.status == 200) {
+	    var responseDataURL = xhr0.responseText;
+	    displayPageAds(responseDatatit, responseDataURL);
+	    console.log("URL值收值:"+responseDataURL);
+		}
+	}
+}
+
+
 function searchByWord(){
 	let word = document.getElementById("wordChoose").value;
 	console.log("搜尋字值:"+word);
@@ -230,16 +250,19 @@ function searchByWord(){
 	xhr0.onreadystatechange = function() {
 		if (xhr0.readyState == 4 && xhr0.status == 200) {
 	    var responseData = xhr0.responseText;
-			displayPageAds(responseData);
+	        searchByWordURL(responseData);
+			
 		}
 	}
 }
         
-function displayPageAds(responseData) {
+function displayPageAds(responseDatatit, responseDataURL) {
 	var content ="<table><th>新聞標題:</th>";
-	var ad = JSON.parse(responseData); // 傳回一個陣列
+	var ad = JSON.parse(responseDatatit); // 傳回一個陣列
+	var adURL = JSON.parse(responseDataURL)
+	console.log("URL值印:"+adURL[1]);
 		for(var i=0; i < ad.length; i++) {
-			content += "<tr style='line-height: 40px;letter-spacing: 3px'><td>"+ ad[i] +"</td></tr>"; //沒有td(沒有依照語法順序會亂掉) 變數會進不去
+			content += "<tr style='line-height: 40px;letter-spacing: 3px'><td><a href='https://www.setn.com/"+adURL[i]+"'>"+ ad[i] +"</a></td></tr>"; //沒有td(沒有依照語法順序會亂掉) 變數會進不去
 		}
 	var newsDiv = document.getElementById("news1");
 	newsDiv.innerHTML = content +"</table>";

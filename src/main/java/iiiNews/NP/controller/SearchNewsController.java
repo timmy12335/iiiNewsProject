@@ -35,8 +35,15 @@ public class SearchNewsController {
 			public String getSingleNews(@PathVariable String newsId, Model model) {
 				NewsBean newsBean = service.getSingleNews(newsId);
 				model.addAttribute("newsSingle", newsBean);
-				return "NP/singleNews";
+				return "NP/singleNewsCss";
 			}
+		// 查詢單一筆已上架新聞
+		@GetMapping("/getSingleNewsForMem/{newsId}")
+			public String getSingleNewsForMem(@PathVariable String newsId, Model model) {
+				NewsBean newsBean = service.getSingleNews(newsId);
+				model.addAttribute("newsSingle", newsBean);
+				return "NP/singleNewsCssForMem";
+		}					
 
 		// 查詢單一會員未上架的新聞列表
 		
@@ -51,7 +58,7 @@ public class SearchNewsController {
 				String memberId = mb.getMemberId();
 				List<NewsBean> list = service.getMemNews(memberId);
 				model.addAttribute("memNewsList", list);
-				return "NP/memNewsList";
+				return "NP/memNewsListTest";
 			}
 			
 		}

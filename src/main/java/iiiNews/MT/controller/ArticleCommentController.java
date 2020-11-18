@@ -40,31 +40,31 @@ public class ArticleCommentController {
 	ServletContext servletContext;
 	
 	
-	@GetMapping("/AllArticleComment")			//使用者進入查看所有文章頁面，暫時OK
-	public String ArticleComment(@ModelAttribute("mtBean") MtAddBean bean, Model model, HttpSession session, HttpServletRequest request){	
-		
-		
-		MBBean mbb = (MBBean) model.getAttribute("MBBean");
-		if (mbb == null) {
-			return "redirect: " + servletContext.getContextPath() + "/Login";
-		}
-	
-		session = request.getSession(false); 
-		if (session == null) {
-			return "redirect: " + servletContext.getContextPath() + "/Login";
-		}
-		bean.setMemberId(mbb.getMemberId());
-		
-		List<MtAddBean> list = AddService.getMtAdd();//++++++++++++++++++++
-		model.addAttribute("ArticleComment",list);
-        //--------------------------手動測試才加
-//        MBBean mb = new MBBean();   //手動設session
-//        mb.setMemberId("9999");
-//        model.addAttribute("MBBean", mb);
-        //--------------------------手動測試才加
-		System.out.println("**********" + bean.getMemberId() + "查看文章囉**********");
-		return "MT/AllArticleComment";
-	}
+//	@GetMapping("/AllArticleComment")			//使用者進入查看所有文章頁面，暫時OK
+//	public String ArticleComment(@ModelAttribute("mtBean") MtAddBean bean, Model model, HttpSession session, HttpServletRequest request){	
+//		
+//		
+//		MBBean mbb = (MBBean) model.getAttribute("MBBean");
+//		if (mbb == null) {
+//			return "redirect: " + servletContext.getContextPath() + "/Login";
+//		}
+//	
+//		session = request.getSession(false); 
+//		if (session == null) {
+//			return "redirect: " + servletContext.getContextPath() + "/Login";
+//		}
+//		bean.setMemberId(mbb.getMemberId());
+//		
+//		List<MtAddBean> list = AddService.getMtAdd();//++++++++++++++++++++
+//		model.addAttribute("ArticleComment",list);
+//        //--------------------------手動測試才加
+////        MBBean mb = new MBBean();   //手動設session
+////        mb.setMemberId("9999");
+////        model.addAttribute("MBBean", mb);
+//        //--------------------------手動測試才加
+//		System.out.println("**********" + bean.getMemberId() + "查看文章囉**********");
+//		return "MT/AllArticleComment";
+//	}
 	
 //	@GetMapping("/CreateComment")				
 //	public String CreateComment(Model model, HttpSession session) {		//載入新增欄位頁面getBean

@@ -101,22 +101,17 @@ height:350;
 		
 	</section>
 	<!-- 媒體搜尋區域  -->
-<div  style="float:left; margin-top:100px;"  >
+				   <div style="float:left; margin-top:100px;">
 			            <h3 id="002" class="display-4" style="font-family:Microsoft JhengHei" >各媒體相關報導</h3> 
-			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:800px;font-size:larger;"">
+			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:800px;font-size:larger;">
                             <div style="background: ">
                             <button onclick="searchByWord()" style="text-align:center color:#4F4F4F" type="button" class="btn btn-primary btn-lg">TVBS新聞</button>
                             <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-secondary btn-lg">三立新聞</button>
                             <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-primary btn-lg">東森新聞</button>
                             <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-secondary btn-lg">壹新聞</button>
                             </div>
-                                   <div id="News1" class="News1">
-                              
-                              
-                              
-                                  </div>
+                            	<div id="news1"></div>
 <%-- 			      <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="..."> --%>
-			      
 			            </div>
 			      </div>
 			      
@@ -146,7 +141,7 @@ height:350;
 	var NewsId2 = ${trkNew.trackId};
 	var caution = false
 	
-	var clicnum = document.getElementById(${trkNew.clicnum});
+	//var clicnum = document.getElementById(${trkNew.clicnum});
 	
 	
 	function setCookie(name, value, expires, path, domain, secure) {
@@ -223,51 +218,32 @@ height:350;
 </script>
 <script>
 
-
-
-let o1 = document.getElementById("wordChoose").value;
-console.log("搜尋字:"+o1);
 function searchByWord(){
 	let word = document.getElementById("wordChoose").value;
 	console.log("搜尋字值:"+word);
 	
 	var queryStringWord = "?word=" + word;
-	//var queryStringWord = word;
 	console.log(queryStringWord);
 	var xhr0 = new XMLHttpRequest(); 
 	xhr0.open("GET", "<c:url value='/httpclient1' />" + queryStringWord , true);
 	xhr0.send();
-	console.log("00000000000000000000001"+xhr0);
 	xhr0.onreadystatechange = function() {
 		if (xhr0.readyState == 4 && xhr0.status == 200) {
 	    var responseData = xhr0.responseText;
-			//console.log("00000000000000000000002"+responseData);
-		displayPageAds(responseData);
-          console.log("ABC======="+responseData)
-        //  document.write(responseData);
-          document.getElementById("News1").innerHTML=responseData;
-	}
+			displayPageAds(responseData);
+		}
 	}
 }
         
 function displayPageAds(responseData) {
-	console.log("ABCD======="+responseData)
-	var content = "<table border='1'>";
-	content += "<th>廣告PK值</th><th>廣告編號</th>";
-	content += "<th>刊登者</th>";
-	content += "<th>類型</th><th>販賣日期</th><th>單價</th>";
-	content += "<th>備註</th>";
-	content += "<th>texting</th></tr></thead><tbody class='text-center'>";
+	var content ="<table><th>新聞標題:</th>";
 	var ad = JSON.parse(responseData); // 傳回一個陣列
-	console.log("ABCDE======="+ad)
-	if(ad==""){
-		content += "<tr><td colspan='9' align='center'><b>無搜尋結果</b></td></tr></tbody></table>";
-	}else{
-	var bgColor = ""; // 每一項商品的背影 
-	
-	}
-	content += "</tbody></table>";
-	document.getElementById("somedivS").innerHTML = content;
+		for(var i=0; i < ad.length; i++) {
+			content += "<tr style='line-height: 40px;letter-spacing: 3px'><td>"+ ad[i] +"</td></tr>"; //沒有td(沒有依照語法順序會亂掉) 變數會進不去
+		}
+	var newsDiv = document.getElementById("news1");
+	newsDiv.innerHTML = content +"</table>";
+	console.log(newsDiv.innerHTML);
 }
 
 

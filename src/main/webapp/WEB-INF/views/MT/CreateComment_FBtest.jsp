@@ -35,8 +35,8 @@ margin:5px;
 <nav>
 <jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 </nav>
-	<div align="center" style="margin-top:30px;">
-	<br><br><br><h2>文章留言</h2>	
+	<div align="center" style="margin-top:150px;">
+	<h2>文章留言</h2>	
 	</div>
 	<hr>
 <!-- 	<form action="/singleArticle" method="post"  > -->

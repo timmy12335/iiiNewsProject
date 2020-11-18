@@ -10,7 +10,7 @@ public interface MtAjaxDao {
 	public int getTotalPages();
 	public List<MtAddBean> getPageComment(Integer pageComNo);
 	
-	public List<MtAddBean> getAllArtWord(String searchword,String set);
+	public List<MtAddBean> getAllArtWord(String searchWord);	//模糊搜尋標題
 	
 
 }

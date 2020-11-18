@@ -51,4 +51,17 @@ public class MtAjaxDaoImpl implements MtAjaxDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MtAddBean> getAllArtWord(String searchWord) {
+		String hql = "FROM MtAddBean WHERE status = 1 AND "
+				+ "(title LIKE :word)";
+		
+		Session session = factory.getCurrentSession();
+		List<MtAddBean> list = session.createQuery(hql)
+									.setParameter("word", "%"+searchWord+"%")
+									.getResultList();
+		return list;
+	}
+
 }

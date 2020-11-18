@@ -110,6 +110,25 @@ window.onload=function(){
 			}
 		}
 	}
+	
+	
+	function searchByWord() {
+		let word = document.getElementById("wordChoose").value;
+		console.log(word);
+
+		var queryStringWord = "?word=" + word;
+		console.log(queryStringWord);
+		var xhr0 = new XMLHttpRequest();
+		xhr0.open("GET", "<c:url value='/getAllArtWord.json' />" + queryStringWord, true);
+		xhr0.send();
+
+		xhr0.onreadystatechange = function() {
+			if (xhr0.readyState == 4 && xhr0.status == 200) {
+				var responseData = xhr0.responseText;
+				displayPageAds(responseData);
+			}
+		}
+	}
 
 
 function displayPageBooks(responseData){
@@ -206,7 +225,7 @@ function displayPageBooks(responseData){
 		</div>
 		<hr>
 		<div>
-			<input type="text" onkeyup="searchByWord()" placeholder="搜尋文章⋯" />
+			<input type="text" id="wordChoose" onkeyup="searchByWord()" placeholder="搜尋文章⋯" />
 		</div>
 		<br><div id='somedivS'></div>
 		<br><div id='navigation'></div><br><br>

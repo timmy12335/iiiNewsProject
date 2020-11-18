@@ -136,7 +136,7 @@ function displayPageBooks(responseData){
 		pageNoCom = mapData.currPage;
 		totalPageCom  = mapData.totalPageCom;
 		
-		var navContent = "<table border='1' ><tr height='36'>" ;
+		var navContent = "<table border='1' ><tr height='36' bgcolor='#fbdb98'>" ;
 		if (pageNoCom != 1){
 			navContent += "<td width='80' align='center'><button id='first'>第一頁</button></td>";
 			navContent += "<td width='80' align='center'><button id='prev'>前一頁</button></td>";

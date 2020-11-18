@@ -57,9 +57,21 @@
 </script>
 <style>
 p{
- margin:0 auto
+ margin:4px auto;
 
 } 
+.title0{
+margin: 1em 0;
+position: relative;
+padding: 0.25em 0;
+font-weight: bold;
+}
+.title0:after {
+content: "";
+display: block;
+height: 4px;
+background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂的顏色 */
+}
 </style>
 </head>
 <body>
@@ -81,14 +93,14 @@ p{
 				<c:otherwise>
 
 					<c:forEach var='news' items='${upMemNewsList}' varStatus='loop'>
-						<div class="border border-danger" style="background-color:lightpink;margin:20px; ">
-							
+						<div class="border " style="background-color:lightpink;margin:20px;border-radius:15px;box-shadow: 3px 3px 3px #9D9D9D; ">
+							<div style="background-color:lavenderblush;border-radius:15px;margin:0px 20px">
 							<div class="row" style="margin:15px">
 								<div class="col-sm-2" >
-								<img width='220' height='150' src="<c:url value='/getUpNewsPicture/${news.newsId}'/>">
+								<img width='250' height='180' src="<c:url value='/getUpNewsPicture/${news.newsId}'/>">
 								</div>
 																								
-								<div class="col-sm-3" align='left' style="background-color: lavenderblush;">								
+								<div class="col-sm-3" align='left'  style="padding-left:60px;">								
 									
 									<p>${news.newsId}</p>
 									<p>新聞類型：${news.newsType}</p>
@@ -97,89 +109,53 @@ p{
 									<p>販賣計時：${news.limitTime}</p>
 									<p>上傳時間：${fn:substring(news.uploadTime,0,19)}</p>
 								</div>
-								<div class="col-sm-5" style="background-color: lavender;">
-									<div class="col-12">
-										<h5>
-											<a href="<c:url value='/getSingleNews/${news.newsId}'/>">${news.title}</a>
-										</h5>
+								<div class="col-sm-5" >
+									<div class="col-12 text-left">
+										<div class="title0" style="font-size:18px;margin:3px;"><b>${news.title}</b></div>
 									</div>
 									<div class="col-12 text-left">
 										<h6>${news.outline}</h6>
 									</div>
 								</div>
-									<div class="col-sm-2" style="background-color: lavenderblush;">
-									<table class="text-center">
-										<tr>
-											<th>時間倒數</th>
-										</tr>
-										<tr>
-											<td id='lastime${loop.index}'></td>
-											<td id="ftime${loop.index}" style="display:none" >${news.futureTime}</td>
-										</tr>
+<!-- 									<div class="col-sm-2" style="border:1px solid black;"> -->
+									<table class="col-sm-2" style="text-align:center;margin:10px auto;" >
 										
 										<tr>
-											<th>價格</th>
+											<td style="">
+											<div class="badge badge-secondary" style="font-size:23px;" id='lastime${loop.index}'></div>
+											</td>
+											<td id="ftime${loop.index}" style="display:none;"> ${news.futureTime} </td>
+										</tr>
+																				
+										<tr>
+											<td>
+											<div style="margin:20px auto;">
+												<h3 class="text-danger">
+													<small class="text-muted" ></small>NT$${news.price} <br>
+												</h3>
+											</div>
+											</td>
 										</tr>
 										<tr>
-											<td>${news.price}</td>
-										</tr>
-										<tr>
-											<td>詳細資訊</td>
+											<td>
+											<button type="button" class="btn btn-danger btn-lg btn-block" onclick="location.href='<c:url value="/getSingleNewsForMem/${news.newsId}"/>'">
+											<i class="fas fa-info-circle"></i>&ensp;詳細資訊
+											</button>
+											</td>
 										</tr>
 									</table>
-								</div>
+<!-- 								</div> -->
+							</div>
 							</div>
 						</div>
-<!-- 						<table class="table table-hover"> -->
-<!-- 							<thead> -->
-<!-- 								<tr height='36' class="thead-Warning "> -->
-<!-- 									<th align='center'>新聞標題</th> -->
-<!-- 									<th width='60' align='center'>新聞編號</th> -->
-<!-- 									<th width='60' align='center'>上傳時間</th> -->
-<!-- 									<th width='100' align='center'>新聞類型</th> -->
-<!-- 									<th width='100' align='center'>發生日期</th> -->
-<!-- 									<th width='100' align='center'>發生時間</th> -->
-<!-- 									<th width='120' align='center'>發生地點</th> -->
-<!-- 									<th width='200' align='center'>影像</th> -->
-<!-- 								</tr> -->
-<!-- 							</thead> -->
-<!-- 							<tr> -->
-<!-- 								<td align='center'><a -->
-<%-- 									href="<c:url value='/getSingleNews/${news.newsId}'/>">${news.title} --%>
-<!-- 								</a></td> -->
-<%-- 								<td align='center'>${news.newsId}</td> --%>
-<%-- 								<td align='center'>${news.uploadTime}</td> --%>
-<%-- 								<td align='center'>${ news.newsType}</td> --%>
-<%-- 								<td align='center'>${news.happenDate}</td> --%>
-<%-- 								<td align='center'>${news.happenTime}</td> --%>
-<%-- 								<td align='center'>${news.location}</td> --%>
-<!-- 								<td><img width='200' height='150' -->
-<%-- 									src="<c:url value='/getUpNewsPicture/${news.newsId}'/>"></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr style="background-color: lightblue;" height='36'> -->
-<!-- 								<th width='500' align='center'>新聞大綱</th> -->
-<!-- 								<th width='100' align='center'>價格</th> -->
-<!-- 								<th width='50' align='center'>販賣計時</th> -->
-<!-- 								<th width='100' align='center'>到期時間</th> -->
-<!-- 								<th width='120' align='center'>時間倒數</th> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<%-- 								<td align='center'>${news.outline}</td> --%>
-<%-- 								<td align='center'>${news.price}</td> --%>
-<%-- 								<td align='center'>${news.limitTime}</td> --%>
-<%-- 								<td align='center' id="ftime${loop.index}">${news.futureTime}</td> --%>
-<%-- 								<td align='center' id='lastime${loop.index}'></td> --%>
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 						<hr> -->
+
 					</c:forEach>
 
 				</c:otherwise>
 			</c:choose>
 
-			<br> <input type="button" value="回目錄"
-				onclick="location.href='/iiiNews'">
-			<%-- 		<a href="<c:url value='history.back()' />">回前頁</a>   --%>
+			<br> <input type="button" value="回目錄" onclick="location.href='/iiiNews'">
+<%-- 					<a href="<c:url value='history.back()' />">回前頁</a>   --%>
 		</div>
 	</div>
 	<script>
@@ -200,7 +176,7 @@ p{
 			window.location.reload();
 		}else{		
 			let time = hr+"小時"+min+"分"+sec+"秒";
-			document.getElementById("lastime"+[i]).innerHTML = time;
+			document.getElementById("lastime"+[i]).innerHTML = "<i class='fas fa-stopwatch'></i>&ensp;"+ time;
 		}
 	}
 	}

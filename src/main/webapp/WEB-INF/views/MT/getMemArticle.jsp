@@ -38,7 +38,7 @@ window.onload = function() { //刪除文章，OK
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #243aa6;
+  background-color: #0066CC;
   color: white;
 }
 
@@ -58,8 +58,8 @@ td {
 	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-	<div align="center" style="margin-top: 100px;">
-		<br>
+	<div align="center" style="margin-top: 30px;">
+		<br><br><br>
 		<h2>會員${memberId}的發文紀錄</h2>
 <%-- 		<a href="<c:url value='/' />">回首頁</a> --%>
 	</div>

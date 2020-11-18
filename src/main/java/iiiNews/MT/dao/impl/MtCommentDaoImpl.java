@@ -41,5 +41,4 @@ public class MtCommentDaoImpl implements MtCommentDao{
 		return mtArtComBean;
 	}
 	
-	
 }

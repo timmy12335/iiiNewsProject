@@ -75,8 +75,8 @@
             </a>
             <div class="collapse" id="aaa">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">查看所有會員文章 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getMemArticleList "> 查詢會員發文紀錄 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">會員文章總覽 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getAllMemArticle"> 個人發文紀錄查詢 </a></li>
               </ul>
             </div>
           </li>

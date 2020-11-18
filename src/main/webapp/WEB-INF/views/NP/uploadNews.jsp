@@ -25,6 +25,32 @@
 <!-- <script type="text/javascript" src="/bootstrap-fileinput/themes/fas/theme.min.js"></script> -->
 
 <title>上傳新聞欄位</title>
+<style>
+		.incss{
+			width:150px;
+			height:45px;
+			margin:10px;
+			font-size:20px;
+			background-color:#BC214C;
+			border:none;
+			outline: none;
+			box-shadow: 3px 3px 3px #9D9D9D;
+			color:white;
+		}
+		.incss:hover{
+			background-color:#e884a0;
+		}
+		.formstyle{
+			background-color:lightpink;
+			border-radius:15px;
+			padding-top:20px;
+			margin-bottom:50px;
+			box-shadow: 4px 4px 4px #9D9D9D;
+		}
+		.labelsize{
+		   font-size:20px;
+		}
+</style>
 </head>
 <body>
 	<nav class="navbar fixed-top">
@@ -33,14 +59,16 @@
 
 
 
-	<div class="container" >
-
-		<div style="margin-top: 150px;">
-			<form:form method="POST" id="form1" modelAttribute="newsBean"
-				enctype="multipart/form-data">
-				<fieldset>
+	<div class="container" >	
+		
+		<div style="margin-top:150px;">
+			<h3 align="center"><b>新聞上傳</b></h3>	
+			<form:form method="POST" id="form1" modelAttribute="newsBean" enctype="multipart/form-data" class="formstyle">				
+				<fieldset>	
+						
 					<div class="form-group row">
-						<label for="title" class="col-sm-2 col-form-label text-right">新聞標題：</label>
+					
+						<label for="title" class="col-sm-2 col-form-label text-right labelsize"><b>新聞標題：</b></label>
 						<div class="col-sm-8">
 							<form:input type="title" class="form-control" id="title"
 								path="title" placeholder="請輸入標題" />
@@ -50,7 +78,7 @@
 						
 					</div>
 					<div class="form-group row">
-						<label for="location" class="col-sm-2 col-form-label text-right">發生地點：</label>
+						<label for="location" class="col-sm-2 col-form-label text-right labelsize"><b>發生地點：</b></label>
 						<div class="col-sm-8">
 							<form:input type="text" class="form-control" id="location"
 								name="location" size="50" path="location" placeholder="請輸入發生地點" />
@@ -58,7 +86,7 @@
 						</div><span id="idspNews-location"></span>
 					</div>
 					<div class="form-group row">
-						<label for="newsType" class="col-sm-2 col-form-label text-right">新聞類型：</label>
+						<label for="newsType" class="col-sm-2 col-form-label text-right labelsize"><b>新聞類型：</b></label>
 						<div class="col-sm-4">
 							<form:select path="newsType" class="form-control">
 								<form:option value="none">分類項目</form:option>
@@ -75,7 +103,7 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="happenDate" class="col-sm-2 col-form-label text-right">發生日期：</label>
+						<label for="happenDate" class="col-sm-2 col-form-label text-right labelsize"><b>發生日期：</b></label>
 						<div class="col-sm-4">
 							<form:input type="Date" id="happenDate" name="happenDate"
 								class="form-control" size="50" path="happenDate" />
@@ -83,7 +111,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="happenTime" class="col-sm-2 col-form-label text-right">發生時間：</label>
+						<label for="happenTime" class="col-sm-2 col-form-label text-right labelsize"><b>發生時間：</b></label>
 						<div class="col-sm-4">
 							<form:input type="time" id="happenTime" name="happenTime"
 								class="form-control" path="happenTime" />
@@ -91,35 +119,37 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="outline" class="col-sm-2 col-form-label text-right">新聞大綱：</label>
+						<label for="outline" class="col-sm-2 col-form-label text-right labelsize"><b>新聞大綱：</b></label>
 						<div class="col-sm-8">
 							<form:textarea type="text" id="outline" name="outline"   class="form-control"
-								rows="3" maxlength="100" path="outline" placeholder="請輸入大綱" />								
+								rows="3" maxlength="100" path="outline" placeholder="請輸入大綱" style="resize:none"/>								
 							<form:errors path="outline" cssClass="error" />
 						</div><span id="idspNews-outline"></span>
 					</div>
 					<div class="form-group row">
-						<label for="article" class="col-sm-2 col-form-label text-right">新聞內文：</label>
+						<label for="article" class="col-sm-2 col-form-label text-right labelsize"><b>新聞內文：</b></label>
 						<div class="col-sm-8">
 						<form:textarea type="text" id="article" name="article" cols="70"  class="form-control"
-							rows="10" path="article" placeholder="請輸入新聞內文" />
+							rows="10" path="article" placeholder="請輸入新聞內文" style="resize:none"/>
 						<form:errors path="article" cssClass="error" />
 						</div><span id="idspNews-article"></span>
 					</div>
 					<div class="form-group row">
-						<label for="price" class="col-sm-2 col-form-label text-right">販賣價格：</label>
+						<label for="price" class="col-sm-2 col-form-label text-right labelsize"><b>販賣價格：</b></label>
 						<div class="col-sm-4">
-							<form:input type="text" id="price" name="price" size="50"
-								class="form-control" path="price" placeholder="請輸入販賣價格" />
+							<form:input type="number" id="price" name="price" 
+								class="form-control" path="price" value="1000" />
 							<form:errors path="price" cssClass="error" />
-						</div><span id="idspNews-price"></span>
+						</div>
 					</div>
 					
 					
-					<div class="form-group" style="background-color:white;">
-					<input id="productImage" name="productImage" type="file" class="file" multiple  data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
+					<div class="form-group row" >
+					<label for="price" class="col-sm-2 col-form-label text-right labelsize"><b>新聞畫面：</b></label>
+					<div class="col-sm-9" style="background-color:#FCFCFC;border-radius:15px" >					
+					<input id="productImage" name="productImage" type="file" class="file" multiple  data-show-upload="false" data-show-caption="true" data-msg-placeholder="請選擇上傳畫面...">
 					<form:errors path="productImage" cssClass="error" />
-
+					</div>
 <!-- 						<label for="price" class="col-sm-2 col-form-label text-right">上傳照片：</label> -->
 <!-- 						<div class="col-sm-8"> -->
 <!-- 							<input type="file" id="productImage" name="productImage" multiple> -->
@@ -129,9 +159,10 @@
 					</div>
 					<div class="form-group row">
 						<label for="price" class="col-sm-2 col-form-label text-right"></label>
-						<div class="col-sm-8">
-							<input type="submit" name="submit" id="submit" value="送出">
-							<input type="reset" value="清除">
+						<div class="col-sm-8" align="center">
+							<input type="submit" class="incss" name="submit" id="submit" value="送出">
+							<input type="reset" class="incss" value="清除">
+							<input type="button" class="incss" value="首頁" onclick="history.back()">
 						</div>
 					</div>
 				</fieldset>
@@ -145,59 +176,63 @@
 // 		$("#input-id").fileinput({
 // 			theme: 'fas', //this line
 // 			});
-		//新聞標題需大於五個字
-      	 $("#title").blur(function(){                      
-          let NameObjValLen = $("#title").val().length;
-          if ($("#title").val()=="") {
-          		$("#idspNews-title").text("請輸入標題")
-          } else if (NameObjValLen >= 5) {           
-                 $("#idspNews-title").text("正確 !")            
-          } else {
-          		$("#idspNews-title").text("請輸入五個字以上")
-          }        
-      })
-      //發生地點需大於一個字
-      	 $("#location").blur(function(){                      
-          let NameObjValLen = $("#location").val().length;
-          if ($("#location").val()=="") {
-          		$("#idspNews-location").text("請輸入地點")           
-          } else {
-          		$("#idspNews-location").text("正確 !")
-          }        
-      })
-      //新聞大綱需大於一百字且小於一百字	
-     	 $("#outline").blur(function(){                      
-         let NameObjValLen = $("#outline").val().length;
-         if ($("#outline").val()=="") {
-         		$("#idspNews-outline").text("請輸入大綱")
-         } else if (NameObjValLen >= 20) {           
-                $("#idspNews-outline").text("正確 !")            
-         } else {
-         		$("#idspNews-outline").text("請輸入二十字以上")
-         }        
-     })   
-		//新聞內文需大於一百字且小於一千字	
-     	 $("#article").blur(function(){                      
-         let NameObjValLen = $("#article").val().length;
-         if ($("#article").val()=="") {
-         		$("#idspNews-article").text("請輸入內文")
-         } else if (NameObjValLen >= 100) {           
-                $("#idspNews-article").text("正確 !")            
-         } else {
-         		$("#idspNews-article").text("請輸入一百字以上")
-         }        
-     })   
-     
-     	//需輸入金額且為數字
-     	$("#price").blur(function(){                      
-          let NameObjValLen = $("#price").val().length;
-          if ($("#price").val()=="") {
-          		$("#idspNews-price").text("請輸入金額")           
-          } else {
-          		$("#idspNews-price").text("正確 !")
-          }        
-      })
-     
-    </script>
+					//日期不能超過今天
+					var today = new Date();
+					var dd = today.getDate();
+					var mm = today.getMonth() + 1; //January is 0!
+					var yyyy = today.getFullYear();
+					if (dd < 10) {
+						dd = '0' + dd
+					}
+					if (mm < 10) {
+						mm = '0' + mm
+					}
+
+					today = yyyy + '-' + mm + '-' + dd;
+					document.getElementById("happenDate").setAttribute("max",today);
+					
+					//新聞標題需大於五個字
+					$("#title").blur(function() {
+						let NameObjValLen = $("#title").val().length;
+						if ($("#title").val() == "") {
+							$("#idspNews-title").text("請輸入標題")
+						} else if (NameObjValLen >= 5) {
+							$("#idspNews-title").text("正確 !")
+						} else {
+							$("#idspNews-title").text("請輸入五個字以上")
+						}
+					})
+					//發生地點需大於一個字
+					$("#location").blur(function() {
+						let NameObjValLen = $("#location").val().length;
+						if ($("#location").val() == "") {
+							$("#idspNews-location").text("請輸入地點")
+						} else {
+							$("#idspNews-location").text("正確 !")
+						}
+					})
+					//新聞大綱需大於一百字且小於一百字	
+					$("#outline").blur(function() {
+						let NameObjValLen = $("#outline").val().length;
+						if ($("#outline").val() == "") {
+							$("#idspNews-outline").text("請輸入大綱")
+						} else if (NameObjValLen >= 20) {
+							$("#idspNews-outline").text("正確 !")
+						} else {
+							$("#idspNews-outline").text("請輸入二十字以上")
+						}
+					})
+					//新聞內文需大於一百字且小於一千字	
+					$("#article").blur(function() {
+						let NameObjValLen = $("#article").val().length;
+						if ($("#article").val() == "") {
+							$("#idspNews-article").text("請輸入內文")
+						} else if (NameObjValLen >= 100) {
+							$("#idspNews-article").text("正確 !")
+						} else {
+							$("#idspNews-article").text("請輸入一百字以上")
+						}
+					})
+				</script>
 </body>
 </html>

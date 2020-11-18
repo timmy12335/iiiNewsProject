@@ -31,7 +31,7 @@
   padding: 8px;
 }
 
-#customers tr:hover {background-color: #F0F0F0;}
+#customers tr:hover {background-color: #ECF5FF;}
 
 #customers th {
   padding-top: 12px;

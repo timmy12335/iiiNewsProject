@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -72,7 +73,7 @@ public class CRBean implements Serializable {
 	public void setCremployee(CRemployee cremployee) {
 		this.cremployee = cremployee;
 	}
-
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cremployee_id")
 	private CRemployee cremployee;
@@ -103,6 +104,8 @@ public class CRBean implements Serializable {
 	public CRBean() {
 	}
 	
+
+
 	public String getCompanyId() {
 		return companyId;
 	}

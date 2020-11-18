@@ -92,9 +92,18 @@ window.onload=function(){
 				<table class="table" border="1" style="width: 800px;">
 					<tr>
 						<td class="form-group">會員姓名:</td>
-						<td colspan='2'align="center"><input type='text' value='${MBBean.name}'>
+						<c:choose>
+						<c:when test="${not empty MBBean}">
+						<td colspan='2'align="center">${MBBean.name}
 						<form:input type="text" path="memberId"
 								id="memberId" value="${MBBean.memberId}" hidden='true'></form:input></td>
+						</c:when>
+						<c:otherwise>
+						<td colspan='2'align="center">${CpMemberBean.cpname}
+						<form:input type="text" path="companyId"
+								id="companyId" value="${CpMemberBean.cpmemberId}" hidden='true'></form:input></td>
+						</c:otherwise>
+						</c:choose>
 					</tr>
 					<tr>
 						<td class="form-group">客服類別:</td>
@@ -157,19 +166,6 @@ window.onload=function(){
 		</div>
 
 	</section>
-	<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5fad42d07279c47e5dcf3598/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-});
-</script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>

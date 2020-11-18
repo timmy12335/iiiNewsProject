@@ -35,8 +35,8 @@ margin:5px;
 <nav>
 <jsp:include page="/fragment/navbar.jsp"></jsp:include> 
 </nav>
-	<div align="center" style="margin-top:150px;">
-	<h2>文章留言</h2>	
+	<div align="center" style="margin-top:30px;">
+	<br><br><br><h2>文章留言</h2>	
 	</div>
 	<hr>
 <!-- 	<form action="/singleArticle" method="post"  > -->
@@ -45,7 +45,7 @@ margin:5px;
 		<table border="1">
 			<tr><td colspan="2"><div>PK： ${CreateComment.pkey}</div></td></tr>
 			<tr><td colspan="2"><div>文章編號：${CreateComment.articleId}</div></td></tr>
-			<tr><td colspan="2"><div>會員編號: &nbsp;${CreateComment.memberId} ***BUG***</div></td></tr>
+			<tr><td colspan="2"><div>會員編號: &nbsp;${CreateComment.memberId}</div></td></tr>
 			<tr><td colspan="2"><div>新增時間: ${CreateComment.updateDate}</div></td></tr>
 <%-- 			<tr><td colspan="2"><div>文章狀態: ${CreateComment.articleStatus }</div></td></tr> --%>
 			<tr><td colspan="2"><div>[${CreateComment.category}] ${CreateComment.title}</div></td></tr>

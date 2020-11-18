@@ -62,7 +62,7 @@ g-recaptcha {
 		<form:form id="regform" onsubmit="return checkinput()"
 			modelAttribute="command_CP">
 			<table align="center">
-				<h2 align="center">會員註冊</h2>
+				<h2 align="center">企業會員</h2>
 				<tr>
 					<td>登入帳號：</td>
 					<td><form:input type="text" path="cpmemberId" required="true"

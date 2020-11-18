@@ -62,12 +62,13 @@ g-recaptcha {
 		<form:form id="regform" onsubmit="return checkinput()"
 			modelAttribute="command">
 			<table align="center">
-				<h2 align="center">會員註冊</h2>
+				<h2 align="center">一般會員</h2>
 				<tr>
 					<td>登入帳號：</td>
 					<td><form:input type="text" path="memberId" required="true"
 							id='memberId' placeholder="輸入帳號" /></td>
-					<td><form:errors style="color:red;font-size:12px" path="memberId"></form:errors></td>
+					<td><form:errors style="color:red;font-size:12px"
+							path="memberId"></form:errors></td>
 					<!-- 					<td>帳號只能是英文、數字，其餘字元均不接受</td> -->
 				</tr>
 				<tr>
@@ -105,9 +106,9 @@ g-recaptcha {
 				<tr>
 					<td>行動電話：</td>
 					<td><form:input type="text" id="phone" path="phone"
-							placeholder="格式:09xx-xxx-xxx"></form:input>
+							placeholder="請務必填寫正確"></form:input>
 					<td><input class="test" type="button" id="btnCheckphone"
-						onclick="return checkphone()" value="點我檢查"></td>
+						onclick="checkphone()" value="發送驗證碼"></td>
 				<tr>
 					<td>生日：</td>
 					<td><form:input type="date" path="birthday" required="true"
@@ -241,24 +242,49 @@ g-recaptcha {
 
 	<script type="text/javascript">
 		function checkphone() {
-			var obj = document.getElementById("phone");
-			var value = obj.value;
-			var regTel1 = /^(([0\ ]\d{2,3}-)?(0\d{2,3})-)(\d{10})(-(\d{3,}))?$/
-					.test(value);
-			var regTel2 = /^(\d{10})?$/.test(value);
-			if (value != "") {
-				if (!regTel1 && !regTel2) {
-					alert("電話號碼格式不正確！");
-					obj.focus();
-					return false;
-				}
-			} else {
-				alert("請輸入電話號碼！");
-				return false;
-			}
-			alert("正確！");
-			return true;
+			var xhr2 = new XMLHttpRequest();
+			xhr2.open("GET", "<c:url value='Member_SMS'/>");
+			xhr2.send();
 		}
+		// 		var wait = 60;
+		// 		function checkphone(o) {
+		// 			if (wait == 0) {
+		// 				o.removeAttribute("disabled");
+		// 				o.value = "發送驗證碼";
+		// 				wait = 60;
+		// 			} else {
+		// 				o.setAttribute("disabled", true);
+		// 				o.value = wait
+		// 				"秒後可以重新傳送";
+		// 				wait--;
+		// 				setTimeout(function() {
+		// 					checkphone(o)
+		// 				}, 1000)
+		// 			}
+		// 			document.getElementById("btnCheckphone").onclick = function() {
+		// 				checkphone(this);
+		// 			}
+		// 		}
+
+		// 		function checkphone() {
+		// 			var obj = document.getElementById("phone");
+		// 			var value = obj.value;
+		// 			var regTel1 = /^(([0\ ]\d{2,3}-)?(0\d{2,3})-)(\d{10})(-(\d{3,}))?$/
+		// 					.test(value);
+		// 			var regTel2 = /^(\d{10})?$/.test(value);
+		// 			if (value != "") {
+		// 				if (!regTel1 && !regTel2) {
+		// 					alert("電話號碼格式不正確！");
+		// 					obj.focus();
+		// 					return false;
+		// 				}
+		// 			} else {
+		// 				alert("請輸入電話號碼！");
+		// 				return false;
+		// 			}
+		// 			alert("正確！");
+		// 			return true;
+		// 		}
 
 		function checkID(id) {
 			tab = "ABCDEFGHJKLMNPQRSTUVXYWZIO"

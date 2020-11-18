@@ -28,4 +28,18 @@ public class CR_msgService_impl implements CR_msgService{
 		
 		return dao.getMemberById(memberId);
 	}
+
+
+	@Override
+	public void updateMsg(CrMsgBean msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deleteMsg(int pk) {
+		// TODO Auto-generated method stub
+		
+	}
 }

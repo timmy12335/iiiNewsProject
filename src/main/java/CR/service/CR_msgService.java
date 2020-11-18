@@ -9,5 +9,7 @@ public interface CR_msgService {
 
 	MBBean getMemberById(int memberId);
 	
+	void updateMsg(CrMsgBean msg);
 	
+	void deleteMsg(int pk);
 }

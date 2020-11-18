@@ -68,7 +68,12 @@ public class MyHttpclient  {
                 //Elements txt = document.select("div.newsimg-area-text-2");
                 
                 Elements txt = document.getElementsByClass("newsimg-area-text-2");
-                String txt0 = txt.get(0).text();
+               // for(int i = 0 ; i <=6 ; i++) {
+              //  String txt = txt0.get().text();
+            //    System.out.println(txt);
+            //    return txt
+              //  }
+               // System.out.println(txt);
            //    Elements txt1 = document.getElementsByClass("mobile_hide");       
             //    Elements txt2 = document.getElementsByClass("search_list_pic");
              //   Elements txt3 = document.getElementsByClass("txt");

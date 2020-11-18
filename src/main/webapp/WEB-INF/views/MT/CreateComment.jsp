@@ -86,7 +86,7 @@ margin:5px;
 <!-- 					<button>送出</button> -->
 <!-- 			<input class="sub" type="submit" name="submit" id="submit" value="送出" /> -->
 		</div>
-		<input type="button" onclick="history.back()" value="回前頁" />
+		<input type="button" onclick="location.href='<c:url value="/AllArticleComment" />' " value="回前頁" />
 <%-- 		<a href="<c:url value="/getAllMtAdd" />">回前頁</a><br><br><br>	 --%>
 	</div>
 	</form:form>

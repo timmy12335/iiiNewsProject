@@ -29,6 +29,34 @@ html{
 	overflow-y: scroll;
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	let queryString = "?memberId="+"tvbstest";
+	console.log(queryString);
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/getCpMemeberSoldListByAjax.json' />" + queryString , true);
+	xhr.send();
+	
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let responseData = xhr.responseText;
+			let ad = JSON.parse(responseData);
+			
+			let selltotal = 0;
+			let jsonlength = 0;
+			for (let i in ad){
+				selltotal += ad[i].unitPrice;
+				jsonlength++;
+			}
+			$("#thismonthsell").html(selltotal);
+			$("#thismonthuploadcount").html(jsonlength);
+			console.log("jsonlength:"+jsonlength);
+		}
+	}
+}
+</script>
 </head>
 <body>
 <nav class="navbar fixed-top">
@@ -58,9 +86,102 @@ html{
 					<div class="tab-pane fade show active p-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 						<h3>總覽</h3>
 						<div class="row">
-							<div class="col-4">本月上傳：${fn:length(CpAdLists)}則</div>
-							<div class="col-4">本月賣出：則</div>
-							<div class="col-4">本月收入：</div>
+							<div class="col-4">
+<%-- 								<h3>本月上傳：${fn:length(CpAdLists)}則</h3> --%>
+								<canvas id="example" width="400" height="200"></canvas>
+  <script>
+  if ($("#example").length) {
+      var SalesChartCanvas = $("#example").get(0).getContext("2d");
+      var SalesChart = new Chart(SalesChartCanvas, {
+        type: 'bar',
+        data: {
+          labels: ["Jan", "Feb", "Mar"],
+          datasets: [{
+              label: '上傳則數',
+              data: [480, 230, 470],
+              backgroundColor: '#8EB0FF'
+            },
+            {
+              label: '賣出則數',
+              data: [400, 340, 550],
+              backgroundColor: '#316FFF'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          layout: {
+            padding: {
+              left: 0,
+              right: 0,
+              top: 20,
+              bottom: 0
+            }
+          },
+          scales: {
+            yAxes: [{
+              display: true,
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                display: false,
+                min: 0,
+                max: 500
+              }
+            }],
+            xAxes: [{
+              stacked: false,
+              ticks: {
+                beginAtZero: true,
+                fontColor: "#9fa0a2"
+              },
+              gridLines: {
+                color: "rgba(0, 0, 0, 0)",
+                display: false
+              },
+              barPercentage: 1
+            }]
+          },
+          legend: {
+            display: false
+          },
+          elements: {
+            point: {
+              radius: 0
+            }
+          }
+        },
+      });
+    }
+  </script>
+							</div>
+							<div class="col-4">
+								<div class="card">
+						        	<div class="card-body">
+						             	<p class="card-title textleft">本月收入金額</p>
+						                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+							                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" id="thismonthsell"></h3>
+							                <i class="fas fa-money-bill-wave icon-md text-muted fa-3x"></i>
+						                </div>  
+						                <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+						        	</div>
+						        </div>
+							</div>
+							<div class="col-4">
+								<div class="card">
+					            	<div class="card-body">
+					             		<p class="card-title textleft">本月賣出則數</p>
+					                	<div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+						                	<h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" id="thismonthuploadcount"></h3>
+						                	<i class="fas fa-file-upload icon-md text-muted fa-3x"></i>
+					                	</div>  
+					                	<p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+					        		</div>
+					        	</div>
+							</div>
 						</div>
 					</div>
 					<div class="tab-pane fade p-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -201,7 +322,13 @@ function display(responseData){
 		}
 		content += "</table>";
 		document.getElementById("soldlist").innerHTML = content;
-		console.log(content);
+		console.log(responseData);
+		
+// 		var selltotal = 0;
+// 		for (var i in ad){
+// 			selltotal += ad[i].unitPrice;
+// 		}
+// 		console.log("selltotal:"+selltotal);
 }
 
 function memberSoldList(memberId){

@@ -37,9 +37,9 @@
 					<label class="col-sm-4 col-form-label">人員狀態：</label>
 					<div class="col-sm-8">
 						<select id="isstay" onchange="searchByisStay()" class="form-control form-control-sm">
-							<option value="-1">全部</option>
 							<option value="1">在職</option>
 							<option value="0">離職</option>
+							<option value="-1">全部</option>
 				         </select>
 			         </div>
 			    </div>
@@ -53,10 +53,11 @@
 				</div>
          	</div>
         </div>
+        <a href=<c:url value='/addemployee'/>><button class='btn btn-primary btn-icon-text' id='add'>新增客服人員</button></a>
 		<div id='somedivS'></div>
 		<div id='navigation'></div>
 		<hr>
-		<a href='..'>回前頁</a>
+		<button onclick='history.back()' class="btn btn-primary">回前頁</button>
 	</div>
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 	<script>
@@ -74,10 +75,10 @@
 	
 
 	function displayPageEmps(responseData){
-		var content = "<table class='table'><thead><tr><th>客服編號</th>";
+		var content = "<table class='table' style='table-layout: fixed;width:1120px;word-break: break-all'><thead><tr><th>客服編號</th>";
 		content +=  "<th>客服姓名</th>";
 	    content +=  "<th>客服帳號</th>";
-	    content +=  "<th>客服信箱</th>";
+	    content +=  "<th style='width:200px;'>客服信箱</th>";
 	    content +=  "<th>入職日期</th><th>處理中客服</th><th>已完成客服</th>";
 	    content +=  "<th>狀態</th><th>功能</th></tr></thead>";
 			var emp = JSON.parse(responseData);		// 傳回一個陣列
@@ -102,15 +103,24 @@
 			               	"<td class='text-center'>" + emp[i].replyamt + "</td>" + 
 			               	"<td class='text-center'>" + transisstay(emp[i].isstay) + "</td>" + 
 			               	"<td class='text-center'>" +
-			               	"<button onclick='updatefunction("+emp[i].empPk+")' type='button' class='btn btn-info'>修改<i class='ti-pencil-alt'></i></button>"+
+			               	"<button onclick='show("+(i)+")' type='button' class='btn btn-info'>修改<i class='ti-pencil-alt'></i></button><br>"+
+			               	"<button onclick='returnCrReport("+emp[i].empPk+")' type='button' class='btn btn-info btn-icon-text'>復職<i class='ti-trash btn-icon-append'></i></button><br>"+
 			               	"<button onclick='deleteCrReport("+emp[i].empPk+")' type='button' class='btn btn-danger btn-icon-text'>刪除<i class='ti-trash btn-icon-append'></i></button>"+
 			               	
 // 			               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +
 // 							"<input type='hidden' name='quantity' value='1'>" + 
 // 							"<input type='hidden' name='adPk' value='"+ad[i].adPk+"'>" + 
 // 							"<input type='submit' class='cartBtn' value='加入購物車' /></form>" + 
-							"</td>" +
-				           "</tr>";
+							"</td></tr>" +
+							"<tr height='80' style='display:none;' id=up"+(i)+">"+
+							"<td class='text-center'><input type='text' size='3' name='empPk' id=emppk"+(i) +" value="+ emp[i].empPk + " disabled></td>" +
+							"<td class='text-center'><input type='text' size='6' name='empName' id=empName"+(i)+" value=" + emp[i].empName + " ></td>" +
+			               	"<td class='text-center'><input type='text' size='20' name='empId' id=empId"+(i)+" value=" + emp[i].empId + "></td>" +
+			               	"<td class='text-center'><input type='text' size='20' name='email' id=empemail"+(i)+" value=" + emp[i].empemail + "></td>" +
+			               	"<td></td><td></td><td></td>"+
+			               	"<td class='text-center'><button onclick='send("+i+")' type='button' class='btn btn-info'>確認修改<i class='ti-pencil-alt'></i></button></td>"+
+			               	"<td></td>"
+			               	"</tr>";
 				      
 			}
 			content += "</table>";
@@ -190,6 +200,68 @@
 	}
 	}
 	
+	function returnCrReport(emppk){
+		var xhr2 = new XMLHttpRequest();
+		var queryStringWord = "?pk=" + emppk;
+		var result=confirm("回覆為在職(編號:"+emppk+")?");
+		if(result){
+			xhr2.open("Get","<c:url value='/returnemp'/>"+queryStringWord,true);
+			xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+			xhr2.send();
+			xhr2.onreadystatechange=function(){
+			if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
+		      result = JSON.parse(xhr2.responseText);
+		      if (result.fail) {		    	  
+				 		divResult.innerHTML = "<font color='red' >"
+							+ result.fail + "</font>";
+			  		} else if (result.success) {
+			  			loading();			
+			}
+		}	
+	}
+	}
+	}
+	
+	function send(emppk){
+		var xhr2 = new XMLHttpRequest();
+		var pk = document.getElementById("emppk"+emppk).value
+		var empnameValue = document.getElementById("empName"+emppk).value;
+		var empIdValue = document.getElementById("empId"+emppk).value;
+		var empemailValue = document.getElementById("empemail"+emppk).value;
+		var result=confirm("確定修改此筆客服表單(單號:"+pk+")?");
+		if(result){
+			xhr2.open("POST","<c:url value='/allemployee/'/>"+pk,true);
+			xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+			var jsonReport = {
+					"empPk": pk, 					
+					"empId": empIdValue, 	
+					"empName": empnameValue,
+					"empemail":empemailValue
+		   		}
+			xhr2.send(JSON.stringify(jsonReport));
+			xhr2.onreadystatechange=function(){
+			if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) {
+		      result = JSON.parse(xhr2.responseText);
+		      console.log(result);
+		      if (result.fail) {		    	  
+					console.log("fail");
+			  		} else if (result.success) {
+// 							window.location.href="<c:url value='/allemployee'/>";						
+						loading();
+			  		}
+		}	
+	}
+	}
+	}
+	
+	function show(index){
+		if(document.getElementById("up"+index).style.display =='none') {
+			document.getElementById("up"+index).style.display='';
+			}else{
+				document.getElementById("up"+index).style.display='none';
+			} 
+		
+	}
 	</script>
 	<script>
 window.onload=loading();
@@ -204,7 +276,7 @@ window.onload=loading();
 	document.getElementById("somedivS").innerHTML = origincontent;
 	
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "<c:url value='/creemployee' />" + "?isstay=-1", true);
+	xhr.open("GET", "<c:url value='/creemployee' />" + "?isstay=1", true);
 // 	xhr.open("GET", "<c:url value='/getAdByAjax.json' />", true);
 	xhr.send();
 	

@@ -24,6 +24,8 @@ public interface CR_empDao {
 
 	List<CRemployee> getempByDate(Date date);
 
+	void returnemployeeByPk(int empPk);
+
 
 	
 }

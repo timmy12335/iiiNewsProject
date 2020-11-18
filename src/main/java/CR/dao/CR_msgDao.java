@@ -9,4 +9,10 @@ public interface CR_msgDao {
 	void addMsg(CrMsgBean msg);
 
 	MBBean getMemberById(int memberId);
+	
+	void updateMsg(CrMsgBean msg);
+	
+	void deleteMsg(int pk);
+	
+	
 }

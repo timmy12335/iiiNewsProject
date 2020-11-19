@@ -217,11 +217,11 @@ position:fixed ;bottom:0;right: 0;_position:relative ;width:
 							src="" />
 					</div >
 					<div class="form-group">
-						<input type="submit"
+						<input type="submit" class="btn btn-outline-secondary btn-icon-text" 
 							value="送出表單" />
-							 <input type="reset" id='reset' value="重設" /> 
+							 <input type="reset" id='reset' class="btn btn-outline-secondary btn-icon-text" value="重設" /> 
 							 <input
-							type="button" id='cancel' value="取消申請" /></td>
+							type="button" id='cancel' class="btn btn-outline-secondary btn-icon-text" value="取消申請" /></td>
 					</div>
 					<div style="text-align:left;valign:top">
 							<p>注意事項: 客服單填寫送出後，請隨時留意客服表單處理狀況，如要查詢客服進度與回覆內容，請從「客服紀錄查詢」查閱。</p>
@@ -238,12 +238,11 @@ position:fixed ;bottom:0;right: 0;_position:relative ;width:
 		</div>
 		</div>
 <div style="display: none" id="show" class="chatroom">
-	<textarea cols='25' rows='10' id='serverResponseArea' readonly style="resize: none;align:left;"> 
-	</textarea>
+	<textarea cols='25' rows='10' id='serverResponseArea' readonly style="resize: none;align:left;"></textarea>
 		<span id='status'></span> 
- 		<button id='btnClose'>關閉訊息</button> 
+ 		<button id='btnClose' class="btn btn-outline-secondary btn-icon-text" >關閉訊息</button> 
 		<hr> 訊息： <input type='text' id='message'>&nbsp;
- 		<button id='btnSend'>送出訊息</button>
+ 		<button id='btnSend' class="btn btn-outline-secondary btn-icon-text" >送出訊息</button>
 </div>
 	<div style="width: 200px; height: 400px;" class="chatbot" id="chatbot" 
  		align="center"></div> 

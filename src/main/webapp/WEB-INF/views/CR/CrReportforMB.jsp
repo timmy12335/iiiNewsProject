@@ -149,11 +149,9 @@ function deleteCrReport(pk){
 								</td></tr>
 							<tr id="MBcontent${report.index}" style="display:none ;word-wrap : break-word ;"><td>客服內容</td>
 							<td  colspan="10" > 
-							<textarea style="width:1000px;height:200px;" disabled>
-							${ser.crContent}</textarea>
+							<textarea style="width:1000px;height:200px;" disabled>${ser.crContent}</textarea>
 							<tr id="recontent${report.index}" style="display:none ;word-wrap : break-word ;"><td>回覆內容</td><td  colspan="10" > 
-							<textarea style="width:1000px;height:300px;" disabled>
-							${ser.crReContent}</textarea>
+							<textarea style="width:1000px;height:300px;" disabled>${ser.crReContent}</textarea>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>

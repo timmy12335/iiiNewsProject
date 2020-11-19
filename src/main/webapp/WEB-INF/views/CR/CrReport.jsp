@@ -126,11 +126,9 @@ white-space: normal;
 									onclick="deleteCrReport(${ser.pk})" >刪除<i class="ti-trash btn-icon-append"></i></button></td>
 							</tr>
 							<tr><td id="MBcontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:800px;height:200px;" class="form-control" disabled>
-							${ser.crContent}</textarea>
+							<textarea style="width:800px;height:200px;" class="form-control" disabled>${ser.crContent}</textarea>
 							<tr><td id="recontent${report.index}" colspan="10" style="display:none ;word-wrap : break-word ;"> 
-							<textarea style="width:800px;height:200px;" class="form-control" disabled>
-							${ser.crReContent}</textarea>
+							<textarea style="width:800px;height:200px;" class="form-control"  disabled>${ser.crReContent}</textarea>
 							</td></tr>
 						</c:forEach>
 					</c:otherwise>

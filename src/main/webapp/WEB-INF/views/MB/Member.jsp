@@ -29,7 +29,7 @@
 
 .test {
 	border: 0;
-	background-color: #7E3D76;
+	background-color: #BC214C;
 	color: #fff;
 	border-radius: 10px;
 	cursor: pointer;
@@ -242,9 +242,11 @@ g-recaptcha {
 
 	<script type="text/javascript">
 		function checkphone() {
+			var phone = document.getElementById("phone").value;
+			var queryString = "?phone=" + phone;
 			var xhr2 = new XMLHttpRequest();
-			xhr2.open("GET", "<c:url value='Member_SMS'/>");
-			xhr2.send();
+			xhr2.open("GET", "<c:url value='Member_SMS'/>" + queryString, true);
+			xhr2.send(); 
 		}
 		// 		var wait = 60;
 		// 		function checkphone(o) {

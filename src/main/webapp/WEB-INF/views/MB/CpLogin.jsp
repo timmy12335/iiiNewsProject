@@ -29,7 +29,7 @@
 
 .test {
 	border: 0;
-	background-color: #7E3D76;
+	background-color: #BC214C;
 	color: #fff;
 	border-radius: 10px;
 	cursor: pointer;
@@ -86,8 +86,8 @@ g-recaptcha {
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;"><input
-						type="submit" name="submit" value="登入" class="test"> <a
-						href="/UserMB">註冊</a></td>
+						type="submit" name="submit" value="登入" class="test">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="/UserMB">註冊</a></td>
 				</tr>
 			</table>
 		</form:form>

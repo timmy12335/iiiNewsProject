@@ -1,7 +1,6 @@
 package iiiNews.MB.dao;
 
 import java.util.List;
-
 import iiiNews.MB.model.MBBean;
 
 public interface MBDao {
@@ -27,4 +26,8 @@ public interface MBDao {
 	public void updatePasswd(String email);
 	
 	public List<String> seachMemberaccount();
+	
+	public MBBean getProductById(int memberId);
+	
+	public  boolean CheckPassword(String oldpwd, String newpwd, Integer id);
 }

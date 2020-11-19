@@ -82,6 +82,7 @@
 	    content +=  "<th>入職日期</th><th>處理中客服</th><th>已完成客服</th>";
 	    content +=  "<th>狀態</th><th>功能</th></tr></thead>";
 			var emp = JSON.parse(responseData);		// 傳回一個陣列
+			console.log(emp);
 			var bgColor = "";   // 每一項商品的背影 
 			for(var i=0; i < emp.length; i++){
 				console.log(emp[i].isstay);
@@ -163,7 +164,7 @@
 	
 	function searchByWord(){
 		let word = document.getElementById("wordChoose").value;
-		
+		console.log(word);
 		var queryStringWord = "?word=" + word;
 		console.log(queryStringWord);
 		var xhr0 = new XMLHttpRequest();

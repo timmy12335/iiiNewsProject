@@ -25,14 +25,14 @@
 			<ul>
 				<li><a href='#'>會員功能</a>
 					<ul>
-						<li><a href="<c:url value='/Forget'/>">修改密碼</a></li>
-						<li><a href='#'>子功能</a></li>
+						<li><a href="<c:url value='/updatepasswd/${MBBean.pkey}'/>">修改密碼</a></li>
+<!-- 						<li><a href='#'>子功能</a></li> -->
 					</ul></li>
-				<li><a href='#'>Product 2</a>
-					<ul>
-						<li><a href='#'>Sub Product</a></li>
-						<li><a href='#'>Sub Product</a></li>
-					</ul></li>
+<!-- 				<li><a href='#'>Product 2</a> -->
+<!-- 					<ul> -->
+<!-- 						<li><a href='#'>Sub Product</a></li> -->
+<!-- 						<li><a href='#'>Sub Product</a></li> -->
+<!-- 					</ul></li> -->
 			</ul></li>
 		<li><a href="<c:url value='/changeStautsForTime'/>">新聞專區</a>
 			<ul>

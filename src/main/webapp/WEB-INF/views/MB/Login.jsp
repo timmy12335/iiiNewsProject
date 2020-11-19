@@ -29,7 +29,7 @@
 
 .test {
 	border: 0;
-	background-color: #7E3D76;
+	background-color: #BC214C;
 	color: #fff;
 	border-radius: 10px;
 	cursor: pointer;
@@ -65,7 +65,8 @@ g-recaptcha {
 					<td>登入帳號：</td>
 					<td><form:input type="text" path="userId" required="true"
 							id='memberId' placeholder="輸入帳號" /></td>
-					<td><form:errors style="color:red;font-size:12px" path="invalidCredentials"></form:errors></td>
+					<td><form:errors style="color:red;font-size:12px"
+							path="invalidCredentials"></form:errors></td>
 				</tr>
 				<tr>
 					<td>登入密碼：</td>
@@ -86,8 +87,8 @@ g-recaptcha {
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;"><input
-						type="submit" name="submit" value="登入" class="test"> <a
-						href="/UserMB">註冊</a></td>
+						type="submit" name="submit" value="登入" class="test">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="/UserMB">註冊</a></td>
 				</tr>
 			</table>
 		</form:form>

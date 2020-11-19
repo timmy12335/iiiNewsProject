@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">	
 <title>Product</title>
 <style>
 #002{
@@ -33,10 +33,10 @@ height:350;
 <body>
 <!-- <div class="input-group mb-3" style="margin:100px ; width:500px" > -->
 <!--   <div class="input-group-prepend"> -->
-<!--   <!-- <a href='httpclient1'> --> -->
+<!--   <!-- <a href='httpclient1'> --> 
 <!--     <button onclick="searchByWord()" class="btn btn-outline-secondary" type="button" id="button-addon1">TVBS SERCH</button></a> -->
 <!--   </div> -->
-<!--   <input     size="1" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" > -->
+<!--   <input   id="wordChoose"  size="1" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" > -->
 <!-- </div> -->
 	<!-- <section>
 		<div>
@@ -58,20 +58,21 @@ height:350;
 			      
 			<div class="col-md-5" >
 			<!-- 追蹤主要頁面 -->
-				<h3 style="background-color:;width:550px;font-family:Microsoft JhengHei">${trkNew.title}</h3>
-				      <figure class="figure">
-                           <img style="" src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
+				<h1 style="font-size:3em;background-color:;width:550px;font-family:Microsoft JhengHei">${trkNew.title}</h1>
+				      <figure style="width:500px;height:400px" class="figure">
+                           <img style="width:500px;height:400px" src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
                            <figcaption class="figure-caption"></figcaption>
                       </figure>
 				<p>建立人: ${trkNew.founder}</p>
 				<p>建立時間: ${trkNew.fondtime}</p>
 				<p>追蹤人數: ${trkNew.trcnum}</p>
-				<p class="text-xl-left" style="font-family:Microsoft JhengHei; width:550px;font-size:larger;">內容: ${trkNew.descript}</p>
+				<p class="text-xxl-left" style="font-family:Microsoft JhengHei; width:550px;font-size:large;">內容: ${trkNew.descript}</p>
 				<p>發生地點: ${trkNew.ocplace}</p>
 				<p>發生時間: ${trkNew.octime}</p>
 				<p>點閱人數: ${trkNew.clicnum}</p>
                 <p>標籤: ${trkNew.tag}</p>
-                 <p id="wordChoose" style="visibility:hidden">${trkNew.tag}</p>
+                <p style="font-family:Microsoft JhengHei">新聞分類: ${trkNew.type}</p>
+              
 				<%-- 	<c:choose>
 					<c:when test='${product.discount != 1.0 }'>
 						<p>
@@ -84,7 +85,7 @@ height:350;
 					</c:otherwise>
 				</c:choose> --%>
 				<%-- 	<p>書商: ${product.companyBean.name}</p> --%>
-				<p style="font-family:Microsoft JhengHei">新聞分類: ${trkNew.type}</p>
+				
 				<p>
 					<strong>追蹤編號: </strong> <span class='label label-warning'>
 						${trkNew.trackId} </span>
@@ -104,7 +105,7 @@ height:350;
 	<!-- 媒體搜尋區域  -->
 				   <div style="float:left; margin-top:100px;">
 			            <h3 id="002" class="display-4" style="font-family:Microsoft JhengHei" >各媒體相關報導</h3> 
-			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:700px;font-size:larger;">
+			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:400px;font-size:larger;">
                             <div style="background: ">
                             <button onclick="searchByWord()" style="text-align:center color:#4F4F4F" type="button" class="btn btn-primary btn-lg">TVBS新聞</button>
                             <button onclick="searchByWord()" style="text-align:center" type="button" class="btn btn-secondary btn-lg">三立新聞</button>
@@ -114,6 +115,14 @@ height:350;
                             	<div id="news1"></div>
 <%-- 			      <img src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="..."> --%>
 			            </div>
+			      </div>
+			      
+			      <div style="float:left; margin-top:10px;">
+			      <h3  class="display-4" style="font-family:Microsoft JhengHei" >追蹤報導</h3> 
+			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:200px;font-size:larger;">
+                                <div id="tnews0" style="background:" >
+                                </div>
+                        </div>   	
 			      </div>
 			      
 	<!-- 點擊累加 -->
@@ -235,7 +244,7 @@ function searchByWordURL(responseData){
 		if (xhr0.readyState == 4 && xhr0.status == 200) {
 	    var responseDataURL = xhr0.responseText;
 	    displayPageAds(responseDatatit, responseDataURL);
-	    console.log("URL值收值:"+responseDataURL);
+	   // console.log("URL值收值:"+responseDataURL);
 		}
 	}
 }
@@ -264,14 +273,34 @@ function displayPageAds(responseDatatit, responseDataURL) {
 	var content ="<table><th>新聞標題:</th>";
 	var ad = JSON.parse(responseDatatit); // 傳回一個陣列
 	var adURL = JSON.parse(responseDataURL)
-	console.log("URL值印:"+adURL[1]);
+	
+//	console.log("URL值印:"+buildByWord0(ad, adURL));
 		for(var i=0; i < ad.length; i++) {
-			content += "<tr style='line-height: 40px;letter-spacing: 3px'><td><a href='https://www.setn.com/"+adURL[i]+"'>"+ ad[i] +"</a></td></tr>"; //沒有td(沒有依照語法順序會亂掉) 變數會進不去
+			content += "<tr style='line-height: 40px;letter-spacing: 3px'><td ><a id='tid"+ i +"' target='_blank' href='https://www.setn.com/"+adURL[i]+"'>"+ ad[i] +"</a>"+
+			"<button onclick='buildByWord("+i+")' type='button' class='btn btn-outline-info'>追蹤</button></td></tr>"; //沒有td(沒有依照語法順序會亂掉) 變數會進不去
 		}
 	var newsDiv = document.getElementById("news1");
 	newsDiv.innerHTML = content +"</table>";
-	console.log(newsDiv.innerHTML);
+ 	/* console.log(newsDiv.innerHTML); */
+	
 }
+//var ad =null;
+//var adURL=null;
+function buildByWord(ad){
+	var n = ad
+	var v = ad+1
+	console.log(v)
+	var tid = document.getElementById("tid"+n);
+    var ti1 = tid.text
+	var hr1 = tid.getAttribute("href")
+	var content ="<table id='tnew'>"
+		content +="<tr style='line-height:40px;letter-spacing:3px'><td><a id='tid"+ n +"' target='_blank' href='https://www.setn.com/"+ hr1 +"'>"+ ti1 +"</a></td></tr></table>"
+		
+    var buildword = document.getElementById("tnews"+n)  
+    buildword.innerHTML = content 
+}
+
+	
 
 
 

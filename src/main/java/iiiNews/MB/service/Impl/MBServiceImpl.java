@@ -78,4 +78,14 @@ public class MBServiceImpl implements MBService {
 	public boolean idExists(String id) {
 		return mbdao.idExists(id);
 	}
+
+	@Override
+	public boolean CheckPassword(String oldpwd, String newpwd, Integer id) {
+		return mbdao.CheckPassword(oldpwd, newpwd,id);
+	}
+
+	@Override
+	public MBBean getProductById(int memberId) {
+		return mbdao.getProductById(memberId);
+	}
 }

@@ -26,6 +26,7 @@ public class MBBean implements Serializable {
 	String memberId;
 	String name;
 	String password;
+	String memberNewPassword;	//新密碼
 	@Transient
 	String okpassword; // 確認密碼
 	String email;
@@ -89,9 +90,19 @@ public class MBBean implements Serializable {
 		builder.append(mbpoints);
 		builder.append(", birthday=");
 		builder.append(birthday);
+		builder.append(", memberNewPassword=");
+		builder.append(memberNewPassword);
 
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public String getMemberNewPassword() {
+		return memberNewPassword;
+	}
+
+	public void setMemberNewPassword(String memberNewPassword) {
+		this.memberNewPassword = memberNewPassword;
 	}
 
 	public MBBean() {

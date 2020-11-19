@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import iiiNews.MB.dao.MBDao;
 import iiiNews.MB.model.MBBean;
 
@@ -132,5 +131,39 @@ public class MBDaoImpl implements MBDao {
 			exist = true;
 		}
 		return exist;
+	}
+
+	@Override
+	public boolean CheckPassword(String oldpwd, String newpwd, Integer id) {
+		boolean check = false;
+		System.out.println(" DAO check1      "+ check);
+		String hql = "FROM MBBean m WHERE m.password = :mold";
+		String hql2 = "UPDATE MBBean mb SET mb.password = :mpwd " 
+		+ "Where mb.password = :mold and mb.memberId = :mid"; 
+		Session session = factory.getCurrentSession();
+		List<MBBean> beans = session.createQuery(hql)
+										.setParameter("mold", oldpwd)
+										.getResultList();
+		System.out.println(beans);
+		if (beans.size() == 0) {
+			check = false;
+			System.out.println(" DAO check2      "+ check);
+			return check;
+		}else {
+			session.createQuery(hql2)
+					.setParameter("mpwd", newpwd)
+					.setParameter("mold", oldpwd)
+					.setParameter("mid", id)
+					.executeUpdate();
+			check = true;
+			System.out.println(" DAO check3      "+ check);
+			return check;
+		}
+	}
+
+	@Override
+	public MBBean getProductById(int memberId) {
+		Session session = factory.getCurrentSession();
+		return session.get(MBBean.class, memberId);
 	}
 }

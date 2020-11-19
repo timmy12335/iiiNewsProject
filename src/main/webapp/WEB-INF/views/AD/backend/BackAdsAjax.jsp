@@ -104,11 +104,11 @@ window.onload=function(){
 	
 	function statusTrans(status){
 		if(status == 0){
-			status = "下架";
+			status = "<label class='badge badge-warning'>下架</label>";
 		}else if(status == 1){
-			status = "上架中";
+			status = "<label class='badge badge-success'>上架中</label";
 		}else{
-			status = "其他";
+			status = "<label class='badge badge-danger'>其他</label>";
 		}
 		return status;
 	}
@@ -136,7 +136,8 @@ window.onload=function(){
 			               	"<td class='text-center'>" + statusTrans(ad[i].status) + "</td>" + 
 			               	"<td class='text-center'>" + ad[i].statement + "</td>" + 
 			               	"<td class='text-center'>" +
-			               	"<button onclick='delfunction("+ad[i].adPk+")' type='button' class='btn btn-danger btn-icon-text'>Delete<i class='ti-trash btn-icon-append'></i></button>"+
+			               	"<button onclick='delfunction("+ad[i].adPk+")' type='button' class='btn btn-danger btn-rounded btn-icon'><i class='ti-trash'></i></button>&nbsp;"+
+			               	"<button onclick='offshelf("+ad[i].adPk+")' type='button' class='btn btn-warning btn-rounded btn-icon'><i class='ti-hummer'></i></button>"+
 // 			               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +
 // 							"<input type='hidden' name='quantity' value='1'>" + 
 // 							"<input type='hidden' name='adPk' value='"+ad[i].adPk+"'>" + 
@@ -203,6 +204,14 @@ window.onload=function(){
 	function delfunction(pk){
 		if (confirm("確定刪除此項商品 ? ") ) {
 			location.href="deleteAdProduct/"+pk
+		} else {
+			;
+		}
+	}
+	
+	function offshelf(pk){
+		if (confirm("確定下架此項商品 ? ") ) {
+			location.href="offShelfAdProduct/"+pk
 		} else {
 			;
 		}

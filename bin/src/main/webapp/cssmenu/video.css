@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+
+#myVideo {
+  position: relative;
+  right: 0;
+  min-width: 100%; 
+  min-height: 100%; 
+  
+}
+
+

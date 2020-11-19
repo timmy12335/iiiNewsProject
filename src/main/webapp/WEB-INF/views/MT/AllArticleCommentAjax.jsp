@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>使用者文章總覽Ajax</title>
+<title>文章列表</title>
 <meta charset="UTF-8">
 <style>
 #customers {
@@ -22,20 +22,21 @@
   padding: 8px;
 }
 
-#customers tr:hover {background-color: #FFF3EE;}
+/* #customers tr:hover {background-color: #844200;} */
 
 #customers th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #FF8F59;
-  color: white;
+  background-color: #FFAD86;
+  color: block;
 }
 
 td {
+ 	background-color: #FFF3EE;
 	padding: 3px;
-	 text-align:center; 
-	 valign:middle;'
+	text-align:center; 
+/* 	 valign:middle;' */
 }
 
 .td1 {
@@ -109,12 +110,31 @@ window.onload=function(){
 			}
 		}
 	}
+	
+	
+	function searchByWord() {
+		let word = document.getElementById("wordChoose").value;
+		console.log(word);
+
+		var queryStringWord = "?word=" + word;
+		console.log(queryStringWord);
+		var xhr0 = new XMLHttpRequest();
+		xhr0.open("GET", "<c:url value='/getAllArtWord.json' />" + queryStringWord, true);
+		xhr0.send();
+
+		xhr0.onreadystatechange = function() {
+			if (xhr0.readyState == 4 && xhr0.status == 200) {
+				var responseData = xhr0.responseText;
+				displayPageAds(responseData);
+			}
+		}
+	}
 
 
 function displayPageBooks(responseData){
 	  var content = "<table id='customers'><tr>";
       		content +=  "<th>類型</th><th>標題</th>";
-      		content +=  "<th>發文者</th><th>上傳日期</th><th>圖片</th><th>內文</th></tr>";	    
+      		content +=  "<th>發文者</th><th>上傳日期</th></tr>";	    
 		var data = responseData.split("&&&");
 		var news = JSON.parse(data[0]);		// 傳回一個陣列
 		var mapData = JSON.parse(data[1]);		// 傳回一個JavaScript物件
@@ -127,9 +147,7 @@ function displayPageBooks(responseData){
 		               "<c:if test='" + news[i].status + "== 0}' ><a href='' ></a></c:if>" + news[i].title + "</a></td>" +
 		               "<td class='td1'>" + news[i].memberId + "</td>" +
 		               "<td class='td1'>" + news[i].updateDate + "</td>" + 
-		               "<td class='td1'><div id='Demo' class='demo'><img style='width:160px;height:90px' src='<c:url value='/getMtCreate/" + 
-		                news[i].articleId + "' />' /></div></td>" + 
-		               "<td class='td1'>" + news[i].article + "</td>"
+		               
 //		               "<td><img  width='200' height='150' " +   
 //		               " src='../../ch00/util/GetImage?no=" + news[i].newsId + "'></td>" + 
 			           "</tr>";  
@@ -196,20 +214,24 @@ function displayPageBooks(responseData){
 
 </head>
 <body>
-<nav>
-<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
-</nav>
+	<nav>
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
+	</nav>
 
-<div align='center' style="margin-top: 150px;">
-	<h3>分頁顯示文章(JSON)</h3>
-	<hr>
-	<div id='somedivS' ></div>
-	<div id='navigation' ></div>
-	<hr>
-	<input type="button" onclick="history.back()" value="回前頁" />
-	<a href="<c:url value="" />">回前頁</a>
-</div>
-	
+	<div align="center" style="background-color: #f8f2e4">
+		<div align="center" style="margin-top: 30px;">
+			<br><br><br>
+			<h2>文章看板</h2>
+		</div>
+		<hr>
+		<div>
+			<input type="text" id="wordChoose" onkeyup="searchByWord()" placeholder="搜尋文章⋯" />
+		</div>
+		<br><div id='somedivS'></div>
+		<br><div id='navigation'></div><br><br>
+<%-- 		<hr><input type="button" onclick="location.href='<c:url value="/" />' " value="回首頁" /> --%>
+	</div>
+
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
 </html>

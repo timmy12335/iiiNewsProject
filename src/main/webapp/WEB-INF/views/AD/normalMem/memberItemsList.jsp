@@ -70,6 +70,10 @@ html {
 						</p>
 						<a onclick="history.back()" href="#">回個人訂單列表</a>
 					</div>
+					<div class="card p-4">
+						<h2>上傳預覽圖片</h2>
+						<div align="center"><img style="width:300px;height:200px;" id="preview_img1" src="/iiiNews/img/preview_default.jpg" /></div>
+					</div>
 				</div>
 				<div class="col-9">
 					<div class="card p-4">
@@ -117,7 +121,7 @@ html {
 <!-- 												<input type="file" id="productImage"> -->
 													<div class="input-group">
 														<div class="custom-file">
-															<input type="file" class="custom-file-input form-control-sm" id="productImage${loop.index}" name="productImage" onchange=change(${loop.index})>
+															<input type="file" class="custom-file-input form-control-lg" id="productImage${loop.index}" name="productImage" onchange=change(${loop.index})>
 															<label class="custom-file-label" for="filename" id="filename${loop.index}">
 															<i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>&nbsp;請選擇檔案</label>
 														</div>
@@ -144,7 +148,7 @@ html {
 			</div>
 
 
-			<div align="center"><img style="width:300px;height:200px;" id="preview_img1" src="#" /></div>
+<!-- 			<div align="center"><img style="width:300px;height:200px;" id="preview_img1" src="#" /></div> -->
 			<hr>
 
 			<!-- container -->

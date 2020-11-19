@@ -164,7 +164,7 @@
 	
 	function searchByWord(){
 		let word = document.getElementById("wordChoose").value;
-		
+		console.log(word);
 		var queryStringWord = "?word=" + word;
 		console.log(queryStringWord);
 		var xhr0 = new XMLHttpRequest();

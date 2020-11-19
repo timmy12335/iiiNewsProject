@@ -100,8 +100,9 @@ fieldset {
         				    <!--   為了多語言 先標註各功能在對應不同語系的字元 -->
        				上傳圖片</label>
 					<div class='col-lg-10'>        				
-        				<form:input id="newsImage" path="newsImage" type='file' 
-            				class='form:input-large' />
+        				<form:input id="newsImage" path="newsImage" type='file' onchange="readURL(this)" 
+        				targetID="preview_progressbarTW_img" class='form:input-large' accept="image/gif, image/jpeg, image/png" />
+    				    <img class='i6' style="display:;" id="preview_progressbarTW_img" src="#" />
     				</div>
 				</div> 
 				
@@ -114,5 +115,32 @@ fieldset {
 			</fieldset>
 		</form:form>
 	</section>
+	<script>
+	function readURL(input){
+// 		    var i1 = document.getElementsByClassName("i6");
+// 		     // i1.style.display = 'block'
+// 		    	  i1.style.background = 'gray'
+//		     console.log(i1)
+		  if(input.files && input.files[0]){
+
+		    var imageTagID = input.getAttribute("targetID");
+
+		    var reader = new FileReader();
+
+		    reader.onload = function (e) {
+
+		       var img = document.getElementById(imageTagID);
+
+		       img.setAttribute("src", e.target.result)
+
+		    }
+
+		    reader.readAsDataURL(input.files[0]);
+
+		  }
+
+		}
+	
+	</script>
 </body>
 </html>

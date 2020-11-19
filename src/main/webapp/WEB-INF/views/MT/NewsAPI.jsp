@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MT/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MT/owl.carousel.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/MT/owl.theme.default.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
@@ -21,14 +22,17 @@
 </script>
 </head>
 <body>
+	<nav class="nav fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	</nav>
 	<div style="background-color: #f8f2e4">
 		<div class="container-fluid">
 			<div>
 				<div role="main" style="align: center;">
 					<br><br><br>
-					<h1 class="title_1" style="text-align: center; font-size: 2.5em;">今 日 頭 條</h1>
-					<div class="bd-example" style="padding: 42px; align: center;">
-						<div style="float: left; margin-left: 530px; margin-right: 10px; margin-bottom: 10px; align: center;">
+					<h1 class="title_1" style="margin:20px auto; text-align: center; font-size: 2.8em;">今 日 頭 條</h1>
+					<div class="bd-example" style="margin:10px auto; text-align: center;">
+						<div style="display:inline-block;">
 							<label for="Country">國家:</label> 
 							<select id="Country">
 								<option value="none">請選擇國家</option>
@@ -39,7 +43,7 @@
 								<option value="us">美國</option>
 							</select>
 						</div>
-						<div style="float: left;">
+						<div style="display:inline-block;">
 							<label for="Category">新聞分類:</label> 
 							<select id="Category">
 								<option value="noneCate">請選擇分類</option>
@@ -55,7 +59,7 @@
 					</div>
 					<div id="myImg"></div>
 					<div id="todayNews" style="column-break-inside: avoid">
-						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 					</div>
 				</div>
 			</div>
@@ -214,5 +218,6 @@
 			}
 		}
 	</script>
+<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
 </html>

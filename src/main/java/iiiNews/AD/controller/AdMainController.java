@@ -176,7 +176,14 @@ public class AdMainController {
 	public String deleteAdProductById(@PathVariable Integer adPk,Model model) {
 		int n = service.deleteAdByMemberPkid(adPk);
 		System.out.println("成功更動 "+n+" 筆");
-		return "redirect:/memberAllAdsList";
+		return "redirect:/backGetAdListAjax";
+	}
+	
+	@GetMapping("/offShelfAdProduct/{adPk}")
+	public String offShelfAdProductById(@PathVariable Integer adPk,Model model) {
+		int n = service.offShelfAdByMemberPkid(adPk);
+		System.out.println("成功更動 "+n+" 筆");
+		return "redirect:/backGetAdListAjax";
 	}
 	
 	@PostMapping("/updateAdProduct/{adPk}")

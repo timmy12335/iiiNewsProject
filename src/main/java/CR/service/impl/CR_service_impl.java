@@ -96,6 +96,12 @@ public class CR_service_impl implements CR_service {
 		return dao.getReportBycpmemberId(memberId);
 	}
 
+	@Override
+	public void addcpReport(CRBean report) {
+		dao.addcpReport(report);
+		
+	}
+
 
 
 }

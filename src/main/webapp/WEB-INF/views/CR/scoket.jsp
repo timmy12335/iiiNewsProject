@@ -31,6 +31,7 @@ position:fixed ;bottom: 0;right: 0;_position:absolute ;width:
 	300px;height: 250px;border: 2px solid green ;background:#eeeeee
 	;padding: 10px;
 }
+
 </style>
 <script>
 	window.onload = function() {
@@ -64,6 +65,7 @@ position:fixed ;bottom: 0;right: 0;_position:absolute ;width:
 
 		// 		}
 		btnSend.onclick = function() {
+		
 			if (socket == null) {
 				status.innerHTML = "必須先連到主機才能送訊息";
 				return;
@@ -140,21 +142,32 @@ position:fixed ;bottom: 0;right: 0;_position:absolute ;width:
 	<section style="margin-top: 100px"></section>
 
 	<!-- 	<button id='btnConn'>開啟客服聊天</button> -->
-	&nbsp;
+	
+	
+	
 	<div style="display: none" id="show" class="chatroom">
-	<textarea cols='38' rows='10' id='serverResponseArea' readonly style="resize: none;">
+	<textarea cols='38' rows='10' id='serverResponseArea' readonly style="resize: none;"> 
 	</textarea>
-		<span id='status'></span>
-		<button id='btnClose'>關閉客服聊天</button>
-		<hr>
-		訊息： <input type='text' id='message'>&nbsp;
-		<button id='btnSend'>送出訊息</button>
-		<hr>
+		<span id='status'></span> 
+ 		<button id='btnClose'>關閉訊息</button> 
+		<hr> -->
+ 		訊息： <input type='text' id='message'>&nbsp;
+ 		<button id='btnSend'>送出訊息</button>
+</div>
+   
+<!--       <div> -->
+<!--         <span>姓名：</span><input id="name"><br/> -->
+<!--         <span>內容：</span><input id="message"> -->
+<!--       </div> -->
+<!--       <button id="btnSend">送出訊息</button> -->
+<!--        <button id="btnClose">關閉訊息</button> -->
+<!--     </div> -->
+<!--     <div id="serverResponseArea"></div> -->
 
-		
 
-	</div>
-	<div style="width: 200px; height: 400px;" class="chatbot" id="chatbot"
-		align="center"></div>
+	
+
+ 	<div style="width: 200px; height: 400px;" class="chatbot" id="chatbot" 
+ 		align="center"></div> 
 </body>
 </html>

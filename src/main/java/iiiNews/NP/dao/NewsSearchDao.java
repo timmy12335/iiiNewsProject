@@ -10,5 +10,7 @@ public interface NewsSearchDao {
 	
 	//類型查詢
 	public List<NewsBean> getNewsByType(String Type);
+	
+	
 		
 }

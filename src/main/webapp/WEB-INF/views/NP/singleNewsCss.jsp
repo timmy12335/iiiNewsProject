@@ -143,18 +143,14 @@ p{
 						<article class="all-browsers shadow0">
 							
 							<article class="browser">
-								<h3>新聞標題</h3>
+								<h3 class="text-danger"><b>標題</b></h3>
 								<h5>${ newsSingle.title }</h5>
 							</article>
 							<article class="browser">
-								<h3>新聞大綱</h3>
+								<h3 class="text-danger"><b>大綱</b></h3>
 								<h5>${ newsSingle.outline }</h5>
 							</article>
-							<article class="browser">
-								<h2>Microsoft Edge</h2>
-								<p>Microsoft Edge is a web browser developed by Microsoft,
-									released in 2015. Microsoft Edge replaced Internet Explorer.</p>
-							</article>
+							
 						</article>
 						<div align="center" style="margin:50px;">
 					

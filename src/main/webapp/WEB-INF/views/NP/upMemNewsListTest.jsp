@@ -56,6 +56,21 @@
 	
 </script>
 <style>
+.incss{
+			width:150px;
+			height:45px;
+			margin:10px;
+			font-size:20px;
+			background-color:#BC214C;
+			border:none;
+			outline: none;
+			box-shadow: 3px 3px 3px #9D9D9D;
+			color:white;
+		}
+		.incss:hover{
+			background-color:#e884a0;
+		}
+
 p{
  margin:4px auto;
 
@@ -71,6 +86,12 @@ content: "";
 display: block;
 height: 4px;
 background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂的顏色 */
+}
+.dstyle{
+	background-color:lightpink;
+	margin:20px;
+	border-radius:15px;
+	box-shadow: 4px 4px 4px #9D9D9D;
 }
 </style>
 </head>
@@ -93,7 +114,7 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 				<c:otherwise>
 
 					<c:forEach var='news' items='${upMemNewsList}' varStatus='loop'>
-						<div class="border " style="background-color:lightpink;margin:20px;border-radius:15px;box-shadow: 3px 3px 3px #9D9D9D; ">
+						<div class="border dstyle" >
 							<div style="background-color:lavenderblush;border-radius:15px;margin:0px 20px">
 							<div class="row" style="margin:15px">
 								<div class="col-sm-2" >
@@ -102,7 +123,7 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 																								
 								<div class="col-sm-3" align='left'  style="padding-left:60px;">								
 									
-									<p>${news.newsId}</p>
+									<p><b>${news.newsId}</b></p>
 									<p>新聞類型：${news.newsType}</p>
 									<p>發生時間：${news.happenDate}&ensp;${news.happenTime}</p>
 									<p>發生地點：${news.location}</p>

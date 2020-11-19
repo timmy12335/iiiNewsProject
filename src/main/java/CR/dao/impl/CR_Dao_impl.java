@@ -43,6 +43,20 @@ public class CR_Dao_impl implements CR_Dao {
 		session.save(report);
 		
 	}
+	
+	@Override
+	public void addcpReport(CRBean report) {
+		Session session=factory.getCurrentSession();
+		CpMemberBean mb = getCpMembersByMemberId(report.getCompanyId());
+		CRemployee crb = getemployeeBytreatamt();
+		Timestamp date=new Timestamp(System.currentTimeMillis());
+		report.setCrApplyDate(date);
+		report.setState("未回覆");
+		report.setCpBean(mb);
+		report.setCremployee(crb);
+		session.save(report);
+		
+	}
 
 
 	@Override
@@ -78,7 +92,6 @@ public class CR_Dao_impl implements CR_Dao {
 	public void updateReport(CRBean report) {
 		Session session=factory.getCurrentSession();
 		session.update(report);
-		
 	}
 
 	@Override
@@ -88,13 +101,13 @@ public class CR_Dao_impl implements CR_Dao {
 		Integer untr = report.getCremployee().getUntreatamt()-1;
 		Integer retr = report.getCremployee().getReplyamt()+1;
 		System.out.println("回覆人數"+retr);
-		Integer test = session.createQuery(hql)
+		 session.createQuery(hql)
 		.setParameter("un", untr)
 		.setParameter("re",  retr)
 		.setParameter("pk", report.getCremployee().getEmpPk())
 		.executeUpdate();
 		session.flush();
-		System.out.println(test);
+		System.out.println("test______________________________________________________________________________________");
 		report.setState("已回覆");
 			
 	}
@@ -114,7 +127,7 @@ public class CR_Dao_impl implements CR_Dao {
 			mb =(MBBean) session.createQuery(hql)
 					.setParameter("mId", memberId)
 					.getSingleResult();
-
+System.out.println("不該近來~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}catch(NonUniqueResultException e) {
 			e.printStackTrace();
 		}
@@ -134,6 +147,7 @@ public class CR_Dao_impl implements CR_Dao {
 		}catch(NonUniqueResultException e) {
 			e.printStackTrace();
 		}
+		System.out.println("有進來~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		return mb;
 	}
 
@@ -170,12 +184,12 @@ public class CR_Dao_impl implements CR_Dao {
 	@Override
 	public CRemployee getemployeeBytreatamt() {
 		Session session=factory.getCurrentSession();
-		String hql ="FROM CRemployee ORDER BY untreatamt ASC";
+		String hql ="FROM CRemployee where isstay=1 ORDER BY untreatamt ASC";
 		
 		CRemployee list =(CRemployee) session.createQuery(hql).setMaxResults(1).getSingleResult();
 		System.out.println(list);
 		System.out.println("hql2="+list.getUntreatamt());
-		String hql2 ="UPDATE CRemployee SET untreatamt=:unamt Where empPk=:pk";
+		String hql2 ="UPDATE CRemployee SET untreatamt=:unamt Where isstay=1 and empPk=:pk";
 		session.createQuery(hql2).setParameter("unamt", list.getUntreatamt()+1)
 								.setParameter("pk", list.getEmpPk()).executeUpdate();
 		

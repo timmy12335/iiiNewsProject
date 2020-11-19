@@ -31,10 +31,18 @@ public class MtAjaxServiceImpl implements MtAjaxService {
 		return ajaxDao.getPageComment(pageComNo);
 	}
 
+	//搜尋keyWord頁數-----------------------------------
 	@Override
-	public List<MtAddBean> getAllArtWord(String searchWord) {		//模糊搜尋標題
-		return ajaxDao.getAllArtWord(searchWord);
+	public int getKeyWordPages(String searchWord) {
+		return ajaxDao.getKeyWordPages(searchWord);
 	}
+	
+	@Override
+	public List<MtAddBean> getAllArtWord(String searchWord, Integer keyWordPage) {		//模糊搜尋標題
+		return ajaxDao.getAllArtWord(searchWord, keyWordPage);
+	}
+
+	
 
 
 	

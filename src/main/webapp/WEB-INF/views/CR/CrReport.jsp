@@ -109,7 +109,7 @@ white-space: normal;
 						<c:forEach var='ser' items='${CrReport}' varStatus='report'>
 							<tr>
 								<td align='left'>${ser.pk}</td>
-								<td align='left'>&nbsp;${ser.mbBean.name}</td>
+								<td align='left'>&nbsp;${ser.mbBean.name}${ser.cpBean.cpname}</td>
 								<td align='center'>${ser.crClass}</td>
 								<td align='left'>&nbsp;${ser.crTitle}</td>
 								<td align='center' onclick="MBfolded(${report.index})" class="box" style="cursor:pointer">
@@ -136,6 +136,9 @@ white-space: normal;
 					</c:otherwise>
 				</c:choose>
 			</table>
+			
+			<hr>
+		<button onclick='history.back()' class="btn btn-primary">回前頁</button>
 	<script>
 	function MBfolded(index){	
 		

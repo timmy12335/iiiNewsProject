@@ -99,8 +99,8 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		</tr>
 		<tr>
 		<td width='120' align='center' colspan="2">
-		<input type='text' name='name' id='name' value="${report.mbBean.name}" hidden='true'/>
-		申請人姓名:${report.mbBean.name}
+		<input type='text' name='name' id='name' value="${report.mbBean.name}${report.cpBean.cpname}" hidden='true'/>
+		申請人姓名:${report.mbBean.name}${report.cpBean.cpname}
 		</td>
 		</tr>
 		<tr>

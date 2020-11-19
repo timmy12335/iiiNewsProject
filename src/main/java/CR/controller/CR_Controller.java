@@ -159,6 +159,7 @@ public class CR_Controller {
 						System.out.println("有要進來?");
 						email.setTo(mb.getEmail());
 					}else if(cpmb !=null) {
+						System.out.println("不該要進來?");
 						email.setTo(cpmb.getCpemail());
 					}else{
 						email.setTo("eeit@gmail.com");	
@@ -174,10 +175,19 @@ public class CR_Controller {
 					email.addAttachment(cb.getAttachmentName(), cb.getImage());
 					}
 					mailSender.send(msg);
-				} catch (MessagingException e) {					
+				} catch (MessagingException e) {	
+					System.out.println("是我啦!!");
 					e.printStackTrace();
 				}
-		service.addReport(cb);
+				if (memberBean == null) {
+					if(cpmemberBean == null) {
+					return "redirect: " + ctx.getContextPath() + "/Login";
+					}
+					service.addcpReport(cb);
+				}else{
+					service.addReport(cb);
+				}
+		
 	    return "redirect:/success";
 	}
 	//成功後跳轉其會員以申請表單畫面
@@ -229,6 +239,8 @@ public class CR_Controller {
 		CRBean cb0 = null;
 		cb0 = service.getReportById(pk);
 		cb0.setCrReContent(cb.getCrReContent());
+		Timestamp today=new Timestamp(System.currentTimeMillis());
+		cb0.setCrReDate(today);
 		try{
 			service.updateReport(cb0);
 			map.put("success","修改完成");

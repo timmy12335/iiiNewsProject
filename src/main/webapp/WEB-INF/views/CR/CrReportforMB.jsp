@@ -20,6 +20,7 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
   <style>
+
 .box {
 width: 300px;
 padding: 10px;
@@ -138,6 +139,14 @@ function deleteCrReport(pk){
 									onclick="deleteCrReport(${ser.pk})" >取消申請<i class="ti-trash btn-icon-append"></i></button>
 								</td>
 								</tr>
+								<tr style="display:none"><td>
+								<input type="radio" name="location" value="0">0
+								<input type="radio" name="location" value="1">1
+								<input type="radio" name="location" value="2">2
+								<input type="radio" name="location" value="3">3
+								<input type="radio" name="location" value="4">4
+								<input type="radio" name="location" value="5">5
+								</td></tr>
 							<tr id="MBcontent${report.index}" style="display:none ;word-wrap : break-word ;"><td>客服內容</td>
 							<td  colspan="10" > 
 							<textarea style="width:1000px;height:200px;" disabled>

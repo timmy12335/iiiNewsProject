@@ -12,4 +12,6 @@ public interface CR_msgService {
 	void updateMsg(CrMsgBean msg);
 	
 	void deleteMsg(int pk);
+
+	void addMsg(String message);
 }

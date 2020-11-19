@@ -28,7 +28,7 @@ public class NewsSearchDaoImpl implements NewsSearchDao {
 							.getResultList();
 		return list;
 	}
-
+	//依類別查詢
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getNewsByType(String Type) {
@@ -39,5 +39,6 @@ public class NewsSearchDaoImpl implements NewsSearchDao {
 				.getResultList();
 		return list;
 	}
+	
 
 }

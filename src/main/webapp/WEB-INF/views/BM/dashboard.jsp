@@ -21,6 +21,15 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
+  <script>
+  
+  
+  
+  
+  </script>
+  
+  
+  
 </head>
 <body>
 <jsp:include page="/fragment/BMnav.jsp"></jsp:include>
@@ -55,8 +64,8 @@
 
         // Set chart options
         var options = {'title':'主要參觀區域人數比例',
-                       'width':400,
-                       'height':300};
+                       'width':1000,
+                       'height':800};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -126,13 +135,13 @@
             chart.draw(data, options);
           }
     </script>
-    
+
   </head>
 
   <body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
-     <div id="chart_div2"></div>
+    <div id="chart_div" width="400" height="400"></div>
+     <div id="chart_div2" width="400" height="400"></div>
 
 
 <jsp:include page="/fragment/BMfoot.jsp"></jsp:include>

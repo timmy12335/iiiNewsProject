@@ -82,7 +82,7 @@
 			<div class="row">
 				<div class="col-md-6 grid-margin stretch-card">
 					<div class="card">
-						<div class="card-header">
+						<div class="card-header bg-info text-white">
 							<h2>廣告欄位上架</h2>
 						</div>
 						<div class="card-body">
@@ -101,11 +101,11 @@
 										<div class="col-sm-9">
 											<form:select class="form-control" path="categoryNo">
 												<form:option value="-1">分類項目</form:option>
-												<form:option value="100">頭版頭</form:option>
-												<form:option value="200">頭版側標</form:option>
-												<form:option value="300">內頁版頭</form:option>
-												<form:option value="400">內頁側標</form:option>
-												<form:option value="500">小廣告</form:option>
+												<form:option value="100">A&nbsp;頭版頁首</form:option>
+												<form:option value="200">B&nbsp;頭版側標</form:option>
+												<form:option value="300">C&nbsp;內頁頁首</form:option>
+												<form:option value="400">D&nbsp;內頁側標</form:option>
+												<form:option value="500">E&nbsp;內文小廣告</form:option>
 											</form:select>
 											<form:errors path="categoryNo" cssClass="error" />
 										</div>
@@ -171,12 +171,12 @@
 										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp清除
 									</button>
 									<button type="button" class="btn btn-outline-info btn-icon-text" onclick="onebuttontodata()">
-										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp一鍵輸入
+										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp一鍵輸入(尚未設定)
 									</button>
 
-									<input type="reset" value="" class="btn btn-light">
-									<input type="button" value="one" onclick="onebuttontodata()"
-										class="btn btn-light">
+<!-- 									<input type="reset" value="" class="btn btn-light"> -->
+<!-- 									<input type="button" value="one(尚未設定)" onclick="onebuttontodata()" -->
+<!-- 										class="btn btn-light"> -->
 								</div>
 							</form:form>
 						</div>
@@ -184,8 +184,20 @@
 				</div>
 				<div class="col-md-6 grid-margin stretch-card">
 					<div class="card">
-						<div class="card-body">
-							<h2>廣告欄位上架</h2>
+						<div class="card-header">
+							<h2>服務使用說明</h2>
+						</div>
+						<div class="card-body text-left p-3">
+							<h4>歡迎使用廣告欄位上架功能</h4>
+							<p>可依分類上傳欄位項目，並設定廣告欄位大小尺寸</p>
+							<div class="row">
+								<div class="col-6 text-center">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_header.jpeg" alt="Sample">
+								</div>
+								<div class="col-6 text-center">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_article.jpeg" alt="Sample">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -193,6 +205,17 @@
 		</div>
 	</div>
 
+<script>
+function onebuttontodata(){
+	console.log("hello")
+	document.getElementById("idWidth").value = '600';
+	document.getElementById("idHeight").value = '300';
+	document.getElementById("idPrice").value = '2000';
+	document.getElementById("idStock").value = '5';
+	document.getElementById("idDate").value = '2020-12-12';
+	document.getElementById("idTitle").value = '雙12欄位';
+}
 
+</script>
 </body>
 </html>

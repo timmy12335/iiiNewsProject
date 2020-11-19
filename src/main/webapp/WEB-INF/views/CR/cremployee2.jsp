@@ -37,8 +37,8 @@
 					<label class="col-sm-4 col-form-label">人員狀態：</label>
 					<div class="col-sm-8">
 						<select id="isstay" onchange="searchByisStay()" class="form-control form-control-sm">
-							<option value="1">在職</option>
-							<option value="0">離職</option>
+							<option value="1">上班</option>
+							<option value="0">下班</option>
 							<option value="-1">全部</option>
 				         </select>
 			         </div>
@@ -64,9 +64,9 @@
 	
 	function transisstay(isstay){
 		if(isstay == 0){
-			isstay = "離職";
+			isstay = "下班";
 		}else if(isstay == 1){
-			isstay = "在職";
+			isstay = "上班";
 		}else{
 			isstay = "未在線";
 		}
@@ -86,9 +86,9 @@
 			for(var i=0; i < emp.length; i++){
 				console.log(emp[i].isstay);
 				if(emp[i].isstay == "0"){
-					bgColor="#AD5A5A";
+					bgColor="#FFCBB3";
 				}else if(emp[i].isstay == "1"){
-					bgColor="#4DFFFF";
+					bgColor="#DDDDFF";
 				}else{
 					bgColor="#d4f5b2"
 				}

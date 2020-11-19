@@ -1,144 +1,130 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
+
 <head>
-<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/cssmenu/bootstrap_index.css">
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<!-- <script src="https://kit.fontawesome.com/ed0adb3a32.js" crossorigin="anonymous"></script> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script><base><base>
-<script>
-$(document).ready(function () {
-  // MDB Lightbox Init
-  $(function () {
-    $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
-  });
-});
-</script>
+<meta charset="UTF-8">
 
+	<title>Doughnut Chart</title>
+	<script src="//www.google-analytics.com/analytics.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/Moment.js"></script>
+	
+	
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
 </head>
+
 <body>
-  <!--Section: Block Content-->
-<section class="mb-5">
+<jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
+<div class="card-body" >
+	<div id="canvas-holder" style="width:70%">
+		<canvas id="chart-area"></canvas>
+	</div>
+<!-- 	<button id="randomizeData">Randomize Data</button> -->
+<!-- 	<button id="addDataset">Add Dataset</button> -->
+<!-- 	<button id="removeDataset">Remove Dataset</button> -->
+<!-- 	<button id="addData">Add Data</button> -->
+<!-- 	<button id="removeData">Remove Data</button> -->
+	<button id="changeCircleSize">Semi/Full Circle</button>
+	<script>
+		
+		var randomScalingFactor = function() {
+			return Math.round(Math.random() * 100);
+		};
 
-  <div class="row">
-    <div class="col-md-6 mb-4 mb-md-0">
+		var config = {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [
+						
+						10,
+						20,
+						30,
+						25,
+						15,
+						10
+				],
+						
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+					],
 
-      <div id="mdb-lightbox-ui"></div>
+					
+				}],
+				labels: [
+					'感情',
+					'交通',
+					'糾紛',
+					'詐騙',
+					'災情',
+					'爆料',
+					
+				]
+			},
+			options: {
+				responsive: true,
+				legend: {
 
-      <div class="mdb-lightbox">
+					labels:{
+						fontSize:20,
+						render:'label'
+					
+					}
+					
+				},
+				title: {
+					display: true,
+					text: '本月新聞分類',
+					fontSize:30,
+					position:'top'
+					
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			},
+			d
+			
+			
+		};
 
-        <div class="row product-gallery mx-1">
+		window.onload = function() {
+			var ctx = document.getElementById('chart-area').getContext('2d');
+			window.myDoughnut = new Chart(ctx, config);
+		};
 
-          <div class="col-12 mb-0">
-            <figure class="view overlay rounded z-depth-1 main-img">
-              <a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
-                data-size="710x823">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
-                  class="img-fluid z-depth-1">
-              </a>
-            </figure>
-            
-        </div>
 
-      </div>
 
-    </div>
-    <div class="col-md-6">
+		document.getElementById('changeCircleSize').addEventListener('click', function() {
+			if (window.myDoughnut.options.circumference === Math.PI) {
+				window.myDoughnut.options.circumference = 2 * Math.PI;
+				window.myDoughnut.options.rotation = -Math.PI / 2;
+			} else {
+				window.myDoughnut.options.circumference = Math.PI;
+				window.myDoughnut.options.rotation = -Math.PI;
+			}
 
-      <h5>Fantasy T-shirt</h5>
-      <p class="mb-2 text-muted text-uppercase small">Shirts</p>
-      <ul class="rating">
-        <li>
-          <i class="fas fa-star fa-sm text-primary"></i>
-        </li>
-        <li>
-          <i class="fas fa-star fa-sm text-primary"></i>
-        </li>
-        <li>
-          <i class="fas fa-star fa-sm text-primary"></i>
-        </li>
-        <li>
-          <i class="fas fa-star fa-sm text-primary"></i>
-        </li>
-        <li>
-          <i class="far fa-star fa-sm text-primary"></i>
-        </li>
-      </ul>
-      <p><span class="mr-1"><strong>$12.99</strong></span></p>
-      <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
-        officia quis dolore quos sapiente tempore alias.</p>
-      <div class="table-responsive">
-        <table class="table table-sm table-borderless mb-0">
-          <tbody>
-            <tr>
-              <th class="pl-0 w-25" scope="row"><strong>Model</strong></th>
-              <td>Shirt 5407X</td>
-            </tr>
-            <tr>
-              <th class="pl-0 w-25" scope="row"><strong>Color</strong></th>
-              <td>Black</td>
-            </tr>
-            <tr>
-              <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
-              <td>USA, Europe</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <hr>
-      <div class="table-responsive mb-2">
-        <table class="table table-sm table-borderless">
-          <tbody>
-            <tr>
-              <td class="pl-0 pb-0 w-25">Quantity</td>
-              <td class="pb-0">Select size</td>
-            </tr>
-            <tr>
-              <td class="pl-0">
-                <div class="def-number-input number-input safari_only mb-0">
-                  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                    class="minus"></button>
-                  <input class="quantity" min="0" name="quantity" value="1" type="number">
-                  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                    class="plus"></button>
-                </div>
-              </td>
-              <td>
-                <div class="mt-1">
-                  <div class="form-check form-check-inline pl-0">
-                    <input type="radio" class="form-check-input" id="small" name="materialExampleRadios"
-                      checked>
-                    <label class="form-check-label small text-uppercase card-link-secondary"
-                      for="small">Small</label>
-                  </div>
-                  <div class="form-check form-check-inline pl-0">
-                    <input type="radio" class="form-check-input" id="medium" name="materialExampleRadios">
-                    <label class="form-check-label small text-uppercase card-link-secondary"
-                      for="medium">Medium</label>
-                  </div>
-                  <div class="form-check form-check-inline pl-0">
-                    <input type="radio" class="form-check-input" id="large" name="materialExampleRadios">
-                    <label class="form-check-label small text-uppercase card-link-secondary"
-                      for="large">Large</label>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <button type="button" class="btn btn-primary btn-md mr-1 mb-2">Buy now</button>
-      <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
-          class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
-    </div>
-  </div>
-
-</section>
-<!--Section: Block Content-->
+			window.myDoughnut.update();
+		});
+	</script>
+	<script type="text/javascript">
+	
+	</script>
+	</div>
 </body>
+
 </html>

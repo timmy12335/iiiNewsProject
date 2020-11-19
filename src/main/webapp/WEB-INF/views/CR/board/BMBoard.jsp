@@ -20,7 +20,7 @@
 
 	
 	<div class='card-body'>
-		<h3>客服人員管理</h3>
+		<h3>公告欄管理</h3>
 		<div class="row align-items-center">
 			
 	        <div class="col-md-4">
@@ -53,7 +53,7 @@
 				</div>
          	</div>
         </div>
-        <a href=<c:url value='/addemployee'/>><button class='btn btn-primary btn-icon-text' id='add'>新增客服人員</button></a>
+        <a href=<c:url value='/addboard'/>><button class='btn btn-primary btn-icon-text' id='add'>新增公告內容</button></a>
 		<div id='somedivS'></div>
 		<div id='navigation'></div>
 		<hr>

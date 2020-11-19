@@ -21,6 +21,8 @@ public interface AdMainService {
 	
 	public int deleteAdByMemberPkid(int pkId);
 	
+	public int offShelfAdByMemberPkid(int pkId);
+	
 	public AdBean getOneAdByadPk(int adPk);
 	
 	public void changeStatus();

@@ -29,4 +29,5 @@ public interface CR_service {
 	CpMemberBean getCpMembersByMemberId(String memberId);
 	
 	List<CRBean> getReportBycpmemberId(String memberId);
+	void addcpReport(CRBean report);
 }

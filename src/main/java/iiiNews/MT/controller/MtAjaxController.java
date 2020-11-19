@@ -61,17 +61,31 @@ public class MtAjaxController {
 	
 	}
 	
-	//以關鍵字來搜尋 (限制上架)
+	//以關鍵字來搜尋 
 	@GetMapping("/getAllArtWord.json")
 	public @ResponseBody List<MtAddBean> getAllArtWord(
-			@RequestParam(value="word")String SearchWord){
+			@RequestParam(value="word")String SearchWord,
+			@RequestParam(value="keyWordPage",defaultValue = "1" )Integer keyWordPage){
 		System.out.println("----------搜尋----------");
 		List<MtAddBean> list = new ArrayList<MtAddBean>();
-		list = ajaxService.getAllArtWord(SearchWord);
+		list = ajaxService.getAllArtWord(SearchWord, keyWordPage);
 		return list;		
 	}
 	
+	@GetMapping("/allArtWordNo")
+	public @ResponseBody Map<String, Integer> getKeyWordPage(
+			@RequestParam(value="word") String searchWord,
+			@RequestParam(value="keyWordPage",defaultValue = "1" )Integer keyWordPage,
+			@RequestParam(value="keyWordTotalPage", defaultValue = "1") Integer keyWordTotalPage) {	
+		
+		keyWordTotalPage = ajaxService.getKeyWordPages(searchWord);
+		
+		Map<String, Integer>  map = new HashMap<>();
+        map.put("keyWordTotalPage", keyWordTotalPage);
+        map.put("currPage", keyWordPage);
+		return map;
 	
+	}
 	
 	//-------------------------------前端Ajax-------------------------------
 	

@@ -10,6 +10,8 @@ public interface MtAjaxService {
 	public int getTotalPages();
 	public List<MtAddBean> getPageComment(Integer pageComNo);
 	
-	public List<MtAddBean> getAllArtWord(String searchWord);		//模糊搜尋標題
+	//搜尋keyWord頁數
+	public int getKeyWordPages(String searchWord);	
+	public List<MtAddBean> getAllArtWord(String searchWord, Integer keyWordPage);		//模糊搜尋標題
 
 }

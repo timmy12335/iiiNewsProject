@@ -45,9 +45,8 @@ import CR.validation.CRaddValidator;
 import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.MBBean;
 
-
 @Controller
-@SessionAttributes({"MBBean","CpMemberBean"})
+@SessionAttributes({ "MBBean", "CpMemberBean" })
 public class CR_Controller {
 	@Autowired
 	ServletContext ctx;
@@ -57,48 +56,47 @@ public class CR_Controller {
 	CR_empService empService;
 	@Autowired
 	JavaMailSender mailSender;
-	
+
 //	@GetMapping("/sendmail")
 //	public String email(Model model) {
 //		return "CR/sendEmail";
 //	}
-	
-	
+
 	@GetMapping("/CRindex")
 	public String showlist(Model model) {
-		return "CR/CRindex";		
+		return "CR/CRindex";
 	}
-	
-	//取全部客服資料
+
+	// 取全部客服資料
 	@GetMapping("/customerReports")
-	public String list(Model model,HttpServletRequest request, HttpServletResponse response) {
+	public String list(Model model, HttpServletRequest request, HttpServletResponse response) {
 		List<CRBean> beans = service.getRecord();
-		model.addAttribute("CrReport",beans);		
+		model.addAttribute("CrReport", beans);
 		return "CR/CrReport";
 	}
-	
-	//依客服單編號取得
+
+	// 依客服單編號取得
 	@GetMapping("/crReport/{pk}")
-	public String getReportByPk(@PathVariable Integer pk, Model model,HttpServletRequest request, HttpServletResponse response) {
+	public String getReportByPk(@PathVariable Integer pk, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
 		CRBean cb = service.getReportById(pk);
 		model.addAttribute("report", cb);
 		return "CR/Report";
 	}
 
-	
-	//會員申請客服表單
-	//給空白表單的方法
+	// 會員申請客服表單
+	// 給空白表單的方法
 	@GetMapping("/addReport")
-	public String getAddNewReportForm(Model model,HttpServletRequest request,HttpServletResponse response) {
+	public String getAddNewReportForm(Model model, HttpServletRequest request, HttpServletResponse response) {
 		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
 		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
 		if (memberBean == null) {
-			if(cpmemberBean == null) {
-			return "redirect: " + ctx.getContextPath() + "/LoginMB";
+			if (cpmemberBean == null) {
+				return "redirect: " + ctx.getContextPath() + "/LoginMB";
 			}
 		}
-	
-		HttpSession session = request.getSession(false); 
+
+		HttpSession session = request.getSession(false);
 		if (session == null) {
 			return "redirect: " + ctx.getContextPath() + "/Login";
 		}
@@ -106,151 +104,147 @@ public class CR_Controller {
 		model.addAttribute("crBean", cb);
 		return "CR/CrAddReport";
 	}
-	
-	
-	
-	//會員申請客服表單送出並寄信
+
+	// 會員申請客服表單送出並寄信
 	@PostMapping("/addReport")
-	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb,Model model, BindingResult bindingResult,HttpServletRequest request,HttpServletResponse response) { //bindingResult表單綁定
+	public String processAddNewReportForm(@ModelAttribute("crBean") CRBean cb, Model model, BindingResult bindingResult,
+			HttpServletRequest request, HttpServletResponse response) { // bindingResult表單綁定
 		CpMemberBean cpmb = null;
 		MBBean mb = null;
-		//通過會員編號取得會員資料
+		// 通過會員編號取得會員資料
 		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
 		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
 		if (memberBean == null) {
-			if(cpmemberBean == null) {
-			return "redirect: " + ctx.getContextPath() + "/Login";
+			if (cpmemberBean == null) {
+				return "redirect: " + ctx.getContextPath() + "/Login";
 			}
 			cpmb = service.getCpMembersByMemberId(cpmemberBean.getCpmemberId());
-		}else{
+		} else {
 			mb = service.getMembersByMemberId(memberBean.getMemberId());
 		}
-		
-		//確認欄位
+
+		// 確認欄位
 		new CRaddValidator().validate(cb, bindingResult);
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			return "CR/CrAddReport";
 		}
-		//取附件的圖片
+		// 取附件的圖片
 		MultipartFile images = cb.getImage();
-		//判斷有無附件圖片
-		if(images.isEmpty()) {
+		// 判斷有無附件圖片
+		if (images.isEmpty()) {
 			System.out.println("無法找到圖片");
-		}else {
-			//取檔案名
+		} else {
+			// 取檔案名
 			cb.setAttachmentName(images.getOriginalFilename());
 		}
-		//處理圖片
-		if(images != null && !images.isEmpty()) {
+		// 處理圖片
+		if (images != null && !images.isEmpty()) {
 			try {
 				byte[] bb = images.getBytes();
 				Blob blob = new SerialBlob(bb);
 				cb.setAttachment(blob);
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-				//寄信確認
-				MimeMessage msg = mailSender.createMimeMessage();
-				try {
-					MimeMessageHelper email = new MimeMessageHelper(msg,true,"utf-8");
-					if(mb !=null) {
-						System.out.println("有要進來?");
-						email.setTo(mb.getEmail());
-					}else if(cpmb !=null) {
-						System.out.println("不該要進來?");
-						email.setTo(cpmb.getCpemail());
-					}else{
-						email.setTo("eeit@gmail.com");	
-					};
-					email.setSubject("iiiNews客服表單申請成功通知信");
-					String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>"
-							+ "<table><tr><td>客服類別:"+cb.getCrClass()+"</td></tr><tr><td>客服標題:"+
-									cb.getCrTitle()+"</td></tr><tr><td>客服內容:"+cb.getCrContent()+
-									"</td></tr></table><br><p>感謝您的申請，我們將會盡快回覆您";
-					email.setText(text,true);
-					//有圖才寄附件
-					if(images != null && !images.isEmpty()) {
-					email.addAttachment(cb.getAttachmentName(), cb.getImage());
-					}
-					mailSender.send(msg);
-				} catch (MessagingException e) {	
-					System.out.println("是我啦!!");
-					e.printStackTrace();
-				}
-				if (memberBean == null) {
-					if(cpmemberBean == null) {
-					return "redirect: " + ctx.getContextPath() + "/Login";
-					}
-					service.addcpReport(cb);
-				}else{
-					service.addReport(cb);
-				}
-		
-	    return "redirect:/success";
-	}
-	//成功後跳轉其會員以申請表單畫面
-	@GetMapping("/success")
-	public String successjsp(Model model, HttpServletRequest request,HttpServletResponse response) {
-		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
-		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
-		List<CRBean> cb=null;
-		if(memberBean == null) {
-			if(cpmemberBean == null) {
+		// 寄信確認
+		MimeMessage msg = mailSender.createMimeMessage();
+		try {
+			MimeMessageHelper email = new MimeMessageHelper(msg, true, "utf-8");
+			if (mb != null) {
+				System.out.println("有要進來?");
+				email.setTo(mb.getEmail());
+			} else if (cpmb != null) {
+				System.out.println("不該要進來?");
+				email.setTo(cpmb.getCpemail());
+			} else {
+				email.setTo("eeit@gmail.com");
+			}
+			;
+			email.setSubject("iiiNews客服表單申請成功通知信");
+			String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>" + "<table><tr><td>客服類別:"
+					+ cb.getCrClass() + "</td></tr><tr><td>客服標題:" + cb.getCrTitle() + "</td></tr><tr><td>客服內容:"
+					+ cb.getCrContent() + "</td></tr></table><br><p>感謝您的申請，我們將會盡快回覆您";
+			email.setText(text, true);
+			// 有圖才寄附件
+			if (images != null && !images.isEmpty()) {
+				email.addAttachment(cb.getAttachmentName(), cb.getImage());
+			}
+			mailSender.send(msg);
+		} catch (MessagingException e) {
+			System.out.println("是我啦!!");
+			e.printStackTrace();
+		}
+		if (memberBean == null) {
+			if (cpmemberBean == null) {
 				return "redirect: " + ctx.getContextPath() + "/Login";
 			}
-			cb=service.getReportBycpmemberId(cpmemberBean.getCpmemberId());
-		}else {
+			service.addcpReport(cb);
+		} else {
+			service.addReport(cb);
+		}
+
+		return "redirect:/success";
+	}
+
+	// 成功後跳轉其會員以申請表單畫面
+	@GetMapping("/success")
+	public String successjsp(Model model, HttpServletRequest request, HttpServletResponse response) {
+		MBBean memberBean = (MBBean) model.getAttribute("MBBean");
+		CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
+		List<CRBean> cb = null;
+		if (memberBean == null) {
+			if (cpmemberBean == null) {
+				return "redirect: " + ctx.getContextPath() + "/Login";
+			}
+			cb = service.getReportBycpmemberId(cpmemberBean.getCpmemberId());
+		} else {
 			cb = service.getReportBymemberId(memberBean.getMemberId());
 		}
-		
-		HttpSession session = request.getSession(false); 
+
+		HttpSession session = request.getSession(false);
 		if (session == null) {
 			return "redirect: " + ctx.getContextPath() + "/Login";
 		}
-		
+
 		model.addAttribute("CrReport", cb);
 		return "CR/CrReportforMB";
 	}
-	
-	
-	
-	//依客服單編號刪除
+
+	// 依客服單編號刪除
 	@DeleteMapping("/customerReports/{pk}")
-	public @ResponseBody Map<String, String> deleteReportByPk(@PathVariable Integer pk){
+	public @ResponseBody Map<String, String> deleteReportByPk(@PathVariable Integer pk) {
 		Map<String, String> map = new HashMap<>();
 		try {
 			service.deleteReprotByPk(pk);
-			map.put("success","刪除成功");
-		}catch(Exception e) {
-			map.put("fail","刪除失敗");
+			map.put("success", "刪除成功");
+		} catch (Exception e) {
+			map.put("fail", "刪除失敗");
 		}
 		return map;
-		
+
 	}
-	
-	//依客服單編號修改
-	@PatchMapping(value="/crReport/{pk}",
-			consumes= {"application/json"}, produces= {"application/json"})
-	public @ResponseBody Map<String, String> updateReportByPk(
-			@RequestBody CRBean cb,@PathVariable Integer pk){
-		Map<String, String> map = new HashMap<>();	
+
+	// 依客服單編號修改
+	@PatchMapping(value = "/crReport/{pk}", consumes = { "application/json" }, produces = { "application/json" })
+	public @ResponseBody Map<String, String> updateReportByPk(@RequestBody CRBean cb, @PathVariable Integer pk) {
+		Map<String, String> map = new HashMap<>();
 		CRBean cb0 = null;
 		cb0 = service.getReportById(pk);
 		cb0.setCrReContent(cb.getCrReContent());
-		Timestamp today=new Timestamp(System.currentTimeMillis());
+		Timestamp today = new Timestamp(System.currentTimeMillis());
 		cb0.setCrReDate(today);
-		try{
+		try {
 			service.updateReport(cb0);
-			map.put("success","修改完成");
-		}catch(Exception e) {
+			map.put("success", "修改完成");
+		} catch (Exception e) {
 			e.printStackTrace();
-			map.put("fail","修改失敗");
+			map.put("fail", "修改失敗");
 		}
 		return map;
-		}
-	//取未被更新的資料
+	}
+	// 取未被更新的資料
 //	private void copyUnupdateField(CRBean cb0, CRBean cb) {
 //		cb.setMemberId(cb0.getMemberId());
 //		cb.setPk(cb0.getPk());
@@ -266,8 +260,7 @@ public class CR_Controller {
 //		cb.setCrReDate(today);
 //	}	
 
-	
-	@GetMapping(value="/getCRimg/{pk}")
+	@GetMapping(value = "/getCRimg/{pk}")
 	public ResponseEntity<byte[]> getPicture(@PathVariable Integer pk) throws Exception {
 		ResponseEntity<byte[]> re = null;
 		InputStream is = null;
@@ -299,8 +292,7 @@ public class CR_Controller {
 		re = new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
 		return re;
 	}
-	
-	
+
 //	@ModelAttribute("cb0")
 //	public CRBean editCrBean(@RequestParam(value="pk", required=false) Integer pk) {
 //		CRBean cb0; 
@@ -314,6 +306,5 @@ public class CR_Controller {
 //		return cb0;
 //		
 //	}
-	
-	
+
 }

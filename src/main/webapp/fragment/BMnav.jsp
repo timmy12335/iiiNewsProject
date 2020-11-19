@@ -132,9 +132,9 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/customerReports'/>"> 客服表單管理</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/allemployee'/>"> 客服人員管理 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/addboard'/>"> 公佈欄管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/chatMan'/>"> 聊天機器管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 5</a></li>
+<%--                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/addboard'/>"> 公佈欄管理</a></li> --%>
+<%--                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/chatMan'/>"> 聊天機器管理</a></li> --%>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/toCal'/>">客服表單統計</a></li>
               </ul>
               </div>
           </li>

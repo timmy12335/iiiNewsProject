@@ -72,7 +72,7 @@
         chart.draw(data, options);
       }
       
-      
+      //以下為柱狀圖
       google.charts.load('current', {packages: ['corechart', 'bar']});
       google.charts.setOnLoadCallback(drawBasic);
 
@@ -143,133 +143,6 @@
     <div id="chart_div" width="400" height="400"></div>
      <div id="chart_div2" width="400" height="400"></div>
 <hr>
-
-
-<div class='card-body'>
-
-
-
-<div id="container" style="height:700px;"></div>
-
-
-
-</div>
-       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
-       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
-       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
-       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
-       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
-     
-       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
-       <script type="text/javascript">
-       
-       
-       
-window.onload=function(){
-	
-		var xhr2 = new XMLHttpRequest();
-		xhr2.open("GET","<c:url value='/calCR'/>",true);
-		xhr2.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-		xhr2.send();
-		xhr2.onreadystatechange=function(){
-		if (xhr2.readyState == 4 && (xhr2.status == 200 || xhr2.status == 204) ) { 
-		var map = JSON.parse(xhr2.responseText);
-	      console.log(map);
-	      var data=[];
-	      var cate=[]; 
-	      var value=[];
-	 		data.push(map); 
-		 console.log(data);
-	      
-		
-		for(var k in map){
-			cate.push(k);
-			value.push(map[k]);
-		}
-		console.log(cate)
-		console.log(value)
-	      getPiePic(cate,value)
-	}	
-		}
-}
-
-      
-
-       
-       
-       
-       
-       
-       
-       
-       
-function getPiePic(cate,value){       
-	
-var arr = []
-for(let i = 0;i <cate.length ;i++){
-	arr.push( {value:value[i] , name: cate[i]})
-}
-var dom = document.getElementById("container");
-var myChart = echarts.init(dom);
-var app = {};
-option = null;
-option = {
-    title: {
-        text: '客服來源',
-        subtext: '纯属虚构',
-        left: 'center'
-    },
-    tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
-    },
-    legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: cate
-    },
-    series: [
-        {
-            name: '客服類別',
-            type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
-            data: 
-               arr
-            ,
-            emphasis: {
-                itemStyle: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        }
-    ]
-};
-;
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
-}
-       </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
 </html>

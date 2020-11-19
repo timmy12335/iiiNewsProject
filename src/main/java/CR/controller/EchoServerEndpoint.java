@@ -41,13 +41,13 @@ public class EchoServerEndpoint {
 //			service.addMsg(message);
 			msg="可到新聞專區觀看";
 			
-		}else if(message.equals("廣告")) {
+		}else if(message.contains("廣告")) {
 //			service.addMsg(message);
 			msg="可到新聞專區觀看";
-		}else if(message.equals("追蹤")) {
+		}else if(message.contains("追蹤")) {
 			msg="請至追蹤專區觀看";
-		}else if(message.contains("s")) {
-			msg="抱歉，不了解你的意思";
+		}else if(message.contains("客服")) {
+			msg="您現在就在客服喔!!";
 		}
 		else {
 			msg="抱歉，不了解你的意思";

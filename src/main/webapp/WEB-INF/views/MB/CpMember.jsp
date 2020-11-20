@@ -6,6 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
 <!-- <script> -->
 
 <!-- </script> -->
@@ -54,103 +61,92 @@ g-recaptcha {
 
 </head>
 <body>
-	<nav>
+	<nav class="nav fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<section style="margin-top: 100px;" align="center">
-		<div id="page" class="container"></div>
 		<form:form id="regform" onsubmit="return checkinput()"
-			modelAttribute="command_CP">
-			<table align="center">
-				<h2 align="center">企業會員</h2>
-				<tr>
-					<td>登入帳號：</td>
-					<td><form:input type="text" path="cpmemberId" required="true"
-							id='cpmemberId' placeholder="輸入帳號" /></td>
-					<td><form:errors style="color:red;font-size:12px"
-							path="cpmemberId"></form:errors></td>
-					<!-- 					<td>帳號只能是英文、數字，其餘字元均不接受</td> -->
-				</tr>
-				<tr>
-					<td>登入密碼：</td>
-					<td><form:input type="password" path="password2"
-							required="true" id='password2' placeholder="輸入密碼" /></td>
-					<!-- 					<td>密碼只能是英文、數字，長度必須大於 5</td> -->
-				</tr>
-				<tr>
-					<td>確認密碼：</td>
-					<td><input type="password" name="okpassword2"
-						required="required" id='okpassword2' placeholder="再次輸入密碼" /></td>
-					<!-- 					<td>再輸入一次密碼，確認沒有打錯字</td> -->
-				</tr>
-				<tr>
-					<td>公司行號：</td>
-					<td><form:input type="text" path="cpname" id="cpname"
-							placeholder="請輸入公司行號" required="true" /></td>
-					<!-- 					<td>填寫註冊者的姓名</td> -->
-				</tr>
-
-				<tr>
-					<td>公司信箱：</td>
-					<td><form:input type="email" path="cpemail"
-							placeholder="輸入公司信箱" /></td>
-					<!-- 					<td>請填慣用的電子郵件</td> -->
-				</tr>
-
-				<tr>
-					<td>公司地址：</td>
-					<td><form:input type="text" path="cpaddress" id="cpaddress"
-							placeholder="請輸入公司地址" required="true" /></td>
-				</tr>
-
-				<tr>
-					<td>公司電話：</td>
-					<td><form:input type="text" id="cptel" path="cptel"
-							placeholder="請加入區碼..."></form:input> <!-- 					<td><input class="test" type="button" id="btnChecktel" -->
-						<!-- 						onclick="return checkphone()" value="點我檢查"></td> -->
-				</tr>
-				<tr>
-					<td>統一編號：</td>
-					<td><form:input type="text" path="Uniformnumbers"
-							id='Uniformnumbers' placeholder="請輸入八位數..."></form:input></td>
-				<tr>
-					<td>創立日期：</td>
-					<td><form:input type="date" path="founddate" required="true"
-							id='founddate' /> <!-- 					<td>請使用 YYYY-MM-DD 的格式</td> -->
-				</tr>
-
-				<!-- 					<td>性別：</td> -->
-				<%-- 					<td><form:select path="sex"> --%>
-				<!-- 							<option value="0">女性</option> -->
-				<!-- 							<option value="1">男性</option> -->
-				<%-- 						</form:select> --%>
-				<!-- 					<td></td> -->
-				<!-- 				</tr> -->
-
-				<tr>
-					<td class="web-form-span ">驗證號碼：</td>
-					<td><input type="text" class=" web-form-input"
-						required="required" id="Yzm" /></td>
-					<td><input class="test" type="button" id="code" value="產生驗證碼"
-						onclick="createCode()">
-				</tr>
-				<tr>
-					<td colspan='5' id="grecaptcha" class="g-recaptcha"
-						data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB"></td>
-				</tr>
-
-				<tr>
-					<td colspan='2' id="g-recaptcha-error"></td>
-				</tr>
-
-				<tr>
-					<td colspan="3" style="text-align: center;"><input
-						type="hidden" name="action" value="reg" /> <input type="submit"
-						value="送出註冊" class="test" />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=""
-						class="btn btn-info">登錄</a></td>
-				</tr>
-			</table>
+			modelAttribute="command_CP" class="forms-sample">
+			<div class="row justify-content-md-center">
+				<div class="col-md-5 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<h2>企業會員</h2>
+							<p class="card-description">Basic form layout</p>
+							<div class="form-group" align="left">
+								<label for="cpmemberId">登入帳號：</label>
+								<form:input type="text" path="cpmemberId" class="form-control"
+									id='cpmemberId' placeholder="輸入帳號" />
+								<form:errors style="color:red;font-size:12px" path="cpmemberId"></form:errors>
+							</div>
+							<div class="form-group" align="left">
+								<label for="password2">登入密碼：</label>
+								<form:input type="password" path="password2"
+									class="form-control" id='password2' placeholder="輸入密碼" />
+								<div class="form-group" align="left">
+									<label for="okpassword2">確認密碼：</label> <input type="password"
+										name="okpassword2" class="form-control" id='okpassword2'
+										placeholder="再次輸入密碼" />
+								</div>
+								<div class="form-group" align="left">
+									<label for="cpname">公司行號：</label>
+									<form:input type="text" path="cpname" id="cpname"
+										placeholder="請輸入公司行號" class="form-control" />
+								</div>
+								<div class="form-group" align="left">
+									<label for="cpemail">公司信箱：</label>
+									<form:input type="email" path="cpemail" class="form-control"
+										placeholder="輸入公司信箱" />
+								</div>
+								<div class="form-group" align="left">
+									<label for="cpaddress">公司地址：</label>
+									<form:input type="text" path="cpaddress" id="cpaddress"
+										placeholder="請輸入公司地址" class="form-control" />
+								</div>
+								<div class="form-group" align="left">
+									<label for="cptel">公司電話：</label>
+									<form:input type="text" id="cptel" path="cptel"
+										class="form-control" placeholder="請加入區碼..."></form:input>
+								</div>
+								<div class="form-group" align="left">
+									<label for="Uniformnumbers">統一編號：</label>
+									<form:input type="text" path="Uniformnumbers"
+										class="form-control" id='Uniformnumbers'
+										placeholder="請輸入八位數..."></form:input>
+								</div>
+								<div class="form-group" align="left">
+									<label for="founddate">創立日期：</label>
+									<form:input type="date" path="founddate" class="form-control"
+										id='founddate' />
+								</div>
+								<div class="form-group" align="left">
+									<label for="Uniformnumbers">驗證號碼：</label> <input type="text"
+										class="form-control" id="Yzm" /> <input class="test"
+										type="button" id="code" value="產生驗證碼" onclick="createCode()">
+								</div>
+								<div class="form-group" align="left">
+									<label colspan='5' id="grecaptcha" class="g-recaptcha"
+										data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB"></label>
+								</div>
+								<div class="form-group" align="left">
+									<label colspan='2' id="g-recaptcha-error"></label>
+								</div>
+								<div class="form-group" align="center">
+									<label colspan="3" style="text-align: center;"></label><input
+										type="hidden" name="action" value="reg" class="form-control" />
+									<input type="submit" value="送出註冊" class="btn btn-primary btn-icon-text" />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=""
+										class="btn btn-info">登錄</a>
+								</div>
+								<button type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="ti-facebook"></i></button>
+								<button type="button" class="btn btn-social-icon btn-google btn-rounded"><i class="ti-google"></i></button>
+								<button type="button" class="btn btn-social-icon btn-twitter btn-rounded"><i class="ti-twitter-alt"></i></button>
+								<button type="button" class="btn btn-social-icon btn-youtube btn-rounded"><i class="ti-youtube"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</form:form>
 	</section>
 

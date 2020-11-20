@@ -119,11 +119,11 @@
 				</script>
 			</div>
 		</li>
-		<c:if test="${MBBean.memberId == null}">
+		<c:if test="${MBBean == null && CpMemberBean == null}">
 			<li><a href="<c:url value='/LoginMB'/>" title="">登入&nbsp;<i
 					class="far fa-user-circle"></i></a></li>
 		</c:if>
-		<c:if test="${MBBean.memberId != null}">
+		<c:if test="${MBBean != null || CpMemberBean != null}">
 			<li><a href="<c:url value='/Loginout' />" title="">登出&nbsp;<i
 					class="far fa-user-circle"></i></a></li>
 		</c:if>

@@ -163,7 +163,13 @@ public class MBDaoImpl implements MBDao {
 
 	@Override
 	public MBBean getProductById(int memberId) {
-		Session session = factory.getCurrentSession();
-		return session.get(MBBean.class, memberId);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+//	@Override
+//	public MBBean getProductById(int memberId) {
+//		Session session = factory.getCurrentSession();
+//		return session.get(MBBean.class, memberId);
+//	}
 }

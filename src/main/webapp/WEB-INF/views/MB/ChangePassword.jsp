@@ -29,8 +29,8 @@
 				</tr>
 				<tr>
 					<td>輸入新密碼確認：</td>
-					<td><input type="password" name="password"
-							id='password' /></td>
+					<td><input type="password" name="memberNewPassword"
+							id='memberNewPassword1' /></td>
 				</tr>
 				<tr align="center">
 					<td colspan="3"><input type="submit" value="確認填寫"> <input

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -95,13 +96,23 @@ height:350;
 						<span class="glyphicon-hand-left glyphicon"></span>返回
 					</a> <a href="<spring:url value='/editNews/${trkNew.trackId}'/>"
 						class='btn btn-warning btn-large'> <!-- 跳轉網頁連結 --> <span
-						class='glyphicon-shopping-cart glyphicon'></span>修改追蹤新聞
+						class=''></span>修改追蹤新聞
 					</a>
+<%-- 					<form:form method='POST' modelAttribute="ImageBean" class='form-horizontal' --%>
+<%-- 			                enctype="multipart/form-data" > --%>
+<!-- 			                <fieldset > -->
+<%-- 			                <form:input id="Image" path="Image" type='file' onchange="readURL(this)"  --%>
+<%--        				targetID="preview_progressbarTW_img" class='form:input-large' accept="image/gif, image/jpeg, image/png" />  --%>
+					   
+<!-- 					     </fieldset> -->
+<%-- 					</form:form> --%>
 				</p>
 			</div>
 		</div>
 		
 	</section>
+	 <a href="<c:url value='/addimage'/>" class='btn btn-warning btn-large'>  <!-- 跳轉網頁連結 --> 
+					    <span class=''></span>新增相關影像</a>
 	<!-- 媒體搜尋區域  -->
 				   <div style="float:left; margin-top:100px;">
 			            <h3 id="002" class="display-4" style="font-family:Microsoft JhengHei" >各媒體相關報導</h3> 

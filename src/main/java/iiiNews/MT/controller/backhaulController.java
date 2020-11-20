@@ -26,17 +26,19 @@ public class backhaulController {
 	@Autowired
 	ServletContext servletContext;
 	
-	@GetMapping("/getAllMtAdd")			//查詢所有的文章***後台部分
-	public String getAllMtList(Model model){	
-		List<MtAddBean> list = service.getAllMtAdd();
-		model.addAttribute("getAllMtList",list);
-        //--------------------------手動測試才加
-//        MBBean mb = new MBBean();   //手動設session
-//        mb.setMemberId("9999");
-//        model.addAttribute("MBBean", mb);
-        //--------------------------手動測試才加
-		return "MT/getAllMtAdd";
-	}
+	//改成Ajax----------------------------------------
+//	@GetMapping("/getAllMtAdd")			//查詢所有的文章***後台部分
+//	public String getAllMtList(Model model){	
+//		List<MtAddBean> list = service.getAllMtAdd();
+//		model.addAttribute("getAllMtList",list);
+//        //--------------------------手動測試才加
+////        MBBean mb = new MBBean();   //手動設session
+////        mb.setMemberId("9999");
+////        model.addAttribute("MBBean", mb);
+//        //--------------------------手動測試才加
+//		return "MT/getAllMtAdd2";
+//	}
+	//改成Ajax----------------------------------------
 	
 //	@GetMapping("/getSingleArticle/{articleId}")	//查詢單一文章***後台部分
 //	public String getSingleArticle(@PathVariable String articleId ,Model model) {

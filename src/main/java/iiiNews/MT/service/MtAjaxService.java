@@ -14,4 +14,8 @@ public interface MtAjaxService {
 	public int getKeyWordPages(String searchWord);	
 	public List<MtAddBean> getAllArtWord(String searchWord, Integer keyWordPage);		//模糊搜尋標題
 
+	//後端文章總覽，標籤分類
+	public List<MtAddBean> getAllMtByAjax(String set);	//set為前端網址所送的資料，如ALL
+	public List<MtAddBean> getMtByCateNoAjax(Integer CateNo, String set);
+	
 }

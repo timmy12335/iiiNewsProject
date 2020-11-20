@@ -14,24 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import iiiNews.MT.model.MtAddBean;
+import iiiNews.MT.service.MtAddService;
 import iiiNews.MT.service.MtAjaxService;
 
 @Controller
 @SessionAttributes({"MBBean"})
 public class MtAjaxController {
 
-
-//	@Autowired
-//	MtAddService AddService;
-	
-//	@Autowired
-//	MtCommentService ComService;
+	@Autowired
+	MtAddService addService;
 	
 	@Autowired
 	MtAjaxService ajaxService;
-	
-//	@Autowired
-//	ServletContext servletContext;
 	
 	//-------------------------------前端Ajax-------------------------------
 	@GetMapping("/AllArticleComment")			//前端瀏覽所有文章ajax
@@ -61,7 +55,7 @@ public class MtAjaxController {
 	
 	}
 	
-	//以關鍵字來搜尋 
+	//--------------------以關鍵字來搜尋 --------------------
 	@GetMapping("/getAllArtWord.json")
 	public @ResponseBody List<MtAddBean> getAllArtWord(
 			@RequestParam(value="word")String SearchWord,
@@ -87,6 +81,34 @@ public class MtAjaxController {
 	
 	}
 	
-	//-------------------------------前端Ajax-------------------------------
+	//-------------------------------後端Ajax-------------------------------
+	
+//	@GetMapping("/AllMtAdd")
+//	public String getajax2() {
+//		service.changeStatus();
+//		return "MT/getAllMtAdd";
+//	}
+	
+	@GetMapping("/getAllMtAdd")			//查詢所有的文章***後台部分
+	public String getAllMtList(){	
+		return "MT/getAllMtAdd";
+	}
+	
+	//以類別來搜尋 (限制上架)
+	@GetMapping("/getArtStatusAjax.json")
+	public @ResponseBody List<MtAddBean> getArtStatusAjax(
+			@RequestParam(value="statusNo",defaultValue = "-1" )Integer statusNo,
+			@RequestParam(value="set",defaultValue = "onsale" )String set) {
+		System.out.println(statusNo);
+		List<MtAddBean> list = new ArrayList<MtAddBean>();
+		if(statusNo.equals("-1") && set.equals("ALL")) {
+			list = ajaxService.getAllMtByAjax(set);
+		}else if(statusNo.equals("-1")){
+			list = ajaxService.getAllMtByAjax("");
+		}else {
+			list = ajaxService.getMtByCateNoAjax(statusNo,set);
+		}
+		return list;
+	}
 	
 }

@@ -83,9 +83,44 @@ public class MtAjaxDaoImpl implements MtAjaxDao {
 									.setParameter("word", "%" + searchWord + "%")
 									.setMaxResults(recordsPerPage)
 									.setFirstResult(startRecordNo)
-									
 									.getResultList();
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MtAddBean> getAllMtByAjax(String set) {
+		
+		String hql = "FROM MtAddBean WHERE status = 1";
+		
+		if(set.equals("ALL")) {
+			hql = "FROM MtAddBean";
+			System.out.println("-----------------選擇全部文章-----------------");
+		}
+		
+		Session session = factory.getCurrentSession();
+		List<MtAddBean> list = session.createQuery(hql)
+									.getResultList();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MtAddBean> getMtByCateNoAjax(Integer statusNo, String set) {
+		
+		String hql = "FROM MtAddBean WHERE status = 1 ";
+		
+		if(set.equals("ALL")) {
+			hql = "FROM MtAddBean WHERE status = :statusno";
+			System.out.println("-----------------選擇文章類別-----------------");
+		}
+		Session session = factory.getCurrentSession();
+		List<MtAddBean> list = session.createQuery(hql)
+									.setParameter("statusno", statusNo)
+									.getResultList();
+		return list;
+
+	}
+
+	
 }

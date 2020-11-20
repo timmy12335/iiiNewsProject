@@ -46,6 +46,7 @@ public class NewsBean implements Serializable{
 	private Time limitTime;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp futureTime;
+	@JsonIgnore
 	private Integer status;
 	@JsonIgnore
 	private String pic_One;
@@ -59,7 +60,7 @@ public class NewsBean implements Serializable{
 	private Blob img_II;
 	@JsonIgnore
 	private Blob img_III;
-	
+	@JsonIgnore
 	@Transient
 	private MultipartFile[] productImage;
 	

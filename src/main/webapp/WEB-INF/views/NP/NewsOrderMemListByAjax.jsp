@@ -35,6 +35,7 @@ function displayNewsOrderList(responseData){
 		  
 		
 		var newsOrderList = JSON.parse(responseData);		// 傳回一個陣列
+// 		console.log("newsOrderList="+newsOrderList);
 			
 		var bgColor = "";   // 每一項商品的背影 
 		 

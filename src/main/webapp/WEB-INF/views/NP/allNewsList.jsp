@@ -1,11 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>所有新聞列表</title>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:hover {background-color:#ffffff;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #0066CC;
+  color: white;
+}
+
+td {
+	padding: 3px;
+	 text-align:center; 
+	 valign:middle;'
+}
+
+.td1 {
+	width: 150px;
+	word-break: break-all;
+	margin: 5px;
+	font-weight: "bold";
+}
+</style>
 <script>
 	function GetDateDiff(endTime) {
 		//將xxxx-xx-xx的時間格式，轉換為 xxxx/xx/xx的格式 
@@ -49,47 +86,54 @@
 <div class="card-body">
 
 
-<div align='center' >
+<div align="center" class="table-responsive pt-3" >
 <h3><b>新聞列表</b></h3>
 
 <c:forEach var='news' items='${newsLists}' varStatus='loop'>
-<table>
-	<tr style="background-color:#C9FFEA;"  height='36'>
-		<th width='600' align='center'>新聞標題</th>
-		<th width='100' align='center'>新聞編號</th>
-		<th width='60' align='center'>上傳時間</th>		
+<table id="customers">
+	<tr  height='36'>
+		
+		<th width='600' align='center'>新聞編號</th>
+		
+		<th width='150' align='center'>上傳時間</th>		
 		<th width='100' align='center'>新聞類型</th>		
-		<th width='100' align='center'>發生地點</th>
+		<th width='150' align='center'>價格</th>
 		<th width='200' align='center'>影像</th>
 	</tr>
-	<tr>
+	<tr style="background-color: #ECF5FF">
+		<td width='100' align='center'>${news.newsId}</td>
+		
+		
+		<td align='center'>${fn:substring(news.uploadTime,0,19)}</td>		
+		<td align='center'>${ news.newsType}</td>
+		<td align='center'>${news.price}</td>
+		
+		<td><img width='200' height='150' 
+	                    	src="<c:url value='/getUpNewsPicture/${news.newsId}'/>" ></td>
+		</tr>
+    <tr  height='36' >
+		<th align='center'>新聞標題</th>
+		<th align='center'>發生時間</th>
+		
+		<th align='center'>到期時間</th>	
+		<th align='center'>時間倒數</th>	
+		<th align='center'></th>	
+		</tr>
+		<tr style="background-color: #ECF5FF">
+		
 		<td align='center' > 
 		<a href="<c:url value='/getSingleNews/${news.newsId}'/>" >${news.title}  </a> 
 		
 		</td>
-		<td width='100' align='center'>${news.newsId}</td>
-		<td align='center'>${news.uploadTime}</td>		
-		<td align='center'>${ news.newsType}</td>
+		<td align='center'>${news.happenDate}&ensp;${news.happenTime}</td>
 		
-		<td align='center'>${news.location}</td>
-		<td><img width='200' height='150' 
-	                    	src="<c:url value='/getUpNewsPicture/${news.newsId}'/>" ></td>
-		</tr>
-    <tr style="background-color:#C9FFEA;"  height='36'>
-		<th width='600' align='center'>新聞大綱</th>
-		<th width='100' align='center'>發生日期</th>
-		<th width='100' align='center'>發生時間</th>
-		<th width='100' align='center'>價格</th>
-		<th width='60' align='center'>到期時間</th>	
-		<th width='60' align='center'>時間倒數</th>	
-		</tr>
-		<tr>
-		<td width='600' align='center'>${news.outline}</td>
-		<td align='center'>${news.happenDate}</td>
-		<td align='center'>${news.happenTime}</td>
-		<td align='center'>${news.price}</td>
-		<td align='center' id="ftime${loop.index}">${news.futureTime}</td>
+		<td align='center' id="ftime${loop.index}">${fn:substring(news.futureTime,0,19)}</td>
 		<td align='center' id='lastime${loop.index}'></td>
+		<td align='center'>
+			<button type="button" class="btn btn-danger " onclick="delNews('${news.newsId}')">
+				<i class="fas fa-trash-alt"></i>&ensp;刪除本則新聞
+			</button>
+		</td>
 		
 	</tr>		
 	</table>
@@ -104,6 +148,14 @@
 
 </div>
 <script>
+
+function delNews(Id){
+	if (confirm("確定刪除此項商品 ? ") ) {
+		location.href="delSingleNewsForBB/"+Id;
+	} else {
+		;
+	}
+}
 
 var num = ${newsLists.size()};
 //將秒轉回時:分:秒 

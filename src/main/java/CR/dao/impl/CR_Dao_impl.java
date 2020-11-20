@@ -195,5 +195,15 @@ System.out.println("不該近來~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 		return list;
 	}
+
+	@Override
+	public void updateScoreOnReport(CRBean cb) {
+		Session session=factory.getCurrentSession();
+		String hql = "UPDATE CRBean SET crReScore=:score Where pk=:pk";
+		 session.createQuery(hql)
+			.setParameter("score", cb.getCrReScore())
+			.setParameter("pk", cb.getPk())
+			.executeUpdate();
+	}
 	
 }

@@ -102,6 +102,12 @@ public class CR_service_impl implements CR_service {
 		
 	}
 
+	@Override
+	public void updateScoreOnReport(CRBean cb) {
+		dao.updateScoreOnReport(cb);
+		
+	}
+
 
 
 }

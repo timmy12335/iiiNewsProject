@@ -104,9 +104,9 @@
 		<li><a href="<c:url value='/CRindex' />">客服中心</a>
 			<ul>
 				<li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
-				<li><a href="<c:url value='/success' />">個人客服表單申請確認</a></li>
-				<li><a href="<c:url value='/msg' />">客服聊天</a></li>
-				<li><a href="<c:url value='/board' />">公告欄</a></li>
+				<li><a href="<c:url value='/success' />">客服紀錄查詢</a></li>
+<%-- 				<li><a href="<c:url value='/msg' />">客服聊天</a></li> --%>
+<%-- 				<li><a href="<c:url value='/board' />">公告欄</a></li> --%>
 			</ul></li>
 		<li>
 			<div id="nowDateTimeSpan">

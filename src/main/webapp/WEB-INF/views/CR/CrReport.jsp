@@ -25,7 +25,7 @@
 	href="${pageContext.request.contextPath}/images/favicon.png" />
 <style>
 .box {
-	width: 100px;
+	width: 60px;
 	padding: 10px;
 }
 
@@ -96,9 +96,9 @@
 				<th>姓名</th>
 				<th>類別</th>
 				<th>標題</th>
-				<th width='150px;'>內容</th>
+				<th width='60px;'>內容</th>
 				<th align='center'>申請日期</th>
-				<th width='150px;'>回覆內容</th>
+				<th width='60px;'>回覆內容</th>
 				<th>回覆人員</th>
 				<th>最新回覆時間</th>
 				<th colspan='2'>功能</th>
@@ -140,6 +140,7 @@
 								onclick="deleteCrReport(${ser.pk})">
 								刪除<i class="ti-trash btn-icon-append"></i>
 							</button></td>
+							
 					</tr>
 					<tr>
 						<td id="MBcontent${report.index}" colspan="10"

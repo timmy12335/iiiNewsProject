@@ -156,6 +156,7 @@ span.error {
 		}
 	}
 	function appendMsg(message) {
+		
 		serverResponseArea.value = serverResponseArea.value + message + "\n";
 	}
 	
@@ -169,8 +170,9 @@ span.error {
 
 		<div align="center">
 
-			<h4>歡迎${MBBean.name}${CpMemberBean.cpname}使用</h4>
-			<h4 class="title">客服表單申請</h4>
+			<h3>歡迎<b>${MBBean.name}${CpMemberBean.cpname}</b>使用</h3>
+			<br>
+			<h3 class="title">客服表單申請</h3>
 
 			<div class='card-body'
 				style='width: 800px; margin-top: 10px; background: #ECECFF; box-shadow: 10px 10px #D0D0D0; border-radius: 30px;'>
@@ -211,7 +213,7 @@ span.error {
 							<form:textarea class="form-control"
 								style="resize: none;height:300px" path="crContent"
 								id="crContent" maxlength="200"></form:textarea>
-							<div id='num'></div>
+							<div id='num'><font color="#E0E0E0" size="1" face="DFKai-sb" ></font></div>
 							<form:errors path="crContent" cssClass="error" />
 						</div>
 
@@ -229,8 +231,11 @@ span.error {
 								class="btn btn-outline-secondary btn-icon-text" value="重設" /> <input
 								type="button" id='cancel'
 								class="btn btn-outline-secondary btn-icon-text" value="取消申請" />
-							</td>
+								<input
+								type="button" id='inputDemo1'
+								class="btn btn-outline-secondary btn-icon-text" value="Demo1" />
 						</div>
+						<hr>
 						<div style="text-align: left; valign: top">
 							<p>注意事項: 客服單填寫送出後，請隨時留意客服表單處理狀況，如要查詢客服進度與回覆內容，請從「客服紀錄查詢」查閱。</p>
 							<p>為了迅速處理您的案件，請勿重複填單哦!客服單欄位請確實填寫，以便我們協助您，回覆時間因客服單內容而有所不同，還請您耐心等候!</p>
@@ -276,7 +281,7 @@ span.error {
 	$("#reset").click(function(){
 		let context = "";
 		$("#imgspan")[0].innerHTML = context;
-		 $("#preview_img").attr('src',"<c:url value='/image/CR2.jpg' />");
+		 $("#preview_img").attr('src',"");
 	});
 	
 	$("#cancel").click(function(){
@@ -294,14 +299,15 @@ span.error {
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
-	}
+	
 	
 	var yourImg = document.getElementById('preview_img');
 	if(yourImg && yourImg.style) {
 	    yourImg.style.height = ${oneItem.height}+'px';
 	    yourImg.style.width = ${oneItem.width}+'px';
 	}
-
+	
+	}
 
 	document.getElementById("crContent").onkeydown=function(){
 	var length = document.getElementById("crContent").value.length;
@@ -313,6 +319,14 @@ span.error {
 		}
 	}
 	
+	document.getElementById("inputDemo1").onclick=function(){
+		var crTitle = document.getElementById("crTitle");
+		var crClass = document.getElementById("crClass");
+		var crContent = document.getElementById("crContent");
+		crTitle.value = "新聞有問題";
+		crClass.value="商品相關";
+		crContent.value="購買新聞資訊後，發現給予的新聞內容和實際想像中不同，想請問能暫時停止給予對方金錢嗎?\n另外想請問為什麼你們的新聞新聞和廣告購買頁面那麼好看!!!!!";
+	}
 
 
 </script>

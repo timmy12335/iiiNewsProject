@@ -21,6 +21,8 @@ public interface CR_Dao {
 	
 	void updateReport(CRBean cb);
 	
+	void updateScoreOnReport(CRBean cb);
+	
 	void evictReport(CRBean cb);
 	
 	public MBBean getMembersByMemberId(String memberId);

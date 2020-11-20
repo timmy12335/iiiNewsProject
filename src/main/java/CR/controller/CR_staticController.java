@@ -21,12 +21,24 @@ public class CR_staticController {
 	CR_calService service;
 	
 	
+	@GetMapping("/toCal")
+	public String getStatic() {
+		return "CR/Staticplace";
+	}
+	
+	
 	@GetMapping("/calCR")
-	public @ResponseBody Map<String, Long> calFromCate(){
+	public @ResponseBody Map<String, Long> calreportFromCate(){
 		Map<String, Long> map = service.calFromCate();
 		System.out.println(map);
-		return map;
-		
+		return map;		
+	}
+	
+	@GetMapping("/calCRfromEmp")
+	public @ResponseBody Map<String, Integer> calunFromEmp(){
+		Map<String, Integer> map = service.calunFromEmp();
+		System.out.println(map);
+		return map;		
 	}
 	
 }

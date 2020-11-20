@@ -44,6 +44,7 @@ p{
 
 </style>
 <script>
+	//列印PDF
 	function printdiv(printpage) {
 		var newstr = printpage.innerHTML;
 		var oldstr = document.body.innerHTML;
@@ -59,6 +60,89 @@ p{
 			printdiv(div_print);
 		}
 	}
+	
+	//從後端得到JSON檔
+	function tableToExcel(json){
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/getOrderedSingleNews.json/' />" + json, true);
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 ) {
+			if (xhr.status == 200){
+				var responseData = xhr.responseText;
+				console.log(responseData);
+				var jsonData = [responseData];
+				//列標題，逗號隔開，每一個逗號就是隔開一個單元格
+		          let str = "";
+		          //增加\t為了不讓表格顯示科學計數法或者其他格式
+		          for(let i = 0 ; i < jsonData.length ; i++ ){
+		            for(let item in jsonData[i]){
+		            	if(jsonData[i][item]==",")
+		            		str+= jsonData[i][item]+"\n" ;
+		            	else
+		            		str+= jsonData[i][item];
+		            }
+		            str+='\n';
+		          }
+		          //encodeURIComponent解決中文亂碼
+		          let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+		          //通過建立a標籤實現
+		          var link = document.createElement("a");
+		          link.href = uri;
+		          //對下載的檔案命名
+		          link.download =  json+".json";
+		          document.body.appendChild(link);
+		          link.click();
+		          document.body.removeChild(link);
+				  
+			} else {
+				alert(xhr.status);
+			}
+		}
+	}
+}
+	
+	//從後端得到WORD檔
+	function tableToWord(word){
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "<c:url value='/getOrderedSingleNews.json/' />" + word, true);
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 ) {
+			if (xhr.status == 200){
+				var responseData = xhr.responseText;
+				console.log(responseData);
+				var jsonData = [responseData];
+				//列標題，逗號隔開，每一個逗號就是隔開一個單元格
+		          let str = "";
+		          //增加\t為了不讓表格顯示科學計數法或者其他格式
+		           for(let i = 0 ; i < jsonData.length ; i++ ){
+		            for(let item in jsonData[i]){
+		            	if(jsonData[i][item]==",")
+		            		str+= jsonData[i][item]+"\n" ;
+		            	else
+		            		str+= jsonData[i][item];
+		            }
+		           str+='\n';
+		         }     
+		          //encodeURIComponent解決中文亂碼
+		          let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+		          //通過建立a標籤實現
+		          var link = document.createElement("a");
+		          link.href = uri;
+		          //對下載的檔案命名
+		          link.download =  word +".doc";
+		          document.body.appendChild(link);
+		          link.click();
+		          document.body.removeChild(link);
+				  
+			} else {
+				alert(xhr.status);
+			}
+		}
+	}
+}
+	
 </script>
 </head>
 <body>
@@ -91,11 +175,13 @@ p{
 						<button class="btn btn-danger btn-lg" name="print" id="bt" >
 						<i class="far fa-file-pdf"></i>&ensp;PDF下載
 						</button>	
-						<button class="btn btn-info btn-lg" name="print" id="bt" >
+						<button class="btn btn-info btn-lg" onclick='tableToExcel("${ newsSingle.newsId }")' >
 						<i class="far fa-file-alt"></i>&ensp;JSON下載
-						</button>				
-						<a href="#" onclick="history.back()" class="btn btn-primary btn-lg">						
-						<i class="fas fa-arrow-alt-circle-left"></i>&ensp;回列表</a>						
+						</button>	
+						<button class="btn btn-primary btn-lg" onclick='tableToWord("${ newsSingle.newsId }")' >
+						<i class="far fa-file-word"></i>&ensp;Word下載
+						</button>			
+											
 						</div>
 						
 						</div>
@@ -127,7 +213,10 @@ p{
 				
 			</div>
 		</div>
-		
+		<div align=center style="margin-bottom:50px">
+			<a href="#" onclick="history.back()" class="btn btn-secondary btn-lg">						
+				<i class="fas fa-arrow-alt-circle-left"></i>&ensp;回列表</a>	
+		</div>
 	</div>
 
 </body>

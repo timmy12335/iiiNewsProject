@@ -22,4 +22,10 @@ public class CR_calService_impl implements CR_calService {
 		return dao.calFromCate();
 	}
 
+	@Override
+	public Map<String, Integer> calunFromEmp() {
+		
+		return dao.calunFromEmp();
+	}
+
 }

@@ -59,7 +59,10 @@
 }
 }
 
-	
+	function InputCrReport(){
+		var crrecontent = document.getElementById("crReContent"); 
+		crrecontent.value="感謝您使用iiiNews客服，依據您的需求，能麻煩您告知訂單編號嗎?\n再麻煩您回信至eeit19no4@gmail.com \n另外感謝您喜歡我們的頁面 \n祝身體健康!!"
+	}
 
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -130,8 +133,8 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		<tr>
 		<td>附件
 		</td>
-		<td>
-		<img style="width:160px;height:100px" src="<c:url value='/getCRimg/${report.pk}' />" />
+		<td align="center">
+		<img style="width:120px;height:auto" src="<c:url value='/getCRimg/${report.pk}' />" />
 		</td></tr>
 		<tr><td align='center'>回覆內容</td><td>
 		<textarea class="form-control" rows="10" name='crReContent' id='crReContent'>${report.crReContent}</textarea>
@@ -142,8 +145,9 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		</td></tr>
 		<tr>
 		<td align='center' colspan='2'>
-		<input type="button" id="btn_update" value="確認回覆" onclick="updateCrReport();"/>
-		<input type="button" id="btn_cancel" value="取消回覆" onclick="cancelCrReport();"/>
+		<input type="button" id="btn_update" class="btn btn-primary btn-icon-text btn-sm" value="確認回覆" onclick="updateCrReport();"/>
+		<input type="button" id="btn_cancel" class="btn btn-danger btn-icon-text btn-sm" value="取消回覆" onclick="cancelCrReport();"/>
+		<input type="button" id="btn_input"  class="btn btn-success btn-icon-text btn-sm" value="Demo" onclick="InputCrReport();"/>
 		</td>
 		</tr>
 </table>

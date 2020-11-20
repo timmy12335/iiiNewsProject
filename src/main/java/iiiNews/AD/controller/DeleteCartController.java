@@ -8,7 +8,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
-@SessionAttributes({"shoppingCart"})
+@SessionAttributes({"shoppingCart","discount"})
 public class DeleteCartController {
 
 	public DeleteCartController() {

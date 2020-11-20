@@ -101,9 +101,9 @@ public class MtAjaxController {
 			@RequestParam(value="set",defaultValue = "onsale" )String set) {
 		System.out.println(statusNo);
 		List<MtAddBean> list = new ArrayList<MtAddBean>();
-		if(statusNo.equals("-1") && set.equals("ALL")) {
+		if(statusNo.equals(-1) && set.equals("ALL")) {
 			list = ajaxService.getAllMtByAjax(set);
-		}else if(statusNo.equals("-1")){
+		}else if(statusNo.equals(-1)){
 			list = ajaxService.getAllMtByAjax("");
 		}else {
 			list = ajaxService.getMtByCateNoAjax(statusNo,set);

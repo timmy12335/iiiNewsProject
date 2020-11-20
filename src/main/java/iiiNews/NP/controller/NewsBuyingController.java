@@ -100,7 +100,7 @@ public class NewsBuyingController {
 //			return "redirect:/showOrderList";				
 		}				
 	}
-	
+	//進綠界頁面
 	@GetMapping("/gotogreenpage")
 	public void gotogreenpage(Model model, HttpServletResponse response) throws IOException {
 		System.out.println("green");
@@ -140,19 +140,26 @@ public class NewsBuyingController {
 		}
 		
 	}	
+	////列出會員被購買訂單列表(json)
 	@GetMapping("/getOrderMemNewsListByAjax.json")
 	public @ResponseBody List<NewsOrderBean> getOrderMemNewsList(Model model){
 		MBBean mb = (MBBean) model.getAttribute("MBBean");		
 		String 	memberId = mb.getMemberId();
 		return npOrderService.getOrderMemListByAjax(memberId);		
 	}
-	
+	//查出被購買單一新聞
 	@GetMapping("/getOrderedSingleNews/{newsId}")
 	public String getOrderedNews(@PathVariable String newsId, Model model) {
 		NewsBean nBean = npOrderService.getOrderedSingleNews(newsId);
 		System.out.println(newsId);
 		model.addAttribute("newsSingle",nBean);
 		return "NP/singleNewsTest";
+	}
+	@GetMapping("/getOrderedSingleNews.json/{newsId}")
+	public @ResponseBody NewsBean getOrderedJson(@PathVariable String newsId) {
+		NewsBean nBean = npOrderService.getOrderedSingleNews(newsId);
+		System.out.println(newsId);
+		return nBean;
 	}
 	
 	//將圖片顯示給企業看(已購買)

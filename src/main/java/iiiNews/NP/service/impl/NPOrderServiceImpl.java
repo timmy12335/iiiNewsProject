@@ -80,4 +80,7 @@ public class NPOrderServiceImpl implements NPOrderService {
 		return newsOrderDao.getOrderedSingleNews(newsId);
 	}
 
+	
+	
+	
 }

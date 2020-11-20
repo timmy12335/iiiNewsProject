@@ -42,4 +42,11 @@ public class CR_msgService_impl implements CR_msgService{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public void addMsg(String message) {
+		// TODO Auto-generated method stub
+		
+	}
 }

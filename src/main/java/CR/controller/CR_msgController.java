@@ -27,7 +27,7 @@ public class CR_msgController {
 	
 	@GetMapping("/chat")
 	public String tomsgroom(CrMsgBean msg) {
-		return "/CR/msgRoom";
+		return "/CR/socket";
 	}
 	
 	@GetMapping("/msgChat")

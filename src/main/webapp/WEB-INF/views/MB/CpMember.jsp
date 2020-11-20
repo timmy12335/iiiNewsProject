@@ -29,7 +29,7 @@
 
 .test {
 	border: 0;
-	background-color: #7E3D76;
+	background-color: #BC214C;
 	color: #fff;
 	border-radius: 10px;
 	cursor: pointer;

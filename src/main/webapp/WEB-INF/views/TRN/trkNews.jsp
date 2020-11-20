@@ -101,7 +101,7 @@
         }
 body {
   
-  padding-top: 5rem;
+  padding-top: 10rem;
   padding-bottom: 3rem;
   color: #5a5a5a;
 }
@@ -111,100 +111,112 @@ body {
 	</nav>
 </head>
 <body>
-<main role="main">
-<div class="wrapper">
-        <ul class="slides">
-            <li>001<img src="imgs/slide1.jpg" alt=""></li>
-            <li>002<img src="imgs/slide2.jpg" alt=""></li>
-            <li>003<img src="imgs/slide3.jpg" alt=""></li>
-            <li>004<img src="imgs/slide4.jpg" alt=""></li>
-        </ul>
-        <ul class="dot">
-            <li id="1"></li>
-            <li id="2"></li>
-            <li id="3"></li>
-            <li id="4"></li>
-        </ul>
-        <div id="prevSlide" class="slide_btn">
-            <i class="fa fa-caret-left"></i>
-        </div>
-        <div id="nextSlide" class="slide_btn">
-            <i class="fa fa-caret-right"></i>
-        </div>
-    </div>
+
+
+
+
+<div>
+<iframe src="https://feed.mikle.com/widget/v2/139192/?preloader-text=Loading..." 
+height="400px" width="100%" class="fw-iframe" scrolling="no" frameborder="0"></iframe>
+</div>
+
+
+
+
+<!-- <main role="main">  -->       <!--以下輪播先不用-->
+<!-- <div class="wrapper"> -->
+<!--         <ul class="slides"> -->
+<!--             <li>001<img src="imgs/slide1.jpg" alt=""></li> -->
+<!--             <li>002<img src="imgs/slide2.jpg" alt=""></li> -->
+<!--             <li>003<img src="imgs/slide3.jpg" alt=""></li> -->
+<!--             <li>004<img src="imgs/slide4.jpg" alt=""></li> -->
+<!--         </ul> -->
+<!--         <ul class="dot"> -->
+<!--             <li id="1"></li> -->
+<!--             <li id="2"></li> -->
+<!--             <li id="3"></li> -->
+<!--             <li id="4"></li> -->
+<!--         </ul> -->
+<!--         <div id="prevSlide" class="slide_btn"> -->
+<!--             <i class="fa fa-caret-left"></i> -->
+<!--         </div> -->
+<!--         <div id="nextSlide" class="slide_btn"> -->
+<!--             <i class="fa fa-caret-right"></i> -->
+<!--         </div> -->
+<!--     </div> -->
     <script>
-        $(function () {
-            let slideNum = 0;
-            let slideCount = $(".slides li").length;  //4
-            let lastIndex = slideCount - 1;  //3
-            // console.log(slideCount);
+//         $(function () {
+//             let slideNum = 0;
+//             let slideCount = $(".slides li").length;  //4
+//             let lastIndex = slideCount - 1;  //3
+//             // console.log(slideCount);
 
-            // console.log($(".dot li"));   
-            $(".dot li").eq(0).css("background-color", "white");
-            $(".dot li").mouseenter(function () {
-                slideNum = $(this).index();
-                console.log(slideNum);
+//             // console.log($(".dot li"));   
+//             $(".dot li").eq(0).css("background-color", "white");
+//             $(".dot li").mouseenter(function () {
+//                 slideNum = $(this).index();
+//                 console.log(slideNum);
 
-                // $(this).css("background-color","#fff")
-                // .siblings().css("background-color","transparent");
+//                 // $(this).css("background-color","#fff")
+//                 // .siblings().css("background-color","transparent");
 
-                // $(".dot li").eq(slideNum).css("background-color","#fff")
-                // .siblings().css("background-color","transparent");
+//                 // $(".dot li").eq(slideNum).css("background-color","#fff")
+//                 // .siblings().css("background-color","transparent");
 
-                // let move=0-800*slideNum;
-                // $("ul.slides").css("left",move);
-                show();
-            });
+//                 // let move=0-800*slideNum;
+//                 // $("ul.slides").css("left",move);
+//                 show();
+//             });
 
-            function show() {
-                $(".dot li").eq(slideNum).css("background-color", "#fff")    /*圖片輪播跟著索引值走，索引值變化圖片才會變化*/
-                    .siblings().css("background-color", "transparent");
+//             function show() {
+//                 $(".dot li").eq(slideNum).css("background-color", "#fff")    /*圖片輪播跟著索引值走，索引值變化圖片才會變化*/
+//                     .siblings().css("background-color", "transparent");
 
-                let move = 0 - 800 * slideNum;
-                let mov1 = $("ul.slides").css("left", move)
-                // $().setInterval(mov1,1000) 
-            }
-            //  $(".dot li").setInterval(show(),1)
-            setInterval(function () { show() }, 3000);
+//                 let move = 0 - 800 * slideNum;
+//                 let mov1 = $("ul.slides").css("left", move)
+//                // $().setInterval(mov1,1000) 
+ //           }
+//            //  $(".dot li").setInterval(show(),1)
+//             setInterval(function () { show() }, 3000);
 
 
-            $("#prevSlide").click(function () {
-                slideNum--;
+//             $("#prevSlide").click(function () {
+//                 slideNum--;
 
-                if (slideNum < 0) slideNum = lastIndex;
-                show();
-            })
+//                 if (slideNum < 0) slideNum = lastIndex;
+//                 show();
+//             })
 
-            $("#nextSlide").click(function r1() {
-                slideNum++;
+//             $("#nextSlide").click(function r1() {
+//                 slideNum++;
 
-                if (slideNum > lastIndex) slideNum = 0;
-                show();
-                // $().setInterval(r1(),1000) 
-            })
+//                 if (slideNum > lastIndex) slideNum = 0;
+//                 show();
+//                 // $().setInterval(r1(),1000) 
+//             })
 
-            let timer;
-            timer = setInterval(function (event) {
-                slideNum++;
-                if (slideNum > lastIndex) slideNum = 0;
-                show()
-            }, 2000);
+//             let timer;
+//             timer = setInterval(function (event) {
+//                 slideNum++;
+//                 if (slideNum > lastIndex) slideNum = 0;
+//                 show()
+//             }, 2000);
 
-            $(".wrapper").mouseenter(function () {
-                clearInterval(timer)
-                console.log("mouseenter")
-            })
-            $(".wrapper").mouseleave(function () {
-                timer = setInterval(function () {
-                    slideNum++;
-                    if (slideNum > lastIndex) slideNum = 0;
-                    show()
-                }, 2000);
-                console.log("mouseenter")
-            })
+//             $(".wrapper").mouseenter(function () {
+//                 clearInterval(timer)
+//                 console.log("mouseenter")
+//             })
+//             $(".wrapper").mouseleave(function () {
+//                 timer = setInterval(function () {
+//                     slideNum++;
+//                     if (slideNum > lastIndex) slideNum = 0;
+//                     show()
+//                 }, 2000);
+//                 console.log("mouseenter")
+//             })
 
-        });
-    </script>
+//         });
+     </script>  
        <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -257,7 +269,7 @@ body {
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
 <hr>
-    <section  >
+    <section style="margin-top:10px" >
         <div>
             <div class="container" style="text-align: center" >
                 <h1>追蹤清單</h1>

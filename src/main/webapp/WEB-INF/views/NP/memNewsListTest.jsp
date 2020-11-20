@@ -121,12 +121,6 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 										<tr>
 											<td style="">
 											
-<!-- 											</td> -->
-<%-- 											<td id="ftime${loop.index}" style="display:none;">  --%>
-<%-- 											<input type="hidden" id="newsId${loop.index}" value="${news.newsId}"/> --%>
-<!-- 											</td> -->
-<%-- 										<td align='center'><input type="button" value="輸入計時時間" onclick="inputLimitTime(${loop.index})"></td> --%>
-<!-- 										<td align='center'><input type="submit" name="submit" id="submit" value="確認送出"></td> -->
 										</tr>
 																				
 										<tr>
@@ -147,7 +141,7 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 										</tr>
 										<tr>
 											<td>
-											<button type="button" class="btn btn-secondary " onclick="location.href='<c:url value="/delSingleNews/${news.newsId}"/>'">
+											<button type="button" class="btn btn-secondary " onclick="delNews('${news.newsId}')">
 											<i class="fas fa-trash-alt"></i>&ensp;刪除本則新聞
 											</button>
 											</td>
@@ -160,55 +154,11 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 											</td>
 										</tr>
 									</table>
-<!-- 								</div> -->
+
 							</div>
 							</div>
 						</div>
-<!-- 					<table> -->
-<!-- 						<tr style="background-color: lightblue;" height='36'> -->
-<!-- 							<th width='500' align='center'>新聞標題</th> -->
-<!-- 							<th width='60' align='center'>新聞編號</th> -->
-<!-- 							<th width='60' align='center'>上傳時間</th> -->
-<!-- 							<th width='100' align='center'>新聞類型</th> -->
-<!-- 							<th width='100' align='center'>發生日期</th> -->
-<!-- 							<th width='100' align='center'>發生時間</th> -->
-<!-- 							<th width='100' align='center'>發生地點</th> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td align='center'><a -->
-<%-- 								href="<c:url value='/getSingleNewsForUpdate/${news.newsId}'/>">${news.title} --%>
-<!-- 							</a></td> -->
-<%-- 							<td align='center'>${news.newsId}</td> --%>
-<%-- 							<td align='center'>${news.uploadTime}</td> --%>
-<%-- 							<td align='center'>${ news.newsType}</td> --%>
-<%-- 							<td align='center'>${news.happenDate}</td> --%>
-<%-- 							<td align='center'>${news.happenTime}</td> --%>
-<%-- 							<td align='center'>${news.location}</td> --%>
-<!-- 						</tr> -->
-<!-- 						<tr style="background-color: lightblue;" height='36'> -->
-<!-- 							<th width='500' align='center'>新聞內文</th> -->
-<!-- 							<th width='100' align='center'>價格</th>  -->
-<!-- 							<th width='50' align='center'>販賣計時</th> -->
-<!-- 							<th></th> -->
-<!-- 							<th></th> -->
-<!-- 							<th></th> -->
-<!-- 							<th></th> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<%-- 							<td align='left'>${news.article}</td> --%>
-<%-- 							<td align='center'>${news.price}</td> --%>
-<!-- 							<td align='center'> -->
-<%-- 								<input type="text" id="limitTime${loop.index}"  readonly /> --%>
-<%-- 								<input type="hidden" id="newsId${loop.index}" value="${news.newsId}"/> --%>
-<!-- 							</td> -->
-<%-- 							<td align='center'><a href="<c:url value='/getUpdateSingleNews/${news.newsId}' />">修改本則新聞</a></td> --%>
-<%-- 							<td align='center'><a href="<c:url value='/delSingleNews/${news.newsId}' />">刪除</a></td> --%>
-<%-- 							<td align='center'><input type="button" value="輸入計時時間" onclick="inputLimitTime(${loop.index})"></td> --%>
-<!-- 							<td align='center'><input type="submit" name="submit" id="submit" value="確認送出"></td> -->
-							
-<!-- 						</tr> -->
-<!-- 					</table>					 -->
-<!-- 					<hr>					 -->
+
 				</c:forEach>
 				</form>
 			</c:otherwise>
@@ -222,6 +172,15 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 </div>
 	</div>
 	<script>
+	
+	function delNews(Id){
+		if (confirm("確定刪除此項商品 ? ") ) {
+			location.href="delSingleNews/"+Id;
+		} else {
+			;
+		}
+	}
+	
 	function inputLimitTime(g) {
 		let time = prompt("請輸入限時時間", "");
 		if(time){			

@@ -34,8 +34,8 @@ public class NPUploadValidator implements Validator {
 		if(nBean.getOutline() != null && nBean.getOutline().length() >=100) {
 			errors.rejectValue("outline", "","大綱字數超出100字，請重新輸入");
 		}
-		if(nBean.getArticle() != null && nBean.getArticle().length() >=300) {
-			errors.rejectValue("outline", "","大綱字數超出300字，請重新輸入");
+		if(nBean.getArticle() != null && nBean.getArticle().length() >=1000) {
+			errors.rejectValue("outline", "","內文字數超出1000字，請重新輸入");
 		}
 		if(nBean.getPrice() != null && nBean.getPrice() <=0) {
 			errors.rejectValue("price", "","價格欄位有誤，請重新輸入");

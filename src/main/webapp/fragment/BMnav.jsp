@@ -55,8 +55,8 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllNews'/>">新聞商品列表</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/iiiNews/src/main/webapp/WEB-INF/views/NP/backBoard/NewsTypepie.jsp">新聞商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getBackAdsTotalEnd'/>">廣告報表</a></li>
               </ul>
             </div>
           </li>
@@ -96,6 +96,8 @@
             </a>
             <div class="collapse" id="ui-order">
               <ul class="nav flex-column sub-menu">
+              	<li class="nav-item"> <a class="nav-link" href="<c:url value='/OrderListForBB'/>">新聞訂單列表</a></li>
+              	<li class="nav-item"> <a class="nav-link" href="<c:url value='/getNewsTypeForBB'/>">新聞訂單報表</a></li>            	
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">廣告商品訂單列表</a></li>
               </ul>
             </div>
@@ -132,9 +134,9 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/customerReports'/>"> 客服表單管理</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/allemployee'/>"> 客服人員管理 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/addboard'/>"> 公佈欄管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/chatMan'/>"> 聊天機器管理</a></li>
-                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 5</a></li>
+<%--                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/addboard'/>"> 公佈欄管理</a></li> --%>
+<%--                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/chatMan'/>"> 聊天機器管理</a></li> --%>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/toCal'/>">客服表單統計</a></li>
               </ul>
               </div>
           </li>

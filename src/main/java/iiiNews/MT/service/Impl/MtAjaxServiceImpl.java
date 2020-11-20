@@ -42,7 +42,17 @@ public class MtAjaxServiceImpl implements MtAjaxService {
 		return ajaxDao.getAllArtWord(searchWord, keyWordPage);
 	}
 
-	
+	@Override
+	public List<MtAddBean> getAllMtByAjax(String set) {
+		return ajaxDao.getAllMtByAjax(set);
+	}
+
+	@Override
+	public List<MtAddBean> getMtByCateNoAjax(Integer statusNo, String set) {
+		return ajaxDao.getMtByCateNoAjax(statusNo,set);
+	}
+
+	//後端文章總覽，標籤分類
 
 
 	

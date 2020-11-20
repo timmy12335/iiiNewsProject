@@ -5,10 +5,16 @@
 
 <html>
 <head>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <script> -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
 
-<!-- </script> -->
 <title>註冊</title>
 <style>
 ::-webkit-input-placeholder {
@@ -54,105 +60,100 @@ g-recaptcha {
 
 </head>
 <body>
-	<nav>
+	<nav class="nav fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<section style="margin-top: 100px;" align="center">
-		<div id="page" class="container"></div>
 		<form:form id="regform" onsubmit="return checkinput()"
-			modelAttribute="command">
-			<table align="center">
-				<h2 align="center">一般會員</h2>
-				<tr>
-					<td>登入帳號：</td>
-					<td><form:input type="text" path="memberId" required="true"
-							id='memberId' placeholder="輸入帳號" /></td>
-					<td><form:errors style="color:red;font-size:12px"
-							path="memberId"></form:errors></td>
-					<!-- 					<td>帳號只能是英文、數字，其餘字元均不接受</td> -->
-				</tr>
-				<tr>
-					<td>登入密碼：</td>
-					<td><form:input type="password" path="password"
-							required="true" id='password' placeholder="輸入密碼" /></td>
-					<!-- 					<td>密碼只能是英文、數字，長度必須大於 5</td> -->
-				</tr>
-				<tr>
-					<td>確認密碼：</td>
-					<td><input type="password" name="okpassword"
-						required="required" id='okpassword' placeholder="再次輸入密碼" /></td>
-					<!-- 					<td>再輸入一次密碼，確認沒有打錯字</td> -->
-				</tr>
-				<tr>
-					<td>真實姓名：</td>
-					<td><form:input type="text" path="name" id="name"
-							placeholder="請輸入真實姓名" required="true" /></td>
-					<!-- 					<td>填寫註冊者的姓名</td> -->
-				</tr>
+			modelAttribute="command" class="forms-sample">
+			<div class="row justify-content-md-center">
+				<div class="col-md-5 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<h2>一般會員</h2>
+							<p class="card-description">Basic form layout</p>
+							<div class="form-group" align="left">
+								<label for="memberId">登入帳號：</label>
+								<form:input type="text" path="memberId" class="form-control"
+									id='memberId' placeholder="輸入帳號" />
+								<form:errors style="color:red;font-size:12px" path="memberId"></form:errors>
+							</div>
+							<div class="form-group" align="left">
+								<label for="password">登入密碼：</label>
+								<form:input type="password" path="password" class="form-control"
+									required="true" id='password' placeholder="輸入密碼" />
+							</div>
+							<div class="form-group" align="left">
+								<label for="okpassword">確認密碼：</label> <input type="password"
+									name="okpassword" class="form-control" required="required"
+									id='okpassword' placeholder="再次輸入密碼" />
+							</div>
+							<div class="form-group" align="left">
+								<label for="name">真實姓名：</label>
+								<form:input type="text" path="name" id="name"
+									class="form-control" placeholder="請輸入真實姓名" required="true" />
+							</div>
+							<div class="form-group" align="left">
+								<label for="email">電子郵件：</label>
+								<form:input type="email" path="email" placeholder="輸入常用信箱"
+									class="form-control" />
+							</div>
 
-				<tr>
-					<td>電子郵件：</td>
-					<td><form:input type="email" path="email" placeholder="輸入常用信箱" /></td>
-					<!-- 					<td>請填慣用的電子郵件</td> -->
-				</tr>
-
-				<tr>
-					<td>身分證號：</td>
-					<td><form:input type="text" path="identityId" id='identityId'
-							placeholder="請輸入正確格式"></form:input> <!-- 					<td><input class="test" type="button" id="btnCheck" -->
-						<!-- 						value="點我檢查" onclick="checkID"></td> -->
-				</tr>
-
-				<tr>
-					<td>行動電話：</td>
-					<td><form:input type="text" id="phone" path="phone"
-							placeholder="請務必填寫正確"></form:input>
-					<td><input class="test" type="button" id="btnCheckphone"
-						onclick="checkphone()" value="發送驗證碼"></td>
-				<tr>
-					<td>生日：</td>
-					<td><form:input type="date" path="birthday" required="true"
-							id='bday' /> <!-- 					<td>請使用 YYYY-MM-DD 的格式</td> -->
-				</tr>
-
-				<tr>
-					<td>性別：</td>
-					<td><form:select path="sex">
-							<option value="0">女性</option>
-							<option value="1">男性</option>
-						</form:select>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td class="web-form-span ">驗證號碼：</td>
-					<td><input type="text" class=" web-form-input"
-						required="required" id="Yzm" /></td>
-					<td><input class="test" type="button" id="code" value="產生驗證碼"
-						onclick="createCode()">
-				</tr>
-				<tr>
-					<td colspan='5' id="grecaptcha" class="g-recaptcha"
-						data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB"></td>
-				</tr>
-
-				<tr>
-					<td colspan='2' id="g-recaptcha-error"></td>
-				</tr>
-
-				<tr>
-					<td colspan="3" style="text-align: center;"><input
-						type="hidden" name="action" value="reg" /> <input type="submit"
-						value="送出註冊" class="test" />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=""
-						class="btn btn-info">登錄</a></td>
-				</tr>
-			</table>
+							<div class="form-group" align="left">
+								<label for="identityId">身分證號：</label>
+								<form:input type="text" path="identityId" id='identityId'
+									placeholder="請輸入正確格式" class="form-control"></form:input>
+							</div>
+							<div class="form-group" align="left">
+								<label for="phone">行動電話：</label>
+								<form:input type="text" id="phone" path="phone"
+									placeholder="請務必填寫正確" class="form-control"></form:input>
+								<input class="test" type="button" id="btnCheckphone"
+									onclick="checkphone(this.id)" value="發送驗證碼">
+							</div>
+							<div class="form-group" align="left">
+								<label for="birthday">生日：</label>
+								<form:input type="date" path="birthday" required="true"
+									id='bday' class="form-control" />
+							</div>
+							<div class="form-group" align="left">
+								<label for="sex">性別：</label>
+								<form:select path="sex">
+									<option value="0">女性</option>
+									<option value="1">男性</option>
+								</form:select>
+							</div>
+							<div class="form-group" align="left">
+								<label for="Yzm">驗證號碼：</label> <input type="text"
+									class="form-control" required="required" id="Yzm" /> <input
+									class="test" type="button" id="code" value="產生驗證碼"
+									onclick="createCode()">
+							</div>
+							<div class="form-group" align="left">
+								<label colspan='5' id="grecaptcha" class="g-recaptcha"
+									data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB"></label>
+							</div>
+							<div class="form-group" align="left">
+								<label colspan='2' id="g-recaptcha-error"></label>
+							</div>
+							<div class="form-group" align="center">
+								<label colspan="3" style="text-align: center;"></label><input
+									type="hidden" name="action" value="reg" class="form-control" />
+								<input type="submit" value="送出註冊" class="btn btn-primary btn-icon-text"/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=""
+									class="btn btn-info">登錄</a>
+							</div>
+							<button type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="ti-facebook"></i></button>
+								<button type="button" class="btn btn-social-icon btn-google btn-rounded"><i class="ti-google"></i></button>
+								<button type="button" class="btn btn-social-icon btn-twitter btn-rounded"><i class="ti-twitter-alt"></i></button>
+								<button type="button" class="btn btn-social-icon btn-youtube btn-rounded"><i class="ti-youtube"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</form:form>
 	</section>
-
-	<script src="https://www.google.com/recaptcha/api.js"></script>
-
+	
 	<script type="text/javascript">
 		//我不是機器人
 		function submitUserForm() {
@@ -241,13 +242,16 @@ g-recaptcha {
 	</script>
 
 	<script type="text/javascript">
-		function checkphone() {
+		function checkphone(objid) {
+
 			var phone = document.getElementById("phone").value;
 			var queryString = "?phone=" + phone;
 			var xhr2 = new XMLHttpRequest();
+
 			xhr2.open("GET", "<c:url value='Member_SMS'/>" + queryString, true);
-			xhr2.send(); 
+			xhr2.send();
 		}
+
 		// 		var wait = 60;
 		// 		function checkphone(o) {
 		// 			if (wait == 0) {

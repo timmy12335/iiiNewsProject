@@ -33,4 +33,19 @@ public class CR_calDao_impl implements CR_calDao {
 		return map;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Integer> calunFromEmp() {
+		Session session = factory.getCurrentSession();
+		Map<String, Integer> map = new HashMap<>();
+		String hql = "SELECT DISTINCT empName FROM CRemployee";
+		List<String> list = session.createQuery(hql).getResultList();
+		for(String emp:list) {
+		String hql2 ="SELECT untreatamt FROM CRemployee where empName=:empname";
+		Integer num= (Integer) session.createQuery(hql2).setParameter("empname", emp).uniqueResult();
+		map.put(emp, num);
+		}
+		return map;
+	}
+
 }

@@ -58,7 +58,9 @@ public class NewsOrderDaoImpl implements NewsOrderDao {
 		List<NewsOrderBean> list = session.createQuery(hql).setParameter("mId", memberId).getResultList();
 		return list;
 	}
-	//取得被購買單一新聞
+	
+	
+	/**取得被購買單一新聞**/
 	@Override
 	public NewsBean getOrderedSingleNews(String newsId) {
 		String hql = "FROM NewsBean WHERE newsId = :nId ";

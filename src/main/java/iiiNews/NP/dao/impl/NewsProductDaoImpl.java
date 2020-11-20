@@ -71,12 +71,12 @@ public class NewsProductDaoImpl implements NewsProductDao {
 		return list;
 	}
 	
-	//確認時間是否超過今天 若超過將status改為0
+	//確認時間是否超過今天 若超過將上架商品status改為0
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> checkTime() {
 		Timestamp statusTime = new Timestamp(System.currentTimeMillis());
-		String hql = "UPDATE NewsBean set status=0 WHERE futureTime < :sTime"; 
+		String hql = "UPDATE NewsBean set status=0 WHERE futureTime < :sTime AND status=1 "; 
 		String hql2 = "FROM NewsBean WHERE status = 1 ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		session.createQuery(hql).setParameter("sTime", statusTime).executeUpdate();

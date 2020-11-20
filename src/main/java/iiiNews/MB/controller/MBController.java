@@ -22,21 +22,23 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import iiiNews.MB.SMS.SMSHttp;
 import iiiNews.MB.SMS.SMSHttpValidato;
+import iiiNews.MB.model.CpMemberBean;
 import iiiNews.MB.model.LoginBean;
 import iiiNews.MB.model.MBBean;
+import iiiNews.MB.service.CPMBService;
 import iiiNews.MB.service.MBService;
 import iiiNews.MB.validate.ChangPasswordValidator;
 import iiiNews.MB.validate.LoginBeanValidator;
 import iiiNews.MB.validate.UserBeanValidator;
 
 @Controller
-@SessionAttributes("MBBean")
+@SessionAttributes({"MBBean","CpMemberBean"})
 public class MBController {
 	@Autowired
 	ServletContext ctx;
 	@Autowired
 	MBService service;
-
+	
 	@RequestMapping(value = "/Forget", method = RequestMethod.GET)
 	public String forget() {
 		return new String("/MB/Forget");
@@ -88,7 +90,7 @@ public class MBController {
 		String userID = "0976262860"; // 帳號
 		String password = "mimi0127"; // 密碼
 		String subject = "測試API2.1"; // 簡訊主旨，主旨不會隨著簡訊內容發送出去。用以註記本次發送之用途。可傳入空字串。
-		String content = "測試測試"; // 簡訊發送內容
+		String content = "簡訊有額度請節制@w@"; // 簡訊發送內容
 //		String mobile = " "; // 接收人之手機號碼。格式為: +886912345678或09123456789。多筆接收人時，請以半形逗點隔開( ,// )，如0912345678,0922333444。
 		String sendTime = " "; // 簡訊預定發送時間。-立即發送：請傳入空字串。-預約發送：請傳入預計發送時間，若傳送時間小於系統接單時間，將不予傳送。格式為YYYYMMDDhhmnss；例如:預約2009/01/31
 								// 15:30:00發送，則傳入20090131153000。若傳遞時間已逾現在之時間，將立即發送。	
@@ -298,7 +300,7 @@ public class MBController {
 	
 	@PostMapping("/updatepasswd/{id}")
 	public String ChangePasswdShow(@ModelAttribute("changepwd") MBBean mb, Model model,BindingResult result, Integer id) {
-//		System.out.println(id);
+		System.out.println(id);
 		ChangPasswordValidator validator = new ChangPasswordValidator();
 		validator.validate(mb, result);
 		if (result.hasErrors()) {

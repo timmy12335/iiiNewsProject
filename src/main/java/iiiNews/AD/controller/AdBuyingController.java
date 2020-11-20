@@ -2,6 +2,7 @@ package iiiNews.AD.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import iiiNews.AD.service.AdOrderService;
 import iiiNews.MB.model.MBBean;
 
 @Controller
-@SessionAttributes({"shoppingCart","MBBean"})
+@SessionAttributes({"shoppingCart","MBBean","discount"})
 public class AdBuyingController {
 
 	@Autowired
@@ -241,7 +242,33 @@ public class AdBuyingController {
 //		return "redirect:/getOrderListByMemberId";
 	}
 	
-	
+	@GetMapping("/getDiscount")
+	public String discount(Model model,@RequestParam String discountStr) {
+		BuyingCart cart = (BuyingCart) model.getAttribute("shoppingCart");
+		if(cart == null) {
+			model.addAttribute("discount", "尚無");
+		}
+		Double discount = 1.0;
+		model.addAttribute("discount", "尚無折扣");
+		if(discountStr.equals("HELLO")) {
+			discount = 0.8;
+			model.addAttribute("discount", "0.8");
+		}
+		
+		Double pay;
+		Integer count;
+		
+		Set<Integer> item = cart.getContent().keySet();
+		for(int n : item) {
+			AdOrderItemBean bean = cart.getContent().get(n);
+			int price = bean.getUnitPrice();
+			pay = price * discount;
+			count = (new BigDecimal(pay).setScale(0, BigDecimal.ROUND_HALF_UP)).intValue();
+			bean.setUnitPrice(count);
+		}
+		
+		return "redirect:/ShowCartContent";
+	}
 	
 
 }

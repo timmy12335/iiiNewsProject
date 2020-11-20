@@ -75,7 +75,7 @@ public class NewsProductServiceImpl implements NewsProductService {
 		
 		return newsProductDao.getAllNews();
 	}
-	//抓單一筆新聞
+	//抓已上架單一筆新聞
 	@Override
 	public NewsBean getSingleNews(String newsId) {		
 		return newsProductDao.getSingleNews(newsId);

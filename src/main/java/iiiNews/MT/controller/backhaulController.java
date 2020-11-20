@@ -1,6 +1,8 @@
 package iiiNews.MT.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import iiiNews.MB.model.MBBean;
 import iiiNews.MT.model.MtAddBean;
 import iiiNews.MT.service.MtAddService;
+import iiiNews.MT.service.MtReportService;
 
 @Controller
 @SessionAttributes({"MBBean"})
@@ -23,6 +27,10 @@ public class backhaulController {
 
 	@Autowired
 	MtAddService service;
+	
+	@Autowired
+	MtReportService reportService;
+	
 	@Autowired
 	ServletContext servletContext;
 	
@@ -84,4 +92,35 @@ public class backhaulController {
 		return "redirect:/getAllMemArticle/"+memberId;
 	}
 	//--------------------------11/17--------------------------
+	//--------------------------報表--------------------------
+	@GetMapping("/MtArtReport")
+	public String MtArtReport() {
+		return "MT/MtArtReport";
+	}
+		
+	//將類別筆數回傳json
+	@GetMapping("/getMtArtReport.json")
+	public @ResponseBody Map<String,Long> getMtArtReport(){	
+		System.out.println(reportService.getMtArtTotalReport());
+		return reportService.getMtArtTotalReport();		 
+	}
+	
+	@GetMapping("/getMtCateReport.json")
+	public Map<String,Integer> getMtCateReport(){
+		
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		map.put("未分類", reportService.getMtCateReport("未分類"));
+		map.put("生活", reportService.getMtCateReport("生活"));
+		map.put("娛樂", reportService.getMtCateReport("娛樂"));
+		map.put("問卦", reportService.getMtCateReport("問卦"));
+		map.put("美食", reportService.getMtCateReport("美食"));
+		map.put("運動", reportService.getMtCateReport("運動"));
+		map.put("趣味", reportService.getMtCateReport("趣味"));
+		map.put("寵物", reportService.getMtCateReport("寵物"));
+	
+		return map;
+	}
+	
+	
+	
 }

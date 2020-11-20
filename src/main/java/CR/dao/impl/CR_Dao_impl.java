@@ -43,6 +43,20 @@ public class CR_Dao_impl implements CR_Dao {
 		session.save(report);
 		
 	}
+	
+	@Override
+	public void addcpReport(CRBean report) {
+		Session session=factory.getCurrentSession();
+		CpMemberBean mb = getCpMembersByMemberId(report.getCompanyId());
+		CRemployee crb = getemployeeBytreatamt();
+		Timestamp date=new Timestamp(System.currentTimeMillis());
+		report.setCrApplyDate(date);
+		report.setState("未回覆");
+		report.setCpBean(mb);
+		report.setCremployee(crb);
+		session.save(report);
+		
+	}
 
 
 	@Override
@@ -113,7 +127,7 @@ public class CR_Dao_impl implements CR_Dao {
 			mb =(MBBean) session.createQuery(hql)
 					.setParameter("mId", memberId)
 					.getSingleResult();
-
+System.out.println("不該近來~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		}catch(NonUniqueResultException e) {
 			e.printStackTrace();
 		}
@@ -133,6 +147,7 @@ public class CR_Dao_impl implements CR_Dao {
 		}catch(NonUniqueResultException e) {
 			e.printStackTrace();
 		}
+		System.out.println("有進來~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		return mb;
 	}
 

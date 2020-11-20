@@ -12,18 +12,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-
 import iiiNews.MB.SMS.SMSHttp;
 import iiiNews.MB.SMS.SMSHttpValidato;
 import iiiNews.MB.model.LoginBean;
 import iiiNews.MB.model.MBBean;
 import iiiNews.MB.service.MBService;
+import iiiNews.MB.validate.ChangPasswordValidator;
 import iiiNews.MB.validate.LoginBeanValidator;
 import iiiNews.MB.validate.UserBeanValidator;
 
@@ -78,21 +80,20 @@ public class MBController {
 		}
 	
 	@GetMapping("/Member_SMS")    //簡訊
-	public String sms(@ModelAttribute("SMS") MBBean mb, Model model, BindingResult result) {
-		
+	public String sms(@ModelAttribute("SMS") MBBean mb, Model model, BindingResult result ,
+			@RequestParam(value="phone")String mobile
+			) {
+
 		SMSHttp sms = new SMSHttp();
 		String userID = "0976262860"; // 帳號
 		String password = "mimi0127"; // 密碼
 		String subject = "測試API2.1"; // 簡訊主旨，主旨不會隨著簡訊內容發送出去。用以註記本次發送之用途。可傳入空字串。
 		String content = "測試測試"; // 簡訊發送內容
-		String mobile = "0976262860"; // 接收人之手機號碼。格式為: +886912345678或09123456789。多筆接收人時，請以半形逗點隔開( ,// )，如0912345678,0922333444。
+//		String mobile = " "; // 接收人之手機號碼。格式為: +886912345678或09123456789。多筆接收人時，請以半形逗點隔開( ,// )，如0912345678,0922333444。
 		String sendTime = " "; // 簡訊預定發送時間。-立即發送：請傳入空字串。-預約發送：請傳入預計發送時間，若傳送時間小於系統接單時間，將不予傳送。格式為YYYYMMDDhhmnss；例如:預約2009/01/31
 								// 15:30:00發送，則傳入20090131153000。若傳遞時間已逾現在之時間，將立即發送。	
-		SMSHttpValidato smshttp = new SMSHttpValidato();
-		smshttp.validate(mb, result);
-		if(service.idExists(mb.getPhone())) {
-			
-		}
+//		SMSHttpValidato smshttp = new SMSHttpValidato();
+		
 		if (sms.getCredit(userID, password)) {
 			System.out.println(new StringBuffer("取得餘額成功，餘額：").append(String.valueOf(sms.getCreditValue())).toString());
 		} else {
@@ -269,4 +270,48 @@ public class MBController {
 //			return "MB/forget";
 //		}
 //	}
+	
+//	@ModelAttribute
+//	public void getMember(@PathVariable(value = "id", required = false) Integer id, Model model,HttpServletRequest request, HttpServletResponse response) {
+////		System.out.println("@model.getMemeber");
+//		MBBean memberbean = (MBBean) model.getAttribute("MBBean");
+//		if (id != null) {
+//			MBBean member = service.getProductById(id);
+//			model.addAttribute("member", member);
+//		}
+//	}
+	
+//	@RequestMapping(value = "/ChangePassword", method = RequestMethod.GET)
+//	public String change() {
+//		return new String("/MB/ChangePassword");
+//	}
+	
+	@GetMapping("/updatepasswd/{id}")
+	public String ChangePassword(@PathVariable("id") Integer id,Model model,HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("=============");
+		System.out.println(id);
+//		MBBean memberbean = (MBBean) model.getAttribute("MBBean"); 
+		MBBean mb = new MBBean();
+		model.addAttribute("changepwd",mb);
+		return "MB/ChangePassword" ;
+	}
+	
+	@PostMapping("/updatepasswd/{id}")
+	public String ChangePasswdShow(@ModelAttribute("changepwd") MBBean mb, Model model,BindingResult result, Integer id) {
+//		System.out.println(id);
+		ChangPasswordValidator validator = new ChangPasswordValidator();
+		validator.validate(mb, result);
+		if (result.hasErrors()) {
+			return "MB/ChangePassword";
+		}
+		boolean check;
+		check = service.CheckPassword(mb.getPassword(),mb.getMemberNewPassword(), id);
+		if (check == true) {
+			return "redirect:/";
+		}
+		else {
+			result.rejectValue("Password", "", "*該舊密碼不存在或密碼錯誤");
+			return "MB/ChangePassword";
+		}
+	}
 }

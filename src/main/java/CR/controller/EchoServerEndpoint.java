@@ -8,10 +8,18 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import org.apache.log4j.Logger;  
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import CR.service.CR_msgService;  
 
 @ServerEndpoint("/echoserver00")
 public class EchoServerEndpoint {
+	
+	
+	@Autowired
+	CR_msgService service;
+	
 	private static final Logger LOGGER = Logger.getLogger(EchoServerEndpoint.class);
 //	private static final Logger LOGGER = Logger.getLogger(ProgrammaticEchoEnpoint.class);	
 	public EchoServerEndpoint() {
@@ -29,8 +37,20 @@ public class EchoServerEndpoint {
 		String msg=null;
 		if(message.equals("你好")) {
 			msg="你好";
-		}else if(message.contentEquals("新聞")) {
-			msg="可到";
+		}else if(message.contains("新聞")) {
+//			service.addMsg(message);
+			msg="可到新聞專區觀看";
+			
+		}else if(message.contains("廣告")) {
+//			service.addMsg(message);
+			msg="可到新聞專區觀看";
+		}else if(message.contains("追蹤")) {
+			msg="請至追蹤專區觀看";
+		}else if(message.contains("客服")) {
+			msg="您現在就在客服喔!!";
+		}
+		else {
+			msg="抱歉，不了解你的意思";
 		}
 		
 	    return msg;

@@ -13,8 +13,8 @@
 	padding: 50px 50px;
 	font-size: 24px;
 	cursor: pointer;
-	color: #984B4B; /*字色 */
-	background-color: #FFAD86; /*底色 */
+	color: #FFDC35; /*字色 */
+	background-color:#BC214C; /*底色 */
 	border-rddius: 15px;
 	box-shadow: 0 8px #999;
 	outline: none;

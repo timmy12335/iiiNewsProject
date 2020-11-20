@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +34,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import CR.model.CRBean;
 import TRN.web.news.model.trkNewsBean;
 import TRN.web.news.service.trkNewsService;
+import iiiNews.MB.model.CpMemberBean;
+import iiiNews.MB.model.MBBean;
 
 @Controller
+@SessionAttributes({"MBBean","CpMemberBean"})
 public class trkNewsController {
     
 	@Autowired
 	trkNewsService service;
-
+	@Autowired
+	ServletContext ctx;
 	@Autowired
 	public void setService(trkNewsService service) {
 		this.service = service;
@@ -55,6 +63,13 @@ public class trkNewsController {
 		this.context = context;       //定義圖片輸出格式
 	}
 
+//---------------------------------------------------------------------	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/trkNews")     //查詢所有資料
 	public String list(Model model) {
 		List<trkNewsBean> list = service.getAllProducts();
@@ -87,12 +102,34 @@ public class trkNewsController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/trknews/add", method = RequestMethod.GET)   
-	public String getAddNewsForm(Model model) {
-		trkNewsBean tb = new trkNewsBean();      //取得新增產品表單欄位表格
-	    model.addAttribute("trkNewsBean", tb); 
-	    return "TRN/addtrkNew";
-}
+	        //會員建立追蹤新聞    //給空白表單的方法
+			@GetMapping("/trknews/add")
+			public String getAddNewReportForm(Model model,HttpServletRequest request,HttpServletResponse response) {
+				MBBean memberBean = (MBBean) model.getAttribute("MBBean");
+				CpMemberBean cpmemberBean = (CpMemberBean) model.getAttribute("CpMemberBean");
+				if (memberBean == null) {
+					if(cpmemberBean == null) {
+					return "redirect: " + ctx.getContextPath() + "/LoginMB";
+					}
+				}
+			
+				HttpSession session = request.getSession(false); 
+				if (session == null) {
+					return "redirect: " + ctx.getContextPath() + "/Login";
+				}
+				trkNewsBean tb = new trkNewsBean();      //取得新增產品表單欄位表格
+			    model.addAttribute("trkNewsBean", tb); 
+				return "TRN/addtrkNew";
+			}
+	
+	
+	//下面整合到上面 先判斷有無會員再進入建立表單畫面
+//	@RequestMapping(value = "/trknews/add", method = RequestMethod.GET)   
+//	public String getAddNewsForm(Model model) {
+//		trkNewsBean tb = new trkNewsBean();      //取得新增產品表單欄位表格
+//	    model.addAttribute("trkNewsBean", tb); 
+//	    return "TRN/addtrkNew";
+//}
 	@RequestMapping(value = "/trknews/add", method = RequestMethod.POST)  //新增追蹤新聞
 	public String processAddNewsForm(@ModelAttribute("trkNewsBean") trkNewsBean tb) { 
 		//if (tb.getStock() ==null) {                      //原是判斷庫存

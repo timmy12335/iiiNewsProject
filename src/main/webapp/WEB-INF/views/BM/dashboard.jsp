@@ -21,6 +21,15 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
+  <script>
+  
+  
+  
+  
+  </script>
+  
+  
+  
 </head>
 <body>
 <jsp:include page="/fragment/BMnav.jsp"></jsp:include>
@@ -48,22 +57,22 @@
         data.addRows([
           ['廣告購買區', 80],
           ['新聞購買區', 70],
-          ['影片觀看區', 100],
+          ['社群討論區', 100],
           ['新聞追蹤區', 80],
           ['客服專區', 20]
         ]);
 
         // Set chart options
         var options = {'title':'主要參觀區域人數比例',
-                       'width':400,
-                       'height':300};
+                       'width':1000,
+                       'height':800};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
       
-      
+      //以下為柱狀圖
       google.charts.load('current', {packages: ['corechart', 'bar']});
       google.charts.setOnLoadCallback(drawBasic);
 
@@ -126,17 +135,15 @@
             chart.draw(data, options);
           }
     </script>
-    
+
   </head>
 
   <body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
-     <div id="chart_div2"></div>
-
-
+    <div id="chart_div" width="400" height="400"></div>
+     <div id="chart_div2" width="400" height="400"></div>
+<hr>
 <jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
-
 </html>
 

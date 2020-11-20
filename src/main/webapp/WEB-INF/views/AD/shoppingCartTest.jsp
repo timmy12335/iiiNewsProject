@@ -140,8 +140,11 @@ function confirmDelete(n) {
 																class="card-link-secondary small text-uppercase"><i
 																class="fas fa-heart mr-1"></i> 加入最愛 </a>
 														</div>
-														<p class="mb-0">
-															<span><strong>NT$ ${ad.value.unitPrice}</strong></span>
+														<p class="mb-0 text-right">
+															<c:if test="${!empty discount}">
+																 <span class="text-danger"><del>原價&nbsp;NT$&nbsp;&nbsp;<fmt:formatNumber type="number" maxFractionDigits="0" value="${ad.value.unitPrice/discount}" /></del></span><br>
+															</c:if>
+															<span><strong>NT$&nbsp;&nbsp;<fmt:formatNumber type="number" maxFractionDigits="0" value="${ad.value.unitPrice}" /></strong></span>
 														</p>
 													</div>
 												</div>
@@ -201,13 +204,20 @@ function confirmDelete(n) {
 									class="list-group-item d-flex justify-content-between align-items-center px-0">
 									合計數量 <span>${fn:length(shoppingCart.content)}</span>
 								</li>
+								<c:if test="${!empty discount}">
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center px-0">
+										原價 <span class="text-danger"><del><fmt:formatNumber type="number" maxFractionDigits="0" value="${shoppingCart.total/discount}" /></del></span>
+										折扣 <span class="text-danger"><fmt:formatNumber type="percent" maxIntegerDigits="3" value="${discount}" /></span>
+									</li>
+								</c:if>
 								<li
 									class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
 									<div>
 										<strong>總額</strong> <strong>
 											<p class="mb-0">(NT$)</p>
 										</strong>
-									</div> <span><strong>${shoppingCart.total} 元</strong></span>
+									</div> <span><strong><fmt:formatNumber type="number" maxFractionDigits="0" value="${shoppingCart.total}" />&nbsp;元</strong></span>
 								</li>
 							</ul>
 							
@@ -243,9 +253,10 @@ function confirmDelete(n) {
 							<div class="collapse" id="collapseExample">
 								<div class="mt-3">
 									<div class="md-form md-outline mb-0">
-										<input type="text" id="discount-code"
+										<input type="text" id="discountStr" name="discountStr"
 											class="form-control font-weight-light"
 											placeholder="Enter discount code">
+										<button onclick="godiscount()">go</button>
 									</div>
 								</div>
 							</div>
@@ -277,6 +288,11 @@ function confirmDelete(n) {
 			} else {
 			
 			}
+		}
+		
+		function godiscount(){
+			var text = document.getElementById("discountStr").value;
+			location.href="/iiiNews/getDiscount/?discountStr="+text;
 		}
 </script>
 

@@ -81,7 +81,7 @@
 <!-- 			</ul></li> -->
 		<li><a href='#'>廣告專區</a>
 			<ul>
-				<li><a href="<c:url value='/getAjaxListSearch' />">Ajax搜尋測試</a></li>
+				<li><a href="<c:url value='/getAjaxListSearch' />">Ajax搜尋</a></li>
 				<li><a href="#">企業會員功能</a>
 					<ul>
 						<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>

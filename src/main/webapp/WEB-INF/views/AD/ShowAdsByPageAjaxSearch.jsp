@@ -43,6 +43,7 @@
 
 Html {
 	margin-left: calc(100vw - 100%);
+	overflow-y: scroll;
 }
 </style>
 </head>

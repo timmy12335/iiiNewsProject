@@ -57,6 +57,7 @@
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllNews'/>">新聞商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/iiiNews/src/main/webapp/WEB-INF/views/NP/backBoard/NewsTypepie.jsp">新聞商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getBackAdsTotalEnd'/>">廣告報表</a></li>
               </ul>
             </div>
           </li>

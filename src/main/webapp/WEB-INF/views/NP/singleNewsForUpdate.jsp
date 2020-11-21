@@ -39,7 +39,7 @@
 }
 p{
   margin: 3px;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 </style>
@@ -60,7 +60,7 @@ p{
 			<div class="shadow0" style="background-color:lightpink;border-radius:15px;margin-bottom:80px">
 				<div class="row">
 					<div class="col-sm-6 p-5" >
-					<img class="shadow0" style="border:5px white solid ;border-radius:15px;margin-left:20px" width='500' height='300' src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
+					<img class="shadow0" style="border:5px white solid ;border-radius:15px;margin-left:70px" width='400' height='250' src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
 					</div>
 					<div class="col-sm-6 p-5 " align="left">
 					<div class="p-2 shadow0" style="background-color:white;border-radius:15px;margin-right:15px">
@@ -87,15 +87,15 @@ p{
 						<article class="all-browsers shadow0">
 							
 							<article class="browser ">
-								<h3 class="text-danger"><b>標題</b></h3>
-								<h5>${ newsSingle.title }</h5>
+								<h4 class="text-danger"><b>標題</b></h4>
+								<h6>${ newsSingle.title }</h6>
 							</article>
 							<article class="browser">
-								<h3 class="text-danger"><b>大綱</b></h3>
-								<h5>${ newsSingle.outline }</h5>
+								<h4 class="text-danger"><b>大綱</b></h4>
+								<h6>${ newsSingle.outline }</h6>
 							</article>
 							<article class="browser">
-								<h3 class="text-danger"><b>內文</b></h3>
+								<h4 class="text-danger"><b>內文</b></h4>
 								<p>${ newsSingle.article }</p>
 							</article>
 						</article>

@@ -31,7 +31,7 @@ public class updateNewsController {
 			NewsBean newsBean = produstservice.getSingleNewsForUpdate(newsId);
 			
 			model.addAttribute("newsSingle", newsBean);
-			return "NP/UpdateSingleNews";
+			return "NP/updateSingleNewsTest";
 		}
 		
 		//一般會員修改單一則新聞

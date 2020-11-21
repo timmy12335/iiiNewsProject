@@ -68,6 +68,8 @@
 						<p>新聞編號: &nbsp;${ newsSingle.newsId }</p>
 						<p>上傳時間：${newsSingle.uploadTime}</p>
 						<div>		
+						<form:input type="hidden" id="newsId" name="newsId"  path="newsId" value="${ newsSingle.newsId }"  />				
+						<form:input type="hidden" id="uploadTime" name="uploadTime" path="uploadTime" value="${ newsSingle.uploadTime }"  />				
 						<form:input type="hidden" id="newsProduct_pk" name="newsProduct_pk"  path="newsProduct_pk" value="${ newsSingle.newsProduct_pk }"  />
 						<form:input type="hidden" id="memberId" name="memberId"  path="memberId" value="${ newsSingle.memberId }"  />
 						<form:input type="hidden" id="pic_One" name="pic_One"  path="pic_One" value="${ newsSingle.pic_One }"  />

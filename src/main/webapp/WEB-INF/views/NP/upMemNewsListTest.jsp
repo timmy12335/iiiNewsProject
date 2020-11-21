@@ -22,6 +22,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>會員新聞列表</title>
+
 <script>
 	
 	//取得現在的時間，放入GetDateDiff()去計算時間
@@ -175,8 +176,12 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 				</c:otherwise>
 			</c:choose>
 
-			<br> <input type="button" value="回目錄" onclick="location.href='/iiiNews'">
-<%-- 					<a href="<c:url value='history.back()' />">回前頁</a>   --%>
+			<br>
+			<div align="center">
+				<input type="button" class="incss" value="回首頁"
+					onclick="location.href='/iiiNews'">
+			</div>
+			
 		</div>
 	</div>
 	<script>

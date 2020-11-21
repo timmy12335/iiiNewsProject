@@ -89,11 +89,11 @@ text-align:center;
     <jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 <script>
 function Cate(cateObj){
-	let CateA = Object.keys(cateObj);
+	let CateA = Object.keys(cateObj);	//Cate取得Key值
 	console.log(CateA);
 	console.log(CateA[0]);
 	
-	let CateV = Object.values(cateObj);
+	let CateV = Object.values(cateObj);	//Cate取得Value值
 	console.log(CateV);
 	console.log(CateV[0]);
 

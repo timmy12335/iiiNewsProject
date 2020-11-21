@@ -95,31 +95,31 @@ public class backhaulController {
 	//--------------------------報表--------------------------
 	@GetMapping("/MtArtReport")
 	public String MtArtReport() {
-		return "MT/MtArtReport";
+		return "MT/MtArtReport2";
 	}
 		
 	//將類別筆數回傳json
-	@GetMapping("/getMtArtReport.json")
+	@GetMapping("/getMtArtReport.json")		//各標籤數量
 	public @ResponseBody Map<String, Long> getMtArtReport(){	
 		System.out.println(reportService.getMtArtTotalReport());
 		return reportService.getMtArtTotalReport();		 
 	}
 	
-	@GetMapping("/getMtCateReport.json")
-	public Map<String,Integer> getMtCateReport(){
-		
-		Map<String,Integer> map = new HashMap<String, Integer>();
-		map.put("未分類", reportService.getMtCateReport("未分類"));
-		map.put("生活", reportService.getMtCateReport("生活"));
-		map.put("娛樂", reportService.getMtCateReport("娛樂"));
-		map.put("問卦", reportService.getMtCateReport("問卦"));
-		map.put("美食", reportService.getMtCateReport("美食"));
-		map.put("運動", reportService.getMtCateReport("運動"));
-		map.put("趣味", reportService.getMtCateReport("趣味"));
-		map.put("寵物", reportService.getMtCateReport("寵物"));
-	
-		return map;
-	}
+//	@GetMapping("/getMtCateReport.json")
+//	public Map<String,Integer> getMtCateReport(){
+//		
+//		Map<String,Integer> map = new HashMap<String, Integer>();
+//		map.put("未分類", reportService.getMtCateReport("未分類"));
+//		map.put("生活", reportService.getMtCateReport("生活"));
+//		map.put("娛樂", reportService.getMtCateReport("娛樂"));
+//		map.put("問卦", reportService.getMtCateReport("問卦"));
+//		map.put("美食", reportService.getMtCateReport("美食"));
+//		map.put("運動", reportService.getMtCateReport("運動"));
+//		map.put("趣味", reportService.getMtCateReport("趣味"));
+//		map.put("寵物", reportService.getMtCateReport("寵物"));
+//	
+//		return map;
+//	}
 	
 	
 	

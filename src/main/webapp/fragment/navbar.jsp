@@ -77,20 +77,18 @@
 <!-- 			</ul></li> -->
 		<li><a href='#'>廣告專區</a>
 			<ul>
-				<li><a href="<c:url value='/getAjaxListSearch' />">Ajax搜尋</a></li>
-				<li><a href="#">企業會員功能</a>
-					<ul>
-						<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
-						<li><a href="<c:url value='/memberAllAdsList' />">查詢所上架的商品列表</a></li>
-						<li><a href="<c:url value='/getSoldOrderByCpMemberId' />">查詢所賣出的商品(下載圖片)#$#</a></li>
-					</ul></li>
-				<li><a href="#">一般會員功能</a>
-					<ul>
-						<li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
-						<li><a href="<c:url value='/getAjaxList' />">看所有廣告列表-Ajax</a></li>
-						<li><a href="<c:url value='/getOrderListByMemberId' />">查看一般會員訂單</a></li>
-					</ul></li>
+				<li><a href="<c:url value='/getAjaxListSearch' />">欄位搜尋</a></li>
 				<li><a href="<c:url value='/ShowCartContent' />">購物車</a></li>
+				<li><a href="#">企業會員專區</a>
+					<ul>
+						<li><a href="<c:url value='/uploadAds' />">上架廣告欄位</a></li>
+						<li><a href="<c:url value='/memberAllAdsList' />">商業會員廣告管理</a></li>
+					</ul></li>
+				<li><a href="#">一般會員專區</a>
+					<ul>
+						<li><a href="<c:url value='/getOrderListByMemberId' />">會員廣告訂單管理</a></li>
+					</ul></li>
+				
 				<li><a href="#">ALL & OLD</a>
 					<ul>
 						<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
@@ -99,6 +97,7 @@
 						<li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
 						<li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
 						<li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
+						<li><a href="<c:url value='/getSoldOrderByCpMemberId' />">查詢所賣出的商品(下載圖片)#$#</a></li>
 					</ul></li>
 			</ul></li>
 		<li><a href="<c:url value='/CRindex' />">客服中心</a>

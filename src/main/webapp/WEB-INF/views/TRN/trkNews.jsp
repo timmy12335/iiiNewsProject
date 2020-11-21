@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/carousel.css">
+
 <style>
  .wrapper {
             position: relative;
@@ -101,7 +101,7 @@
         }
 body {
   
-  padding-top: 10rem;
+  padding-top: 5rem;
   padding-bottom: 3rem;
   color: #5a5a5a;
 }
@@ -269,10 +269,25 @@ height="400px" width="100%" class="fw-iframe" scrolling="no" frameborder="0"></i
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
 <hr>
-    <section style="margin-top:10px" >
+    <section style="" >
+                <div style="font-size:large;margin-left:300px;background:;width:200px;font-family:Microsoft JhengHei;"class="">
+					<label class='' for="category">新聞類型 </label>
+						<select name="pageselect" onchange="self.location.href=options[selectedIndex].value">
+							<option value=""  >請選擇</option>
+							<option value="<c:url value='/trkNews' />">所有類型</option>
+							<option value="<c:url value='/trkNews/社會'/>">社會</option>
+							<option value="<c:url value='/trkNews/國際'/>">國際</option>
+							<option value="<c:url value='/trkNews/政治'/>">政治 </option>
+							<option value="<c:url value='/trkNews/科技'/>">科技</option>
+							<option value="<c:url value='/trkNews/生活'/>">生活</option>
+							<option value="<c:url value='/trkNews/娛樂'/>">娛樂</option>
+							<option value="<c:url value='/trkNews/地方'/>">地方</option>
+						</select>
+				</div>
+			
         <div>
             <div class="container" style="text-align: center" >
-                <h1>追蹤清單</h1>
+                <h1 style="font-family:Microsoft JhengHei;">新聞追蹤</h1>
             </div>
         </div>
     </section>

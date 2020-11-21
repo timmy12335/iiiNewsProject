@@ -31,30 +31,30 @@
 	</div>
 	</div>
 	</a>
-	<a>
+	<a href="<c:url value='/success' />">
 	<div class="card">
 	<span></span>
 	<div class='imgBx'><img src="<c:url value='/image/CR1.jpg'/>"></div>
 	<div class="content">
 	<div>
-	<h2>關於我們</h2>
-	<p>想要了解我們或是想要寄信請至此頁面。<p>	
+	<h2>客服表單查詢</h2>
+	<p>查詢個人已申請的表單。<p>	
 	</div>
 	</div>
 	</div>
 	</a>
-	<a href="<c:url value='/msg' />">
-	<div class="card">
-	<span></span>
-	<div class='imgBx'><img src="<c:url value='/image/CR5.jpg'/>"></div>
-	<div class="content">
-	<div>
-	<h2>聊天室Test</h2>
-	<p>慘烈<p>	
-	</div>
-	</div>
-	</div>
-</a>
+<%-- 	<a href="<c:url value='/msg' />"> --%>
+<!-- 	<div class="card"> -->
+<!-- 	<span></span> -->
+<%-- 	<div class='imgBx'><img src="<c:url value='/image/CR5.jpg'/>"></div> --%>
+<!-- 	<div class="content"> -->
+<!-- 	<div> -->
+<!-- 	<h2></h2> -->
+<!-- 	<p><p>	 -->
+<!-- 	</div> -->
+<!-- 	</div> -->
+<!-- 	</div> -->
+<!-- </a> -->
 </div>
 </section>
 

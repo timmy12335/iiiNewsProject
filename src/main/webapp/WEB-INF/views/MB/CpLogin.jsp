@@ -6,6 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" -->
+<!-- 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" -->
+<!-- 	crossorigin="anonymous"> -->
 <!-- <script> -->
 
 <!-- </script> -->
@@ -56,40 +66,42 @@ g-recaptcha {
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<section style="margin-top: 100px;" align="center">
-		<div id="page" class="container"></div>
-		<form:form id="regform" onsubmit="return checkinput()"
-			modelAttribute="CpLoginBean">
-			<table align="center">
-				<h2 align="center">會員登入</h2>
-				<tr>
-					<td>登入帳號：</td>
-					<td><form:input type="text" path="userId" required="true"
-							id='cpmemberId' placeholder="輸入帳號" /></td>
-					<td><form:errors style="color:red;font-size:12px"
-							path="invalidCredentials"></form:errors></td>
-				</tr>
-				<tr>
-					<td>登入密碼：</td>
-					<td><form:input type="password" path="password"
-							required="true" id='password' placeholder="輸入密碼" /></td>
-				</tr>
-				<tr>
-					<td align="center" colspan='2'><form:checkbox
-							path="rememberMe" /><span class="text-muted">記住密碼</span></td>
-				</tr>
-				<tr>
-					<td colspan='5' id="grecaptcha" class="g-recaptcha"
-						data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB"></td>
-				</tr>
-				<tr>
-					<td colspan='2' id="g-recaptcha-error"></td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align: center;"><input
-						type="submit" name="submit" value="登入" class="test">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="/UserMB">註冊</a></td>
-				</tr>
-			</table>
+		<form:form id="regform" onsubmit="return submitUserForm();"
+			modelAttribute="CpLoginBean" class="forms-sample">
+			<div class="row justify-content-md-center">
+				<div class="col-md-3 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<h2 align="center">會員登入</h2>
+							<p class="card-description">Login</p>
+							<div class="form-group" align="left">
+								<label for="userId">登入帳號：</label>
+								<form:input type="text" path="userId" class="form-control"
+										id='cpmemberId' placeholder="輸入帳號" />
+								<form:errors style="color:red;font-size:12px"
+										path="invalidCredentials"></form:errors>
+							</div>
+							<div class="form-group" align="left">
+								<label for="password">登入密碼：</label>
+								<form:input type="password" path="password"
+										class="form-control" id='password' placeholder="輸入密碼" />
+							</div>
+							<div class="form-group" align="left">
+								<label align="center" colspan='2'></label><form:checkbox
+										path="rememberMe" /><span class="text-muted">記住密碼</span>
+							</div>
+							<div class="form-group" align="left">
+								<label colspan='5' id="grecaptcha" class="g-recaptcha"
+									data-sitekey="6LcXZ7IZAAAAAAkcEb54s18XQh2cq-DzVhCd-LxB"></label>
+							</div>
+							<div class="form-group" align="left">
+								<label colspan='2' id="g-recaptcha-error"></label>
+							</div>
+							<div>
+								<label colspan="2" style="text-align: center;"></label><input
+									type="submit" name="submit" value="登入" class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="/UserMB" class="btn btn-info">註冊</a>
+							</div>
 		</form:form>
 	</section>
 	<script src="https://www.google.com/recaptcha/api.js"></script>

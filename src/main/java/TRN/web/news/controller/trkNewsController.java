@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import CR.model.CRBean;
+import TRN.web.news.model.ImageBean;
 import TRN.web.news.model.trkNewsBean;
 import TRN.web.news.service.trkNewsService;
 import iiiNews.MB.model.CpMemberBean;
@@ -70,7 +71,7 @@ public class trkNewsController {
 	
 	
 	
-	@GetMapping("/trkNews")     //查詢所有資料
+	@GetMapping("/trkNews")     //查詢所有追蹤新聞資料
 	public String list(Model model) {
 		List<trkNewsBean> list = service.getAllProducts();
 		model.addAttribute("trkNews", list);
@@ -130,6 +131,33 @@ public class trkNewsController {
 //	    model.addAttribute("trkNewsBean", tb); 
 //	    return "TRN/addtrkNew";
 //}
+			
+	@PostMapping(value = "/addimage")  //新增圖片
+	public String insertImages(@ModelAttribute("ImageBean") Integer NewsId,ImageBean imgb) {
+		MultipartFile picture = imgb.getItrktImage();
+		String originalFilename = picture.getOriginalFilename();
+		if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
+			imgb.setFilename(originalFilename);
+		}
+		// 建立Blob物件，交由 Hibernate 寫入資料庫
+				if (picture != null && !picture.isEmpty()) {
+					try {
+						byte[] b = picture.getBytes();
+						Blob blob = new SerialBlob(b);
+						imgb.setCoverimage(blob);
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+					}
+				}
+				// 必須要找出對應的TrkNews物件
+				trkNewsBean trkNewsBean = service.findByPrimaryKey(NewsId);
+				imgb.setTrkNewsBean(trkNewsBean);
+				
+		return null;
+	}
+			
+			
 	@RequestMapping(value = "/trknews/add", method = RequestMethod.POST)  //新增追蹤新聞
 	public String processAddNewsForm(@ModelAttribute("trkNewsBean") trkNewsBean tb) { 
 		//if (tb.getStock() ==null) {                      //原是判斷庫存

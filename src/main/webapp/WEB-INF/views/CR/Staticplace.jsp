@@ -73,7 +73,33 @@
 		}
 
 	}
-
+function calAllReportByDate
+	var xhr1 = new XMLHttpRequest();
+	xhr1.open("GET", "<c:url value='/calCRfromEmp'/>", true);
+	xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xhr1.send();
+	xhr1.onreadystatechange = function() {
+		if (xhr1.readyState == 4
+				&& (xhr1.status == 200 || xhr1.status == 204)) {
+			var map = JSON.parse(xhr1.responseText);
+			console.log(map);
+			var data1 = [];
+			var emp = [];
+			var report = [];
+			console.log(data1);
+			for ( var k in map) {
+				emp.push(k);
+				report.push(map[k]);
+			}
+			console.log(emp);
+			console.log(report);
+			getLinePic(emp, report);
+		}
+	}
+	
+	
+	
+	
 	//圓餅圖 
 	function getPiePic(cate, value) {
 
@@ -180,6 +206,31 @@
 			myChart.setOption(option, true);
 		}
 	}
+	
+	//線圖
+	function showLine(){
+	var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line'
+    }]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+	}	
 </script>
 </head>
 <body>
@@ -190,9 +241,9 @@
 		<a href=<c:url value='/addemployee'/>><button
 				class='btn btn-primary btn-icon-text' id='add'>客服單總計</button></a> <a
 			href=<c:url value='/addemployee'/>><button
-				class='btn btn-primary btn-icon-text' id='add'>未處理客服單</button></a> <a
+				class='btn btn-primary btn-icon-text' id='untreat'>未處理客服單</button></a> <a
 			href=<c:url value='/addemployee'/>><button
-				class='btn btn-primary btn-icon-text' id='add'>處理完客服單</button></a>
+				class='btn btn-primary btn-icon-text' id='done'>處理完客服單</button></a>
 	</div>
 	<div class="row">
 

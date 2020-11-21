@@ -62,7 +62,7 @@
 				<li><a href="<c:url value='/queryByType' />">分類追蹤</a></li>
 				<li><a href="<c:url value='trknews/add'/>">建立追蹤新聞</a></li>
 			</ul></li>
-		<li><a href="<c:url value='/getTodayNews' />">本日熱門新聞</a></li>	
+		<li><a href="<c:url value='/getTodayNews' />">全球熱門新聞</a></li>	
 		<li><a href="<c:url value='#' />">社群專區</a>
 <!-- 			<ul> -->
 <%-- 				<li><a href="<c:url value='#' />">討論區</a> --%>

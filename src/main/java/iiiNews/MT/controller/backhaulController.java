@@ -100,7 +100,7 @@ public class backhaulController {
 		
 	//將類別筆數回傳json
 	@GetMapping("/getMtArtReport.json")
-	public @ResponseBody Map<String,Long> getMtArtReport(){	
+	public @ResponseBody Map<String, Long> getMtArtReport(){	
 		System.out.println(reportService.getMtArtTotalReport());
 		return reportService.getMtArtTotalReport();		 
 	}

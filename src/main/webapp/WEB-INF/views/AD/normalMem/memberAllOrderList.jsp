@@ -30,6 +30,28 @@ html{
 	margin-left:calc(100vw - 100%);
 	overflow-y: scroll;
 }
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  width:100%;
+  display:none;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
 </style>
 </head>
 <body>
@@ -39,6 +61,11 @@ html{
 	<div class="iiinewsContainer">
 		<div class="container">
 		<div class="row bg-white shadow-sm rounded">
+		
+		<div class="alert" id="nopayalert">
+		  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+		  <strong><i class="far fa-bell fa-lg"></i>&nbsp;&nbsp;Notice！提醒！&nbsp;&nbsp;</strong> 您尚有未付款的訂單，立即前往結帳！CHECKOUT NOW！
+		</div>
 		
 			<div class="col-12 bg-info text-white p-4">
 				<h2>會員${showmemberId}的訂單列表</h2>
@@ -71,9 +98,14 @@ html{
 										<td class='text-center'>
 											<c:if test="${ad.paymentStatus == 0}">
 												<span class="text-danger">未付款&nbsp;<i class="fas fa-exclamation-circle"></i></span>
-												<c:if test="${ad.paymentStatus == 0}">
 												&nbsp;&nbsp;<a class="btn btn-danger" href="<c:url value="/checkoutOK.Pay/${ad.adOrderPk}" />">前往付款</a>
-												</c:if>
+												<script>
+												function nopayalert(){;
+													console.log("alert")
+													document.getElementById("nopayalert").style.display='block';
+												}
+												nopayalert();
+												</script>
 											</c:if>
 											<c:if test="${ad.paymentStatus == 1}">
 												<span class='text-success'>已付款&nbsp;<i class='fas fa-check-circle'></i></span>
@@ -96,5 +128,6 @@ html{
 		</div>
 	<!-- iiinewsContainer -->
 	</div>
+
 </body>
 </html>

@@ -24,7 +24,7 @@ public class MtAjaxDaoImpl implements MtAjaxDao {
 
 	// 使用AJAX顯示新聞頁面-----------------------------------
 	@Override
-	public int getTotalPages() {
+	public int getTotalPages() {			//計算頁面數量
 		int totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
 		return totalPages;
 	}
@@ -42,7 +42,7 @@ public class MtAjaxDaoImpl implements MtAjaxDao {
 	@Override
 	public List<MtAddBean> getPageComment(Integer pageComNo) {
 		int startRecordNo = (pageComNo - 1) * recordsPerPage;
-		String hql = "FROM MtAddBean WHERE status = 1";
+		String hql = "FROM MtAddBean WHERE status = 1 ";
 		Session session = factory.getCurrentSession();
 		List<MtAddBean> list = session.createQuery(hql)
 									.setMaxResults(recordsPerPage)
@@ -54,13 +54,13 @@ public class MtAjaxDaoImpl implements MtAjaxDao {
 	
 	//搜尋keyWord頁數-----------------------------------
 	@Override
-	public int getKeyWordPages(String searchWord) {
+	public int getKeyWordPages(String searchWord) {			//搜尋數後，計算頁面數量
 		int KeyWordPages = (int) (Math.ceil(getSearchRecordCounts(searchWord) / (double) recordsPerPage));
 		return KeyWordPages;
 	}
 	
-	// 計算資料庫總共有幾筆資料
-	public long getSearchRecordCounts(String searchWord) {
+	// 計算資料庫總共有幾筆keyWord資料
+	public long getSearchRecordCounts(String searchWord) {				
 		Long count = null; // 必須使用 long 型態
 		String hql = "SELECT count(*) FROM MtAddBean WHERE status = 1 AND (title LIKE :word)";
 		Session session = factory.getCurrentSession();
@@ -86,15 +86,16 @@ public class MtAjaxDaoImpl implements MtAjaxDao {
 									.getResultList();
 		return list;
 	}
-
+	
+	// -----------------------------------後端文章總覽顯示頁面-----------------------------------
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MtAddBean> getAllMtByAjax(String set) {
 		
-		String hql = "FROM MtAddBean WHERE status = 1";
+		String hql = "FROM MtAddBean WHERE status = 1 ";
 		
 		if(set.equals("ALL")) {
-			hql = "FROM MtAddBean";
+			hql = "FROM MtAddBean ORDER BY pkey DESC";
 			System.out.println("-----------------選擇全部文章-----------------");
 		}
 		
@@ -111,7 +112,7 @@ public class MtAjaxDaoImpl implements MtAjaxDao {
 		String hql = "FROM MtAddBean WHERE status = 1 ";
 		
 		if(set.equals("ALL")) {
-			hql = "FROM MtAddBean WHERE status = :statusno";
+			hql = "FROM MtAddBean WHERE status = :statusno ORDER BY pkey DESC";
 			System.out.println("-----------------選擇文章類別-----------------");
 		}
 		Session session = factory.getCurrentSession();

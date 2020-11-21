@@ -10,19 +10,30 @@
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<!-- <link rel="stylesheet" -->
+<%-- 	href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css"> --%>
+<!-- <link rel="stylesheet" -->
+<%-- 	href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css"> --%>
+<!-- <!-- endinject -->
+-->
+<!-- <!-- plugin css for this page -->
+-->
+<!-- <!-- End plugin css for this page -->
+-->
+<!-- <!-- inject:css -->
+-->
+<!-- <link rel="stylesheet" -->
+<%-- 	href="${pageContext.request.contextPath}/css/style.css"> --%>
+<!-- <!-- endinject -->
+-->
+<!-- <link rel="shortcut icon" -->
+<%-- 	href="${pageContext.request.contextPath}/images/favicon.png" /> --%>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/vendors/base/vendor.bundle.base.css">
-<!-- endinject -->
-<!-- plugin css for this page -->
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css">
-<!-- endinject -->
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/images/favicon.png" />
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 .box {
 	width: 300px;
@@ -51,6 +62,8 @@
 	font-family: "標楷體";
 	color: darkblue;
 }
+
+
 </style>
 <script>
 function deleteCrReport(pk){
@@ -77,29 +90,7 @@ function deleteCrReport(pk){
 }
 }
 
-function Score(pk){
-	var xhr0 = new XMLHttpRequest();
-	var divResult = document.getElementById('resultmsg');
-	var result=confirm("確定刪除此筆客服表單(單號:"+pk+")?");
-	if(result){
-		xhr0.open("POST","<c:url value='/customerReports/'/>"+pk,true);
-		xhr0.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-		xhr0.send();
-		xhr0.onreadystatechange=function(){
-		if (xhr0.readyState == 4 && (xhr0.status == 200 || xhr0.status == 204) ) {
-	      result = JSON.parse(xhr0.responseText);
-	      if (result.fail) {		    	  
-			 		divResult.innerHTML = "<font color='red' >"
-						+ result.fail + "</font>";
-		  		} else if (result.success) {
-			 		divResult.innerHTML = "<font color='green' >"
-						+ result.success + "</font>";
-						window.location.href="<c:url value='/success'/>";						
-		}
-	}	
-}
-}
-}
+
 
 </script>
 
@@ -110,105 +101,135 @@ function Score(pk){
 	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-	<section style="margin-top: 100px">
+	<section style="margin-top: 100px;">
 
-
-		<h4 class="font-weight-bold mb-0" align="center">已申請客服</h4>
-		<div id="resultmsg"></div>
-		<table class="table table-hover" style="width: 1100px;" align="center">
-			<thead>
-				<tr>
-					<th width='60'>單號</th>
-					<th>姓名</th>
-					<th>類別</th>
-					<th>標題</th>
-					<th>內容</th>
-					<th>附件</th>
-					<th align='center'>申請日期</th>
-					<th>回覆內容</th>
-					<th>回覆人員</th>
-					<th>最新回覆時間</th>
-					<th colspan='2'>功能</th>
-				</tr>
-			</thead>
-			<c:choose>
-				<c:when test="${empty CrReport}">
+		
+			<h2 class="font-weight-bold mb-0" align="center">已申請客服</h2>
+			<br>
+			<div id="resultmsg"></div>
+			<table class="table table-hover "
+				style="border: 1px solid black; width:1400px;" align="center">
+				<thead class="table-primary"
+					style="background-color: #6FB7B7;" text-align="center">
 					<tr>
-						<td colspan='8' align='center'><font color='red'>無客服資料</font></td>
+						<th align="right" width='60px;'>單號</th>
+						<th width='120px;'>姓名</th>
+						<th width='120px;'>類別</th>
+						<th width='120px;'>標題</th>
+						<th align="right" width='120px;'>內容</th>
+						<th width='60px;'>附件</th>
+						<th width='120px;'>申請日期</th>
+						<th width='120px;'>回覆內容</th>
+						<th width='120px;'>回覆人員</th>
+						<th width='120px;'>回覆時間</th>
+						<th >功能</th>
 					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var='ser' items='${CrReport}' varStatus="report">
-						<tr>
-							<td align='left'>${ser.pk}</td>
-							<td align='left'>&nbsp;${ser.mbBean.name}</td>
-							<td align='center'>${ser.crClass}</td>
-							<td align='left'>&nbsp;${ser.crTitle}</td>
-							<td align='center' onclick="MBfolded(${report.index})"
-								class="box"><p class="ellipsis">${ser.crContent}</p></td>
-							<td><img style="width: 160px; height: 100px"
-								src="<c:url value='/getCRimg/${ser.pk}' />" /></td>
-							<td align='center'><fmt:formatDate
-									value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
-							<c:choose>
-								<c:when test="${not empty ser.crReContent}">
-									<td align='center' onclick="folded(${report.index})"
-										class="box"><p class="ellipsis">
-											<c:out value="${ser.crReContent}"></c:out>
-										</p></td>
-									<td align='center'><c:out
-											value="${ser.cremployee.empName}" /></td>
-									<td align='center'><fmt:formatDate value="${ser.crReDate}"
-											pattern="yyyy-MM-dd" /></td>
-									<td><button id="btn_update"
-											class="btn btn-outline-secondary btn-icon-text"
-											onclick="confirmReply(${report.index})">
-											確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
-										</button>
-								</c:when>
-								<c:otherwise>
-									<td align='center' onclick="folded(${report.index})"
-										class="box"><p class="ellipsis"></p></td>
-									<td align='center'></td>
-									<td align='center'><fmt:formatDate value="${ser.crReDate}"
-											pattern="yyyy-MM-dd" /></td>
-									<td><button id="btn_update"
-											class="btn btn-outline-secondary btn-icon-text"
-											onclick="confirmReply(${ser.pk})" disabled>
-											確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
-										</button>
-								</c:otherwise>
-							</c:choose>
-							<button id="btn_delete"
-								class="btn btn-outline-danger btn-icon-text"
-								onclick="deleteCrReport(${ser.pk})">
-								取消申請<i class="ti-trash btn-icon-append"></i>
-							</button>
-							</td>
-						</tr>
-						<tr style="display: none" id="score${report.index}">
-							<td><select name="scoreNum" id="scoreNum${report.index}" onchange="print_value();">
-									<option value='1'>極差</option>
-									<option value='2'>差</option>
-									<option value='3'>普</option>
-									<option value='4'>優</option>
-									<option value='5'>極優</option>
-							</select></td>
-						</tr>
-						<tr id="MBcontent${report.index}"
-							style="display: none; word-wrap: break-word;">
-							<td>客服內容</td>
-							<td colspan="10"><textarea
-									style="width: 1000px; height: 200px;" disabled>${ser.crContent}</textarea>
-						<tr id="recontent${report.index}"
-							style="display: none; word-wrap: break-word;">
-							<td>回覆內容</td>
-							<td colspan="10"><textarea
-									style="width: 1000px; height: 300px;" disabled>${ser.crReContent}</textarea>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</table>
+				</thead>
+				<tbody style="background-color: white;">
+					<c:choose>
+						<c:when test="${empty CrReport}">
+							<tr>
+								<td colspan='8'><font color='red'>無客服資料</font></td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var='ser' items='${CrReport}' varStatus="report">
+								<tr style="height: 100px;">
+									<td style='vertical-align: middle;'>${ser.pk}</td>
+									<td style='vertical-align: middle;'>&nbsp;${ser.mbBean.name}</td>
+									<td style='vertical-align: middle;'>${ser.crClass}</td>
+									<td style='vertical-align: middle;'>&nbsp;${ser.crTitle}</td>
+									<td style='vertical-align: middle;cursor: pointer; '
+										onclick="MBfolded(${report.index})" class="box"><p
+											class="ellipsis">${ser.crContent}</p></td>
+									<td style='vertical-align: middle;'><img
+										style="width: 160px; height: 100px"
+										src="<c:url value='/getCRimg/${ser.pk}' />" /></td>
+									<td style='vertical-align: middle;'><fmt:formatDate
+											value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+									<c:choose>
+										<c:when
+											test="${not empty ser.crReContent && empty ser.crReScore}">
+											<td onclick="folded(${report.index})"
+												style='vertical-align: middle; cursor: pointer' class="box"><p
+													class="ellipsis">
+													<c:out value="${ser.crReContent}"></c:out>
+												</p></td>
+											<td style='vertical-align: middle;'><c:out
+													value="${ser.cremployee.empName}" /></td>
+											<td style='vertical-align: middle;'><fmt:formatDate
+													value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
+											<td style='vertical-align: middle;'><button
+													id="btn_update" class="btn btn-success"
+													onclick="confirmReply(${report.index})">
+													確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
+												</button>
+											
+												<button id="btn_delete"
+													class="btn btn-danger" style="width:85px;"
+													onclick="deleteCrReport(${ser.pk})">
+													取消申請<i class="ti-trash btn-icon-append"></i>
+												</button></td>
+										</c:when>
+										<c:when
+											test="${not empty ser.crReContent && not empty ser.crReScore}">
+											<td style='vertical-align: middle;cursor: pointer; '
+												onclick="folded(${report.index})" class="box"><p
+													class="ellipsis">
+													<c:out value="${ser.crReContent}"></c:out>
+												</p></td>
+											<td style='vertical-align: middle;'><c:out
+													value="${ser.cremployee.empName}" /></td>
+											<td style='vertical-align: middle;'><fmt:formatDate
+													value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
+											<td style='vertical-align: middle;'><button
+													id="btn_update"
+													class="btn btn-outline-secondary btn-icon-text" disabled>
+													<b><font color="#FF5809" size="3">感謝評分</font></b>
+													</button></td>
+										</c:when>
+										<c:otherwise>
+											<td style='vertical-align: middle;'
+												onclick="folded(${report.index})" class="box"><p
+													class="ellipsis"></p></td>
+											<td></td>
+											<td style='vertical-align: middle;'><fmt:formatDate
+													value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
+											<td style='vertical-align: middle;'><button
+													id="btn_update" class="btn btn btn-success"
+													onclick="confirmReply(${ser.pk})" disabled>
+													確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
+												</button></td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+								<tr style="display: none" id="score${report.index}">
+							
+									<td colspan="11"><select name="scoreNum" id="scoreNum${report.index}"
+										onchange="ScoreNum(${report.index},${ser.pk});">
+											<option value='1'>極差</option>
+											<option value='2'>差</option>
+											<option value='3'>普</option>
+											<option value='4'>優</option>
+											<option value='5'>極優</option>
+									</select></td>
+								</tr>
+								<tr id="MBcontent${report.index}"
+									style="display: none; word-wrap: break-word;">
+									<td colspan="2" style='vertical-align: middle;'>客服內容</td>
+									<td colspan="10"><textarea
+											style="width: 800px; height: 200px;resize:none;" disabled >${ser.crContent}</textarea>
+								<tr id="recontent${report.index}"
+									style="display: none; word-wrap: break-word;">
+									<td colspan="2" style='vertical-align: middle;'>回覆內容</td>
+									<td colspan="11"><textarea
+											style="width: 800px; height: 200px;resize:none;" disabled>${ser.crReContent}</textarea></td>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+
 	</section>
 	<script>
 	function MBfolded(index){	
@@ -234,6 +255,71 @@ function Score(pk){
 		
 	}
 
+	//評分展開
+	function confirmReply(index){
+		if(document.getElementById("score"+index).style.display =='none') {
+			document.getElementById("score"+index).style.display='';
+			}else{
+				document.getElementById("score"+index).style.display='none';
+			} 
+	}
+	
+	function transformScore(num){
+		switch (num) {
+		  case "1":
+		    	num="極差"
+		    	return num;
+		    	break;
+		  case "2":
+			    num="差"
+			    return num;
+			    break;
+		  case "3":
+			    num="普"
+			    return num;
+			    break;
+		  case "4":
+			    num="優"
+			    return num;
+			    break;
+		  case "5":
+			    num="極優"
+			    return num;
+			    break;
+		}
+	}
+	
+	
+	//進行評分並修改評分檔案
+	function ScoreNum(index, pk){
+		var xhr0 = new XMLHttpRequest();
+		var score = document.getElementById("scoreNum"+index).value;
+		var result=confirm("確定進行評分(評分為"+transformScore(score)+")?");
+		if(result){
+			document.getElementById("score"+index).style.display='none';
+			xhr0.open("POST","<c:url value='/scoreNum/'/>"+pk,true);
+			xhr0.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+			var jsonReport = {
+					"pk": pk, 					
+					"crReScore":score
+		   		}
+			xhr0.send(JSON.stringify(jsonReport));				
+			xhr0.onreadystatechange=function(){
+			if (xhr0.readyState == 4 && (xhr0.status == 200 || xhr0.status == 204) ) {
+		      result = JSON.parse(xhr0.responseText);
+		      if (result.fail) {
+		    	  console.log(result.fail);
+		    	  		var divResult = alert("評分暫時有問題!!10秒後再請重試!");		
+			  		} else if (result.success) {
+			  			console.log(result.fail);
+			  			var divResult = alert("感謝您的評分!!希望之後有機會能再次回覆。");
+			  			window.location.href="<c:url value='/success'/>";	
+			}
+		}	
+	}
+	}
+	}
+	
 	</script>
 </body>
 </html>

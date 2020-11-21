@@ -293,6 +293,25 @@ public class CR_Controller {
 		return re;
 	}
 
+	//將分數傳入並進行修改
+	@PostMapping(value="/scoreNum/{pk}" , consumes = { "application/json" }, produces = { "application/json" })
+	public Map<String, String> updateScoreByPk(@RequestBody CRBean cb, @PathVariable Integer pk ){
+		Map<String, String> map = new HashMap<>();
+		CRBean cb0 = null;
+		cb0 = service.getReportById(pk);
+		cb0.setCrReScore(cb.getCrReScore());
+		try {
+			service.updateReport(cb0);
+			map.put("success", "評分成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("fail", "評分系統出錯，暫時無法處理評分。");
+		}
+		return map;
+		
+	}
+	
+	
 //	@ModelAttribute("cb0")
 //	public CRBean editCrBean(@RequestParam(value="pk", required=false) Integer pk) {
 //		CRBean cb0; 

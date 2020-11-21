@@ -43,7 +43,7 @@
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">
               <i class="ti-shield menu-icon"></i>
-              <span class="menu-title">回首頁</span>
+              <span class="menu-title">首頁</span>
             </a>
           </li>
           <li class="nav-item">
@@ -56,6 +56,7 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllNews'/>">新聞商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getBackAdsTotalEnd'/>">廣告報表</a></li>
               </ul>
             </div>
           </li>
@@ -74,8 +75,9 @@
             </a>
             <div class="collapse" id="aaa">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getAllMtAdd">會員文章總覽 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/getAllMemArticle"> 個人發文紀錄查詢 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllMtAdd'/>">會員文章總覽 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllMemArticle'/>">個人發文紀錄查詢 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/MtArtReport'/>">社群數據分析 </a></li>
               </ul>
             </div>
           </li>

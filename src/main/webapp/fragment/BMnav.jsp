@@ -49,14 +49,14 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="ti-palette menu-icon"></i>
-              <span class="menu-title">商品類</span>
+              <span class="menu-title">廣告商品管理系統</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllNews'/>">新聞商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getBackAdsTotalEnd'/>">廣告報表</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">廣告商品訂單列表</a></li>
               </ul>
             </div>
           </li>
@@ -92,14 +92,14 @@
 		<li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
               <i class="ti-view-list-alt menu-icon"></i>
-              <span class="menu-title">訂單管理系統</span>
+              <span class="menu-title">新聞訂單管理系統</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-order">
               <ul class="nav flex-column sub-menu">
+              	<li class="nav-item"> <a class="nav-link" href="<c:url value='/getAllNews'/>">新聞商品列表</a></li>
               	<li class="nav-item"> <a class="nav-link" href="<c:url value='/OrderListForBB'/>">新聞訂單列表</a></li>
               	<li class="nav-item"> <a class="nav-link" href="<c:url value='/getNewsTypeForBB'/>">新聞訂單報表</a></li>            	
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">廣告商品訂單列表</a></li>
               </ul>
             </div>
           </li>

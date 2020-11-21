@@ -35,6 +35,7 @@ public class AdOrderItemBean {
 	private Integer quantity;			//訂購的數量
 	
 	private String sellerMemberId;		//^^^^賣家會員帳號
+	private String sellerMemberName;		//^^^^賣家會員帳號
 	private String buyerMemberId;		//賣家會員帳號
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
@@ -66,7 +67,7 @@ public class AdOrderItemBean {
 
 	//有傳參數的建構子
 	public AdOrderItemBean(Integer itemPk,Integer adPk, String adNo, Integer unitPrice, Integer quantity, String sellerMemberId,
-			String buyerMemberId, String categoryNo, Double width, Double height, Date adDate, Timestamp soldDate) {
+			String sellerMemberName, String buyerMemberId, String categoryNo, Double width, Double height, Date adDate, Timestamp soldDate) {
 		super();
 		this.itemPk = itemPk;
 		this.adPk = adPk;
@@ -80,6 +81,7 @@ public class AdOrderItemBean {
 		this.height = height;
 		this.adDate = adDate;
 		this.soldDate = soldDate;
+		this.sellerMemberName = sellerMemberName;
 	}
 
 	public Integer getItemPk() {
@@ -232,6 +234,14 @@ public class AdOrderItemBean {
 
 	public void setSoldDate(Timestamp soldDate) {
 		this.soldDate = soldDate;
+	}
+
+	public String getSellerMemberName() {
+		return sellerMemberName;
+	}
+
+	public void setSellerMemberName(String sellerMemberName) {
+		this.sellerMemberName = sellerMemberName;
 	}
 	
 	

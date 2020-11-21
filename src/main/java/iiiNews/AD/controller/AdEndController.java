@@ -87,4 +87,10 @@ public class AdEndController {
 		return map;
 	}
 	
+	@GetMapping("/getAllOrderPriceAndCount.map")
+	public @ResponseBody Map<String, Integer> allOrderPriceAndCount(Model model){
+		Map<String, Integer> map = adEndService.allOrderPriceAndCount();
+		return map;
+	}
+	
 }

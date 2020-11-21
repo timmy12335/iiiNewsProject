@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -29,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import iiiNews.AD.model.AdOrderBean;
 import iiiNews.AD.model.AdOrderItemBean;
@@ -133,7 +133,7 @@ public class AdOrderController {
 	@PostMapping("/getOneItem/{itemPk}")
 	public String UploadItemPic(Model model,
 							@ModelAttribute("oneItem") AdOrderItemBean oneItemBean,
-							@PathVariable int itemPk) {
+							@PathVariable int itemPk,RedirectAttributes redirectAtt) {
 		MultipartFile productImage = oneItemBean.getProductImage();
 		System.out.println("productImage:-->" +productImage);
 		//拿它原來的檔名取出來放到我們一個叫做FileName欄位
@@ -165,7 +165,9 @@ public class AdOrderController {
 		System.out.println(n+"更改成功");
 //		model.addAttribute("oneItem", oneItemBean);
 //		return "AD/orders/showOneItem";
-		return "redirect:/";
+		redirectAtt.addFlashAttribute("FlashMSG_uploadPictureSuccess", "成功上傳照片，編號："+originBean.getAdNo());
+		int adOrderPk = originBean.getAdOrderBean().getAdOrderPk();
+		return "redirect:/getItemByOrderPk/"+adOrderPk;
 	}
 	
 	//從資料庫取得該圖片 來顯示在畫面上
@@ -198,8 +200,8 @@ public class AdOrderController {
 		//這裡要用到ServletContext servletContext 要先去前面定義這個Bean並且@Autowired
 		if (is == null) {
 			System.out.println("is is null");
-			is = servletContext.getResourceAsStream("/image/Logo.png");
-			mimeType = servletContext.getMimeType("Logo.png");
+			is = servletContext.getResourceAsStream("/img/notupload_default.jpg");
+			mimeType = servletContext.getMimeType("notupload_default.jpg");
 		}
 		
 		

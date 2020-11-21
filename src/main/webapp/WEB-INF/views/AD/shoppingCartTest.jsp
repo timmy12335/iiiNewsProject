@@ -110,7 +110,8 @@ function confirmDelete(n) {
 																</c:choose>
 															</p>
 															<p class="mb-2 text-muted text-uppercase small">販售之上架日期：${ad.value.adDate}</p>
-															<p class="mb-3 text-muted text-uppercase small">賣家名稱 / 帳號：${ad.value.sellerMemberId}</p>
+<%-- 															<p class="mb-3 text-muted text-uppercase small">賣家名稱 / 帳號：${ad.value.sellerMemberId}</p> --%>
+															<p class="mb-3 text-muted text-uppercase small">賣家名稱 / 帳號：${ad.value.sellerMemberName}</p>
 														</div>
 														<div>
 															<div

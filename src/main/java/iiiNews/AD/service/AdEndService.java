@@ -8,4 +8,6 @@ public interface AdEndService {
 	public Map<String, Integer> eachCateCount(ArrayList<String> array,String cpmemberId);
 	
 	public Map<String, Integer> eachCatePrice(String cpmemberId);
+	
+	public Map<String, Integer> allOrderPriceAndCount();
 }

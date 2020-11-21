@@ -91,7 +91,7 @@ public class MtAjaxController {
 	
 	@GetMapping("/getAllMtAdd")			//查詢所有的文章***後台部分
 	public String getAllMtList(){	
-		return "MT/getAllMtAdd";
+		return "MT/getAllMtAddAjax";	//getAllMtAdd.jsp為無Ajax版本
 	}
 	
 	//以類別來搜尋 (限制上架)

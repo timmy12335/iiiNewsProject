@@ -77,7 +77,7 @@ public class AdBuyingController {
 		String sellername = adbean.getMemberId();
 		Timestamp soldDate = new Timestamp(System.currentTimeMillis());
 		AdOrderItemBean aoib = new AdOrderItemBean(null, adbean.getAdPk(), adbean.getAdNo(), adbean.getPrice(),
-										quantity, sellername, buyername, adbean.getCategoryNo(), adbean.getWidth(),
+										quantity, sellername,adbean.getMemberName(), buyername, adbean.getCategoryNo(), adbean.getWidth(),
 										adbean.getHeight(), adbean.getAdDate(),soldDate);
 		//+++++ 改寫到service
 		cart.addToCart(adPk, aoib);

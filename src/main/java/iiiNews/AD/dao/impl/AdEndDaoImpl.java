@@ -35,4 +35,12 @@ public class AdEndDaoImpl implements AdEndDao {
 		
 		return list;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<AdOrderItemBean> allOrderFunction(){
+		String hql = "FROM AdOrderItemBean";
+		Session session = factory.getCurrentSession();
+		List<AdOrderItemBean> list = session.createQuery(hql).getResultList();
+		return list;
+	}
 }

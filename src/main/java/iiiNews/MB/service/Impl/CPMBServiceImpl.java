@@ -53,16 +53,28 @@ public class CPMBServiceImpl implements CPMBService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Transactional
 	@Override
 	public CpMemberBean cplogin(String account, String password) {
 		System.out.println("service");
 		return cpmbdao.cplogin(account, password);
 	}
-	
+
 	@Transactional
 	@Override
 	public boolean idcpExists(String id) {
 		return cpmbdao.idcpExists(id);
+	}
+
+	@Override
+	public CpMemberBean get(Integer id) {
+		return cpmbdao.get(id);
+	}
+
+	@Transactional
+	@Override
+	public List<CpMemberBean> getAllMembers() {
+		return cpmbdao.getAll();
 	}
 }

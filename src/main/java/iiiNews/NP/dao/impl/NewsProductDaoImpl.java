@@ -106,7 +106,7 @@ public class NewsProductDaoImpl implements NewsProductDao {
 	@Override
 	public List<NewsBean> getUpMemNews(String memberId) {
 		Timestamp statusTime = new Timestamp(System.currentTimeMillis());
-		String hql0 = "UPDATE NewsBean set status=0 WHERE futureTime < :sTime";
+		String hql0 = "UPDATE NewsBean set status=0 WHERE futureTime < :sTime AND status = 1 ";
 		String hql = "FROM NewsBean WHERE memberId = :memId "
 				+ "AND status = 1 ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();

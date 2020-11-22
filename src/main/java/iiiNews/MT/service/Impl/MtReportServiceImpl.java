@@ -1,6 +1,7 @@
 package iiiNews.MT.service.Impl;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class MtReportServiceImpl implements MtReportService{
 
 	@Override
 	public Map<String, Long> getMtArtTotalReport() {
-		Map<String, Long> map = new HashMap<>();
+		Map<String, Long> map = new LinkedHashMap<>();		//用LinkedHashMap排序才會正確
 		map.put("未分類", mtReportDao.getMtArtTotalReport("未分類", 1));
 		map.put("生活", mtReportDao.getMtArtTotalReport("生活", 1));
 		map.put("娛樂", mtReportDao.getMtArtTotalReport("娛樂", 1));

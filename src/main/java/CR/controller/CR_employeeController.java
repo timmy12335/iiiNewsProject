@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import CR.model.CRemployee;
 import CR.service.CR_empService;
+import CR.validation.CRempValidator;
 
 @Controller
 public class CR_employeeController {
@@ -51,9 +53,16 @@ public class CR_employeeController {
 	}
 	
 	@PostMapping("/addemployee")
-	public String processemp(@ModelAttribute("cremployee") CRemployee cre, Model model, BindingResult bindingresult) {
+	public String processemp(@ModelAttribute("cremployee") CRemployee cre) {
+//		new CRempValidator().validate(cre, bindingResult);
+//		if (bindingResult.hasErrors()) {
+//			System.out.println("應該要進來");
+//			return "CR/addemp";
+//		}
+		
 		service.addemployee(cre);
 		return "redirect:/allemployee";	
+		
 	}
 	
 	@DeleteMapping(value="/allemployee/{empPk}")

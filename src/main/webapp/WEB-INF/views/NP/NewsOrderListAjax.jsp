@@ -162,7 +162,7 @@ function displayNewsOrderList(responseData){
 	</nav>
 	<div align='center' style="margin-top: 150px;">
 		
-		<h2>企業訂單列表<small></small></h2>
+		<h2>企業會員「${CpMemberBean.cpname}」，你好&nbsp;&nbsp;這是您的訂單列表<small></small></h2>
 		<hr>
 		<div  class="container" id='somedivS'></div>
 		

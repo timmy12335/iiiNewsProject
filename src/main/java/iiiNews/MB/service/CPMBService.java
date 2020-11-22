@@ -18,8 +18,12 @@ public interface CPMBService {
 	public List<CpMemberBean> getCpMember(String cpname);
 
 	void addCpMember(CpMemberBean cpmember);
-	
+
 	public CpMemberBean cplogin(String account, String password);
 
 	public boolean idcpExists(String id);
+
+	CpMemberBean get(Integer id);
+
+	List<CpMemberBean> getAllMembers();
 }

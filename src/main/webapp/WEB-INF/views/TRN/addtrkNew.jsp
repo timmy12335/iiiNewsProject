@@ -62,8 +62,15 @@ fieldset {
 						類型 </label>
 					<div class='col-lg-10'>
 						<form:select path="type">
-							<form:option value="-1" label="請挑選" />
-							<form:options items="${typeList}" />
+							<form:option value="" label="請挑選" >請挑選 </form:option>
+							<form:option value="">社會</form:option>
+							<form:option value="">國際</form:option>
+							<form:option value="">政治 </form:option>
+							<form:option value="">科技</form:option>
+							<form:option value="">生活</form:option>
+							<form:option value="">娛樂</form:option>
+							<form:option value="">地方</form:option>
+							<%-- <form:options items="${typeList}" /> --%>
 						</form:select>
 					</div>
 				</div>
@@ -76,11 +83,30 @@ fieldset {
 							class='form:input-large' />
 					</div>
 				</div>
+				
+				<div class="form-group" style="display:none">
+					<label class='control-label col-lg-2 col-lg-2' for="price">
+						點閱次數</label>
+					<div class='col-lg-10'>
+						<form:input id="clicnum" path="clicnum" type='text'
+							class='form:input-large' />
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<label class='control-label col-lg-2 col-lg-2' for="bookNo">
 						發生時間 </label>
 					<div class='col-lg-10'>
 						<form:input  data-format="yyyy-MM-dd" id="octime" path="octime" type='text' style="width:118px"
+							class='form:input-large' />
+					</div>
+				</div>
+
+                 <div class="form-group" style="display:none">
+					<label class='control-label col-lg-2 col-lg-2' for="bookNo">
+						建立時間 </label>
+					<div class='col-lg-10'>
+						<form:input  data-format="yyyy-MM-dd" id="fondtime" path="fondtime" type='text' style="width:118px"
 							class='form:input-large' />
 					</div>
 				</div>
@@ -105,6 +131,8 @@ fieldset {
     				    <img class='i6' style="display:;" id="preview_progressbarTW_img" src="#" />
     				</div>
 				</div> 
+				
+			
 				
 				<div class="form-group">
 					<div class='col-lg-offset-2 col-lg-10'>

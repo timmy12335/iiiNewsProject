@@ -76,9 +76,9 @@ window.onload = function() {
 <body>
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
 	
-		<div align="center" style="margin-top: 30px;">
-			<h2>數據分析</h2>
-		</div>
+<!-- 		<div align="center" style="margin-top: 30px;"> -->
+<!-- 			<h2>數據分析</h2> -->
+<!-- 		</div> -->
 		
 		<figure class="highcharts-figure">
     		<div id="container"></div>

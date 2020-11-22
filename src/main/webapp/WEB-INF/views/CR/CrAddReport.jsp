@@ -129,7 +129,7 @@ border:2px green solid;
 			};
 
 			socket.onmessage = function(event) {
-				appendMsg("Server: " + event.data);
+				appendMsg("新聞金錢客服豹: " + event.data);
 			};
 			btnClose.disabled = false;
 			btnSend.disabled = false;
@@ -138,7 +138,7 @@ border:2px green solid;
 					status.innerHTML = "[close] 連線正常關閉, code=" + event.code
 							+ ", reason= " + event.reason;
 				} else {
-					status.innerHTML = "[close] 連線不正常結束";
+					status.innerHTML = "[close] 客服連線中斷";
 				}
 				btnClose.disabled = true;
 				btnSend.disabled = true;
@@ -146,7 +146,7 @@ border:2px green solid;
 			};
 
 			socket.onerror = function(error) {
-				alert("[error] 連線發生錯誤，原因：" + error.message);
+				alert("[error] 客服連線發生錯誤，原因：" + error.message);
 			};
 		}
 

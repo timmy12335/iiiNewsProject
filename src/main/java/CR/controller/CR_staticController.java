@@ -41,4 +41,18 @@ public class CR_staticController {
 		return map;		
 	}
 	
+	@GetMapping("/calCRfromAll")
+	public @ResponseBody Map<String, Long> calAllFromEmp(){
+		Map<String, Long> map = service.calAllFromEmp();
+		System.out.println(map);
+		return map;		
+	}
+	
+	@GetMapping("/calCRfromDone")
+	public @ResponseBody Map<String, Integer> calDoneFromEmp(){
+		Map<String, Integer> map = service.calDoneFromEmp();
+		System.out.println(map);
+		return map;		
+	}
+	
 }

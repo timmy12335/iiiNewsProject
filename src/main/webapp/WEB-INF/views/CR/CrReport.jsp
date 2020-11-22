@@ -25,7 +25,7 @@
 	href="${pageContext.request.contextPath}/images/favicon.png" />
 <style>
 .box {
-	width: 60px;
+	width: 30px;
 	padding: 10px;
 }
 
@@ -85,9 +85,7 @@
 
 	<%-- 		<jsp:include page="/fragment/navbar.jsp"></jsp:include> --%>
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
-<div class="row">
 
-		<div class='col-md-12 grid-margin stretch-card'>
 
 			<div class="card">
 				<div class='card-body' style='background: #F0F0F0'>
@@ -136,16 +134,16 @@
 						<td align='center'>${ser.cremployee.empName}</td>
 						<td align='center'><fmt:formatDate value="${ser.crReDate}"
 								pattern="yyyy-MM-dd" /></td>
-						<td><button id="btn_update"
+						<td><div><button id="btn_update"
 								class="btn btn-outline-secondary btn-icon-text btn-sm"
 								onclick="updateCrReport(${ser.pk})">
 								回覆<i class="ti-pencil-alt btn-icon-append"></i>
-							</button>
+							</button></div><div style="margin-top:10px;">
 							<button id="btn_delete"
 								class="btn btn-outline-danger btn-icon-text btn-sm"
 								onclick="deleteCrReport(${ser.pk})" >
 								刪除<i class="ti-trash btn-icon-append"></i>
-							</button></td>
+							</button></div></td>
 							
 					</tr>
 					<tr>
@@ -167,8 +165,6 @@
 	<hr>
 	<button onclick='history.back()' class="btn btn-primary">回前頁</button>
 	
-	</div>
-	</div>
 	</div>
 	</div>
 

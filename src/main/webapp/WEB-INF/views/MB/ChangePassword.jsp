@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<td>輸入新密碼確認：</td>
-					<td><input type="password" name="memberNewPassword"
+					<td><input type="password" name="memberNewPassword1"
 							id='memberNewPassword1' /></td>
 				</tr>
 				<tr align="center">

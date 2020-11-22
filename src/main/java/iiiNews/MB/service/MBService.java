@@ -1,6 +1,8 @@
 package iiiNews.MB.service;
 
 import java.util.List;
+
+
 import iiiNews.MB.model.MBBean;
 
 public interface MBService {
@@ -17,4 +19,6 @@ public interface MBService {
 	public List<String> seachMemberaccount();
 	public MBBean getProductById(int memberId);
 	public  boolean CheckPassword(String oldpwd, String newpwd, Integer id);
+	MBBean get(Integer id);
+	List<MBBean> getAllMembers();
 }

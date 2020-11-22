@@ -124,7 +124,7 @@ public class trkNewsController {
 				Timestamp adminTime = new Timestamp(System.currentTimeMillis());
 				//String tsStr = "yyyy-mm-dd hh:mm:ss [.fffff]";
 				//adminTime = Timestamp.valueOf(tsStr);
-				
+				tb.setClicnum(1);
 				tb.setFondtime(adminTime);
 				tb.setOctime(adminTime);
 				model.addAttribute("trkNewsBean", tb); 

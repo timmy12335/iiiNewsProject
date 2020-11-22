@@ -62,7 +62,7 @@ g-recaptcha {
 </style>
 </head>
 <body>
-	<nav>
+	<nav class="nav fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<section style="margin-top: 100px;" align="center">
@@ -77,18 +77,19 @@ g-recaptcha {
 							<div class="form-group" align="left">
 								<label for="userId">登入帳號：</label>
 								<form:input type="text" path="userId" class="form-control"
-										id='cpmemberId' placeholder="輸入帳號" />
+									id='cpmemberId' placeholder="輸入帳號" />
 								<form:errors style="color:red;font-size:12px"
-										path="invalidCredentials"></form:errors>
+									path="invalidCredentials"></form:errors>
 							</div>
 							<div class="form-group" align="left">
 								<label for="password">登入密碼：</label>
-								<form:input type="password" path="password"
-										class="form-control" id='password' placeholder="輸入密碼" />
+								<form:input type="password" path="password" class="form-control"
+									id='password' placeholder="輸入密碼" />
 							</div>
 							<div class="form-group" align="left">
-								<label align="center" colspan='2'></label><form:checkbox
-										path="rememberMe" /><span class="text-muted">記住密碼</span>
+								<label align="center" colspan='2'></label>
+								<form:checkbox path="rememberMe" />
+								<span class="text-muted">記住密碼</span>
 							</div>
 							<div class="form-group" align="left">
 								<label colspan='5' id="grecaptcha" class="g-recaptcha"
@@ -97,11 +98,32 @@ g-recaptcha {
 							<div class="form-group" align="left">
 								<label colspan='2' id="g-recaptcha-error"></label>
 							</div>
-							<div>
+							<div class="form-group" align="center">
 								<label colspan="2" style="text-align: center;"></label><input
-									type="submit" name="submit" value="登入" class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="/UserMB" class="btn btn-info">註冊</a>
+									type="submit" name="submit" value="登入"
+									class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="<c:url value='/UserMB' />" class="btn btn-info">註冊</a>
 							</div>
+							<button type="button"
+								class="btn btn-social-icon btn-facebook btn-rounded">
+								<i class="ti-facebook"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-google btn-rounded">
+								<i class="ti-google"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-twitter btn-rounded">
+								<i class="ti-twitter-alt"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-youtube btn-rounded">
+								<i class="ti-youtube"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</form:form>
 	</section>
 	<script src="https://www.google.com/recaptcha/api.js"></script>

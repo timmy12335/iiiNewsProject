@@ -104,7 +104,7 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 	<div class="container-fluid">
 		<div align='center' style="margin-top: 150px;">
 			<h3>
-				<b>會員${MBBean.memberId}已上架新聞列表</b>
+				<b>會員「${MBBean.name}」，您好&nbsp;&nbsp;這是您的已上架新聞列表</b>
 			</h3>
 			<c:choose>
 				<c:when test="${empty upMemNewsList}">

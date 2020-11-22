@@ -21,11 +21,11 @@
 
 	<div class='card-body'>
 		<h3>客服人員管理</h3>
-		<div class="row align-items-center" style='margin-bottom:10px;'>
+		<div class="row align-items-center">
 
 			<div class="col-md-4">
 				<div class="form-group row">
-					<label class="col-sm-4 col-form-label ">姓名搜尋：</label>
+					<label class="col-sm-4 col-form-label ">關鍵字搜尋：</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control form-control-sm"
 							id="wordChoose" onkeyup="searchByWord()" />
@@ -35,13 +35,13 @@
 			<div class="col-md-4">
 				<div class="form-group row">
 
-					<label class="col-sm-4 col-form-label">人員狀態：</label>
+					<label class="col-sm-4 col-form-label">回覆狀態：</label>
 					<div class="col-sm-8">
 						<select id="isstay" onchange="searchByisStay()"
 							class="form-control form-control-sm">
-							<option value="1">上班</option>
-							<option value="0">下班</option>
-							<option value="-1">全部</option>
+							<option value="全部">全部</option>
+							<option value="已回覆">已回覆</option>
+							<option value="未回覆">未回覆</option>
 						</select>
 					</div>
 				</div>
@@ -56,10 +56,6 @@
 				</div>
 			</div>
 		</div>
-		<div>
-				<a href=<c:url value='/addemployee'/>><button
-				class='btn btn-primary btn-icon-text btn-sm' id='add'>新增客服人員</button></a>
-				</div>
 		<div id='somedivS'></div>
 		<div id='navigation'></div>
 		<hr>
@@ -79,60 +75,66 @@
 		}
 
 		function displayPageEmps(responseData) {
-			var content = "<table class='table' style='table-layout: fixed;width:1120px;word-break: break-all'><thead style='background-color:#6FB7B7'><tr><th>客服編號</th>";
-			content += "<th>客服姓名</th>";
-			content += "<th>客服帳號</th>";
-			content += "<th style='width:200px;'>客服信箱</th>";
-			content += "<th>入職日期</th><th>處理中客服</th><th>已完成客服</th>";
-			content += "<th>狀態</th><th>功能</th></tr></thead>";
+			var content = "<table class='table table-striped'><thead><tr><th>客服單號</th>";
+			content += "<th>會員姓名</th>";
+			content += "<th>客服類別</th>";
+			content += "<th>客服標題</th>";
+			content += "<th>客服內容</th><th>申請日期</th><th>回覆內容</th>";
+			content += "<th>回覆人員</th><th>回覆時間</th><th>功能</th></tr></thead>";
 			var emp = JSON.parse(responseData); // 傳回一個陣列
 			console.log(emp);
 			var bgColor = ""; // 每一項商品的背影 
-			for (var i = (emp.length-1); i >=0; i--) {
-				console.log(emp[i].isstay);
-				if (emp[i].isstay == "0") {
-					bgColor = "	#FFF3EE";
-				} else if (emp[i].isstay == "1") {
-					bgColor = "	#F5FFE8";
+			for (var i = 0; i < emp.length; i++) {
+				
+				if (emp[i].crReContent == "未回覆") {
+					bgColor = "#FFCBB3";
+				} else if (emp[i].crReContent == "已回覆") {
+					bgColor = "#DDDDFF";
 				} else {
-					bgColor = "	#ECF5FF"
+					bgColor = "#d4f5b2"
 				}
 				content += "<tr height='80' bgcolor='" + bgColor + "'>" +
 				// 							"<td class='text-center'>" + (i+1) + "&nbsp;</td>" + 
 				"<td class='text-center'>"
-						+ emp[i].empPk
+						+ emp[i].pk
 						+ "&nbsp;</td>"
 						+ "<td class='text-center'>"
-						+ emp[i].empName
+						+ emp[i].mbBean.name+emp[i].cpBean.cpname
 						+ "</td>"
 						+ "<td class='text-center'>"
-						+ emp[i].empId
+						+ emp[i].crClass
 						+ "</td>"
 						+ "<td class='text-center'>"
-						+ emp[i].empemail
+						+ emp[i].crTitle
 						+ "&nbsp;</td>"
 						+ "<td class='text-center'>"
-						+ emp[i].applyDate
+						+ emp[i].crContent
 						+ "</td>"
 						+ "<td class='text-right'>"
-						+ emp[i].untreatamt
+						+ emp[i].crApplyDate
 						+ "</td>"
 						+ "<td class='text-center'>"
-						+ emp[i].replyamt
+						+ emp[i].crReContent
 						+ "</td>"
 						+ "<td class='text-center'>"
-						+ transisstay(emp[i].isstay)
+						+ emp[i].cremployee.empName
+						+ "</td>"
+						+ "<td class='text-center'>"
+						+ emp[i].cremployee.empName
+						+ "</td>"
+						+ "<td class='text-center'>"
+						+ emp[i].crReDate
 						+ "</td>"
 						+ "<td class='text-center'>"
 						+ "<button onclick='show("
 						+ (i)
-						+ ")' type='button' class='btn btn-info btn-sm'>修改<i class='ti-pencil-alt'></i></button><br>"
+						+ ")' type='button' class='btn btn-info'>修改<i class='ti-pencil-alt'></i></button><br>"
 						+ "<button onclick='returnCrReport("
 						+ emp[i].empPk
-						+ ")' type='button' class='btn btn-info btn-icon-text btn-sm'>上班<i class='ti-trash btn-icon-append'></i></button><br>"
+						+ ")' type='button' class='btn btn-info btn-icon-text'>上班<i class='ti-trash btn-icon-append'></i></button><br>"
 						+ "<button onclick='deleteCrReport("
 						+ emp[i].empPk
-						+ ")' type='button' class='btn btn-danger btn-icon-text btn-sm'>下班<i class='ti-trash btn-icon-append'></i></button>"
+						+ ")' type='button' class='btn btn-danger btn-icon-text'>下班<i class='ti-trash btn-icon-append'></i></button>"
 						+
 
 						// 			               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +
@@ -140,7 +142,7 @@
 						// 							"<input type='hidden' name='adPk' value='"+ad[i].adPk+"'>" + 
 						// 							"<input type='submit' class='cartBtn' value='加入購物車' /></form>" + 
 						"</td></tr>"
-						+ "<tr height='80' style='display:none;' bgcolor="+bgColor+ " id=up"
+						+ "<tr height='80' style='display:none;' id=up"
 						+ (i)
 						+ ">"
 						+ "<td class='text-center'><input type='text' size='3' name='empPk' id=emppk"
@@ -166,7 +168,7 @@
 						+ "<td></td><td></td><td></td>"
 						+ "<td class='text-center'><button onclick='send("
 						+ i
-						+ ")' type='button' class='btn btn-info btn-sm'>確認修改<i class='ti-pencil-alt'></i></button></td>"
+						+ ")' type='button' class='btn btn-info'>確認修改<i class='ti-pencil-alt'></i></button></td>"
 						+ "<td></td>"
 				"</tr>";
 
@@ -325,18 +327,17 @@
 	<script>
 		window.onload = loading();
 		function loading() {
-			var origincontent = "<table class='table table-striped'><thead><tr><th>客服編號</th>";
-			origincontent += "<th>客服姓名</th>";
-			origincontent += "<th>客服帳號</th>";
-			origincontent += "<th>客服信箱</th>";
-			origincontent += "<th>入職日期</th><th>處理中客服</th><th>已完成客服</th>";
-			origincontent += "<th>狀態</th><th>功能</th></tr></thead>";
+			var origincontent = "<table class='table table-striped'><thead><tr><th>客服單號</th>";
+			origincontent += "<th>會員姓名</th>";
+			origincontent += "<th>客服類別</th>";
+			origincontent += "<th>客服標題</th>";
+			origincontent += "<th>客服內容</th><th>申請日期</th><th>回覆內容</th>";
+			origincontent += "<th>回覆人員</th><th>回覆時間</th><th>功能</th></tr></thead>";
 			origincontent += "<tr><td colspan='9'><b>請選擇欲搜尋的類別</b></td></tr></table>";
 			document.getElementById("somedivS").innerHTML = origincontent;
 
 			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "<c:url value='/creemployee' />" + "?isstay=1",
-					true);
+			xhr.open("GET", "<c:url value='/getAll' />", true);
 			// 	xhr.open("GET", "<c:url value='/getAdByAjax.json' />", true);
 			xhr.send();
 

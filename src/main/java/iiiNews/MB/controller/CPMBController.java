@@ -186,4 +186,10 @@ public class CPMBController {
 		session.invalidate();
 		return "redirect: " + req.getContextPath();
 	}
+	
+	@GetMapping("/showCpAllMembers")
+	public String list(Model model) {
+		model.addAttribute("cpmembers", service.getAllMembers());
+		return "MB/CpAllmember";
+	}
 }

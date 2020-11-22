@@ -54,7 +54,17 @@
 		.spstyle{
 			
 			font-size:20px;
-			font-meight:bold;
+			font-weight:bold;
+			text-shadow:
+				-1px -1px 0 #000,
+				
+				1px -1px 0 #000,
+				
+				-1px 1px 0 #000,
+				
+				1px 1px 0 #000,
+				
+				1px 1px 1px #656566;
 		}
 		
 </style>
@@ -63,13 +73,14 @@
 	<nav class="navbar fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-
-
+		
 
 	<div class="container" >	
 		
 		<div style="margin-top:150px;">
-			<h3 align="center"><b>新聞上傳</b></h3>	
+			<h3 align="center">
+				<b>會員「${MBBean.name}」，您好&nbsp;&nbsp;歡迎您上傳新聞</b>
+			</h3>			
 			<form:form method="POST" id="form1" modelAttribute="newsBean" enctype="multipart/form-data" class="formstyle">				
 				<fieldset>	
 						
@@ -202,42 +213,42 @@
 					$("#title").blur(function() {
 						let NameObjValLen = $("#title").val().length;
 						if ($("#title").val() == "") {
-							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>請輸入標題").attr("style","color:red");
+							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>&ensp;請輸入標題").attr("style","color:#63fffc");
 						} else if (NameObjValLen >= 5) {
-							$("#idspNews-title").text("正確 !").attr("style","color:green");
+							$("#idspNews-title").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
 						} else {
-							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>請大於五個字")
+							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>&ensp;請大於五個字").attr("style","color:#63fffc");
 						}
 					})
 					//發生地點需大於一個字
 					$("#location").blur(function() {
 						let NameObjValLen = $("#location").val().length;
 						if ($("#location").val() == "") {
-							$("#idspNews-location").html("<i class='fas fa-times-circle'></i>請輸入地點")
+							$("#idspNews-location").html("<i class='fas fa-times-circle'></i>&ensp;請輸入地點").attr("style","color:#63fffc");
 						} else {
-							$("#idspNews-location").text("正確 !")
+							$("#idspNews-location").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
 						}
 					})
 					//新聞大綱需大於一百字且小於一百字	
 					$("#outline").blur(function() {
 						let NameObjValLen = $("#outline").val().length;
 						if ($("#outline").val() == "") {
-							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>請輸入大綱")
+							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>&ensp;請輸入大綱").attr("style","color:#63fffc");
 						} else if (NameObjValLen >= 20) {
-							$("#idspNews-outline").text("正確 !")
+							$("#idspNews-outline").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
 						} else {
-							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>請大於二十字")
+							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>&ensp;請大於二十字").attr("style","color:#63fffc");
 						}
 					})
 					//新聞內文需大於一百字且小於一千字	
 					$("#article").blur(function() {
 						let NameObjValLen = $("#article").val().length;
 						if ($("#article").val() == "") {
-							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>請輸入內文")
+							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>&ensp;請輸入內文").attr("style","color:#63fffc");
 						} else if (NameObjValLen >= 100) {
-							$("#idspNews-article").text("正確 !")
+							$("#idspNews-article").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
 						} else {
-							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>請大於一百字")
+							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>&ensp;請大於一百字").attr("style","color:#63fffc");
 						}
 					})
 				</script>

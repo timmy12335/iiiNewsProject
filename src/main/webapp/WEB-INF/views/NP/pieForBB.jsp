@@ -30,6 +30,7 @@
      				
      				newsTypeNum = JSON.parse(responseData);
      				newsTypeCount = JSON.parse(responseData0);
+     				//總金額
      				var sum = 0;
      				for(var key in newsTypeCount){
      					sum += newsTypeCount[key]
@@ -37,7 +38,13 @@
      				}
      				document.getElementById("totalprice").innerHTML="$"+sum;
      				console.log("總和="+sum)
-//     				alert(sum)
+     				//總筆數
+     				var sum0 = 0;
+     				for(var key0 in newsTypeNum){
+     					sum0 += newsTypeNum[key0]
+     				}
+     				document.getElementById("totalNum").innerHTML=sum0+"筆";
+     				console.log("總比數="+sum0);
      				
 //     				console.log(newsTypeNum);
      				console.log(newsTypeCount);
@@ -80,7 +87,13 @@
 		<div class="container" style="position: relative;">
 		<div class="row">
 		<div class="col-8"></div>
-		<div class="col-2"></div>
+		<div class="card col-2" style="width: 200px">
+				<div class="card-body" >
+					<div class="card-title" style="font-size:20px">銷售總筆數</div>
+					<div class="card-text" id="totalNum" style="font-size:20px"></div>
+
+				</div>		
+		</div>
 			<div class="card col-2" style="width: 200px">
 				<div class="card-body" >
 					<div class="card-title" style="font-size:20px">銷售總金額</div>

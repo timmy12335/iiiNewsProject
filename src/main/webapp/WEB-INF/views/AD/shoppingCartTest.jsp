@@ -225,17 +225,17 @@ function confirmDelete(n) {
 							<button type="button"
 								class="btn btn-outline-danger btn-block waves-effect waves-light"
 								onclick='location.href="<c:url value='/removeShoppingCart.returnCartPage' />"'>
-								清空購物車&nbsp<i class="fa fa-frown-o" aria-hidden="true"></i></button>
+								清空購物車&nbsp;&nbsp;&nbsp;<i class="fa fa-frown-o" aria-hidden="true"></i></button>
 
 							<button type="button"
 								class="btn btn-outline-info btn-block waves-effect waves-light"
 								onclick='location.href="<c:url value='/getAjaxListSearch' />"'>
-								繼續購物&nbsp&nbsp&nbsp<i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+								繼續購物&nbsp;&nbsp;&nbsp;<i class="fa fa-cart-plus" aria-hidden="true"></i></button>
 
 							<button type="button"
 								class="btn btn-primary btn-block waves-effect waves-light"
 								onclick="checkoutfunction(${fn:length(shoppingCart.content)},'${showmemberId}')">
-								送出訂單&nbsp&nbsp&nbsp<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+								送出訂單&nbsp;&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 
 
 						</div>
@@ -247,7 +247,7 @@ function confirmDelete(n) {
 						<div class="card-body">
 							<a class="dark-grey-text d-flex justify-content-between"
 								data-toggle="collapse" href="#collapseExample"
-								aria-expanded="false" aria-controls="collapseExample"> 加入折扣代碼 (optional) 
+								aria-expanded="false" aria-controls="collapseExample"> 加入折扣代碼 (optional)<span class="text-danger">${FlashMSG_discountFail}</span>
 								<span><i class="fas fa-chevron-down pt-1"></i></span>
 							</a>
 
@@ -257,7 +257,9 @@ function confirmDelete(n) {
 										<input type="text" id="discountStr" name="discountStr"
 											class="form-control font-weight-light"
 											placeholder="Enter discount code">
-										<button onclick="godiscount()">go</button>
+									</div>
+									<div class="mt-2">
+										<button onclick="godiscount()" class="btn btn-primary btn-block waves-effect waves-light">享受折扣&nbsp;&nbsp;&nbsp;<i class="fas fa-tags"></i></button>
 									</div>
 								</div>
 							</div>

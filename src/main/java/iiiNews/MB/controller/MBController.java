@@ -1,5 +1,7 @@
 package iiiNews.MB.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,13 +35,13 @@ import iiiNews.MB.validate.LoginBeanValidator;
 import iiiNews.MB.validate.UserBeanValidator;
 
 @Controller
-@SessionAttributes({"MBBean","CpMemberBean"})
+@SessionAttributes({ "MBBean", "CpMemberBean" })
 public class MBController {
 	@Autowired
 	ServletContext ctx;
 	@Autowired
 	MBService service;
-	
+
 	@RequestMapping(value = "/Forget", method = RequestMethod.GET)
 	public String forget() {
 		return new String("/MB/Forget");
@@ -76,15 +79,14 @@ public class MBController {
 			result.rejectValue("memberId", "", "*帳號已存在，請重新輸入");
 			return "MB/Member";
 		}
-			service.addMember(mb);
-			model.addAttribute("mb", mb);
-			return "MB/UserList";
-		}
-	
-	@GetMapping("/Member_SMS")    //簡訊
-	public String sms(@ModelAttribute("SMS") MBBean mb, Model model, BindingResult result ,
-			@RequestParam(value="phone")String mobile
-			) {
+		service.addMember(mb);
+		model.addAttribute("mb", mb);
+		return "MB/UserList";
+	}
+
+	@GetMapping("/Member_SMS") // 簡訊
+	public String sms(@ModelAttribute("SMS") MBBean mb, Model model, BindingResult result,
+			@RequestParam(value = "phone") String mobile) {
 
 		SMSHttp sms = new SMSHttp();
 		String userID = "0976262860"; // 帳號
@@ -93,8 +95,9 @@ public class MBController {
 		String content = "簡訊有額度請節制@w@"; // 簡訊發送內容
 //		String mobile = " "; // 接收人之手機號碼。格式為: +886912345678或09123456789。多筆接收人時，請以半形逗點隔開( ,// )，如0912345678,0922333444。
 		String sendTime = " "; // 簡訊預定發送時間。-立即發送：請傳入空字串。-預約發送：請傳入預計發送時間，若傳送時間小於系統接單時間，將不予傳送。格式為YYYYMMDDhhmnss；例如:預約2009/01/31
-								// 15:30:00發送，則傳入20090131153000。若傳遞時間已逾現在之時間，將立即發送。	
-//		SMSHttpValidato smshttp = new SMSHttpValidato();
+						// 15:30:00發送，則傳入20090131153000。若傳遞時間已逾現在之時間，將立即發送。
+
+		
 		
 		if (sms.getCredit(userID, password)) {
 			System.out.println(new StringBuffer("取得餘額成功，餘額：").append(String.valueOf(sms.getCreditValue())).toString());
@@ -272,7 +275,7 @@ public class MBController {
 //			return "MB/forget";
 //		}
 //	}
-	
+
 //	@ModelAttribute
 //	public void getMember(@PathVariable(value = "id", required = false) Integer id, Model model,HttpServletRequest request, HttpServletResponse response) {
 ////		System.out.println("@model.getMemeber");
@@ -282,24 +285,26 @@ public class MBController {
 //			model.addAttribute("member", member);
 //		}
 //	}
-	
+
 //	@RequestMapping(value = "/ChangePassword", method = RequestMethod.GET)
 //	public String change() {
 //		return new String("/MB/ChangePassword");
 //	}
-	
+
 	@GetMapping("/updatepasswd/{id}")
-	public String ChangePassword(@PathVariable("id") Integer id,Model model,HttpServletRequest request, HttpServletResponse response) {
+	public String ChangePassword(@PathVariable("id") Integer id, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
 		System.out.println("=============");
 		System.out.println(id);
 //		MBBean memberbean = (MBBean) model.getAttribute("MBBean"); 
 		MBBean mb = new MBBean();
-		model.addAttribute("changepwd",mb);
-		return "MB/ChangePassword" ;
+		model.addAttribute("changepwd", mb);
+		return "MB/ChangePassword";
 	}
-	
+
 	@PostMapping("/updatepasswd/{id}")
-	public String ChangePasswdShow(@ModelAttribute("changepwd") MBBean mb, Model model,BindingResult result, Integer id) {
+	public String ChangePasswdShow(@ModelAttribute("changepwd") MBBean mb, Model model, BindingResult result,
+			Integer id) {
 		System.out.println(id);
 		ChangPasswordValidator validator = new ChangPasswordValidator();
 		validator.validate(mb, result);
@@ -307,13 +312,19 @@ public class MBController {
 			return "MB/ChangePassword";
 		}
 		boolean check;
-		check = service.CheckPassword(mb.getPassword(),mb.getMemberNewPassword(), id);
+		check = service.CheckPassword(mb.getPassword(), mb.getMemberNewPassword(), id);
+		System.out.println("controller:"+mb.getPassword()+","+mb.getMemberNewPassword());
 		if (check == true) {
 			return "redirect:/";
-		}
-		else {
+		} else {
 			result.rejectValue("Password", "", "*該舊密碼不存在或密碼錯誤");
 			return "MB/ChangePassword";
 		}
+	}
+	
+	@GetMapping("/showAllMembers")
+	public String list(Model model) {
+		model.addAttribute("members", service.getAllMembers());
+		return "MB/Allmember";
 	}
 }

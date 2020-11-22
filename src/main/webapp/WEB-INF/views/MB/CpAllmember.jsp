@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>所有一般會員表單</title>
+<title>所有企業會員表單</title>
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
@@ -50,40 +50,40 @@
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
 
 
-	<h4 class="font-weight-bold mb-0">顯示所有一般會員表單</h4>
+	<h4 class="font-weight-bold mb-0">顯示所有企業會員表單</h4>
 	<div id="resultmsg"></div>
 	<table class="table">
 		<thead>
 			<tr>
 				<th width='60'>會員編號</th>
-				<th>會員姓名</th>
 				<th>會員帳號</th>
 				<th>會員密碼</th>
-				<th width='60px;'>會員電話</th>
-				<th width='60px;'>會員性別</th>
-				<th>會員身分證</th>
-				<th>會員生日</th>
-				<th align='center'>會員信箱</th>
+				<th width='60px;'>公司電話</th>
+				<th width='60px;'>創立日期</th>
+				<th>統一編號</th>
+				<th>公司地址</th>
+				<th width='70px;'>公司行號</th>
+				<th width='60px;'>公司信箱</th>
 			</tr>
 		</thead>
 		<c:choose>
-			<c:when test="${empty members}">
+			<c:when test="${empty cpmembers}">
 				<tr>
 					<td colspan='8' align='center'><font color='red'>無會員資料</font></td>
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var='mb' items='${members}' varStatus='report'>
+				<c:forEach var='cpmb' items='${cpmembers}' varStatus='report'>
 					<tr>
-						<td align='center'>${mb.pkey}</td>
-						<td align='left'>&nbsp;${mb.name}</td>
-						<td align='left'>${mb.memberId}</td>
-						<td align='left'>&nbsp;${mb.password}</td>
-						<td align='left'>&nbsp;${mb.phone}</td>
-						<td align='center'>&nbsp;${mb.sex}</td>
-						<td align='left'>&nbsp;${mb.identityId}</td>
-						<td align='left'>&nbsp;${mb.birthday}</td>
-						<td align='left'>&nbsp;${mb.email}</td>
+						<td align='center'>${cpmb.pkey}</td>
+						<td align='left'>${cpmb.cpmemberId}</td>
+						<td align='left'>&nbsp;${cpmb.password2}</td>
+						<td align='left'>&nbsp;${cpmb.cptel}</td>
+						<td align='left'>&nbsp;${cpmb.founddate}</td>
+						<td align='left'>&nbsp;${cpmb.uniformnumbers}</td>
+						<td align='left'>&nbsp;${cpmb.cpaddress}</td>
+						<td align='left'>&nbsp;${cpmb.cpname}</td>
+						<td align='left'>&nbsp;${cpmb.cpemail}</td>
 					</tr>
 	
 <%-- 						<td align='center' onclick="MBfolded(${report.index})" class="box" --%>

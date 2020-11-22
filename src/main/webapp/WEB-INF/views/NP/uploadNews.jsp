@@ -73,13 +73,14 @@
 	<nav class="navbar fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-
-
+		
 
 	<div class="container" >	
 		
 		<div style="margin-top:150px;">
-			<h3 align="center"><b>新聞上傳</b></h3>	
+			<h3 align="center">
+				<b>會員「${MBBean.name}」，您好&nbsp;&nbsp;歡迎您上傳新聞</b>
+			</h3>			
 			<form:form method="POST" id="form1" modelAttribute="newsBean" enctype="multipart/form-data" class="formstyle">				
 				<fieldset>	
 						

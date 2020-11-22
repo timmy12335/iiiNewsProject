@@ -395,7 +395,7 @@ height="400px" width="100%" class="fw-iframe" scrolling="no" frameborder="0"></i
                               <span class="text-muted">建立者:${trkNew.founder}</span>
                            </div>
                            <div class="mt-2 mb-2">
-                              <span class="text-muted">發生時間：:${trkNew.octime}</span>
+                              <span class="text-muted">建立時間：:${trkNew.fondtime}</span>
                            </div>
                            <div class="mt-2 mb-2">
                               <h4>點閱人數: ${trkNew.clicnum}</h4>

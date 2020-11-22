@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,14 +86,14 @@ public class trkNewsController {
 		return "TRN/type";
 	}
 
-	@RequestMapping("/trkNews/{type}")      //分類查詢 show 單個分類所有新聞 
+	@RequestMapping("/trkNews/{type}")      //由主頁選擇分類查詢 show 單個分類所有新聞 
 	public String getNewsBytypes(@PathVariable("type") String type, Model model){
 		List<trkNewsBean> trkNews = service.getNewsBytypes(type);
 		model.addAttribute("trkNews", trkNews);
 		return "TRN/trkNews";
 	}
 
-	@RequestMapping("/trkNew")                       //查詢單筆產品資料
+	@RequestMapping("/trkNew")                       //show單筆新聞資料
 	public String getNewsById(@RequestParam("id") Integer id, Model model){ 
 		model.addAttribute("trkNew", service.getNewsById(id));
 		return "TRN/trkNew";
@@ -103,7 +104,7 @@ public class trkNewsController {
 		return null;
 	}
 	
-	        //會員建立追蹤新聞    //給空白表單的方法
+	        //會員建立追蹤新聞    //給空白表單的方法//沒會員跳轉註冊會員
 			@GetMapping("/trknews/add")
 			public String getAddNewReportForm(Model model,HttpServletRequest request,HttpServletResponse response) {
 				MBBean memberBean = (MBBean) model.getAttribute("MBBean");
@@ -118,8 +119,15 @@ public class trkNewsController {
 				if (session == null) {
 					return "redirect: " + ctx.getContextPath() + "/Login";
 				}
-				trkNewsBean tb = new trkNewsBean();      //取得新增產品表單欄位表格
-			    model.addAttribute("trkNewsBean", tb); 
+				
+				trkNewsBean tb = new trkNewsBean();      //new一個空白bean準備新增產品表單欄位表格
+				Timestamp adminTime = new Timestamp(System.currentTimeMillis());
+				//String tsStr = "yyyy-mm-dd hh:mm:ss [.fffff]";
+				//adminTime = Timestamp.valueOf(tsStr);
+				
+				tb.setFondtime(adminTime);
+				tb.setOctime(adminTime);
+				model.addAttribute("trkNewsBean", tb); 
 				return "TRN/addtrkNew";
 			}
 	

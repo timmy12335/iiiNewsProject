@@ -25,7 +25,7 @@ public class CR_Dao_impl implements CR_Dao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CRBean> getRecord() {
-		String hql ="FROM CRBean";
+		String hql ="FROM CRBean ORDER BY pk DESC";
 		Session session=factory.getCurrentSession();		
 		return session.createQuery(hql).getResultList();
 	}
@@ -158,7 +158,7 @@ System.out.println("不該近來~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	@Override
 	public List<CRBean> getReportBymemberId(String memberId) {
 		Session session=factory.getCurrentSession();
-		String hql ="FROM CRBean where memberId=:mId";
+		String hql ="FROM CRBean where memberId=:mId ORDER BY crApplyDate ASC";
 		return session.createQuery(hql).setParameter("mId", memberId).getResultList();
 	}
 	

@@ -67,8 +67,8 @@ g-recaptcha {
 	</nav>
 	<section style="margin-top: 100px;" align="center">
 		<!-- 		<div id="page" class="container"></div> -->
-		<form:form id="regform"
-			modelAttribute="LoginBean" class="forms-sample" onsubmit="return submitUserForm();">
+		<form:form id="regform" modelAttribute="LoginBean"
+			class="forms-sample" onsubmit="return submitUserForm();">
 			<div class="row justify-content-md-center">
 				<div class="col-md-3 grid-margin stretch-card">
 					<div class="card">
@@ -101,9 +101,30 @@ g-recaptcha {
 							</div>
 							<div class="form-group" align="center">
 								<label colspan="2" style="text-align: center;"></label><input
-									type="submit" name="submit" value="登入" class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									type="submit" name="submit" value="登入"
+									class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="/UserMB" class="btn btn-info">註冊</a>
 							</div>
+							<button type="button"
+								class="btn btn-social-icon btn-facebook btn-rounded">
+								<i class="ti-facebook"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-google btn-rounded">
+								<i class="ti-google"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-twitter btn-rounded">
+								<i class="ti-twitter-alt"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-youtube btn-rounded">
+								<i class="ti-youtube"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</form:form>
 	</section>
 	<script src="https://www.google.com/recaptcha/api.js"></script>

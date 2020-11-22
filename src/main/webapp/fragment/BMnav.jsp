@@ -117,7 +117,7 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="連結"> 查看所有會員 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='showAllMembers'/>"> 查看所有會員 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 2 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 3</a></li>
                 <li class="nav-item"> <a class="nav-link" href="連結"> 備用 4 </a></li>

@@ -30,4 +30,8 @@ public interface MBDao {
 	public MBBean getProductById(int memberId);
 	
 	public  boolean CheckPassword(String oldpwd, String newpwd, Integer id);
+	
+	MBBean get(Integer id);
+	
+	List<MBBean> getAll();
 }

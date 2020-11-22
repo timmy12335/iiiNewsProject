@@ -163,7 +163,7 @@ public class CR_Controller {
 				System.out.println("不該要進來?");
 				email.setTo(cpmb.getCpemail());
 			} else {
-				email.setTo("eeit@gmail.com");
+				email.setTo("eeit2020119@gmail.com");
 			}
 			;
 			email.setSubject("iiiNews客服表單申請成功通知信");

@@ -61,7 +61,7 @@
 				</tr>
 				<tr>
 					<td colspan='3'><span style="color: red;">系統將於<span
-							style="text-align: center;" style="color: red;" id='timer'>5</span>秒後，將為您跳轉至首頁。
+							style="text-align: center;" style="color: red;" id='timer'>10</span>秒後，將為您跳轉至首頁。
 					</span></td>
 				</tr>
 				<%-- 				<td><a href="<c:url value='/getSingleMmeber/${mb.memberId}'/>"></a></td> --%>

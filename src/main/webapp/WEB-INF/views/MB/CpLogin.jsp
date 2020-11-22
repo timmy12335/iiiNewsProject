@@ -102,7 +102,7 @@ g-recaptcha {
 								<label colspan="2" style="text-align: center;"></label><input
 									type="submit" name="submit" value="登入"
 									class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="/UserMB" class="btn btn-info">註冊</a>
+								<a href="<c:url value='/UserMB' />" class="btn btn-info">註冊</a>
 							</div>
 							<button type="button"
 								class="btn btn-social-icon btn-facebook btn-rounded">

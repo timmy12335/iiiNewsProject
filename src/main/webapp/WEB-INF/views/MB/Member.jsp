@@ -140,7 +140,7 @@ g-recaptcha {
 								<label colspan="3" style="text-align: center;"></label><input
 									type="hidden" name="action" value="reg" class="form-control" />
 								<input type="submit" value="送出註冊" class="btn btn-primary btn-icon-text"/>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=""
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="<c:url value='/LoginMB' />"
 									class="btn btn-info">登錄</a>
 							</div>
 							<button type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="ti-facebook"></i></button>

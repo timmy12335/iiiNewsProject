@@ -70,14 +70,17 @@ html {
 						</p>
 						<a onclick="history.back()" href="#">回個人訂單列表</a>
 					</div>
-					<div class="card p-4">
-						<h2>上傳預覽圖片</h2>
+					<div class="card p-4" style="margin-top:30px;">
+						<h2>預覽圖片</h2>
 						<div align="center"><img style="width:300px;height:200px;" id="preview_img1" src="/iiiNews/img/preview_default.jpg" /></div>
 					</div>
 				</div>
 				<div class="col-9">
 					<div class="card p-4">
 						<h2>商品列表</h2>
+						<c:if test="${not empty FlashMSG_uploadPictureSuccess}">
+ 	   						<span class="text-danger"><b>${FlashMSG_uploadPictureSuccess}</b></span>
+ 						</c:if>
 						<div>
 							<table class="table">
 								<thead class='thead-light text-center'>
@@ -101,15 +104,16 @@ html {
 										<td>${items.width}</td>
 										<td>${items.height}</td>
 										<td>${items.unitPrice}</td>
-										<td><c:if test="${orderInfo.paymentStatus != 2}">
-												<a href="<c:url value="/getOneItem/${items.itemPk}" />"
-													onclick="return confirm('Are you sure?')">前往上傳照片</a>
-											</c:if>
+										<td>
+<%-- 											<c:if test="${orderInfo.paymentStatus == 1}"> --%>
+<%-- 												<a href="<c:url value="/getOneItem/${items.itemPk}" />" --%>
+<!-- 													onclick="return confirm('Are you sure?')">前往上傳照片</a> -->
+<%-- 											</c:if> --%>
 
 											<button class="btn btn-primary" type="button"
 												data-toggle="collapse" data-target=".multi-collapse${loop.index}"
 												aria-expanded="false" aria-controls="setAd${loop.index} setPic${loop.index}">
-												<i class="fas fa-angle-double-down"></i>
+												前往上傳照片&nbsp;<i class="fas fa-angle-double-down"></i>
 											</button></td>
 
 									</tr>
@@ -135,7 +139,11 @@ html {
 									</tr>
 									<tr class="collapse multi-collapse${loop.index}" id="setPic${loop.index}">
 										<td colspan='10'>
-											<img style="width:300px;height:200px;" id="preview_img${loop.index}" class="blah" src="<c:url value='/getPicture/${items.itemPk}' />" />
+										<div>
+										<div style="display:inline-block;"><span>高：${items.height}&nbsp;px</span></div>
+										<div style="display:inline-block;"><img style="width:${items.width}px;height:${items.height}px;border:3px dashed #BC214C" id="preview_img${loop.index}" class="blah" src="<c:url value='/getPicture/${items.itemPk}' />" /></div>
+										<div><span style="padding-left:${(items.width/2)+30}px">寬：${items.width}&nbsp;px</span></div>
+										</div>
 										</td>
 									</tr>
 

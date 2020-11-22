@@ -1,208 +1,200 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>666666</title>
-    <script>
-    window.onload=function(){
-    	var newsTypeNum,newsTypeCount;
-    	var xhr = new XMLHttpRequest();
-    	xhr.open("GET", "<c:url value='/getMtArtReport.json'/>", true);
-    	xhr.send();
-    	var xhr0 = new XMLHttpRequest();
-    	xhr0.open("GET", "<c:url value='/getMtCateReport.json'/>", true);
-    	xhr0.send();
-    	xhr.onreadystatechange = function() {
-    		if (xhr.readyState == 4 && xhr0.readyState == 4) {
-    			if (xhr.status == 200 && xhr0.status == 200){
-    				var responseData = xhr.responseText;  
-    				var responseData0 = xhr0.responseText;
- //    				console.log(responseData);
-     				
-     				newsTypeNum = JSON.parse(responseData);
-     				newsTypeCount = JSON.parse(responseData0);
-     				
-     				console.log(newsTypeNum);
-     				console.log(newsTypeCount);
-     		    	Type(newsTypeNum,newsTypeCount);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <title>Data Report</title>
 
-    			} else {
-    				alert(xhr.status);
-    			}
-    		}
-    		
-    	}
-//     	var xhr0 = new XMLHttpRequest();
-//     	xhr0.open("GET", "<c:url value='/getNewsCountForBB.json'/>", true);
-//     	xhr0.send();
-//     	xhr0.onreadystatechange = function() {
-//     		if (xhr0.readyState == 4 ) {
-//     			if (xhr0.status == 200){
-//     				var responseData0 = xhr0.responseText;
+<script>
+window.onload = function() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/getMtArtReport.json' />", true);
+		xhr.send();
 
-//      				console.log(responseData0);
-//      				newsTypeCount = JSON.parse(responseData0);
-//  //    				Type(newsTypeCount);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var responseData = xhr.responseText;
+				console.log("responseData :" + responseData);
+				// 			let text = document.getElementById("BarChartText");
+				// 			text.innerHTML="各類型上傳則數";
 
-//     			} else {
-//     				alert(xhr0.status);
-//     			}
-//     		}
-    		
-//     	}
-    	
-    	
-    }
-    </script>
+				var cateObj = JSON.parse(responseData);
+				console.log("cate :" + cateObj);
+				Cate(cateObj);
+				document.getElementById("barChart").innerHTML;
+			}
+		}
+	}
+</script>
+<style>
+h4{
+text-align:center;
+}
+</style>
+
 </head>
-
-    <body >
-    <jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
-		<div class="card-body">
-        <div id="container" style="height:700px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1605769547048">
-            <div style="position: relative; width: 1536px; height: 666px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-                <canvas data-zr-dom-id="zr_0" width="1920" height="832" style="position: absolute; left: 0px; top: 0px; width: 1536px; height: 666px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
-            </div>
-            <div>
-
-            </div>
+<body>
+<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
+<!-- <div class="main-panel"> -->
+        <!-- <div class="content-wrapper"> -->
+        <div>
+<!--             <div class="row"> -->
+                <div class="col-lg-8 grid-margin stretch-card" style="margin:30px auto;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">每日發文量</h4>
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+<!--                 <div class="col-lg-6 grid-margin stretch-card"> -->
+<!--                     <div class="card"> -->
+<!--                         <div class="card-body"> -->
+<!--                             <h4 class="card-title">發文種類</h4> -->
+<!--                             <canvas id="barChart"></canvas> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+            <!-- partial -->
         </div>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
- <script type="text/javascript">
- function Type(newsTypeNum,newsTypeCount) {
-	let TypeA = newsTypeNum["未分類"];
-	let TypeB = newsTypeNum["生活"];
-	let TypeC = newsTypeNum["娛樂"];
-	let TypeD = newsTypeNum["問卦"];
-	let TypeE = newsTypeNum["美食"];
-	let TypeF = newsTypeNum["運動"];
-	let TypeG = newsTypeNum["趣味"];
-	let TypeH = newsTypeNum["寵物"];
-	console.log(TypeB);
-	
-	let CountA = newsTypeCount["未分類"];
-	let CountB = newsTypeCount["生活"];
-	let CountC = newsTypeCount["娛樂"];
-	let CountD = newsTypeCount["問卦"];
-	let CountE = newsTypeCount["美食"];
-	let CountF = newsTypeCount["運動"];
-	let CountG = newsTypeCount["趣味"];
-	let CountH = newsTypeCount["寵物"];
+        
+        
+        <div>
+<!--             <div class="row"> -->
+<!--                 <div class="col-lg-6 grid-margin stretch-card"> -->
+<!--                     <div class="card"> -->
+<!--                         <div class="card-body"> -->
+<!--                             <h4 class="card-title">每日發文量</h4> -->
+<!--                             <canvas id="lineChart"></canvas> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
- var dom = document.getElementById("container");
- var myChart = echarts.init(dom);
- var app = {};
- option = null;
- option = {
-     tooltip: {
-         trigger: 'item',
-         formatter: '{a} <br/>{b}: {c} ({d}%)'
-     },
-     legend: {
-         orient: 'vertical',
-         left: 10,
-         data: ['未分類', '生活', '娛樂', '問卦', '美食', '運動', '趣味', '寵物']
-     },
-     series: [
-         {
-             name: '筆數',
-             type: 'pie',
-             selectedMode: 'single',
-             radius: [0, '30%'],
- 
-             label: {
-                 position: 'inner'
-             },
-             labelLine: {
-                 show: false
-             },
-             data: [
-                 {value: TypeA, name: '未分類'},
-                 {value: TypeB, name: '生活'},
-                 {value: TypeC, name: '娛樂'},
-                 {value: TypeD, name: '問卦'},
-                 {value: TypeE, name: '美食'},
-                 {value: TypeF, name: '運動'},
-                 {value: TypeG, name: "趣味"},
-                 {value: TypeH, name: "寵物"},
-             ]
-         },
-         {
-             name: '金額',
-             type: 'pie',
-             radius: ['40%', '55%'],
-             label: {
-                 formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-                 backgroundColor: '#eee',
-                 borderColor: '#aaa',
-                 borderWidth: 1,
-                 borderRadius: 4,
-                 // shadowBlur:3,
-                 // shadowOffsetX: 2,
-                 // shadowOffsetY: 2,
-                 // shadowColor: '#999',
-                 // padding: [0, 7],
-                 rich: {
-                     a: {
-                         color: '#999',
-                         lineHeight: 22,
-                         align: 'center'
-                     },
-                     // abg: {
-                     //     backgroundColor: '#333',
-                     //     width: '100%',
-                     //     align: 'right',
-                     //     height: 22,
-                     //     borderRadius: [4, 4, 0, 0]
-                     // },
-                     hr: {
-                         borderColor: '#aaa',
-                         width: '100%',
-                         borderWidth: 0.5,
-                         height: 0
-                     },
-                     b: {
-                         fontSize: 16,
-                         lineHeight: 33
-                     },
-                     per: {
-                         color: '#eee',
-                         backgroundColor: '#334455',
-                         padding: [2, 4],
-                         borderRadius: 2
-                     }
-                 }
-             },
-             data: [
-                 {value: CountA, name: '未分類'},
-                 {value: CountB, name: '生活'},
-                 {value: CountC, name: '娛樂'},
-                 {value: CountD, name: '問卦'},
-                 {value: CountE, name: '美食'},
-                 {value: CountF, name: '運動'},
-                 {value: CountG, name: '趣味'},
-                 {value: CountH, name: '寵物'},
-              ]
-         }
-     ]
- };
- if (option && typeof option === "object") {
-     myChart.setOption(option, true);
- }
- }
-        </script>
+                <div class="col-lg-8 grid-margin stretch-card" style="margin:50px auto;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">發文類型分析</h4>
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+<!--             </div> -->
+            <!-- partial -->
+        </div>
+    <!-- </div> -->
+    <jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
+<script>
+function Cate(cateObj){
+	let CateA = Object.keys(cateObj);	//Cate取得Key值
+	console.log(CateA);
+	console.log(CateA[0]);
+	
+	let CateV = Object.values(cateObj);	//Cate取得Value值
+	console.log(CateV);
+	console.log(CateV[0]);
+
+    var LINECHART = {
+        labels: ["2013333", "2014", "2014", "2015", "2016", "2017"],
+        datasets: [{
+            label: '# 每日發文量',
+            data: [10, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+            fill: false
+        }]
+    };
+
+    var BARCHART = {
+        labels: CateA,
+        datasets: [{
+            label: '# 發文數量',
+            data: CateV,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(247, 80, 0, 0.2)',
+                'rgba(173, 90, 90, 0.2)',
+                'rgba(0, 166, 0, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(247, 80, 0, 1)',
+                'rgba(173, 90, 90, 1)',
+                'rgba(0, 166, 0, 1)'
+            ],
+            borderWidth: 1,
+            fill: false
+        }]
+    };
+
+
+    var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        legend: {
+            display: false
+        },
+        elements: {
+            point: {
+                radius: 0
+            }
+        }
+
+    };
+
+if ($("#barChart").length) {
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var barChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: BARCHART,
+            options: options
+        });
+    }
+
+//     if ($("#lineChart").length) {
+//         var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+//         var lineChart = new Chart(lineChartCanvas, {
+//             type: 'line',
+//             data: LINECHART,
+//             options: options
+//         });
+//     }
+
+}
+
     
-</div>
-<jsp:include page="/fragment/BMfoot.jsp"></jsp:include> 
+</script>
 </body>
 </html>

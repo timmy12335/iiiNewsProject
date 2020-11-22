@@ -22,44 +22,47 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>會員新聞列表</title>
 <style>
-.incss{
-			width:150px;
-			height:45px;
-			margin:10px;
-			font-size:20px;
-			background-color:#BC214C;
-			border:none;
-			outline: none;
-			box-shadow: 3px 3px 3px #9D9D9D;
-			color:white;
-		}
-		.incss:hover{
-			background-color:#e884a0;
-		}
-
-p{
- margin:4px auto;
-
-} 
-.title0{
-margin: 1em 0;
-position: relative;
-padding: 0.25em 0;
-font-weight: bold;
+.incss {
+	width: 150px;
+	height: 45px;
+	margin: 10px;
+	font-size: 20px;
+	background-color: #BC214C;
+	border: none;
+	outline: none;
+	box-shadow: 3px 3px 3px #9D9D9D;
+	color: white;
 }
+
+.incss:hover {
+	background-color: #e884a0;
+}
+
+p {
+	margin: 4px auto;
+}
+
+.title0 {
+	margin: 1em 0;
+	position: relative;
+	padding: 0.25em 0;
+	font-weight: bold;
+}
+
 .title0:after {
-content: "";
-display: block;
-height: 4px;
-background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂的顏色 */
+	content: "";
+	display: block;
+	height: 4px;
+	background-image: linear-gradient(to right, #FF7365 0%, transparent);
+	/* 自訂的顏色 */
 }
-.dstyle{
-	background-color:lightpink;
-	margin:20px;
-	border-radius:15px;
+
+.dstyle {
+	background-color: lightpink;
+	margin: 20px;
+	border-radius: 15px;
 	box-shadow: 4px 4px 4px #9D9D9D;
 }
-
 </style>
 </head>
 <body>
@@ -106,13 +109,14 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 									</div>
 									<div class="col-12 text-left">
 										<h6>${news.outline}</h6>
-										<input type="text" id="limitTime${loop.index}"  readonly />
+										
+										<input type="hidden" id="limitTime${loop.index}"  placeholder="00:00:00"/>
 										<div id="ftime${loop.index}" style="display:none;">
 										<input type="hidden" id="newsId${loop.index}" value="${news.newsId}"/>										
 										</div>
 										
-										<input type="button" value="輸入計時時間" onclick="inputLimitTime(${loop.index})">
-										<input type="submit" name="submit" id="submit" value="確認送出">
+										<input type="button" id="keyin${loop.index}" value="輸入計時時間" onclick="clickToText(${loop.index})" class="btn btn-secondary">
+										<input type="hidden" name="submit" id="submit${loop.index}" onclick="inputLimitTime(${loop.index})" value="確認送出" class="btn btn-secondary ">
 									</div>
 								</div>
 <!-- 									<div class="col-sm-2" style="border:1px solid black;"> -->
@@ -172,6 +176,11 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 </div>
 	</div>
 	<script>
+	function clickToText(c) {
+		$("#limitTime"+[c]).attr("type","text");
+		$("#submit"+[c]).attr("type","submit");
+		$("#keyin"+[c]).attr("type","hidden");
+	}
 	
 	function delNews(Id){
 		if (confirm("確定刪除此項商品 ? ") ) {
@@ -182,14 +191,18 @@ background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂
 	}
 	
 	function inputLimitTime(g) {
-		let time = prompt("請輸入限時時間", "");
+//		let time = prompt("請輸入限時時間", "");
+		let time = $("#limitTime"+[g]).val();
+		console.log(time);
 		if(time){			
-			$("#limitTime"+[g]).attr("value",time);
+//			$("#limitTime"+[g]).attr("value",time);
 			$("#limitTime"+[g]).attr("name","limitTime");
 			$("#newsId"+[g]).attr("name","newsId");
 			console.log(time);
 		}else{
-			alert("請輸入正確時間") 
+			if(confirm("請輸入正確時間")){
+				  window.location.reload();
+			} 
 		}
 	}
 	</script>

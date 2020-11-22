@@ -50,13 +50,6 @@
 		.labelsize{
 		   font-size:20px;
 		}
-		
-		.spstyle{
-			
-			font-size:20px;
-			font-meight:bold;
-		}
-		
 </style>
 </head>
 <body>
@@ -67,30 +60,39 @@
 
 
 	<div class="container" >	
-		
+		<h2>修改單則新聞</h2>
 		<div style="margin-top:150px;">
-			<h3 align="center"><b>新聞上傳</b></h3>	
-			<form:form method="POST" id="form1" modelAttribute="newsBean" enctype="multipart/form-data" class="formstyle">				
+			<h3 align="center"><b>修改新聞上傳</b></h3>	
+			<form:form method="POST"  id="form1" modelAttribute="newsSingle" enctype="multipart/form-data" class="formstyle">				
 				<fieldset>	
-						
+						<p>新聞編號: &nbsp;${ newsSingle.newsId }</p>
+						<p>上傳時間：${newsSingle.uploadTime}</p>
+						<div>		
+						<form:input type="hidden" id="newsId" name="newsId"  path="newsId" value="${ newsSingle.newsId }"  />				
+						<form:input type="hidden" id="uploadTime" name="uploadTime" path="uploadTime" value="${ newsSingle.uploadTime }"  />				
+						<form:input type="hidden" id="newsProduct_pk" name="newsProduct_pk"  path="newsProduct_pk" value="${ newsSingle.newsProduct_pk }"  />
+						<form:input type="hidden" id="memberId" name="memberId"  path="memberId" value="${ newsSingle.memberId }"  />
+						<form:input type="hidden" id="pic_One" name="pic_One"  path="pic_One" value="${ newsSingle.pic_One }"  />
+						<form:input type="hidden" id="pic_Two" name="pic_Two"  path="pic_Two" value="${ newsSingle.pic_Two }"  />
+						<form:input type="hidden" id="pic_Three" name="pic_Three"  path="pic_Three" value="${ newsSingle.pic_Three }"  />			
+						<form:input type="hidden" id="status" name="status"  path="status" value="${ newsSingle.status }"  />
+						</div>	
 					<div class="form-group row">
 					
 						<label for="title" class="col-sm-2 col-form-label text-right labelsize"><b>新聞標題：</b></label>
 						<div class="col-sm-8">
-							<form:input type="title" class="form-control" id="title"
-								path="title" placeholder="請輸入標題" />
+							<form:input class="form-control" type="text" id="title" name="title" size="50" path="title" value="${ newsSingle.title }" />
 								
-								<form:errors path="title" cssClass="error" class="spstyle"/>
-						</div><span id="idspNews-title" class="spstyle"></span>
+								<form:errors path="title" cssClass="error" />
+						</div><span id="idspNews-title"></span>
 						
 					</div>
 					<div class="form-group row">
 						<label for="location" class="col-sm-2 col-form-label text-right labelsize"><b>發生地點：</b></label>
 						<div class="col-sm-8">
-							<form:input type="text" class="form-control" id="location"
-								name="location" size="50" path="location" placeholder="請輸入發生地點" />
-							<form:errors path="location" cssClass="error" class="spstyle"/>
-						</div><span id="idspNews-location" class="spstyle"></span>
+							<form:input class="form-control" type="text" id="location" name="location" size="50" path="location" value="${ newsSingle.location}" />
+							<form:errors path="location" cssClass="error" />
+						</div><span id="idspNews-location"></span>
 					</div>
 					<div class="form-group row">
 						<label for="newsType" class="col-sm-2 col-form-label text-right labelsize"><b>新聞類型：</b></label>
@@ -104,7 +106,7 @@
 								<form:option value="災情">災情</form:option>
 								<form:option value="爆料">爆料</form:option>
 							</form:select>
-							<form:errors path="newsType" cssClass="error" class="spstyle"/>
+							<form:errors path="newsType" cssClass="error" />
 						</div>
 						<%-- 	<font color="red" size="-1">${errorMsg.errorCategoryNoEmpty}</font> --%>
 					</div>
@@ -112,50 +114,46 @@
 					<div class="form-group row">
 						<label for="happenDate" class="col-sm-2 col-form-label text-right labelsize"><b>發生日期：</b></label>
 						<div class="col-sm-4">
-							<form:input type="Date" id="happenDate" name="happenDate"
-								class="form-control" size="50" path="happenDate" />
-							<form:errors path="happenDate" cssClass="error" class="spstyle"/>
+							<form:input class="form-control" type="Date" id="happenDate" name="happenDate" size="50" path="happenDate" />
+							<form:errors path="happenDate" cssClass="error" />
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="happenTime" class="col-sm-2 col-form-label text-right labelsize"><b>發生時間：</b></label>
 						<div class="col-sm-4">
-							<form:input type="time" id="happenTime" name="happenTime"
-								class="form-control" path="happenTime" />
-							<form:errors path="happenTime" cssClass="error" class="spstyle"/>
+							<form:input class="form-control" type="time" id="happenTime" name="happenTime" size="50" path="happenTime" />
+							<form:errors path="happenTime" cssClass="error" />
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="outline" class="col-sm-2 col-form-label text-right labelsize"><b>新聞大綱：</b></label>
 						<div class="col-sm-8">
-							<form:textarea type="text" id="outline" name="outline"   class="form-control"
-								rows="3" maxlength="100" path="outline" placeholder="請輸入大綱" style="resize:none"/>								
-							<form:errors path="outline" cssClass="error" class="spstyle"/>
-						</div><span id="idspNews-outline" class="spstyle"></span>
+							<form:textarea class="form-control" type="text" id="outline" name="outline" size="50" path="outline" value="${ newsSingle.outline }" style="resize:none"/>								
+							<form:errors path="outline" cssClass="error" />
+						</div><span id="idspNews-outline"></span>
 					</div>
 					<div class="form-group row">
 						<label for="article" class="col-sm-2 col-form-label text-right labelsize"><b>新聞內文：</b></label>
 						<div class="col-sm-8">
-						<form:textarea type="text" id="article" name="article" cols="70"  class="form-control"
-							rows="10" path="article" placeholder="請輸入新聞內文" style="resize:none"/>
-						<form:errors path="article" cssClass="error" class="spstyle"/>
-						</div><span id="idspNews-article" class="spstyle"></span>
+						<form:textarea class="form-control" type="text" id="article" name="article" cols="70" rows="10" path="article" value="${ newsSingle.article }" style="resize:none"/>
+						<form:errors path="article" cssClass="error" />
+						</div><span id="idspNews-article"></span>
 					</div>
 					<div class="form-group row">
 						<label for="price" class="col-sm-2 col-form-label text-right labelsize"><b>販賣價格：</b></label>
 						<div class="col-sm-4">
-							<form:input type="number" id="price" name="price" 
-								class="form-control" path="price" value="1000" />
-							<form:errors path="price" cssClass="error" class="spstyle"/>
+							<form:input class="form-control" type="text" id="price" name="price" size="50" path="price" value="${ newsSingle.price }" />
+							<form:errors path="price" cssClass="error" />
 						</div>
 					</div>
 					
 					
 					<div class="form-group row" >
+					<img width='300' height='200' id="productImage1" src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
 					<label for="price" class="col-sm-2 col-form-label text-right labelsize"><b>新聞畫面：</b></label>
 					<div class="col-sm-9" style="background-color:#FCFCFC;border-radius:15px" >					
 					<input id="productImage" name="productImage" type="file" class="file" multiple  data-show-upload="false" data-show-caption="true" data-msg-placeholder="請選擇上傳畫面...">
-					<form:errors path="productImage" cssClass="error" class="spstyle"/>
+					<form:errors path="productImage" cssClass="error" />
 					</div>
 <!-- 						<label for="price" class="col-sm-2 col-form-label text-right">上傳照片：</label> -->
 <!-- 						<div class="col-sm-8"> -->
@@ -202,18 +200,18 @@
 					$("#title").blur(function() {
 						let NameObjValLen = $("#title").val().length;
 						if ($("#title").val() == "") {
-							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>請輸入標題").attr("style","color:red");
+							$("#idspNews-title").text("請輸入標題")
 						} else if (NameObjValLen >= 5) {
-							$("#idspNews-title").text("正確 !").attr("style","color:green");
+							$("#idspNews-title").text("正確 !")
 						} else {
-							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>請大於五個字")
+							$("#idspNews-title").text("請輸入五個字以上")
 						}
 					})
 					//發生地點需大於一個字
 					$("#location").blur(function() {
 						let NameObjValLen = $("#location").val().length;
 						if ($("#location").val() == "") {
-							$("#idspNews-location").html("<i class='fas fa-times-circle'></i>請輸入地點")
+							$("#idspNews-location").text("請輸入地點")
 						} else {
 							$("#idspNews-location").text("正確 !")
 						}
@@ -222,22 +220,22 @@
 					$("#outline").blur(function() {
 						let NameObjValLen = $("#outline").val().length;
 						if ($("#outline").val() == "") {
-							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>請輸入大綱")
+							$("#idspNews-outline").text("請輸入大綱")
 						} else if (NameObjValLen >= 20) {
 							$("#idspNews-outline").text("正確 !")
 						} else {
-							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>請大於二十字")
+							$("#idspNews-outline").text("請輸入二十字以上")
 						}
 					})
 					//新聞內文需大於一百字且小於一千字	
 					$("#article").blur(function() {
 						let NameObjValLen = $("#article").val().length;
 						if ($("#article").val() == "") {
-							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>請輸入內文")
+							$("#idspNews-article").text("請輸入內文")
 						} else if (NameObjValLen >= 100) {
 							$("#idspNews-article").text("正確 !")
 						} else {
-							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>請大於一百字")
+							$("#idspNews-article").text("請輸入一百字以上")
 						}
 					})
 				</script>

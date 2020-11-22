@@ -58,6 +58,23 @@ Html {
 
 			<div class="row">
 				<div class="col-lg-3">
+				<!-- Card -->
+					<div class="card mb-3">
+						<div class="card-header" style="background-color:#FBD09D;">
+							<h4>歡迎使用廣告欄位系統</h4>
+						</div>
+						<div class="card-body">
+						<p>查看欄位示意圖</p>
+							<div class="row">
+								<div class="col-6 text-center">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_header.jpeg" alt="Sample">
+								</div>
+								<div class="col-6 text-center">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_article.jpeg" alt="Sample">
+								</div>
+							</div>
+						</div>
+					</div>
 					<!-- Card -->
 					<div class="card mb-3">
 						<div class="card-header">
@@ -69,46 +86,27 @@ Html {
 							<label class="col-form-label">依分類搜尋：</label> <select
 								class="form-control" id="cateChoose" onchange="searchBycateNo()">
 								<option value="-1">請選擇</option>
-								<option value="100">頭版頭</option>
-								<option value="200">頭版側標</option>
-								<option value="300">內頁版頭</option>
-								<option value="400">內頁側標</option>
-								<option value="500">小廣告</option>
+								<option value="100">A&nbsp;頭版頁首</option>
+								<option value="200">B&nbsp;頭版側標</option>
+								<option value="300">C&nbsp;內頁頁首</option>
+								<option value="400">D&nbsp;內頁側標</option>
+								<option value="500">E&nbsp;內文小廣告</option>
 							</select> <label class="col-form-label">依日期搜尋：</label> <input type="date"
 								class="form-control" id="dateChoose" onchange="searchByDate()" />
 						</div>
 					</div>
-					<!-- Card -->
-					<div class="card mb-3">
-						<h3>進階搜尋2</h3>
-					</div>
+					
 				</div>
 				<div class="col-lg-9">
 					<div class="card mb-9">
 						<div class="card-header">
-							<h2>廣告欄位商品搜尋(JSON)</h2>
+							<h2>欄位商品搜尋</h2>
 						</div>
-
-
-						<!-- 			<label>關鍵字查詢：</label> -->
-						<!-- 			<input type="text" class="search" id="wordChoose" onkeyup="searchByWord()"/> -->
-						<!-- 			<label>按分類搜尋：</label> -->
-						<!-- 			<select id="cateChoose" onchange="searchBycateNo()"> -->
-						<!-- 				<option value="-1">請選擇</option> -->
-						<!-- 				<option value="100">頭版頭</option> -->
-						<!-- 				<option value="200">頭版側標</option> -->
-						<!-- 				<option value="300">內頁版頭</option> -->
-						<!-- 				<option value="400">內頁側標</option> -->
-						<!-- 				<option value="500">小廣告</option> -->
-						<!-- 	         </select> -->
-						<!-- 	         <label>按日期搜尋：</label> -->
-						<!-- 	         <input type="date" id="dateChoose" onchange="searchByDate()"/> -->
-						<!-- 			<hr> -->
+						
 						<div id='somedivS' class="table-responsive"></div>
-						<!-- 		 style='height: 260px;' style='height: 60px; margin: 250px;' -->
 						<div id='navigation'></div>
 						<hr>
-						<a href='..'>回前頁</a>
+<!-- 						<a href='..'>回前頁</a> -->
 
 					</div>
 				</div>
@@ -127,15 +125,15 @@ Html {
 	<script>
 		function cateNameTrans(categoryNo) {
 			if (categoryNo == 100) {
-				cateName = "頭版頭";
+				cateName = "A&nbsp;頭版頁首";
 			} else if (categoryNo == 200) {
-				cateName = "頭版側標";
+				cateName = "B&nbsp;頭版側標";
 			} else if (categoryNo == 300) {
-				cateName = "內頁版頭";
+				cateName = "C&nbsp;內頁頁首";
 			} else if (categoryNo == 400) {
-				cateName = "內頁側標";
+				cateName = "D&nbsp;內頁側標";
 			} else if (categoryNo == 500) {
-				cateName = "小廣告";
+				cateName = "E&nbsp;內文小廣告";
 			} else {
 				cateName = "其他";
 			}
@@ -144,7 +142,7 @@ Html {
 
 		function displayPageAds(responseData) {
 			var content = "<table class='table table-hover'><thead class='thead-light text-center'><tr><th>序號</th>";
-			content += "<th>廣告PK值</th><th>廣告編號</th>";
+			content += "<th>廣告編號</th>";
 			content += "<th>刊登者</th>";
 			content += "<th>類型</th><th>販賣日期</th><th>單價</th>";
 			content += "<th>備註</th>";
@@ -155,13 +153,8 @@ Html {
 			}else{
 			var bgColor = ""; // 每一項商品的背影 
 			for (var i = 0; i < ad.length; i++) {
-				bgColor = (i % 2 == 0 ? "#ECFFFF" : "#FFECF5");
-// 				content += "<tr bgcolor='" + bgColor + "'>" + "<td>"
 				content += "<tr>" + "<td>"
 						+ (i + 1)
-						+ "&nbsp;</td>"
-						+ "<td>"
-						+ ad[i].adPk
 						+ "&nbsp;</td>"
 						+ "<td>"
 						+ ad[i].adNo
@@ -169,9 +162,9 @@ Html {
 						+ "<td>"
 						+ ad[i].memberName
 						+ "</td>"
-						+ "<td>"
+						+ "<td class='text-left'>"
 						+ cateNameTrans(ad[i].categoryNo)
-						+ "&nbsp;</td>"
+						+ "</td>"
 						+ "<td>"
 						+ ad[i].adDate
 						+ "</td>"

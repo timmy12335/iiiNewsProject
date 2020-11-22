@@ -6,6 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Document</title>
     <script>
     window.onload=function(){
@@ -25,8 +30,16 @@
      				
      				newsTypeNum = JSON.parse(responseData);
      				newsTypeCount = JSON.parse(responseData0);
+     				var sum = 0;
+     				for(var key in newsTypeCount){
+     					sum += newsTypeCount[key]
+     					
+     				}
+     				document.getElementById("totalprice").innerHTML="$"+sum;
+     				console.log("總和="+sum)
+//     				alert(sum)
      				
-     				console.log(newsTypeNum);
+//     				console.log(newsTypeNum);
      				console.log(newsTypeCount);
      		    	Type(newsTypeNum,newsTypeCount);
 
@@ -63,20 +76,35 @@
     <body >
     <jsp:include page="/fragment/BMnav.jsp"></jsp:include> 
 		<div class="card-body">
-        <div id="container" style="height:700px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1605769547048">
-            <div style="position: relative; width: 1536px; height: 666px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-                <canvas data-zr-dom-id="zr_0" width="1920" height="832" style="position: absolute; left: 0px; top: 0px; width: 1536px; height: 666px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
-            </div>
-            <div>
+		
+		<div class="container" style="position: relative;">
+		<div class="row">
+		<div class="col-8"></div>
+		<div class="col-2"></div>
+			<div class="card col-2" style="width: 200px">
+				<div class="card-body" >
+					<div class="card-title" style="font-size:20px">銷售總金額</div>
+					<div class="card-text" id="totalprice" style="font-size:20px"></div>
 
+				</div>
+			</div>
+			
+		</div>
+		</div>
+
+        <div id="container" style="height:700px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;" _echarts_instance_="ec_1605769547048">
+        	<div class="card-body">
+		
+		</div>
+            <div style="position: relative; width: 1536px; height: 666px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+                
+                <canvas data-zr-dom-id="zr_0" width="1920" height="832" style="position: absolute; left: 0px; top: 0px; width: 1536px; height: 666px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
             </div>
         </div>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
  <script type="text/javascript">
  function Type(newsTypeNum,newsTypeCount) {
@@ -195,6 +223,7 @@
         </script>
     
 </div>
+
 <jsp:include page="/fragment/BMfoot.jsp"></jsp:include> 
 </body>
 </html>

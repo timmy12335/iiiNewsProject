@@ -36,6 +36,7 @@ html{
   color: white;
   width:100%;
   display:none;
+  margin:20 auto;
 }
 
 .closebtn {
@@ -60,13 +61,14 @@ html{
 	</nav>
 	<div class="iiinewsContainer">
 		<div class="container">
-		<div class="row bg-white shadow-sm rounded">
-		
+				
 		<div class="alert" id="nopayalert">
 		  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
 		  <strong><i class="far fa-bell fa-lg"></i>&nbsp;&nbsp;Notice！提醒！&nbsp;&nbsp;</strong> 您尚有未付款的訂單，立即前往結帳！CHECKOUT NOW！
 		</div>
 		
+		<div class="row bg-white shadow rounded">
+
 			<div class="col-12 bg-info text-white p-4">
 				<h2>會員${showmemberId}的訂單列表</h2>
 			</div>
@@ -114,7 +116,10 @@ html{
 												<span class="text-secondary">已取消&nbsp;<i class="fas fa-exclamation-triangle"></i></span>
 											</c:if>
 										</td>
-										<td class='text-center'><a class="btn btn-info" href="<c:url value="/getItemByOrderPk/${ad.adOrderPk}" />">檢視訂單 / 上傳圖片</a>
+										<td class='text-center'>
+										<c:if test="${ad.paymentStatus == 1}">
+											<a class="btn btn-info" href="<c:url value="/getItemByOrderPk/${ad.adOrderPk}" />">檢視訂單 / 上傳圖片</a>
+										</c:if>
 										</td>
 									</tr>
 								</c:forEach>

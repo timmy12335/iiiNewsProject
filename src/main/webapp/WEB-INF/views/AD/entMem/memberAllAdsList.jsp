@@ -105,25 +105,25 @@ window.onload = function() {
 				<div class="col-9">
 					<nav>
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link active" id="nav-home-tab"
+							<a class="nav-item nav-link border-bottom active" id="nav-home-tab"
 								data-toggle="tab" href="#nav-home" role="tab"
-								aria-controls="nav-home" aria-selected="true">總覽</a> <a
-								class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+								aria-controls="nav-home" aria-selected="true">總覽</a>
+							<a class="nav-item nav-link border-bottom"id="nav-profile-tab" data-toggle="tab"
 								href="#nav-profile" role="tab" aria-controls="nav-profile"
-								aria-selected="false">已上傳列表</a> <a class="nav-item nav-link"
-								id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+								aria-selected="false">已上傳列表</a>
+							<a class="nav-item nav-link border-bottom" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
 								role="tab" aria-controls="nav-contact" aria-selected="false"
 								onclick="memberSoldList('${CpAdLists[0].memberId}')">已售出列表</a>
 						</div>
 					</nav>
-					<div class="tab-content" id="nav-tabContent">
+					<div class="tab-content bg-white shadow rounded" id="nav-tabContent">
 						<div class="tab-pane fade show active p-4" id="nav-home"
 							role="tabpanel" aria-labelledby="nav-home-tab">
 							<h3>總覽</h3>
 							<div class="row">
 								<div class="col-4">
 									<%-- 								<h3>本月上傳：${fn:length(CpAdLists)}則</h3> --%>
-									<div class="card">
+									<div class="card shadow-sm bg-white rounded">
 										<div class="card-body">
 											<p class="card-title textleft">本月廣告上傳數</p>
 											<div
@@ -140,7 +140,7 @@ window.onload = function() {
 									</div>
 								</div>
 								<div class="col-4">
-									<div class="card">
+									<div class="card shadow-sm bg-white rounded">
 										<div class="card-body">
 											<p class="card-title textleft">本月收入收益金額</p>
 											<div
@@ -157,7 +157,7 @@ window.onload = function() {
 									</div>
 								</div>
 								<div class="col-4">
-									<div class="card">
+									<div class="card shadow-sm bg-white rounded">
 										<div class="card-body">
 											<p class="card-title textleft">本月售出則數</p>
 											<div

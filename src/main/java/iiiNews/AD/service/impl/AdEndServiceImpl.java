@@ -68,5 +68,21 @@ public class AdEndServiceImpl implements AdEndService {
 		list.add("500");
 		return list;
 	}
+
+	@Override
+	@Transactional
+	public Map<String, Integer> allOrderPriceAndCount(){
+		Map<String, Integer> map = new HashMap<>();
+		List<AdOrderItemBean> list = adEndDao.allOrderFunction();
+		int price = 0;
+		int count = 0;
+		for(AdOrderItemBean aoib:list) {
+			price += aoib.getUnitPrice();
+			count++;
+		}
+		map.put("monthPrice",price);
+		map.put("monthCount",count);
+		return map;
+	}
 	
 }

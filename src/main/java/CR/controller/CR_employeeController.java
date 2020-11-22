@@ -53,7 +53,7 @@ public class CR_employeeController {
 	}
 	
 	@PostMapping("/addemployee")
-	public String processemp(@ModelAttribute("cremployee") CRemployee cre, Model model, BindingResult bindingResult,HttpServletRequest request, HttpServletResponse response) {
+	public String processemp(@ModelAttribute("cremployee") CRemployee cre) {
 //		new CRempValidator().validate(cre, bindingResult);
 //		if (bindingResult.hasErrors()) {
 //			System.out.println("應該要進來");

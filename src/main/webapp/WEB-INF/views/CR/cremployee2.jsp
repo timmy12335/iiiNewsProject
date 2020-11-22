@@ -88,7 +88,7 @@
 			var emp = JSON.parse(responseData); // 傳回一個陣列
 			console.log(emp);
 			var bgColor = ""; // 每一項商品的背影 
-			for (var i = (emp.length-1); i >0; i--) {
+			for (var i = (emp.length-1); i >=0; i--) {
 				console.log(emp[i].isstay);
 				if (emp[i].isstay == "0") {
 					bgColor = "	#FFF3EE";

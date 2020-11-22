@@ -80,14 +80,14 @@ public class httpController {
 		//String a1 =e1.toString() ;
 		//List<String> list = Arrays.asList(a1);
 		
-		File writename = new File("C:\\_springMVC\\outwritestream\\input.txtoutput.txt"); // 相對路徑，如果沒有則要建立一個新的output。txt檔案
-		writename.createNewFile(); // 建立新檔案
-		BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-		 for(String l:list){
-		out.write(l); // \r\n即為換行
-		 }
-		out.flush(); // 把快取區內容壓入檔案
-		out.close(); // 最後記得關閉檔案
+//		File writename = new File("C:\\_springMVC\\outwritestream\\input.txtoutput.txt"); // 相對路徑，如果沒有則要建立一個新的output。txt檔案
+//		writename.createNewFile(); // 建立新檔案
+//		BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+//		 for(String l:list){
+//		out.write(l); // \r\n即為換行
+//		 }
+//		out.flush(); // 把快取區內容壓入檔案
+//		out.close(); // 最後記得關閉檔案
 		
 		//String d1 = b1.get(0).text();
 //		System.out.println("9999"+d1);
@@ -121,14 +121,14 @@ public class httpController {
 		//String a1 =e1.toString() ;
 		//List<String> list = Arrays.asList(a1);
 		
-		File writename = new File("C:\\_springMVC\\outwritestream\\input.txtoutputURL.txt"); // 相對路徑，如果沒有則要建立一個新的output。txt檔案
-		writename.createNewFile(); // 建立新檔案
-		BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-		 for(String l:list1){
-		out.write(l); // \r\n即為換行
-		 }
-		out.flush(); // 把快取區內容壓入檔案
-		out.close(); // 最後記得關閉檔案
+//		File writename = new File("C:\\_springMVC\\outwritestream\\input.txtoutputURL.txt"); // 相對路徑，如果沒有則要建立一個新的output。txt檔案
+//		writename.createNewFile(); // 建立新檔案
+//		BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+//		 for(String l:list1){
+//		out.write(l); // \r\n即為換行
+//		 }
+//		out.flush(); // 把快取區內容壓入檔案
+//		out.close(); // 最後記得關閉檔案
 		
 		//String d1 = b1.get(0).text();
 //		System.out.println("9999"+d1);

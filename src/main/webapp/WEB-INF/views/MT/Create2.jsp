@@ -6,7 +6,6 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <title>上架廣告欄位</title>
 <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
 <script >
@@ -38,22 +37,23 @@ window.onload = function(){
 </script>
 </head>
 <body>
-	<nav class="navbar fixed-top">
+	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
-	<div class="container">
+	<div id="page" class="container" align="center">
 <!-- 		<h2 class="BoxTitle">-----廣告欄位置上傳-----</h2> -->
-		<div align="center" >
+		<div class="container-login100">
 			<form:form method="POST" modelAttribute="mtBean" enctype="multipart/form-data">
 <%-- 			<form:form method="POST" modelAttribute="mtBean" --%>
 <%-- 				enctype="multipart/form-data" onsubmit="return submitUserForm();"> --%>
 				<fieldset>
-					<div style="margin-top: 100px;">
-						<h2>${MBBean.name}您好，歡迎建立貼文</h2>
+					<div align="center" style="margin-top: 40px;">
+						<h1>${MBBean.name}您好，歡迎建立貼文</h1>
+						<p>${MBBean.name}您好，歡迎建立貼文</p>
 						<hr>
 						<div class="st1">
 							<label for="Category">類別:</label>
-							<form:select class="form-control form-control-sm" path="Category">
+							<form:select path="Category">
 								<form:option value="未分類">未分類</form:option>
 								<form:option value="生活">生活</form:option>
 								<form:option value="娛樂">娛樂</form:option>
@@ -67,7 +67,7 @@ window.onload = function(){
 						
 						<div class="st1">
 							<label for="title">標題:</label>
-							<form:input class="form-control" type="text" id="title" name="title" path="title"
+							<form:input type="text" id="title" name="title" path="title"
 								size="45" placeholder="今晚我想來點..." /><br>
 							<div><form:errors path="title" style="font-size:12px;color:red" /></div> <!-- //11/05判斷功能，要改成Ajax-->
 						</div>
@@ -102,9 +102,9 @@ window.onload = function(){
 				</div>
 				
 				<div>
-						<input type='button' class='btn btn-primary btn-sm' value='Demo1' >
+						<input type='button' class=''  id='clickme1' value='Demo1' >
 						<span>&nbsp;&nbsp;</span>
-						<input type='button' class='btn btn-primary btn-sm' value='Demo2' >
+						<input type='button' class=''  id='clickme2' value='Demo2' >
 						<span>&nbsp;&nbsp;</span>
 				</div>
 				</fieldset>

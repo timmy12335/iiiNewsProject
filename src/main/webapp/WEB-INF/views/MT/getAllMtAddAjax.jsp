@@ -58,6 +58,15 @@ td {
 	margin: 5px;
 	font-weight: "bold";
 }
+.ellipsis {
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	white-space: normal;
+}
 </style>
 </head>
 <body>
@@ -118,9 +127,9 @@ td {
 							}
 // 							+"<c:if test='" + mtAll[i].status + "== 1'><td><label class='badge badge-success'>可瀏覽</label></td></c:if>"
 // 							+"<c:if test='" + mtAll[i].status + "== 0'><td><label class='badge badge-danger'>已下架</label></td></c:if>"
-							content += "<td>" + mtAll[i].category + "</td><td class='td1'>" + mtAll[i].title + "</td><td class='td1'>"
+					content += "<td>" + mtAll[i].category + "</td><td class='td1'>" + mtAll[i].title + "</td><td class='td1'>"
 							+"<div id='Demo' class='demo'><img style='width:160px;height:90px' src='<c:url value='/getMtCreate/" + mtAll[i].articleId + "' />' />"
-							+"</div></td><td class='td1'>" + mtAll[i].article + "</td><td><div align='center'>";
+							+"</div></td><td class='td1'><div class='ellipsis'>" + mtAll[i].article + "</div></td><td><div align='center'>";
 // 							+"</div>" + mtAll[i].imgName + "</td><td class='td1'>" + mtAll[i].article + "</td><td><div align='center'>";
 // 							+"<a class='delSingle' href='${pageContext.request.contextPath}/delSingleArticle/" + mtAll[i].articleId + "'>";
 							if (mtAll[i].status == 1) {

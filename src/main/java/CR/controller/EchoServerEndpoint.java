@@ -43,7 +43,7 @@ public class EchoServerEndpoint {
 			
 		}else if(message.contains("廣告")) {
 //			service.addMsg(message);
-			msg="可到新聞專區觀看";
+			msg="可到廣告專區觀看";
 		}else if(message.contains("追蹤")) {
 			msg="請至追蹤專區觀看";
 		}else if(message.contains("客服")) {

@@ -53,7 +53,7 @@ p{
 
 		<div  style="margin-top: 100px;">
 		<div align="center">
-			<h1>新聞詳細內容</h1>
+			<h1>123新聞詳細內容</h1>
 			<p>可於前頁輸入時間上架喔!</p>
 			<p></p>
 		</div>
@@ -75,7 +75,7 @@ p{
 						<span class="text-danger" style="font-size:35px;margin:10px">
 							<b>NT$${newsSingle.price} </b>
 						</span>						
-						<a href="#" onclick="history.back()" class="btn btn-primary btn-lg">
+						<a href="<c:url value='/getMemNewsList'/>" class="btn btn-primary btn-lg">
 						<i class="fas fa-arrow-alt-circle-left"></i>&ensp;回列表</a>						
 						</div>
 						

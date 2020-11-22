@@ -6,8 +6,8 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <title>更新內文</title>
-<script src="https://www.google.com/recaptcha/api.js"></script>
 <script >
 window.onload = function(){
 		var btn = document.getElementById("update1");
@@ -42,7 +42,7 @@ window.onload = function(){
 			<form:form method="POST" modelAttribute="mtAddBean"
 				enctype="multipart/form-data" onsubmit="return submitUserForm();">
 				<fieldset>
-					<div align="center" style="margin-top: 50px;">
+					<div align="center" style="margin-top: 100px;">
 						<h2>更新內文</h2>
 						<div>		
 							<form:input type="hidden" id="articleId" name="articleId"  path="articleId" value="${ mtAddBean.articleId }"  />
@@ -107,9 +107,9 @@ window.onload = function(){
 <!-- 				</div> -->
 
 					<div>
-						<input type='button' class=''  id='update1' value='Update1' >
+						<input type='button' class='btn btn-primary btn-sm' value='Update1' >
 						<span>&nbsp;&nbsp;</span>
-						<input type='button' class=''  id='update2' value='Update2' >
+						<input type='button' class='btn btn-primary btn-sm' value='Update2' >
 						<span>&nbsp;&nbsp;</span>
 					</div>
 				</fieldset>

@@ -26,11 +26,11 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	@Override
 	public List<AdBean> getAllAdByAjax(String set) {
 		
-		String hql = "FROM AdBean WHERE stock > 0 AND status = 1";
+		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 ORDER BY adPk DESC";
 		
 		if(set.equals("ALL")) {
-			hql = "FROM AdBean";
-			System.out.println("all print by dao");
+			hql = "FROM AdBean ORDER BY adPk DESC";
+			System.out.println("all print by dao DESC");
 		}
 		
 		Session session = factory.getCurrentSession();
@@ -43,10 +43,11 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	@Override
 	public List<AdBean> getAdByCateNoAjax(String CateNo,String set) {
 //		int startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND categoryNo = :cateno";
+		System.out.println("getAdByCateNoAjax ORDER BY adPk DESC");
+		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND categoryNo = :cateno ORDER BY adPk DESC";
 		
 		if(set.equals("ALL")) {
-			hql = "FROM AdBean WHERE categoryNo = :cateno";
+			hql = "FROM AdBean WHERE categoryNo = :cateno ORDER BY adPk DESC";
 			System.out.println("all print by dao");
 		}
 		Session session = factory.getCurrentSession();
@@ -60,10 +61,11 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<AdBean> getAdByDateAjax(Date adDate,String set) {
-		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND adDate = :date";
+		System.out.println("getAdByDateAjax ORDER BY adPk DESC");
+		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND adDate = :date ORDER BY adPk DESC";
 		
 		if(set.equals("ALL")) {
-			hql = "FROM AdBean WHERE adDate = :date";
+			hql = "FROM AdBean WHERE adDate = :date ORDER BY adPk DESC";
 			System.out.println("all print by dao");
 		}
 		
@@ -78,16 +80,17 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<AdBean> getAdByWordAjax(String searchword,String set) {
+		System.out.println("getAdByWordAjax ORDER BY adPk DESC");
 		String hql = "FROM AdBean WHERE stock > 0 AND status = 1 AND "
 				+ "(memberName LIKE :word OR adNo LIKE :word "
 				+ "OR adTitle LIKE :word OR statement LIKE :word"
-				+ ")";
+				+ ") ORDER BY adPk DESC";
 		
 		if(set.equals("ALL")) {
 			hql = "FROM AdBean WHERE "
 					+ "(memberName LIKE :word OR adNo LIKE :word "
 					+ "OR adTitle LIKE :word OR statement LIKE :word"
-					+ ")";
+					+ ") ORDER BY adPk DESC";
 			System.out.println("all print by dao");
 		}
 		Session session = factory.getCurrentSession();
@@ -107,15 +110,15 @@ public class AdAjaxSearchDaoImpl implements AdAjaxSearchDao {
 		
 		String hql = "FROM AdOrderBean";
 		if (buyerMemberId.equals("ALL")&&adOrderNo.equals("ALL")) {
-			hql = "FROM AdOrderBean";
+			hql = "FROM AdOrderBean ORDER BY adOrderPk DESC";
 			list = session.createQuery(hql).getResultList();
-			System.out.println("======================  方法一  ======================");
+			System.out.println("======================  方法一  ======================DESC");
 		}else if(! buyerMemberId.equals("ALL")) {
-			hql = "FROM AdOrderBean WHERE buyerMemberId = :mid";
+			hql = "FROM AdOrderBean WHERE buyerMemberId = :mid ORDER BY adOrderPk DESC";
 			list = session.createQuery(hql).setParameter("mid", buyerMemberId).getResultList();
-			System.out.println("======================  方法2  ======================");
+			System.out.println("======================  方法2  ======================DESC");
 		}else {
-			hql = "FROM AdOrderBean";
+			hql = "FROM AdOrderBean ORDER BY adOrderPk DESC";
 			list = session.createQuery(hql).getResultList();
 			System.out.println("======================  方法3  ======================");
 		}

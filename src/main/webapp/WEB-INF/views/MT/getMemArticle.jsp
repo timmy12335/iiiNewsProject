@@ -18,13 +18,13 @@ window.onload = function() { //刪除文章，OK
 }
 
 </script>
-<title>Get Member MtBean</title>
+<title>發文紀錄</title>
 
 <style>
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 90%;
+  width: 80%;
 }
 
 #customers td, #customers th {
@@ -55,6 +55,17 @@ td {
 	margin: 5px;
 	font-weight: "bold";
 }
+
+.ellipsis {
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	white-space: normal;
+}
+
 </style>
 </head>
 <body>
@@ -62,7 +73,7 @@ td {
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<div align="center" style="background-color: #f8f2e4">
-	<div align="center" style="margin-top: 30px;">
+	<div style="margin-top: 30px;">
 		<br><br><br>
 		<h2>${MBBean.name}的發文紀錄</h2>
 <%-- 		<a href="<c:url value='/' />">回首頁</a> --%>
@@ -86,7 +97,7 @@ td {
 				<th>文章狀態</th>
 				<th>類型</th>
 				<th>標題</th>
-				<th>圖片</th>
+<!-- 				<th>圖片</th> -->
 				<th>內文</th>
 				<th>維護</th>
 			</tr>
@@ -103,16 +114,14 @@ td {
 					<c:if test="${ memList.status == 0}"><td>***已下架***</td></c:if>
 					<td>${memList.category}</td>
 					<td class="td1"><a href="<c:url value='/getSingleArticle/${memList.articleId}'/>" >${memList.title}</a> </td>
-					<td class="td1"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${memList.articleId}' />" />${memList.imgName}</td>
-					<td class="td1">${memList.article}</td>
-					<td>
+<%-- 					<td class="td1"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${memList.articleId}' />" />${memList.imgName}</td> --%>
+					<td class="td1"><div class="ellipsis">${memList.article}</div></td>
+					<td class="td1">
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
 							<a class='delSingle' href="${pageContext.request.contextPath}/delMemArticle/${memList.articleId}">
-							<c:if test="${ memList.status == 0}" ><a href='' ></a></c:if>
-							刪除</a>
-							<a
-								href="${pageContext.request.contextPath}/modifyArticle/${memList.pkey}">編輯資料</a>
+							<c:if test="${ memList.status == 0}" ><a href='' ></a></c:if>刪除</a>
+							<a href="${pageContext.request.contextPath}/modifyArticle/${memList.pkey}">編輯資料</a>
 						</div>
 					</td>
 				</tr>

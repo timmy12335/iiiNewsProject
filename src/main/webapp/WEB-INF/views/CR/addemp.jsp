@@ -32,17 +32,17 @@ span.error {
 		<div class="form-group">
 			<label>客服人員名稱:</label>
 			<form:input type="text" path="empName" id="empName"  placeholder="請輸入員工名稱" class="form-control"></form:input>
-			<div class="invalid-feedback"><form:errors path="empName" cssClass="error" /></div>
+			<form:errors path="empName" cssClass="error" />
 		</div>
 		<div class="form-group">
 			<label>客服人員帳號:</label>
 			<form:input type="text" path="empId" id="empId" placeholder="請輸入員工編號"  class="form-control"></form:input>
-			<div class="invalid-feedback"><form:errors path="empId" cssClass="error" /></div>
+			<form:errors path="empId" cssClass="error" />
 		</div>
 		<div class="form-group">
 			<label>客服人員電子信箱:</label>
 			<form:input type="text" path="empemail" id="empemail" placeholder="請輸入員工信箱" class="form-control"></form:input>
-			<div class="invalid-feedback"><form:errors path="empemail" cssClass="error" /></div>
+			<form:errors path="empemail" cssClass="error" />
 		</div>
 		<div>
 			<div>

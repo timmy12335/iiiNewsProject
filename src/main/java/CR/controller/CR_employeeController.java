@@ -53,12 +53,12 @@ public class CR_employeeController {
 	}
 	
 	@PostMapping("/addemployee")
-	public String processemp(@ModelAttribute("cremployee") CRemployee cre) {
-//		new CRempValidator().validate(cre, bindingResult);
-//		if (bindingResult.hasErrors()) {
-//			System.out.println("應該要進來");
-//			return "CR/addemp";
-//		}
+	public String processemp(@ModelAttribute("cremployee") CRemployee cre, Model model, BindingResult bindingResult) {
+		new CRempValidator().validate(cre, bindingResult);
+		if (bindingResult.hasErrors()) {
+			System.out.println("應該要進來");
+			return "CR/addemp";
+		}
 		
 		service.addemployee(cre);
 		return "redirect:/allemployee";	

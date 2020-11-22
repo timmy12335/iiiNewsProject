@@ -71,7 +71,8 @@ td {
 	<c:choose>
 			<c:when test="${empty memArticleList}">
 			<tr>
-				<td colspan="10"><div style="font-size:20px;color:red;text-align:center;">&nbsp;暫無發文紀錄&nbsp;</div></td>
+				<td colspan="10"><div style="font-size:20px;color:red;text-align:center;">&nbsp;暫無發文紀錄&nbsp;<br><br>
+				<a href="<c:url value='/MtCreate' />">&nbsp;立刻與好友分享你的第一篇文章!!!&nbsp;</a></div></td>
 			</tr>
 			</c:when>
 			<c:otherwise>

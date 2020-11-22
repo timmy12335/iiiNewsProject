@@ -12,12 +12,12 @@ window.onload = function(){
 		var btn2 = document.getElementById("clickme2");
 		btn.onclick = function(){
 		A =  document.getElementById("comment")
-		A.value ="AAAAA留言留言"
+		A.value ="太狂了吧!!! 我覺得可以"
 		}
 		
 		btn2.onclick = function(){
 		B =  document.getElementById("comment")
-		B.value ="BBB留言"
+		B.value ="我覺得不行"
 	}
 }
 	</script>

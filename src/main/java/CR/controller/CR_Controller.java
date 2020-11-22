@@ -1,6 +1,9 @@
 package CR.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -17,6 +20,7 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Constants;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -165,7 +169,7 @@ public class CR_Controller {
 			email.setSubject("iiiNews客服表單申請成功通知信");
 			String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>" + "<table><tr><td>客服類別:"
 					+ cb.getCrClass() + "</td></tr><tr><td>客服標題:" + cb.getCrTitle() + "</td></tr><tr><td>客服內容:"
-					+ cb.getCrContent() + "</td></tr></table><br><p>感謝您的申請，我們將會盡快回覆您";
+					+ cb.getCrContent() + "</td></tr></table><br><p>感謝您的申請，我們將會盡快回覆您</p>";
 			email.setText(text, true);
 			// 有圖才寄附件
 			if (images != null && !images.isEmpty()) {
@@ -173,7 +177,6 @@ public class CR_Controller {
 			}
 			mailSender.send(msg);
 		} catch (MessagingException e) {
-			System.out.println("是我啦!!");
 			e.printStackTrace();
 		}
 		if (memberBean == null) {
@@ -293,6 +296,7 @@ public class CR_Controller {
 		return re;
 	}
 
+	
 	//將分數傳入並進行修改
 	@PostMapping(value="/scoreNum/{pk}" , consumes = { "application/json" }, produces = { "application/json" })
 	public Map<String, String> updateScoreByPk(@RequestBody CRBean cb, @PathVariable Integer pk ){

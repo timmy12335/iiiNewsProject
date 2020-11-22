@@ -44,18 +44,26 @@ span.error {
 .hidechatbot {
 	background: "";
 }
-
+.statuscolor{
+color:#969696;
+font-size:12px;
+}
 .chatroom {
 	position: fixed;
-	bottom: 0;
+	bottom: 10px;
 	right: 0;
 	_position: absoluate;
-	width: 300px;
+	width: 370px;
 	height: auto;
 	border: 2px solid green;
-	background: #eeeeee;
+	background: #ECECFF;
+	border-radius:15px 15px;
 	padding: 10px;
 	float: both;
+}
+
+#serverResponseArea{
+border:2px green solid;
 }
 </style>
 
@@ -105,7 +113,13 @@ span.error {
 			socket.send(message.value);
 			message.value = "";
 		}
-
+		
+		message.onkeydown=function(){
+			if (event.keyCode==13){
+				btnSend.onclick();
+			}
+		}
+		
 		chatbot.onclick = function() {
 			socket = new WebSocket(connString);
 			document.getElementById("show").style.display = "";
@@ -156,13 +170,13 @@ span.error {
 		}
 	}
 	function appendMsg(message) {
-		
+		$('#serverResponseArea').scrollTop($('#serverResponseArea')[0].scrollHeight)
 		serverResponseArea.value = serverResponseArea.value + message + "\n";
 	}
 	
 </script>
 </head>
-<body style="background-color: #FFECEC">
+<body>
 	<nav>
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
@@ -210,7 +224,7 @@ span.error {
 
 						<div class="form-group">
 							<label>客服內容:</label>
-							<form:textarea class="form-control"
+							<form:textarea class="form-control" placeholder="請輸入至少10字以上的內容...."
 								style="resize: none;height:300px" path="crContent"
 								id="crContent" maxlength="200"></form:textarea>
 							<div id='num'><font color="#E0E0E0" size="1" face="DFKai-sb" ></font></div>
@@ -251,13 +265,14 @@ span.error {
 			</div>
 		</div>
 		<div style="display: none" id="show" class="chatroom">
-			<textarea cols='30' rows='10' id='serverResponseArea' readonly
+			<textarea cols='40' rows='10' id='serverResponseArea' readonly
 				style="resize: none; align: left;"></textarea>
-			<span id='status'></span>
-			<button id='btnClose' class="btn btn-outline-secondary btn-icon-text">關閉客服對話</button>
+			
+			<button id='btnClose' class="btn btn-danger btn-icon-text btn-sm">關閉客服對話</button>
 			<hr>
 			訊息： <input type='text' id='message'>&nbsp;
-			<button id='btnSend' class="btn btn-outline-secondary btn-icon-text">送出</button>
+			<button id='btnSend' class="btn btn-secondary btn-icon-text btn-sm">送出</button>
+		<div id='status' class="statuscolor"></div>
 		</div>
 		<div style="width: 200px; height: 400px;" class="chatbot" id="chatbot"
 			align="center"></div>
@@ -319,6 +334,7 @@ span.error {
 		}
 	}
 	
+	
 	document.getElementById("inputDemo1").onclick=function(){
 		var crTitle = document.getElementById("crTitle");
 		var crClass = document.getElementById("crClass");
@@ -326,6 +342,7 @@ span.error {
 		crTitle.value = "新聞有問題";
 		crClass.value="商品相關";
 		crContent.value="購買新聞資訊後，發現給予的新聞內容和實際想像中不同，想請問能暫時停止給予對方金錢嗎?\n另外想請問為什麼你們的新聞新聞和廣告購買頁面那麼好看!!!!!";
+		document.getElementById("crContent").onkeydown();
 	}
 
 

@@ -1,11 +1,15 @@
 package iiiNews.AD.controller;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
@@ -71,12 +77,26 @@ public class AdBuyingController {
 		}
 		
 		AdBean adbean = adMainService.getOneAdByadPk(adPk);
+		//折扣問題處理
+		int unitPrice = adbean.getPrice();
+		
+		double middlediscount;
+		int afterdiscount;
+		if (model.getAttribute("discount") != null) {
+			System.out.println("加入購物車的discount方法");
+			System.out.println("unitPrice:"+unitPrice);
+			Double discount = (Double) model.getAttribute("discount");
+			middlediscount = adbean.getPrice()*discount;
+			afterdiscount = (new BigDecimal(middlediscount).setScale(0, BigDecimal.ROUND_HALF_UP)).intValue();
+			unitPrice = afterdiscount;
+			System.out.println("middlediscount:"+middlediscount+","+"afterdiscount:"+afterdiscount+","+"unitPrice:"+unitPrice);
+		}
 		
 		//名字暫時寫死的
 		String buyername = "frank";
 		String sellername = adbean.getMemberId();
 		Timestamp soldDate = new Timestamp(System.currentTimeMillis());
-		AdOrderItemBean aoib = new AdOrderItemBean(null, adbean.getAdPk(), adbean.getAdNo(), adbean.getPrice(),
+		AdOrderItemBean aoib = new AdOrderItemBean(null, adbean.getAdPk(), adbean.getAdNo(), unitPrice,
 										quantity, sellername,adbean.getMemberName(), buyername, adbean.getCategoryNo(), adbean.getWidth(),
 										adbean.getHeight(), adbean.getAdDate(),soldDate);
 		//+++++ 改寫到service
@@ -243,17 +263,46 @@ public class AdBuyingController {
 	}
 	
 	@GetMapping("/getDiscount")
-	public String discount(Model model,@RequestParam String discountStr) {
+	public String discount(Model model,@RequestParam String discountStr,RedirectAttributes redirectAtt) {
 		BuyingCart cart = (BuyingCart) model.getAttribute("shoppingCart");
 		if(cart == null) {
-			model.addAttribute("discount", "尚無");
+			System.out.println("購物車為空");
+			redirectAtt.addFlashAttribute("FlashMSG_discountFail", "購物車為空");
+			return  "AD/shoppingCartTest";
 		}
 		Double discount = 1.0;
-		model.addAttribute("discount", "尚無折扣");
-		if(discountStr.equals("HELLO")) {
-			discount = 0.8;
-			model.addAttribute("discount", "0.8");
+		
+		//讀折扣碼檔案
+		String line = "";
+		Map<String,Double> map = new HashMap<>();
+		try (FileInputStream fis = new FileInputStream("C:\\_springMVC\\workspace\\iiiNews\\data\\discount.txt");
+				InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+				BufferedReader br = new BufferedReader(isr0);) {
+			while ((line = br.readLine()) != null) {
+				String[] sa = line.split("\\|");
+				map.put(sa[0],Double.valueOf(sa[1]));
+			}
+		}catch (Exception ex) {
+			ex.printStackTrace();
 		}
+		
+		if (map.containsKey(discountStr)) {
+			System.out.println("contain:"+map.get(discountStr));
+			discount = map.get(discountStr);
+			model.addAttribute("discount", discount);
+		}else {
+			redirectAtt.addFlashAttribute("FlashMSG_discountFail", "查無折扣碼");
+			return  "redirect:/ShowCartContent";
+		}
+		
+		
+//		if(discountStr.equals("HELLO")) {
+//			discount = 0.8;
+//			model.addAttribute("discount", discount);
+//		}else {
+//			redirectAtt.addFlashAttribute("FlashMSG_discountFail", "查無折扣碼");
+//			return  "redirect:/ShowCartContent";
+//		}
 		
 		Double pay;
 		Integer count;
@@ -261,7 +310,11 @@ public class AdBuyingController {
 		Set<Integer> item = cart.getContent().keySet();
 		for(int n : item) {
 			AdOrderItemBean bean = cart.getContent().get(n);
-			int price = bean.getUnitPrice();
+			
+			AdBean adbean = adMainService.getOneAdByadPk(bean.getAdPk());
+			int price = adbean.getPrice();
+			
+//			int price = bean.getUnitPrice();
 			pay = price * discount;
 			count = (new BigDecimal(pay).setScale(0, BigDecimal.ROUND_HALF_UP)).intValue();
 			bean.setUnitPrice(count);
@@ -270,5 +323,7 @@ public class AdBuyingController {
 		return "redirect:/ShowCartContent";
 	}
 	
+	
+
 
 }

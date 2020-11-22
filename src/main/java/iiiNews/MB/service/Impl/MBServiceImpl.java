@@ -55,6 +55,7 @@ public class MBServiceImpl implements MBService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Transactional
 	@Override
 	public MBBean login(String account, String password) {
@@ -66,26 +67,38 @@ public class MBServiceImpl implements MBService {
 	@Override
 	public void updatePassword(String email) {
 		mbdao.updatePasswd(email);
-		System.out.println("session 更新密碼");	
+		System.out.println("session 更新密碼");
 	}
 
 	@Override
 	public List<String> seachMemberaccount() {
 		return mbdao.seachMemberaccount();
 	}
+
 	@Transactional
 	@Override
 	public boolean idExists(String id) {
 		return mbdao.idExists(id);
 	}
 
+	@Transactional
 	@Override
 	public boolean CheckPassword(String oldpwd, String newpwd, Integer id) {
-		return mbdao.CheckPassword(oldpwd, newpwd,id);
+		return mbdao.CheckPassword(oldpwd, newpwd, id);
 	}
 
 	@Override
 	public MBBean getProductById(int memberId) {
 		return mbdao.getProductById(memberId);
+	}
+
+	@Override
+	public MBBean get(Integer id) {
+		return mbdao.get(id);
+	}
+	@Transactional
+	@Override
+	public List<MBBean> getAllMembers() {
+		return mbdao.getAll();
 	}
 }

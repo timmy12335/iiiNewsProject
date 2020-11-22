@@ -133,13 +133,14 @@ public class MBDaoImpl implements MBDao {
 		return exist;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean CheckPassword(String oldpwd, String newpwd, Integer id) {
 		boolean check = false;
 		System.out.println(" DAO check1      "+ check);
 		String hql = "FROM MBBean m WHERE m.password = :mold";
 		String hql2 = "UPDATE MBBean mb SET mb.password = :mpwd " 
-		+ "Where mb.password = :mold and mb.memberId = :mid"; 
+		+ "WHERE mb.memberId = :mid"; 
 		Session session = factory.getCurrentSession();
 		List<MBBean> beans = session.createQuery(hql)
 										.setParameter("mold", oldpwd)
@@ -150,11 +151,13 @@ public class MBDaoImpl implements MBDao {
 			System.out.println(" DAO check2      "+ check);
 			return check;
 		}else {
-			session.createQuery(hql2)
+			System.out.println("newpwd:"+newpwd);
+			System.out.println("mid:"+id);
+			int n = session.createQuery(hql2)
 					.setParameter("mpwd", newpwd)
-					.setParameter("mold", oldpwd)
 					.setParameter("mid", id)
 					.executeUpdate();
+			System.out.println("n:"+n);
 			check = true;
 			System.out.println(" DAO check3      "+ check);
 			return check;
@@ -165,6 +168,23 @@ public class MBDaoImpl implements MBDao {
 	public MBBean getProductById(int memberId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public MBBean get(Integer id) {
+		return factory.getCurrentSession().get(MBBean.class, id);
+	}
+
+	@Override
+	public List<MBBean> getAll() {
+		String hql = "FROM MBBean";
+		Session session = getSession();
+		List<MBBean> list = session.createQuery(hql).getResultList();
+		return list;
+	}
+	
+	public Session getSession() {
+        return factory.getCurrentSession();			
 	}
 
 //	@Override

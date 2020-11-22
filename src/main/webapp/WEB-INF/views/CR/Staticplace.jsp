@@ -73,29 +73,29 @@
 		}
 
 	}
-function calAllReportByDate
-	var xhr1 = new XMLHttpRequest();
-	xhr1.open("GET", "<c:url value='/calCRfromEmp'/>", true);
-	xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	xhr1.send();
-	xhr1.onreadystatechange = function() {
-		if (xhr1.readyState == 4
-				&& (xhr1.status == 200 || xhr1.status == 204)) {
-			var map = JSON.parse(xhr1.responseText);
-			console.log(map);
-			var data1 = [];
-			var emp = [];
-			var report = [];
-			console.log(data1);
-			for ( var k in map) {
-				emp.push(k);
-				report.push(map[k]);
-			}
-			console.log(emp);
-			console.log(report);
-			getLinePic(emp, report);
-		}
-	}
+// function calAllReportByDate
+// 	var xhr1 = new XMLHttpRequest();
+// 	xhr1.open("GET", "<c:url value='/calCRfromEmp'/>", true);
+// 	xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+// 	xhr1.send();
+// 	xhr1.onreadystatechange = function() {
+// 		if (xhr1.readyState == 4
+// 				&& (xhr1.status == 200 || xhr1.status == 204)) {
+// 			var map = JSON.parse(xhr1.responseText);
+// 			console.log(map);
+// 			var data1 = [];
+// 			var emp = [];
+// 			var report = [];
+// 			console.log(data1);
+// 			for ( var k in map) {
+// 				emp.push(k);
+// 				report.push(map[k]);
+// 			}
+// 			console.log(emp);
+// 			console.log(report);
+// 			getLinePic(emp, report);
+// 		}
+// 	}
 	
 	
 	
@@ -207,30 +207,71 @@ function calAllReportByDate
 		}
 	}
 	
-	//線圖
-	function showLine(){
-	var dom = document.getElementById("container");
-var myChart = echarts.init(dom);
-var app = {};
-option = null;
-option = {
-    xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+	//HighChart練習
+	
+	Highcharts.chart('container', {
+
+    chart: {
+        type: 'column',
+        styledMode: true
     },
-    yAxis: {
-        type: 'value'
+
+    title: {
+        text: 'Styling axes and columns'
     },
+
+    yAxis: [{
+        className: 'highcharts-color-0',
+        title: {
+            text: 'Primary axis'
+        }
+    }, {
+        className: 'highcharts-color-1',
+        opposite: true,
+        title: {
+            text: 'Secondary axis'
+        }
+    }],
+
+    plotOptions: {
+        column: {
+            borderRadius: 5
+        }
+    },
+
     series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line'
+        data: [1, 3, 2, 4]
+    }, {
+        data: [324, 124, 547, 221],
+        yAxis: 1
     }]
-};
-;
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
-	}	
+
+});
+	
+	//線圖
+// 	function showLine(){
+// 	var dom = document.getElementById("container");
+// var myChart = echarts.init(dom);
+// var app = {};
+// option = null;
+// option = {
+//     xAxis: {
+//         type: 'category',
+//         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+//     },
+//     yAxis: {
+//         type: 'value'
+//     },
+//     series: [{
+//         data: [820, 932, 901, 934, 1290, 1330, 1320],
+//         type: 'line'
+//     }]
+// };
+// ;
+// if (option && typeof option === "object") {
+//     myChart.setOption(option, true);
+// }
+// 	}	
 </script>
 </head>
 <body>
@@ -263,29 +304,11 @@ if (option && typeof option === "object") {
 					<!-- <div id="selectLinewithre" style="width:300px; height:300px;"></div> -->
 				</div>
 			</div>
-
+<div class="container"></div>
 		</div>
 	</div>
-	<div class="row">
-
-		<div class='col-md-6 grid-margin stretch-card'>
-
-			<div class="card">
-				<div class='card-body' style='background: #F0F0F0'>
-					<canvas id="myChartDateemp"></canvas>
-				</div>
-			</div>
-		</div>
-		<div class='col-md-6 grid-margin stretch-card'>
-			<div class="card">
-				<div class='card-body' style='background: #F0F0F0; align: center;'>
-					<canvas id="myChartDateReport"></canvas>
-					<!-- <div id="selectLinewithre" style="width:300px; height:300px;"></div> -->
-				</div>
-			</div>
-
-		</div>
-	</div>
+	
+	
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>
 </html>

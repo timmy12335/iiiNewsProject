@@ -62,8 +62,6 @@
 	font-family: "標楷體";
 	color: darkblue;
 }
-
-
 </style>
 <script>
 function deleteCrReport(pk){
@@ -103,132 +101,135 @@ function deleteCrReport(pk){
 	</nav>
 	<section style="margin-top: 100px;">
 
-		
-			<h2 class="font-weight-bold mb-0" align="center">已申請客服</h2>
-			<br>
-			<div id="resultmsg"></div>
-			<table class="table table-hover "
-				style="border: 1px solid black; width:1400px;" align="center">
-				<thead class="table-primary"
-					style="background-color: #6FB7B7;" text-align="center">
-					<tr>
-						<th align="right" width='60px;'>單號</th>
-						<th width='120px;'>姓名</th>
-						<th width='120px;'>類別</th>
-						<th width='120px;'>標題</th>
-						<th align="right" width='120px;'>內容</th>
-						<th width='60px;'>附件</th>
-						<th width='120px;'>申請日期</th>
-						<th width='120px;'>回覆內容</th>
-						<th width='120px;'>回覆人員</th>
-						<th width='120px;'>回覆時間</th>
-						<th >功能</th>
-					</tr>
-				</thead>
-				<tbody style="background-color: white;">
-					<c:choose>
-						<c:when test="${empty CrReport}">
-							<tr>
-								<td colspan='8'><font color='red'>無客服資料</font></td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var='ser' items='${CrReport}' varStatus="report">
-								<tr style="height: 100px;">
-									<td style='vertical-align: middle;'>${ser.pk}</td>
-									<td style='vertical-align: middle;'>&nbsp;${ser.mbBean.name}</td>
-									<td style='vertical-align: middle;'>${ser.crClass}</td>
-									<td style='vertical-align: middle;'>&nbsp;${ser.crTitle}</td>
-									<td style='vertical-align: middle;cursor: pointer; '
-										onclick="MBfolded(${report.index})" class="box"><p
-											class="ellipsis">${ser.crContent}</p></td>
-									<td style='vertical-align: middle;'><img
-										style="width: 160px; height: 100px"
-										src="<c:url value='/getCRimg/${ser.pk}' />" /></td>
-									<td style='vertical-align: middle;'><fmt:formatDate
-											value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
-									<c:choose>
-										<c:when
-											test="${not empty ser.crReContent && empty ser.crReScore}">
-											<td onclick="folded(${report.index})"
-												style='vertical-align: middle; cursor: pointer' class="box"><p
-													class="ellipsis">
-													<c:out value="${ser.crReContent}"></c:out>
-												</p></td>
-											<td style='vertical-align: middle;'><c:out
-													value="${ser.cremployee.empName}" /></td>
-											<td style='vertical-align: middle;'><fmt:formatDate
-													value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
-											<td style='vertical-align: middle;'><button
-													id="btn_update" class="btn btn-success"
-													onclick="confirmReply(${report.index})">
-													確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
-												</button>
-											
-												<button id="btn_delete"
-													class="btn btn-danger" style="width:85px;"
-													onclick="deleteCrReport(${ser.pk})">
-													取消申請<i class="ti-trash btn-icon-append"></i>
-												</button></td>
-										</c:when>
-										<c:when
-											test="${not empty ser.crReContent && not empty ser.crReScore}">
-											<td style='vertical-align: middle;cursor: pointer; '
-												onclick="folded(${report.index})" class="box"><p
-													class="ellipsis">
-													<c:out value="${ser.crReContent}"></c:out>
-												</p></td>
-											<td style='vertical-align: middle;'><c:out
-													value="${ser.cremployee.empName}" /></td>
-											<td style='vertical-align: middle;'><fmt:formatDate
-													value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
-											<td style='vertical-align: middle;'><button
-													id="btn_update"
-													class="btn btn-outline-secondary btn-icon-text" disabled>
-													<b><font color="#FF5809" size="3">感謝評分</font></b>
-													</button></td>
-										</c:when>
-										<c:otherwise>
-											<td style='vertical-align: middle;'
-												onclick="folded(${report.index})" class="box"><p
-													class="ellipsis"></p></td>
-											<td></td>
-											<td style='vertical-align: middle;'><fmt:formatDate
-													value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
-											<td style='vertical-align: middle;'><button
-													id="btn_update" class="btn btn btn-success"
+
+		<h2 class="font-weight-bold mb-0" align="center">${MBBean.name}${CpMemberBean.cpname}
+			:表單列表</h2>
+		<br>
+		<div id="resultmsg"></div>
+		<table class="table table-hover "
+			style="border: 1px solid black; width: 1400px;" align="center">
+			<thead class="table-primary" style="background-color: #6FB7B7;"
+				text-align="center">
+				<tr>
+					<th align="right" width='60px;'>單號</th>
+					<th width='120px;'>申請人</th>
+					<th width='120px;'>類別</th>
+					<th width='120px;'>標題</th>
+					<th align="right" width='120px;'>內容</th>
+					<th width='60px;'>附圖</th>
+					<th width='120px;'>申請日期</th>
+					<th width='120px;'>回覆內容</th>
+					<th width='120px;'>回覆人員</th>
+					<th width='120px;'>回覆時間</th>
+					<th>功能</th>
+				</tr>
+			</thead>
+			<tbody style="background-color: #FCFCFC;">
+				<c:choose>
+					<c:when test="${empty CrReport}">
+						<tr>
+							<td colspan='8'><font color='red'>無客服資料</font></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var='ser' items='${CrReport}' varStatus="report">
+							<tr style="height: 100px;">
+								<td style='vertical-align: middle;'>${ser.pk}</td>
+								<td style='vertical-align: middle;'>&nbsp;${ser.mbBean.name}${ser.cpBean.cpname }</td>
+								<td style='vertical-align: middle;'>${ser.crClass}</td>
+								<td style='vertical-align: middle;'>&nbsp;${ser.crTitle}</td>
+								<td style='vertical-align: middle; cursor: pointer;'
+									onclick="MBfolded(${report.index})" class="box"
+									><p class="ellipsis" title='點擊顯示詳細內容'>${ser.crContent}</p></td>
+								<td style='vertical-align: middle;'><img
+									style="width: 160px; height: 100px"
+									src="<c:url value='/getCRimg/${ser.pk}' />" /></td>
+								<td style='vertical-align: middle;'><fmt:formatDate
+										value="${ser.crApplyDate}" pattern="yyyy-MM-dd HH:mm" /></td>
+								<c:choose>
+									<c:when
+										test="${not empty ser.crReContent && empty ser.crReScore}">
+										<td onclick="folded(${report.index})"
+											style='vertical-align: middle; cursor: pointer' class="box"
+											><p class="ellipsis" >
+												<c:out value="${ser.crReContent}"></c:out>
+											</p></td>
+										<td style='vertical-align: middle;'><c:out
+												value="${ser.cremployee.empName}" /></td>
+										<td style='vertical-align: middle;'><fmt:formatDate
+												value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
+										<td style='vertical-align: middle;'><button
+												id="btn_update" class="btn btn-success"
+												onclick="confirmReply(${report.index})">
+												確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
+											</button></td>
+									</c:when>
+									<c:when
+										test="${not empty ser.crReContent && not empty ser.crReScore}">
+										<td style='vertical-align: middle; cursor: pointer;'
+											onclick="folded(${report.index})" class="box"><p
+												class="ellipsis" title='點擊顯示詳細內容'>
+												<c:out value="${ser.crReContent}"></c:out>
+											</p></td>
+										<td style='vertical-align: middle;'><c:out
+												value="${ser.cremployee.empName}" /></td>
+										<td style='vertical-align: middle;'><fmt:formatDate
+												value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
+										<td style='vertical-align: middle;'><button
+												id="btn_update"
+												class="btn btn-outline-secondary btn-icon-text" disabled>
+												<b><font color="#FF5809" size="3">感謝評分</font></b>
+											</button></td>
+									</c:when>
+									<c:otherwise>
+										<td style='vertical-align: middle; cursor: pointer;'
+											onclick="folded(${report.index})" class="box"><p
+												class="ellipsis"></p></td>
+										<td></td>
+										<td style='vertical-align: middle;'><fmt:formatDate
+												value="${ser.crReDate}" pattern="yyyy-MM-dd" /></td>
+										<td style='vertical-align: middle;'><div>
+												<button id="btn_update" class="btn btn btn-success"
 													onclick="confirmReply(${ser.pk})" disabled>
 													確認/評分<i class="ti-pencil-alt btn-icon-append"></i>
-												</button></td>
-										</c:otherwise>
-									</c:choose>
-								</tr>
-								<tr style="display: none" id="score${report.index}">
-							
-									<td colspan="11"><select name="scoreNum" id="scoreNum${report.index}"
-										onchange="ScoreNum(${report.index},${ser.pk});">
-											<option value='1'>極差</option>
-											<option value='2'>差</option>
-											<option value='3'>普</option>
-											<option value='4'>優</option>
-											<option value='5'>極優</option>
-									</select></td>
-								</tr>
-								<tr id="MBcontent${report.index}"
-									style="display: none; word-wrap: break-word;">
-									<td colspan="2" style='vertical-align: middle;'>客服內容</td>
-									<td colspan="10"><textarea
-											style="width: 800px; height: 200px;resize:none;" disabled >${ser.crContent}</textarea>
-								<tr id="recontent${report.index}"
-									style="display: none; word-wrap: break-word;">
-									<td colspan="2" style='vertical-align: middle;'>回覆內容</td>
-									<td colspan="11"><textarea
-											style="width: 800px; height: 200px;resize:none;" disabled>${ser.crReContent}</textarea></td>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
+												</button>
+											</div>
+											<div style='margin-top: 10px;'>
+												<button id="btn_delete" class="btn btn-danger"
+													style="width: 85px;" onclick="deleteCrReport(${ser.pk})">
+													取消申請<i class="ti-trash btn-icon-append"></i>
+												</button>
+											</div></td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
+							<tr style="display: none" id="score${report.index}">
+
+								<td colspan="11"><select name="scoreNum"
+									id="scoreNum${report.index}"
+									onchange="ScoreNum(${report.index},${ser.pk});">
+										<option value='1'>極差</option>
+										<option value='2'>差</option>
+										<option value='3'>普</option>
+										<option value='4'>優</option>
+										<option value='5'>極優</option>
+								</select></td>
+							</tr>
+							<tr id="MBcontent${report.index}"
+								style="display: none; background-color: #ECF5FF;word-wrap: break-word;">
+								<td colspan="2" style='text-align:center;vertical-align: middle;'><b><font size="4">客服內容:</font></b></td>
+								<td colspan="12"><div style="height: 80px;display:flex; align-items: center;text-align:center; ">
+								 <font size='3'>${ser.crContent}</font></div>
+							<tr id="recontent${report.index}"
+								style="display: none; word-wrap: break-word; background-color: #ECF5FF">
+								<td colspan="2" style='text-align:center;vertical-align: middle;'><b><font size="4">回覆內容:</font></b></td>
+								<td colspan="11" style='vertical-align: middle;'><div
+										style="height: 80px; display:flex; align-items: center;"><font size='3'>${ser.crReContent}</font></div></td>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
 
 	</section>
 	<script>

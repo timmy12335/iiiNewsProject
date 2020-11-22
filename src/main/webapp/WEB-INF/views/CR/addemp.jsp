@@ -8,42 +8,53 @@
 <head>
 <meta charset="UTF-8">
 <title>後台-客服人員新增</title>
+<style>
+span.error {
+	color: red;
+	display: inline-block;
+	font-size: 5pt;
+}
+</style>
+<script>
 
 
 
+</script>
 </head>
 <body>
 
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
-
-	<h4 class="card-title">客服人員新增</h4>
-	<form:form method="POST" modelAttribute="cremployee" id="forms"
+<div>
+	<h3 >客服人員新增</h3>
+	</div>
+	<form:form method="post" modelAttribute="cremployee" id="forms" class="form-sample" 
 		enctype="multipart/form-data">
-		<tr>
-			<td>客服人員名稱:</td>
-			<td><form:input type="text" path="empName" id="empName"></form:input>
-			</td>
-		</tr>
-		<tr>
-			<td>客服人員帳號:</td>
-			<td><form:input type="text" path="empId" id="empId"></form:input>
-			</td>
-		</tr>
-		<tr>
-			<td>客服人員電子信箱:</td>
-			<td><form:input type="text" path="empemail" id="empemail"></form:input>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<div>
-					<input type="reset" class="btn btn-inverse-dark btn-fw"> <input
-						type="submit" class="btn btn-inverse-dark btn-fw"> <input
-						type="button" id="cancel" onclick="history.back();" value="回前頁">
+		<div class="form-group">
+			<label>客服人員名稱:</label>
+			<form:input type="text" path="empName" id="empName"  placeholder="請輸入員工名稱" class="form-control"></form:input>
+			<div class="invalid-feedback"><form:errors path="empName" cssClass="error" /></div>
+		</div>
+		<div class="form-group">
+			<label>客服人員帳號:</label>
+			<form:input type="text" path="empId" id="empId" placeholder="請輸入員工編號"  class="form-control"></form:input>
+			<div class="invalid-feedback"><form:errors path="empId" cssClass="error" /></div>
+		</div>
+		<div class="form-group">
+			<label>客服人員電子信箱:</label>
+			<form:input type="text" path="empemail" id="empemail" placeholder="請輸入員工信箱" class="form-control"></form:input>
+			<div class="invalid-feedback"><form:errors path="empemail" cssClass="error" /></div>
+		</div>
+		<div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-inverse-dark btn-fw">
+				 <input
+					type="reset" class="btn btn-inverse-dark btn-fw"> 
+					<input
+					type="button" id="cancel" onclick="history.back();"
+					class="btn btn-inverse-dark btn-fw" value="回前頁">
 
-				</div>
-			</td>
-		</tr>
+			</div>
+		</div>
 	</form:form>
 
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>

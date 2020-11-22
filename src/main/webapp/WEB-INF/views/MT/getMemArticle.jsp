@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,7 @@ td {
 	<div align="center" style="background-color: #f8f2e4">
 	<div align="center" style="margin-top: 30px;">
 		<br><br><br>
-		<h2>會員${memberId}的發文紀錄</h2>
+		<h2>${MBBean.name}的發文紀錄</h2>
 <%-- 		<a href="<c:url value='/' />">回首頁</a> --%>
 	</div>
 	<hr>
@@ -77,8 +78,8 @@ td {
 	<div align="center">
 		<table id="customers">
 			<tr>
-				<th>PK</th>
-				<th>文章編號</th>
+<!-- 				<th>PK</th> -->
+<!-- 				<th>文章編號</th> -->
 				<th>發文者</th>
 				<th>上傳日期</th>
 				<th>文章狀態</th>
@@ -91,10 +92,12 @@ td {
 <%-- 			<c:if test="${MBBean != null}"> --%>
 			<c:forEach var="memList" items="${memArticleList}">
 				<tr>
-					<td>&nbsp;${memList.pkey} &nbsp;</td>
-					<td>${memList.articleId}</td>
+<%-- 					<td>&nbsp;${memList.pkey} &nbsp;</td> --%>
+<%-- 					<td>${memList.articleId}</td> --%>
 					<td>${memList.memberId}</td>
-					<td>${memList.updateDate}</td>
+<%-- 					<td>${memList.updateDate}</td> --%>
+					<c:set var="date" value="${fn:substring(memList.updateDate, 0, 10)}" />
+					<td>${date}</td>
 					<c:if test="${ memList.status == 1}"><td>可瀏覽</td></c:if>
 					<c:if test="${ memList.status == 0}"><td>***已下架***</td></c:if>
 					<td>${memList.category}</td>

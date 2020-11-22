@@ -45,7 +45,7 @@ span.error {
 			<div class="invalid-feedback"><form:errors path="empemail" cssClass="error" /></div>
 		</div>
 		<div>
-			<div class="form-group">
+			<div>
 				<input type="submit" class="btn btn-inverse-dark btn-fw">
 				 <input
 					type="reset" class="btn btn-inverse-dark btn-fw"> 

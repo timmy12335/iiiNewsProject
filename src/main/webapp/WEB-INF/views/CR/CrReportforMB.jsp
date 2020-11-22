@@ -128,7 +128,7 @@ function deleteCrReport(pk){
 				<c:choose>
 					<c:when test="${empty CrReport}">
 						<tr>
-							<td colspan='8'><font color='red'>無客服資料</font></td>
+							<td colspan='12'><font color='red'>無客服資料</font></td>
 						</tr>
 					</c:when>
 					<c:otherwise>

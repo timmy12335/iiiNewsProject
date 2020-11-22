@@ -62,14 +62,14 @@ fieldset {
 						類型 </label>
 					<div class='col-lg-10'>
 						<form:select path="type">
-							<form:option value="" label="請挑選" >請挑選 </form:option>
-							<form:option value="">社會</form:option>
-							<form:option value="">國際</form:option>
-							<form:option value="">政治 </form:option>
-							<form:option value="">科技</form:option>
-							<form:option value="">生活</form:option>
-							<form:option value="">娛樂</form:option>
-							<form:option value="">地方</form:option>
+							<form:option value="-1" label="請挑選" >請挑選 </form:option>
+							<form:option value="社會">社會</form:option>
+							<form:option value="國際">國際</form:option>
+							<form:option value="政治">政治 </form:option>
+							<form:option value="科技">科技</form:option>
+							<form:option value="生活">生活</form:option>
+							<form:option value="娛樂">娛樂</form:option>
+							<form:option value="地方">地方</form:option>
 							<%-- <form:options items="${typeList}" /> --%>
 						</form:select>
 					</div>

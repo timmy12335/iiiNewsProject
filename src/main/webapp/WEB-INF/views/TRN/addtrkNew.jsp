@@ -80,7 +80,7 @@ fieldset {
 					<label class='control-label col-lg-2 col-lg-2' for="bookNo">
 						發生時間 </label>
 					<div class='col-lg-10'>
-						<form:input id="octime" path="octime" type='text'
+						<form:input  data-format="yyyy-MM-dd" id="octime" path="octime" type='text' style="width:118px"
 							class='form:input-large' />
 					</div>
 				</div>

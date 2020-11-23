@@ -18,7 +18,7 @@ window.onload = function() { //刪除文章，OK
 }
 
 </script>
-<title>Get Member MtBean</title>
+<title>發文紀錄</title>
 
 <style>
 #customers {
@@ -127,7 +127,7 @@ td {
 <%-- 			</c:if> --%>
 		</table>
 		<hr>
-		<a href="<c:url value="" />">-----TOP-----</a><br><br>
+		<a class="btn btn-primary" href="<c:url value="" />">TOP</a><br><br>
 <!-- 		<input type="button" onclick="history.back()" value="重新查詢" /> -->
 <%-- 		<a href="<c:url value='/' />">回首頁</a><br><br> --%>
 	</div>

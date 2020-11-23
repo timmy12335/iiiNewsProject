@@ -214,7 +214,7 @@ function deleteCrReport(pk){
 							</tr>
 							<tr style="display: none" id="score${report.index}">
 
-								<td colspan="11" align="center"><select name="scoreNum"
+								<td colspan="11"><select name="scoreNum"
 									id="scoreNum${report.index}"
 									onchange="ScoreNum(${report.index},${ser.pk});">
 										<option value='1'>極差</option>

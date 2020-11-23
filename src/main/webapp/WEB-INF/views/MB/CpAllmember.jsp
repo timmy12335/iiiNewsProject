@@ -61,8 +61,8 @@
 				<th width='60px;'>公司電話</th>
 				<th width='60px;'>創立日期</th>
 				<th>統一編號</th>
-				<th>公司地址</th>
 				<th width='70px;'>公司行號</th>
+				<th>公司地址</th>
 				<th width='60px;'>公司信箱</th>
 			</tr>
 		</thead>
@@ -81,47 +81,10 @@
 						<td align='left'>&nbsp;${cpmb.cptel}</td>
 						<td align='left'>&nbsp;${cpmb.founddate}</td>
 						<td align='left'>&nbsp;${cpmb.uniformnumbers}</td>
-						<td align='left'>&nbsp;${cpmb.cpaddress}</td>
 						<td align='left'>&nbsp;${cpmb.cpname}</td>
+						<td align='left'>&nbsp;${cpmb.cpaddress}</td>
 						<td align='left'>&nbsp;${cpmb.cpemail}</td>
 					</tr>
-	
-<%-- 						<td align='center' onclick="MBfolded(${report.index})" class="box" --%>
-<!-- 							style="cursor: pointer"> -->
-<%-- 							<p class="ellipsis">${ser.crContent}</p> --%>
-<!-- 						</td> -->
-<%-- 						<td align='center'><fmt:formatDate value="${ser.crApplyDate}" --%>
-<%-- 								pattern="yyyy-MM-dd HH:mm" /></td> --%>
-<%-- 						<td align='center' onclick="folded(${report.index})" class="box" --%>
-<!-- 							style="cursor: pointer"> -->
-<%-- 							<p class="ellipsis">${ser.crReContent}</p> --%>
-<!-- 						</td> -->
-<%-- 						<td align='center'>${ser.cremployee.empName}</td> --%>
-<%-- 						<td align='center'><fmt:formatDate value="${ser.crReDate}" --%>
-<%-- 								pattern="yyyy-MM-dd" /></td> --%>
-<!-- 						<td><button id="btn_update" -->
-<!-- 								class="btn btn-outline-secondary btn-icon-text" -->
-<%-- 								onclick="updateCrReport(${ser.pk})"> --%>
-<!-- 								回覆<i class="ti-pencil-alt btn-icon-append"></i> -->
-<!-- 							</button> -->
-<!-- 							<button id="btn_delete" -->
-<!-- 								class="btn btn-outline-danger btn-icon-text" -->
-<%-- 								onclick="deleteCrReport(${ser.pk})"> --%>
-<!-- 								刪除<i class="ti-trash btn-icon-append"></i> -->
-<!-- 							</button></td> -->
-							
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<%-- 						<td id="MBcontent${report.index}" colspan="10" --%>
-<!-- 							style="display: none; word-wrap: break-word;"><textarea -->
-<!-- 								style="width: 800px; height: 200px;" class="form-control" -->
-<%-- 								disabled>${ser.crContent}</textarea> --%>
-<!-- 					<tr> -->
-<%-- 						<td id="recontent${report.index}" colspan="10" --%>
-<!-- 							style="display: none; word-wrap: break-word;"><textarea -->
-<!-- 								style="width: 800px; height: 200px;" class="form-control" -->
-<%-- 								disabled>${ser.crReContent}</textarea></td> --%>
-<!-- 					</tr> -->
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>

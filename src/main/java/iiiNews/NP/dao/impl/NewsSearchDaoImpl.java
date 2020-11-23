@@ -21,7 +21,7 @@ public class NewsSearchDaoImpl implements NewsSearchDao {
 		String hql = "FROM NewsBean WHERE status = 1 AND "
 				+ "(title LIKE :words OR location LIKE :words "
 				+ "OR outline LIKE :words OR article LIKE :words"
-				+ ")";
+				+ ") ORDER BY uploadTime DESC";
 		Session session = factory.getCurrentSession();
 		List<NewsBean> list = session.createQuery(hql)
 							.setParameter("words", "%"+searchWords+"%")
@@ -32,7 +32,7 @@ public class NewsSearchDaoImpl implements NewsSearchDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<NewsBean> getNewsByType(String Type) {
-		String hql = "FROM NewsBean WHERE status = 1 AND newsType=:Type ";				
+		String hql = "FROM NewsBean WHERE status = 1 AND newsType=:Type ORDER BY uploadTime DESC";				
 		Session session = factory.getCurrentSession();
 		List<NewsBean> list = session.createQuery(hql)
 				.setParameter("Type", Type)

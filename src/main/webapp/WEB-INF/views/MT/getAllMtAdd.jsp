@@ -18,7 +18,7 @@ window.onload = function() { //刪除文章，OK
 }
 </script>
 
-<title>使用者文章管理</title>
+<title>會員文章總覽</title>
 <style>
 #customers {
   font-family: Arial, Helvetica, sans-serif;

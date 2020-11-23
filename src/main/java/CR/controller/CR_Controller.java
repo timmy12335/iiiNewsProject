@@ -157,10 +157,8 @@ public class CR_Controller {
 		try {
 			MimeMessageHelper email = new MimeMessageHelper(msg, true, "utf-8");
 			if (mb != null) {
-				System.out.println("有要進來?");
 				email.setTo(mb.getEmail());
-			} else if (cpmb != null) {
-				System.out.println("不該要進來?");
+			} else if (cpmb != null) {				
 				email.setTo(cpmb.getCpemail());
 			} else {
 				email.setTo("eeit2020119@gmail.com");

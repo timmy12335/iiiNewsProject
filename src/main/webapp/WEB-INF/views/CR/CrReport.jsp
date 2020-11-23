@@ -23,6 +23,8 @@
 <!-- endinject -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/images/favicon.png" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
 <style>
 .box {
 	width: 30px;
@@ -37,6 +39,11 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	white-space: normal;
+}
+
+.fontsize {
+	font-size: 14pt;
+	font-family: 'Noto Sans TC', sans-serif;
 }
 </style>
 <script type="text/javascript">
@@ -93,7 +100,7 @@
 	<h3 class="font-weight-bold mb-0">顯示所有客服表單</h3>
 	<div style="margin-top:10px;" id="resultmsg">
 	</div>
-	<table class="table table-striped" >
+	<table class="table table-striped fontsize" >
 		<thead style="background-color:#6FB7B7">
 			<tr >
 				<th width='60'>單號</th>
@@ -111,7 +118,7 @@
 		<c:choose>
 			<c:when test="${empty CrReport}">
 				<tr>
-					<td colspan='8' align='center'><font color='red'>無客服資料</font></td>
+					<td colspan='10' align='center'><font color='red'>無客服資料</font></td>
 				</tr>
 			</c:when>
 			<c:otherwise>
@@ -135,7 +142,7 @@
 						<td align='center'><fmt:formatDate value="${ser.crReDate}"
 								pattern="yyyy-MM-dd" /></td>
 						<td><div><button id="btn_update"
-								class="btn btn-outline-secondary btn-icon-text btn-sm"
+								class="btn btn-outline-primary btn-icon-text btn-sm"
 								onclick="updateCrReport(${ser.pk})">
 								回覆<i class="ti-pencil-alt btn-icon-append"></i>
 							</button></div><div style="margin-top:10px;">
@@ -146,14 +153,14 @@
 							</button></div></td>
 							
 					</tr>
-					<tr>
-						<td id="MBcontent${report.index}" colspan="10"
-							style="display: none; word-wrap: break-word;"><textarea
+					<tr  id="MBcontent${report.index}"  style="display: none; word-wrap: break-word;">
+					<td>客服內容</td>
+						<td colspan="10"><textarea
 								style="width: 800px; height: 200px;" class="form-control"
-								disabled>${ser.crContent}</textarea>
-					<tr>
-						<td id="recontent${report.index}" colspan="10"
-							style="display: none; word-wrap: break-word;"><textarea
+								disabled>${ser.crContent}</textarea></td>
+					<tr  id="recontent${report.index}" style="display: none; word-wrap: break-word;" class="fontsize">
+					<td>回覆內容</td>
+						<td colspan="10"><textarea
 								style="width: 800px; height: 200px;" class="form-control"
 								disabled>${ser.crReContent}</textarea></td>
 					</tr>

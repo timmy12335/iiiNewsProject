@@ -72,6 +72,10 @@
 #cssmenu {
 	border-bottom: 2px solid white;
 }
+li{
+color:white;
+}
+
 .wei-grid-special0 {
 position: relative;
 /* left: 10%; */
@@ -85,9 +89,13 @@ transition: box-shadow 500ms;
 .wei-grid-special0:hover {
 box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
 }
+li{
+margin-top:5px;
+}
+
 </style>
 
-<script src="js/jquery.hoverpulse.js"></script>
+
 <script>
 	
 	
@@ -161,17 +169,17 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
                         </span>
                     </div>
                 </div>
-                <div id="TypeForm" class="bg-white p-3 mb-3 border rounded">
-							<select id="type" class="form-control" onchange="searchByType()">
-								<option value="-1">分類項目</option>
-								<option value="交通">交通</option>
-								<option value="糾紛">糾紛</option>
-								<option value="感情">感情</option>
-								<option value="詐騙">詐騙</option>
-								<option value="災情">災情</option>
-								<option value="爆料">爆料</option>
-							</select>
-				</div>
+<!--                 <div id="TypeForm" class="bg-white p-3 mb-3 border rounded"> -->
+<!-- 							<select id="type" class="form-control" onchange="searchByType()"> -->
+<!-- 								<option value="-1">分類項目</option> -->
+<!-- 								<option value="交通">交通</option> -->
+<!-- 								<option value="糾紛">糾紛</option> -->
+<!-- 								<option value="感情">感情</option> -->
+<!-- 								<option value="詐騙">詐騙</option> -->
+<!-- 								<option value="災情">災情</option> -->
+<!-- 								<option value="爆料">爆料</option> -->
+<!-- 							</select> -->
+<!-- 				</div> -->
                 <!-- 搜尋/end -->
                 <!-- 分類/start -->
                 <div class="bg-white p-3 mb-3 border rounded">
@@ -179,25 +187,29 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
                         <strong>分類</strong>
                     </h5>
                     <ul class="list-category category">
-                        <li>
-                            <a href="<c:url value='/getNewsByType?type=交通' />">交通
-                                <span class="badge badge-pill badge-secondary ml-2">3</span>
-                            </a>
+                        <li >
+                            <a class="btn btn-primary" href="<c:url value='/getNewsByType?type=交通' />">交通                               
+                            </a><span class="badge badge-pill badge-secondary ml-2">3</span>
                         </li>
                         <li>
-                            <a href="<c:url value='/getNewsByType?type=糾紛' />">糾紛</a>
+                            <a style="color:white;background: #e05d14;" class="btn" href="<c:url value='/getNewsByType?type=糾紛' />">糾紛
+                            </a><span class="badge badge-pill badge-secondary ml-2">3</span>
                         </li>
                         <li>
-                            <a href="<c:url value='/getNewsByType?type=感情' />">感情</a>
+                            <a class="btn" style="color:white;background: #ff688c;" href="<c:url value='/getNewsByType?type=感情' />">感情
+                            </a><span class="badge badge-pill badge-secondary ml-2">5</span>
                         </li>
                         <li>
-                            <a href="<c:url value='/getNewsByType?type=詐騙' />">詐騙</a>
+                            <a class="btn" style="color:white; background: #44ada5;" href="<c:url value='/getNewsByType?type=詐騙' />">詐騙
+                            </a><span class="badge badge-pill badge-secondary ml-2">1</span>
                         </li>
                         <li>
-                            <a href="<c:url value='/getNewsByType?type=災情' />">災情</a>
+                            <a class="btn btn-danger" href="<c:url value='/getNewsByType?type=災情' />">災情
+                            </a><span class="badge badge-pill badge-secondary ml-2">4</span>
                         </li>
                         <li>
-                            <a href="<c:url value='/getNewsByType?type=爆料' />">爆料</a>
+                            <a class="btn btn-secondary" href="<c:url value='/getNewsByType?type=爆料' />">爆料
+                            </a><span class="badge badge-pill badge-secondary ml-2">1</span>
                         </li>
                     </ul>
                 </div>
@@ -225,9 +237,9 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
 						<div class="mt-2 mb-2">
 							<h3>${ news.newsType}</h3>
 						</div>
-						<div class="text-info mt-2 mb-2">
-							<a href="<c:url value='/getSingleNews/${news.newsId}'/>">${news.title}
-							</a>
+						<div class="text-primary mt-2 mb-2">
+							<h5>${news.title}</h5>
+
 						</div>
 						<div class="mt-2 mb-2">
 							<span class="text-muted">${ news.location}</span>
@@ -235,7 +247,6 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
 						<div class="mt-2 mb-2">
 							<span class="text-muted">上架時間：${fn:substring(news.uploadTime,0,19)}</span><br>
 							
-<%-- 							到期時間:<span class="text-muted" id="ftime${loop.index}">${news.futureTime}</span> --%>
 						</div>
 						<div class="text-left mt-2 mb-2">
 							<h4 class="text-danger">
@@ -259,8 +270,6 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
 			</c:choose>
 			</div>
 			</div> 
-			
-			<script type="text/javascript">hello();</script>
 			</div>
 			
 		
@@ -268,9 +277,7 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
 	</section>
 
 <script>
-$(document).ready(function() {
-    $("div.imgdiv img").hoverpulse();
-});
+
 
 function searchByType() {
 	let type = document.getElementById("type").value;
@@ -302,7 +309,7 @@ function clock() {
 	sec = sec01 % 60 <10 ? '0'+sec01 % 60 :sec01 % 60 ;		
 	min = (sec01-sec)/60%60 <10 ? '0'+ (sec01-sec)/60%60 : (sec01-sec)/60%60;
 	hr01 =(((sec01-sec) /60) - min) / 60 ;
-	hr = hr01 <10 ?'0'+ hr01 :hr01 ;
+	hr = hr01 <10 ?'0'+ hr01:hr01;
 	let zr0 = hr + min + sec;
 //若為0時0分0秒 重整頁面下架
 	if(zr0 == 0){

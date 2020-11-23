@@ -92,6 +92,12 @@ window.onload = function() {
 						<h3 class="card-header">廣告列表系統</h3>
 <%-- 						<h4>帳號：${CpMemberBean.cpmemberId}</h4> --%>
 						<h4 class="card-body">${CpMemberBean.cpname}，您好</h4>
+						<c:if test="${not empty FlashMSG_uploadAdSuccess}">
+ 	   						<span class="text-danger"><b>${FlashMSG_uploadAdSuccess}</b></span>
+ 						</c:if>
+ 						<c:if test="${not empty FlashMSG_updateAdSuccess}">
+ 	   						<span class="text-danger"><b>${FlashMSG_updateAdSuccess}</b></span>
+ 						</c:if>
 					</div>
 					<div class="col-12 bg-white rounded shadow-sm p-3 mb-5">
 						<h4 class="card-header">檢視報表</h4>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
@@ -62,11 +63,10 @@
 	<div class="container" >	
 		<h2>修改單則新聞</h2>
 		<div style="margin-top:150px;">
-			<h3 align="center"><b>修改新聞上傳</b></h3>	
+			<h3 align="center"><b>新聞「${ newsSingle.newsId }」修改</b></h3>
 			<form:form method="POST"  id="form1" modelAttribute="newsSingle" enctype="multipart/form-data" class="formstyle">				
 				<fieldset>	
-						<p>新聞編號: &nbsp;${ newsSingle.newsId }</p>
-						<p>上傳時間：${newsSingle.uploadTime}</p>
+						
 						<div>		
 						<form:input type="hidden" id="newsId" name="newsId"  path="newsId" value="${ newsSingle.newsId }"  />				
 						<form:input type="hidden" id="uploadTime" name="uploadTime" path="uploadTime" value="${ newsSingle.uploadTime }"  />				
@@ -78,7 +78,8 @@
 						<form:input type="hidden" id="status" name="status"  path="status" value="${ newsSingle.status }"  />
 						</div>	
 					<div class="form-group row">
-					
+						
+						
 						<label for="title" class="col-sm-2 col-form-label text-right labelsize"><b>新聞標題：</b></label>
 						<div class="col-sm-8">
 							<form:input class="form-control" type="text" id="title" name="title" size="50" path="title" value="${ newsSingle.title }" />
@@ -146,11 +147,15 @@
 							<form:errors path="price" cssClass="error" />
 						</div>
 					</div>
+					<div class="form-group row" >
+					<img style="display:block; margin:auto;" width='300' height='200' id="productImage1" src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
+					</div>
 					
 					
 					<div class="form-group row" >
-					<img width='300' height='200' id="productImage1" src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>">
+					
 					<label for="price" class="col-sm-2 col-form-label text-right labelsize"><b>新聞畫面：</b></label>
+<%-- 					<img width='300' height='200' id="productImage1" src="<c:url value='/getNewsPicture/${ newsSingle.newsId }'/>"> --%>
 					<div class="col-sm-9" style="background-color:#FCFCFC;border-radius:15px" >					
 					<input id="productImage" name="productImage" type="file" class="file" multiple  data-show-upload="false" data-show-caption="true" data-msg-placeholder="請選擇上傳畫面...">
 					<form:errors path="productImage" cssClass="error" />
@@ -167,7 +172,7 @@
 						<div class="col-sm-8" align="center">
 							<input type="submit" class="incss" name="submit" id="submit" value="送出">
 							<input type="reset" class="incss" value="清除">
-							<input type="button" class="incss" value="首頁" onclick="history.back()">
+							<input type="button" class="incss" value="回列表" onclick="history.back()">
 						</div>
 					</div>
 				</fieldset>

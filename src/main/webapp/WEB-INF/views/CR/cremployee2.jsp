@@ -83,7 +83,7 @@
 		}
 
 		function displayPageEmps(responseData) {
-			var content = "<table class='table' style='table-layout: fixed;width:1120px;word-break: break-all'><thead style='background-color:#6FB7B7'><tr><th>客服編號</th>";
+			var content = "<table class='table' style='table-layout: fixed;width:1120px;word-break: break-all'><thead style='background-color:#6FB7B7'><tr><th>人員編號</th>";
 			content += "<th>客服姓名</th>";
 			content += "<th>客服帳號</th>";
 			content += "<th style='width:200px;'>客服信箱</th>";
@@ -329,7 +329,7 @@
 	<script>
 		window.onload = loading();
 		function loading() {
-			var origincontent = "<table class='table table-striped'><thead><tr><th>客服編號</th>";
+			var origincontent = "<table class='table table-striped'><thead><tr><th>人員編號</th>";
 			origincontent += "<th>客服姓名</th>";
 			origincontent += "<th>客服帳號</th>";
 			origincontent += "<th>客服信箱</th>";

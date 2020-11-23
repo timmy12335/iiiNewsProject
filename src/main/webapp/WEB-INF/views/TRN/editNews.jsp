@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <script>
+
 var NewsId2 = ${NewsId};
 var hasError = false;
 
@@ -170,7 +172,13 @@ window.onload = function() {
 <title>Insert title here</title>
 </head>
 <body>
-	1091105
+	 <nav class="navbar fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	 </nav>
+	
+	
+	
+	
 	<div align='center'>
 		<h2>修改會員資料</h2>
 		<div id='resultMsg' style="height: 18px; font-weight: bold;"></div>
@@ -178,65 +186,50 @@ window.onload = function() {
 		<fieldset style='display: inline-block; width: 820px;'>
 			<legend>請修改下列資料</legend>
 			<input type="hidden" name="NewsId" id='NewsId'><br>
-			<table border='1'>
+			<table>
+				<tr height='60' style="display:none">
+					
+					<td width='400'>&nbsp;建立人: <label id='NewsIda'></label><br>
+					</td>
+					
+			</tr>
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:550px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">標題</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+				<input   disabled="disabled" name="title"	id='title' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"><br>    <!--  <input type="text" name="title"	id='title'><br> -->
+                </div>                                                                         <!--  </td> -->
+			</tr>
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:250px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">發生地點:</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+					<input  name="ocplace" id='ocplace' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"><br>
+				  </div> 
+					
+			 </tr>
 				<tr height='60'>
-					<td width='200'>&nbsp;</td>
-					<td width='400'>&nbsp;帳號: <label id='NewsIda'></label><br>
-					</td>
-					<td width='200'>
-						<div id='result0c' style="height: 10px;"></div> <br>
-						<div id='result0s' style="height: 10px;"></div>
-					</td>
-				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
-					<td width='400'>&nbsp;標題: <input type="text" name="title"
-						id='title'><br>
-					</td>
-					<td width='200' style="vertical-align: top">
-						<div id='result1c' style="height: 10px;"></div> <br>
-						<div id='result1s' style="height: 10px;"></div>
-					</td>
-				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
-					<td width='400'>&nbsp; 發生地點: <input type="text" name="ocplace"
-						id='ocplace'><br>
-					</td>
-					<td width='200' style="vertical-align: top">
-						<div id='result2c' style="height: 10px;"></div> <br>
-						<div id='result2s' style="height: 10px;"></div>
-					</td>
-				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
+					
 					<td width='400'>&nbsp;發生時間: <input type="text" name="octime"
 						id='octime' size='24'>
 					</td>
-					<td width='200'>
-						<div id='result3c' style="height: 10px;"></div> <br>
-						<div id='result3s' style="height: 10px;"></div>
-					</td>
+					
 				</tr>
 				<tr height='60'>
-					<td width='200'>&nbsp;</td>
+					
 					<td width='400'>&nbsp;建立人: <input type="text" name="founder"
 						id='founder' size='24'>
 					</td>
-					<td width='200'>
-						<div id='result3c' style="height: 10px;"></div> <br>
-						<div id='result3s' style="height: 10px;"></div>
-					</td>
+					
 				</tr>
 				<tr height='60'>
-					<td width='200'>&nbsp;</td>
+					
 					<td width='400'>&nbsp;類型: <input type="text" name="type"
 						id='type' size='24'>
 					</td>
-					<td width='200'>
-						<div id='result3c' style="height: 10px;"></div> <br>
-						<div id='result3s' style="height: 10px;"></div>
-					</td>
+					
 				</tr>
 				<tr height='50'>
 					<td colspan='3' align='center'>

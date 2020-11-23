@@ -30,12 +30,27 @@ body {
 
 
 
-<div class="iframe1">
-<iframe src="https://feed.mikle.com/widget/v2/139192/?preloader-text=Loading..." 
-height="400px" width="100%" class="fw-iframe" scrolling="no" frameborder="0"></iframe>
+<div class="iframe1" style=" ">
+<!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+<!--   <button onclick="changifram()" type="button" class="btn btn-secondary">Left</button> -->
+<!--   <button type="button" class="btn btn-secondary">Middle</button> -->
+<!--   <button type="button" class="btn btn-secondary">Right</button> -->
+<!-- </div> -->
+<iframe id="if1" src="https://feed.mikle.com/widget/v2/139192/?preloader-text=Loading..." 
+height="400px" width="90%" style="margin-left:90px" class="fw-iframe" scrolling="no" frameborder="0"></iframe>
+
 </div>
 
+<script>
 
+// function changifram() {
+//     var f2 = "<iframe src='https://feed.mikle.com/widget/v2/139364/?preloader-text=Loading...' height='400px' width='90%' class='fw-iframe' scrolling='no' frameborder='0'></iframe>"
+//     console.log(f2);
+//    var f1 = document.getElementById("if1");
+//    console.log(f1);
+//    f1.innerHTML = f2
+// }
+</script>
 
 
 <!-- <main role="main">  -->       <!--以下輪播先不用-->

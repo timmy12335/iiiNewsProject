@@ -58,11 +58,19 @@ public class httpController {
 //	}
 	@GetMapping("/httpclient1") // 連線查詢所有資料
 	public @ResponseBody List<String> httpclient(
-		   @RequestParam (value="word")String word) throws IOException {
+		   @RequestParam (value="word")String word1) throws IOException {
 		String e1 = ""; //第一次宣告,不能重複宣告
+		String word = "";
 		List<String> list = new ArrayList<String>();
-		System.out.println(word);
-		
+		System.out.println("傳到controller1"+word1);
+		if(word1.indexOf(" ") ==-1) {
+			word = word1;
+			System.out.println("word裡面沒空格"+word);
+		}else {
+			
+			word = word1.replace(" ", "%20");
+			System.out.println("word裡面替換空格"+word);
+		}
 		MyHttpclient t1 = new MyHttpclient();
 		
 		Elements d1 =t1.httpclientData(word).getElementsByClass("newsimg-area-text-2");
@@ -99,9 +107,19 @@ public class httpController {
 	
 	@GetMapping("/httpclient2") // 連線查詢所有資料
 	public @ResponseBody List<String> httpclientURL(
-		   @RequestParam (value="word")String word) throws IOException {
+		   @RequestParam (value="word")String word1) throws IOException {
 		String e1 = ""; //第一次宣告,不能重複宣告
+		String word = "";
 		List<String> list1 = new ArrayList<String>();
+		System.out.println("傳到controller1"+word1);
+		if(word1.indexOf(" ") ==-1) {
+			word = word1;
+			System.out.println("word裡面沒空格"+word);
+		}else {
+			
+			word = word1.replace(" ", "%20");
+			System.out.println("word裡面替換空格"+word);
+		}
 		System.out.println(word);
 		
 		MyHttpclient t1 = new MyHttpclient();

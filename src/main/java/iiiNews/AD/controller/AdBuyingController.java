@@ -190,8 +190,11 @@ public class AdBuyingController {
 			AdOrderItemBean aoib = cartItem.get(n);
 			aoib.setBuyerMemberId(buyerMemberId);
 			aoib.setAdOrderBean(aob);
+			/* 把商品AdOrderItemBean一一放入Set中
+			 * (雙向多對一  一方有個多 儲存多方的物件)
+			 * 再將此儲存多方的物件Set用setter到aob的setItems中
+			 * adpkList是為了修改庫存量*/
 			itemBeanSet.add(aoib);
-			//
 			adpkList.add(aoib.getAdPk());
 		}
 		aob.setItems(itemBeanSet);
@@ -212,13 +215,15 @@ public class AdBuyingController {
 		System.out.println("訂單生成"+n+"筆");
 		System.out.println("======完成======");
 		
-		//若新增成功則清空購物車 移除購物車
-//		if(n>0) {
-//			System.out.println("交易成功，準備清空購物車");
-//			status.setComplete();
-//			webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
-//		}
-//		return "redirect:/getOrderListByMemberId";
+		/*若新增成功則清空購物車 移除購物車
+		 * 但移除attribute不能在此controller中進行
+		 * 不能使用
+		 * status.setComplete();
+		 * webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
+		 * 否則會把所有的attribute都清掉
+		 * 因此為了移除特地多寫了一個controller方法
+		 * 導向removeShoppingCart*/
+		
 		return "redirect:/removeShoppingCart";
 	}
 	
@@ -259,6 +264,7 @@ public class AdBuyingController {
 		
 		System.out.println("=====結束綠界的結帳=====");
 		adOrderService.changePaymentStatus(adOrderPk);
+		System.out.println(greenword);
 		System.out.println("=====更改完結帳狀態=====");
 //		($$$$ 要寫串接綠界的結帳)
 //		return "redirect:/getOrderListByMemberId";
@@ -345,7 +351,6 @@ public class AdBuyingController {
 			AdBean adbean = adMainService.getOneAdByadPk(bean.getAdPk());
 			int price = adbean.getPrice();
 			
-//			int price = bean.getUnitPrice();
 			pay = price * discount;
 			count = (new BigDecimal(pay).setScale(0, BigDecimal.ROUND_HALF_UP)).intValue();
 			bean.setUnitPrice(count);

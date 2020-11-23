@@ -116,7 +116,7 @@ p {
 										</div>
 										
 										<input type="button" id="keyin${loop.index}" value="輸入計時時間" onclick="clickToText(${loop.index})" class="btn btn-secondary">
-										<input type="hidden" name="submit" id="submit${loop.index}" onclick="inputLimitTime(${loop.index})" value="確認送出" class="btn btn-secondary ">
+										<input type="hidden" name="submit" id="submit${loop.index}" onclick="return inputLimitTime(${loop.index})" value="確認送出" class="btn btn-secondary ">
 									</div>
 								</div>
 <!-- 									<div class="col-sm-2" style="border:1px solid black;"> -->
@@ -199,12 +199,16 @@ p {
 			$("#limitTime"+[g]).attr("name","limitTime");
 			$("#newsId"+[g]).attr("name","newsId");
 			console.log(time);
-		}else{
-			if(confirm("請輸入正確時間")){
-				  window.location.reload();
-			} 
+		}else if(time==""){
+			alert("請輸入正確時間")
+			return false;
+				
+			}
+			
+				 
+			
 		}
-	}
+	
 	</script>
 </body>
 </html>

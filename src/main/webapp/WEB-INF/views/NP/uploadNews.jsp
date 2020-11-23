@@ -68,6 +68,29 @@
 		}
 		
 </style>
+<script>
+
+window.onload = function(){	
+	var btn = document.getElementById("clickme");
+	btn.onclick=function() {		
+		let title =  document.getElementById("title");
+		title.value ="有一張精神疾病證明好像就是免死金牌了！無故攻擊80歲老婦卻判無罪";
+		let location = document.getElementById("location");
+		location.value = "南投";
+		let newsType = document.getElementById("newsType");
+		newsType.value = "糾紛";
+		let outline = document.getElementById("outline");
+		outline.value = "發生在今天早上8點左右，里民沈媽媽遭受到長東街 （未知民眾）拿夾報歐打！導致頭部縫6針、腳骨斷裂 、全身瘀青！";
+		let article = document.getElementById("article");
+ 		article.value = "到醫院了解後知道，兩人互不認識而且並無交談。這名男子在打人的時候還要求婦人跪下，並用腳踹她導致腳骨斷裂！打完之後，說剛才發生什麼事情他都不知道......"
+				 		+"「他有幻想症，說把阿嬤當中國人，說自己是美國人！」男子被警方逮捕時供稱因為自己是美國人，要教訓中國人！？"
+				 		+"又說『因為阿嬤不下跪所以要打她！』，當時不少網友就直呼「完蛋了！SOP又要出來了，等等又是精神病了.....」";
+ 		let price = document.getElementById("price");
+ 		price.value = 5000;
+			}
+	
+}
+</script>
 </head>
 <body>
 	<nav class="navbar fixed-top">
@@ -91,7 +114,7 @@
 							<form:input type="title" class="form-control" id="title"
 								path="title" placeholder="請輸入標題" />
 								
-								<form:errors path="title" cssClass="error" class="spstyle"/>
+								<span class="text-danger"><form:errors path="title" cssClass="error" /></span>
 						</div><span id="idspNews-title" class="spstyle"></span>
 						
 					</div>
@@ -100,13 +123,13 @@
 						<div class="col-sm-8">
 							<form:input type="text" class="form-control" id="location"
 								name="location" size="50" path="location" placeholder="請輸入發生地點" />
-							<form:errors path="location" cssClass="error" class="spstyle"/>
+							<span class="text-danger"><form:errors path="location" cssClass="error" class="spstyle"/></span>
 						</div><span id="idspNews-location" class="spstyle"></span>
 					</div>
 					<div class="form-group row">
 						<label for="newsType" class="col-sm-2 col-form-label text-right labelsize"><b>新聞類型：</b></label>
 						<div class="col-sm-4">
-							<form:select path="newsType" class="form-control">
+							<form:select path="newsType" id="newsType" class="form-control">
 								<form:option value="none">分類項目</form:option>
 								<form:option value="交通">交通</form:option>
 								<form:option value="糾紛">糾紛</form:option>
@@ -115,9 +138,9 @@
 								<form:option value="災情">災情</form:option>
 								<form:option value="爆料">爆料</form:option>
 							</form:select>
-							<form:errors path="newsType" cssClass="error" class="spstyle"/>
+							<span class="text-danger"><form:errors path="newsType" cssClass="error" class="spstyle"/></span>
 						</div>
-						<%-- 	<font color="red" size="-1">${errorMsg.errorCategoryNoEmpty}</font> --%>
+						
 					</div>
 
 					<div class="form-group row">
@@ -125,7 +148,7 @@
 						<div class="col-sm-4">
 							<form:input type="Date" id="happenDate" name="happenDate"
 								class="form-control" size="50" path="happenDate" />
-							<form:errors path="happenDate" cssClass="error" class="spstyle"/>
+							<span class="text-danger"><form:errors path="happenDate" cssClass="error" class="spstyle"/></span>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -133,7 +156,7 @@
 						<div class="col-sm-4">
 							<form:input type="time" id="happenTime" name="happenTime"
 								class="form-control" path="happenTime" />
-							<form:errors path="happenTime" cssClass="error" class="spstyle"/>
+							<span class="text-danger"><form:errors path="happenTime" cssClass="error" class="spstyle"/></span>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -141,7 +164,7 @@
 						<div class="col-sm-8">
 							<form:textarea type="text" id="outline" name="outline"   class="form-control"
 								rows="3" maxlength="100" path="outline" placeholder="請輸入大綱" style="resize:none"/>								
-							<form:errors path="outline" cssClass="error" class="spstyle"/>
+							<span class="text-danger"><form:errors path="outline" cssClass="error" class="spstyle"/></span>
 						</div><span id="idspNews-outline" class="spstyle"></span>
 					</div>
 					<div class="form-group row">
@@ -149,7 +172,7 @@
 						<div class="col-sm-8">
 						<form:textarea type="text" id="article" name="article" cols="70"  class="form-control"
 							rows="10" path="article" placeholder="請輸入新聞內文" style="resize:none"/>
-						<form:errors path="article" cssClass="error" class="spstyle"/>
+						<span class="text-danger"><form:errors path="article" cssClass="error" class="spstyle"/></span>
 						</div><span id="idspNews-article" class="spstyle"></span>
 					</div>
 					<div class="form-group row">
@@ -157,7 +180,7 @@
 						<div class="col-sm-4">
 							<form:input type="number" id="price" name="price" 
 								class="form-control" path="price" value="1000" />
-							<form:errors path="price" cssClass="error" class="spstyle"/>
+							<span class="text-danger"><form:errors path="price" cssClass="error" class="spstyle"/></span>
 						</div>
 					</div>
 					
@@ -166,7 +189,7 @@
 					<label for="price" class="col-sm-2 col-form-label text-right labelsize"><b>新聞畫面：</b></label>
 					<div class="col-sm-9" style="background-color:#FCFCFC;border-radius:15px" >					
 					<input id="productImage" name="productImage" type="file" class="file" multiple  data-show-upload="false" data-show-caption="true" data-msg-placeholder="請選擇上傳畫面...">
-					<form:errors path="productImage" cssClass="error" class="spstyle"/>
+					<span class="text-danger"><form:errors path="productImage" cssClass="error" class="spstyle"/></span>
 					</div>
 <!-- 						<label for="price" class="col-sm-2 col-form-label text-right">上傳照片：</label> -->
 <!-- 						<div class="col-sm-8"> -->
@@ -181,6 +204,7 @@
 							<input type="submit" class="incss" name="submit" id="submit" value="送出">
 							<input type="reset" class="incss" value="清除">
 							<input type="button" class="incss" value="首頁" onclick="history.back()">
+							<input	id="clickme" type="button" class="incss" value="DEMO" >
 						</div>
 					</div>
 				</fieldset>
@@ -191,66 +215,64 @@
 
     </div>
     <script>
-// 		$("#input-id").fileinput({
-// 			theme: 'fas', //this line
-// 			});
-					//日期不能超過今天
-					var today = new Date();
-					var dd = today.getDate();
-					var mm = today.getMonth() + 1; //January is 0!
-					var yyyy = today.getFullYear();
-					if (dd < 10) {
-						dd = '0' + dd
-					}
-					if (mm < 10) {
-						mm = '0' + mm
-					}
+    
+		//日期不能超過今天
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth() + 1; //January is 0!
+		var yyyy = today.getFullYear();
+		if (dd < 10) {
+			dd = '0' + dd
+		}
+		if (mm < 10) {
+			mm = '0' + mm
+		}
 
-					today = yyyy + '-' + mm + '-' + dd;
-					document.getElementById("happenDate").setAttribute("max",today);
-					
-					//新聞標題需大於五個字
-					$("#title").blur(function() {
-						let NameObjValLen = $("#title").val().length;
-						if ($("#title").val() == "") {
-							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>&ensp;請輸入標題").attr("style","color:#63fffc");
-						} else if (NameObjValLen >= 5) {
-							$("#idspNews-title").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
-						} else {
-							$("#idspNews-title").html("<i class='fas fa-times-circle'></i>&ensp;請大於五個字").attr("style","color:#63fffc");
-						}
-					})
-					//發生地點需大於一個字
-					$("#location").blur(function() {
-						let NameObjValLen = $("#location").val().length;
-						if ($("#location").val() == "") {
-							$("#idspNews-location").html("<i class='fas fa-times-circle'></i>&ensp;請輸入地點").attr("style","color:#63fffc");
-						} else {
-							$("#idspNews-location").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
-						}
-					})
-					//新聞大綱需大於一百字且小於一百字	
-					$("#outline").blur(function() {
-						let NameObjValLen = $("#outline").val().length;
-						if ($("#outline").val() == "") {
-							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>&ensp;請輸入大綱").attr("style","color:#63fffc");
-						} else if (NameObjValLen >= 20) {
-							$("#idspNews-outline").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
-						} else {
-							$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>&ensp;請大於二十字").attr("style","color:#63fffc");
-						}
-					})
-					//新聞內文需大於一百字且小於一千字	
-					$("#article").blur(function() {
-						let NameObjValLen = $("#article").val().length;
-						if ($("#article").val() == "") {
-							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>&ensp;請輸入內文").attr("style","color:#63fffc");
-						} else if (NameObjValLen >= 100) {
-							$("#idspNews-article").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
-						} else {
-							$("#idspNews-article").html("<i class='fas fa-times-circle'></i>&ensp;請大於一百字").attr("style","color:#63fffc");
-						}
-					})
-				</script>
+		today = yyyy + '-' + mm + '-' + dd;
+		document.getElementById("happenDate").setAttribute("max",today);
+		
+		//新聞標題需大於五個字
+		$("#title").blur(function() {
+			let NameObjValLen = $("#title").val().length;
+			if ($("#title").val() == "") {
+				$("#idspNews-title").html("<i class='fas fa-times-circle'></i>&ensp;請輸入標題").attr("style","color:#63fffc");
+			} else if (NameObjValLen >= 5) {
+				$("#idspNews-title").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
+			} else {
+				$("#idspNews-title").html("<i class='fas fa-times-circle'></i>&ensp;請大於五個字").attr("style","color:#63fffc");
+			}
+		})
+		//發生地點需大於一個字
+		$("#location").blur(function() {
+			let NameObjValLen = $("#location").val().length;
+			if ($("#location").val() == "") {
+				$("#idspNews-location").html("<i class='fas fa-times-circle'></i>&ensp;請輸入地點").attr("style","color:#63fffc");
+			} else {
+				$("#idspNews-location").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
+			}
+		})
+		//新聞大綱需大於一百字且小於一百字	
+		$("#outline").blur(function() {
+			let NameObjValLen = $("#outline").val().length;
+			if ($("#outline").val() == "") {
+				$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>&ensp;請輸入大綱").attr("style","color:#63fffc");
+			} else if (NameObjValLen >= 20) {
+				$("#idspNews-outline").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
+			} else {
+				$("#idspNews-outline").html("<i class='fas fa-times-circle'></i>&ensp;請大於二十字").attr("style","color:#63fffc");
+			}
+		})
+		//新聞內文需大於一百字且小於一千字	
+		$("#article").blur(function() {
+			let NameObjValLen = $("#article").val().length;
+			if ($("#article").val() == "") {
+				$("#idspNews-article").html("<i class='fas fa-times-circle'></i>&ensp;請輸入內文").attr("style","color:#63fffc");
+			} else if (NameObjValLen >= 100) {
+				$("#idspNews-article").html("<i class='fas fa-check-circle'></i>&ensp;正確 !").attr("style","color:white");
+			} else {
+				$("#idspNews-article").html("<i class='fas fa-times-circle'></i>&ensp;請大於一百字").attr("style","color:#63fffc");
+			}
+		})
+	</script>
 </body>
 </html>

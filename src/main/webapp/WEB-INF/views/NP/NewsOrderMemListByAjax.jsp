@@ -153,7 +153,7 @@ window.onload=function(){
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 	<div align='center' style="margin-top: 150px;">
-		<h2>會員${MBBean.memberId}訂單列表(JSON)</h2>
+		<h2>會員「${MBBean.name}」，你好&nbsp;&nbsp;這是您的訂單列表</h2>
 		<hr>
 		<div class="container" id='somedivS'></div>
 <!-- 		<div id='navigation' style='height: 60px; margin: 250px;'></div> -->

@@ -13,92 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
- .wrapper {
-            position: relative;
-            width: 800px;
-            height: 300px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        ul {
-            margin: 0;
-            padding: 0;
-            position: absolute;
-        }
-
-        li {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        ul.slides {
-            width: 3200px;
-            left: 0px;
-            transition: all .5s;
-        }
-
-        ul.slides li {
-            width: 800px;
-            height: 300px;
-            overflow: hidden;
-            float: left;
-        }
-
-        ul.slides li img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .dot {
-            bottom: 10px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .dot li {
-            border: 1px solid #fff;
-            /* border-radius: 50%; */
-            margin: 0 5px;
-            width: 24px;
-            height: 10px;
-        }
-
-        /* .dot li:hover{
-            background: #fff;
-        } */
-        .slide_btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 0;
-            bottom: 0;
-            width: 30px;
-            color: #fff;
-            position: absolute;
-            font-size: 24px;
-            /* background-color:red; */
-        }
-
-        #prevSlide {
-            left: 0;
-        }
-
-        #nextSlide {
-            right: 0;
-        }
-
-        .slide_btn i {
-            color: rgba(255, 255, 255, .6);
-            transition: .5s;
-        }
-
-        .slide_btn:hover i {
-            color: rgba(255, 255, 255, 1);
-        }
+ 
 body {
   
   padding-top: 5rem;
@@ -106,16 +21,16 @@ body {
   color: #5a5a5a;
 }
 </style>
-<nav class="navbar fixed-top">
-		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
-	</nav>
+
 </head>
 <body>
+     <nav class="navbar fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	 </nav>
 
 
 
-
-<div>
+<div class="iframe1">
 <iframe src="https://feed.mikle.com/widget/v2/139192/?preloader-text=Loading..." 
 height="400px" width="100%" class="fw-iframe" scrolling="no" frameborder="0"></iframe>
 </div>

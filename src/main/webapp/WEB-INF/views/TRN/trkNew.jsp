@@ -10,28 +10,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">	
 <title>Product</title>
 <style>
-#002{
-width:200px;
-line-height:50px;
-padding:20px;
-border:2px green solid;
-float:left;
-}
-#001{
-width:200px;　//DIV區塊寬度
-line-height:50px;　//DIV區塊高度
-padding:20px;　//DIV區塊內距，參閱：CSS padding 內距。
-border:2px blue solid;　//DIV區塊邊框，參閱：CSS border 邊框設計。
-margin-right:10px;　//靠右外距，參閱：CSS margin 邊界使用介紹範例教學。
-float:left;
-}
-img{
-width:450px;
-height:350;
+
+/* img{ */
+/* width:450px; */
+/* height:350; */
+/* } */
+p{
+font-family:Microsoft JhengHei;
+font-size:medium
 }
 </style>
+
 </head>
-<body>
+<body style="margin-top:5rem">
+     <nav class="navbar fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	</nav>
 <!-- <div class="input-group mb-3" style="margin:100px ; width:500px" > -->
 <!--   <div class="input-group-prepend"> -->
 <!--   <!-- <a href='httpclient1'> --> 
@@ -53,9 +47,9 @@ height:350;
 	       
 	       
 	       
-	<section class="container" style="background-color:gray; float:left; width:600px;margin:50px" >
+	<section class="container" style=" background-color:gray; float:left; width:650px;margin:80px" >
 	              
-		<div  class="row"  >
+		<div  class="row" style="margin-left:;" >
 			      
 			<div class="col-md-5" >
 			<!-- 追蹤主要頁面 -->
@@ -65,11 +59,11 @@ height:350;
                            <figcaption class="figure-caption"></figcaption>
                       </figure>
 				<p>建立人: ${trkNew.founder}</p>
-				<p>建立時間: ${trkNew.fondtime}</p>
+				<p style="width:300px">建立時間: ${trkNew.fondtime}</p>
 				<p>追蹤人數: ${trkNew.trcnum}</p>
 				<p class="text-xxl-left" style="font-family:Microsoft JhengHei; width:550px;font-size:large;">內容: ${trkNew.descript}</p>
 				<p>發生地點: ${trkNew.ocplace}</p>
-				<p>發生時間: ${trkNew.octime}</p>
+				<p style="width:300px">發生時間: ${trkNew.octime}</p>
 				<p>點閱人數: ${trkNew.clicnum}</p>
                 <p>標籤: ${trkNew.tag}</p>
                 <p style="font-family:Microsoft JhengHei">新聞分類: ${trkNew.type}</p>
@@ -111,9 +105,10 @@ height:350;
 		</div>
 		
 	</section>
-	 <a href="<c:url value='/addimage'/>" class='btn btn-warning btn-large'>  <!-- 跳轉網頁連結 --> 
-					    <span class=''></span>新增相關影像</a>
+<%-- 	 <a href="<c:url value='/addimage'/>" class='btn btn-warning btn-large'>  <!-- 跳轉網頁連結 -->  --%>
+<!-- 					    <span class=''></span>新增相關影像</a> -->
 	<!-- 媒體搜尋區域  -->
+	           <section style="margin-left:85rem;">
 				   <div style="float:left; margin-top:100px;">
 			            <h3 id="002" class="display-4" style="font-family:Microsoft JhengHei" >各媒體相關報導</h3> 
 			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:400px;font-size:larger;">
@@ -135,7 +130,7 @@ height:350;
                                 </div>
                         </div>   	
 			      </div>
-			      
+			  </section>    
 	<!-- 點擊累加 -->
 	 <%-- <%
 		Integer hitsCount = (Integer) application.getAttribute("hitCounter");
@@ -220,7 +215,7 @@ height:350;
 	}
 	console.log("Session人數="+visits);
 	
-	document.write("您是到訪的第" + t1 + "位用户！");
+// 	document.write("您是到訪的第" + t1 + "位用户！");
 	
 	
 	

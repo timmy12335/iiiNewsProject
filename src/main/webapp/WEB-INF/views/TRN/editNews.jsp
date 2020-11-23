@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <script>
+
 var NewsId2 = ${NewsId};
 var hasError = false;
 
@@ -20,6 +22,8 @@ window.onload = function() {
 	var octime = document.getElementById("octime");
 	var founder = document.getElementById("founder");
 	var type = document.getElementById("type");
+	var tag = document.getElementById("tag");
+	var descript = document.getElementById("descript");
 	var xhr = new XMLHttpRequest();
 
 	xhr.open("GET", "<c:url value='/editNews2/" + NewsId2 +" ' />", true);
@@ -31,7 +35,8 @@ window.onload = function() {
 	 // 伺服器請求完成
 	    if (xhr.readyState == 4 && xhr.status == 200) {
  		   var trkNewsBean = JSON.parse(xhr.responseText);
-		   console.log(xhr.responseText);
+		   console.log("Bean="+xhr.responseText);
+		   console.log("tag="+trkNewsBean.tag);
  		   NewsId2.value = trkNewsBean.NewsId;
 		   idLabel.innerHTML = trkNewsBean.NewsId2;
 		   title.value = trkNewsBean.title;
@@ -39,6 +44,8 @@ window.onload = function() {
 		   octime.value = trkNewsBean.octime;
 		   founder.value = trkNewsBean.founder;
 		   type.value = trkNewsBean.type;
+		   tag.value = trkNewsBean.tag;
+		   descript.value = trkNewsBean.descript;
 	    }
      }
 	console.log(NewsId2)
@@ -170,7 +177,13 @@ window.onload = function() {
 <title>Insert title here</title>
 </head>
 <body>
-	1091105
+	 <nav class="navbar fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	 </nav>
+	
+	
+	
+	
 	<div align='center'>
 		<h2>修改會員資料</h2>
 		<div id='resultMsg' style="height: 18px; font-weight: bold;"></div>
@@ -178,77 +191,76 @@ window.onload = function() {
 		<fieldset style='display: inline-block; width: 820px;'>
 			<legend>請修改下列資料</legend>
 			<input type="hidden" name="NewsId" id='NewsId'><br>
-			<table border='1'>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
-					<td width='400'>&nbsp;帳號: <label id='NewsIda'></label><br>
+			<table>
+				<tr height='60' style="display:none">
+					
+					<td width='400'>&nbsp;建立人: <label id='NewsIda'></label><br>
 					</td>
-					<td width='200'>
-						<div id='result0c' style="height: 10px;"></div> <br>
-						<div id='result0s' style="height: 10px;"></div>
-					</td>
-				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
-					<td width='400'>&nbsp;標題: <input type="text" name="title"
-						id='title'><br>
-					</td>
-					<td width='200' style="vertical-align: top">
-						<div id='result1c' style="height: 10px;"></div> <br>
-						<div id='result1s' style="height: 10px;"></div>
-					</td>
-				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
-					<td width='400'>&nbsp; 發生地點: <input type="text" name="ocplace"
-						id='ocplace'><br>
-					</td>
-					<td width='200' style="vertical-align: top">
-						<div id='result2c' style="height: 10px;"></div> <br>
-						<div id='result2s' style="height: 10px;"></div>
-					</td>
-				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
+					
+			</tr>
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:550px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">標題</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+				<input   disabled="disabled" name="title"	id='title' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"><br>    <!--  <input type="text" name="title"	id='title'><br> -->
+                </div>                                                                         <!--  </td> -->
+			</tr>
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:250px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">發生地點:</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+					<input  name="ocplace" id='ocplace' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"><br>
+				  </div> 
+			 </tr>
+				<tr height='' style="display:none">
+					
 					<td width='400'>&nbsp;發生時間: <input type="text" name="octime"
 						id='octime' size='24'>
 					</td>
-					<td width='200'>
-						<div id='result3c' style="height: 10px;"></div> <br>
-						<div id='result3s' style="height: 10px;"></div>
-					</td>
+					
 				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
+				<tr height='5' style="display:none">
+					
 					<td width='400'>&nbsp;建立人: <input type="text" name="founder"
 						id='founder' size='24'>
 					</td>
-					<td width='200'>
-						<div id='result3c' style="height: 10px;"></div> <br>
-						<div id='result3s' style="height: 10px;"></div>
-					</td>
+					
 				</tr>
-				<tr height='60'>
-					<td width='200'>&nbsp;</td>
-					<td width='400'>&nbsp;類型: <input type="text" name="type"
-						id='type' size='24'>
-					</td>
-					<td width='200'>
-						<div id='result3c' style="height: 10px;"></div> <br>
-						<div id='result3s' style="height: 10px;"></div>
-					</td>
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:250px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">類型:</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+					<input  name="type" id='type' type="text" class="form-control" placeholder="類型" aria-label="類型" aria-describedby="basic-addon1"><br>
+				  </div> 
+			</tr> 
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:250px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">標籤:</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+					<input  name="tag" id='tag' type="text" class="form-control" placeholder="搜尋標籤" aria-label="搜尋標籤" aria-describedby="basic-addon1"><br>
+				  </div> 
+			</tr> 
+				<tr>
+						<textarea name="descript" id='descript' style="resize:none;width:300px;height:200px;" id="descript" path="descript" type='text'
+							class='form:input-large' > </textarea>
+				
 				</tr>
+
 				<tr height='50'>
 					<td colspan='3' align='center'>
-						<button id='updateData'>更新</button>
-						<button id='deleteData'>刪除</button>
+					    <button id='updateData' type="button" class="btn btn-primary btn-lg">更新</button>
+                        <button id='deleteData' type="button" class="btn btn-secondary btn-lg">刪除</button>
 					</td>
 				</tr>
 			</table>
 		</fieldset>
 		<hr>
 		<p>
-			<a href="<c:url value='/'  />">回前頁</a>
+			<a href="<c:url value='/trkNews'  />"><button type="button" class="btn btn-secondary btn-lg btn-block">回前頁</button></a>
 		<hr>
 	</div>
 

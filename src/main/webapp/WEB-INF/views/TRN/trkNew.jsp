@@ -47,7 +47,7 @@ font-size:medium
 	       
 	       
 	       
-	<section class="container" style=" background-color:gray; float:left; width:650px;margin:80px" >
+	<section class="container" style=" background-color:#9D9D9D; float:left; width:650px;margin:80px" >
 	              
 		<div  class="row" style="margin-left:;" >
 			      

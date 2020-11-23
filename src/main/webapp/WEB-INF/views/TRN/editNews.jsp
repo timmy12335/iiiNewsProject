@@ -22,6 +22,8 @@ window.onload = function() {
 	var octime = document.getElementById("octime");
 	var founder = document.getElementById("founder");
 	var type = document.getElementById("type");
+	var tag = document.getElementById("tag");
+	var descript = document.getElementById("descript");
 	var xhr = new XMLHttpRequest();
 
 	xhr.open("GET", "<c:url value='/editNews2/" + NewsId2 +" ' />", true);
@@ -33,7 +35,8 @@ window.onload = function() {
 	 // 伺服器請求完成
 	    if (xhr.readyState == 4 && xhr.status == 200) {
  		   var trkNewsBean = JSON.parse(xhr.responseText);
-		   console.log(xhr.responseText);
+		   console.log("Bean="+xhr.responseText);
+		   console.log("tag="+trkNewsBean.tag);
  		   NewsId2.value = trkNewsBean.NewsId;
 		   idLabel.innerHTML = trkNewsBean.NewsId2;
 		   title.value = trkNewsBean.title;
@@ -41,6 +44,8 @@ window.onload = function() {
 		   octime.value = trkNewsBean.octime;
 		   founder.value = trkNewsBean.founder;
 		   type.value = trkNewsBean.type;
+		   tag.value = trkNewsBean.tag;
+		   descript.value = trkNewsBean.descript;
 	    }
      }
 	console.log(NewsId2)
@@ -208,40 +213,54 @@ window.onload = function() {
 				  </div>
 					<input  name="ocplace" id='ocplace' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"><br>
 				  </div> 
-					
 			 </tr>
-				<tr height='60'>
+				<tr height='' style="display:none">
 					
 					<td width='400'>&nbsp;發生時間: <input type="text" name="octime"
 						id='octime' size='24'>
 					</td>
 					
 				</tr>
-				<tr height='60'>
+				<tr height='5' style="display:none">
 					
 					<td width='400'>&nbsp;建立人: <input type="text" name="founder"
 						id='founder' size='24'>
 					</td>
 					
 				</tr>
-				<tr height='60'>
-					
-					<td width='400'>&nbsp;類型: <input type="text" name="type"
-						id='type' size='24'>
-					</td>
-					
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:250px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">類型:</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+					<input  name="type" id='type' type="text" class="form-control" placeholder="類型" aria-label="類型" aria-describedby="basic-addon1"><br>
+				  </div> 
+			</tr> 
+			<tr height='5'>
+				<div class="input-group mb-3" style="width:250px">
+				  <div class="input-group-prepend">
+                      <span  class="input-group-text" id="basic-addon1">標籤:</span>        <!--<td width='400'>&nbsp;標題:  -->
+				  </div>
+					<input  name="tag" id='tag' type="text" class="form-control" placeholder="搜尋標籤" aria-label="搜尋標籤" aria-describedby="basic-addon1"><br>
+				  </div> 
+			</tr> 
+				<tr>
+						<textarea name="descript" id='descript' style="resize:none;width:300px;height:200px;" id="descript" path="descript" type='text'
+							class='form:input-large' > </textarea>
+				
 				</tr>
+
 				<tr height='50'>
 					<td colspan='3' align='center'>
-						<button id='updateData'>更新</button>
-						<button id='deleteData'>刪除</button>
+					    <button id='updateData' type="button" class="btn btn-primary btn-lg">更新</button>
+                        <button id='deleteData' type="button" class="btn btn-secondary btn-lg">刪除</button>
 					</td>
 				</tr>
 			</table>
 		</fieldset>
 		<hr>
 		<p>
-			<a href="<c:url value='/'  />">回前頁</a>
+			<a href="<c:url value='/trkNews'  />"><button type="button" class="btn btn-secondary btn-lg btn-block">回前頁</button></a>
 		<hr>
 	</div>
 

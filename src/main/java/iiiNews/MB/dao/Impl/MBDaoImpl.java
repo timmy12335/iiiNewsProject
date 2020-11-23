@@ -96,7 +96,7 @@ public class MBDaoImpl implements MBDao {
 
 	@Override
 	public void updatePasswd(String email) {
-		String password = "@8M75K";
+		String password = "mimi90325";
 		String hql = "UPDATE MBBean mb SET mb.password = :mpwd " +
 					"Where mb.email = :memail";
 		Session session = factory.getCurrentSession();

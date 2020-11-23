@@ -38,7 +38,7 @@ public class EchoServerEndpoint {
 	public String onMessage(String message) {
 		LOGGER.info("註釋版的ServerEndpoint：收到客戶端送來訊息: " + message);
 		String msg=null;
-		if(message.equals("你好")) {
+		if(message.equals("你好") || message.equals("Hi") ||  message.equals("hi") || message.equals("HI") || message.contains("安")) {
 			msg="你好";
 		}else if(message.contains("新聞")) {
 //			service.addMsg(message);

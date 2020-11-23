@@ -8,6 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>客服表單</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+.fontsize {
+	font-size: 14pt;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+
+</style>
 <script>
 
 
@@ -61,7 +70,7 @@
 
 	function InputCrReport(){
 		var crrecontent = document.getElementById("crReContent"); 
-		crrecontent.value="感謝您使用iiiNews客服，依據您的需求，能麻煩您告知訂單編號嗎?\n再麻煩您回信至eeit19no4@gmail.com \n另外感謝您喜歡我們的頁面 \n祝身體健康!!"
+		crrecontent.value="\t感謝您使用iiiNews客服，依據您的需求，能麻煩您告知訂單編號嗎?\n\t再麻煩您回信至eeit19no4@gmail.com \n\t感謝您使用iiiNews新聞金錢報 \n\t祝您身體健康!!"
 	}
 
 </script>
@@ -94,7 +103,7 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 <hr>
 <div align='center'>
 <div id='resultMsg'></div>
-<table border='1' class="table table-bordered">
+<table border='1' class="table table-bordered fontsize">
 	<tr>
 		<td width='60' align='center' colspan="2">單號:No.${report.pk}
 		<input type='text' name='pk' id='pk' value="${report.pk}" hidden='true' disabled/>

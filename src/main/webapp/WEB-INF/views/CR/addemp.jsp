@@ -14,17 +14,18 @@ span.error {
 	display: inline-block;
 	font-size: 5pt;
 }
+
+.bigfont {
+	font-size:14pt;
+
+}
 </style>
-<script>
 
-
-
-</script>
 </head>
 <body>
 
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
-<div>
+<div style="margin-bottom:30px;">
 	<h3 >客服人員新增</h3>
 	</div>
 	<form:form method="post" modelAttribute="cremployee" id="forms" class="form-sample" 
@@ -49,6 +50,8 @@ span.error {
 				<input type="submit" class="btn btn-inverse-dark btn-fw">
 				 <input
 					type="reset" class="btn btn-inverse-dark btn-fw"> 
+				<input
+					type="button" class="btn btn-inverse-dark btn-fw" id="DemoEmp" value="一鍵輸入"> 
 					<input
 					type="button" id="cancel" onclick="history.back();"
 					class="btn btn-inverse-dark btn-fw" value="回前頁">
@@ -59,5 +62,15 @@ span.error {
 
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 
+<script>
+document.getElementById("DemoEmp").onclick=function(){
+	var empName = document.getElementById("empName");
+	var empId = document.getElementById("empId");
+	var empemail = document.getElementById("empemail");
+	empName.value = "王春天";
+	empId.value="spring134";
+	empemail.value="springwang135@gmail.com";
+}
+</script>
 </body>
 </html>

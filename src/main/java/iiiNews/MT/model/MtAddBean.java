@@ -44,6 +44,7 @@ public class MtAddBean implements Serializable{
 	private String imgName;			//圖片名字
 	@Column(columnDefinition = "varchar(MAX)")
 	private String videoLink;		//影片連結
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String article;			//內文
 	private String comment;			//留言
 	private Integer status;			//文章狀態

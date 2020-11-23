@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@ window.onload = function() { //刪除文章，OK
 }
 
 </script>
-<title>Get Member MtBean</title>
+<title>發文紀錄</title>
 
 <style>
 #customers {
@@ -44,6 +45,7 @@ window.onload = function() { //刪除文章，OK
 
 td {
 	padding: 3px;
+	text-align:center;
 }
 
 .td1 {
@@ -51,6 +53,15 @@ td {
 	word-break: break-all;
 	margin: 5px;
 	font-weight: "bold";
+}
+.ellipsis {
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	white-space: normal;
 }
 </style>
 </head>
@@ -89,14 +100,16 @@ td {
 					<td>&nbsp;${memList.pkey} &nbsp;</td>
 					<td>${memList.articleId}</td>
 					<td>${memList.memberId}</td>
-					<td width="10px" height="20px">${memList.updateDate}</td>
+<%-- 					<td width="10px" height="20px">${memList.updateDate}</td> --%>
+					<c:set var="date" value="${fn:substring(memList.updateDate, 0, 10)}" />
+					<td>${date}</td>
 					<c:if test="${ memList.status == 1}"><td><label class="badge badge-success">可瀏覽</label></td></c:if>
 					<c:if test="${ memList.status == 0}"><td><label class="badge badge-danger">已下架</label></td></c:if>
 					<td>${memList.category}</td>
 					<td class="td1">${memList.title}</td>
-					<td class="td1"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${memList.articleId}' />" />${memList.imgName}</td>
-					<td class="td1">${memList.article}</td>
-					<td>
+					<td class="td1"><img style="width:160px;height:90px" src="<c:url value='/getMtCreate/${memList.articleId}' />" /></td>
+					<td class="td1"><div class="ellipsis">${memList.article}</div></td>
+					<td class="td1">
 						<div align="center">
 <%--  							<a href="${pageContext.request.contextPath}/getAllMtAdd/Del/${all.pkey}">從DB刪除</a> --%>
 							<a class='delSingle' href="${pageContext.request.contextPath}/delAllMemArticle/${memList.articleId}">
@@ -114,7 +127,7 @@ td {
 <%-- 			</c:if> --%>
 		</table>
 		<hr>
-		<a href="<c:url value="" />">-----TOP-----</a><br><br>
+		<a class="btn btn-primary" href="<c:url value="" />">TOP</a><br><br>
 <!-- 		<input type="button" onclick="history.back()" value="重新查詢" /> -->
 <%-- 		<a href="<c:url value='/' />">回首頁</a><br><br> --%>
 	</div>

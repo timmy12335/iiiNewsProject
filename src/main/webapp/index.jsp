@@ -24,7 +24,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/cssmenu/video.css">
 	
-<title>我們新聞的首頁Title標</title>
+<title>iiiNews 新聞金錢報</title>
 <style>
 .tablebyme {
 	width: 70%;
@@ -102,6 +102,7 @@
 		</header>
 	
 		<!-- 頁首/結束 -->
+
 		<!-- 特色/開始 -->
 		<section class="container">
 			<div class="row">
@@ -129,106 +130,106 @@
 		<!-- 主標語/開始 -->
 		<section class="d-flex justify-content-center bg-danger slogan">
 			<h3 class="align-self-center text-white">
-				<strong>分享新聞，重視價值</strong>
+				<strong>改變傳統媒體模式，全民皆記者</strong>
 			</h3>
 		</section>
 		<!-- 主標語/結束 -->
 		<!-- 推薦課程/開始 -->
-		<section class="container">
-			<div class="row">
-				<!-- 標題/開始 -->
-				<div class="col-12">
-					<h1 class="text-success text-center">
-						<strong>推薦新聞</strong>
-					</h1>
-				</div>
-				<!-- 標題/結束 -->
-				<!-- 課程1/開始 -->
-				<div class="col-12 col-md-4 p2">
-					<div class="box-content">
-						<div>
-							<img src="img/NoImage.jpg" alt="Unity"
-								class="img-fluid d-block m-auto w-75">
-						</div>
-						<div class="mt-2 mb-2">
-							<h3>美食秘笈</h3>
-						</div>
-						<div class="text-info mt-2 mb-2">好吃好玩的老街美食大發現</div>
-						<div class="mt-2 mb-2">
-							<span class="text-muted">會員：test</span>
-						</div>
-						<div class="mt-2 mb-2">
-							<span class="text-muted">上架時間：2020-11-06</span>
-						</div>
-						<div class="text-center mt-2 mb-2">
-							<h4 class="text-danger">
-								<small class="text-muted"><s>原價 NT$ 1600</s></small>NT$ 1200
-							</h4>
-						</div>
-						<div class="mt-3">
-							<button type="button" class="btn btn-danger btn-lg btn-block">付款測試中</button>
-						</div>
-					</div>
-				</div>
-				<!-- 課程1/結束 -->
-				<!-- 課程2/開始 -->
-				<div class="col-12 col-md-4 p2">
-					<div class="box-content">
-						<div>
-							<img src="img/NoImage.jpg" alt="GameSalad"
-								class="img-fluid d-block m-auto w-75">
-						</div>
-						<div class="mt-2 mb-2">
-							<h3>街頭即時報</h3>
-						</div>
-						<div class="text-info mt-2 mb-2">高速公路路面濕滑車禍</div>
-						<div class="mt-2 mb-2">
-							<span class="text-muted">會員：test</span>
-						</div>
-						<div class="mt-2 mb-2">
-							<span class="text-muted">上架時間：2020-11-06</span>
-						</div>
-						<div class="text-center mt-2 mb-2">
-							<h4 class="text-danger">
-								<small class="text-muted"><s>原價 NT$ 3200</s></small>NT$ 1600
-							</h4>
-						</div>
-						<div class="mt-3">
-							<button type="button" class="btn btn-danger btn-lg btn-block">付款測試中</button>
-						</div>
-					</div>
-				</div>
-				<!-- 課程2/結束 -->
-				<!-- 課程3/開始 -->
-				<div class="col-12 col-md-4 p2">
-					<div class="box-content">
-						<div>
-							<img src="img/NoImage.jpg" alt="Google Web Design"
-								class="img-fluid d-block m-auto w-75">
-						</div>
-						<div class="mt-2 mb-2">
-							<h3>爆料！某立委喝花酒...</h3>
-						</div>
-						<div class="text-info mt-2 mb-2"></div>
-						<div class="mt-2 mb-2">
-							<span class="text-muted">會員：123Test</span>
-						</div>
-						<div class="mt-2 mb-2">
-							<span class="text-muted">上架時間：2020-11-06</span>
-						</div>
-						<div class="text-center mt-2 mb-2">
-							<h4 class="text-danger">
-								<small class="text-muted"><s>原價 NT$ 3200</s></small>NT$ 1600
-							</h4>
-						</div>
-						<div class="mt-3">
-							<button type="button" class="btn btn-danger btn-lg btn-block">付款測試中</button>
-						</div>
-					</div>
-				</div>
-				<!-- 課程3/結束 -->
-			</div>
-		</section>
+<!-- 		<section class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				標題/開始 -->
+<!-- 				<div class="col-12"> -->
+<!-- 					<h1 class="text-success text-center"> -->
+<!-- 						<strong>推薦新聞</strong> -->
+<!-- 					</h1> -->
+<!-- 				</div> -->
+<!-- 				標題/結束 -->
+<!-- 				課程1/開始 -->
+<!-- 				<div class="col-12 col-md-4 p2"> -->
+<!-- 					<div class="box-content"> -->
+<!-- 						<div> -->
+<!-- 							<img src="img/NoImage.jpg" alt="Unity" -->
+<!-- 								class="img-fluid d-block m-auto w-75"> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<h3>美食秘笈</h3> -->
+<!-- 						</div> -->
+<!-- 						<div class="text-info mt-2 mb-2">好吃好玩的老街美食大發現</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<span class="text-muted">會員：test</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<span class="text-muted">上架時間：2020-11-06</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="text-center mt-2 mb-2"> -->
+<!-- 							<h4 class="text-danger"> -->
+<!-- 								<small class="text-muted"><s>原價 NT$ 1600</s></small>NT$ 1200 -->
+<!-- 							</h4> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-3"> -->
+<!-- 							<button type="button" class="btn btn-danger btn-lg btn-block">付款測試中</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				課程1/結束 -->
+<!-- 				課程2/開始 -->
+<!-- 				<div class="col-12 col-md-4 p2"> -->
+<!-- 					<div class="box-content"> -->
+<!-- 						<div> -->
+<!-- 							<img src="img/NoImage.jpg" alt="GameSalad" -->
+<!-- 								class="img-fluid d-block m-auto w-75"> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<h3>街頭即時報</h3> -->
+<!-- 						</div> -->
+<!-- 						<div class="text-info mt-2 mb-2">高速公路路面濕滑車禍</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<span class="text-muted">會員：test</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<span class="text-muted">上架時間：2020-11-06</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="text-center mt-2 mb-2"> -->
+<!-- 							<h4 class="text-danger"> -->
+<!-- 								<small class="text-muted"><s>原價 NT$ 3200</s></small>NT$ 1600 -->
+<!-- 							</h4> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-3"> -->
+<!-- 							<button type="button" class="btn btn-danger btn-lg btn-block">付款測試中</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				課程2/結束 -->
+<!-- 				課程3/開始 -->
+<!-- 				<div class="col-12 col-md-4 p2"> -->
+<!-- 					<div class="box-content"> -->
+<!-- 						<div> -->
+<!-- 							<img src="img/NoImage.jpg" alt="Google Web Design" -->
+<!-- 								class="img-fluid d-block m-auto w-75"> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<h3>爆料！某立委喝花酒...</h3> -->
+<!-- 						</div> -->
+<!-- 						<div class="text-info mt-2 mb-2"></div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<span class="text-muted">會員：123Test</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-2 mb-2"> -->
+<!-- 							<span class="text-muted">上架時間：2020-11-06</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="text-center mt-2 mb-2"> -->
+<!-- 							<h4 class="text-danger"> -->
+<!-- 								<small class="text-muted"><s>原價 NT$ 3200</s></small>NT$ 1600 -->
+<!-- 							</h4> -->
+<!-- 						</div> -->
+<!-- 						<div class="mt-3"> -->
+<!-- 							<button type="button" class="btn btn-danger btn-lg btn-block">付款測試中</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				課程3/結束 -->
+<!-- 			</div> -->
+<!-- 		</section> -->
 	</div>
 	<!-- 頁腳/開始 -->
 	<footer class="bg-dark mt-5 footer-content" style="height: 120px;">

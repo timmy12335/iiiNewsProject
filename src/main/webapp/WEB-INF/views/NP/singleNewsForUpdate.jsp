@@ -53,7 +53,7 @@ p{
 
 		<div  style="margin-top: 100px;">
 		<div align="center">
-			<h1>123新聞詳細內容</h1>
+			<h1>新聞詳細內容</h1>
 			<p>可於前頁輸入時間上架喔!</p>
 			<p></p>
 		</div>

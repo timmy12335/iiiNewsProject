@@ -48,30 +48,30 @@ window.onload=function(){
 		<br>
 		<div class="row align-items-center">
 			
-	        <div class="col-md-4">
+	        <div class="col-md-6">
 				<div class="form-group row">
-					<label class="col-sm-4 col-form-label ">關鍵字搜尋：</label>
+					<label class="col-sm-4 col-form-label ">會員帳號搜尋：</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control form-control-sm" id="wordChoose" onkeyup="searchByMemberId()"/>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="form-group row">
-					<label class="col-sm-4 col-form-label">分類搜尋：</label>
-					<div class="col-sm-8">
-						<select id="cateChoose" onchange="searchBycateNo()" class="form-control form-control-sm">
-							<option value="-1">全部</option>
-							<option value="100">頭版頭</option>
-							<option value="200">頭版側標</option>
-							<option value="300">內頁版頭</option>
-							<option value="400">內頁側標</option>
-							<option value="500">小廣告</option>
-				         </select>
-			         </div>
-			    </div>
-         	</div>
-         	<div class="col-md-4">
+<!-- 			<div class="col-md-4"> -->
+<!-- 				<div class="form-group row"> -->
+<!-- 					<label class="col-sm-4 col-form-label">分類搜尋：</label> -->
+<!-- 					<div class="col-sm-8"> -->
+<!-- 						<select id="cateChoose" onchange="searchBycateNo()" class="form-control form-control-sm"> -->
+<!-- 							<option value="-1">全部</option> -->
+<!-- 							<option value="100">頭版頭</option> -->
+<!-- 							<option value="200">頭版側標</option> -->
+<!-- 							<option value="300">內頁版頭</option> -->
+<!-- 							<option value="400">內頁側標</option> -->
+<!-- 							<option value="500">小廣告</option> -->
+<!-- 				         </select> -->
+<!-- 			         </div> -->
+<!-- 			    </div> -->
+<!--          	</div> -->
+         	<div class="col-md-6">
          		<div class="form-group row">
 					<label class="col-sm-4 col-form-label">日期搜尋：</label>
 					<div class="col-sm-8">

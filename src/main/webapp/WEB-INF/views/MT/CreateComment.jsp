@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +12,12 @@ window.onload = function(){
 		var btn2 = document.getElementById("clickme2");
 		btn.onclick = function(){
 		A =  document.getElementById("comment")
-		A.value ="AAAAA留言留言"
+		A.value ="太狂了吧!!! 我覺得可以"
 		}
 		
 		btn2.onclick = function(){
 		B =  document.getElementById("comment")
-		B.value ="BBB留言"
+		B.value ="我覺得不行"
 	}
 }
 	</script>
@@ -46,7 +47,9 @@ margin:5px;
 			<tr><td colspan="2"><div>PK： ${CreateComment.pkey}</div></td></tr>
 			<tr><td colspan="2"><div>文章編號：${CreateComment.articleId}</div></td></tr>
 			<tr><td colspan="2"><div>會員編號: &nbsp;${CreateComment.memberId}</div></td></tr>
-			<tr><td colspan="2"><div>新增時間: ${CreateComment.updateDate}</div></td></tr>
+<%-- 			<tr><td colspan="2"><div>新增時間: ${CreateComment.updateDate}</div></td></tr> --%>
+			<c:set var="date" value="${fn:substring(CreateComment.updateDate, 0, 10)}" />
+			<tr><td colspan="2"><div>新增時間 : ${date}</div></td></tr>
 <%-- 			<tr><td colspan="2"><div>文章狀態: ${CreateComment.articleStatus }</div></td></tr> --%>
 			<tr><td colspan="2"><div>[${CreateComment.category}] ${CreateComment.title}</div></td></tr>
 <%-- 			<tr><td><div>標題: ${ singleArticle.title }</div></td></tr> --%>

@@ -11,14 +11,22 @@
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <style type="text/css">
 fieldset {
-	border: 1px solid rgb(255, 232, 57);
+	
 	width: 400px;
 	margin: auto;
 }
+ input {padding:5px 15px; background:#ccc; border:0 none;
+cursor:pointer;
+-webkit-border-radius: 5px;
+border-radius: 5px; }
 </style>
 <title>trkNews</title>
 </head>
 <body>
+    <nav class="navbar fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	</nav>
+
 	<section>
 		<div class="container">
 			<h1 style="text-align: center">建立追蹤新聞</h1>
@@ -62,14 +70,14 @@ fieldset {
 						類型 </label>
 					<div class='col-lg-10'>
 						<form:select path="type">
-							<form:option value="" label="請挑選" >請挑選 </form:option>
-							<form:option value="">社會</form:option>
-							<form:option value="">國際</form:option>
-							<form:option value="">政治 </form:option>
-							<form:option value="">科技</form:option>
-							<form:option value="">生活</form:option>
-							<form:option value="">娛樂</form:option>
-							<form:option value="">地方</form:option>
+							<form:option value="-1" label="請挑選" >請挑選 </form:option>
+							<form:option value="社會">社會</form:option>
+							<form:option value="國際">國際</form:option>
+							<form:option value="政治">政治 </form:option>
+							<form:option value="科技">科技</form:option>
+							<form:option value="生活">生活</form:option>
+							<form:option value="娛樂">娛樂</form:option>
+							<form:option value="地方">地方</form:option>
 							<%-- <form:options items="${typeList}" /> --%>
 						</form:select>
 					</div>
@@ -97,7 +105,7 @@ fieldset {
 					<label class='control-label col-lg-2 col-lg-2' for="bookNo">
 						發生時間 </label>
 					<div class='col-lg-10'>
-						<form:input  data-format="yyyy-MM-dd" id="octime" path="octime" type='text' style="width:118px"
+						<form:input  data-format="yyyy-MM-dd" id="octime" path="octime" type='text' style="width:140px"
 							class='form:input-large' />
 					</div>
 				</div>

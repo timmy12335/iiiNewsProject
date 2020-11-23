@@ -20,6 +20,30 @@
 
 <!-- </script> -->
 <title>會員登入</title>
+<script>
+	window.onload = function() {
+		var btn = document.getElementById("clickme1");
+		btn.onclick = function() {
+			AA = document.getElementById("userId")
+			AA.value = "code101"
+			AAA = document.getElementById("password")
+			AAA.value = "12345"
+// 			AAAA = document.getElementById("okpassword")
+// 			AAAA.value = "mimi0127"
+// 			AAAAA = document.getElementById("name")
+// 			AAAAA.value = "小蝸"
+// 			AAAAAA = document.getElementById("email")
+// 			AAAAAA.value = "miche831224@icloud.com"
+// 			AAAAAAA = document.getElementById("identityId")
+// 			AAAAAAA.value = "U121799920"
+// 			AAAAAAAA = document.getElementById("phone")
+// 			AAAAAAAA.value = "0976262860"
+
+			// 		submitUserForm = document.getElementById("grecaptcha")
+			// 		submitUserForm.value = true;
+		}
+	}
+</script>
 <style>
 ::-webkit-input-placeholder {
 	color: #FFA042;
@@ -73,12 +97,12 @@ g-recaptcha {
 				<div class="col-md-3 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
-							<h2 align="center">會員登入</h2>
+							<h2 align="center">一般登入</h2>
 							<p class="card-description">Login</p>
 							<div class="form-group" align="left">
 								<label for="userId">登入帳號：</label>
 								<form:input type="text" path="userId" class="form-control"
-									id='memberId' placeholder="輸入帳號" />
+									id='userId' placeholder="輸入帳號" />
 								<form:errors style="color:red;font-size:12px"
 									path="invalidCredentials"></form:errors>
 							</div>
@@ -104,6 +128,10 @@ g-recaptcha {
 									type="submit" name="submit" value="登入"
 									class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="<c:url value='/UserMB' />" class="btn btn-info">註冊</a>
+							</div>
+							<div class="form-group">
+								<input type='button' class='form-control' id='clickme1' value='Demo'>
+								<span>&nbsp;&nbsp;</span>
 							</div>
 							<button type="button"
 								class="btn btn-social-icon btn-facebook btn-rounded">

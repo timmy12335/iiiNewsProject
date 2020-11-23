@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,9 @@ font-weight:"bold";
 					<td><div>發文者: ${mtBean.memberId}</div></td>
 				</tr>
 				<tr>
-					<td><div>上傳時間: ${mtBean.updateDate}</div></td>
+<%-- 					<td><div>上傳時間: ${mtBean.updateDate}</div></td> --%>
+					<c:set var="date" value="${fn:substring(mtBean.updateDate, 0, 10)}" />
+					<td><div>上傳時間: ${date}</div></td>
 				</tr>
 				<c:if test="${mtBean.status == 1}"><tr><td><div>文章狀態:上傳成功</div></td></tr></c:if>
 				<tr>

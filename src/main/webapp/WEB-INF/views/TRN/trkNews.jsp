@@ -13,92 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
- .wrapper {
-            position: relative;
-            width: 800px;
-            height: 300px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        ul {
-            margin: 0;
-            padding: 0;
-            position: absolute;
-        }
-
-        li {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        ul.slides {
-            width: 3200px;
-            left: 0px;
-            transition: all .5s;
-        }
-
-        ul.slides li {
-            width: 800px;
-            height: 300px;
-            overflow: hidden;
-            float: left;
-        }
-
-        ul.slides li img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .dot {
-            bottom: 10px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .dot li {
-            border: 1px solid #fff;
-            /* border-radius: 50%; */
-            margin: 0 5px;
-            width: 24px;
-            height: 10px;
-        }
-
-        /* .dot li:hover{
-            background: #fff;
-        } */
-        .slide_btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 0;
-            bottom: 0;
-            width: 30px;
-            color: #fff;
-            position: absolute;
-            font-size: 24px;
-            /* background-color:red; */
-        }
-
-        #prevSlide {
-            left: 0;
-        }
-
-        #nextSlide {
-            right: 0;
-        }
-
-        .slide_btn i {
-            color: rgba(255, 255, 255, .6);
-            transition: .5s;
-        }
-
-        .slide_btn:hover i {
-            color: rgba(255, 255, 255, 1);
-        }
+ 
 body {
   
   padding-top: 5rem;
@@ -106,21 +21,36 @@ body {
   color: #5a5a5a;
 }
 </style>
-<nav class="navbar fixed-top">
-		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
-	</nav>
+
 </head>
 <body>
+     <nav class="navbar fixed-top">
+		<jsp:include page="/fragment/navbar.jsp"></jsp:include> 
+	 </nav>
 
 
 
+<div class="iframe1" style=" ">
+<!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+<!--   <button onclick="changifram()" type="button" class="btn btn-secondary">Left</button> -->
+<!--   <button type="button" class="btn btn-secondary">Middle</button> -->
+<!--   <button type="button" class="btn btn-secondary">Right</button> -->
+<!-- </div> -->
+<iframe id="if1" src="https://feed.mikle.com/widget/v2/139192/?preloader-text=Loading..." 
+height="400px" width="90%" style="margin-left:90px" class="fw-iframe" scrolling="no" frameborder="0"></iframe>
 
-<div>
-<iframe src="https://feed.mikle.com/widget/v2/139192/?preloader-text=Loading..." 
-height="400px" width="100%" class="fw-iframe" scrolling="no" frameborder="0"></iframe>
 </div>
 
+<script>
 
+// function changifram() {
+//     var f2 = "<iframe src='https://feed.mikle.com/widget/v2/139364/?preloader-text=Loading...' height='400px' width='90%' class='fw-iframe' scrolling='no' frameborder='0'></iframe>"
+//     console.log(f2);
+//    var f1 = document.getElementById("if1");
+//    console.log(f1);
+//    f1.innerHTML = f2
+// }
+</script>
 
 
 <!-- <main role="main">  -->       <!--以下輪播先不用-->

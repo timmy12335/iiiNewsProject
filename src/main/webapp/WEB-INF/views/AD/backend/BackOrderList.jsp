@@ -171,9 +171,9 @@ window.onload=function(){
 	
 	function statusTrans(status){
 		if(status == 0){
-			status = "尚未付款";
+			status = "<span class='bg-danger text-white p-1'>尚未付款</span>";
 		}else if(status == 1){
-			status = "已付款";
+			status = "<span class='bg-success text-white p-1'>已付款</span>";
 		}else{
 			status = "其他";
 		}
@@ -186,7 +186,7 @@ window.onload=function(){
 		      content +=  "<th class='text-center'>訂單PK值</th><th class='text-center'>訂單編號</th>";
 		      content +=  "<th class='text-center'>購買人</th>";
 		      content +=  "<th class='text-center'>訂單成立日期</th><th class='text-center'>訂單總價</th>";
-		      content +=  "<th class='text-center'>付款狀態</th><th class='text-center'>備註</th>";
+		      content +=  "<th class='text-center'>付款狀態</th>";
 			  content +=  "<th class='text-center'>編輯</th></tr></thead>";
 			var ad = JSON.parse(responseData);		// 傳回一個陣列
 			var bgColor = "";   // 每一項商品的背影 
@@ -200,7 +200,6 @@ window.onload=function(){
 			               	"<td class='text-center'>" + ad[i].orderDate + "</td>" +
 			               	"<td class='text-right'>" + "NT$ " + ad[i].totalAmount + "</td>" +
 			               	"<td class='text-center'>" + statusTrans(ad[i].paymentStatus) + "</td>" + 
-			               	"<td class='text-center'>" + ad[i].payingDetail + "</td>" + 
 			               	"<td class='text-center'>" +
 			               	"<button onclick='delfunction("+ad[i].adPk+")' type='button' class='btn btn-danger btn-icon-text'>Delete<i class='ti-trash btn-icon-append'></i></button>"+
 // 			               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +

@@ -198,7 +198,7 @@ function confirmDelete(n) {
 											<c:otherwise>其他</c:otherwise>
 										</c:choose>
 										/&nbsp;${ad.value.adDate} &nbsp;)
-										 <span>$ ${ad.value.unitPrice}</span>
+										 <span>$&nbsp;<fmt:formatNumber type="number" value="${ad.value.unitPrice}"/></span>
 									</li>
 								</c:forEach>
 								<li

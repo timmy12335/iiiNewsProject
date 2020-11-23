@@ -19,6 +19,8 @@
 <!-- inject:css -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
 <style type="text/css">
 span.error {
 	color: red;
@@ -63,7 +65,13 @@ font-size:12px;
 }
 
 #serverResponseArea{
-border:2px green solid;
+	border:2px green solid;
+}
+
+.fontsize{
+	font-size:14pt;
+	font-family: 'Noto Sans TC', sans-serif;
+
 }
 </style>
 
@@ -129,7 +137,7 @@ border:2px green solid;
 			};
 
 			socket.onmessage = function(event) {
-				appendMsg("Server: " + event.data);
+				appendMsg("新聞金錢客服豹: " + event.data);
 			};
 			btnClose.disabled = false;
 			btnSend.disabled = false;
@@ -138,7 +146,7 @@ border:2px green solid;
 					status.innerHTML = "[close] 連線正常關閉, code=" + event.code
 							+ ", reason= " + event.reason;
 				} else {
-					status.innerHTML = "[close] 連線不正常結束";
+					status.innerHTML = "[close] 客服連線中斷";
 				}
 				btnClose.disabled = true;
 				btnSend.disabled = true;
@@ -146,7 +154,7 @@ border:2px green solid;
 			};
 
 			socket.onerror = function(error) {
-				alert("[error] 連線發生錯誤，原因：" + error.message);
+				alert("[error] 客服連線發生錯誤，原因：" + error.message);
 			};
 		}
 
@@ -191,7 +199,7 @@ border:2px green solid;
 			<div class='card-body'
 				style='width: 800px; margin-top: 10px; background: #ECECFF; box-shadow: 10px 10px #D0D0D0; border-radius: 30px;'>
 				<form:form method="post" modelAttribute="crBean" id="forms"
-					class="form-sample" enctype="multipart/form-data">
+					class="form-sample fontsize" enctype="multipart/form-data">
 					<fieldset style="background: light-pink;">
 						<c:choose>
 							<c:when test="${not empty MBBean}">
@@ -199,19 +207,19 @@ border:2px green solid;
 									value="${MBBean.memberId}" hidden='true'></form:input>
 							</c:when>
 							<c:otherwise>
-								<form:input type="text" path="companyId" id="companyId"
+								<form:input type="text" path="companyId" id="companyId" class="fontsize"
 									value="${CpMemberBean.cpmemberId}" hidden='true'></form:input>
 							</c:otherwise>
 						</c:choose>
 						<div class="form-group">
-							<label>客服主題:</label>
-							<form:input class="form-control" type="text"
+							<label class="fontsize">客服主題:</label>
+							<form:input class="form-control fontsize" type="text"
 								placeholder="請輸入客服主題" path="crTitle" id="crTitle"></form:input>
 							<form:errors path="crTitle" cssClass="error" />
 						</div>
 						<div class="form-group">
 							<label class="form-group">客服類別:</label>
-							<form:select path="crClass" id="crClass" class="form-control"
+							<form:select path="crClass" id="crClass" class="form-control fontsize"
 								style="border:none;">
 								<option>帳號相關</option>
 								<option>交易相關</option>
@@ -223,16 +231,17 @@ border:2px green solid;
 						</div>
 
 						<div class="form-group">
-							<label>客服內容:</label>
-							<form:textarea class="form-control" placeholder="請輸入至少10字以上的內容...."
-								style="resize: none;height:300px" path="crContent"
+							<label class="fontsize">客服內容:</label>
+							<form:textarea class="form-control fontsize" placeholder="請輸入至少10字以上的內容...."
+								style="resize: none;height:300px;" path="crContent"
 								id="crContent" maxlength="200"></form:textarea>
 							<div id='num'><font color="#E0E0E0" size="1" face="DFKai-sb" ></font></div>
 							<form:errors path="crContent" cssClass="error" />
 						</div>
 
 						<div class="form-group">
-							<label>附件檔案:</label> <input type="file" name="image" id="image"
+							<label class="fontsize">附件檔案:</label> 
+							<input type="file" name="image" id="image"
 								class='form-contorl'>
 						</div>
 						<div class="form-group">
@@ -339,12 +348,11 @@ border:2px green solid;
 		var crTitle = document.getElementById("crTitle");
 		var crClass = document.getElementById("crClass");
 		var crContent = document.getElementById("crContent");
-		crTitle.value = "新聞有問題";
+		crTitle.value = "對於新聞有疑問";
 		crClass.value="商品相關";
-		crContent.value="購買新聞資訊後，發現給予的新聞內容和實際想像中不同，想請問能暫時停止給予對方金錢嗎?\n另外想請問為什麼你們的新聞新聞和廣告購買頁面那麼好看!!!!!";
+		crContent.value="購買新聞資訊後，發現給予的新聞內容和實際想像中不同，想請問能退貨退錢嗎?\n另外想請問下架倒數前一秒進行購買時，網路突然中斷，\n還能及時購買到嗎?";
 		document.getElementById("crContent").onkeydown();
 	}
-
 
 </script>
 </body>

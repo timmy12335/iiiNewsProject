@@ -43,8 +43,8 @@ public class NPUploadValidator implements Validator {
 		if(nBean.getNewsType() != null && nBean.getNewsType().equals("none")) {
 			errors.rejectValue("newsType", "","請選擇新聞類型");
 		}
-		if(nBean.getProductImage().length > 3) {
-			errors.rejectValue("productImage", "","照片請勿超過三張");
+		if(nBean.getProductImage().length != 3) {
+			errors.rejectValue("productImage", "","照片請輸入三張");
 		}
 		
 		

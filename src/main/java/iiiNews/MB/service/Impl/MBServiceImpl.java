@@ -69,7 +69,8 @@ public class MBServiceImpl implements MBService {
 		mbdao.updatePasswd(email);
 		System.out.println("session 更新密碼");
 	}
-
+	
+	@Transactional
 	@Override
 	public List<String> seachMemberaccount() {
 		return mbdao.seachMemberaccount();
@@ -87,6 +88,7 @@ public class MBServiceImpl implements MBService {
 		return mbdao.CheckPassword(oldpwd, newpwd, id);
 	}
 
+	@Transactional
 	@Override
 	public MBBean getProductById(int memberId) {
 		return mbdao.getProductById(memberId);

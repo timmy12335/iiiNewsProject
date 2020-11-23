@@ -48,8 +48,36 @@
 			}
 		}
 
-		//柱狀圖
+	//總計柱狀圖
+	var xhr1 = new XMLHttpRequest();
+	var title = "總計客服單"
+	xhr1.open("GET", "<c:url value='/calCRfromAll'/>", true);
+	xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xhr1.send();
+
+	xhr1.onreadystatechange = function() {
+		if (xhr1.readyState == 4
+				&& (xhr1.status == 200 || xhr1.status == 204)) {
+			var map = JSON.parse(xhr1.responseText);
+			console.log(map);
+			var data1 = [];
+			var emp = [];
+			var report = [];
+			console.log(data1);
+			for ( var k in map) {
+				emp.push(k);
+				report.push(map[k]);
+			}
+			console.log(emp);
+			console.log(report);
+			getLinePic(title,emp, report);
+		}
+	}
+	}
+	//點擊統計各克服員未處理客服單
+	function clickforuntreat(){
 		var xhr1 = new XMLHttpRequest();
+		var title = "未處理客服單"
 		xhr1.open("GET", "<c:url value='/calCRfromEmp'/>", true);
 		xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xhr1.send();
@@ -68,11 +96,65 @@
 				}
 				console.log(emp);
 				console.log(report);
-				getLinePic(emp, report);
+				getLinePic(title, emp, report);
 			}
 		}
+		}
+	//點擊統計各克服員總共擁有客服單
+	function clickforall(){
+	var xhr1 = new XMLHttpRequest();
+	var title = "總計客服單"
+	xhr1.open("GET", "<c:url value='/calCRfromAll'/>", true);
+	xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xhr1.send();
 
+	xhr1.onreadystatechange = function() {
+		if (xhr1.readyState == 4
+				&& (xhr1.status == 200 || xhr1.status == 204)) {
+			var map = JSON.parse(xhr1.responseText);
+			console.log(map);
+			var data1 = [];
+			var emp = [];
+			var report = [];
+			console.log(data1);
+			for ( var k in map) {
+				emp.push(k);
+				report.push(map[k]);
+			}
+			console.log(emp);
+			console.log(report);
+			getLinePic(title,emp, report);
+		}
 	}
+	}
+	
+	//點擊統計各客服員以處理客服單
+	function clickforDone(){
+		var xhr1 = new XMLHttpRequest();
+		var title = "已完成客服單"
+		xhr1.open("GET", "<c:url value='/calCRfromDone'/>", true);
+		xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xhr1.send();
+
+		xhr1.onreadystatechange = function() {
+			if (xhr1.readyState == 4
+					&& (xhr1.status == 200 || xhr1.status == 204)) {
+				var map = JSON.parse(xhr1.responseText);
+				console.log(map);
+				var data1 = [];
+				var emp = [];
+				var report = [];
+				console.log(data1);
+				for ( var k in map) {
+					emp.push(k);
+					report.push(map[k]);
+				}
+				console.log(emp);
+				console.log(report);
+				getLinePic(title,emp, report);
+			}
+		}
+		}
 // function calAllReportByDate
 // 	var xhr1 = new XMLHttpRequest();
 // 	xhr1.open("GET", "<c:url value='/calCRfromEmp'/>", true);
@@ -151,7 +233,7 @@
 	}
 
 	//柱狀圖
-	function getLinePic(emp, report) {
+	function getLinePic(title, emp, report) {
 		var arr = []
 		for (let i = 0; i < emp.length; i++) {
 			arr.push({
@@ -167,7 +249,7 @@
 		option = {
 			title : {
 				text : '人員客服統計',
-				subtext : '未處理客服單統計',
+				subtext : title,
 				left : 'center'
 			},
 			color : [ '#3398DB' ],
@@ -194,7 +276,7 @@
 				type : 'value'
 			} ],
 			series : [ {
-				name : '尚未處理客服單數',
+				name : title,
 				type : 'bar',
 				center : [ '50%', '50%' ],
 				barWidth : '40%',
@@ -209,44 +291,44 @@
 	
 	//HighChart練習
 	
-	Highcharts.chart('container', {
+// 	Highcharts.chart('container', {
 
-    chart: {
-        type: 'column',
-        styledMode: true
-    },
+//     chart: {
+//         type: 'column',
+//         styledMode: true
+//     },
 
-    title: {
-        text: 'Styling axes and columns'
-    },
+//     title: {
+//         text: 'Styling axes and columns'
+//     },
 
-    yAxis: [{
-        className: 'highcharts-color-0',
-        title: {
-            text: 'Primary axis'
-        }
-    }, {
-        className: 'highcharts-color-1',
-        opposite: true,
-        title: {
-            text: 'Secondary axis'
-        }
-    }],
+//     yAxis: [{
+//         className: 'highcharts-color-0',
+//         title: {
+//             text: 'Primary axis'
+//         }
+//     }, {
+//         className: 'highcharts-color-1',
+//         opposite: true,
+//         title: {
+//             text: 'Secondary axis'
+//         }
+//     }],
 
-    plotOptions: {
-        column: {
-            borderRadius: 5
-        }
-    },
+//     plotOptions: {
+//         column: {
+//             borderRadius: 5
+//         }
+//     },
 
-    series: [{
-        data: [1, 3, 2, 4]
-    }, {
-        data: [324, 124, 547, 221],
-        yAxis: 1
-    }]
+//     series: [{
+//         data: [1, 3, 2, 4]
+//     }, {
+//         data: [324, 124, 547, 221],
+//         yAxis: 1
+//     }]
 
-});
+// });
 	
 	//線圖
 // 	function showLine(){
@@ -279,12 +361,12 @@
 
 	<h3>各項客服報表</h3>
 	<div style='margin-top: 20px; margin-bottom: 20px;'>
-		<a href=<c:url value='/addemployee'/>><button
-				class='btn btn-primary btn-icon-text' id='add'>客服單總計</button></a> <a
-			href=<c:url value='/addemployee'/>><button
-				class='btn btn-primary btn-icon-text' id='untreat'>未處理客服單</button></a> <a
-			href=<c:url value='/addemployee'/>><button
-				class='btn btn-primary btn-icon-text' id='done'>處理完客服單</button></a>
+		<button
+				class='btn btn-primary btn-icon-text' id='All' onclick="clickforall()">客服單總計</button>
+				<button
+				class='btn btn-primary btn-icon-text' id='untreat' onclick="clickforuntreat()">未處理客服單</button>
+			<button
+				class='btn btn-primary btn-icon-text' id='done' onclick="clickforDone()">處理完客服單</button>
 	</div>
 	<div class="row">
 

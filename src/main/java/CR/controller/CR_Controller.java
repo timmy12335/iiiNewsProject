@@ -157,10 +157,8 @@ public class CR_Controller {
 		try {
 			MimeMessageHelper email = new MimeMessageHelper(msg, true, "utf-8");
 			if (mb != null) {
-				System.out.println("有要進來?");
 				email.setTo(mb.getEmail());
-			} else if (cpmb != null) {
-				System.out.println("不該要進來?");
+			} else if (cpmb != null) {				
 				email.setTo(cpmb.getCpemail());
 			} else {
 				email.setTo("eeit2020119@gmail.com");
@@ -294,6 +292,45 @@ public class CR_Controller {
 //re = new ResponseEntity<byte[]>(content, HttpStatus.OK);
 		re = new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
 		return re;
+	}
+	
+	//下載圖片
+	@GetMapping(value = "/downloadCRimg/{pk}")
+	public void downloadPic(@PathVariable Integer pk, HttpServletResponse response) throws Exception {
+		InputStream is = null;
+		OutputStream os = null;
+		String mimeType = null;
+		CRBean bean = service.getReportById(pk);
+		if (bean != null) {
+			Blob blob = bean.getAttachment();
+			if (blob != null) {
+				is = blob.getBinaryStream();
+				mimeType = ctx.getMimeType(bean.getAttachmentName());
+			}
+		}
+		
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(mediaType);
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		response.setHeader("Content-Disposition", "attachment;fileName="+bean.getAttachmentName());
+		try {
+		byte[] b = new byte[81920];
+		int len = 0;
+		os =response.getOutputStream();
+		while ((len = is.read(b)) != -1) {
+			os.write(b, 0, len);
+		}
+		os.flush();
+		}finally {
+			if(os!=null) {
+				try {
+					os.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	

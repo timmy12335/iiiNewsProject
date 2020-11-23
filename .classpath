@@ -31,11 +31,5 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="javax.servlet-3.0.0.v201112011016.jar"/>
 	<classpathentry kind="lib" path="log4j.jar"/>
-	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="test" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

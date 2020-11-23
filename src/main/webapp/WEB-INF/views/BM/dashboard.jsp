@@ -140,7 +140,7 @@
 
   <body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div" width="400" height="400"></div>
+    <div id="chart_div" width="400" height="400" align='center;'></div>
      <div id="chart_div2" width="400" height="400"></div>
 <hr>
 <jsp:include page="/fragment/BMfoot.jsp"></jsp:include>

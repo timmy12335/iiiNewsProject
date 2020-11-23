@@ -13,6 +13,10 @@
 /* 		margin-left:calc(100vw - 100%); */
 /* 		overflow-y: scroll; */
 /* 	} */
+.spacebutton{
+ margin-bottom:10px;
+}
+
 </style>
 </head>
 <body>
@@ -21,7 +25,7 @@
 
 	<div class='card-body'>
 		<h3>客服人員管理</h3>
-		<div class="row align-items-center" style='margin-bottom:10px;'>
+		<div class="row align-items-center" style='margin-bottom:0px;'>
 
 			<div class="col-md-4">
 				<div class="form-group row">
@@ -56,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-		<div>
+		<div style="margin-bottom:10px;">
 				<a href=<c:url value='/addemployee'/>><button
 				class='btn btn-primary btn-icon-text btn-sm' id='add'>新增客服人員</button></a>
 				</div>
@@ -79,7 +83,7 @@
 		}
 
 		function displayPageEmps(responseData) {
-			var content = "<table class='table' style='table-layout: fixed;width:1120px;word-break: break-all'><thead style='background-color:#6FB7B7'><tr><th>客服編號</th>";
+			var content = "<table class='table' style='table-layout: fixed;width:1120px;word-break: break-all'><thead style='background-color:#6FB7B7'><tr><th>人員編號</th>";
 			content += "<th>客服姓名</th>";
 			content += "<th>客服帳號</th>";
 			content += "<th style='width:200px;'>客服信箱</th>";
@@ -124,15 +128,15 @@
 						+ transisstay(emp[i].isstay)
 						+ "</td>"
 						+ "<td class='text-center'>"
-						+ "<button onclick='show("
+						+ "<div><button onclick='show("
 						+ (i)
-						+ ")' type='button' class='btn btn-info btn-sm'>修改<i class='ti-pencil-alt'></i></button><br>"
-						+ "<button onclick='returnCrReport("
+						+ ")' type='button' class='btn btn-success btn-icon-text btn-sm spacebutton'>修改<i class='ti-pencil-alt btn-icon-append'></i></button></div>"
+						+ "<div><button onclick='returnCrReport("
 						+ emp[i].empPk
-						+ ")' type='button' class='btn btn-info btn-icon-text btn-sm'>上班<i class='ti-trash btn-icon-append'></i></button><br>"
-						+ "<button onclick='deleteCrReport("
+						+ ")' type='button' class='btn btn-info btn-icon-text btn-sm spacebutton'>上班<i class='ti-export btn-icon-append'></i></button></div>"
+						+ "<div><button onclick='deleteCrReport("
 						+ emp[i].empPk
-						+ ")' type='button' class='btn btn-danger btn-icon-text btn-sm'>下班<i class='ti-trash btn-icon-append'></i></button>"
+						+ ")' type='button' class='btn btn-danger btn-icon-text btn-sm spacebutton'>下班<i class='ti-import btn-icon-append'></i></button></div>"
 						+
 
 						// 			               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +
@@ -232,7 +236,7 @@
 		function deleteCrReport(emppk) {
 			var xhr2 = new XMLHttpRequest();
 
-			var result = confirm("確定刪除此筆(單號:" + emppk + ")?");
+			var result = confirm("確定打卡下班(單號:" + emppk + ")?");
 			if (result) {
 				xhr2.open("DELETE", "<c:url value='/allemployee/'/>" + emppk,
 						true);
@@ -257,7 +261,7 @@
 		function returnCrReport(emppk) {
 			var xhr2 = new XMLHttpRequest();
 			var queryStringWord = "?pk=" + emppk;
-			var result = confirm("回覆為在職(編號:" + emppk + ")?");
+			var result = confirm("確定打卡上班(編號:" + emppk + ")?");
 			if (result) {
 				xhr2.open("Get", "<c:url value='/returnemp'/>"
 						+ queryStringWord, true);
@@ -325,7 +329,7 @@
 	<script>
 		window.onload = loading();
 		function loading() {
-			var origincontent = "<table class='table table-striped'><thead><tr><th>客服編號</th>";
+			var origincontent = "<table class='table table-striped'><thead><tr><th>人員編號</th>";
 			origincontent += "<th>客服姓名</th>";
 			origincontent += "<th>客服帳號</th>";
 			origincontent += "<th>客服信箱</th>";

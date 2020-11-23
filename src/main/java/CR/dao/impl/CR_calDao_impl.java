@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import CR.dao.CR_calDao;
+import CR.model.CRemployee;
 
 @Repository
 public class CR_calDao_impl implements CR_calDao {
@@ -48,4 +49,35 @@ public class CR_calDao_impl implements CR_calDao {
 		return map;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Long> calAllFromEmp() {
+		Session session = factory.getCurrentSession();
+		Map<String, Long> map = new HashMap<>();
+		String hql = "SELECT DISTINCT cremployee FROM CRBean";
+		List<CRemployee> list = session.createQuery(hql).getResultList();
+		for(CRemployee emp:list) {
+		String hql2 ="SELECT COUNT(*) FROM CRBean where cremployee=:crepk";
+		
+		Long num= (Long) session.createQuery(hql2).setParameter("crepk", emp).uniqueResult();
+		map.put(emp.getEmpName(), num);
+		}
+		return map;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Integer> calDoneFromEmp() {
+		Session session = factory.getCurrentSession();
+		Map<String, Integer> map = new HashMap<>();
+		String hql = "SELECT DISTINCT empName FROM CRemployee";
+		List<String> list = session.createQuery(hql).getResultList();
+		for(String emp:list) {
+		String hql2 ="SELECT replyamt FROM CRemployee where empName=:empname";
+		Integer num= (Integer) session.createQuery(hql2).setParameter("empname", emp).uniqueResult();
+		map.put(emp, num);
+		}
+		return map;
+	}
+	
 }

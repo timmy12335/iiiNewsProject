@@ -25,7 +25,7 @@
 	href="${pageContext.request.contextPath}/images/favicon.png" />
 <style>
 .box {
-	width: 60px;
+	width: 30px;
 	padding: 10px;
 }
 
@@ -85,19 +85,17 @@
 
 	<%-- 		<jsp:include page="/fragment/navbar.jsp"></jsp:include> --%>
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
-<div class="row">
 
-		<div class='col-md-12 grid-margin stretch-card'>
 
 			<div class="card">
 				<div class='card-body' style='background: #F0F0F0'>
 
-	<h4 class="font-weight-bold mb-0">顯示所有客服表單</h4>
-	<div id="resultmsg">
+	<h3 class="font-weight-bold mb-0">顯示所有客服表單</h3>
+	<div style="margin-top:10px;" id="resultmsg">
 	</div>
-	<table class="table">
-		<thead>
-			<tr>
+	<table class="table table-striped" >
+		<thead style="background-color:#6FB7B7">
+			<tr >
 				<th width='60'>單號</th>
 				<th>姓名</th>
 				<th>類別</th>
@@ -118,7 +116,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach var='ser' items='${CrReport}' varStatus='report'>
-					<tr>
+					<tr bgcolor="#D1E9E9">
 						<td align='left'>${ser.pk}</td>
 						<td align='left'>&nbsp;${ser.mbBean.name}${ser.cpBean.cpname}</td>
 						<td align='center'>${ser.crClass}</td>
@@ -136,16 +134,16 @@
 						<td align='center'>${ser.cremployee.empName}</td>
 						<td align='center'><fmt:formatDate value="${ser.crReDate}"
 								pattern="yyyy-MM-dd" /></td>
-						<td><button id="btn_update"
+						<td><div><button id="btn_update"
 								class="btn btn-outline-secondary btn-icon-text btn-sm"
 								onclick="updateCrReport(${ser.pk})">
 								回覆<i class="ti-pencil-alt btn-icon-append"></i>
-							</button>
+							</button></div><div style="margin-top:10px;">
 							<button id="btn_delete"
 								class="btn btn-outline-danger btn-icon-text btn-sm"
 								onclick="deleteCrReport(${ser.pk})" >
 								刪除<i class="ti-trash btn-icon-append"></i>
-							</button></td>
+							</button></div></td>
 							
 					</tr>
 					<tr>
@@ -167,8 +165,6 @@
 	<hr>
 	<button onclick='history.back()' class="btn btn-primary">回前頁</button>
 	
-	</div>
-	</div>
 	</div>
 	</div>
 

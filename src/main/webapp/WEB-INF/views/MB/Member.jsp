@@ -16,6 +16,30 @@
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
 
 <title>註冊</title>
+<script>
+	window.onload = function() {
+		var btn = document.getElementById("clickme1");
+		btn.onclick = function() {
+			AA = document.getElementById("memberId")
+			AA.value = "miche831224"
+			AAA = document.getElementById("password")
+			AAA.value = "mimi0127"
+			AAAA = document.getElementById("okpassword")
+			AAAA.value = "mimi0127"
+			AAAAA = document.getElementById("name")
+			AAAAA.value = "小蝸"
+			AAAAAA = document.getElementById("email")
+			AAAAAA.value = "miche831224@icloud.com"
+			AAAAAAA = document.getElementById("identityId")
+			AAAAAAA.value = "U121799920"
+			AAAAAAAA = document.getElementById("phone")
+			AAAAAAAA.value = "0976262860"
+
+			// 		submitUserForm = document.getElementById("grecaptcha")
+			// 		submitUserForm.value = true;
+		}
+	}
+</script>
 <style>
 ::-webkit-input-placeholder {
 	color: #FFA042;
@@ -139,21 +163,38 @@ g-recaptcha {
 							<div class="form-group" align="center">
 								<label colspan="3" style="text-align: center;"></label><input
 									type="hidden" name="action" value="reg" class="form-control" />
-								<input type="submit" value="送出註冊" class="btn btn-primary btn-icon-text"/>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="<c:url value='/LoginMB' />"
-									class="btn btn-info">登錄</a>
+								<input type="submit" value="送出註冊"
+									class="btn btn-primary btn-icon-text" />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+									href="<c:url value='/LoginMB' />" class="btn btn-info">登錄</a>
 							</div>
-							<button type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="ti-facebook"></i></button>
-								<button type="button" class="btn btn-social-icon btn-google btn-rounded"><i class="ti-google"></i></button>
-								<button type="button" class="btn btn-social-icon btn-twitter btn-rounded"><i class="ti-twitter-alt"></i></button>
-								<button type="button" class="btn btn-social-icon btn-youtube btn-rounded"><i class="ti-youtube"></i></button>
+							<div class="form-group">
+								<input type='button' class='form-control' id='clickme1' value='Demo'>
+								<span>&nbsp;&nbsp;</span>
+							</div>
+							<button type="button"
+								class="btn btn-social-icon btn-facebook btn-rounded">
+								<i class="ti-facebook"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-google btn-rounded">
+								<i class="ti-google"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-twitter btn-rounded">
+								<i class="ti-twitter-alt"></i>
+							</button>
+							<button type="button"
+								class="btn btn-social-icon btn-youtube btn-rounded">
+								<i class="ti-youtube"></i>
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form:form>
 	</section>
-	
+
 	<script type="text/javascript">
 		//我不是機器人
 		function submitUserForm() {

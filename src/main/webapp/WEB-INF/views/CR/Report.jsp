@@ -131,10 +131,11 @@ $("#crClass option[value = '"+cc+"']").attr("selected",true);
 		</td>
 		</tr>
 		<tr>
-		<td>附件
+		<td align='center'>附件
 		</td>
 		<td align="center">
-		<img style="width:120px;height:auto" src="<c:url value='/getCRimg/${report.pk}' />" />
+<%-- 		<img style="width:120px;height:auto" src="<c:url value='/getCRimg/${report.pk}' />" /> --%>
+		<a href="<c:url value='/downloadCRimg/${report.pk}'/>">附件下載</a>
 		</td></tr>
 		<tr><td align='center'>回覆內容</td><td>
 		<textarea class="form-control" rows="10" name='crReContent' id='crReContent'>${report.crReContent}</textarea>

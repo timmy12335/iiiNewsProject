@@ -1,5 +1,8 @@
 package CR.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -43,11 +46,15 @@ public class EchoServerEndpoint {
 			
 		}else if(message.contains("廣告")) {
 //			service.addMsg(message);
-			msg="可到新聞專區觀看";
+			msg="可到廣告專區觀看";
 		}else if(message.contains("追蹤")) {
 			msg="請至追蹤專區觀看";
 		}else if(message.contains("客服")) {
 			msg="您現在就在客服喔!!";
+		}else if(message.contains("時間")) {
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			msg="現在時間為:"+ sdf.format(date);
 		}
 		else {
 			msg="抱歉，不了解你的意思";

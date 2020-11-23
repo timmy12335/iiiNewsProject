@@ -295,6 +295,45 @@ public class CR_Controller {
 		re = new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
 		return re;
 	}
+	
+	//下載圖片
+	@GetMapping(value = "/downloadCRimg/{pk}")
+	public void downloadPic(@PathVariable Integer pk, HttpServletResponse response) throws Exception {
+		InputStream is = null;
+		OutputStream os = null;
+		String mimeType = null;
+		CRBean bean = service.getReportById(pk);
+		if (bean != null) {
+			Blob blob = bean.getAttachment();
+			if (blob != null) {
+				is = blob.getBinaryStream();
+				mimeType = ctx.getMimeType(bean.getAttachmentName());
+			}
+		}
+		
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(mediaType);
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		response.setHeader("Content-Disposition", "attachment;fileName="+bean.getAttachmentName());
+		try {
+		byte[] b = new byte[81920];
+		int len = 0;
+		os =response.getOutputStream();
+		while ((len = is.read(b)) != -1) {
+			os.write(b, 0, len);
+		}
+		os.flush();
+		}finally {
+			if(os!=null) {
+				try {
+					os.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	
 	//將分數傳入並進行修改

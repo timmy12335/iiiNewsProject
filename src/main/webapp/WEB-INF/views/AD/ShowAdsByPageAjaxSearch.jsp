@@ -13,7 +13,7 @@
 <script>
 	window.onload = function() {
 		var origincontent = "<table class='table table-hover'><thead class='thead-light text-center'><tr><th>序號</th>";
-		origincontent += "<th>廣告PK值</th><th>廣告編號</th>";
+		origincontent += "<th>標題</th><th>廣告編號</th>";
 		origincontent += "<th>刊登者</th>";
 		origincontent += "<th>類型</th><th>販賣日期</th><th>單價</th>";
 		origincontent += "<th>備註</th>";
@@ -142,11 +142,11 @@ Html {
 
 		function displayPageAds(responseData) {
 			var content = "<table class='table table-hover'><thead class='thead-light text-center'><tr><th>序號</th>";
-			content += "<th>廣告編號</th>";
+			content += "<th>標題</th><th>廣告編號</th>";
 			content += "<th>刊登者</th>";
 			content += "<th>類型</th><th>販賣日期</th><th>單價</th>";
 			content += "<th>備註</th>";
-			content += "<th>texting</th></tr></thead><tbody class='text-center'>";
+			content += "<th></th></tr></thead><tbody class='text-center'>";
 			var ad = JSON.parse(responseData); // 傳回一個陣列
 			if(ad==""){
 				content += "<tr><td colspan='9' align='center'><b>無搜尋結果</b></td></tr></tbody></table>";
@@ -156,6 +156,9 @@ Html {
 				content += "<tr>" + "<td>"
 						+ (i + 1)
 						+ "&nbsp;</td>"
+						+ "<td>"
+						+ ad[i].adTitle
+						+ "</td>"
 						+ "<td>"
 						+ ad[i].adNo
 						+ "</td>"
@@ -233,18 +236,33 @@ Html {
 		function searchByWord() {
 			let word = document.getElementById("wordChoose").value;
 			console.log(word);
+			
+			if(word==""){
+				console.log("字串為空");
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "<c:url value='/getAdByAjax.json' />", true);
+				xhr.send();
 
-			var queryStringWord = "?word=" + word;
-			console.log(queryStringWord);
-			var xhr0 = new XMLHttpRequest();
-			xhr0.open("GET", "<c:url value='/getAdByWordAjax.json' />"
-					+ queryStringWord, true);
-			xhr0.send();
-
-			xhr0.onreadystatechange = function() {
-				if (xhr0.readyState == 4 && xhr0.status == 200) {
-					var responseData = xhr0.responseText;
-					displayPageAds(responseData);
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						var responseData = xhr.responseText;
+						displayPageAds(responseData);
+					}
+				}
+			}else{
+				console.log("字串不為空真的進去得到關鍵字搜尋");
+				var queryStringWord = "?word=" + word;
+				console.log(queryStringWord);
+				var xhr0 = new XMLHttpRequest();
+				xhr0.open("GET", "<c:url value='/getAdByWordAjax.json' />"
+						+ queryStringWord, true);
+				xhr0.send();
+	
+				xhr0.onreadystatechange = function() {
+					if (xhr0.readyState == 4 && xhr0.status == 200) {
+						var responseData = xhr0.responseText;
+						displayPageAds(responseData);
+					}
 				}
 			}
 		}

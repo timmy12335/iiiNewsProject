@@ -28,4 +28,18 @@ public class CR_calService_impl implements CR_calService {
 		return dao.calunFromEmp();
 	}
 
+	@Override
+	public Map<String, Integer> calDoneFromEmp() {
+		
+		return dao.calDoneFromEmp();
+	}
+	
+	@Override
+	public Map<String, Long> calAllFromEmp() {
+		
+		return dao.calAllFromEmp();
+	}
+
+	
+	
 }

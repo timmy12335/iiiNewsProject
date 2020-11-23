@@ -27,13 +27,14 @@ public class CRempValidator implements Validator {
 		if(empbean.getEmpId() != null && empbean.getEmpId().length() <= -1) {
 			errors.rejectValue("empId", "","輸入有誤，請重新輸入");
 		}
-		String format = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+		
 		if(empbean.getEmpemail() != null && empbean.getEmpemail().length() <= -1) {
 			errors.rejectValue("empemail", "","輸入有誤，請重新輸入");
 		}
-		if(empbean.getEmpemail() != null && empbean.getEmpemail().matches(format)) {
-			errors.rejectValue("empemail", "","email格式錯誤，請重新輸入");
-		}
+//		String format = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+//		if(empbean.getEmpemail() != null && empbean.getEmpemail().matches(format)) {
+//			errors.rejectValue("empemail", "","email格式錯誤，請重新輸入");
+//		}
 	}
 
 }

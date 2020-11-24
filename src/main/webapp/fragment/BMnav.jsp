@@ -55,7 +55,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">廣告商品訂單列表</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">廣告訂單列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getBackAdsTotalEnd'/>">廣告報表</a></li>
               </ul>
             </div>

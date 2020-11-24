@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>分頁廣告列表</title>
+<title>iiiNews 廣告專區欄位列表搜尋</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -61,8 +61,8 @@ Html {
 				<div class="col-lg-3">
 				<!-- Card -->
 					<div class="card mb-3">
-						<div class="card-header" style="background-color:#FBD09D;">
-							<h4>歡迎使用廣告欄位系統</h4>
+						<div class="card-header bg-info text-white">
+							<h3>歡迎使用廣告欄位系統</h3>
 						</div>
 						<div class="card-body">
 						<p>查看欄位示意圖</p>

@@ -141,6 +141,24 @@
               </ul>
               </div>
           </li>
+          
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#trkList" aria-expanded="false" aria-controls="trkList">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title">追蹤新聞管理系統</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="trkList">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<c:url value=''/>"> 追蹤新聞管理</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value=''/>"> 新聞統計 </a></li>
+<%--                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/addboard'/>"> 公佈欄管理</a></li> --%>
+<%--                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/chatMan'/>"> 聊天機器管理</a></li> --%>
+                <%-- <li class="nav-item"> <a class="nav-link" href="<c:url value='/toCal'/>">客服表單統計</a></li> --%>
+              </ul>
+              </div>
+          </li>
+          
       </nav>
       <div class="main-panel">
       <div class="content-wrapper" width="1000px">

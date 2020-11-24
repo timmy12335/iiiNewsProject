@@ -24,7 +24,7 @@ public class trkNewsDaoImpl implements trkNewsDao {
 	@Override       //查詢所有資料
 	@SuppressWarnings("unchecked")
 	public List<trkNewsBean> getAllProducts() {
-		String hql = "FROM trkNewsBean";
+		String hql = "FROM trkNewsBean ORDER BY fondtime DESC";
 		Session session = null;
 		List<trkNewsBean> list = new ArrayList<>();
 		session = factory.getCurrentSession();

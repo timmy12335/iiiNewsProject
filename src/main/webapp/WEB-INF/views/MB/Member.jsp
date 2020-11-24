@@ -133,7 +133,7 @@ g-recaptcha {
 								<form:input type="text" id="phone" path="phone"
 									placeholder="請務必填寫正確" class="form-control"></form:input>
 								<input class="test" type="button" id="btnCheckphone"
-									onclick="checkphone(this.id)" value="發送驗證碼">
+									onclick="checkphone(this.id)" value="發送簡訊">
 							</div>
 							<div class="form-group" align="left">
 								<label for="birthday">生日：</label>

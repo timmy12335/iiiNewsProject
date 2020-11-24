@@ -19,6 +19,17 @@ p{
 font-family:Microsoft JhengHei;
 font-size:medium
 }
+.title1
+{
+
+/* 背景顏色 #eeeeee */
+background-color:#eeeeee;
+/*左側框線寬度(5px)、solid(實線)、顏色(orange)*/
+border-left:5px solid orange; 
+/*行內文字間距(5px)*/
+padding:5px;
+/*垂直置中*/
+}
 </style>
 
 </head>
@@ -53,20 +64,27 @@ font-size:medium
 			      
 			<div class="col-md-5" >
 			<!-- 追蹤主要頁面 -->
-				<h1 style="font-size:3em;background-color:;width:550px;font-family:Microsoft JhengHei">${trkNew.title}</h1>
+				<h1 class="title1" style="font-size:3em;background-color:;width:620px;font-family:Microsoft JhengHei">${trkNew.title}</h1>
 				      <figure style="width:500px;height:400px" class="figure">
                            <img style="width:500px;height:400px" src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
                            <figcaption class="figure-caption"></figcaption>
                       </figure>
-				<p>建立人: ${trkNew.founder}</p>
+				<p style="background-color:;width:500px;text-align:right">建立人: ${trkNew.founder}</p>
 				<p style="width:300px">建立時間: ${trkNew.fondtime}</p>
 				<p>追蹤人數: ${trkNew.trcnum}</p>
-				<p class="text-xxl-left" style="font-family:Microsoft JhengHei; width:550px;font-size:large;">內容: ${trkNew.descript}</p>
+				 <div >
+				<p class="alert alert-primary" role="alert" style="font-family:Microsoft JhengHei; width:610px;font-size:large;">內容: ${trkNew.descript}</p>
+				</div>
 				<p>發生地點: ${trkNew.ocplace}</p>
 				<p style="width:300px">發生時間: ${trkNew.octime}</p>
 				<p>點閱人數: ${trkNew.clicnum}</p>
-                <p>標籤: ${trkNew.tag}</p>
+				<div style="background-color:;width:500px;text-align:center">
+                <p class="badge badge-info" style="font-size:medium; text-align:center">標籤: ${trkNew.tag}</p>
+                </div>
                 <p style="font-family:Microsoft JhengHei">新聞分類: ${trkNew.type}</p>
+              
+             
+
               
 				<%-- 	<c:choose>
 					<c:when test='${product.discount != 1.0 }'>

@@ -49,7 +49,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header bg-secondary text-white">
-                            <h2>更新文章編號:${mtAddBean.articleId}</h2>
+                            <h2>文章編號:${mtAddBean.articleId}</h2>
                         </div>
                         <div class="card-body">
                             <form:form method="POST" modelAttribute="mtAddBean" enctype="multipart/form-data"

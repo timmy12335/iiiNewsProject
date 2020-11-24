@@ -50,20 +50,20 @@
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
 
 
-	<h4 class="font-weight-bold mb-0">顯示所有一般會員表單</h4>
+	<h3 class="font-weight-bold mb-0">顯示所有一般會員表單</h3>
 	<div id="resultmsg"></div>
 	<table class="table">
 		<thead>
 			<tr>
-				<th width='60'>會員編號</th>
-				<th>會員姓名</th>
-				<th>會員帳號</th>
-				<th>會員密碼</th>
-				<th width='60px;'>會員電話</th>
-				<th width='60px;'>會員性別</th>
-				<th>會員身分證</th>
-				<th>會員生日</th>
-				<th align='center'>會員信箱</th>
+				<th width='60' style="color:#EA0000;">會員編號</th>
+				<th style="color:#EA0000;">會員姓名</th>
+				<th style="color:#EA0000;">會員帳號</th>
+				<th style="color:#EA0000;">會員密碼</th>
+				<th width='60px;' style="color:#EA0000;">會員電話</th>
+				<th width='60px;' style="color:#EA0000;">會員性別</th>
+				<th style="color:#EA0000;">會員身分證</th>
+				<th style="color:#EA0000;">會員生日</th>
+				<th align='center' style="color:#EA0000;">會員信箱</th>
 			</tr>
 		</thead>
 		<c:choose>

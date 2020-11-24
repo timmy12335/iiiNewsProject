@@ -90,13 +90,13 @@
 
 	<!-- 頁首/開始 -->
 	<div style="z-index: -100; position: relative;">
-		<header class="header"  >
+		<header class="header" style="margin-bottom:40px">
 
-			<video autoplay muted loop id="myVideo" style="object-fit:fill;height:500px;"  >
+			<video autoplay muted loop id="myVideo" style="object-fit:fill;height:450px;"  >
 				<source src="images/covid19.mp4" type="video/mp4">
 			</video>
 
-
+			
 			<!-- 	<img src="images/room.jpg" alt="banner" class="img-fluid" style="height: 550px;"> -->
 			<!-- 	<img src="images/CCC.jpg" alt="banner" class="img-fluid" style="height: 550px;"> -->
 		</header>

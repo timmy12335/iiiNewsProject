@@ -6,7 +6,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<title>上架廣告欄位</title>
+<title>iiiNews 上架廣告欄位</title>
 <style>
 /*在此設定margin 以防止被navbar壓到*/
 .iiinewsContainer {
@@ -101,7 +101,7 @@
 										<label for="category" class="col-sm-3 col-form-label">欄位位置:
 										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
-											<form:select class="form-control" path="categoryNo">
+											<form:select class="form-control" path="categoryNo" onchange="changeimg()" id="idCategoryNo">
 												<form:option value="-1">分類項目</form:option>
 												<form:option value="100">A&nbsp;頭版頁首</form:option>
 												<form:option value="200">B&nbsp;頭版側標</form:option>
@@ -199,10 +199,10 @@
 							<p>可依分類上傳欄位項目，並設定廣告欄位大小尺寸</p>
 							<div class="row">
 								<div class="col-6 text-center">
-									<img class="img-fluid w-100" src="/iiiNews/img/ad_header.jpeg" alt="Sample">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_header.jpeg" alt="Sample" id="sampleHeader">
 								</div>
 								<div class="col-6 text-center">
-									<img class="img-fluid w-100" src="/iiiNews/img/ad_article.jpeg" alt="Sample">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_article.jpeg" alt="Sample" id="sampleArticle">
 								</div>
 							</div>
 						</div>
@@ -221,6 +221,33 @@ function onebuttontodata(){
 	document.getElementById("idStock").value = '5';
 	document.getElementById("idDate").value = '2020-12-12';
 	document.getElementById("idTitle").value = '雙12欄位';
+}
+
+function changeimg(){
+	console.log("change img");
+	var cateValue = document.getElementById("idCategoryNo").value;
+	console.log("cateValue:"+cateValue);
+	var jquerycatevalue = $("#idCategoryNo").val();
+	if(jquerycatevalue == 100){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_A.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_ALL.jpg");
+	}else if(jquerycatevalue == 200){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_B.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_ALL.jpg");
+	}else if(jquerycatevalue == 300){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_ALL.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_C.jpg");
+	}else if(jquerycatevalue == 400){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_ALL.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_D.jpg");
+	}else if(jquerycatevalue == 500){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_ALL.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_E.jpg");
+	}else{
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header.jpeg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article.jpeg");
+	}
+	console.log("jquerycatevalue:"+jquerycatevalue);
 }
 
 </script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>後臺管理 廣告商品列表</title>
+<title>iiiNews 後臺管理 廣告商品列表</title>
 <script>
 window.onload=function(){
 	var origincontent = "<table class='table table-striped'><thead><tr><th>序號</th>";
@@ -42,7 +42,7 @@ window.onload=function(){
 
 	
 	<div class='card-body'>
-		<h3>後臺管理 廣告商品列表(AJAX JSON)</h3>
+		<h3>後臺管理 廣告商品列表</h3>
 		<br>
 		<div class="row align-items-center">
 			
@@ -81,21 +81,21 @@ window.onload=function(){
 		<div id='somedivS'></div>
 		<div id='navigation'></div>
 		<hr>
-		<a href='..'>回前頁</a>
+<!-- 		<a href='..'>回前頁</a> -->
 	</div>
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 	<script>
 	function cateNameTrans(categoryNo) {
 		if(categoryNo == 100){
-			cateName = "頭版頭";
+			cateName = "A&nbsp;頭版頁首";
 		}else if(categoryNo == 200){
-			cateName = "頭版側標";
+			cateName = "B&nbsp;頭版側標";
 		}else if(categoryNo == 300){
-			cateName = "內頁版頭";
+			cateName = "C&nbsp;內頁頁首";
 		}else if(categoryNo == 400){
-			cateName = "內頁側標";
+			cateName = "D&nbsp;內頁側標";
 		}else if(categoryNo == 500){
-			cateName = "小廣告";
+			cateName = "E&nbsp;內文小廣告";
 		}else{
 			cateName = "其他";
 		}
@@ -116,7 +116,7 @@ window.onload=function(){
 
 	function displayPageAds(responseData){
 		  var content = "<table class='table table-striped'><thead><tr><th>序號</th>";
-		      content +=  "<th class='text-center'>廣告PK值</th><th class='text-center'>廣告編號</th>";
+		      content +=  "<th class='text-center'>廣告編號</th>";
 		      content +=  "<th class='text-center'>刊登者</th>";
 		      content +=  "<th class='text-center'>類型</th><th class='text-center'>販賣日期</th><th class='text-center'>單價</th>";
 		      content +=  "<th class='text-center'>上架狀態</th><th class='text-center'>備註</th>";
@@ -127,7 +127,7 @@ window.onload=function(){
 				bgColor = (i % 2 == 0 ? "#d4f5b2" : "#b2f5e5");
 				content += "<tr height='80' bgcolor='" + bgColor + "'>" + 
 							"<td class='text-center'>" + (i+1) + "&nbsp;</td>" + 
-				           	"<td class='text-center'>" + ad[i].adPk + "&nbsp;</td>" + 
+// 				           	"<td class='text-center'>" + ad[i].adPk + "&nbsp;</td>" + 
 			               	"<td class='text-center'>" + ad[i].adNo + "</td>" +
 			               	"<td class='text-center'>" + ad[i].memberName + "</td>" +
 			               	"<td class='text-center'>" + cateNameTrans(ad[i].categoryNo) + "&nbsp;</td>" +

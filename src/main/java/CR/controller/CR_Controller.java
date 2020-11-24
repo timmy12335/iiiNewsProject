@@ -162,8 +162,7 @@ public class CR_Controller {
 				email.setTo(cpmb.getCpemail());
 			} else {
 				email.setTo("eeit2020119@gmail.com");
-			}
-			;
+			};
 			email.setSubject("iiiNews客服表單申請成功通知信");
 			String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>" + "<table><tr><td>客服類別:"
 					+ cb.getCrClass() + "</td></tr><tr><td>客服標題:" + cb.getCrTitle() + "</td></tr><tr><td>客服內容:"

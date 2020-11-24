@@ -178,7 +178,7 @@
 										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp清除
 									</button>
 									<button type="button" class="btn btn-outline-info btn-icon-text" onclick="onebuttontodata()">
-										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp一鍵輸入(尚未設定)
+										<i class="fa fa-refresh btn-icon-prepend"></i>&nbsp一鍵輸入
 									</button>
 
 <!-- 									<input type="reset" value="" class="btn btn-light"> -->
@@ -219,8 +219,8 @@ function onebuttontodata(){
 	document.getElementById("idHeight").value = '300';
 	document.getElementById("idPrice").value = '2000';
 	document.getElementById("idStock").value = '5';
-	document.getElementById("idDate").value = '2020-12-12';
-	document.getElementById("idTitle").value = '雙12欄位';
+	document.getElementById("idDate").value = '2020-12-31';
+	document.getElementById("idTitle").value = '跨年';
 }
 
 function changeimg(){

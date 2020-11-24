@@ -27,8 +27,8 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/image/Logo.png" class="mr-2" alt="logo" style="height:60px;width:120px;"/></a>
+        <a class="navbar-brand brand-logo-mini" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/image/smallLogo.png" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -54,23 +54,23 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表(AJAX JSON)</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getBackAdsTotalEnd'/>">廣告報表</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/backGetAdListAjax'/>">廣告商品列表</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='/getOrderListEnd'/>">廣告商品訂單列表</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<c:url value='/getBackAdsTotalEnd'/>">廣告報表</a></li>
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="連結">
-              <i class="ti-layout-list-post menu-icon"></i>
-              <span class="menu-title">人員維護</span>
-            </a>
-          </li>
+<!--           <li class="nav-item"> -->
+<!--             <a class="nav-link" href="連結"> -->
+<!--               <i class="ti-layout-list-post menu-icon"></i> -->
+<!--               <span class="menu-title">人員維護</span> -->
+<!--             </a> -->
+<!--           </li> -->
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#aaa" aria-expanded="false" aria-controls="aaa">
               <i class="ti-flag-alt menu-icon"></i>
-              <span class="menu-title">社群管理</span>
+              <span class="menu-title">社群管理系統</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="aaa">

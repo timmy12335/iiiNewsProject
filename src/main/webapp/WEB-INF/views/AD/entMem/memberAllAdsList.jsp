@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -201,9 +202,10 @@ window.onload = function() {
 							aria-labelledby="nav-profile-tab">
 							<h3>您所有上傳的廣告列表</h3>
 							<div class="table-responsive">
-								<table class="table table-bordered">
+								<table class='table table-striped table-hover'>
 									<thead>
-										<tr>
+										<tr class="text-center font-weight-bold">
+											<td>序號</td>
 											<td>產品編號</td>
 											<td>上傳日期</td>
 											<td>分類</td>
@@ -216,20 +218,21 @@ window.onload = function() {
 											<td>設定</td>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody style="background-color:rgba(247,247,247,0.6);">
 										<c:choose>
 											<c:when test="${empty CpAdLists}">
 												<tr>
-													<td colspan='10' align="center">您無上傳清單</td>
+													<td colspan='11' align="center">您無上傳清單</td>
 												</tr>
 												<tr>
-													<td colspan='10' align="center"><a
+													<td colspan='11' align="center"><a
 														href="<c:url value='/uploadAds' />">立即前往刊登吧</a></td>
 												</tr>
 											</c:when>
 											<c:otherwise>
 												<c:forEach var="ad" items="${CpAdLists}" varStatus="loop">
 													<tr>
+														<td>${loop.index+1}</td>
 														<td>${ad.adNo}</td>
 														<td>${fn:substring(ad.uploadDate,0,19)}</td>
 														<td><c:choose>
@@ -243,9 +246,9 @@ window.onload = function() {
 														<td>${ad.width}</td>
 														<td>${ad.height}</td>
 														<td>${ad.adDate}</td>
-														<td>${ad.price}</td>
-														<td><c:if test="${ad.status == 0}">已下架</c:if> <c:if
-																test="${ad.status == 1}">上架中</c:if></td>
+														<td><fmt:formatNumber type="number" value="${ad.price}" /></td>
+														<td><c:if test="${ad.status == 0}"><span class="bg-warning text-dark p-1 font-weight-bold">已下架</span></c:if>
+															<c:if test="${ad.status == 1}"><span class="bg-success text-white p-1 font-weight-bold">上架中</span></c:if></td>
 														<td>${ad.stock}</td>
 														<td><a href="<c:url value="#" />">修改</a> <%-- 						<a href="<c:url value="/deleteAdProduct/${ad.adPk}" />" onclick="return confirm('Are you sure?')">刪除</a> --%>
 															<button class="btn btn-primary" type="button"
@@ -255,7 +258,7 @@ window.onload = function() {
 															</button></td>
 													</tr>
 													<tr class="collapse" id="setAd${loop.index}">
-														<td colspan='10'>
+														<td colspan='11'>
 															<form
 																action='<c:url value="/updateAdProduct/"/>${ad.adPk}'
 																method="POST">
@@ -293,7 +296,7 @@ window.onload = function() {
 						</div>
 						<div class="tab-pane fade p-4" id="nav-contact" role="tabpanel"
 							aria-labelledby="nav-contact-tab">
-							<h3>已賣出列表</h3>
+							<h3>您已售出廣告列表</h3>
 							<div class="table-responsive" id="soldlist"></div>
 						</div>
 					</div>
@@ -314,7 +317,7 @@ function changeAd(index){
 
 function display(responseData){
 	  var content = "<table class='table table-striped'><thead><tr><th>序號</th>";
-	      content +=  "<th class='text-center'>項目PK值</th><th class='text-center'>廣告編號</th>";
+	      content +=  "<th class='text-center'>廣告編號</th>";
 	      content +=  "<th class='text-center'>所販賣之日期</th><th class='text-center'>賣出價格</th>";
 	      content +=  "<th class='text-center'>售出日期</th><th class='text-center'>買家帳號</th>";
 		  content +=  "<th class='text-center'>狀態</th></tr></thead>";
@@ -327,7 +330,6 @@ function display(responseData){
 				bgColor = (i % 2 == 0 ? "#d4f5b2" : "#b2f5e5");
 				content += "<tr height='80' bgcolor='" + bgColor + "'>" + 
 							"<td class='text-center'>" + (i+1) + "&nbsp;</td>" + 
-				           	"<td class='text-center'>" + ad[i].itemPk + "&nbsp;</td>" + 
 			               	"<td class='text-center'>" + ad[i].adNo + "</td>" +
 			               	"<td class='text-center'>" + ad[i].adDate + "</td>" +
 			               	"<td class='text-right'>" + "NT$ " + ad[i].unitPrice + "</td>" +

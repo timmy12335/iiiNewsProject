@@ -110,8 +110,7 @@
             </div>
         </div><br>
         <div align="center">
-            <input class="btn btn-primary" type="button" onclick="location.href='<c:url value=" /AllArticleComment" />'
-            " value="回前頁" />
+            <input class="btn btn-primary" type="button" onclick="location.href='<c:url value="/AllArticleComment" />' " value="回前頁" />
         </div>
     </div>
 </body>

@@ -1,15 +1,6 @@
 package iiiNews.MB.controller;
 
-import java.util.List;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
@@ -18,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +44,7 @@ public class MBController {
 	@Autowired
 	MBService service;
 	@Autowired
-	JavaMailSender mail01;
+	JavaMailSenderImpl mailSender;
 
 //	@RequestMapping(value = "/Forget", method = RequestMethod.GET)
 //	public String forget() {
@@ -220,40 +212,40 @@ public class MBController {
 		return "redirect:/";
 	}
 
-	public void Gmailsend(String email) {
-		System.out.println("email");
-		System.out.println(email);
-		String host = "smtp.gmail.com";
-		int port = 587;
-		String username = "miche831224@gmail.com";
-		String password = "mimi90325";// your password
-		Properties props = new Properties();
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.port", port);
-		Session session = Session.getInstance(props, new Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
-		String div = "忘記密碼， 您的密碼已預設成，"+"<h2 style='color:red'>"+"code54"+"</h2>"+"，請登入後修改密碼";
-		try {
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("miche831224@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			message.setSubject("忘記密碼.");
-			message.setContent(div,"text/html;charset=UTF-8");
-
-			Transport transport = session.getTransport("smtp");
-			transport.connect(host, port, username, password);
-			Transport.send(message);
-			System.out.println("HIHIHI");
-		} catch (MessagingException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
+//	public void Gmailsend(String email) {
+//		System.out.println("email");
+//		System.out.println(email);
+//		String host = "smtp.gmail.com";
+//		int port = 587;
+//		String username = "miche831224@gmail.com";
+//		String password = "mimi90325";// your password
+//		Properties props = new Properties();
+//		props.put("mail.smtp.host", host);
+//		props.put("mail.smtp.auth", "true");
+//		props.put("mail.smtp.starttls.enable", "true");
+//		props.put("mail.smtp.port", port);
+//		Session session = Session.getInstance(props, new Authenticator() {
+//			protected PasswordAuthentication getPasswordAuthentication() {
+//				return new PasswordAuthentication(username, password);
+//			}
+//		});
+//		String div = "忘記密碼， 您的密碼已預設成，"+"<h2 style='color:red'>"+"code54"+"</h2>"+"，請登入後修改密碼";
+//		try {
+//			Message message = new MimeMessage(session);
+//			message.setFrom(new InternetAddress("miche831224@gmail.com"));
+//			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+//			message.setSubject("忘記密碼.");
+//			message.setContent(div,"text/html;charset=UTF-8");
+//
+//			Transport transport = session.getTransport("smtp");
+//			transport.connect(host, port, username, password);
+//			Transport.send(message);
+//			System.out.println("HIHIHI");
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//			throw new RuntimeException(e);
+//		}
+//	}
 	
 	@GetMapping("/forgetpwd")
 	public String forgetpwd(Model model, HttpServletRequest request) {
@@ -265,35 +257,39 @@ public class MBController {
 	@PostMapping("/forgetpwd")
 	public String forgotpwds(@ModelAttribute("forgot") ForgetBean mb, Model model, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response) {
-		List<String> list = service.seachMemberaccount();
+//		List<String> list = service.seachMemberaccount();
 		ForgetPassword validator = new ForgetPassword();
 		validator.validate(mb, result);
-		
-		String email = mb.getMemberEmail();
-		System.out.println(email);
-		MimeMessage mas = mail01.createMimeMessage();
+		System.out.println(mb);
+//		String email = mb.getMemberEmail();
+		System.out.println(mb.getMemberEmail());
+		MimeMessage mas = mailSender.createMimeMessage();
 		try {
-			MimeMessageHelper mail = new MimeMessageHelper(mas, true, "UTF-8");
-			mail.setTo(email);
-			mail.setSubject("mbmail");
-			mail.setText("text");
-			mail01.send(mas);
+			String text = "<h3>這是您的臨時密碼:pklqaz26，登入後請立即修改</h3>";
+			MimeMessageHelper email = new MimeMessageHelper(mas, true, "UTF-8");
+			System.out.println("mb="+mb.getMemberEmail());
+			email.setTo("Lisa Wang <" + mb.getMemberEmail().trim() +">");
+			System.out.println("To=" + "Lisa Wang <" + mb.getMemberEmail().trim() +">");
+			email.setSubject("mbmail");
+			email.setText(text, true);
+			email.setFrom("miche831224@gamil.com");
+			mailSender.send(mas);
 		}catch (MessagingException e) {
 				e.printStackTrace();
-				throw new RuntimeException(e);
+				
 		}
 		return "redirect:/";
 	}
 
-	@ModelAttribute
-	public void getMember(@PathVariable(value = "id", required = false) Integer id, Model model,HttpServletRequest request, HttpServletResponse response) {
+//	@ModelAttribute
+//	public void getMember(@PathVariable(value = "id", required = false) Integer id, Model model,HttpServletRequest request, HttpServletResponse response) {
 //		System.out.println("@model.getMemeber");
-		MBBean memberbean = (MBBean) model.getAttribute("MBBean");
-		if (id != null) {
-			MBBean member = service.getProductById(id);
-			model.addAttribute("member", member);
-		}
-	}
+//		MBBean memberbean = (MBBean) model.getAttribute("MBBean");
+//		if (id != null) {
+//			MBBean member = service.getProductById(id);
+//			model.addAttribute("member", member);
+//		}
+//	}
 
 //	@RequestMapping(value = "/ChangePassword", method = RequestMethod.GET)
 //	public String change() {
@@ -313,7 +309,7 @@ public class MBController {
 
 	@PostMapping("/updatepasswd/{id}")
 	public String ChangePasswdShow(@ModelAttribute("changepwd") MBBean mb, Model model, BindingResult result,
-			Integer id) {
+			@PathVariable("id") Integer id) {
 		System.out.println(id);
 		ChangPasswordValidator validator = new ChangPasswordValidator();
 		validator.validate(mb, result);

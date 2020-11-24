@@ -138,19 +138,19 @@ public class MBDaoImpl implements MBDao {
 	public boolean CheckPassword(String oldpwd, String newpwd, Integer id) {
 		boolean check = false;
 		System.out.println(" DAO check1      "+ check);
-		String hql = "FROM MBBean m WHERE m.password = :mold";
+//		String hql = "FROM MBBean m WHERE m.password = :mold";
 		String hql2 = "UPDATE MBBean mb SET mb.password = :mpwd " 
-		+ "WHERE mb.memberId = :mid"; 
+		+ "WHERE mb.pkey = :mid"; 
 		Session session = factory.getCurrentSession();
-		List<MBBean> beans = session.createQuery(hql)
-										.setParameter("mold", oldpwd)
-										.getResultList();
-		System.out.println(beans);
-		if (beans.size() == 0) {
-			check = false;
-			System.out.println(" DAO check2      "+ check);
-			return check;
-		}else {
+//		List<MBBean> beans = session.createQuery(hql)
+//										.setParameter("mold", oldpwd)
+//										.getResultList();
+//		System.out.println(beans);
+//		if (beans.size() == 0) {
+//			check = false;
+//			System.out.println(" DAO check2      "+ check);
+//			return check;
+//		}else {
 			System.out.println("newpwd:"+newpwd);
 			System.out.println("mid:"+id);
 			int n = session.createQuery(hql2)
@@ -162,7 +162,7 @@ public class MBDaoImpl implements MBDao {
 			System.out.println(" DAO check3      "+ check);
 			return check;
 		}
-	}
+//	}
 
 	@Override
 	public MBBean getProductById(int memberId) {

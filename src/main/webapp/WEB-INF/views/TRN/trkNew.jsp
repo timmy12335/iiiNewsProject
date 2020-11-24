@@ -143,8 +143,8 @@ padding:5px;
 			      
 			      <div style="float:left; margin-top:10px;">
 			      <h3  class="display-4" style="font-family:Microsoft JhengHei" >追蹤報導</h3> 
-			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:200px;font-size:larger;">
-                                <div id="tnews0" style="background:" >
+			            <div style="overflow:scroll;border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:200px;font-size:larger;">
+                                <div id="tnews0" style="background:;" >
                                 </div>
                         </div>   	
 			      </div>
@@ -317,19 +317,48 @@ function buildByWord(ad){
 	var tid = document.getElementById("tid"+n);
     var ti1 = tid.text
 	var hr1 = tid.getAttribute("href")
+//	console.log("建標題"+ ti1);
+//	console.log("建標題網址"+ hr1);
 	var content ="<table id='tnew'>"
-		content +="<tr style='line-height:40px;letter-spacing:3px'><td><a id='tid"+ n +"' target='_blank' href='https://www.setn.com/"+ hr1 +"'>"+ ti1 +"</a></td></tr></table>"
+		content +="<tr style='line-height:40px;letter-spacing:3px'><td><a id='tid"+ n +"' target='_blank' href='"+ hr1 +"'>"+ ti1 +"</a></td></tr></table>"
 		
-    var buildword = document.getElementById("tnews"+n)  
-    buildword.innerHTML = content 
+    var buildword = document.getElementById("tnews0")  
+    //新增 div--v
+    var div = document.createElement("div");                                 
+	     //設定 div 屬性，如 id--v
+        div.setAttribute("id", "newDiv");　  
+
+	     div.innerHTML = content ;
+	     
+　　     buildword.appendChild(div);
+　　     insertRpt(n);
+　　     
 }
 
-	
+function  insertRpt(n){
+	var inst = document.getElementById("tid"+n)
+	var instt = inst.text
+	var instURL = inst.getAttribute("href")
+	var trfk ="${trkNew.trackId}"
+	console.log(instt)
+	console.log(instURL)
+	console.log(trfk)
+}
+
+// function addElementDiv() {
+// 　　var parent = document.getElementById("tnews0");
+// 　　//新增 div
+// 　　var div = document.createElement("div");
+// 　　//設定 div 屬性，如 id
+// 　　div.setAttribute("id", "newDiv");
+// 　　div.innerHTML = "js 動態新增div";
+// 　　parent.appendChild(div);
+// }
 
 
 
 </script> 
-
-
+<div id="parent1">addtest=================================================================</div>
+<input onclick="addElementDiv()" type="button" value="一化網頁設計" name="按鈕名稱" style="width:150px;height:50px;">
 </body>
 </html>

@@ -127,7 +127,7 @@ public class httpController {
 	
 		Elements c1 = d1.select("a");
 		
-		for(int i = 0 ; i <=20 ; i++) {
+		for(int i = 0 ; i <=20 ; i+=2) {
 		 e1 = c1.get(i).attr("href");
 		
 		

@@ -119,9 +119,6 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='showAllMembers'/>"> 查看所有一般會員 </a></li>
                 <li class="nav-item"> <a class="nav-link" href="<c:url value='showCpAllMembers'/>"> 查看所有企業會員 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 3</a></li>
-                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 4 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="連結"> 備用 5</a></li>
               </ul>
             </div>
           </li>

@@ -104,7 +104,7 @@
 			<ul>
 				<li><a href="<c:url value='/addReport' />">申請客服表單</a></li>
 				<li><a href="<c:url value='/success' />">客服紀錄查詢</a></li>
-<%-- 				<li><a href="<c:url value='/msg' />">客服聊天</a></li> --%>
+<%-- 				<li><a href="<c:url value='/chat' />">聊天室</a></li> --%>
 <%-- 				<li><a href="<c:url value='/board' />">公告欄</a></li> --%>
 			</ul></li>
 		<li>

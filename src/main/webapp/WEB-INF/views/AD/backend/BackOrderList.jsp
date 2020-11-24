@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>後台訂單列表</title>
+<title>iiiNews 後臺管理 廣告訂單列表</title>
 <script type="text/javascript">
 	function deleteCheck(){
 		if(confirm("確定更新此項資料")){
@@ -18,12 +18,12 @@
 <script>
 window.onload=function(){
 	var origincontent = "<table class='table table-striped'><thead><tr><th>序號</th>";
-	origincontent +=  "<th>訂單PK值</th><th>訂單編號</th>";
-    origincontent +=  "<th>販賣者</th><th>購買者</th>";
-    origincontent +=  "<th>類型</th><th align='center'>訂單成立日期</th><th>訂單價格</th>";
-    origincontent +=  "<th>付款狀態</th><th>備註</th>";
+	origincontent +=  "<th>訂單編號</th>";
+    origincontent +=  "<th class='text-center'>購買人</th>";
+    origincontent +=  "<th class='text-center'>訂單成立日期</th><th class='text-center'>訂單總價</th>";
+    origincontent +=  "<th>付款狀態</th>";
     origincontent +=  "<th>編輯</th></tr></thead>";
-	origincontent +=  "<tr><td colspan='9'><b>請選擇欲搜尋的類別</b></td></tr></table>";
+	origincontent +=  "<tr><td colspan='7'><b>請選擇欲搜尋的類別</b></td></tr></table>";
 	document.getElementById("somedivS").innerHTML = origincontent;
 	
 	var xhr = new XMLHttpRequest();
@@ -44,7 +44,7 @@ window.onload=function(){
 <div class='card-body'>
 
 
-	<h3>後臺管理 訂單管理列表(AJAX JSON)</h3>
+	<h3>後臺管理 訂單管理列表</h3>
 		<br>
 		<div class="row align-items-center">
 			
@@ -73,17 +73,17 @@ window.onload=function(){
 <!--          	</div> -->
          	<div class="col-md-6">
          		<div class="form-group row">
-					<label class="col-sm-4 col-form-label">日期搜尋：</label>
-					<div class="col-sm-8">
-						<input type="date" id="dateChoose" onchange="searchByDate()" class="form-control form-control-sm"/>
-					</div>
+<!-- 					<label class="col-sm-4 col-form-label">日期搜尋：</label> -->
+<!-- 					<div class="col-sm-8"> -->
+<!-- 						<input type="date" id="dateChoose" onchange="searchByDate()" class="form-control form-control-sm"/> -->
+<!-- 					</div> -->
 				</div>
          	</div>
         </div>
 		<div id='somedivS'></div>
 		<div id='navigation'></div>
 		<hr>
-		<a href='..'>回前頁</a>
+<!-- 		<a href='..'>回前頁</a> -->
 
 
 
@@ -171,9 +171,9 @@ window.onload=function(){
 	
 	function statusTrans(status){
 		if(status == 0){
-			status = "尚未付款";
+			status = "<span class='bg-danger text-white p-1'>尚未付款</span>";
 		}else if(status == 1){
-			status = "已付款";
+			status = "<span class='bg-success text-white p-1'>已付款</span>";
 		}else{
 			status = "其他";
 		}
@@ -183,10 +183,10 @@ window.onload=function(){
 
 	function displayPageAds(responseData){
 		  var content = "<table class='table table-striped'><thead><tr><th>序號</th>";
-		      content +=  "<th class='text-center'>訂單PK值</th><th class='text-center'>訂單編號</th>";
+		      content +=  "<th class='text-center'>訂單編號</th>";
 		      content +=  "<th class='text-center'>購買人</th>";
 		      content +=  "<th class='text-center'>訂單成立日期</th><th class='text-center'>訂單總價</th>";
-		      content +=  "<th class='text-center'>付款狀態</th><th class='text-center'>備註</th>";
+		      content +=  "<th class='text-center'>付款狀態</th>";
 			  content +=  "<th class='text-center'>編輯</th></tr></thead>";
 			var ad = JSON.parse(responseData);		// 傳回一個陣列
 			var bgColor = "";   // 每一項商品的背影 
@@ -194,13 +194,12 @@ window.onload=function(){
 				bgColor = (i % 2 == 0 ? "#d4f5b2" : "#b2f5e5");
 				content += "<tr height='80' bgcolor='" + bgColor + "'>" + 
 							"<td class='text-center'>" + (i+1) + "&nbsp;</td>" + 
-				           	"<td class='text-center'>" + ad[i].adOrderPk + "&nbsp;</td>" + 
+// 				           	"<td class='text-center'>" + ad[i].adOrderPk + "&nbsp;</td>" + 
 			               	"<td class='text-center'>" + ad[i].adOrderNo + "</td>" +
 			               	"<td class='text-center'>" + ad[i].buyerMemberId + "</td>" +
 			               	"<td class='text-center'>" + ad[i].orderDate + "</td>" +
 			               	"<td class='text-right'>" + "NT$ " + ad[i].totalAmount + "</td>" +
 			               	"<td class='text-center'>" + statusTrans(ad[i].paymentStatus) + "</td>" + 
-			               	"<td class='text-center'>" + ad[i].payingDetail + "</td>" + 
 			               	"<td class='text-center'>" +
 			               	"<button onclick='delfunction("+ad[i].adPk+")' type='button' class='btn btn-danger btn-icon-text'>Delete<i class='ti-trash btn-icon-append'></i></button>"+
 // 			               	"<form action='"+"<c:url value='/addProductToCart' />"+"'method="+"'POST'>" +

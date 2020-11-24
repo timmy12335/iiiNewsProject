@@ -6,7 +6,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
-<title>上架廣告欄位</title>
+<title>iiiNews 上架廣告欄位</title>
 <style>
 /*在此設定margin 以防止被navbar壓到*/
 .iiinewsContainer {
@@ -89,17 +89,19 @@
 							<form:form method="POST" modelAttribute="adBean">
 								<fieldset>
 									<div class="form-group row">
-										<label for="idTitle" class="col-sm-3 col-form-label">標題:</label>
+										<label for="idTitle" class="col-sm-3 col-form-label">標題:
+										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
 											<form:input class="form-control" type="text" id="idTitle"
 												name="idTitle" path="adTitle" />
-											<form:errors path="adTitle" cssClass="error" />
+											<span class="text-danger"><form:errors path="adTitle" cssClass="error" /></span>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="category" class="col-sm-3 col-form-label">欄位位置:</label>
+										<label for="category" class="col-sm-3 col-form-label">欄位位置:
+										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
-											<form:select class="form-control" path="categoryNo">
+											<form:select class="form-control" path="categoryNo" onchange="changeimg()" id="idCategoryNo">
 												<form:option value="-1">分類項目</form:option>
 												<form:option value="100">A&nbsp;頭版頁首</form:option>
 												<form:option value="200">B&nbsp;頭版側標</form:option>
@@ -107,56 +109,61 @@
 												<form:option value="400">D&nbsp;內頁側標</form:option>
 												<form:option value="500">E&nbsp;內文小廣告</form:option>
 											</form:select>
-											<form:errors path="categoryNo" cssClass="error" />
+											<span class="text-danger"><form:errors path="categoryNo" cssClass="error" /></span>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="idWidth" class="col-sm-3 col-form-label">寬:</label>
+										<label for="idWidth" class="col-sm-3 col-form-label">寬:
+										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
-											<form:input class="form-control" type="text" id="idWidth"
+											<form:input class="form-control" type="number" id="idWidth"
 												name="idWidth" path="width" placeholder="請輸入寬" />
-											<form:errors path="width" cssClass="error" />
+											<span class="text-danger"><form:errors path="width" cssClass="error" /></span>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="idHeight" class="col-sm-3 col-form-label">高:</label>
+										<label for="idHeight" class="col-sm-3 col-form-label">高:
+										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
-											<form:input class="form-control" type="text" id="idHeight"
+											<form:input class="form-control" type="number" id="idHeight"
 												name="idHeight" path="height" placeholder="請輸入高" />
-											<form:errors path="height" cssClass="error" />
+											<span class="text-danger"><form:errors path="height" cssClass="error" /></span>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="idDate" class="col-sm-3 col-form-label">廣告時間:</label>
+										<label for="idDate" class="col-sm-3 col-form-label">廣告時間:
+										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
 											<form:input class="form-control" type="date" id="idDate"
 												name="idDate" path="adDate" placeholder="請輸入時間" />
-											<form:errors path="adDate" cssClass="error" />
+											<span class="text-danger"><form:errors path="adDate" cssClass="error" /></span>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="idPrice" class="col-sm-3 col-form-label">價錢:</label>
+										<label for="idPrice" class="col-sm-3 col-form-label">價錢:
+										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
 											<form:input class="form-control" type="number" min="0"
 												id="idPrice" name="idPrice" path="price" placeholder="請輸入價錢" />
-											<form:errors path="price" cssClass="error" />
+											<span class="text-danger"><form:errors path="price" cssClass="error" /></span>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="idStock" class="col-sm-3 col-form-label">庫存:</label>
+										<label for="idStock" class="col-sm-3 col-form-label">欲販售數量:
+										<span class="text-danger"><b>*</b></span></label>
 										<div class="col-sm-9">
 											<form:input class="form-control" type="number" step="1"
 												min="1" max="20" id="idStock" name="idStock" path="stock"
 												placeholder="請輸入庫存" />
-											<form:errors path="stock" cssClass="error" />
+											<span class="text-danger"><form:errors path="stock" cssClass="error" /></span>
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="idStatement" class="col-sm-3 col-form-label">備註:</label>
 										<div class="col-sm-9">
-											<form:input class="form-control" type="text" id="idStatement"
-												name="idStatement" path="statement" />
-											<form:errors path="statement" cssClass="error" />
+											<form:textarea class="form-control" type="text" id="idStatement"
+												name="idStatement" path="statement" style="resize:none;"/>
+											<span class="text-danger"><form:errors path="statement" cssClass="error" /></span>
 										</div>
 									</div>
 								</fieldset>
@@ -192,10 +199,10 @@
 							<p>可依分類上傳欄位項目，並設定廣告欄位大小尺寸</p>
 							<div class="row">
 								<div class="col-6 text-center">
-									<img class="img-fluid w-100" src="/iiiNews/img/ad_header.jpeg" alt="Sample">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_header.jpeg" alt="Sample" id="sampleHeader">
 								</div>
 								<div class="col-6 text-center">
-									<img class="img-fluid w-100" src="/iiiNews/img/ad_article.jpeg" alt="Sample">
+									<img class="img-fluid w-100" src="/iiiNews/img/ad_article.jpeg" alt="Sample" id="sampleArticle">
 								</div>
 							</div>
 						</div>
@@ -214,6 +221,33 @@ function onebuttontodata(){
 	document.getElementById("idStock").value = '5';
 	document.getElementById("idDate").value = '2020-12-12';
 	document.getElementById("idTitle").value = '雙12欄位';
+}
+
+function changeimg(){
+	console.log("change img");
+	var cateValue = document.getElementById("idCategoryNo").value;
+	console.log("cateValue:"+cateValue);
+	var jquerycatevalue = $("#idCategoryNo").val();
+	if(jquerycatevalue == 100){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_A.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_ALL.jpg");
+	}else if(jquerycatevalue == 200){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_B.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_ALL.jpg");
+	}else if(jquerycatevalue == 300){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_ALL.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_C.jpg");
+	}else if(jquerycatevalue == 400){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_ALL.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_D.jpg");
+	}else if(jquerycatevalue == 500){
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header_ALL.jpg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article_E.jpg");
+	}else{
+		$("#sampleHeader").attr("src","/iiiNews/img/ad_header.jpeg");
+		$("#sampleArticle").attr("src","/iiiNews/img/ad_article.jpeg");
+	}
+	console.log("jquerycatevalue:"+jquerycatevalue);
 }
 
 </script>

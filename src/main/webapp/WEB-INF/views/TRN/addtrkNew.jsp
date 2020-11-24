@@ -15,10 +15,33 @@ fieldset {
 	width: 400px;
 	margin: auto;
 }
- input {padding:5px 15px; background:#ccc; border:0 none;
-cursor:pointer;
--webkit-border-radius: 5px;
-border-radius: 5px; }
+ input {
+ padding:5px 15px; 
+ background:#ccc; 
+ border:0 none;
+ cursor:pointer;
+ -webkit-border-radius: 5px;
+ border-radius: 5px; }
+ 
+#wrap {
+padding:20px;
+  border-radius: 10px;
+ background: #C4E1E1;	 
+  
+margin: 20px auto;
+width: 724px;
+
+}
+#top { 
+
+height: 26px;
+}
+#content {
+padding: 0 40px 0 40px;
+}
+#bottom {            
+height: 20px;
+}
 </style>
 <title>trkNews</title>
 </head>
@@ -33,8 +56,13 @@ border-radius: 5px; }
 		</div>
 	</section>
 	<hr style="height: 1px; border: none; color: #333; background-color: #333;">
-	<section class="container">
+
+	<section  class="container">
+	<div style="background:#9c8f96" id="wrap">
+	      
+	         <div id="content">
 		<!--       三個地方要完全一樣 -->
+<!-- 		<table id="">	 -->
 		<form:form method='POST' modelAttribute="trkNewsBean" class='form-horizontal'
 			enctype="multipart/form-data" >
 			<fieldset >
@@ -123,7 +151,7 @@ border-radius: 5px; }
 					<label class='control-label col-lg-2 col-lg-2' for="price">
 						內容 </label>
 					<div class='col-lg-10'>
-						<form:textarea style="resize:none;width:300px;height:200px;" id="descript" path="descript" type='text'
+						<form:textarea style="resize:none;width:300px;height:200px;background:#ccc" id="descript" path="descript" type='text'
 							class='form:input-large' />
 					</div>
 				</div>
@@ -150,7 +178,12 @@ border-radius: 5px; }
 				</div>
 			</fieldset>
 		</form:form>
+<!-- 	  </table>	 -->
+         </div>
+       
+       </div>
 	</section>
+
 	<script>
 	function readURL(input){
 // 		    var i1 = document.getElementsByClassName("i6");

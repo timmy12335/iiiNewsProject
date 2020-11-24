@@ -77,7 +77,7 @@
 <!-- 			</ul></li> -->
 		<li><a href='#'>廣告專區</a>
 			<ul>
-				<li><a href="<c:url value='/getAjaxListSearch' />">欄位搜尋</a></li>
+				<li><a href="<c:url value='/getAjaxListSearch' />">廣告欄位搜尋</a></li>
 				<li><a href="<c:url value='/ShowCartContent' />">購物車</a></li>
 				<li><a href="#">企業會員專區</a>
 					<ul>
@@ -89,16 +89,16 @@
 						<li><a href="<c:url value='/getOrderListByMemberId' />">會員廣告訂單管理</a></li>
 					</ul></li>
 				
-				<li><a href="#">ALL & OLD</a>
-					<ul>
-						<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li>
-						<li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li>
-						<li><a href="<c:url value='/testingMonthOrder' />">test</a></li>
-						<li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li>
-						<li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li>
-						<li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li>
-						<li><a href="<c:url value='/getSoldOrderByCpMemberId' />">查詢所賣出的商品(下載圖片)#$#</a></li>
-					</ul></li>
+<!-- 				<li><a href="#">ALL & OLD</a> -->
+<!-- 					<ul> -->
+<%-- 						<li><a href="<c:url value='/uploadAds' />">上傳頁面</a></li> --%>
+<%-- 						<li><a href="<c:url value='/getAllAds' />">看所有廣告列表</a></li> --%>
+<%-- 						<li><a href="<c:url value='/testingMonthOrder' />">test</a></li> --%>
+<%-- 						<li><a href="<c:url value='/getOrderListByMemberId' />">查看會員訂單</a></li> --%>
+<%-- 						<li><a href="<c:url value='/ShowCartContent' />">看購物車</a></li> --%>
+<%-- 						<li><a href="<c:url value='/getAjaxList' />">Ajax測試</a></li> --%>
+<%-- 						<li><a href="<c:url value='/getSoldOrderByCpMemberId' />">查詢所賣出的商品(下載圖片)#$#</a></li> --%>
+<!-- 					</ul></li> -->
 			</ul></li>
 		<li><a href="<c:url value='/CRindex' />">客服中心</a>
 			<ul>

@@ -4,11 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
 <title>文章列表</title>
 <meta charset="UTF-8">
 <style>
 #customers {
-  font-family: Arial, Helvetica, sans-serif;
+/*   font-family: 'Noto Sans TC', sans-serif; */
+  font-family: 'Ubuntu', sans-serif;
   border-collapse: collapse;
   width: 90%;
 }
@@ -35,25 +40,54 @@
 td {
  	background-color: #FFF3EE;
 	padding: 3px;
-	text-align:center; 
+/* 	text-align:center;  */
 /* 	 valign:middle;' */
 }
-
+.tdbtn{background-color: #f8f2e4;
+}
 .td1 {
 	width: 150px;
 	word-break: break-all;
 	margin: 5px;
 	font-weight: "bold";
 }
-/* .table_tit{ */
-/* 	white-space: nowrap;   */
-/* 	overflow: hidden;   */
-/* 	text-overflow: ellipsis; */
-/* } */
+a {
+    color:black;
+    
+
+}
+a:hover{
+	color:black;
+	text-decoration:none;
+}
+
+.aline{
+	margin: 1em 0;
+	position: relative;
+	padding: 0.25em 0;
+	font-weight: bold;
+}
+.aline:after {
+	content: "";
+	display: block;
+	height: 4px;
+	background-image: linear-gradient(to right, #FF7365 0%, transparent);  /* 自訂的顏色 */
+}
+.button0{
+/* 	font-color:#000000; */
+/* 	color:#000000; */
+  	background-color: #ffad86;
+	border:none;
+	outline:none;
+  	
+}
+
 </style>
 </head>
 <body style="background-color: #f8f2e4;">
-	<nav>
+<div class="iiinewsContainer">
+	<div class="container">
+	<nav class="navbar fixed-top">
 		<jsp:include page="/fragment/navbar.jsp"></jsp:include>
 	</nav>
 
@@ -63,8 +97,10 @@ td {
 			<h2>文章看板</h2>
 		</div>
 		<hr>
-		<div>
-			<input type="text" id="wordChoose" onkeyup="searchByWord()" placeholder="搜尋文章⋯" />
+		<div class="form-group row justify-content-center">
+		<div class="col-sm-3">
+			<input class="form-control" type="text" id="wordChoose" onkeyup="searchByWord()" placeholder="搜尋文章⋯" />
+		</div>
 		</div>
 		<br><div id='somedivS'></div>
 		<br><div id='navigation'></div><br><br>
@@ -72,7 +108,8 @@ td {
 	</div>
 
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
-	
+		</div>
+    </div>
 <script>
 window.onload=function(){
 
@@ -135,8 +172,8 @@ window.onload=function(){
 	
 
 function displayPageBooks(responseData){
-	  var content = "<table id='customers'><tr>";
-      		content +=  "<th>類型</th><th>標題</th>";
+	  var content = "<table id='customers' style='font-size:20px'><tr>";
+      		content +=  "<th>標題</th>";
       		content +=  "<th>發文者</th><th>上傳日期</th></tr>";	    
 		var data = responseData.split("&&&");
 		console.log("data-----" + data[1]);
@@ -148,11 +185,11 @@ function displayPageBooks(responseData){
 		 
 		for(var i=0; i < news.length; i++){
 			content += "<tr height='80'>" + 
-		               "<td class='td1'>" + news[i].category + "</td>" +
-		               "<td class='td1'><a href='<c:url value='/CreateComment/" + news[i].articleId + "'/>' >" +
-		               "<c:if test='" + news[i].status + "== 0}' ><a href='' ></a></c:if>" + news[i].title + "</a></td>" +
-		               "<td class='td1'>" + news[i].memberId + "</td>" +
-		               "<td class='td1'>" + news[i].updateDate + "</td>" + 
+		               "<td align='left'>[" + news[i].category  + "] " +
+		               "<a class='aline' href='<c:url value='/CreateComment/" + news[i].articleId + "'/>' >" +
+		               "<c:if test='" + news[i].status + "== 0}' ><a href=''></a></c:if><b>" + news[i].title + "</b></a></td>" +
+		               "<td align='center'>" + news[i].memberId + "</td>" +
+		               "<td align='center'style='font-size:16px;'>" + news[i].updateDate + "</td>" + 
 		               
 //		               "<td><img  width='200' height='150' " +   
 //		               " src='../../ch00/util/GetImage?no=" + news[i].newsId + "'></td>" + 
@@ -164,21 +201,21 @@ function displayPageBooks(responseData){
 		pageNoCom = mapData.currPage;
 		totalPageCom  = mapData.totalPageCom;
 		
-		var navContent = "<table border='1' ><tr height='36'>" ;
+		var navContent = "<table><tr height='36'>" ;
 		if (pageNoCom != 1){
-			navContent += "<td width='80' align='center'><button id='first'>第一頁</button></td>";
-			navContent += "<td width='80' align='center'><button id='prev'>前一頁</button></td>";
+			navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='first'>第一頁</button></td>";
+			navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='prev'>前一頁</button></td>";
 		}  else {
-			navContent += "<td width='80' align='center'>&nbsp;</td>";
-			navContent += "<td width='80' align='center'>&nbsp;</td>";
+			navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
+			navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
 		}
-		navContent += "<td width='200' align='center'>第" + pageNoCom + "頁 / 共" + totalPageCom + "頁</td>";
+		navContent += "<td class='tdbtn' width='200' align='center' style='font-size:18px'>第<b>" + pageNoCom + "</b>頁 / 共" + totalPageCom + "頁</td>";
 		if (pageNoCom != totalPageCom){
-			navContent += "<td width='80' align='center'><button id='next'>下一頁</button></td>";
-			navContent += "<td width='80' align='center'><button id='last'>最末頁</button></td>";
+			navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='next'>下一頁</button></td>";
+			navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='last'>最末頁</button></td>";
 		}  else {
-			navContent += "<td width='80' align='center'>&nbsp;</td>";
-			navContent += "<td width='80' align='center'>&nbsp;</td>";
+			navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
+			navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
 		}
 		navContent += "</table>";
 		document.getElementById("navigation").innerHTML = navContent;
@@ -281,8 +318,8 @@ function asynRequest(id) {
 
 
 	function displayPageSearch(responseData) {
-			var content = "<table id='customers'><tr>";
-			content += "<th>類型</th><th>標題</th>";
+			var content = "<table id='customers' style='font-size:20px'><tr>";
+			content += "<th>標題</th>";
 			content += "<th>發文者</th><th>上傳日期</th></tr>";
 			var data = responseData.split("&&&");
 			var news = JSON.parse(data[0]); // 傳回一個陣列
@@ -290,19 +327,16 @@ function asynRequest(id) {
 			var bgColor = ""; // 每一項商品的背影 顏色
 
 			for (var i = 0; i < news.length; i++) {
-				content += "<tr height='80'>"
-						+ "<td class='td1'>"
-						+ news[i].category
-						+ "</td>"
-						+ "<td class='td1'><a href='<c:url value='/CreateComment/" + news[i].articleId + "'/>' >"
-						+ "<c:if test='" + news[i].status + "== 0}' ><a href='' ></a></c:if>"
-						+ news[i].title + "</a></td>" + "<td class='td1'>"
-						+ news[i].memberId + "</td>" + "<td class='td1'>"
-						+ news[i].updateDate + "</td>" +
+				content += "<tr height='80'>" + 
+						   "<td align='left'>[" + news[i].category  + "] " + 
+						   "<a class='aline' href='<c:url value='/CreateComment/" + news[i].articleId + "'/>' >" + 
+						   "<c:if test='" + news[i].status + "== 0}' ><a href=''></a></c:if><b>" + news[i].title + "</b></a></td>" + 
+						   "<td align='center'>" + news[i].memberId + "</td>" + 
+						   "<td align='center' style='font-size:16px;'>" + news[i].updateDate + "</td>" +
 
 						//			               "<td><img  width='200' height='150' " +   
 						//			               " src='../../ch00/util/GetImage?no=" + news[i].newsId + "'></td>" + 
-						"</tr>";
+							"</tr>";
 
 			}
 			content += "</table>";
@@ -310,22 +344,21 @@ function asynRequest(id) {
 			keyWordPage = mapData.currPage;
 			keyWordTotalPage = mapData.keyWordTotalPage;
 
-			var navContent = "<table border='1' ><tr height='36'>";
+			var navContent = "<table><tr height='36'>";
 			if (keyWordPage != 1) {
-				navContent += "<td width='80' align='center'><button id='first'>第一頁</button></td>";
-				navContent += "<td width='80' align='center'><button id='prev'>前一頁</button></td>";
+				navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='first'>第一頁</button></td>";
+				navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='prev'>前一頁</button></td>";
 			} else {
-				navContent += "<td width='80' align='center'>&nbsp;</td>";
-				navContent += "<td width='80' align='center'>&nbsp;</td>";
+				navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
+				navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
 			}
-			navContent += "<td width='200' align='center'>第" + keyWordPage
-					+ "頁 / 共" + keyWordTotalPage + "頁</td>";
+			navContent += "<td class='tdbtn' width='200' align='center' style='font-size:18px'>第<b>" + keyWordPage + "</b>頁 / 共" + keyWordTotalPage + "頁</td>";
 			if (keyWordPage != keyWordTotalPage) {
-				navContent += "<td width='80' align='center'><button id='next'>下一頁</button></td>";
-				navContent += "<td width='80' align='center'><button id='last'>最末頁</button></td>";
+				navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='next'>下一頁</button></td>";
+				navContent += "<td class='tdbtn' width='80' align='center'><button class='btn button0' id='last'>最末頁</button></td>";
 			} else {
-				navContent += "<td width='80' align='center'>&nbsp;</td>";
-				navContent += "<td width='80' align='center'>&nbsp;</td>";
+				navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
+				navContent += "<td class='tdbtn' width='80' align='center'>&nbsp;</td>";
 			}
 			navContent += "</table>";
 			document.getElementById("navigation").innerHTML = navContent;

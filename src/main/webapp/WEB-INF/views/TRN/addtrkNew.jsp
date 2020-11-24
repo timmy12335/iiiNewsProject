@@ -147,6 +147,24 @@ height: 20px;
 					</div>
 				</div>
 
+                <div class="form-group" style="display:none">
+					<label class='control-label col-lg-2 col-lg-2' for="bookNo">
+						狀態</label>
+					<div class='col-lg-10'>
+						<form:input   id="status" path="status" type='text' style="width:118px"
+							value="1" class='form:input-large' />
+					</div>
+				</div>
+
+                <div class="form-group" style="display:none">
+					<label class='control-label col-lg-2 col-lg-2' for="price">
+						追蹤人數</label>
+					<div class='col-lg-10'>
+						<form:input id="trcnum" path="trcnum" type='text'
+							value="1" class='form:input-large' />
+					</div>
+				</div>
+
 				<div class="form-group">
 					<label class='control-label col-lg-2 col-lg-2' for="price">
 						內容 </label>

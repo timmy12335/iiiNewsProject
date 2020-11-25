@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">	
-<title>Product</title>
+<title>TrkNews</title>
 <style>
 
 /* img{ */
@@ -18,6 +18,17 @@
 p{
 font-family:Microsoft JhengHei;
 font-size:medium
+}
+.title1
+{
+
+/* 背景顏色 #eeeeee */
+background-color:#eeeeee;
+/*左側框線寬度(5px)、solid(實線)、顏色(orange)*/
+border-left:5px solid orange; 
+/*行內文字間距(5px)*/
+padding:5px;
+/*垂直置中*/
 }
 </style>
 
@@ -53,20 +64,27 @@ font-size:medium
 			      
 			<div class="col-md-5" >
 			<!-- 追蹤主要頁面 -->
-				<h1 style="font-size:3em;background-color:;width:550px;font-family:Microsoft JhengHei">${trkNew.title}</h1>
+				<h1 class="title1" style="font-size:3em;background-color:;width:620px;font-family:Microsoft JhengHei">${trkNew.title}</h1>
 				      <figure style="width:500px;height:400px" class="figure">
                            <img style="width:500px;height:400px" src="<c:url value='/getPictureTK/${trkNew.trackId}' />" class="figure-img img-fluid rounded" alt="...">
                            <figcaption class="figure-caption"></figcaption>
                       </figure>
-				<p>建立人: ${trkNew.founder}</p>
+				<p style="background-color:;width:500px;text-align:right">建立人: ${trkNew.founder}</p>
 				<p style="width:300px">建立時間: ${trkNew.fondtime}</p>
 				<p>追蹤人數: ${trkNew.trcnum}</p>
-				<p class="text-xxl-left" style="font-family:Microsoft JhengHei; width:550px;font-size:large;">內容: ${trkNew.descript}</p>
+				 <div >
+				<p class="alert alert-primary" role="alert" style="font-family:Microsoft JhengHei; width:610px;font-size:large;">內容: ${trkNew.descript}</p>
+				</div>
 				<p>發生地點: ${trkNew.ocplace}</p>
 				<p style="width:300px">發生時間: ${trkNew.octime}</p>
 				<p>點閱人數: ${trkNew.clicnum}</p>
-                <p>標籤: ${trkNew.tag}</p>
+				<div style="background-color:;width:500px;text-align:center">
+                <p class="badge badge-info" style="font-size:medium; text-align:center">標籤: ${trkNew.tag}</p>
+                </div>
                 <p style="font-family:Microsoft JhengHei">新聞分類: ${trkNew.type}</p>
+              
+             
+
               
 				<%-- 	<c:choose>
 					<c:when test='${product.discount != 1.0 }'>
@@ -125,8 +143,8 @@ font-size:medium
 			      
 			      <div style="float:left; margin-top:10px;">
 			      <h3  class="display-4" style="font-family:Microsoft JhengHei" >追蹤報導</h3> 
-			            <div style="border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:200px;font-size:larger;">
-                                <div id="tnews0" style="background:" >
+			            <div style="overflow:scroll;border-style: outset ;font-family:Microsoft JhengHei; width:550px;height:200px;font-size:larger;">
+                                <div id="tnews0" style="background:;" >
                                 </div>
                         </div>   	
 			      </div>
@@ -299,19 +317,48 @@ function buildByWord(ad){
 	var tid = document.getElementById("tid"+n);
     var ti1 = tid.text
 	var hr1 = tid.getAttribute("href")
+//	console.log("建標題"+ ti1);
+//	console.log("建標題網址"+ hr1);
 	var content ="<table id='tnew'>"
-		content +="<tr style='line-height:40px;letter-spacing:3px'><td><a id='tid"+ n +"' target='_blank' href='https://www.setn.com/"+ hr1 +"'>"+ ti1 +"</a></td></tr></table>"
+		content +="<tr style='line-height:40px;letter-spacing:3px'><td><a id='tid"+ n +"' target='_blank' href='"+ hr1 +"'>"+ ti1 +"</a></td></tr></table>"
 		
-    var buildword = document.getElementById("tnews"+n)  
-    buildword.innerHTML = content 
+    var buildword = document.getElementById("tnews0")  
+    //新增 div--v
+    var div = document.createElement("div");                                 
+	     //設定 div 屬性，如 id--v
+        div.setAttribute("id", "newDiv");　  
+
+	     div.innerHTML = content ;
+	     
+　　     buildword.appendChild(div);
+　　     insertRpt(n);
+　　     
 }
 
-	
+function  insertRpt(n){
+	var inst = document.getElementById("tid"+n)
+	var instt = inst.text
+	var instURL = inst.getAttribute("href")
+	var trfk ="${trkNew.trackId}"
+	console.log(instt)
+	console.log(instURL)
+	console.log(trfk)
+}
+
+// function addElementDiv() {
+// 　　var parent = document.getElementById("tnews0");
+// 　　//新增 div
+// 　　var div = document.createElement("div");
+// 　　//設定 div 屬性，如 id
+// 　　div.setAttribute("id", "newDiv");
+// 　　div.innerHTML = "js 動態新增div";
+// 　　parent.appendChild(div);
+// }
 
 
 
 </script> 
-
-
+<!-- <div id="parent1">addtest=================================================================</div> -->
+<!-- <input onclick="addElementDiv()" type="button" value="一化網頁設計" name="按鈕名稱" style="width:150px;height:50px;"> -->
 </body>
 </html>

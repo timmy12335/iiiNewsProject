@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>所有會員訂單列表</title>
+<title>iiiNews 會員廣告訂單列表</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -64,13 +64,13 @@ html{
 				
 		<div class="alert" id="nopayalert">
 		  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-		  <strong><i class="far fa-bell fa-lg"></i>&nbsp;&nbsp;Notice！提醒！&nbsp;&nbsp;</strong> 您尚有未付款的訂單，立即前往結帳！CHECKOUT NOW！
+		  <strong><i class="far fa-bell fa-lg"></i>&nbsp;&nbsp;Notice！提醒！&nbsp;&nbsp;</strong> 您有尚未付款的訂單，立即前往結帳！CHECKOUT NOW！
 		</div>
 		
 		<div class="row bg-white shadow rounded">
 
 			<div class="col-12 bg-info text-white p-4">
-				<h2>會員${showmemberId}的訂單列表</h2>
+				<h2>會員${MBBean.name}的廣告訂單列表</h2>
 			</div>
 			<div class="table-responsive">
 				<table class="table table-hover">

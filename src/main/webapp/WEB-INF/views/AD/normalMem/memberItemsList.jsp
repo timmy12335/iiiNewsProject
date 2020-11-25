@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>會員訂單的商品列表</title>
+<title>iiiNews 會員已購商品列表</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -100,7 +100,15 @@ html {
 										<td>${items.adNo}</td>
 										<td>${items.sellerMemberId}</td>
 										<td>${items.adDate}</td>
-										<td>${items.categoryNo}</td>
+										<td><c:choose>
+												<c:when test="${items.categoryNo == 100}">A&nbsp;頭版頁首</c:when>
+												<c:when test="${items.categoryNo == 200}">B&nbsp;頭版側標</c:when>
+												<c:when test="${items.categoryNo == 300}">C&nbsp;內頁頁首</c:when>
+												<c:when test="${items.categoryNo == 400}">D&nbsp;內頁側標</c:when>
+												<c:when test="${items.categoryNo == 500}">E&nbsp;內文小廣告</c:when>
+												<c:otherwise>其他</c:otherwise>
+											</c:choose>
+										</td>
 										<td>${items.width}</td>
 										<td>${items.height}</td>
 										<td>${items.unitPrice}</td>
@@ -125,7 +133,7 @@ html {
 <!-- 												<input type="file" id="productImage"> -->
 													<div class="input-group">
 														<div class="custom-file">
-															<input type="file" class="custom-file-input form-control-lg" id="productImage${loop.index}" name="productImage" onchange=change(${loop.index})>
+															<input type="file" class="custom-file-input form-control-lg" id="productImage${loop.index}" name="productImage" onchange=change(${loop.index})  style="text-overflow:hidden;">
 															<label class="custom-file-label" for="filename" id="filename${loop.index}">
 															<i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>&nbsp;請選擇檔案</label>
 														</div>

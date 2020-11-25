@@ -1,7 +1,5 @@
 package CR.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
@@ -20,7 +18,6 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Constants;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -152,7 +149,7 @@ public class CR_Controller {
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-		// 寄信確認
+		 //寄信確認
 		MimeMessage msg = mailSender.createMimeMessage();
 		try {
 			MimeMessageHelper email = new MimeMessageHelper(msg, true, "utf-8");
@@ -162,8 +159,7 @@ public class CR_Controller {
 				email.setTo(cpmb.getCpemail());
 			} else {
 				email.setTo("eeit2020119@gmail.com");
-			}
-			;
+			};
 			email.setSubject("iiiNews客服表單申請成功通知信");
 			String text = "<h2>客服申請</h2><p>感謝您使用iiiNews專業新聞網站客服系統，以下是您申請的內容:<p><br>" + "<table><tr><td>客服類別:"
 					+ cb.getCrClass() + "</td></tr><tr><td>客服標題:" + cb.getCrTitle() + "</td></tr><tr><td>客服內容:"

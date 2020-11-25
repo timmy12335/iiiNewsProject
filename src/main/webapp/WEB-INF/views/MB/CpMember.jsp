@@ -141,7 +141,7 @@ g-recaptcha {
 								<button type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="ti-facebook"></i></button>
 								<button type="button" class="btn btn-social-icon btn-google btn-rounded"><i class="ti-google"></i></button>
 								<button type="button" class="btn btn-social-icon btn-twitter btn-rounded"><i class="ti-twitter-alt"></i></button>
-								<button type="button" class="btn btn-social-icon btn-youtube btn-rounded"><i class="ti-youtube"></i></button>
+<!-- 								<button type="button" class="btn btn-social-icon btn-youtube btn-rounded"><i class="ti-youtube"></i></button> -->
 							</div>
 						</div>
 					</div>

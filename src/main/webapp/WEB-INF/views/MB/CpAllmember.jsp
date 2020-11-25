@@ -23,6 +23,7 @@
 <!-- endinject -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/images/favicon.png" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
 .box {
 	width: 60px;
@@ -40,97 +41,61 @@
 }
 </style>
 <script type="text/javascript">
-
-		</script>
+	
+</script>
 
 </head>
 <body>
 
 	<%-- 		<jsp:include page="/fragment/navbar.jsp"></jsp:include> --%>
 	<jsp:include page="/fragment/BMnav.jsp"></jsp:include>
-
-
-	<h4 class="font-weight-bold mb-0">顯示所有企業會員表單</h4>
-	<div id="resultmsg"></div>
-	<table class="table">
-		<thead>
-			<tr>
-				<th width='60'>會員編號</th>
-				<th>會員帳號</th>
-				<th>會員密碼</th>
-				<th width='60px;'>公司電話</th>
-				<th width='60px;'>創立日期</th>
-				<th>統一編號</th>
-				<th>公司地址</th>
-				<th width='70px;'>公司行號</th>
-				<th width='60px;'>公司信箱</th>
-			</tr>
-		</thead>
-		<c:choose>
-			<c:when test="${empty cpmembers}">
+<!-- 	<div class="card-body"> -->
+		<h3 class="font-weight-bold mb-0">顯示所有企業會員表單</h3>
+		<div id="resultmsg"></div>
+		<table class="table">
+			<thead>
 				<tr>
-					<td colspan='8' align='center'><font color='red'>無會員資料</font></td>
+					<th width='60' style="color: #EA0000;">會員編號</th>
+					<th style="color: #EA0000;">會員帳號</th>
+					<th style="color: #EA0000;">會員密碼</th>
+					<th width='60px;' style="color: #EA0000;">公司電話</th>
+					<th width='60px;' style="color: #EA0000;">創立日期</th>
+					<th style="color: #EA0000;">統一編號</th>
+					<th width='70px;' style="color: #EA0000;">公司行號</th>
+					<th style="color: #EA0000;">公司地址</th>
+					<th width='60px;' style="color: #EA0000;">公司信箱</th>
 				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var='cpmb' items='${cpmembers}' varStatus='report'>
+			</thead>
+			<c:choose>
+				<c:when test="${empty cpmembers}">
 					<tr>
-						<td align='center'>${cpmb.pkey}</td>
-						<td align='left'>${cpmb.cpmemberId}</td>
-						<td align='left'>&nbsp;${cpmb.password2}</td>
-						<td align='left'>&nbsp;${cpmb.cptel}</td>
-						<td align='left'>&nbsp;${cpmb.founddate}</td>
-						<td align='left'>&nbsp;${cpmb.uniformnumbers}</td>
-						<td align='left'>&nbsp;${cpmb.cpaddress}</td>
-						<td align='left'>&nbsp;${cpmb.cpname}</td>
-						<td align='left'>&nbsp;${cpmb.cpemail}</td>
+						<td colspan='8' align='center'><font color='red'>無會員資料</font></td>
 					</tr>
-	
-<%-- 						<td align='center' onclick="MBfolded(${report.index})" class="box" --%>
-<!-- 							style="cursor: pointer"> -->
-<%-- 							<p class="ellipsis">${ser.crContent}</p> --%>
-<!-- 						</td> -->
-<%-- 						<td align='center'><fmt:formatDate value="${ser.crApplyDate}" --%>
-<%-- 								pattern="yyyy-MM-dd HH:mm" /></td> --%>
-<%-- 						<td align='center' onclick="folded(${report.index})" class="box" --%>
-<!-- 							style="cursor: pointer"> -->
-<%-- 							<p class="ellipsis">${ser.crReContent}</p> --%>
-<!-- 						</td> -->
-<%-- 						<td align='center'>${ser.cremployee.empName}</td> --%>
-<%-- 						<td align='center'><fmt:formatDate value="${ser.crReDate}" --%>
-<%-- 								pattern="yyyy-MM-dd" /></td> --%>
-<!-- 						<td><button id="btn_update" -->
-<!-- 								class="btn btn-outline-secondary btn-icon-text" -->
-<%-- 								onclick="updateCrReport(${ser.pk})"> --%>
-<!-- 								回覆<i class="ti-pencil-alt btn-icon-append"></i> -->
-<!-- 							</button> -->
-<!-- 							<button id="btn_delete" -->
-<!-- 								class="btn btn-outline-danger btn-icon-text" -->
-<%-- 								onclick="deleteCrReport(${ser.pk})"> --%>
-<!-- 								刪除<i class="ti-trash btn-icon-append"></i> -->
-<!-- 							</button></td> -->
-							
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<%-- 						<td id="MBcontent${report.index}" colspan="10" --%>
-<!-- 							style="display: none; word-wrap: break-word;"><textarea -->
-<!-- 								style="width: 800px; height: 200px;" class="form-control" -->
-<%-- 								disabled>${ser.crContent}</textarea> --%>
-<!-- 					<tr> -->
-<%-- 						<td id="recontent${report.index}" colspan="10" --%>
-<!-- 							style="display: none; word-wrap: break-word;"><textarea -->
-<!-- 								style="width: 800px; height: 200px;" class="form-control" -->
-<%-- 								disabled>${ser.crReContent}</textarea></td> --%>
-<!-- 					</tr> -->
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</table>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var='cpmb' items='${cpmembers}' varStatus='report'>
+						<tr>
+							<td align='center'>${cpmb.pkey}</td>
+							<td align='left'>${cpmb.cpmemberId}</td>
+							<td align='left'>&nbsp;${cpmb.password2}</td>
+							<td align='left'>&nbsp;${cpmb.cptel}</td>
+							<td align='left'>&nbsp;${cpmb.founddate}</td>
+							<td align='left'>&nbsp;${cpmb.uniformnumbers}</td>
+							<td align='left'>&nbsp;${cpmb.cpname}</td>
+							<td align='left'>&nbsp;${cpmb.cpaddress}</td>
+							<td align='left' style="text-overflow:hidden">&nbsp;${cpmb.cpemail}</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</table>
 
-	<hr>
-	<button onclick='history.back()' class="btn btn-primary">回前頁</button>
+		<hr>
+		<button onclick='history.back()' class="btn btn-primary">回前頁</button>
+<!-- 	</div> -->
+
 	<script>
-
+		
 	</script>
 	<jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import iiiNews.AD.model.AdBean;
 import iiiNews.AD.service.AdMainService;
@@ -33,7 +35,10 @@ public class AdMainController {
 	/*在此controller內的功能有
 	 * 取得上傳表格、送出使用者填好的上傳表格
 	 * 取得所有廣告列表
-	 * 根據該新聞的pk鍵 刪除該則廣告(單則)*/
+	 * 根據企業會員資料(編號)取得該會員所有廣告列表
+	 * 根據pk鍵 刪除該則廣告(單則)
+	 * 根據pk鍵 下架該則廣告(單則)
+	 * 根據pk鍵 更新該則廣告(單則)*/
 	
 	
 	
@@ -61,22 +66,33 @@ public class AdMainController {
 			model.addAttribute("showmemberId", cpmemberId);
 		}
 		
-		//純粹是為了給初始值 可以不寫
-//		bean.setAdNo("AD20201024");
-//		bean.setWidth(600.0);
-//		bean.setHeight(200.0);
-//		bean.setPrice(1000);
-//		bean.setStock(10);
+		/*這裡可以給初始值實際操作可以不寫
+		 * bean.setAdNo("AD20201024");
+		 * bean.setWidth(600.0);
+		 * bean.setHeight(200.0);
+		 * bean.setPrice(1000);
+		 * bean.setStock(10);*/
 		
 		model.addAttribute("adBean",bean);
 		return "AD/entMem/uploadAds";
 	}
 	
-	//送出使用者填好的上傳表格
+	
+	/* 送出使用者填好的上傳表格
+	 * 利用post方法傳入 並透過springMVC的Validate去檢查*/
 	@PostMapping("/uploadAds")
 	public String uploadAdsForm(
-			@ModelAttribute("adBean") AdBean bean, Model model, BindingResult bindingResult) {
+			@ModelAttribute("adBean") AdBean bean, Model model, BindingResult bindingResult,RedirectAttributes redirectAtt) {
+		/* 是Post方法 使用者送出表格時進來這裡
+		 * 讀取使用者資料跟型態轉換 這裡是透過@ModelAttribute("adBean") AdBean bean
+		 * 就會傳完整的資料放在bean裡面傳進來給我們用
+		 * 再填一些不是使用者輸入的資料 然後進行驗證資料 */
 		
+		/* 利用springMVC的Validate去檢查資料
+		 * new出所寫的AdUploadValidator呼叫validate方法(Object target, Errors errors)
+		 * target是放AdBean,errors就是綁定的bindingresult
+		 * 如果error有錯 則彈回 並且抓出所有錯誤訊息
+		 * 錯誤訊息會存在 ObjectError error中*/
 		new AdUploadValidator().validate(bean, bindingResult);
 		if(bindingResult.hasErrors()) {
 			System.out.println("==============");
@@ -87,15 +103,9 @@ public class AdMainController {
 			return "AD/entMem/uploadAds";
 		}
 		
-		/*是Post方法 使用者送出表格時進來這裡
-		 * 讀取使用者資料跟型態轉換 這裡是透過@ModelAttribute("adBean") AdBean bean
-		 * 就會傳完整的資料放在bean裡面傳進來給我們用
-		 * 再填一些不是使用者輸入的資料 然後進行驗證資料 */
-		
-		Map<String, String> msg = new HashMap<>();
-		
-		//$$$$ 未來要寫得到企業memberId 目前暫時寫從Attribute取 尚未驗證過!!!
-		//先確定他有登入 且是企業會員
+		/* 先確定他有登入 且是企業會員
+		 * 得到企業cpmemberId與cpname (從Attribute取)
+		 * 若未登入則導回登入畫面*/
 		CpMemberBean cpbean = (CpMemberBean) model.getAttribute("CpMemberBean");
 		String cpmemberId ="";
 		String cpname = "";
@@ -116,9 +126,9 @@ public class AdMainController {
 		Timestamp uploadDate = new Timestamp(System.currentTimeMillis());
 		bean.setUploadDate(uploadDate);
 		
-//		/*處理廣告編號問題
-//		 * 編號命名方式 AD+日期+編號 AD2020102500001
-//		 * 取得最後一筆編號資料進行判斷*/
+		/* 處理廣告編號問題
+		 * 編號命名方式 AD+日期+編號 AD2020102500001
+		 * 取得最後一筆編號資料進行判斷*/
 		String noStr = service.createAdNo();
 		bean.setAdNo(noStr);
 		
@@ -127,16 +137,13 @@ public class AdMainController {
 		
 		int n = service.saveAds(bean);
 		System.out.println("成功筆數："+n);
-		
-		//####優化 這裡要處理好傳送到前端的資訊的問題 要再想一下
-		msg.put("addStatus", "上架廣告成功，已新增： "+n+" 筆");
-		model.addAttribute("processMsg", msg);
-		System.out.println(msg);
+		redirectAtt.addFlashAttribute("FlashMSG_uploadAdSuccess", "上架廣告欄位成功，新增： "+n+" 筆<br>廣告編號："+noStr);
+
 		return "redirect:/memberAllAdsList";
 	}
 	
 	
-	//取得所有廣告列表
+	/**取得所有廣告列表**/
 	@GetMapping("/getAllAds")
 	public String getAllAdsList(Model model){
 		service.changeStatus();
@@ -145,12 +152,14 @@ public class AdMainController {
 		return "AD/adlist/allAdsList";
 	}
 	
-	//$$$$ 根據企業會員資料(編號)取得該會員所有廣告列表
+	
+	/**根據企業會員資料(編號)取得該會員所有廣告列表**/
 	@GetMapping("/memberAllAdsList")
 	public String getMemberAdList(Model model){
 		
-		//$$$$ 未來要寫得到企業memberId 目前暫時寫從Attribute取 尚未驗證過!!!
-		//先確定他有登入 且是企業會員
+		/* 會員資料從Attribute中取
+		 * 先確定他有登入 且是企業會員
+		 * 之後再傳送到getCpMemberAdList去查*/
 		CpMemberBean cpbean = (CpMemberBean) model.getAttribute("CpMemberBean");
 		String cpmemberId ="";
 		if(cpbean == null) {
@@ -162,7 +171,6 @@ public class AdMainController {
 			System.out.println("登入的帳號是"+cpmemberId);
 		}
 
-		
 		List<AdBean> list = service.getCpMemberAdList(cpmemberId);
 		model.addAttribute("CpAdLists",list);
 		return "AD/entMem/memberAllAdsList";
@@ -170,8 +178,8 @@ public class AdMainController {
 
 	
 	
-	//根據該新聞的pk鍵 刪除該則廣告(單則)
-	//####優化：要跳轉回去時告訴使用者刪掉幾筆
+	/**根據pk鍵 刪除該則廣告(單則)**/
+	//####優化：要跳轉回去時告訴使用者刪掉幾筆 目前不讓使用者刪除 由後台操作
 	@GetMapping("/deleteAdProduct/{adPk}")
 	public String deleteAdProductById(@PathVariable Integer adPk,Model model) {
 		int n = service.deleteAdByMemberPkid(adPk);
@@ -179,6 +187,7 @@ public class AdMainController {
 		return "redirect:/backGetAdListAjax";
 	}
 	
+	/**根據pk鍵 下架該則廣告(單則)**/
 	@GetMapping("/offShelfAdProduct/{adPk}")
 	public String offShelfAdProductById(@PathVariable Integer adPk,Model model) {
 		int n = service.offShelfAdByMemberPkid(adPk);
@@ -186,12 +195,18 @@ public class AdMainController {
 		return "redirect:/backGetAdListAjax";
 	}
 	
+	/**根據pk鍵 修改該則廣告(單則)**/
+	/* 由商業會員來進行內容更新
+	 * 去查詢AdBean後利用setter的方法
+	 * 把要更新的內容寫回去之後
+	 * 再將整個bean存回去*/
 	@PostMapping("/updateAdProduct/{adPk}")
 	public String updateAdProductById(@PathVariable Integer adPk,
 									@RequestParam Double width,
 									@RequestParam Double height,
 									@RequestParam Integer price,
-									@RequestParam Integer stock,Model model) {
+									@RequestParam Integer stock,Model model
+									,RedirectAttributes redirectAtt) {
 		
 		AdBean ab = service.getOneAdByadPk(adPk);
 		ab.setWidth(width);
@@ -199,8 +214,8 @@ public class AdMainController {
 		ab.setPrice(price);
 		ab.setStock(stock);
 		service.updateAds(ab);
-//		int n = service.deleteAdByMemberPkid(adPk);
-//		System.out.println("成功更動 "+n+" 筆");
+		String noStr = ab.getAdNo();
+		redirectAtt.addFlashAttribute("FlashMSG_updateAdSuccess", "廣告欄位資訊修改成功，<br>異動廣告編號："+noStr);
 		return "redirect:/memberAllAdsList";
 	}
 

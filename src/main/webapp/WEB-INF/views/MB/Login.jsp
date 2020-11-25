@@ -145,10 +145,10 @@ g-recaptcha {
 								class="btn btn-social-icon btn-twitter btn-rounded">
 								<i class="ti-twitter-alt"></i>
 							</button>
-							<button type="button"
-								class="btn btn-social-icon btn-youtube btn-rounded">
-								<i class="ti-youtube"></i>
-							</button>
+<!-- 							<button type="button" -->
+<!-- 								class="btn btn-social-icon btn-youtube btn-rounded"> -->
+<!-- 								<i class="ti-youtube"></i> -->
+<!-- 							</button> -->
 						</div>
 					</div>
 				</div>

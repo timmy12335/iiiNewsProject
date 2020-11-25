@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>購物車清單</title>
+<title>iiiNews 購物車清單</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -19,6 +19,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 	crossorigin="anonymous"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script>
 function confirmDelete(n) {
 	if (confirm("確定移除此項商品 ? ") ) {
@@ -198,7 +199,7 @@ function confirmDelete(n) {
 											<c:otherwise>其他</c:otherwise>
 										</c:choose>
 										/&nbsp;${ad.value.adDate} &nbsp;)
-										 <span>$ ${ad.value.unitPrice}</span>
+										 <span>$&nbsp;<fmt:formatNumber type="number" value="${ad.value.unitPrice}"/></span>
 									</li>
 								</c:forEach>
 								<li
@@ -236,7 +237,6 @@ function confirmDelete(n) {
 								class="btn btn-primary btn-block waves-effect waves-light"
 								onclick="checkoutfunction(${fn:length(shoppingCart.content)},'${showmemberId}')">
 								送出訂單&nbsp;&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-
 
 						</div>
 					</div>
@@ -276,13 +276,13 @@ function confirmDelete(n) {
 	</div>
 	<script>
 		function checkoutfunction(count,loginmember){
-			if (confirm("確定前往結帳 ") ) {
+			if (confirm("即將前往結帳 ") ) {
 				if(count == 0){
 					alert("您的購物車中無商品");
 					return;
 				}else{
 					if(loginmember==""){
-						alert("您尚未登入");
+						alert("您尚未登入，請先登入");
 						location.href="<c:url value='/Login' />"
 					}else{
 						location.href="<c:url value='/checkoutOK.insert' />"

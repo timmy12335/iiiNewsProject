@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>分頁廣告列表</title>
+<title>iiiNews 廣告專區欄位列表搜尋</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -60,8 +61,8 @@ Html {
 				<div class="col-lg-3">
 				<!-- Card -->
 					<div class="card mb-3">
-						<div class="card-header" style="background-color:#FBD09D;">
-							<h4>歡迎使用廣告欄位系統</h4>
+						<div class="card-header bg-info text-white">
+							<h3>歡迎使用廣告欄位系統</h3>
 						</div>
 						<div class="card-body">
 						<p>查看欄位示意圖</p>
@@ -186,7 +187,7 @@ Html {
 						+ "<input type='hidden' name='quantity' value='1'>"
 						+ "<input type='hidden' name='adPk' value='"+ad[i].adPk+"'>"
 // 						+ "<input type='submit' class='cartBtn' value='加入購物車' />"
-						+ "<button type='submit' class='btn btn-primary btn-rounded btn-icon'><i class='fa fa-cart-plus' aria-hidden='true'></i>&nbsp;&nbsp;加入購物車</button>"
+						+ "<button type='submit' class='btn btn-primary btn-rounded btn-icon'><i class='fa fa-cart-plus' aria-hidden='true'></i>&nbsp;&nbsp;加入</button>"
 						+ "</form></td>" +
 						//		               "<td><img  width='200' height='150' " +   
 						//		               " src='../../ch00/util/GetImage?no=" + news[i].newsId + "'></td>" + 

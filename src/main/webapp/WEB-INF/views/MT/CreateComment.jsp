@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<title>查詢文章</title>
+<title>瀏覽文章</title>
 <script>
     window.onload = function () {
         var btn = document.getElementById("clickme1");
@@ -96,7 +96,7 @@
                                     </td>
                                     <td style="text-align:right;width:80px;">
                                         <div>
-                                            <c:set var="date" value="${fn:substring(CreateComment.updateDate, 0, 16)}" />
+                                            <c:set var="date" value="${fn:substring(comBean.uploadTime, 0, 16)}" />
                                             ${date}
                                         </div>
                                     </td>

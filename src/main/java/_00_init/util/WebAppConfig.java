@@ -85,8 +85,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 		JavaMailSenderImpl mailsend = new JavaMailSenderImpl();
 		mailsend.setHost("smtp.gmail.com");
 		mailsend.setPort(587);
-		mailsend.setUsername("miche831221@gmail.com");
-		mailsend.setPassword("mimi0127");
+		mailsend.setUsername("iiiNews20201127@gmail.com");
+		mailsend.setPassword("Demo1127");
 		mailsend.setJavaMailProperties(additionalProperties());
 		
 		return mailsend;

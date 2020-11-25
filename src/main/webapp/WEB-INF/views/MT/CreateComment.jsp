@@ -87,30 +87,28 @@
                                     <div>
                                         <form:errors path="comment" style="font-size:12px;color:red" />
                                     </div>
-
                                 <td>
                             </tr>
-                            <tr>
-                                <c:forEach var="comBean" items="${CreateComment.items}">
+                            <c:forEach var="comBean" items="${CreateComment.items}">
+                                <tr>
                                     <td>
                                         <div><b>${comBean.comMemberId} : </b>${comBean.comment}</div>
                                     </td>
-                                    <td style="text-align:right">
+                                    <td style="text-align:right;width:80px;">
                                         <div>
-                                            <c:set var="date"
-                                                value="${fn:substring(CreateComment.updateDate, 0, 16)}" />
-                                            &nbsp;&nbsp;&nbsp;<b></b> ${date}
+                                            <c:set var="date" value="${fn:substring(CreateComment.updateDate, 0, 16)}" />
+                                            ${date}
                                         </div>
                                     </td>
-                                </c:forEach>
-                            </tr>
+                                </tr>
+                            </c:forEach>
                         </table>
                     </form:form>
                 </div>
             </div>
         </div><br>
         <div align="center">
-            <input class="btn btn-primary" type="button" onclick="location.href='<c:url value="/AllArticleComment" />' " value="回前頁" />
+            <input class="btn btn-primary" type="button" onclick="location.href='<c:url value="/AllArticleComment" />'" value="回前頁" />
         </div>
     </div>
 </body>

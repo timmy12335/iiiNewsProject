@@ -174,7 +174,7 @@ window.onload = function() {
 };
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TrkNews</title>
 </head>
 <body>
 	 <nav class="navbar fixed-top">

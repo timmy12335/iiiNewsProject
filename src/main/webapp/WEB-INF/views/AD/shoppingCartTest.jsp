@@ -276,13 +276,13 @@ function confirmDelete(n) {
 	</div>
 	<script>
 		function checkoutfunction(count,loginmember){
-			if (confirm("確定前往結帳 ") ) {
+			if (confirm("即將前往結帳 ") ) {
 				if(count == 0){
 					alert("您的購物車中無商品");
 					return;
 				}else{
 					if(loginmember==""){
-						alert("您尚未登入");
+						alert("您尚未登入，請先登入");
 						location.href="<c:url value='/Login' />"
 					}else{
 						location.href="<c:url value='/checkoutOK.insert' />"

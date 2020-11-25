@@ -190,7 +190,7 @@ margin-top:5px;
                     <ul class="list-category category">
                         <li >
                             <a class="btn btn-primary" href="<c:url value='/getNewsByType?type=交通' />">交通                               
-                            </a><span class="badge badge-pill badge-secondary ml-2">3</span>
+                            </a><span class="badge badge-pill badge-secondary ml-2">1</span>
                         </li>
                         <li>
                             <a style="color:white;background: #e05d14;" class="btn" href="<c:url value='/getNewsByType?type=糾紛' />">糾紛
@@ -198,7 +198,7 @@ margin-top:5px;
                         </li>
                         <li>
                             <a class="btn" style="color:white;background: #ff688c;" href="<c:url value='/getNewsByType?type=感情' />">感情
-                            </a><span class="badge badge-pill badge-secondary ml-2">5</span>
+                            </a><span class="badge badge-pill badge-secondary ml-2">1</span>
                         </li>
                         <li>
                             <a class="btn" style="color:white; background: #44ada5;" href="<c:url value='/getNewsByType?type=詐騙' />">詐騙
@@ -206,7 +206,7 @@ margin-top:5px;
                         </li>
                         <li>
                             <a class="btn btn-danger" href="<c:url value='/getNewsByType?type=災情' />">災情
-                            </a><span class="badge badge-pill badge-secondary ml-2">4</span>
+                            </a><span class="badge badge-pill badge-secondary ml-2">2</span>
                         </li>
                         <li>
                             <a class="btn btn-secondary" href="<c:url value='/getNewsByType?type=爆料' />">爆料

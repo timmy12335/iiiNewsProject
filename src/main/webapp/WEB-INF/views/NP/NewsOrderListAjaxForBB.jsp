@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>分頁新聞列表</title>
+<title>後台新聞訂單列表</title>
 <style>
 #customers {
   font-family: Arial, Helvetica, sans-serif;
@@ -99,7 +99,7 @@ function displayNewsOrderList(responseData){
 <div class="card-body">
 	
 	<div align='center' >
-		<h3>後台顯示訂單列表(JSON)</h3>
+		<h3>新聞訂單列表</h3>
 		<hr>
 		<div id='somedivS'></div>
 <!-- 		<div id='navigation' style='height: 60px; margin: 250px;'></div> -->

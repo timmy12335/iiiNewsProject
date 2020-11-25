@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>所有新聞列表</title>
+<title>後台新聞列表</title>
 <style>
 #customers {
   font-family: Arial, Helvetica, sans-serif;
@@ -93,7 +93,7 @@ td {
 <table id="customers">
 	<tr  height='36'>
 		
-		<th width='600' align='center'>新聞編號</th>
+		<th width='100' align='center'>新聞編號</th>
 		
 		<th width='150' align='center'>上傳時間</th>		
 		<th width='100' align='center'>新聞類型</th>		

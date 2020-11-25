@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,7 +132,7 @@ p {
 											<td>
 											<div >
 												<h3 class="text-danger">
-													<small class="text-muted" ></small>NT$${news.price} <br>
+													NT$<fmt:formatNumber type="number">${news.price}</fmt:formatNumber> <br>
 												</h3>
 											</div>
 											</td>

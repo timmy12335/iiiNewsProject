@@ -72,68 +72,9 @@
         chart.draw(data, options);
       }
       
-      //以下為柱狀圖
-      google.charts.load('current', {packages: ['corechart', 'bar']});
-      google.charts.setOnLoadCallback(drawBasic);
-
-      function drawBasic() {
-
-            var data = new google.visualization.DataTable();
-            data.addColumn('date', '日期');
-            data.addColumn('number', '客服單');
-            var dateTime = new Date();
-            dateTime=dateTime.setDate(dateTime.getDate()-1);
-            dateTime=new Date(dateTime);
-            var dateTime2 = new Date();
-            dateTime2=dateTime2.setDate(dateTime2.getDate()-2);
-            dateTime2=new Date(dateTime2);
-            var dateTime3 = new Date();
-            dateTime3=dateTime3.setDate(dateTime3.getDate()-2);
-            dateTime3=new Date(dateTime3);
-            var dateTime4 = new Date();
-            dateTime4=dateTime4.setDate(dateTime4.getDate()-2);
-            dateTime4=new Date(dateTime4);
-            data.addRows([
-              [new Date(), 1],
-              [dateTime, 20],
-              [dateTime2, 3],
-              [dateTime3, 5],
-              [dateTime4, 6]
-//               [new Date(), 1],
-//               [new Date(), 1],
-//               [new Date(), 200],
-//               [new Date(), 1]
-//               [{v: [9, 0, 0], f: '9 am'}, 2],
-//               [{v: [10, 0, 0], f:'10 am'}, 3],
-//               [{v: [11, 0, 0], f: '11 am'}, 4],
-//               [{v: [12, 0, 0], f: '12 pm'}, 5],
-//               [{v: [13, 0, 0], f: '1 pm'}, 6],
-//               [{v: [14, 0, 0], f: '2 pm'}, 7],
-//               [{v: [15, 0, 0], f: '3 pm'}, 8],
-//               [{v: [16, 0, 0], f: '4 pm'}, 9],
-//               [{v: [17, 0, 0], f: '5 pm'}, 10],
-            ]);
-
-            var options = {
-              title: '各日期客服統計',
-              hAxis: {
-                title: '日期',
-                format: 'YYYY-MM-dd',
-//                 viewWindow: {
-//                   min: [2020-01-01, 0],
-//                   max: [2020-12-31, 1]
-                }
-              ,
-              vAxis: {
-                title: '客服數量'
-              }
-            };
-
-            var chart = new google.visualization.ColumnChart(
-              document.getElementById('chart_div2'));
-
-            chart.draw(data, options);
-          }
+     
+           
+          
     </script>
 
   </head>
@@ -141,7 +82,7 @@
   <body>
     <!--Div that will hold the pie chart-->
     <div id="chart_div" width="400" height="400" align='center;'></div>
-     <div id="chart_div2" width="400" height="400"></div>
+     
 <hr>
 <jsp:include page="/fragment/BMfoot.jsp"></jsp:include>
 </body>

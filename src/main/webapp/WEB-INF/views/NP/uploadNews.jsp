@@ -74,17 +74,18 @@ window.onload = function(){
 	var btn = document.getElementById("clickme");
 	btn.onclick=function() {		
 		let title =  document.getElementById("title");
-		title.value ="有一張精神疾病證明好像就是免死金牌了！無故攻擊80歲老婦卻判無罪";
+		title.value ="高雄市區淹大水!!!有小轎車滅頂，不知道還有沒有人在車內!";
 		let location = document.getElementById("location");
-		location.value = "南投";
+		location.value = "高雄";
 		let newsType = document.getElementById("newsType");
-		newsType.value = "糾紛";
+		newsType.value = "災情";
 		let outline = document.getElementById("outline");
-		outline.value = "發生在今天早上8點左右，里民沈媽媽遭受到長東街 （未知民眾）拿夾報歐打！導致頭部縫6針、腳骨斷裂 、全身瘀青！";
+		outline.value = "高雄市區已經有4處傳出淹水災情，中華地下道還有市區道路周邊，水淹至腳踝，有些機車都泡在水裡，甚至有轎車滅頂的的嚴重災情";
 		let article = document.getElementById("article");
- 		article.value = "到醫院了解後知道，兩人互不認識而且並無交談。這名男子在打人的時候還要求婦人跪下，並用腳踹她導致腳骨斷裂！打完之後，說剛才發生什麼事情他都不知道......"
-				 		+"「他有幻想症，說把阿嬤當中國人，說自己是美國人！」男子被警方逮捕時供稱因為自己是美國人，要教訓中國人！？"
-				 		+"又說『因為阿嬤不下跪所以要打她！』，當時不少網友就直呼「完蛋了！SOP又要出來了，等等又是精神病了.....」";
+ 		article.value = "原本以為只是下雨，沒想到「根本颱風」，才半天市區道路就嚴重積水「簡直可以游泳了」，"
+ 						+"剛剛路面有很大漂浮木可能從尚頂路裡面漂流出來，路面暗我差一點整個撞上去，我已經把它搬到安全島旁邊，"
+ 						+"請永康往交流道這邊經過台南人注意，因為很暗突然淹水很高至少20-30公分高，"
+ 						+"連轎車都滅頂了，真是太可怕了。";
  		let price = document.getElementById("price");
  		price.value = 5000;
 			}

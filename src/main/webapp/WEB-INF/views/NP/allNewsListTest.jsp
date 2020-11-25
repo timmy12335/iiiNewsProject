@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -250,7 +251,7 @@ margin-top:5px;
 						</div>
 						<div class="text-left mt-2 mb-2">
 							<h4 class="text-danger">
-								<small class="text-muted"></small>NT$${news.price}
+								NT$<fmt:formatNumber type="number">${news.price}</fmt:formatNumber>
 								<br>
 							</h4>
 						</div>

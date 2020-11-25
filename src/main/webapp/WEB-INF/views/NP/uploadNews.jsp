@@ -24,7 +24,7 @@
 <!-- <link rel="stylesheet" href="/fontawesome/css/all.min.css"> -->
 <!-- <script type="text/javascript" src="/bootstrap-fileinput/themes/fas/theme.min.js"></script> -->
 
-<title>上傳新聞欄位</title>
+<title>上傳新聞</title>
 <style>
 		.incss{
 			width:150px;

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,7 +128,7 @@ p{
 						
 						<div class="badge badge-secondary " style="font-size:25px;" id=lastime></div><br>
 						<span class="text-danger" style="font-size:35px;margin:10px">
-							<b>NT$${newsSingle.price} </b>
+							<b>NT$<fmt:formatNumber type="number">${newsSingle.price}</fmt:formatNumber></b>
 						</span>
 						<a href="<c:url value="/insertToOrderBean/${newsSingle.newsId}" />" onclick="return confirm('確定購買?')" class="btn btn-danger btn-lg">
 						<i class="fas fa-shopping-cart"></i>&ensp;購買</a> 

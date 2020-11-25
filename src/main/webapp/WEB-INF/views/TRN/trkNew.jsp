@@ -358,7 +358,7 @@ function  insertRpt(n){
 
 
 </script> 
-<div id="parent1">addtest=================================================================</div>
-<input onclick="addElementDiv()" type="button" value="一化網頁設計" name="按鈕名稱" style="width:150px;height:50px;">
+<!-- <div id="parent1">addtest=================================================================</div> -->
+<!-- <input onclick="addElementDiv()" type="button" value="一化網頁設計" name="按鈕名稱" style="width:150px;height:50px;"> -->
 </body>
 </html>

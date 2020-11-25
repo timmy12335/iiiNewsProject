@@ -133,7 +133,7 @@ html {
 <!-- 												<input type="file" id="productImage"> -->
 													<div class="input-group">
 														<div class="custom-file">
-															<input type="file" class="custom-file-input form-control-lg" id="productImage${loop.index}" name="productImage" onchange=change(${loop.index})>
+															<input type="file" class="custom-file-input form-control-lg" id="productImage${loop.index}" name="productImage" onchange=change(${loop.index})  style="text-overflow:hidden;">
 															<label class="custom-file-label" for="filename" id="filename${loop.index}">
 															<i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>&nbsp;請選擇檔案</label>
 														</div>

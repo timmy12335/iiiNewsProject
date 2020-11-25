@@ -79,7 +79,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="Image">照片:</label>
                                         <div class="col-sm-9">
-                                            <form:input type="file" id="Image" name="Image" path="Image" />
+                                            <form:input type="file" id="Image" name="Image" path="Image" style="overflow:hidden;"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">

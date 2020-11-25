@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">	
-<title>Product</title>
+<title>TrkNews</title>
 <style>
 
 /* img{ */
@@ -358,7 +358,7 @@ function  insertRpt(n){
 
 
 </script> 
-<div id="parent1">addtest=================================================================</div>
-<input onclick="addElementDiv()" type="button" value="一化網頁設計" name="按鈕名稱" style="width:150px;height:50px;">
+<!-- <div id="parent1">addtest=================================================================</div> -->
+<!-- <input onclick="addElementDiv()" type="button" value="一化網頁設計" name="按鈕名稱" style="width:150px;height:50px;"> -->
 </body>
 </html>

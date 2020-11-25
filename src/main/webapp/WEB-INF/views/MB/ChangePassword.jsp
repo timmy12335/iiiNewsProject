@@ -46,8 +46,7 @@
 								<label colspan="3" style="text-align: center;"></label><input
 									type="hidden" name="action" value="reg" class="form-control" />
 								<input type="submit" value="確認修改"
-									class="btn btn-primary btn-icon-text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-									href="<c:url value='/forgetpwd' />" class="btn btn-info">忘記密碼?</a>
+									class="btn btn-primary btn-icon-text" />
 							</div>
 						</div>
 					</div>

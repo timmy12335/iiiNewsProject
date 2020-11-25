@@ -126,7 +126,8 @@ g-recaptcha {
 								<label colspan="2" style="text-align: center;"></label><input
 									type="submit" name="submit" value="登入"
 									class="btn btn-primary btn-icon-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="<c:url value='/UserMB' />" class="btn btn-info">註冊</a>
+								<a href="<c:url value='/UserMB' />" class="btn btn-info">註冊</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+									href="<c:url value='/forgetpwd' />">忘記密碼?</a>
 							</div>
 							<div class="form-group">
 								<input type='button' class='form-control' id='clickme1' value='Demo'>

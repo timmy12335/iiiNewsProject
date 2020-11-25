@@ -37,7 +37,7 @@
 							<div class="form-group" align="left">
 								<label for="memberEmail">輸入信箱：</label>
 								<form:input type="text" path="memberEmail" id='memberEmail'
-									class="form-control" />
+									class="form-control" placeholder="輸入信箱" />
 							</div>
 <!-- 							<div class="form-group" align="left"> -->
 <!-- 								<label for="phone">行動電話：</label> -->
